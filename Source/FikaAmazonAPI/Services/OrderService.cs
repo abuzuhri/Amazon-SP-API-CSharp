@@ -2,7 +2,7 @@
 using AmazonSpApiSDK.Clients;
 using AmazonSpApiSDK.Models;
 using AmazonSpApiSDK.Models.Orders;
-using FikaAmazonAPI.Search.Order;
+using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Utils;
 using RestSharp;
 using System;
@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
     {
         public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            
         }
 
         #region GetOrders
@@ -57,7 +57,6 @@ namespace FikaAmazonAPI.Services
 
         public Order GetOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
             CreateAuthorizedRequest(OrdersApiUrls.Order(orderId), RestSharp.Method.GET);
             var response = ExecuteRequest<GetOrderResponse>();
            return response.Payload;
@@ -67,7 +66,6 @@ namespace FikaAmazonAPI.Services
         public OrderItemList GetOrderItems(string orderId)
         {
             var orderItemList = new OrderItemList();
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
             CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET);
             var response = ExecuteRequest<GetOrderItemsResponse>();
             var nextToken = response.Payload.NextToken;
@@ -82,8 +80,6 @@ namespace FikaAmazonAPI.Services
         }
         public OrderItemsList GetOrderItemsNextToken(string orderId,string nextToken)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
-
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
 
@@ -95,7 +91,6 @@ namespace FikaAmazonAPI.Services
 
         public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
             CreateAuthorizedRequest(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.GET, queryParameters);
             var response = ExecuteRequest<GetOrderBuyerInfoResponse>();
             return response.Payload;
@@ -103,7 +98,6 @@ namespace FikaAmazonAPI.Services
         
         public OrderItemsBuyerInfoList GetOrderItemsBuyerInfo(string orderId)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
             CreateAuthorizedRequest(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.GET);
             var response = ExecuteRequest<GetOrderItemsBuyerInfoResponse>();
             return response.Payload;
@@ -111,7 +105,6 @@ namespace FikaAmazonAPI.Services
 
         public Address GetOrderAddress(string orderId)
         {
-            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
             CreateAuthorizedRequest(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.GET);
             var response = ExecuteRequest<GetOrderAddressResponse>();
             return response.Payload.ShippingAddress;

@@ -19,7 +19,6 @@ namespace FikaAmazonAPI.Services
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
-        protected MarketPlaceParamEnum MarketPlaceParam { get; set; } = MarketPlaceParamEnum.MarketplaceId;
         protected MarketPlace MarketPlace { get; set; }
         protected string AmazonSandboxUrl { get; set; }
         protected string AmazonProductionUrl { get; set; }
@@ -66,7 +65,6 @@ namespace FikaAmazonAPI.Services
         {
             RefreshToken();
             CreateRequest(url, method);
-            //AddMarketPlaceId();
             AddQueryParameters(queryParameters);
             AddAccessToken();
         }
@@ -91,7 +89,7 @@ namespace FikaAmazonAPI.Services
         /// <returns>Returns data of T type</returns>
         protected T ExecuteRequest<T>() where T : new()
         {
-            Request = TokenService.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential.RoleArn, AmazonCredential.AccessKey, AmazonCredential.SecretKey);
+            Request = TokenService.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential.RoleArn, AmazonCredential.AccessKey, AmazonCredential.SecretKey, AmazonCredential.MarketPlace.Region.RegionName);
             var response = RequestClient.Execute<T>(Request);
             //response.Headers
             ///TODO
@@ -126,11 +124,6 @@ namespace FikaAmazonAPI.Services
                 throw new NotFoundException("Resource that you are looking for is not found", response);
             else
                 throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
-        }
-
-        protected void AddMarketPlaceId()
-        {
-            Request.AddQueryParameter(MarketPlaceParam.ToString(), MarketPlace.ID);
         }
 
         protected void AddQueryParameters(List<KeyValuePair<string, string>> queryParameters)

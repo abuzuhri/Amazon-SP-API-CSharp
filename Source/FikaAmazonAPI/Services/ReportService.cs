@@ -1,5 +1,6 @@
-﻿using AmazonSpApiSDK.Models.Reports;
-using FikaAmazonAPI.Search.Report;
+﻿using AmazonSpApiSDK.Models;
+using AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.Parameter.Report;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,37 +11,36 @@ namespace FikaAmazonAPI.Services
     {
         public ReportService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-
         }
         #region GetReport
         public List<Report> GetReport(ParameterReportList parameterReportList)
         {
-            var list = new List<Report>();
-
             var parameters = parameterReportList.getParameters();
 
             CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
             var response = ExecuteRequest<GetReportsResponse>();
-            var nextToken = response.NextToken;
-            list = response.Payload;
+            parameterReportList.nextToken = response.NextToken;
+            var list = response.Payload;
             list.AddRange(list);
 
-            while (!string.IsNullOrEmpty(nextToken))
+            while (!string.IsNullOrEmpty(parameterReportList.nextToken))
             {
-                var nextTokenResponse = GetOrdersByNextToken(nextToken);
+                var nextTokenResponse = GetOrdersByNextToken(parameterReportList);
                 list.AddRange(nextTokenResponse.Payload);
-                nextToken = nextTokenResponse.NextToken;
+                parameterReportList.nextToken = nextTokenResponse.NextToken;
             }
             return list;
         }
 
 
-        public GetReportsResponse GetOrdersByNextToken(string nextToken)
+        public GetReportsResponse GetOrdersByNextToken(ParameterReportList parameterReportList)
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+            var parameterReportListNew = new ParameterReportList();
+            parameterReportListNew.nextToken = parameterReportList.nextToken;
+            //parameterReportListNew.reportTypes= parameterReportList.reportTypes;
+            var parameters = parameterReportListNew.getParameters();
 
-            CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
             var response = ExecuteRequest<GetReportsResponse>();
             return response;
         }

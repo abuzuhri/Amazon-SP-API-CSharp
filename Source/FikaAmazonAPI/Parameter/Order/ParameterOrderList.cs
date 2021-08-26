@@ -1,11 +1,12 @@
-﻿using FikaAmazonAPI.Utils;
+﻿using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FikaAmazonAPI.Search.Order
+namespace FikaAmazonAPI.Parameter.Order
 {
     public class ParameterOrderList :  ParameterBased
     {

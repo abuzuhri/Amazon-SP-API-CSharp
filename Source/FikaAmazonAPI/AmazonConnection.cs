@@ -13,10 +13,12 @@ namespace FikaAmazonAPI
 
         public OrderService Orders => this._Orders ?? throw _NoCredentials;
         public ReportService Reports => this._Reports ?? throw _NoCredentials;
+        public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
 
 
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
+        private SolicitationService _Solicitations { get; set; }
 
 
 
@@ -42,6 +44,7 @@ namespace FikaAmazonAPI
 
             this._Orders = new OrderService(this.Credentials);
             this._Reports = new ReportService(this.Credentials);
+            this._Solicitations = new SolicitationService(this.Credentials);
         }
     }
 }

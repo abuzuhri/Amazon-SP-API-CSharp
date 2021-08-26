@@ -128,7 +128,12 @@
                 get => $"{_resourceBaseUrl}/privilege";
             }
         }
-
+        protected class SolicitationsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/solicitations/v1";
+            public static string GetSolicitationActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
+            public static string CreateProductReviewAndSellerFeedbackSolicitation(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/solicitations/productReviewAndSellerFeedback";
+        }
         protected class OrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/orders/v0";

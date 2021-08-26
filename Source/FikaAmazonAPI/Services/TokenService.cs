@@ -54,7 +54,7 @@ namespace FikaAmazonAPI.Services
             return new LWAAuthorizationSigner(lwaAuthorizationCredentials).Sign(restRequest);
         }
 
-        public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, string roleARN, string accessKey, string secretKey)
+        public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, string roleARN, string accessKey, string secretKey,string region)
         {
             AssumeRoleResponse response1 = null;
             using (var STSClient = new AmazonSecurityTokenServiceClient(accessKey, secretKey, RegionEndpoint.USEast1))
@@ -74,7 +74,7 @@ namespace FikaAmazonAPI.Services
             {
                 AccessKeyId = response1.Credentials.AccessKeyId,
                 SecretKey = response1.Credentials.SecretAccessKey,
-                Region = "eu-west-1"
+                Region = region
             };
 
             restRequest.AddHeader("x-amz-security-token", response1.Credentials.SessionToken);

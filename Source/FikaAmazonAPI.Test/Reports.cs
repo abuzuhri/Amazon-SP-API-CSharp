@@ -1,29 +1,22 @@
-﻿using System;
+﻿using FikaAmazonAPI.Parameter.Report;
+using FikaAmazonAPI.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AmazonSpApiSDK.Api.Sellers;
-using AmazonSpApiSDK.Clients;
-using FikaAmazonAPI;
-using FikaAmazonAPI.Parameter;
-using FikaAmazonAPI.Parameter.Order;
-using FikaAmazonAPI.Parameter.Report;
-using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Sample
+namespace FikaAmazonAPI.Test
 {
-    class Program
+    [TestClass]
+    public class Reports
     {
-        static async Task Main(string[] args)
+        AmazonConnection amazonConnection;
+        public Reports()
         {
-
-
-
-
-
-            AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+            amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
                 SecretKey = Environment.GetEnvironmentVariable("SecretKey"),
@@ -35,6 +28,11 @@ namespace FikaAmazonAPI.Sample
 
             });
 
+        }
+
+        [TestMethod]
+        public void GetOrders()
+        {
             var parameters = new ParameterReportList();
             parameters.pageSize = 100;
             parameters.reportTypes = new List<ReportTypes>();
@@ -44,10 +42,6 @@ namespace FikaAmazonAPI.Sample
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
             amazonConnection.Reports.GetReport(parameters);
-
-
-            Console.ReadLine();
-            
         }
     }
 }

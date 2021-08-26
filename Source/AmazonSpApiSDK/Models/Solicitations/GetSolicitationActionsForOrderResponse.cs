@@ -35,7 +35,12 @@ namespace AmazonSpApiSDK.Models.Solicitations
             this.Embedded = Embedded;
             this.Errors = Errors;
         }
-
+        public GetSolicitationActionsForOrderResponse()
+        {
+            this.Links = default(GetSolicitationActionsForOrderResponseLinks);
+            this.Embedded = default(GetSolicitationActionsForOrderResponseEmbedded);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// Gets or Sets Links
         /// </summary>

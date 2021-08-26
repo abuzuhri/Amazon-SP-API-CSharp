@@ -1,9 +1,10 @@
-﻿using System;
+﻿using FikaAmazonAPI.Search;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Search.Report
+namespace FikaAmazonAPI.Parameter.Report
 {
     public class ParameterCreateReportSpecification : ParameterBased
     {
