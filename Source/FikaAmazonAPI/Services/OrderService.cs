@@ -1,0 +1,120 @@
+﻿using AmazonSpApiSDK.Api.Orders;
+using AmazonSpApiSDK.Clients;
+using AmazonSpApiSDK.Models;
+using AmazonSpApiSDK.Models.Orders;
+using FikaAmazonAPI.Search.Order;
+using FikaAmazonAPI.Utils;
+using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace FikaAmazonAPI.Services
+{
+    public class OrderService : RequestService
+    {
+        public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+        }
+
+        #region GetOrders
+        public List<Order> GetOrders(ParameterOrderList serachOrderList)
+        {
+            var parameters = serachOrderList.getParameters();
+            return GetOrders(parameters);
+        }
+
+        public List<Order> GetOrders(List<KeyValuePair<string, string>> queryParameters = null)
+        {
+            var orderList = new List<Order>();
+
+            CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
+            var response = ExecuteRequest<GetOrdersResponse>();
+            var nextToken = response.Payload.NextToken;
+            orderList = response.Payload.Orders;
+            while (!string.IsNullOrEmpty(nextToken))
+            {
+                var orderPayload = GetByNextToken(nextToken);
+                orderList.AddRange(orderPayload.Orders);
+                nextToken = orderPayload.NextToken;
+            }
+            return orderList;
+        }
+
+        private OrdersList GetByNextToken(string nextToken)
+        {
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+
+
+            CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
+            var response = ExecuteRequest<GetOrdersResponse>();
+            return response.Payload;
+        }
+
+        #endregion
+
+        public Order GetOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            CreateAuthorizedRequest(OrdersApiUrls.Order(orderId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetOrderResponse>();
+           return response.Payload;
+        }
+
+
+        public OrderItemList GetOrderItems(string orderId)
+        {
+            var orderItemList = new OrderItemList();
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetOrderItemsResponse>();
+            var nextToken = response.Payload.NextToken;
+            orderItemList.AddRange(response.Payload.OrderItems);
+            while (!string.IsNullOrEmpty(nextToken))
+            {
+                var orderItemPayload = GetOrderItemsNextToken(orderId,nextToken);
+                orderItemList.AddRange(orderItemPayload.OrderItems);
+                nextToken = orderItemPayload.NextToken;
+            }
+            return orderItemList;
+        }
+        public OrderItemsList GetOrderItemsNextToken(string orderId,string nextToken)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+
+
+            CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET, queryParameters);
+            var response = ExecuteRequest<GetOrderItemsResponse>();
+            return response.Payload;
+        }
+
+        public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            CreateAuthorizedRequest(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.GET, queryParameters);
+            var response = ExecuteRequest<GetOrderBuyerInfoResponse>();
+            return response.Payload;
+        }
+        
+        public OrderItemsBuyerInfoList GetOrderItemsBuyerInfo(string orderId)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            CreateAuthorizedRequest(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetOrderItemsBuyerInfoResponse>();
+            return response.Payload;
+        }
+
+        public Address GetOrderAddress(string orderId)
+        {
+            MarketPlaceParam = MarketPlaceParamEnum.MarketplaceIds;
+            CreateAuthorizedRequest(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetOrderAddressResponse>();
+            return response.Payload.ShippingAddress;
+        }
+    }
+}
