@@ -19,15 +19,15 @@ namespace FikaAmazonAPI.Services
         }
 
         #region GetOrders
-        public List<Order> GetOrders(ParameterOrderList serachOrderList)
+        public List<CreateReportResult> GetOrders(ParameterOrderList serachOrderList)
         {
             var parameters = serachOrderList.getParameters();
             return GetOrders(parameters);
         }
 
-        public List<Order> GetOrders(List<KeyValuePair<string, string>> queryParameters = null)
+        public List<CreateReportResult> GetOrders(List<KeyValuePair<string, string>> queryParameters = null)
         {
-            var orderList = new List<Order>();
+            var orderList = new List<CreateReportResult>();
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
             var response = ExecuteRequest<GetOrdersResponse>();
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.Services
 
         #endregion
 
-        public Order GetOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
+        public CreateReportResult GetOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
             CreateAuthorizedRequest(OrdersApiUrls.Order(orderId), RestSharp.Method.GET);
             var response = ExecuteRequest<GetOrderResponse>();

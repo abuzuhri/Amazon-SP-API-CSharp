@@ -2,19 +2,18 @@
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
+using static AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report
 {
-    public class ParameterCreateReportSpecification : ParameterBased
+    public class ParameterCreateReportScheduleSpecification : ParameterBased
     {
         public ReportOptions reportOptions { get; set; }
         public ReportTypes reportType { get; set; }
-        public DateTime? dataStartTime { get; set; }
-        public DateTime? dataEndTime { get; set; }
         public MarketplaceIds marketplaceIds { get; set; }
+        public PeriodEnum period { get; set; }
+        public DateTime? nextReportCreationTime { get; set; }
+
     }
 }

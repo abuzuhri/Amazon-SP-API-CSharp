@@ -31,6 +31,10 @@ namespace AmazonSpApiSDK.Models.Reports
         {
             this.Errors = Errors;
         }
+        public CancelReportScheduleResponse()
+        {
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// Gets or Sets Errors

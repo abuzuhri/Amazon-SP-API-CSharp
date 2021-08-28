@@ -43,7 +43,7 @@
         }
         protected class ReportApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/reports/2020-09-04";
+            private readonly static string _resourceBaseUrl = "/reports/2021-06-30";
             public static string CreateReport
             {
                 get => $"{_resourceBaseUrl}/reports";
@@ -64,7 +64,7 @@
             }
             public static string GetReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
             public static string CancelReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
-            public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/schedules/{reportDocumentId}";
+            public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
 
         }
         protected class InventoryApiUrls

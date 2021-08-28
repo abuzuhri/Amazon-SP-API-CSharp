@@ -57,7 +57,7 @@ namespace FikaAmazonAPI.Services
         public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, string roleARN, string accessKey, string secretKey,string region)
         {
             AssumeRoleResponse response1 = null;
-            using (var STSClient = new AmazonSecurityTokenServiceClient(accessKey, secretKey, RegionEndpoint.USEast1))
+            using (var STSClient = new AmazonSecurityTokenServiceClient(accessKey, secretKey)) //, RegionEndpoint.USEast1
             {
                 var req = new AssumeRoleRequest()
                 {

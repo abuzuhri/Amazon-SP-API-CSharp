@@ -61,11 +61,15 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
-        protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null)
+        protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null)
         {
             RefreshToken();
             CreateRequest(url, method);
-            AddQueryParameters(queryParameters);
+            if (postJsonObj != null)
+            {
+                AddJsonBody(postJsonObj);
+            }
+            else  AddQueryParameters(queryParameters);
             AddAccessToken();
         }
 
@@ -118,12 +122,16 @@ namespace FikaAmazonAPI.Services
 
         protected void ParseResponse(IRestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
                 return;
             if (response.StatusCode == HttpStatusCode.NotFound)
                 throw new NotFoundException("Resource that you are looking for is not found", response);
             else
+            {
+                Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details"+ response.Content);
                 throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
+            }
+                
         }
 
         protected void AddQueryParameters(List<KeyValuePair<string, string>> queryParameters)
@@ -136,10 +144,15 @@ namespace FikaAmazonAPI.Services
         {
             Request.AddQueryParameter("limit", limit.ToString());
         }
-
+        protected void AddJsonBody(object jsonData)
+        {
+            //Request.JsonSerializer = new JsonNetSerializer();
+            var json = JsonConvert.SerializeObject(jsonData);
+            Request.AddJsonBody(json);
+        }
         protected void AddAccessToken()
         {
-            Request.AddHeader("x-amz-access-token", AccessToken);
+            Request.AddHeader(AmazonSpApiSDK.Runtime.LWAAuthorizationSigner.AccessTokenHeaderName, AccessToken);
         }
 
         protected void RefreshToken()
@@ -149,4 +162,24 @@ namespace FikaAmazonAPI.Services
 
     }
 
+    public class JsonNetSerializer : ISerializer
+    {
+        public string Serialize(object obj) =>
+            JsonConvert.SerializeObject(obj);
+
+        //public string Serialize(BodyParameter bodyParameter) =>
+        //    JsonConvert.SerializeObject(bodyParameter.Value);
+
+        public T Deserialize<T>(IRestResponse response) =>
+            JsonConvert.DeserializeObject<T>(response.Content);
+
+        public string[] SupportedContentTypes { get; } =
+        {
+                "application/json", "text/json", "text/x-json", "text/javascript", "*+json"
+            };
+
+        public string ContentType { get; set; } = "application/json";
+
+        public DataFormat DataFormat { get; } = DataFormat.Json;
+    }
 }

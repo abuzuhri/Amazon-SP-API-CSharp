@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AmazonSpApiSDK.Api.Sellers;
 using AmazonSpApiSDK.Clients;
@@ -21,8 +22,6 @@ namespace FikaAmazonAPI.Sample
 
 
 
-
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -35,15 +34,8 @@ namespace FikaAmazonAPI.Sample
 
             });
 
-            var parameters = new ParameterReportList();
-            parameters.pageSize = 100;
-            parameters.reportTypes = new List<ReportTypes>();
-            parameters.reportTypes.Add(ReportTypes.GET_AFN_INVENTORY_DATA);
 
-            parameters.marketplaceIds = new List<string>();
-            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
-            amazonConnection.Reports.GetReport(parameters);
 
 
             Console.ReadLine();

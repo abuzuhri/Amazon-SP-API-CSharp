@@ -21,7 +21,7 @@ namespace AmazonSpApiSDK.Models.Orders
     /// A list of orders.
     /// </summary>
     [DataContract]
-    public partial class OrderList : List<Order>, IEquatable<OrderList>, IValidatableObject
+    public partial class OrderList : List<CreateReportResult>, IEquatable<OrderList>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderList" /> class.

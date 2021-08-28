@@ -18,32 +18,32 @@ using System.Text;
 namespace AmazonSpApiSDK.Models.Reports
 {
     /// <summary>
-    /// The response for the getReport operation.
+    /// The response for the getReportSchedules operation.
     /// </summary>
     [DataContract]
-    public partial class GetReportResponse : IEquatable<GetReportResponse>, IValidatableObject
+    public partial class GetReportSchedulesResponseV00 : IEquatable<GetReportSchedulesResponseV00>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetReportResponse" /> class.
+        /// Initializes a new instance of the <see cref="GetReportSchedulesResponseV00" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getReport operation..</param>
+        /// <param name="ReportSchedules">The ReportSchedules for the getReportSchedules operation..</param>
         /// <param name="Errors">Errors.</param>
-        public GetReportResponse(Report Payload = default(Report), ErrorList Errors = default(ErrorList))
+        public GetReportSchedulesResponseV00(ReportScheduleList ReportSchedules = default(ReportScheduleList), ErrorList Errors = default(ErrorList))
         {
-            this.Payload = Payload;
+            this.ReportSchedules = ReportSchedules;
             this.Errors = Errors;
         }
-        public GetReportResponse()
+        public GetReportSchedulesResponseV00()
         {
-            this.Payload = default(Report);
+            this.ReportSchedules = default(ReportScheduleList);
             this.Errors = default(ErrorList);
         }
         /// <summary>
-        /// The payload for the getReport operation.
+        /// The ReportSchedules for the getReportSchedules operation.
         /// </summary>
-        /// <value>The payload for the getReport operation.</value>
-        [DataMember(Name = "payload", EmitDefaultValue = false)]
-        public Report Payload { get; set; }
+        /// <value>The ReportSchedules for the getReportSchedules operation.</value>
+        [DataMember(Name = "reportSchedules", EmitDefaultValue = false)]
+        public ReportScheduleList ReportSchedules { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
@@ -58,8 +58,8 @@ namespace AmazonSpApiSDK.Models.Reports
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class GetReportResponse {\n");
-            sb.Append("  Payload: ").Append(Payload).Append("\n");
+            sb.Append("class GetReportSchedulesResponseV00 {\n");
+            sb.Append("  ReportSchedules: ").Append(ReportSchedules).Append("\n");
             sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -81,24 +81,24 @@ namespace AmazonSpApiSDK.Models.Reports
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetReportResponse);
+            return this.Equals(input as GetReportSchedulesResponseV00);
         }
 
         /// <summary>
-        /// Returns true if GetReportResponse instances are equal
+        /// Returns true if GetReportSchedulesResponseV00 instances are equal
         /// </summary>
-        /// <param name="input">Instance of GetReportResponse to be compared</param>
+        /// <param name="input">Instance of GetReportSchedulesResponseV00 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GetReportResponse input)
+        public bool Equals(GetReportSchedulesResponseV00 input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                    this.Payload == input.Payload ||
-                    (this.Payload != null &&
-                    this.Payload.Equals(input.Payload))
+                    this.ReportSchedules == input.ReportSchedules ||
+                    (this.ReportSchedules != null &&
+                    this.ReportSchedules.Equals(input.ReportSchedules))
                 ) &&
                 (
                     this.Errors == input.Errors ||
@@ -116,8 +116,8 @@ namespace AmazonSpApiSDK.Models.Reports
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Payload != null)
-                    hashCode = hashCode * 59 + this.Payload.GetHashCode();
+                if (this.ReportSchedules != null)
+                    hashCode = hashCode * 59 + this.ReportSchedules.GetHashCode();
                 if (this.Errors != null)
                     hashCode = hashCode * 59 + this.Errors.GetHashCode();
                 return hashCode;

@@ -50,7 +50,7 @@ namespace AmazonSpApiSDK.Models.Reports
         /// Initializes a new instance of the <see cref="ReportDocument" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ReportDocument() { }
+        public ReportDocument() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportDocument" /> class.
         /// </summary>

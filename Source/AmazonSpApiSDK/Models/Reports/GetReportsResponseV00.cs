@@ -18,32 +18,42 @@ using System.Text;
 namespace AmazonSpApiSDK.Models.Reports
 {
     /// <summary>
-    /// The response for the getReport operation.
+    /// The response for the getReports operation.
     /// </summary>
     [DataContract]
-    public partial class GetReportResponse : IEquatable<GetReportResponse>, IValidatableObject
+    public partial class GetReportsResponseV00 : IEquatable<GetReportsResponseV00>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetReportResponse" /> class.
+        /// Initializes a new instance of the <see cref="GetReportsResponseV00" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getReport operation..</param>
+        /// <param name="Payload">The payload for the getReports operation..</param>
+        /// <param name="NextToken">Returned when the number of results exceeds pageSize. To get the next page of results, call getReports with this token as the only parameter..</param>
         /// <param name="Errors">Errors.</param>
-        public GetReportResponse(Report Payload = default(Report), ErrorList Errors = default(ErrorList))
+        public GetReportsResponseV00(ReportList Payload = default(ReportList), string NextToken = default(string), ErrorList Errors = default(ErrorList))
         {
-            this.Payload = Payload;
+            this.Reports = Payload;
+            this.NextToken = NextToken;
             this.Errors = Errors;
         }
-        public GetReportResponse()
+        public GetReportsResponseV00()
         {
-            this.Payload = default(Report);
+            this.Reports = default(ReportList);
+            this.NextToken = default(string);
             this.Errors = default(ErrorList);
         }
         /// <summary>
-        /// The payload for the getReport operation.
+        /// The payload for the getReports operation.
         /// </summary>
-        /// <value>The payload for the getReport operation.</value>
-        [DataMember(Name = "payload", EmitDefaultValue = false)]
-        public Report Payload { get; set; }
+        /// <value>The payload for the getReports operation.</value>
+        [DataMember(Name = "reports", EmitDefaultValue = false)]
+        public ReportList Reports { get; set; }
+
+        /// <summary>
+        /// Returned when the number of results exceeds pageSize. To get the next page of results, call getReports with this token as the only parameter.
+        /// </summary>
+        /// <value>Returned when the number of results exceeds pageSize. To get the next page of results, call getReports with this token as the only parameter.</value>
+        [DataMember(Name = "nextToken", EmitDefaultValue = false)]
+        public string NextToken { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
@@ -58,8 +68,9 @@ namespace AmazonSpApiSDK.Models.Reports
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class GetReportResponse {\n");
-            sb.Append("  Payload: ").Append(Payload).Append("\n");
+            sb.Append("class GetReportsResponse {\n");
+            sb.Append("  Reports: ").Append(Reports).Append("\n");
+            sb.Append("  NextToken: ").Append(NextToken).Append("\n");
             sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -81,24 +92,29 @@ namespace AmazonSpApiSDK.Models.Reports
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GetReportResponse);
+            return this.Equals(input as GetReportsResponse);
         }
 
         /// <summary>
-        /// Returns true if GetReportResponse instances are equal
+        /// Returns true if GetReportsResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of GetReportResponse to be compared</param>
+        /// <param name="input">Instance of GetReportsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GetReportResponse input)
+        public bool Equals(GetReportsResponseV00 input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                    this.Payload == input.Payload ||
-                    (this.Payload != null &&
-                    this.Payload.Equals(input.Payload))
+                    this.Reports == input.Reports ||
+                    (this.Reports != null &&
+                    this.Reports.Equals(input.Reports))
+                ) &&
+                (
+                    this.NextToken == input.NextToken ||
+                    (this.NextToken != null &&
+                    this.NextToken.Equals(input.NextToken))
                 ) &&
                 (
                     this.Errors == input.Errors ||
@@ -116,8 +132,10 @@ namespace AmazonSpApiSDK.Models.Reports
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Payload != null)
-                    hashCode = hashCode * 59 + this.Payload.GetHashCode();
+                if (this.Reports != null)
+                    hashCode = hashCode * 59 + this.Reports.GetHashCode();
+                if (this.NextToken != null)
+                    hashCode = hashCode * 59 + this.NextToken.GetHashCode();
                 if (this.Errors != null)
                     hashCode = hashCode * 59 + this.Errors.GetHashCode();
                 return hashCode;

@@ -35,109 +35,109 @@ namespace AmazonSpApiSDK.Models.Reports
         {
 
             /// <summary>
-            /// Enum PT5M for value: PT5M
+            /// Enum PT5M for value: PT5M  5 minutes
             /// </summary>
             [EnumMember(Value = "PT5M")]
             PT5M = 1,
 
             /// <summary>
-            /// Enum PT15M for value: PT15M
+            /// Enum PT15M for value: PT15M 15 minutes
             /// </summary>
             [EnumMember(Value = "PT15M")]
             PT15M = 2,
 
             /// <summary>
-            /// Enum PT30M for value: PT30M
+            /// Enum PT30M for value: PT30M 30 minutes
             /// </summary>
             [EnumMember(Value = "PT30M")]
             PT30M = 3,
 
             /// <summary>
-            /// Enum PT1H for value: PT1H
+            /// Enum PT1H for value: PT1H 1 hour
             /// </summary>
             [EnumMember(Value = "PT1H")]
             PT1H = 4,
 
             /// <summary>
-            /// Enum PT2H for value: PT2H
+            /// Enum PT2H for value: PT2H 2 hours
             /// </summary>
             [EnumMember(Value = "PT2H")]
             PT2H = 5,
 
             /// <summary>
-            /// Enum PT4H for value: PT4H
+            /// Enum PT4H for value: PT4H 4 hours
             /// </summary>
             [EnumMember(Value = "PT4H")]
             PT4H = 6,
 
             /// <summary>
-            /// Enum PT8H for value: PT8H
+            /// Enum PT8H for value: PT8H 8 hours
             /// </summary>
             [EnumMember(Value = "PT8H")]
             PT8H = 7,
 
             /// <summary>
-            /// Enum PT12H for value: PT12H
+            /// Enum PT12H for value: PT12H 12 hours
             /// </summary>
             [EnumMember(Value = "PT12H")]
             PT12H = 8,
 
             /// <summary>
-            /// Enum P1D for value: P1D
+            /// Enum P1D for value: P1D 1 day
             /// </summary>
             [EnumMember(Value = "P1D")]
             P1D = 9,
 
             /// <summary>
-            /// Enum P2D for value: P2D
+            /// Enum P2D for value: P2D 2 days
             /// </summary>
             [EnumMember(Value = "P2D")]
             P2D = 10,
 
             /// <summary>
-            /// Enum P3D for value: P3D
+            /// Enum P3D for value: P3D 3 days
             /// </summary>
             [EnumMember(Value = "P3D")]
             P3D = 11,
 
             /// <summary>
-            /// Enum PT84H for value: PT84H
+            /// Enum PT84H for value: PT84H 84 hours
             /// </summary>
             [EnumMember(Value = "PT84H")]
             PT84H = 12,
 
             /// <summary>
-            /// Enum P7D for value: P7D
+            /// Enum P7D for value: P7D 7 days
             /// </summary>
             [EnumMember(Value = "P7D")]
             P7D = 13,
 
             /// <summary>
-            /// Enum P14D for value: P14D
+            /// Enum P14D for value: P14D 14 days
             /// </summary>
             [EnumMember(Value = "P14D")]
             P14D = 14,
 
             /// <summary>
-            /// Enum P15D for value: P15D
+            /// Enum P15D for value: P15D 15 days
             /// </summary>
             [EnumMember(Value = "P15D")]
             P15D = 15,
 
             /// <summary>
-            /// Enum P18D for value: P18D
+            /// Enum P18D for value: P18D 18 days
             /// </summary>
             [EnumMember(Value = "P18D")]
             P18D = 16,
 
             /// <summary>
-            /// Enum P30D for value: P30D
+            /// Enum P30D for value: P30D 30 days
             /// </summary>
             [EnumMember(Value = "P30D")]
             P30D = 17,
 
             /// <summary>
-            /// Enum P1M for value: P1M
+            /// Enum P1M for value: P1M 1 month
             /// </summary>
             [EnumMember(Value = "P1M")]
             P1M = 18

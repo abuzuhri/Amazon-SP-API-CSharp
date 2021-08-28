@@ -25,7 +25,7 @@ namespace AmazonSpApiSDK.Models.Orders
     {
         public GetOrderResponse()
         {
-            this.Payload = default(Order);
+            this.Payload = default(CreateReportResult);
             this.Errors = default(ErrorList);
         }
         /// <summary>
@@ -33,7 +33,7 @@ namespace AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <param name="Payload">The payload for the getOrder operation..</param>
         /// <param name="Errors">One or more unexpected errors occurred during the getOrder operation..</param>
-        public GetOrderResponse(Order Payload = default(Order), ErrorList Errors = default(ErrorList))
+        public GetOrderResponse(CreateReportResult Payload = default(CreateReportResult), ErrorList Errors = default(ErrorList))
         {
             this.Payload = Payload;
             this.Errors = Errors;
@@ -44,7 +44,7 @@ namespace AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <value>The payload for the getOrder operation.</value>
         [DataMember(Name = "payload", EmitDefaultValue = false)]
-        public Order Payload { get; set; }
+        public CreateReportResult Payload { get; set; }
 
         /// <summary>
         /// One or more unexpected errors occurred during the getOrder operation.

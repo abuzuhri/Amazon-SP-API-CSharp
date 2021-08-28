@@ -23,7 +23,7 @@ namespace AmazonSpApiSDK.Models.Orders
     /// Order information.
     /// </summary>
     [DataContract]
-    public partial class Order : IEquatable<Order>, IValidatableObject
+    public partial class CreateReportResult : IEquatable<CreateReportResult>, IValidatableObject
     {
         /// <summary>
         /// The current order status.
@@ -194,12 +194,12 @@ namespace AmazonSpApiSDK.Models.Orders
         [DataMember(Name = "OrderType", EmitDefaultValue = false)]
         public OrderTypeEnum? OrderType { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Order" /> class.
+        /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public Order() { }
+        public CreateReportResult() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Order" /> class.
+        /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
         /// </summary>
         /// <param name="AmazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
         /// <param name="SellerOrderId">A seller-defined order identifier..</param>
@@ -236,7 +236,7 @@ namespace AmazonSpApiSDK.Models.Orders
         /// <param name="IsSoldByAB">When true, the item within this order was bought and re-sold by Amazon Business EU SARL (ABEU). By buying and instantly re-selling your items, ABEU becomes the seller of record, making your inventory available for sale to customers who would not otherwise purchase from a third-party seller..</param>
         /// <param name="AssignedShipFromLocationAddress">The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location..</param>
         /// <param name="FulfillmentInstruction">Contains the instructions about the fulfillment like where should it be fulfilled from..</param>
-        public Order(string AmazonOrderId = default(string), string SellerOrderId = default(string), string PurchaseDate = default(string), string LastUpdateDate = default(string), OrderStatusEnum OrderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? FulfillmentChannel = default(FulfillmentChannelEnum?), string SalesChannel = default(string), string OrderChannel = default(string), string ShipServiceLevel = default(string), Money OrderTotal = default(Money), int? NumberOfItemsShipped = default(int?), int? NumberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList PaymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? PaymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList PaymentMethodDetails = default(PaymentMethodDetailItemList), string MarketplaceId = default(string), string ShipmentServiceLevelCategory = default(string), string EasyShipShipmentStatus = default(string), string CbaDisplayableShippingLabel = default(string), OrderTypeEnum? OrderType = default(OrderTypeEnum?), string EarliestShipDate = default(string), string LatestShipDate = default(string), string EarliestDeliveryDate = default(string), string LatestDeliveryDate = default(string), bool? IsBusinessOrder = default(bool?), bool? IsPrime = default(bool?), bool? IsPremiumOrder = default(bool?), bool? IsGlobalExpressEnabled = default(bool?), string ReplacedOrderId = default(string), bool? IsReplacementOrder = default(bool?), string PromiseResponseDueDate = default(string), bool? IsEstimatedShipDateSet = default(bool?), bool? IsSoldByAB = default(bool?), Address AssignedShipFromLocationAddress = default(Address), FulfillmentInstruction FulfillmentInstruction = default(FulfillmentInstruction))
+        public CreateReportResult(string AmazonOrderId = default(string), string SellerOrderId = default(string), string PurchaseDate = default(string), string LastUpdateDate = default(string), OrderStatusEnum OrderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? FulfillmentChannel = default(FulfillmentChannelEnum?), string SalesChannel = default(string), string OrderChannel = default(string), string ShipServiceLevel = default(string), Money OrderTotal = default(Money), int? NumberOfItemsShipped = default(int?), int? NumberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList PaymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? PaymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList PaymentMethodDetails = default(PaymentMethodDetailItemList), string MarketplaceId = default(string), string ShipmentServiceLevelCategory = default(string), string EasyShipShipmentStatus = default(string), string CbaDisplayableShippingLabel = default(string), OrderTypeEnum? OrderType = default(OrderTypeEnum?), string EarliestShipDate = default(string), string LatestShipDate = default(string), string EarliestDeliveryDate = default(string), string LatestDeliveryDate = default(string), bool? IsBusinessOrder = default(bool?), bool? IsPrime = default(bool?), bool? IsPremiumOrder = default(bool?), bool? IsGlobalExpressEnabled = default(bool?), string ReplacedOrderId = default(string), bool? IsReplacementOrder = default(bool?), string PromiseResponseDueDate = default(string), bool? IsEstimatedShipDateSet = default(bool?), bool? IsSoldByAB = default(bool?), Address AssignedShipFromLocationAddress = default(Address), FulfillmentInstruction FulfillmentInstruction = default(FulfillmentInstruction))
         {
             // to ensure "AmazonOrderId" is required (not null)
             if (AmazonOrderId == null)
@@ -613,7 +613,7 @@ namespace AmazonSpApiSDK.Models.Orders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Order);
+            return this.Equals(input as CreateReportResult);
         }
 
         /// <summary>
@@ -621,7 +621,7 @@ namespace AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <param name="input">Instance of Order to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Order input)
+        public bool Equals(CreateReportResult input)
         {
             if (input == null)
                 return false;

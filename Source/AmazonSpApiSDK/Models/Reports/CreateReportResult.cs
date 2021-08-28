@@ -28,7 +28,7 @@ namespace AmazonSpApiSDK.Models.Reports
         /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateReportResult() { }
+        public CreateReportResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
         /// </summary>

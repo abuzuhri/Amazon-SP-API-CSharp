@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace FikaAmazonAPI.Utils
@@ -123,7 +126,7 @@ namespace FikaAmazonAPI.Utils
             IN_QUEUE
         }
 
-
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum ReportTypes
         {
             GET_VENDOR_SALES_DIAGNOSTIC_REPORT,
@@ -221,84 +224,84 @@ namespace FikaAmazonAPI.Utils
             GET_B2B_PRODUCT_OPPORTUNITIES_NOT_YET_ON_AMAZON,
 
         }
-        /// <summary>
-        /// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.
-        /// </summary>
-        public enum Period
-        {
-            /// <summary>
-            /// 5 minutes
-            /// </summary>
-            PT5M,
-            /// <summary>
-            /// 15 minutes
-            /// </summary>
-            PT15M,
-            /// <summary>
-            /// 30 minutes
-            /// </summary>
-            PT30M,
-            /// <summary>
-            /// 1 hour
-            /// </summary>
-            PT1H,
-            /// <summary>
-            /// 2 hours
-            /// </summary>
-            PT2H,
-            /// <summary>
-            /// 4 hours
-            /// </summary>
-            PT4H,
-            /// <summary>
-            /// 8 hours
-            /// </summary>
-            PT8H,
-            /// <summary>
-            /// 12 hours
-            /// </summary>
-            PT12H,
-            /// <summary>
-            /// 1 day
-            /// </summary>
-            P1D,
-            /// <summary>
-            /// 2 days
-            /// </summary>
-            P2D,
-            /// <summary>
-            /// 3 days
-            /// </summary>
-            P3D,
-            /// <summary>
-            /// 84 hours
-            /// </summary>
-            PT84H,
-            /// <summary>
-            /// 7 days
-            /// </summary>
-            P7D,
-            /// <summary>
-            /// 14 days
-            /// </summary>
-            P14D,
-            /// <summary>
-            /// 15 days
-            /// </summary>
-            P15D,
-            /// <summary>
-            /// 18 days
-            /// </summary>
-            P18D,
-            /// <summary>
-            /// 30 days
-            /// </summary>
-            P30D,
-            /// <summary>
-            /// 1 month
-            /// </summary>
-            P1M
-        }
+        ///// <summary>
+        ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.
+        ///// </summary>
+        //public enum Period
+        //{
+        //    /// <summary>
+        //    /// 5 minutes
+        //    /// </summary>
+        //    PT5M,
+        //    /// <summary>
+        //    /// 15 minutes
+        //    /// </summary>
+        //    PT15M,
+        //    /// <summary>
+        //    /// 30 minutes
+        //    /// </summary>
+        //    PT30M,
+        //    /// <summary>
+        //    /// 1 hour
+        //    /// </summary>
+        //    PT1H,
+        //    /// <summary>
+        //    /// 2 hours
+        //    /// </summary>
+        //    PT2H,
+        //    /// <summary>
+        //    /// 4 hours
+        //    /// </summary>
+        //    PT4H,
+        //    /// <summary>
+        //    /// 8 hours
+        //    /// </summary>
+        //    PT8H,
+        //    /// <summary>
+        //    /// 12 hours
+        //    /// </summary>
+        //    PT12H,
+        //    /// <summary>
+        //    /// 1 day
+        //    /// </summary>
+        //    P1D,
+        //    /// <summary>
+        //    /// 2 days
+        //    /// </summary>
+        //    P2D,
+        //    /// <summary>
+        //    /// 3 days
+        //    /// </summary>
+        //    P3D,
+        //    /// <summary>
+        //    /// 84 hours
+        //    /// </summary>
+        //    PT84H,
+        //    /// <summary>
+        //    /// 7 days
+        //    /// </summary>
+        //    P7D,
+        //    /// <summary>
+        //    /// 14 days
+        //    /// </summary>
+        //    P14D,
+        //    /// <summary>
+        //    /// 15 days
+        //    /// </summary>
+        //    P15D,
+        //    /// <summary>
+        //    /// 18 days
+        //    /// </summary>
+        //    P18D,
+        //    /// <summary>
+        //    /// 30 days
+        //    /// </summary>
+        //    P30D,
+        //    /// <summary>
+        //    /// 1 month
+        //    /// </summary>
+        //    P1M
+        //}
 
     }
 }

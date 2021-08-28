@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Reports
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetReportSchedulesResponse()
+        {
+            this.Payload = default(ReportScheduleList);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getReportSchedules operation.
         /// </summary>
