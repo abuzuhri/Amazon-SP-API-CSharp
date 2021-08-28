@@ -17,7 +17,7 @@ The purpose of this package is to have an easy way of getting started with the A
 ---
 ### Tasks
 - [x] [OrdersV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/orders-api/ordersV0.md)
-- [ ] [Reports](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2020-09-04.md)
+- [x] [Reports](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2020-09-04.md)
 - [ ] [FinancesV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/finances-api/financesV0.md)
 - [ ] [Feeds](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feeds_2020-09-04.md)
 - [ ] [Uploads](https://github.com/amzn/selling-partner-api-docs/blob/main/references/uploads-api/uploads_2020-11-01.md)
@@ -74,7 +74,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
           RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
      });
 
-     amazonConnection.Orders.ListOrders().Wait();
+     amazonConnection.Orders.ListOrders();
             
 ```
 
