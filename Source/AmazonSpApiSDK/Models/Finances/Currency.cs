@@ -28,7 +28,7 @@ namespace AmazonSpApiSDK.Models.Finances
         /// </summary>
         /// <param name="CurrencyCode">The three-digit currency code in ISO 4217 format..</param>
         /// <param name="CurrencyAmount">The monetary value..</param>
-        public Currency(string CurrencyCode = default(string), BigDecimal CurrencyAmount = default(BigDecimal))
+        public Currency(string CurrencyCode = default(string), double CurrencyAmount = default(double))
         {
             this.CurrencyCode = CurrencyCode;
             this.CurrencyAmount = CurrencyAmount;
@@ -46,7 +46,7 @@ namespace AmazonSpApiSDK.Models.Finances
         /// </summary>
         /// <value>The monetary value.</value>
         [DataMember(Name = "CurrencyAmount", EmitDefaultValue = false)]
-        public BigDecimal CurrencyAmount { get; set; }
+        public double CurrencyAmount { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

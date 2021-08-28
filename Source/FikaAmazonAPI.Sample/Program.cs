@@ -22,6 +22,7 @@ namespace FikaAmazonAPI.Sample
 
 
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -35,7 +36,14 @@ namespace FikaAmazonAPI.Sample
             });
 
 
+            //ListFinancialEvents
 
+            amazonConnection.Financial.ListFinancialEvents(new Parameter.Finance.ParameterListFinancialEvents()
+            {
+                  PostedAfter=DateTime.UtcNow.AddDays(-1),
+                  PostedBefore=DateTime.UtcNow.AddDays(-30),
+                  MaxResultsPerPage=55
+            });
 
 
             Console.ReadLine();

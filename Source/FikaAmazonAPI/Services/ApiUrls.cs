@@ -107,6 +107,20 @@
                 get => $"{_resourceBaseUrl}/location";
             }
         }
+        protected class FinanceApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/finances/v0";
+            public static string ListFinancialEventGroups
+            {
+                get => $"{_resourceBaseUrl}/financialEventGroups";
+            }
+            public static string ListFinancialEventsByGroupId(string eventGroupId) => $"{_resourceBaseUrl}/financialEventGroups/{eventGroupId}/financialEvents";
+            public static string ListFinancialEventsByOrderId(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/financialEvents";
+            public static string ListFinancialEvents
+            {
+                get => $"{_resourceBaseUrl}/listFinancialEvents";
+            }
+        }
 
         protected class AccountApiUrls
         {

@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Finances
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public ListFinancialEventGroupsResponse()
+        {
+            this.Payload = default(ListFinancialEventGroupsPayload);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the listFinancialEventGroups operation.
         /// </summary>
