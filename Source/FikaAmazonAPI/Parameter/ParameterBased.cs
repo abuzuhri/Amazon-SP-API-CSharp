@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.Search
                     {
                         output = value.ToString();
                     }
-                    else if(p.PropertyType.IsEnum)
+                    else if(p.PropertyType.IsEnum || IsNullableEnum(p.PropertyType))
                     {
                         output = value.ToString();
                     }
@@ -64,7 +64,11 @@ namespace FikaAmazonAPI.Search
 
             return queryParameters;
         }
-
+        public static bool IsNullableEnum(Type t)
+        {
+            Type u = Nullable.GetUnderlyingType(t);
+            return (u != null) && u.IsEnum;
+        }
         public static bool IsEnumerableOfEnum(Type type)
         {
             return GetEnumerableTypes(type).Any(t => t.IsEnum);

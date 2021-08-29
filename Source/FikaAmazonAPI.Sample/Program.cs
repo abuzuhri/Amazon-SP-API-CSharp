@@ -36,12 +36,13 @@ namespace FikaAmazonAPI.Sample
             });
 
 
-            //ListFinancialEvents
-
-            var items = amazonConnection.CatalogItem.ListCatalogItems(new Parameter.CatalogItems.ParameterListCatalogItems() { 
-                MarketplaceId= MarketPlace.UnitedArabEmirates.ID,
-                Query= "740985280133"
+            var data = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+            {
+                ItemCondition = ItemCondition.New,
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asin = "B07K13XL4Y"
             });
+
 
 
             Console.ReadLine();

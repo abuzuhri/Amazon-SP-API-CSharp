@@ -33,6 +33,11 @@ namespace AmazonSpApiSDK.Models.ProductPricing
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public GetPricingResponse()
+        {
+            this.Payload = default(PriceList);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the getPricing and getCompetitivePricing operations.

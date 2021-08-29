@@ -33,7 +33,7 @@ The purpose of this package is to have an easy way of getting started with the A
 - [ ] [Messaging](https://github.com/amzn/selling-partner-api-docs/blob/main/references/messaging-api/messaging.md)
 - [ ] [Notifications](https://github.com/amzn/selling-partner-api-docs/blob/main/references/notifications-api/notifications.md)
 - [ ] [ProductFeesV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-fees-api/productFeesV0.md)
-- [ ] [ProductPricingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-pricing-api/productPricingV0.md)
+- [x] [ProductPricingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-pricing-api/productPricingV0.md)
 - [ ] [Sales](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sales-api/sales.md)
 - [ ] [Sellers](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sellers-api/sellers.md)
 - [ ] [Services](https://github.com/amzn/selling-partner-api-docs/blob/main/references/services-api/services.md)

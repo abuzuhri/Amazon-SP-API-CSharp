@@ -16,6 +16,7 @@ namespace FikaAmazonAPI
         public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
         public FinancialService Financial => this._Financials ?? throw _NoCredentials;
         public CatalogItemService CatalogItem => this._CatalogItems ?? throw _NoCredentials;
+        public ProductPricingService ProductPricing => this._ProductPricing ?? throw _NoCredentials;
 
 
         private OrderService _Orders { get; set; }
@@ -23,6 +24,7 @@ namespace FikaAmazonAPI
         private SolicitationService _Solicitations { get; set; }
         private FinancialService _Financials { get; set; }
         private CatalogItemService _CatalogItems { get; set; }
+        private ProductPricingService _ProductPricing { get; set; }
 
 
 
@@ -51,6 +53,7 @@ namespace FikaAmazonAPI
             this._Solicitations = new SolicitationService(this.Credentials);
             this._Financials = new FinancialService(this.Credentials);
             this._CatalogItems = new CatalogItemService(this.Credentials);
+            this._ProductPricing = new ProductPricingService(this.Credentials);
         }
     }
 }

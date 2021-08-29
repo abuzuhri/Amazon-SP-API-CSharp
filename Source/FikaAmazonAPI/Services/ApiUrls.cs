@@ -41,6 +41,24 @@
                 get => $"/get_item_aspects_for_category";
             }
         }
+
+        protected class ProductPricingApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/products/pricing/v0";
+            public static string GetPricing
+            {
+                get => $"{_resourceBaseUrl}/price";
+            }
+            public static string GetCompetitivePricing
+            {
+                get => $"{_resourceBaseUrl}/competitivePrice";
+            }
+
+            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{SellerSKU}/offers";
+            public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
+
+        }
+
         protected class ReportApiUrls
         {
             private readonly static string _resourceBaseUrl = "/reports/2021-06-30";

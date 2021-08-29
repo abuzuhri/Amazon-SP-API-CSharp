@@ -12,6 +12,8 @@ namespace FikaAmazonAPI.Utils
         public readonly static string AmazonToeknEndPoint = "https://api.amazon.com/auth/o2/token";
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
 
+
+        [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of OrderStatus values
         /// </summary>
@@ -51,6 +53,7 @@ namespace FikaAmazonAPI.Utils
             Unfulfillable
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of payment method
         /// </summary>
@@ -69,6 +72,8 @@ namespace FikaAmazonAPI.Utils
             /// </summary>
             Other
         }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of EasyShipShipmentStatus , Used to select Easy Ship orders with statuses that match the specified values
         /// </summary>
@@ -86,7 +91,7 @@ namespace FikaAmazonAPI.Utils
             ReturningToSeller
         }
 
-
+        [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list that indicates how an order was fulfilled
         /// </summary>
@@ -101,7 +106,7 @@ namespace FikaAmazonAPI.Utils
             /// </summary>
             SellerFulfilled
         }
-
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum ProcessingStatuses
         {
             /// <summary>
@@ -124,6 +129,35 @@ namespace FikaAmazonAPI.Utils
             /// The report has not yet started processing. It may be waiting for another IN_PROGRESS report.
             /// </summary>
             IN_QUEUE
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ItemType
+        {
+            Asin,
+            Sku
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CustomerType
+        {
+            Consumer,
+            Business
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ItemCondition
+        {
+            New,
+            Used,
+            Collectible,
+            Refurbished,
+            Club
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OfferTypeEnum
+        {
+            B2C,
+            B2B
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
