@@ -15,12 +15,14 @@ namespace FikaAmazonAPI
         public ReportService Reports => this._Reports ?? throw _NoCredentials;
         public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
         public FinancialService Financial => this._Financials ?? throw _NoCredentials;
+        public CatalogItemService CatalogItem => this._CatalogItems ?? throw _NoCredentials;
 
 
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
         private SolicitationService _Solicitations { get; set; }
         private FinancialService _Financials { get; set; }
+        private CatalogItemService _CatalogItems { get; set; }
 
 
 
@@ -48,6 +50,7 @@ namespace FikaAmazonAPI
             this._Reports = new ReportService(this.Credentials);
             this._Solicitations = new SolicitationService(this.Credentials);
             this._Financials = new FinancialService(this.Credentials);
+            this._CatalogItems = new CatalogItemService(this.Credentials);
         }
     }
 }

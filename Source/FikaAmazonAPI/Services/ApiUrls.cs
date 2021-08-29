@@ -165,10 +165,15 @@
         protected class CategoryApiUrls
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
-            public static string Items
+            public static string ListCatalogItems
             {
                 get => $"{_resourceBaseUrl}/items";
             }
+            public static string ListCatalogCategories
+            {
+                get => $"{_resourceBaseUrl}/categories";
+            }
+            public static string GetCatalogItem(string asin) => $"{_resourceBaseUrl}/items/{asin}";
         }
     }
 

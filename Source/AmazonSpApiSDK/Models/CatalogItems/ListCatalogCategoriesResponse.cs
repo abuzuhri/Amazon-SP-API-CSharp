@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.CatalogItems
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public ListCatalogCategoriesResponse()
+        {
+            this.Payload = default(ListOfCategories);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the listCatalogCategories operation.
         /// </summary>

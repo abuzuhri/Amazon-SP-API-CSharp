@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
 
         public ItemList GetAll(List<KeyValuePair<string, string>> queryParameters = null)
         {
-            CreateAuthorizedRequest(CategoryApiUrls.Items, RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(CategoryApiUrls.ListCatalogItems, RestSharp.Method.GET, queryParameters);
             var response = ExecuteRequest<ListCatalogItemsResponse>();
             return response.Payload.Items;
         }

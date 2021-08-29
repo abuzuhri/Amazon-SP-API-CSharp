@@ -33,6 +33,12 @@ namespace AmazonSpApiSDK.Models.CatalogItems
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public GetCatalogItemResponse()
+        {
+            this.Payload = default(Item);
+            this.Errors = default(ErrorList);
+        }
+
 
         /// <summary>
         /// The payload for the getCatalogItem operation.

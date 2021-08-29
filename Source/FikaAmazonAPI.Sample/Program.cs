@@ -38,11 +38,9 @@ namespace FikaAmazonAPI.Sample
 
             //ListFinancialEvents
 
-            amazonConnection.Financial.ListFinancialEvents(new Parameter.Finance.ParameterListFinancialEvents()
-            {
-                  PostedAfter=DateTime.UtcNow.AddDays(-1),
-                  PostedBefore=DateTime.UtcNow.AddDays(-30),
-                  MaxResultsPerPage=55
+            var items = amazonConnection.CatalogItem.ListCatalogItems(new Parameter.CatalogItems.ParameterListCatalogItems() { 
+                MarketplaceId= MarketPlace.UnitedArabEmirates.ID,
+                Query= "740985280133"
             });
 
 
