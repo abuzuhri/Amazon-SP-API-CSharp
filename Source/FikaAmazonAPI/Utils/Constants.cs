@@ -13,6 +13,13 @@ namespace FikaAmazonAPI.Utils
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
 
 
+        //GranularityType
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum GranularityType
+        {
+            Marketplace
+        }
+
         [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of OrderStatus values

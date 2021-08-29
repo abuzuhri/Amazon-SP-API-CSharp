@@ -23,6 +23,7 @@ namespace FikaAmazonAPI.Sample
 
 
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
