@@ -33,6 +33,11 @@ namespace AmazonSpApiSDK.Models.Sales
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public GetOrderMetricsResponse()
+        {
+            this.Payload = default(OrderMetricsList);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the getOrderMetrics operation.
