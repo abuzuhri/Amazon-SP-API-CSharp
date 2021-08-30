@@ -62,6 +62,14 @@
             public static string DeleteDestination(string destinationId) => $"{_resourceBaseUrl}/destinations/{destinationId}";
         }
 
+        protected class SellersApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/sellers/v1";
+            public static string GetMarketplaceParticipations
+            {
+                get => $"{_resourceBaseUrl}/marketplaceParticipations";
+            }
+        }
         protected class ProductPricingApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/pricing/v0";

@@ -22,6 +22,6 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue TotalFeesEstimate { get; set; }
+        public MoneyType TotalFeesEstimate { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue FeeDiscountMonetaryAmount { get; set; }
+        public MoneyType FeeDiscountMonetaryAmount { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -37,6 +37,6 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue PriceThreshold { get; set; }
+        public MoneyType PriceThreshold { get; set; }
     }
 }

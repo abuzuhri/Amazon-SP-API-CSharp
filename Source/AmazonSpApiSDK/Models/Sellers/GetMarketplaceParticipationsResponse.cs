@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Sellers
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetMarketplaceParticipationsResponse()
+        {
+            this.Payload = default(MarketplaceParticipationList);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getMarketplaceParticipations operation.
         /// </summary>

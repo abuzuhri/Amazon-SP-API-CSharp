@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("ListingPrice")]
-        public AmountValue ListingPrice { get; set; }
+        public MoneyType ListingPrice { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("Shipping")]
-        public AmountValue Shipping { get; set; }
+        public MoneyType Shipping { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.

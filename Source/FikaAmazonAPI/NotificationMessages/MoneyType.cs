@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class AmountValue
+    public partial class MoneyType
     {
         /// <summary>
         /// An explanation about the purpose of this instance.

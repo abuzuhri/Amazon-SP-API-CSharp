@@ -35,13 +35,8 @@ namespace FikaAmazonAPI.Sample
 
             });
 
-            var SQL_URL = "https://sqs.us-east-2.amazonaws.com/239917024027/ICANL_SQS";
-            ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
 
-            CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
-
-
-            amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
+            var data=amazonConnection.Seller.GetMarketplaceParticipations();
 
             Console.ReadLine();
             

@@ -20,13 +20,13 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("CompetitivePriceThreshold")]
-        public AmountValue CompetitivePriceThreshold { get; set; }
+        public MoneyType CompetitivePriceThreshold { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("ListPrice")]
-        public AmountValue ListPrice { get; set; }
+        public MoneyType ListPrice { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("MinimumAdvertisedPrice")]
-        public AmountValue MinimumAdvertisedPrice { get; set; }
+        public MoneyType MinimumAdvertisedPrice { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -62,7 +62,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("SuggestedLowerPricePlusShipping")]
-        public AmountValue SuggestedLowerPricePlusShipping { get; set; }
+        public MoneyType SuggestedLowerPricePlusShipping { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.

@@ -9,9 +9,9 @@ namespace FikaAmazonAPI.NotificationMessages
         public string Condition { get; set; }
         public string OfferType { get; set; }
         public long QuantityTier { get; set; }
-        public AmountValue ListingPrice { get; set; }
-        public AmountValue Shipping { get; set; }
-        public AmountValue LandedPrice { get; set; }
+        public MoneyType ListingPrice { get; set; }
+        public MoneyType Shipping { get; set; }
+        public MoneyType LandedPrice { get; set; }
         public string DiscountType { get; set; }
         public string FulfillmentChannel { get; set; }
     }

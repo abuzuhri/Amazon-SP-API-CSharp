@@ -10,8 +10,8 @@ namespace FikaAmazonAPI.NotificationMessages
         public string SubCondition { get; set; }
         public SellerFeedbackRating SellerFeedbackRating { get; set; }
         public ShippingTime ShippingTime { get; set; }
-        public AmountValue ListingPrice { get; set; }
-        public AmountValue Shipping { get; set; }
+        public MoneyType ListingPrice { get; set; }
+        public MoneyType Shipping { get; set; }
         public ShipsFrom ShipsFrom { get; set; }
         public bool IsFulfilledByAmazon { get; set; }
         public bool IsBuyBoxWinner { get; set; }

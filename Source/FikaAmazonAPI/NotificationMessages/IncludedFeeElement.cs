@@ -13,12 +13,12 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue FeeAmount { get; set; }
+        public MoneyType FeeAmount { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue FeePromotion { get; set; }
+        public MoneyType FeePromotion { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -28,12 +28,12 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue FinalFee { get; set; }
+        public MoneyType FinalFee { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        public AmountValue TaxAmount { get; set; }
+        public MoneyType TaxAmount { get; set; }
     }
 
 }
