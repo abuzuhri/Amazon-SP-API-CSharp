@@ -31,7 +31,10 @@ namespace AmazonSpApiSDK.Models.Notifications
         {
             this.Errors = Errors;
         }
-
+        public DeleteDestinationResponse()
+        {
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// One or more unexpected errors occurred during the deleteDestination operation.
         /// </summary>

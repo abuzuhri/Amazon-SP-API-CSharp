@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.2.3" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.2.8" />
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.41" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />

@@ -8,6 +8,7 @@ using AmazonSpApiSDK.Api.Sellers;
 using AmazonSpApiSDK.Clients;
 using FikaAmazonAPI;
 using FikaAmazonAPI.Parameter;
+using FikaAmazonAPI.Parameter.Notification;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
@@ -19,8 +20,6 @@ namespace FikaAmazonAPI.Sample
     {
         static async Task Main(string[] args)
         {
-
-
 
 
 
@@ -36,15 +35,13 @@ namespace FikaAmazonAPI.Sample
 
             });
 
+            var SQL_URL = "https://sqs.us-east-2.amazonaws.com/239917024027/ICANL_SQS";
+            ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
 
-            var data = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
-            {
-                ItemCondition = ItemCondition.New,
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asin = "B07K13XL4Y"
-            });
+            CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
 
 
+            amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
 
             Console.ReadLine();
             

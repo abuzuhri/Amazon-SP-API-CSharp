@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.41" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.0.57" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
@@ -22,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AmazonSpApiSDK\AmazonSpApiSDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Parameter\Authorization\" />
   </ItemGroup>
 
 </Project>

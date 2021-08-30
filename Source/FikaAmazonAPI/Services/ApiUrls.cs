@@ -42,6 +42,26 @@
             }
         }
 
+        protected class NotificationApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/notifications/v1";
+            public static string GetSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
+            public static string CreateSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
+            public static string GetSubscriptionById(string notificationType,string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            public static string DeleteSubscriptionById(string notificationType,string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+
+            public static string GetDestinations
+            {
+                get => $"{_resourceBaseUrl}/destinations";
+            }
+            public static string CreateDestination
+            {
+                get => $"{_resourceBaseUrl}/destinations";
+            }
+            public static string GetDestination(string destinationId) => $"{_resourceBaseUrl}/destinations/{destinationId}";
+            public static string DeleteDestination(string destinationId) => $"{_resourceBaseUrl}/destinations/{destinationId}";
+        }
+
         protected class ProductPricingApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/pricing/v0";
@@ -165,6 +185,14 @@
             private readonly static string _resourceBaseUrl = "/solicitations/v1";
             public static string GetSolicitationActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
             public static string CreateProductReviewAndSellerFeedbackSolicitation(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/solicitations/productReviewAndSellerFeedback";
+        }
+        protected class FbaInventoriesApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/fba/inventory/v1";
+            public static string GetInventorySummaries
+            {
+                get => $"{_resourceBaseUrl}/summaries";
+            }
         }
         protected class OrdersApiUrls
         {

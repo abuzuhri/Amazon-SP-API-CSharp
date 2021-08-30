@@ -28,7 +28,7 @@ namespace AmazonSpApiSDK.Models.Notifications
         /// Initializes a new instance of the <see cref="CreateDestinationRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateDestinationRequest() { }
+        public CreateDestinationRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateDestinationRequest" /> class.
         /// </summary>
@@ -55,6 +55,7 @@ namespace AmazonSpApiSDK.Models.Notifications
                 this.Name = Name;
             }
         }
+
 
         /// <summary>
         /// The information required to create a destination resource. Applications should use one resource type (sqs or eventBridge) per destination.

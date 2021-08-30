@@ -20,22 +20,22 @@ namespace FikaAmazonAPI
         public AuthorizationService Authorization => this._Authorization ?? throw _NoCredentials;
         public AplusContentService AplusContent => this._AplusContent ?? throw _NoCredentials;
         public FbaInboundEligibilityService FbaInboundEligibility => this._FbaInboundEligibility ?? throw _NoCredentials;
-        public FbaInboundService FbaInboundService => this._FbaInbound ?? throw _NoCredentials;
-        public FbaInventoryService FbaInventoryService => this._FbaInventory ?? throw _NoCredentials;
-        public FbaOutboundService FbaOutboundService => this._FbaOutbound ?? throw _NoCredentials;
-        public FbaSmallandLightService FbaSmallandLightService => this._FbaSmallandLight ?? throw _NoCredentials;
-        public FeedService FeedService => this._Feed ?? throw _NoCredentials;
-        public ListingsItemService ListingsItemService => this._ListingsItem ?? throw _NoCredentials;
-        public MerchantFulfillmentService MerchantFulfillmentService => this._MerchantFulfillment ?? throw _NoCredentials;
-        public MessagingService MessagingService => this._Messaging ?? throw _NoCredentials;
-        public NotificationService NotificationService => this._Notification ?? throw _NoCredentials;
-        public ProductFeeService ProductFeeService => this._ProductFee ?? throw _NoCredentials;
-        public SalesService SalesService => this._Sales ?? throw _NoCredentials;
-        public SellerService SellerService => this._Seller ?? throw _NoCredentials;
-        public ServicesService ServicesService => this._Services ?? throw _NoCredentials;
-        public ShipmentInvoicingService ShipmentInvoicingService => this._ShipmentInvoicing ?? throw _NoCredentials;
-        public ShippingService ShippingService => this._Shipping ?? throw _NoCredentials;
-        public UploadService UploadService => this._Upload ?? throw _NoCredentials;
+        public FbaInboundService FbaInbound => this._FbaInbound ?? throw _NoCredentials;
+        public FbaInventoryService FbaInventory => this._FbaInventory ?? throw _NoCredentials;
+        public FbaOutboundService FbaOutbound => this._FbaOutbound ?? throw _NoCredentials;
+        public FbaSmallandLightService FbaSmallandLight => this._FbaSmallandLight ?? throw _NoCredentials;
+        public FeedService Feed => this._Feed ?? throw _NoCredentials;
+        public ListingsItemService ListingsItem => this._ListingsItem ?? throw _NoCredentials;
+        public MerchantFulfillmentService MerchantFulfillment => this._MerchantFulfillment ?? throw _NoCredentials;
+        public MessagingService Messaging => this._Messaging ?? throw _NoCredentials;
+        public NotificationService Notification => this._Notification ?? throw _NoCredentials;
+        public ProductFeeService ProductFee => this._ProductFee ?? throw _NoCredentials;
+        public SalesService Sales => this._Sales ?? throw _NoCredentials;
+        public SellerService Seller => this._Seller ?? throw _NoCredentials;
+        public ServicesService Services => this._Services ?? throw _NoCredentials;
+        public ShipmentInvoicingService ShipmentInvoicing => this._ShipmentInvoicing ?? throw _NoCredentials;
+        public ShippingService Shipping => this._Shipping ?? throw _NoCredentials;
+        public UploadService Upload => this._Upload ?? throw _NoCredentials;
 
 
         private OrderService _Orders { get; set; }

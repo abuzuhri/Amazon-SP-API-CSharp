@@ -35,6 +35,12 @@ namespace AmazonSpApiSDK.Models.FbaInventory
             this.Pagination = Pagination;
             this.Errors = Errors;
         }
+        public GetInventorySummariesResponse()
+        {
+            this.Payload = default(GetInventorySummariesResult);
+            this.Pagination = default(Pagination);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the getInventorySummaries operation.

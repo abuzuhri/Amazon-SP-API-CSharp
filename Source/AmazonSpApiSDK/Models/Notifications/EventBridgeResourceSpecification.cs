@@ -28,7 +28,7 @@ namespace AmazonSpApiSDK.Models.Notifications
         /// Initializes a new instance of the <see cref="EventBridgeResourceSpecification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EventBridgeResourceSpecification() { }
+        public EventBridgeResourceSpecification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="EventBridgeResourceSpecification" /> class.
         /// </summary>

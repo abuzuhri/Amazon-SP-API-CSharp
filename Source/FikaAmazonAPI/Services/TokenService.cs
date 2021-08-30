@@ -6,6 +6,7 @@ using AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.Utils;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace FikaAmazonAPI.Services
@@ -25,7 +26,7 @@ namespace FikaAmazonAPI.Services
                 return DateTime.UtcNow.Subtract((DateTime)lastUpdated).TotalSeconds > expiresIn;
         }
 
-        public static string RefreshAccessToken(AmazonCredential credentials)
+        public static string RefreshAccessToken(AmazonCredential credentials,bool isGrantless=false)
         {
             var lwaCredentials = new LWAAuthorizationCredentials()
             {
@@ -33,7 +34,10 @@ namespace FikaAmazonAPI.Services
                 ClientSecret = credentials.ClientSecret,
                 Endpoint = new Uri(Constants.AmazonToeknEndPoint),
                 RefreshToken = credentials.RefreshToken,
+                Scopes=null
             };
+            if (isGrantless)
+                lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
             var Client = new LWAClient(lwaCredentials);
             var accessToken = Client.GetAccessToken();
@@ -41,18 +45,6 @@ namespace FikaAmazonAPI.Services
             return accessToken;
         }
 
-        public static IRestRequest SignWithAccessToken(IRestRequest restRequest, string clientId, string clientSecret, string refreshToken)
-        {
-            var lwaAuthorizationCredentials = new LWAAuthorizationCredentials
-            {
-                ClientId = clientId,
-                ClientSecret = clientSecret,
-                Endpoint = new Uri("https://api.amazon.com/auth/o2/token"),
-                RefreshToken = refreshToken,
-            };
-
-            return new LWAAuthorizationSigner(lwaAuthorizationCredentials).Sign(restRequest);
-        }
 
         public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, string roleARN, string accessKey, string secretKey,string region)
         {

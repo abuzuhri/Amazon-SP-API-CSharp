@@ -31,6 +31,10 @@ namespace AmazonSpApiSDK.Models.Notifications
         {
             this.Errors = Errors;
         }
+        public DeleteSubscriptionByIdResponse( )
+        {
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// An unexpected condition occurred during the deleteSubscriptionById operation.

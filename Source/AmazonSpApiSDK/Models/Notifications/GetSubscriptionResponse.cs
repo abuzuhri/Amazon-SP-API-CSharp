@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Notifications
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetSubscriptionResponse()
+        {
+            this.Payload = default(Subscription);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getSubscription operation.
         /// </summary>

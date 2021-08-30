@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Notifications
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetDestinationResponse()
+        {
+            this.Payload = default(Destination);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getDestination operation.
         /// </summary>

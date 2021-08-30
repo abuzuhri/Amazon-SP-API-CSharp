@@ -61,9 +61,9 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
-        protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null)
+        protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null,bool isGrantless=false)
         {
-            RefreshToken();
+            RefreshToken(isGrantless);
             CreateRequest(url, method);
             if (postJsonObj != null)
             {
@@ -155,9 +155,9 @@ namespace FikaAmazonAPI.Services
             Request.AddHeader(AmazonSpApiSDK.Runtime.LWAAuthorizationSigner.AccessTokenHeaderName, AccessToken);
         }
 
-        protected void RefreshToken()
+        protected void RefreshToken(bool isGrantless=false)
         {
-            AccessToken = TokenService.RefreshAccessToken(AmazonCredential);
+            AccessToken = TokenService.RefreshAccessToken(AmazonCredential, isGrantless);
         }
 
     }
