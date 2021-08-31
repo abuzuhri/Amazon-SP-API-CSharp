@@ -196,6 +196,13 @@
                 get => $"{_resourceBaseUrl}/privilege";
             }
         }
+
+        protected class ProductFeeApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/products/fees/v0";
+            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{SellerSKU}/feesEstimate";
+            public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
+        }
         protected class SolicitationsApiUrls
         {
             private readonly static string _resourceBaseUrl = "/solicitations/v1";

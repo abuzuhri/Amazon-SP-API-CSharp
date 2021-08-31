@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.ProductFees
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetMyFeesEstimateResponse()
+        {
+            this.Payload = default(GetMyFeesEstimateResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the operation.
         /// </summary>
