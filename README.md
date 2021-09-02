@@ -45,7 +45,7 @@ The purpose of this package is to have an easy way of getting started with the A
 ### Installation
 
 ```powershell
-Install-Package CSharpAmazonSpAPI -Version 1.0.0
+Install-Package CSharpAmazonSpAPI -Version 1.0.1
 ```
 
 ---
@@ -63,6 +63,8 @@ For more information about keys please check [Amazon Selling Partner Api develop
 
 ---
 ### Usage
+
+## Configration
 ```CSharp
     AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
     {
@@ -74,8 +76,131 @@ For more information about keys please check [Amazon Selling Partner Api develop
           RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
      });
 
-     amazonConnection.Orders.ListOrders();
+```
+
+## Order Lsit ,For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
+```CSharp
+   var orders= amazonConnection.Orders.ListOrders();
             
+```
+
+
+## Order Lsit with parameter
+```CSharp
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+
+            serachOrderList.AmazonOrderIds = new List<string>();
+            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
+            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
+            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
+            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            
+```
+
+## Report Lsit ,For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
+```CSharp
+            var parameters = new ParameterReportList();
+            parameters.pageSize = 100;
+            parameters.reportTypes = new List<ReportTypes>();
+            parameters.reportTypes.Add(ReportTypes.GET_AFN_INVENTORY_DATA);
+            parameters.marketplaceIds = new List<string>();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+            var reports=amazonConnection.Reports.GetReports(parameters);
+```
+
+## Custom Report
+```CSharp
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
+            parameters.dataStartTime = DateTime.UtcNow.AddDays(-30);
+            parameters.dataEndTime = DateTime.UtcNow.AddDays(-10);
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+            parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
+
+            var report= amazonConnection.Reports.CreateReport(parameters);
+```
+
+## Product Pricing ,For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
+```CSharp
+
+var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asins = new string[] { "B00CZC5F0G" }
+            });
+
+```
+
+## Product Competitive Price
+```CSharp
+
+var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asins = new string[] { "B00CZC5F0G" },
+
+            });
+```
+
+
+## Notifications Create Destination,For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+```CSharp
+
+//EventBridge
+            var data = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
+            {
+                Name = "CompanyName",
+                ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification()
+                {
+                    EventBridge = new AmazonSpApiSDK.Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
+                }
+            });
+
+            //SQS
+            var dataSqs = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
+            {
+                Name = "CompanyName_AE",
+                ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
+                {
+                    Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+                }
+            });
+```
+
+## Notifications read messages
+```CSharp
+
+            var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
+            ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
+
+            CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
+
+
+            amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
+
+
+        public class CustomMessageReceiver : IMessageReceiver
+        {
+
+            public void ErrorCatch(Exception ex)
+            {
+                //Your code here
+            }
+
+            public void NewMessageRevicedTriger(NotificationMessageResponce message)
+            {
+                //Your Code here
+            }
+        }
+
+
 ```
 
 ---
