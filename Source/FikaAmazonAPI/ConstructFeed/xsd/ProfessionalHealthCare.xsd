@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by sunil sachdev (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 20011/07/26 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+           <xsd:include schemaLocation="amzn-base.xsd"/>
+           <xsd:element name="ProfessionalHealthCare">
+           	<xsd:complexType>
+           		<xsd:sequence>
+           			<xsd:element name="ProductType">
+           				<xsd:complexType>
+           					<xsd:choice>
+           						<xsd:element name="ProfessionalHealthCare"/>
+								<xsd:element ref="MedicalDevice"/>
+           					</xsd:choice>
+           				</xsd:complexType>
+           			</xsd:element>
+            	<xsd:element name="VariationData" minOccurs="0">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="Parentage" >
+            				<xsd:simpleType>
+            					<xsd:restriction base="xsd:string">
+            						<xsd:enumeration value="parent"/>
+            						<xsd:enumeration value="child"/>
+            					</xsd:restriction>
+            				</xsd:simpleType>
+            			</xsd:element>
+            			<xsd:element name="VariationTheme" minOccurs="0">
+            				<xsd:simpleType>
+            						<xsd:restriction base="xsd:string">
+            							<xsd:enumeration value="ColorName"/>
+            							<xsd:enumeration value="ItemPackageQuantity"/>
+            							<xsd:enumeration value="Material"/>
+            							<xsd:enumeration value="SizeName-ColorName"/>
+            							<xsd:enumeration value="SizeName"/>
+            							<xsd:enumeration value="Wattage"/>
+            						</xsd:restriction>
+            				</xsd:simpleType>
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            	</xsd:element>
+                <xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="ColorName" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="ScentName" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FinishType" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/> 
+                <xsd:element name="ItemForm" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="SpecificUsesForProduct" type="StringNotNull" minOccurs="0"  maxOccurs="2"/>
+                <xsd:element name="SkinTone" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+                <xsd:element name="Coverage" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="SkinType" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+                <xsd:element name="HairType" type="LongStringNotNull" minOccurs="0" maxOccurs="2"/>
+                <xsd:element name="Directions" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="Ingredients" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="Indications" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+                <xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>	
+                <xsd:element name="NumberOfPieces" type="PositiveInteger" minOccurs="0"/>
+                <xsd:element name="PlugType" type="HundredString" minOccurs="0"/>
+                <xsd:element name="HarmonizedCode" type="HundredString" minOccurs="0"/>	
+                <xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+                <xsd:element name="MinimumWeightRecommendation" type="WeightDimension" minOccurs="0"/>
+                <xsd:element name="MaximumWeightRecommendation" type="WeightDimension" minOccurs="0"/>
+                <xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="BatteryAverageLife" type="PositiveNonZeroDimension" minOccurs="0"/>
+                <xsd:element name="BatteryCellComposition" type="BatteryCellTypeValues" minOccurs="0"/>				
+                <xsd:element name="BatteryAverageLifeStandby" type="PositiveNonZeroDimension" minOccurs="0"/>
+                <xsd:element name="BatteryChargeTime" type="PositiveNonZeroDimension" minOccurs="0"/>
+                <xsd:element name="BatteryDescription" type="StringNotNull" minOccurs="0"/>	
+                <xsd:element name="BatteryFormFactor" type="StringNotNull" minOccurs="0"/>	
+                <xsd:element name="BatteryPower" type="BatteryPowerIntegerDimension" minOccurs="0"/>
+                <xsd:element name="LithiumBatteryEnergyContent" type="Dimension" minOccurs="0"/>
+                <xsd:element name="LithiumBatteryPackaging" type="LithiumBatteryPackagingType" minOccurs="0"/>
+                <xsd:element name="LithiumBatteryVoltage" type="Dimension" minOccurs="0"/>
+                <xsd:element name="LithiumBatteryWeight" type="Dimension" minOccurs="0"/>
+                <xsd:element name="NumberOfItems" type="PositiveInteger" minOccurs="0"/>
+                <xsd:element name="FdaDeviceClassification" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FdaIndicationOfUse" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FdaInstructionsForUseType" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FdaLabelType" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FdaPremarketApprovalNumber510k" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="FdaPremarketApprovalNumberPma" type="StringNotNull" minOccurs="0"/>
+                <xsd:element name="UnitCount" minOccurs="0">
+                	<xsd:complexType>
+                			<xsd:simpleContent>
+                					<xsd:extension base="xsd:decimal">
+                						<xsd:attribute name="unitOfMeasure" type="StringNotNull" use="required"/>
+                					</xsd:extension>
+                			</xsd:simpleContent>
+                	</xsd:complexType>
+                </xsd:element>
+				<xsd:element name="ProductExpirationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FcShelfLife" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FcShelfLifePadTime" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FcShelfLifePadTime2q" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FcReceivePadTime" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxRole1" type="OrganizationTaxRoles" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxCode1" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxRole2" type="OrganizationTaxRoles" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxCode2" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxRole3" type="OrganizationTaxRoles" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxCode3" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxRole4" type="OrganizationTaxRoles" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxCode4" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxRole5" type="OrganizationTaxRoles" minOccurs="0"/>
+				<xsd:element name="OrganizationTaxCode5" type="StringNotNull" minOccurs="0"/>
+		     </xsd:sequence>
+           	</xsd:complexType>
+           </xsd:element>
+		   
+		   <!--
+		   Medical Device
+		   -->
+				<xsd:element name="MedicalDevice">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CeRiskAssessmentRequired" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="UKMedicinesActClassification" type="UKMedicinesClassUnit" minOccurs="0"/>
+							<xsd:element name="StorageInstructions" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="TransportationRestrictions" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="GdprRisk" type="GdprRiskType" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+</xsd:schema>

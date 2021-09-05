@@ -22,6 +22,53 @@ namespace FikaAmazonAPI.Utils
             Total
         }
         [JsonConverter(typeof(StringEnumConverter))]
+        public enum OperationType
+        {
+            Update,
+            Delete,
+            PartialUpdate,
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum FeedType
+        {
+            JSON_LISTINGS_FEED,
+            POST_PRODUCT_DATA,
+            POST_INVENTORY_AVAILABILITY_DATA,
+            POST_PRODUCT_OVERRIDES_DATA,
+            POST_PRODUCT_PRICING_DATA,
+            POST_PRODUCT_IMAGE_DATA,
+            POST_PRODUCT_RELATIONSHIP_DATA,
+            POST_FLAT_FILE_INVLOADER_DATA,
+            POST_FLAT_FILE_LISTINGS_DATA,
+            POST_FLAT_FILE_BOOKLOADER_DATA_,
+            POST_FLAT_FILE_CONVERGENCE_LISTINGS_DATA,
+            POST_FLAT_FILE_PRICEANDQUANTITYONLY_UPDATE_DATA,
+            POST_UIEE_BOOKLOADER_DATA,
+            POST_STD_ACES_DATA,
+            POST_ORDER_ACKNOWLEDGEMENT_DATA,
+            POST_PAYMENT_ADJUSTMENT_DATA,
+            POST_ORDER_FULFILLMENT_DATA,
+            POST_INVOICE_CONFIRMATION_DATA,
+            POST_EXPECTED_SHIP_DATE_SOD,
+            POST_FLAT_FILE_ORDER_ACKNOWLEDGEMENT_DATA,
+            POST_FLAT_FILE_PAYMENT_ADJUSTMENT_DATA,
+            POST_FLAT_FILE_FULFILLMENT_DATA,
+            POST_EXPECTED_SHIP_DATE_SOD_FLAT_FILE,
+            POST_FULFILLMENT_ORDER_REQUEST_DATA,
+            POST_FULFILLMENT_ORDER_CANCELLATION_REQUEST_DATA,
+            POST_FBA_INBOUND_CARTON_CONTENTS,
+            POST_FLAT_FILE_FULFILLMENT_ORDER_REQUEST_DATA,
+            POST_FLAT_FILE_FULFILLMENT_ORDER_CANCELLATION_REQUEST_DATA,
+            POST_FLAT_FILE_FBA_CREATE_INBOUND_PLAN,
+            POST_FLAT_FILE_FBA_UPDATE_INBOUND_PLAN,
+            POST_FLAT_FILE_FBA_CREATE_REMOVAL,
+            RFQ_UPLOAD_FEED,
+            POST_EASYSHIP_DOCUMENTS
+
+
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum FirstDayOfWeek
         {
             Monday,
@@ -300,6 +347,70 @@ namespace FikaAmazonAPI.Utils
             GET_B2B_PRODUCT_OPPORTUNITIES_NOT_YET_ON_AMAZON,
 
         }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ContentType
+        {
+            [EnumMember(Value = "text/xml; charset=UTF-8")]
+            XML,
+            [EnumMember(Value = "application/json; charset=UTF-8")]
+            JSON
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum FeedMessageType
+        {
+            CatPIL,
+            CharacterData,
+            Customer,
+            CustomerReport,
+            EnhancedContent,
+            ExternalCustomer,
+            ExternalOrder,
+            FulfillmentCenter,
+            FulfillmentOrderRequest,
+            FulfillmentOrderCancellationRequest,
+            Image,
+            Inventory,
+            InvoiceConfirmation,
+            Item,
+            MSVat,
+            Local,
+            Loyalty,
+            MultiChannelOrderReport,
+            NavigationReport,
+            Offer,
+            OrderAcknowledgement,
+            OrderAdjustment,
+            OrderFulfillment,
+            OrderSourcingOnDemand,
+            OrderNotificationReport,
+            OrderReport,
+            Override,
+            PendingOrderReport,
+            PointOfSale,
+            Price,
+            TradeInPrice,
+            ProcessingReport,
+            Product,
+            ProductImage,
+            Promotion,
+            PurchaseConfirmation,
+            ACES,
+            PIES,
+            Relationship,
+            ReverseItem,
+            RichContent,
+            SalesHistory,
+            SalesAdjustment,
+            SettlementReport,
+            StandardProduct,
+            TestOrderRequest,
+            Store,
+            StoreStockMovement,
+            WebstoreItem,
+        }
+
+
         ///// <summary>
         ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.
         ///// </summary>

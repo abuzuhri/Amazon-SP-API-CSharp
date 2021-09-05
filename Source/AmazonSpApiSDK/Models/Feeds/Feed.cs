@@ -75,7 +75,7 @@ namespace AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="Feed" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Feed() { }
+        public Feed() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Feed" /> class.
         /// </summary>

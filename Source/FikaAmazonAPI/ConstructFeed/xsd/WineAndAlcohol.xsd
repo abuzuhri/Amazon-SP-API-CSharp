@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="WineAndAlcohol">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element name="Wine">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="HarvestDate" type="xsd:dateTime" minOccurs="0"/>
+										<xsd:element name="Appellation" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VineDescription" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VineAge" type="StringNotNull" minOccurs="1"/>
+										<xsd:element name="AdditionalProductInformation" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="BlendGrapeVarietal" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+										<xsd:element name="WineType" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="Designation" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="SubAppellation" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="ShippingGroup" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VarietalComposition" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+										<xsd:element name="SweetnessAtHarvest" type="SweetnessAtHarvestDimension" minOccurs="0"/>
+										<xsd:element name="DrinkingRangeEndYear" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="Winemaker" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="DrinkingRangeStartYear" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="CloneName" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VineyardYield" type="VineyardYieldDimension" minOccurs="0"/>
+										<xsd:element name="Rootstock" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="Negociant" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VarietalDesignation" type="StringNotNull" minOccurs="1"/>
+										<xsd:element name="RegionalWineClassification" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="SoilType" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="ViticultureMethod" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="Vintage" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="FiningMaterial" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VinificationMethod" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="CoverArt" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="VineyardDescription" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+										<xsd:element name="GrapeAverageSize" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="GrapeAverageWeight" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="HarvestTemperature" type="TemperatureDimension" minOccurs="0"/>
+										<xsd:element name="HarvestTimeOfDay" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="SweetnessDescription" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="ResidualSugar" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="TotalAcidity" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="AgingProgram" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="BottleCountryOfManufacture" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="BottleColor" type="StringNotNull" minOccurs="0"/>
+										<xsd:element name="FirstProductionYear" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="ReleaseDate" type="xsd:dateTime" minOccurs="0"/>
+										<xsd:element name="ShortDescription" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+										<xsd:element name="WineRatingRater" type="RaterType" minOccurs="0" maxOccurs="3"/>
+										<xsd:element name="WineRatingScore" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+										<xsd:element name="WineRatingReview" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+										<xsd:element name="HandlingTime" type="xsd:positiveInteger" minOccurs="0"/>
+										<xsd:element name="InternationalWineCellarRating" type="String" minOccurs="0"/>
+										<xsd:element name="JamesSucklingRating" type="String" minOccurs="0"/>
+										<xsd:element name="BurghoundRating" type="String" minOccurs="0"/>
+										<xsd:element name="WineSpiritsRating" type="String" minOccurs="0"/>
+										<xsd:element name="JamesHallidayRating" type="String" minOccurs="0"/>
+										<xsd:element name="AntonioGalloniRating" type="String" minOccurs="0"/>
+										<xsd:element name="SuggestedFoodPairing" type="LongStringNotNull" minOccurs="0"/>
+										<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Spirits"/>
+							<xsd:element name="Beer"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Color-ItemDisplayWeight"/>
+										<xsd:enumeration value="Color-PatternName"/>
+										<xsd:enumeration value="Color-Size"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="Flavor-Size"/>
+										<xsd:enumeration value="ItemDisplayWeight"/>
+										<xsd:enumeration value="ItemDisplayWeight-Color"/>
+										<xsd:enumeration value="ItemDisplayWeight-ItemPackageQuantity"/>
+										<xsd:enumeration value="ItemDisplayWeight-Size"/>
+										<xsd:enumeration value="ItemPackageQuantity-ItemDisplayWeight"/>
+										<xsd:enumeration value="PatternName"/>
+										<xsd:enumeration value="PatternName-Flavor"/>
+										<xsd:enumeration value="PatternName-ItemDisplayWeight"/>
+										<xsd:enumeration value="PatternName-Size"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="Size-ItemDisplayWeight"/>
+										<xsd:enumeration value="Size-PatternName"/>
+										<xsd:enumeration value="Vintage"/>
+										<xsd:enumeration value="Vintage-NumberofItems"/>
+                                                                  </xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="PatternName" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ItemDisplayWeight" type="WeightDimension" minOccurs="0"/>
+							<xsd:element name="Color" type="SuperLongStringNotNull" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="BodyDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NutritionFacts" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PhValue" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="ItemVolume" type="VolumeDimension" minOccurs="1"/>
+				<xsd:element name="AgingVesselMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BottledDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="PackageTypeName" type="StringNotNull" minOccurs="1"/>
+				<xsd:element name="CooperageHeadToastDesignation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsPerishable" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="OccasionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Importer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LiquidPackagingType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsLiquidDoubleSealed" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BottleType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BarrelAgingTime" type="DateIntegerDimension" minOccurs="0"/>
+				<xsd:element name="AwardsWon" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ServingRecommendation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryString" type="StringNotNull" minOccurs="1"/>
+				<xsd:element name="CaffeineContent" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CooperageManufacturer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PrimaryFermentationYeast" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialIngredients" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FermentationMethod" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SecondaryFermentationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ContainerVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="AgeRangeDescription" type="StringNotNull" minOccurs="1"/>
+				<xsd:element name="AlcoholContent" type="AlcoholContentDimension" minOccurs="0"/>
+				<xsd:element name="CooperageMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ContainerMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Cuisine" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CooperageNewMaterialPercentage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FilteringProcess" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SubregionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Directions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UseByRecommendation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CustomerReturnPolicy" type="CustomerReturnPolicyType" minOccurs="0"/>
+				<xsd:element name="ContainerType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OriginDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TasteDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AmountProduced" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="CooperageToastLevel" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="StorageInstructions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BottleAgingTime" type="DateIntegerDimension" minOccurs="0"/>
+				<xsd:element name="Specialty" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LiquidPackagingSeal" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OneClickAvailable" type="xsd:boolean" minOccurs="0"/>
+				<!-- V2 VW attributes applicable for PrimeNow sellers -->
+				<xsd:element name="AverageSizePerMerchantUom" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MerchantUnitOfMeasureUnit" type="GenericUnit" minOccurs="0"/>
+				<xsd:element name="MerchantUnitOfMeasureValue" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ContainsLiquidContents" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="FcShelfLife" type="DateIntegerDimension" minOccurs="0"/>
+				<!-- V3 VW attributes applicable for PrimeNow sellers -->
+				<xsd:element name="AverageSizevalue" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="AverageSizeUnit" minOccurs="0" >
+				<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="units"/>
+							<xsd:enumeration value="ounces"/>
+							<xsd:enumeration value="pounds"/>
+							<xsd:enumeration value="grams"/>
+							<xsd:enumeration value="kilograms"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="MerchantUOMValue" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MerchantUOMUnit" minOccurs="0" >
+				<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="units"/>
+							<xsd:enumeration value="ounces"/>
+							<xsd:enumeration value="pounds"/>
+							<xsd:enumeration value="grams"/>
+							<xsd:enumeration value="kilograms"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="InventoryUnitofMeasure" minOccurs="0" >
+				<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="units"/>
+							<xsd:enumeration value="ounces"/>
+							<xsd:enumeration value="pounds"/>
+							<xsd:enumeration value="grams"/>
+							<xsd:enumeration value="kilograms"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>				
+				<xsd:element name="PricingStrategy" type="PricingStrategyValues" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="RaterType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="RP"/>
+			<xsd:enumeration value="WE"/>
+			<xsd:enumeration value="WS"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

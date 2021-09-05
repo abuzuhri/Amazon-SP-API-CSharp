@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2006/11/17 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Price">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SKU"/>
+				<xsd:element name="StandardPrice" type="OverrideCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="StandardPricePoints" type="xsd:integer" minOccurs="0"/>
+				<xsd:element name="BusinessPrice" type="BasePriceCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="QuantityPriceType" type="QuantityPriceTypes" minOccurs="0"/>
+				<xsd:element name="QuantityPrice" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="QuantityPrice1" type="BasePriceCurrencyAmount" minOccurs="0"/>
+							<xsd:element name="QuantityLowerBound1" type="PositiveInteger" minOccurs="0"/>
+							<xsd:element name="QuantityPrice2" type="BasePriceCurrencyAmount" minOccurs="0"/>
+							<xsd:element name="QuantityLowerBound2" type="PositiveInteger" minOccurs="0"/>
+							<xsd:element name="QuantityPrice3" type="BasePriceCurrencyAmount" minOccurs="0"/>
+							<xsd:element name="QuantityLowerBound3" type="PositiveInteger" minOccurs="0"/>
+							<xsd:element name="QuantityPrice4" type="BasePriceCurrencyAmount" minOccurs="0"/>
+							<xsd:element name="QuantityLowerBound4" type="PositiveInteger" minOccurs="0"/>
+							<xsd:element name="QuantityPrice5" type="BasePriceCurrencyAmount" minOccurs="0"/>
+							<xsd:element name="QuantityLowerBound5" type="PositiveInteger" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="MinimumSellerAllowedPrice" type="StringOverrideCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="MaximumSellerAllowedPrice" type="StringOverrideCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="MAP" type="OverrideCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="DepositAmount" type="CurrencyAmountWithDefault" minOccurs="0"/>
+				<xsd:element name="Sale" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="SalePrice" type="OverrideCurrencyAmount"/>
+							<xsd:element name="SalePricePoints" type="xsd:integer" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CompareAt" type="DatedCompareAtPrice" minOccurs="0"/>
+				<xsd:element name="Previous" type="DatedPrice" minOccurs="0"/>
+				<xsd:element name="Rental_0" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_1" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_2" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_3" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_4" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_5" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_6" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_7" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_8" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rental_9" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StartDate" type="xsd:dateTime"/>
+							<xsd:element name="EndDate" type="xsd:dateTime"/>
+							<xsd:element name="RentalPrice" type="OverrideCurrencyAmountWithTax"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CostPerClickBidPrice" type="OverrideCurrencyAmount" minOccurs="0"/>
+                <xsd:element name="PricingAction" type="PricingActionValues" minOccurs="0"/>
+				<xsd:element name="MetalStandardPrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DiamondStandardPrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GemstoneStandardPrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MakingChargesStandardPrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TaxStandardPrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MetalSalePrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DiamondSalePrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GemstoneSalePrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MakingChargesSalePrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TaxSalePrice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaximumRetailPrice" type="OverrideCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="IsSourcingOnDemand" type="IsSourcingOnDemandValues" minOccurs="0"/>
+				<xsd:element name="PricingStrategy" type="PricingStrategyValues" minOccurs="0"/>
+				<xsd:element name="MinimumOrderAmount" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MaximumOrderAmount" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="OrderIncrement" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MSRPWithTax" type="OverrideCurrencyAmount" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="BaseCurrencyCodeWithDefault">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="USD"/>
+			<xsd:enumeration value="GBP"/>
+			<xsd:enumeration value="EUR"/>
+			<xsd:enumeration value="JPY"/>
+			<xsd:enumeration value="CAD"/>
+			<xsd:enumeration value="CNY"/>
+			<xsd:enumeration value="INR"/>
+			<xsd:enumeration value="AUD"/>
+			<xsd:enumeration value="BRL"/>
+			<xsd:enumeration value="MXN"/>
+			<xsd:enumeration value="TRY"/>
+			<xsd:enumeration value="DEFAULT"/>
+			<xsd:enumeration value="AED"/>
+			<xsd:enumeration value="SAR"/>
+			<xsd:enumeration value="SGD"/>
+			<xsd:enumeration value="SEK"/>
+			<xsd:enumeration value="PLN"/>
+			<xsd:enumeration value="EGP"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="CurrencyAmountWithDefault">
+		<xsd:simpleContent>
+			<xsd:extension base="BasePriceCurrencyAmount">
+				<xsd:attribute name="currency" type="BaseCurrencyCodeWithDefault" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="StringCurrencyAmountWithDefault">
+		<xsd:simpleContent>
+			<xsd:extension base="StringBasePriceCurrencyAmount">
+				<xsd:attribute name="currency" type="BaseCurrencyCodeWithDefault" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OverrideCurrencyAmount">
+		<xsd:simpleContent>
+			<xsd:extension base="CurrencyAmountWithDefault">
+				<xsd:attribute name="zero" type="xsd:boolean" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="StringOverrideCurrencyAmount">
+		<xsd:simpleContent>
+			<xsd:extension base="StringCurrencyAmountWithDefault">
+				<xsd:attribute name="zero" type="xsd:boolean" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+		<xsd:complexType name="OverrideCurrencyAmountWithTax">
+		<xsd:simpleContent>
+			<xsd:extension base="OverrideCurrencyAmount">
+				<xsd:attribute name="valueWithoutTax" type="BasePriceCurrencyAmount" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="QuantityPriceTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="fixed"/>
+			<xsd:enumeration value="percent"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PricingActionValues">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="delete business_price"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

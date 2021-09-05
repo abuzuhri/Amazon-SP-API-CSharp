@@ -35,6 +35,12 @@ namespace AmazonSpApiSDK.Models.Feeds
             this.NextToken = NextToken;
             this.Errors = Errors;
         }
+        public GetFeedsResponse()
+        {
+            this.Payload = default(FeedList);
+            this.NextToken = default(string);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// Gets or Sets Payload

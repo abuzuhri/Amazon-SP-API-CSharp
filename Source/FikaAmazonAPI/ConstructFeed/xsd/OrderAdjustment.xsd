@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #12 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!--
+    $Date: 2012/03/28 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+
+    <xsd:element name="OrderAdjustment">
+        <xsd:complexType>
+            <xsd:sequence>
+
+                <xsd:choice>
+                    <xsd:element ref="AmazonOrderID"/>
+                    <xsd:element ref="MerchantOrderID"/>
+                </xsd:choice>
+
+                <xsd:element name="ActionType" minOccurs="0" maxOccurs="1">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="Refund"/>
+                            <xsd:enumeration value="Cancel"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <xsd:element name="CODCollectionMethod" minOccurs="0">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="DirectPayment"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <xsd:element name="AdjustedItem" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+
+                            <xsd:choice>
+                                <xsd:element ref="AmazonOrderItemCode"/>
+                                <xsd:element ref="MerchantOrderItemID"/>
+                            </xsd:choice>
+
+                            <xsd:element name="MerchantAdjustmentItemID" type="StringNotNull"
+                                minOccurs="0"/>
+
+                            <xsd:element name="AdjustmentReason">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="NoInventory"/>
+                                        <xsd:enumeration value="CustomerReturn"/>
+                                        <xsd:enumeration value="GeneralAdjustment"/>
+                                        <xsd:enumeration value="CouldNotShip"/>
+                                        <xsd:enumeration value="DifferentItem"/>
+                                        <xsd:enumeration value="Abandoned"/>
+                                        <xsd:enumeration value="CustomerCancel"/>
+                                        <xsd:enumeration value="PriceError"/>
+                                        <xsd:enumeration value="ProductOutofStock"/>
+                                        <xsd:enumeration value="CustomerAddressIncorrect"/>
+                                        <xsd:enumeration value="Exchange"/>
+                                        <xsd:enumeration value="Other"/>
+                                        <xsd:enumeration value="CarrierCreditDecision"/>
+                                        <xsd:enumeration value="RiskAssessmentInformationNotValid"/>
+                                        <xsd:enumeration value="CarrierCoverageFailure"/>
+                                        <xsd:enumeration value="TransactionRecord"/>
+                                        <xsd:enumeration value="Undeliverable"/>
+                                        <xsd:enumeration value="RefusedDelivery"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+
+                            <xsd:element name="ItemPriceAdjustments" type="AdjustmentBuyerPrice"
+                                minOccurs="0"/>
+
+                            <xsd:element name="PromotionAdjustments" minOccurs="0"
+                                maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+
+                                        <xsd:element ref="PromotionClaimCode" minOccurs="0"/>
+                                        <xsd:element ref="MerchantPromotionID" minOccurs="0"/>
+
+                                        <xsd:element name="Component" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+
+                                                  <xsd:element name="Type"
+                                                  type="PromotionApplicationType"/>
+                                                  <xsd:element name="Amount"
+                                                  type="AdjustmentCurrencyAmount"/>
+
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="DirectPaymentAdjustments"
+                                type="AdjustmentDirectPaymentType" minOccurs="0"/>
+                            <xsd:element name="QuantityCancelled" type="xsd:positiveInteger"
+                                minOccurs="0"/>
+                            <xsd:element name="Quantity" type="xsd:positiveInteger" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="AdjustmentBuyerPrice">
+        <xsd:sequence>
+            <xsd:element name="Component" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Type">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value="Principal"/>
+                                    <xsd:enumeration value="Shipping"/>
+                                    <xsd:enumeration value="Tax"/>
+                                    <xsd:enumeration value="ShippingTax"/>
+                                    <xsd:enumeration value="RestockingFee"/>
+                                    <xsd:enumeration value="RestockingFeeTax"/>
+                                    <xsd:enumeration value="GiftWrap"/>
+                                    <xsd:enumeration value="GiftWrapTax"/>
+                                    <xsd:enumeration value="Surcharge"/>
+                                    <xsd:enumeration value="ReturnShipping"/>
+                                    <xsd:enumeration value="Goodwill"/>
+                                    <xsd:enumeration value="ExportCharge"/>
+                                    <xsd:enumeration value="COD"/>
+                                    <xsd:enumeration value="CODTax"/>
+                                    <xsd:enumeration value="Other"/>
+                                    <xsd:enumeration value="FreeReplacementReturnShipping"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="Amount" type="AdjustmentCurrencyAmount"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AdjustmentCurrencyAmount">
+        <xsd:simpleContent>
+            <xsd:extension base="BaseCurrencyAmount">
+                <xsd:attribute name="currency" type="BaseCurrencyCode" use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="AdjustmentDirectPaymentType">
+        <xsd:sequence>
+            <xsd:element name="Component" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Type" type="xsd:string"/>
+                        <xsd:element name="Amount" type="AdjustmentCurrencyAmount"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -29,7 +29,7 @@ namespace AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="CreateFeedSpecification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateFeedSpecification() { }
+        public CreateFeedSpecification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateFeedSpecification" /> class.
         /// </summary>

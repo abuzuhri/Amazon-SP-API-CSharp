@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #10 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/04/02 $
+                                                                                                                       
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced,
+    distributed or used, in whole or in part, for any purpose other than as necessary
+    to list products for sale on the www.amazon.com web site pursuant to an agreement
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="ThreeDPrinting">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="DigitalDesigns"/>
+							<xsd:enumeration value="ThreeDPrintedProduct"/>
+							<xsd:enumeration value="ThreeDPrintableDesigns"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="ColorName"/>
+										<xsd:enumeration value="Material"/>
+										<xsd:enumeration value="Material-Color"/>
+										<xsd:enumeration value="Material-Size"/>
+										<xsd:enumeration value="SizeName"/>
+										<xsd:enumeration value="SizeName-ColorName"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DisplayDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="StyleKeywords" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OriginDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateType" type="StringNotNull" minOccurs="0" maxOccurs="9"/>
+				<xsd:element name="CertificateNumber" type="StringNotNull" minOccurs="0" maxOccurs="9"/>
+				<xsd:element name="DesignFileUrl" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="VolumeBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDepth" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DepartmentName" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Theme" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Genre" type="StringNotNull" minOccurs="0" maxOccurs="18"/>
+				<xsd:element name="MfgMinimum" type="MinimumAgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="VideoUrl" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="14"/>
+				<xsd:element name="SpecialSizeType" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="BeltStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrameMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LensMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatiblePhoneModels" type="StringNotNull" minOccurs="0" maxOccurs="18"/>
+				<xsd:element name="CompatibleDevices" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="NumberOfPieces" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstallationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SkillLevel" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="MetalType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsCustomizable" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="AdditionalProductInformation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RecommendedUserBuild" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PrintingTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemFirmnessDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsVeryHighValue" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SupportedDevices" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PreferredManufacturer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AdditionalSizeInformation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FinishType" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

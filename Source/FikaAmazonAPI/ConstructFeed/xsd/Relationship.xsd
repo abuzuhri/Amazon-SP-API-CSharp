@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #6 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2006/02/07 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Relationship">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ParentSKU" type="SKUType"/>
+				<xsd:element name="Relation" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="SKU"/>
+							<xsd:element name="SortHeuristic" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="Quantity" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="ComponentNumber" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="ChildDetailPageDisplay" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="independently_displayable"/>
+										<xsd:enumeration value="display_only_on_parent"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Type">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Variation"/>
+										<xsd:enumeration value="DisplaySet"/>
+										<xsd:enumeration value="Collection"/>
+										<xsd:enumeration value="Accessory"/>
+										<xsd:enumeration value="Customized"/>
+										<xsd:enumeration value="Part"/>
+										<xsd:enumeration value="Complements"/>
+										<xsd:enumeration value="Piece"/>
+										<xsd:enumeration value="Necessary"/>
+										<xsd:enumeration value="ReplacementPart"/>
+										<xsd:enumeration value="Similar"/>
+										<xsd:enumeration value="Episode"/>
+										<xsd:enumeration value="Season"/>
+										<xsd:enumeration value="MerchantTitleAuthority"/>
+										<xsd:enumeration value="Component"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

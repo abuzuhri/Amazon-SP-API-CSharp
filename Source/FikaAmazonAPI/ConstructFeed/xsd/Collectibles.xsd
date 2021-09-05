@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by V Swetha (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	
+	<xsd:element name="Collectibles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="AdvertisementCollectibles"/>
+							<xsd:element ref="HistoricalCollectibles"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AdvertisementCollectibles">
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MakeAnOfferMinimumPercentage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="Theme" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AdditionalProductInformation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Originality" type="Originality" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Genre" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AuthenticatedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="EstatePeriod" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsVeryHighValue" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="CertificateNumber" type="HundredString" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HistoricalCollectibles">
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MakeAnOfferMinimumPercentage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Originality" type="Originality" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EventName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AuthenticatedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Contributor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateNumber" type="HundredString" minOccurs="0"/>
+				<xsd:element name="LimitedEditionNumber" type="HundredString" minOccurs="0"/>
+				<xsd:element name="LimitedEditionQuantity" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsVeryHighValue" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="AdditionalProductInformation" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

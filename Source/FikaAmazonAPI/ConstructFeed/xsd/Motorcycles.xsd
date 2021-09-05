@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2011/04/06 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com. 
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Motorcycles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="Vehicles"/>
+							<xsd:element ref="ProtectiveClothing"/>
+							<xsd:element ref="Helmets"/>
+							<xsd:element ref="RidingBoots"/>
+							<xsd:element ref="Gloves"/>
+							<xsd:element ref="Accessories"/>
+							<xsd:element ref="Parts"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Amperage" type="AmperageDimension" minOccurs="0"/>
+				<xsd:element name="CareInstructions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element ref="ColorSpecification" minOccurs="0"/>
+				<xsd:element name="Department" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="Lifestyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RecallDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SpecificationMet" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Model" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="String">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="String">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+				<xsd:element name="Wattage" type="WattageDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # MOTORCYCLES Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="Vehicles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BackSuspensionDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="BackWheelDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Co2Emission" type="EmissionsDimension" minOccurs="0"/>
+				<xsd:element name="CubicCapacity" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DriveSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EngineType" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontBrakeDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontSuspensionDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontWheelDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="FuelCapacity" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="FuelEconomyCity" type="FuelEconomyDimension" minOccurs="0"/>
+				<xsd:element name="FuelEconomyCombined" type="FuelEconomyDimension" minOccurs="0"/>
+				<xsd:element name="FuelEconomyHighway" type="FuelEconomyDimension" minOccurs="0"/>
+				<xsd:element name="FuelType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IgnitionSystemType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaximumHorsepower" type="HorsepowerDimension" minOccurs="0"/>
+				<xsd:element name="MaximumRange" type="RangeDimension" minOccurs="0"/>
+				<xsd:element name="MaximumSpeed" type="SpeedDimension" minOccurs="0"/>
+				<xsd:element name="MaximumTorque" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="OemEquivalentPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="RearBrakeDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeatHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TransmissionType" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # POWER_SPORTS_PROTECTIVE_GEAR Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="ProtectiveClothing">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FitType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="InnerMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InsoleMaterialType" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Seasons" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SleeveLength" type="ClothingSizeDimension" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="WaistSize" type="ClothingSizeDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # POWER_SPORTS_RIDING_HELMET Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="Helmets">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FitType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="InnerMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InsoleMaterialType" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Seasons" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # POWER_SPORTS_RIDING_SHOES Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="RidingBoots">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FitType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="InnerMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InsoleMaterialType" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Seasons" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ShaftDiameter" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="ShaftHeight" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="SoleMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # POWER_SPORTS_RIDING_GLOVES Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="Gloves">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FitType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="InnerMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InsoleMaterialType" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Seasons" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # MOTORCYCLE_ACCESSORY Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="Accessories">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteryDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BatteryLife" type="BatteryLifeDimension" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="String">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LoadCapacity" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="OemEquivalentPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="Viscosity" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="VolumeCapacity" type="VolumeDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # MOTORCYCLE_PART Classification Data
+    ###############################################################
+    -->
+	<xsd:element name="Parts">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AreBatteriesIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteriesRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteryDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BatteryLife" type="BatteryLifeDimension" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontBrakeDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontSuspensionDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="FrontWheelDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="String">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="OemEquivalentPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="PartPosition" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="String">
+							<xsd:enumeration value="front"/>
+							<xsd:enumeration value="rear"/>
+							<xsd:enumeration value="right"/>
+							<xsd:enumeration value="left"/>
+							<xsd:enumeration value="upper"/>
+							<xsd:enumeration value="lower"/>
+							<xsd:enumeration value="inside"/>
+							<xsd:enumeration value="outside"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RearBrakeDescription" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+    ###############################################################
+    # Motorcycles specific types
+    ###############################################################
+    -->
+	<xsd:complexType name="EmissionsDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="EmissionUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="FuelEconomyDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="FuelEconomyUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="RangeDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="RangeUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="HorsepowerDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="HorsepowerUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<!--
+    ###############################################################
+    # Motorcycles specific unit of measure
+    ###############################################################
+    -->
+	<xsd:simpleType name="EmissionUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="grams_per_100_kilometers"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FuelEconomyUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="liters_per_100_kilometers"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RangeUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="kilometers"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="HorsepowerUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="kilowatts"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

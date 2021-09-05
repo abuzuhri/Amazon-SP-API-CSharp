@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #7 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2007/03/08 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="OrderAcknowledgement">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AmazonOrderID"/>
+				<xsd:element ref="MerchantOrderID" minOccurs="0"/>
+				<xsd:element name="StatusCode">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Success"/>
+							<xsd:enumeration value="Failure"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Item" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="AmazonOrderItemCode"/>
+							<xsd:element ref="MerchantOrderItemID" minOccurs="0"/>
+							<xsd:element name="CancelReason" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NoInventory"/>
+										<xsd:enumeration value="ShippingAddressUndeliverable"/>
+										<xsd:enumeration value="CustomerExchange"/>
+										<xsd:enumeration value="BuyerCanceled"/>
+										<xsd:enumeration value="GeneralAdjustment"/>
+										<xsd:enumeration value="CarrierCreditDecision"/>
+										<xsd:enumeration value="RiskAssessmentInformationNotValid"/>
+										<xsd:enumeration value="CarrierCoverageFailure"/>
+										<xsd:enumeration value="CustomerReturn"/>
+										<xsd:enumeration value="MerchandiseNotReceived"/>
+										<xsd:enumeration value="CannotVerifyInformation"/>
+										<xsd:enumeration value="PricingError"/>
+										<xsd:enumeration value="RejectOrder"/>
+										<xsd:enumeration value="WeatherDelay"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							 <xsd:element name="Quantity" type="xsd:positiveInteger" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+

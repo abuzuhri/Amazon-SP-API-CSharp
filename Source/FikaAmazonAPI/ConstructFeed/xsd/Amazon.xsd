@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xsd:annotation>
+<xsd:documentation>
+$Date: 2004/11/18 $
+AMAZON.COM CONFIDENTIAL.This document and the information contained in it are
+confidential and proprietary information of Amazon.com and may not be reproduced,distributed or used, in whole or in part, for any purpose other than as necessary to list products for sale on the www.amazon.com web site pursuant to an agreement with Amazon.com.
+</xsd:documentation>
+</xsd:annotation>
+<xsd:include schemaLocation="amzn-base.xsd"/>
+
+<xsd:element name="Amazon-Vendor-Only">	
+<xsd:complexType>
+<xsd:sequence>
+	<xsd:element name="Cost" type="CurrencyAmount"/>
+</xsd:sequence>				
+</xsd:complexType>
+</xsd:element>
+<xsd:annotation>
+<xsd:documentation>
+If you are using the Amazon-Only structure, please also include and populate the Amazon-Vendor-Only structure.
+</xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="Amazon-Only">
+<xsd:complexType>
+<xsd:sequence>
+	<xsd:element name="Tier" type="xsd:positiveInteger"/>
+	<xsd:element name="PurchasingCategory" type="StringNotNull"/>
+	<xsd:element name="PurchasingSubCategory" type="StringNotNull"/>
+	<xsd:element name="PackagingType" type="StringNotNull"/>
+	<xsd:element name="UnderlyingAvailability">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="backordered"/>
+			<xsd:enumeration value="manufacturer-out-of-stock"/>
+			<xsd:enumeration value="pre-ordered"/>
+			<xsd:enumeration value="2-3-days"/>
+			<xsd:enumeration value="1-2-weeks"/>
+			<xsd:enumeration value="4-6-weeks"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReplenishmentCategory">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="basic-replenishment"/>
+			<xsd:enumeration value="limited-replenishment"/>
+			<xsd:enumeration value="manufacturer-out-of-stock"/>
+			<xsd:enumeration value="new-product"/>
+			<xsd:enumeration value="non-replenishable"/>
+			<xsd:enumeration value="non-stockupable"/>
+			<xsd:enumeration value="obsolete"/>
+			<xsd:enumeration value="planned-replenishment"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DropShipStatus">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="drop-ship-disabled"/>
+			<xsd:enumeration value="drop-ship-disabled-by-buyer"/>
+			<xsd:enumeration value="drop-ship-enabled"/>
+			<xsd:enumeration value="drop-ship-enabled-no-auto-pricing"/>
+			<xsd:enumeration value="drop-ship-only"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OutOfStockWebsiteMessage">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="email-me-when-available"/>
+			<xsd:enumeration value="out-of-stock"/>
+			<xsd:enumeration value="pre-order-ute"/>
+			<xsd:enumeration value="underlying-availability"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	</xsd:element>
+	</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+
+
+
+
+
+
+
+
+
+

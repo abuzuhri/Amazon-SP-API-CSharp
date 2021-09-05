@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   <!--
+   $Date: 20011/07/26 $
+
+   AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+   confidential and proprietary information of Amazon.com and may not be reproduced, 
+   distributed or used, in whole or in part, for any purpose other than as necessary 
+   to list products for sale on the www.amazon.com web site pursuant to an agreement 
+   with Amazon.com.
+   -->
+   <xsd:include schemaLocation="amzn-base.xsd"/>
+   <!--
+   Please read the corresponding documentation that contains the recommended values for elements
+   of type StringNotNull.
+   -->
+   <xsd:element name="MaterialHandling">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element minOccurs="0" name="Parentage">
+               <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                     <xsd:enumeration value="parent"/>
+                     <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+               </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="CFMat90PSI" type="PositiveDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleBeamFlangeWidth" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleMinBeamCurveRadius" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleMinBeamHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="ControlCordLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="DrumCapacity" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HangerHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="Horsepower" type="Dimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamOutsideDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamType" type="HundredString" minOccurs="0"/>
+            <xsd:element name="LeverLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="LiftingMaterialType" type="LongString" minOccurs="0"/>
+            <xsd:element name="LiftingMechanism" type="LongString" minOccurs="0"/>
+            <xsd:element name="LoadCapacity" type="WeightDimension" minOccurs="0"/>
+            <xsd:element name="MaterialType" type="LongString" minOccurs="0"/>
+            <xsd:element name="MaximumHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MaximumLiftingHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MaximumLiftingSpeed" type="SpeedDimension" minOccurs="0"/>
+            <xsd:element name="MaximumPressure" type="PressureDimension" minOccurs="0"/>
+            <xsd:element name="MaximumTensionLoad" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MeasurementSystem" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MinimumClearance" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MinimumHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="ModelNumber" type="HundredString" minOccurs="0"/>
+            <xsd:element name="MotorPhase" type="HundredString" minOccurs="0"/>
+            <xsd:element name="MountingHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MountingType" type="HundredString" minOccurs="0"/>
+            <xsd:element name="NumberOfLinks" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="NumberOfPoints" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="NumberOfSpeeds" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="OilCapacity" type="VolumeDimension" minOccurs="0"/>
+            <xsd:element name="PistonStrokeLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="PowerSourceType" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="6"/>
+            <xsd:element name="SpecificationMet" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="StrandType" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="TensionRating" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="Voltage" type="PositiveDimension" minOccurs="0"/>
+            <xsd:element name="WheelTreadWidth" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Color" type="SuperLongStringNotNull" minOccurs="0"/>
+			<xsd:element name="ExteriorFinish" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="FinishTypes" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="GritMaterialType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="GritType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="LowerTemperatureRating" type="TemperatureDimension" minOccurs="0"/>
+			<xsd:element name="ManufacturerGrade" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ThreadType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="UpperTemperatureRating" type="TemperatureDimension" minOccurs="0"/>
+			<xsd:element name="WheelDiameter" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="ExtensionLength" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="FuelType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="GraduationInterval" type="GraduationInterval" minOccurs="0"/>
+			<xsd:element name="LiquidPackagingType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="FlyLineNumber" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="FcShelfLife" type="DateIntegerDimension" minOccurs="0"/>
+			<xsd:element name="FulfillReadinessCond" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+			<xsd:element name="Racks" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="Shelves" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="PlatformHeight" type="Dimension" minOccurs="0"/>
+			<xsd:element name="UnitCount" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:decimal">
+							<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TemperatureRange" type="TemperatureRangeType" minOccurs="0"/>
+			<xsd:element name="CompatibleMaterial" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="FlashPoint" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="IsHeatSensitive" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ItemPackIsConveyable" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ProductExpirationDate" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="Wattage" type="PositiveDimension" minOccurs="0"/>
+			<xsd:element minOccurs="0" name="VariationData">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Parentage">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="parent"/>
+									<xsd:enumeration value="child"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element minOccurs="0" name="VariationTheme">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Numberofitems"/>
+									<xsd:enumeration value="Wattage"/>
+									<xsd:enumeration value="ItemPackageQuantity"/>
+									<xsd:enumeration value="Size"/>
+									<xsd:enumeration value="Material"/>
+									<xsd:enumeration value="Color"/>
+									<xsd:enumeration value="ColorSize"/>
+									<xsd:enumeration value="Color-Material"/>
+									<xsd:enumeration value="Stylename"/>
+									<xsd:enumeration value="SizeName"/>
+									<xsd:enumeration value="Color_name"/>
+									<xsd:enumeration value="Sizename-Colorname"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

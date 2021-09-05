@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Sunitha Basodi (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 20011/07/26 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="RawMaterials">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:simpleType>
+						<xsd:restriction base="HundredString">
+							<xsd:enumeration value="CeramicBalls"/>
+							<xsd:enumeration value="CeramicTubing"/>
+							<xsd:enumeration value="Ceramics"/>
+							<xsd:enumeration value="MetalBalls"/>
+							<xsd:enumeration value="MetalMesh"/>
+							<xsd:enumeration value="MetalTubing"/>
+							<xsd:enumeration value="Metals"/>
+							<xsd:enumeration value="PlasticBalls"/>
+							<xsd:enumeration value="PlasticMesh"/>
+							<xsd:enumeration value="PlasticTubing"/>
+							<xsd:enumeration value="Plastics"/>
+							<xsd:enumeration value="RawMaterials"/>
+							<xsd:enumeration value="Wire"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AirEntryPressure" type="PressureDimension" minOccurs="0"/>
+				<xsd:element name="BackingType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BallType" type="String" minOccurs="0"/>
+				<xsd:element name="CompatibleWithTubeGauge" type="Dimension" minOccurs="0"/>
+				<xsd:element name="CornerStyle" type="HundredString" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="DiscDiameterString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DurometerHardness" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ExteriorFinish" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FoamStructure" type="HundredString" minOccurs="0"/>
+				<xsd:element name="GaugeString" type="String" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HoleCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="InsideDiameterString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="InsideDiameterToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemDiameterToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemHardness" type="String" minOccurs="0"/>
+				<xsd:element name="ItemLengthToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="String" minOccurs="0"/>
+				<xsd:element name="ItemTemper" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ItemThickness" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemThicknessToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemWidthToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="LowerBubblingPressure" type="PressureDimension" minOccurs="0"/>
+				<xsd:element name="LowerTemperatureRating" type="TemperatureDimension" minOccurs="0"/>
+				<xsd:element name="Map" type="BaseCurrencyAmount" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="LongString" minOccurs="1"/>
+				<xsd:element name="MaximumPressure" type="PressureDimension" minOccurs="0"/>
+				<xsd:element name="MeasurementSystem" type="String" minOccurs="1"/>
+				<xsd:element name="MeshCount" type="MeshCountDimension" minOccurs="0"/>
+				<xsd:element name="MeshForm" type="SuperLongString" minOccurs="0"/>
+				<xsd:element name="MeshNumber" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MeshOpeningShape" type="SuperLongString" minOccurs="0"/>
+				<xsd:element name="MeshOpeningSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MetalConstructionType" type="SuperLongString" minOccurs="0"/>
+				<xsd:element name="NotchDepth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="NotchWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="OpenAreaPercentage" type="Dimension" minOccurs="0"/>
+				<xsd:element name="PoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ShimType" type="SuperLongString" minOccurs="0"/>
+				<xsd:element name="SlotDepth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SlotWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpecificationMet" type="String" minOccurs="0"/>
+				<xsd:element name="SphericityString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="StandardConstruction" type="String" minOccurs="0"/>
+				<xsd:element name="SubjectContent" type="String" minOccurs="0"/>
+				<xsd:element name="TensileStrength" type="TensileStrengthDimension" minOccurs="0"/>
+				<xsd:element name="ThreadDiameterString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ToleranceHeld" type="String" minOccurs="0"/>
+				<xsd:element name="TubingWallType" type="SuperLongString" minOccurs="0"/>
+				<xsd:element name="UpperBubblingPressure" type="PressureDimension" minOccurs="0"/>
+				<xsd:element name="UpperTemperatureRating" type="TemperatureDimension" minOccurs="0"/>
+				<xsd:element name="VoidVolumePercentage" type="Dimension" minOccurs="0"/>
+				<xsd:element name="WallThickness" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="WallThicknessToleranceString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="WireDiameterString" type="LengthDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# RawMaterials Data Types
+	###############################################################
+	-->	
+	<xsd:complexType name="TensileStrengthDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="ForceUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="MeshCountDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="PositiveInteger">
+					<xsd:attribute name="unitOfMeasure" type="MeshCountUnitOfMeasure" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType  name="MeshCountUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="threads per centimeter"/>
+			<xsd:enumeration value="threads per inch"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

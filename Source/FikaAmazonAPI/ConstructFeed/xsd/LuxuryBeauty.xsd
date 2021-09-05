@@ -1,0 +1,109 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="LuxuryBeauty">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:simpleType>
+						<xsd:restriction base="HundredString">
+							<xsd:enumeration value="LuxuryBeauty"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="SizeName"/>
+										<xsd:enumeration value="ColorName"/>
+										<xsd:enumeration value="SizeName-ColorName"/>
+										<xsd:enumeration value="Scent"/>
+										<xsd:enumeration value="Size-Scent"/>										
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="SuperLongStringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ScentName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Finish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetGender" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+				<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Specialty" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecificUsesForProduct" type="String" minOccurs="0"/>
+				<xsd:element name="Coverage" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SunProtection" type="SunProtectionDimension" minOccurs="0"/>
+				<xsd:element name="SkinType" type="LongStringNotNull" minOccurs="0" maxOccurs="4"/>
+				<xsd:element name="HairType" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Directions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Indications" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="PlugFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PowerSourceType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+				<xsd:element name="Wattage" type="WattageDimension" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="TimeDimension" minOccurs="0"/>
+				<xsd:element name="BatteryCellType" type="BatteryCellTypeValues" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="TimeDimension" minOccurs="0"/>
+				<xsd:element name="BatteryFormFactor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BatteryPower" type="BatteryPowerIntegerDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryVoltage" type="VoltageDecimalDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="AwardsWon" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

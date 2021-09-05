@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #2 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+    <!--
+    $Date: 2007/09/13 $
+ 
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="FulfillmentOrderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MerchantFulfillmentOrderID" type="FortyStringNotNull">
+                                    <xsd:annotation>
+                                        <xsd:documentation>This identifier is used to uniquely identify this FulfillmentOrderRequests.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                <xsd:element name="DisplayableOrderID" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>This identifier is presented as the OrderId in the packaging slip.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                <xsd:element name="DisplayableOrderDate" type="xsd:dateTime" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>This identifier is presented as the OrderDate in the packing slip.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                <xsd:element name="DisplayableOrderComment" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>This comment is a segment of displayable text presented on the packing slip.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                <xsd:element name="DeliverySLA" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>This value determines the SLA in which the items will be delivered. (examples: Standard, Expedited, Priority)</xsd:documentation>
+                                    </xsd:annotation>
+                </xsd:element>
+                                <xsd:element name="FulfillmentPolicy" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The fulfillment policy indicates how unfulfillable items should be handled (examples: FillOrKill, FillAll, FillAllAvailable).</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="FulfillmentMethod" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The fulfillment method indicates the intended recipient channel for the order whether it be a consumer order, inventory return or destroyer (examples: Consumer, Removal, Destroy).</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="FulfillmentAction" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The fulfillment action is either hold or ship.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="NotificationEmail" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The notificationEmail provides e-mail addresses to receive e-mail notifications when items are shipped.</xsd:documentation>
+                                    </xsd:annotation>
+                                    <xsd:simpleType>
+                                        <xsd:restriction base="xsd:normalizedString">
+                                            <xsd:pattern value="[\w\._\-\+]+@([\w_\-]+\.)+\w+"/>
+                                            <xsd:maxLength value="64"/>
+                                        </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:element>
+                <xsd:element name="DestinationAddress" type="AddressTypeSupportNonCity">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The destination shipping address.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                <xsd:element name="Item" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                                                    <xsd:element name="MerchantSKU" type="SKUType" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>The merchant SKU.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="Quantity" type="xsd:nonNegativeInteger" minOccurs="0"/>
+                                                    <xsd:element name="MerchantFulfillmentOrderItemID" type="xsd:string" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>An identifier unique to this FulfillmentOrderRequest used to identify this line item.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="GiftMessage" type="xsd:string" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>The gift message displayed on the packing slip for this item.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="DisplayableComment" type="xsd:string" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>A comment displayed on the packing slip for this item.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="FulfillmentNetworkSKU" type="xsd:string" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>The fulfillment network SKU may be specified when the active merchant SKU doesn't map to the desired fulfillment network SKU (FNSKU); please note the merchant SKU is always required.  The value is only ever considered when Removal or Destroy fulfillment method is selected.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="OrderItemDisposition" type="xsd:string" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>The order item disposition indicates the disposition of the inventory (examples: Sellable, Unsellable).  The Unsellable disposition is only permitted when Removal or Destroy fulfillment method is selected.</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                                                    <xsd:element name="PerUnitDeclaredValue" type="PositiveCurrencyAmount" minOccurs="0">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>The perUnitDeclaredValue may be specified to indicate the monetary value assigned to each unit of inventory for this line item</xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

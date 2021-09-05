@@ -1,4 +1,6 @@
-﻿namespace AmazonSpApiSDK.Services
+﻿using System;
+
+namespace AmazonSpApiSDK.Services
 {
 
     public static class EnvironemntManager
@@ -47,8 +49,8 @@
             private readonly static string _resourceBaseUrl = "/notifications/v1";
             public static string GetSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
             public static string CreateSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
-            public static string GetSubscriptionById(string notificationType,string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
-            public static string DeleteSubscriptionById(string notificationType,string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            public static string GetSubscriptionById(string notificationType, string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            public static string DeleteSubscriptionById(string notificationType, string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
 
             public static string GetDestinations
             {
@@ -120,6 +122,11 @@
             public static string CancelReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
             public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
 
+        }
+        protected class UploadApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/uploads/2020-11-01";
+            public static string CreateUploadDestinationForResource(string resource) => $"{_resourceBaseUrl}/uploadDestinations/{resource}";
         }
         protected class InventoryApiUrls
         {
@@ -208,6 +215,25 @@
             private readonly static string _resourceBaseUrl = "/solicitations/v1";
             public static string GetSolicitationActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
             public static string CreateProductReviewAndSellerFeedbackSolicitation(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/solicitations/productReviewAndSellerFeedback";
+        }
+        protected class FeedsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/feeds/2021-06-30";
+            public static string GetFeeds
+            {
+                get => $"{_resourceBaseUrl}/feeds";
+            }
+            public static string CreateFeed
+            {
+                get => $"{_resourceBaseUrl}/feeds";
+            }
+            public static string CreateFeedDocument
+            {
+                get => $"{_resourceBaseUrl}/documents";
+            }
+            public static string GetFeedDocument(string feedDocumentId) => $"{_resourceBaseUrl}/documents/{feedDocumentId}";
+            public static string GetFeed(string feedId) => $"{_resourceBaseUrl}/feeds/{feedId}";
+            public static string CancelFeed(string feedId) => $"{_resourceBaseUrl}/feeds/{feedId}";
         }
         protected class FbaInventoriesApiUrls
         {

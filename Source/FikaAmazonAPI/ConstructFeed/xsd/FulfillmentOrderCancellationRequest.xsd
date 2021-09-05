@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+    <!--
+    $Date: 2012/02/07 $
+ 
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="FulfillmentOrderCancellationRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MerchantFulfillmentOrderID" type="FortyStringNotNull">
+                	<xsd:annotation>
+                    	<xsd:documentation>This identifier is used to uniquely identify this FulfillmentOrderRequests.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Item" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>                        	                            
+                            <xsd:element name="MerchantFulfillmentOrderItemID" type="xsd:string" minOccurs="0">
+                            	<xsd:annotation>
+                                	<xsd:documentation>An identifier unique to this FulfillmentOrderRequest used to identify this line item.</xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:element>                                                    
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -14,11 +14,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ConstructFeed\xsd\**" />
+    <EmbeddedResource Remove="ConstructFeed\xsd\**" />
+    <None Remove="ConstructFeed\xsd\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.41" />
     <PackageReference Include="AWSSDK.SQS" Version="3.7.0.57" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="XSerializer" Version="0.4.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #5 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2007/09/04 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="ProductImage">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SKU"/>
+				<xsd:element name="ImageType">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Main"/>
+							<xsd:enumeration value="Swatch"/>
+							<xsd:enumeration value="BKLB"/>
+							<xsd:enumeration value="PT1"/>
+							<xsd:enumeration value="PT2"/>
+							<xsd:enumeration value="PT3"/>
+							<xsd:enumeration value="PT4"/>
+							<xsd:enumeration value="PT5"/>
+							<xsd:enumeration value="PT6"/>
+							<xsd:enumeration value="PT7"/>
+							<xsd:enumeration value="PT8"/>
+							<xsd:enumeration value="Search"/>
+							<xsd:enumeration value="PM01"/>
+							<xsd:enumeration value="MainOfferImage"/>
+							<xsd:enumeration value="OfferImage1"/>
+							<xsd:enumeration value="OfferImage2"/>
+							<xsd:enumeration value="OfferImage3"/>
+							<xsd:enumeration value="OfferImage4"/>
+							<xsd:enumeration value="OfferImage5"/>
+							<xsd:enumeration value="PFEE"/>
+							<xsd:enumeration value="PFUK"/>
+							<xsd:enumeration value="PFDE"/>
+							<xsd:enumeration value="PFFR"/>
+							<xsd:enumeration value="PFIT"/>
+							<xsd:enumeration value="PFES"/>
+							<xsd:enumeration value="EEGL"/>
+							<xsd:enumeration value="PT98"/>							
+							<xsd:enumeration value="PT99"/>							
+							<xsd:enumeration value="ELFL"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ImageLocation" type="xsd:anyURI" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

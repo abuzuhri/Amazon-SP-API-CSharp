@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #2 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!--
+    $Date: 2005/04/01 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+
+    <xsd:element name="OrderFulfillment">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice>
+                    <xsd:element ref="AmazonOrderID"/>
+                    <xsd:element ref="MerchantOrderID"/>
+                </xsd:choice>
+                <xsd:element name="MerchantFulfillmentID" type="IDNumber" minOccurs="0"/>
+                <xsd:element name="FulfillmentDate" type="xsd:dateTime"/>
+                <xsd:element name="FulfillmentData" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="CarrierCode" minOccurs="0"/>
+                            <xsd:element name="CarrierName" type="String" minOccurs="0"/>
+                            <xsd:element name="ShippingMethod" type="String" minOccurs="0"/>
+                            <xsd:element name="ShipperTrackingNumber" type="String" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element name="CODCollectionMethod" minOccurs="0">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="DirectPayment"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <xsd:element name="Item" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:choice>
+                                <xsd:element ref="AmazonOrderItemCode"/>
+                                <xsd:element ref="MerchantOrderItemID"/>
+                            </xsd:choice>
+                            <xsd:element name="MerchantFulfillmentItemID" type="IDNumber"
+                                minOccurs="0"/>
+                            <xsd:element name="Quantity" type="xsd:positiveInteger" minOccurs="0"/>
+                             <xsd:element name="TransparencyCode" type="xsd:string" minOccurs="0" maxOccurs="10"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ShipFromAddress" type="AddressType" minOccurs="0" />
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

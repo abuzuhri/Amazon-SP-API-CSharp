@@ -61,6 +61,8 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
+
+
         protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null,bool isGrantless=false)
         {
             RefreshToken(isGrantless);
@@ -162,6 +164,7 @@ namespace FikaAmazonAPI.Services
 
     }
 
+
     public class JsonNetSerializer : ISerializer
     {
         public string Serialize(object obj) =>
@@ -181,5 +184,8 @@ namespace FikaAmazonAPI.Services
         public string ContentType { get; set; } = "application/json";
 
         public DataFormat DataFormat { get; } = DataFormat.Json;
+
+
+
     }
 }

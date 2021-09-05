@@ -1,0 +1,2316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="Video">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ProductType">
+                    <xsd:complexType>
+                        <xsd:choice>
+                            <xsd:element ref="VideoDVD"/>
+                            <xsd:element ref="VideoVHS"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VideoDVD">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" name="AspectRatio" type="VideoAspectRatioType"/>
+                <xsd:element minOccurs="0" name="BBFCRating" type="BBFC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="CNCRating" type="CNC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="CBFCRating" type="CBFC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="FSKRating" type="FSK_Rating_Type"/>
+                <xsd:element minOccurs="0" name="MPAARating" type="MPAARatingType"/>
+                <xsd:element minOccurs="0" name="ItalianAgeRating" type="ItalianAgeRatingType"/>
+                <xsd:element minOccurs="0" name="ICAARating" type="ICAARatingType"/>
+                <xsd:element minOccurs="0" name="MediaType" type="VideoDVDMediaType"/>
+                <xsd:element minOccurs="0" name="NumberOfItems" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="NumberOfDiscs" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="RunTime" type="xsd:positiveInteger"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Format" type="VideoFormatType"/>
+                <xsd:element maxOccurs="2" minOccurs="0" name="DVDRegion" type="DVDRegionType"/>
+                <xsd:element maxOccurs="2" minOccurs="0" name="BluRayRegion" type="BluRayRegionType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="AudioEncoding" type="AudioEncodingType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="Language" type="LanguageStringType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="SubtitleLanguage" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" name="PublicationDate" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="TheatricalReleaseDate" type="xsd:dateTime"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Actor" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Director" type="FortyStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Host" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Narrator" type="StringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Producer" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="PrimaryContributor" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="5" minOccurs="0" name="SubjectKeywords" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="IsAdultProduct" type="xsd:boolean"/>
+                <xsd:element minOccurs="0" name="Genre" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="CountryOfOrigin" type="CountryOfOriginType"/>
+                <xsd:element minOccurs="0" name="Binding" type="VideoBindingType"/>
+                <xsd:element minOccurs="0" name="Chromatism" type="ChromatismType"/>
+                <xsd:element minOccurs="0" name="Subtitle" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="PackageTypeName" type="MediumStringNotNull"/>
+                <xsd:element minOccurs="0" name="Publisher" type="HundredString"/>
+                <xsd:element minOccurs="0" name="McPrcWxjz" type="HundredString"/>
+                <xsd:element minOccurs="0" name="PublishingCompany" type="HundredString"/>
+                <xsd:element minOccurs="0" name="ProductionCompany" type="HundredString"/>
+                <xsd:element minOccurs="0" name="OriginalLanguageTitle" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="DVDStructureSides" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="DVDStructureLayers" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="LanguageDubbed" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" name="LanguageSubtitlesForHearingImpaired" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" ref="Battery"/>
+                <xsd:element minOccurs="0" name="BatteryAverageLife" type="BatteryLifeDimension"/>
+                <xsd:element minOccurs="0" name="BatteryAverageLifeStandby" type="Dimension"/>
+                <xsd:element minOccurs="0" name="BatteryChargeTime" type="Dimension"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryEnergyContent" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryPackaging">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="batteries_contained_in_equipment"/>
+                            <xsd:enumeration value="batteries_only"/>
+                            <xsd:enumeration value="batteries_packed_with_equipment"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="LithiumBatteryVoltage" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryWeight" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="NumberOfLithiumIonCells" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionType" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="SellerWarrantyDescription">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:normalizedString">
+                            <xsd:maxLength value="1500"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="Warnings" type="LongStringNotNull"/>
+                <xsd:element minOccurs="0" name="Studio" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="SourceCountryCode" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="ThreeDTechnology" type="ThreeDTechnologyValues"/>
+                <xsd:element minOccurs="0" name="AudioEncodingLanguage">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="german"/>
+                            <xsd:enumeration value="aragonese"/>
+                            <xsd:enumeration value="sidamo"/>
+                            <xsd:enumeration value="altaic_languages"/>
+                            <xsd:enumeration value="luo"/>
+                            <xsd:enumeration value="papuan_languages"/>
+                            <xsd:enumeration value="khotanese"/>
+                            <xsd:enumeration value="kinyarwanda"/>
+                            <xsd:enumeration value="elamite"/>
+                            <xsd:enumeration value="hausa"/>
+                            <xsd:enumeration value="dutch"/>
+                            <xsd:enumeration value="old_french"/>
+                            <xsd:enumeration value="classical_syriac"/>
+                            <xsd:enumeration value="flemish"/>
+                            <xsd:enumeration value="kokborok"/>
+                            <xsd:enumeration value="songhai_languages"/>
+                            <xsd:enumeration value="nepali"/>
+                            <xsd:enumeration value="makasar"/>
+                            <xsd:enumeration value="ancient_greek"/>
+                            <xsd:enumeration value="sardinian"/>
+                            <xsd:enumeration value="niger_kordofanian_languages"/>
+                            <xsd:enumeration value="chinook_jargon"/>
+                            <xsd:enumeration value="cayuga"/>
+                            <xsd:enumeration value="castillian"/>
+                            <xsd:enumeration value="old_irish"/>
+                            <xsd:enumeration value="persian"/>
+                            <xsd:enumeration value="aleut"/>
+                            <xsd:enumeration value="jula"/>
+                            <xsd:enumeration value="siksika"/>
+                            <xsd:enumeration value="pohnpeian"/>
+                            <xsd:enumeration value="nzima"/>
+                            <xsd:enumeration value="chiricahua"/>
+                            <xsd:enumeration value="siswati"/>
+                            <xsd:enumeration value="sumerian"/>
+                            <xsd:enumeration value="north_american_indian_languages"/>
+                            <xsd:enumeration value="pidgin_english"/>
+                            <xsd:enumeration value="minangkabau"/>
+                            <xsd:enumeration value="dravidian_languages"/>
+                            <xsd:enumeration value="gorontalo"/>
+                            <xsd:enumeration value="slovak"/>
+                            <xsd:enumeration value="hebrew"/>
+                            <xsd:enumeration value="sasak"/>
+                            <xsd:enumeration value="northern_sami"/>
+                            <xsd:enumeration value="ekajuk"/>
+                            <xsd:enumeration value="chechen"/>
+                            <xsd:enumeration value="selkup"/>
+                            <xsd:enumeration value="kirundi"/>
+                            <xsd:enumeration value="braj"/>
+                            <xsd:enumeration value="celtic_languages"/>
+                            <xsd:enumeration value="bengali"/>
+                            <xsd:enumeration value="azerbaijani"/>
+                            <xsd:enumeration value="upper_sorbian"/>
+                            <xsd:enumeration value="sorbian_languages"/>
+                            <xsd:enumeration value="scots"/>
+                            <xsd:enumeration value="afrikaans"/>
+                            <xsd:enumeration value="sami"/>
+                            <xsd:enumeration value="umbundu"/>
+                            <xsd:enumeration value="australian_languages"/>
+                            <xsd:enumeration value="assyrian"/>
+                            <xsd:enumeration value="navaho"/>
+                            <xsd:enumeration value="khoisan_languages"/>
+                            <xsd:enumeration value="chamic_languages"/>
+                            <xsd:enumeration value="lithuanian"/>
+                            <xsd:enumeration value="bambara"/>
+                            <xsd:enumeration value="vietnamese"/>
+                            <xsd:enumeration value="bini"/>
+                            <xsd:enumeration value="maltese"/>
+                            <xsd:enumeration value="slave_athapascan"/>
+                            <xsd:enumeration value="mandar"/>
+                            <xsd:enumeration value="susu"/>
+                            <xsd:enumeration value="lule_sami"/>
+                            <xsd:enumeration value="apache_languages"/>
+                            <xsd:enumeration value="artificial_languages"/>
+                            <xsd:enumeration value="algonquian_languages"/>
+                            <xsd:enumeration value="bikol"/>
+                            <xsd:enumeration value="sanskrit"/>
+                            <xsd:enumeration value="tuvinian"/>
+                            <xsd:enumeration value="bihari"/>
+                            <xsd:enumeration value="wakashan_languages"/>
+                            <xsd:enumeration value="gaelic_scots"/>
+                            <xsd:enumeration value="tatar"/>
+                            <xsd:enumeration value="luba_katanga"/>
+                            <xsd:enumeration value="kumyk"/>
+                            <xsd:enumeration value="welsh"/>
+                            <xsd:enumeration value="chinese"/>
+                            <xsd:enumeration value="japanese"/>
+                            <xsd:enumeration value="beja"/>
+                            <xsd:enumeration value="norwegian_bokmal"/>
+                            <xsd:enumeration value="tzeltal"/>
+                            <xsd:enumeration value="tiv"/>
+                            <xsd:enumeration value="angika"/>
+                            <xsd:enumeration value="scots_gaelic"/>
+                            <xsd:enumeration value="garo"/>
+                            <xsd:enumeration value="otomian_languages"/>
+                            <xsd:enumeration value="north_ndebele"/>
+                            <xsd:enumeration value="dhivehi"/>
+                            <xsd:enumeration value="aramaic"/>
+                            <xsd:enumeration value="rarotongan"/>
+                            <xsd:enumeration value="setswana"/>
+                            <xsd:enumeration value="kanuri"/>
+                            <xsd:enumeration value="mon_khmer_languages"/>
+                            <xsd:enumeration value="haryanvi"/>
+                            <xsd:enumeration value="zaza"/>
+                            <xsd:enumeration value="lushai"/>
+                            <xsd:enumeration value="ijo_languages"/>
+                            <xsd:enumeration value="zande_languages"/>
+                            <xsd:enumeration value="indic"/>
+                            <xsd:enumeration value="sandawe"/>
+                            <xsd:enumeration value="fon"/>
+                            <xsd:enumeration value="ndonga"/>
+                            <xsd:enumeration value="xhosa"/>
+                            <xsd:enumeration value="judeo_persian"/>
+                            <xsd:enumeration value="taiwanese_chinese"/>
+                            <xsd:enumeration value="karen_languages"/>
+                            <xsd:enumeration value="bribri"/>
+                            <xsd:enumeration value="marathi"/>
+                            <xsd:enumeration value="sinhalese"/>
+                            <xsd:enumeration value="inuktitut"/>
+                            <xsd:enumeration value="tigre"/>
+                            <xsd:enumeration value="slovene"/>
+                            <xsd:enumeration value="choctaw"/>
+                            <xsd:enumeration value="ga"/>
+                            <xsd:enumeration value="northern_frisian"/>
+                            <xsd:enumeration value="yugoslavian"/>
+                            <xsd:enumeration value="mirandese"/>
+                            <xsd:enumeration value="nauru"/>
+                            <xsd:enumeration value="spanish"/>
+                            <xsd:enumeration value="somali"/>
+                            <xsd:enumeration value="dakota"/>
+                            <xsd:enumeration value="syriac"/>
+                            <xsd:enumeration value="french_canadian"/>
+                            <xsd:enumeration value="lower_sorbian"/>
+                            <xsd:enumeration value="punjabi"/>
+                            <xsd:enumeration value="inari_sami"/>
+                            <xsd:enumeration value="gwichin"/>
+                            <xsd:enumeration value="inuktitun"/>
+                            <xsd:enumeration value="erzya"/>
+                            <xsd:enumeration value="cushitic_languages"/>
+                            <xsd:enumeration value="kikuyu"/>
+                            <xsd:enumeration value="quechua"/>
+                            <xsd:enumeration value="nilo_saharan_languages"/>
+                            <xsd:enumeration value="sino_tibetan"/>
+                            <xsd:enumeration value="kalaallisut"/>
+                            <xsd:enumeration value="asturian"/>
+                            <xsd:enumeration value="romance"/>
+                            <xsd:enumeration value="pampanga"/>
+                            <xsd:enumeration value="fanti"/>
+                            <xsd:enumeration value="bislama"/>
+                            <xsd:enumeration value="bahasa"/>
+                            <xsd:enumeration value="aromanian"/>
+                            <xsd:enumeration value="madurese"/>
+                            <xsd:enumeration value="pedi"/>
+                            <xsd:enumeration value="norwegian"/>
+                            <xsd:enumeration value="herero"/>
+                            <xsd:enumeration value="yoruba"/>
+                            <xsd:enumeration value="ottoman_turkish"/>
+                            <xsd:enumeration value="latin"/>
+                            <xsd:enumeration value="middle_english"/>
+                            <xsd:enumeration value="gilbertese"/>
+                            <xsd:enumeration value="french"/>
+                            <xsd:enumeration value="georgian"/>
+                            <xsd:enumeration value="portuguese_brazilian"/>
+                            <xsd:enumeration value="old_provencal"/>
+                            <xsd:enumeration value="tamashek"/>
+                            <xsd:enumeration value="serbian"/>
+                            <xsd:enumeration value="marshallese"/>
+                            <xsd:enumeration value="kru_languages"/>
+                            <xsd:enumeration value="kashubian"/>
+                            <xsd:enumeration value="chhattisgarhi"/>
+                            <xsd:enumeration value="kosraean"/>
+                            <xsd:enumeration value="hindi"/>
+                            <xsd:enumeration value="esperanto"/>
+                            <xsd:enumeration value="kazakh"/>
+                            <xsd:enumeration value="gayo"/>
+                            <xsd:enumeration value="afghan_pashtu"/>
+                            <xsd:enumeration value="rapanui"/>
+                            <xsd:enumeration value="ewondo"/>
+                            <xsd:enumeration value="egyptian"/>
+                            <xsd:enumeration value="gibberish"/>
+                            <xsd:enumeration value="khmer"/>
+                            <xsd:enumeration value="banda_languages"/>
+                            <xsd:enumeration value="hungarian"/>
+                            <xsd:enumeration value="moksha"/>
+                            <xsd:enumeration value="creek"/>
+                            <xsd:enumeration value="luiseno"/>
+                            <xsd:enumeration value="karelian"/>
+                            <xsd:enumeration value="greenlandic"/>
+                            <xsd:enumeration value="samoan"/>
+                            <xsd:enumeration value="romansch"/>
+                            <xsd:enumeration value="berber"/>
+                            <xsd:enumeration value="cree"/>
+                            <xsd:enumeration value="gothic"/>
+                            <xsd:enumeration value="nyamwezi"/>
+                            <xsd:enumeration value="magahi"/>
+                            <xsd:enumeration value="shona"/>
+                            <xsd:enumeration value="lunda"/>
+                            <xsd:enumeration value="uzbek"/>
+                            <xsd:enumeration value="arawak"/>
+                            <xsd:enumeration value="friulian"/>
+                            <xsd:enumeration value="fiji"/>
+                            <xsd:enumeration value="turkmen"/>
+                            <xsd:enumeration value="old_persian"/>
+                            <xsd:enumeration value="shan"/>
+                            <xsd:enumeration value="latvian"/>
+                            <xsd:enumeration value="old_english"/>
+                            <xsd:enumeration value="tsonga"/>
+                            <xsd:enumeration value="faroese"/>
+                            <xsd:enumeration value="votic"/>
+                            <xsd:enumeration value="ossetian"/>
+                            <xsd:enumeration value="iroquoian_languages"/>
+                            <xsd:enumeration value="yupik_languages"/>
+                            <xsd:enumeration value="dargwa"/>
+                            <xsd:enumeration value="papiamento"/>
+                            <xsd:enumeration value="phoenician"/>
+                            <xsd:enumeration value="mandingo"/>
+                            <xsd:enumeration value="delaware"/>
+                            <xsd:enumeration value="low_german"/>
+                            <xsd:enumeration value="lao"/>
+                            <xsd:enumeration value="mongolian"/>
+                            <xsd:enumeration value="telugu"/>
+                            <xsd:enumeration value="abkhazian"/>
+                            <xsd:enumeration value="chagatai"/>
+                            <xsd:enumeration value="achinese"/>
+                            <xsd:enumeration value="udmurt"/>
+                            <xsd:enumeration value="siouan_languages"/>
+                            <xsd:enumeration value="malagasy"/>
+                            <xsd:enumeration value="pashto"/>
+                            <xsd:enumeration value="thai"/>
+                            <xsd:enumeration value="efik"/>
+                            <xsd:enumeration value="luxembourgish"/>
+                            <xsd:enumeration value="bodo"/>
+                            <xsd:enumeration value="gbaya"/>
+                            <xsd:enumeration value="kara_kalpak"/>
+                            <xsd:enumeration value="eastern_frisian"/>
+                            <xsd:enumeration value="nepal_bhasa"/>
+                            <xsd:enumeration value="malay"/>
+                            <xsd:enumeration value="germanic_languages"/>
+                            <xsd:enumeration value="tsimshian"/>
+                            <xsd:enumeration value="hokkien"/>
+                            <xsd:enumeration value="adangme"/>
+                            <xsd:enumeration value="dogri"/>
+                            <xsd:enumeration value="lamba"/>
+                            <xsd:enumeration value="sogdian"/>
+                            <xsd:enumeration value="scandanavian_languages"/>
+                            <xsd:enumeration value="middle_french"/>
+                            <xsd:enumeration value="afrihili"/>
+                            <xsd:enumeration value="estonian"/>
+                            <xsd:enumeration value="sichuan_yi"/>
+                            <xsd:enumeration value="portuguese_creole"/>
+                            <xsd:enumeration value="igbo"/>
+                            <xsd:enumeration value="awadhi"/>
+                            <xsd:enumeration value="ukranian"/>
+                            <xsd:enumeration value="interlingua"/>
+                            <xsd:enumeration value="gahrwali"/>
+                            <xsd:enumeration value="mizo"/>
+                            <xsd:enumeration value="interlingue"/>
+                            <xsd:enumeration value="cantonese_chinese"/>
+                            <xsd:enumeration value="albanian"/>
+                            <xsd:enumeration value="italian"/>
+                            <xsd:enumeration value="adygei"/>
+                            <xsd:enumeration value="korean"/>
+                            <xsd:enumeration value="khasi"/>
+                            <xsd:enumeration value="tupi_languages"/>
+                            <xsd:enumeration value="lojban"/>
+                            <xsd:enumeration value="ewe"/>
+                            <xsd:enumeration value="gullah"/>
+                            <xsd:enumeration value="simplified_chinese"/>
+                            <xsd:enumeration value="prakrit_languages"/>
+                            <xsd:enumeration value="akan"/>
+                            <xsd:enumeration value="kashmiri"/>
+                            <xsd:enumeration value="bosnian"/>
+                            <xsd:enumeration value="klingon"/>
+                            <xsd:enumeration value="tai_languages"/>
+                            <xsd:enumeration value="dzongkha"/>
+                            <xsd:enumeration value="belgian"/>
+                            <xsd:enumeration value="manipuri"/>
+                            <xsd:enumeration value="lapp"/>
+                            <xsd:enumeration value="guarani"/>
+                            <xsd:enumeration value="valencian"/>
+                            <xsd:enumeration value="sangho"/>
+                            <xsd:enumeration value="yapese"/>
+                            <xsd:enumeration value="zuni"/>
+                            <xsd:enumeration value="kuanyama"/>
+                            <xsd:enumeration value="bhutani"/>
+                            <xsd:enumeration value="english"/>
+                            <xsd:enumeration value="sign_language"/>
+                            <xsd:enumeration value="czech"/>
+                            <xsd:enumeration value="hawaiian"/>
+                            <xsd:enumeration value="south_ndebele"/>
+                            <xsd:enumeration value="palauan"/>
+                            <xsd:enumeration value="geez"/>
+                            <xsd:enumeration value="austronesian"/>
+                            <xsd:enumeration value="tahitian"/>
+                            <xsd:enumeration value="ladino"/>
+                            <xsd:enumeration value="dinka"/>
+                            <xsd:enumeration value="komi"/>
+                            <xsd:enumeration value="bhojpuri"/>
+                            <xsd:enumeration value="old_norse"/>
+                            <xsd:enumeration value="walloon"/>
+                            <xsd:enumeration value="central_american_indian_languages"/>
+                            <xsd:enumeration value="javanese"/>
+                            <xsd:enumeration value="belarusian"/>
+                            <xsd:enumeration value="tibetan"/>
+                            <xsd:enumeration value="zulu"/>
+                            <xsd:enumeration value="cherokee"/>
+                            <xsd:enumeration value="swahili"/>
+                            <xsd:enumeration value="iranian_languages"/>
+                            <xsd:enumeration value="himachali_languages"/>
+                            <xsd:enumeration value="oriya"/>
+                            <xsd:enumeration value="galibi_carib"/>
+                            <xsd:enumeration value="middle_irish"/>
+                            <xsd:enumeration value="icelandic"/>
+                            <xsd:enumeration value="classical_newari"/>
+                            <xsd:enumeration value="baltic_languages"/>
+                            <xsd:enumeration value="kamba"/>
+                            <xsd:enumeration value="twi"/>
+                            <xsd:enumeration value="afro_asiatic_languages"/>
+                            <xsd:enumeration value="gujarati"/>
+                            <xsd:enumeration value="nyankole"/>
+                            <xsd:enumeration value="baluchi"/>
+                            <xsd:enumeration value="uighur"/>
+                            <xsd:enumeration value="occitan"/>
+                            <xsd:enumeration value="pangasinan"/>
+                            <xsd:enumeration value="semitic_languages"/>
+                            <xsd:enumeration value="sundanese"/>
+                            <xsd:enumeration value="nko"/>
+                            <xsd:enumeration value="tamil"/>
+                            <xsd:enumeration value="gondi"/>
+                            <xsd:enumeration value="judeo_arabic"/>
+                            <xsd:enumeration value="arapaho"/>
+                            <xsd:enumeration value="micmac"/>
+                            <xsd:enumeration value="mohawk"/>
+                            <xsd:enumeration value="yao"/>
+                            <xsd:enumeration value="sranan_tongo"/>
+                            <xsd:enumeration value="farsi"/>
+                            <xsd:enumeration value="bliss"/>
+                            <xsd:enumeration value="gallegan"/>
+                            <xsd:enumeration value="buryat"/>
+                            <xsd:enumeration value="manx"/>
+                            <xsd:enumeration value="tagalog"/>
+                            <xsd:enumeration value="assamese"/>
+                            <xsd:enumeration value="kurukh"/>
+                            <xsd:enumeration value="swiss_german"/>
+                            <xsd:enumeration value="scandinavian_languages"/>
+                            <xsd:enumeration value="old_high_german"/>
+                            <xsd:enumeration value="mandarin_chinese"/>
+                            <xsd:enumeration value="polish"/>
+                            <xsd:enumeration value="kabyle"/>
+                            <xsd:enumeration value="galician"/>
+                            <xsd:enumeration value="mayan"/>
+                            <xsd:enumeration value="ukrainian"/>
+                            <xsd:enumeration value="bamileke_languages"/>
+                            <xsd:enumeration value="zenaga"/>
+                            <xsd:enumeration value="kalmyk"/>
+                            <xsd:enumeration value="ojibwa"/>
+                            <xsd:enumeration value="tereno"/>
+                            <xsd:enumeration value="karachay_balkar"/>
+                            <xsd:enumeration value="yakut"/>
+                            <xsd:enumeration value="filipino"/>
+                            <xsd:enumeration value="rajasthani"/>
+                            <xsd:enumeration value="aymara"/>
+                            <xsd:enumeration value="kawi"/>
+                            <xsd:enumeration value="manchu"/>
+                            <xsd:enumeration value="traditional_chinese"/>
+                            <xsd:enumeration value="romanian"/>
+                            <xsd:enumeration value="limburgan"/>
+                            <xsd:enumeration value="southern_sami"/>
+                            <xsd:enumeration value="burmese"/>
+                            <xsd:enumeration value="armenian"/>
+                            <xsd:enumeration value="breton"/>
+                            <xsd:enumeration value="hmong"/>
+                            <xsd:enumeration value="indo_european"/>
+                            <xsd:enumeration value="middle_high_german"/>
+                            <xsd:enumeration value="ido"/>
+                            <xsd:enumeration value="sindhi"/>
+                            <xsd:enumeration value="bulgarian"/>
+                            <xsd:enumeration value="neapolitan"/>
+                            <xsd:enumeration value="kachin"/>
+                            <xsd:enumeration value="dogrib"/>
+                            <xsd:enumeration value="moldavian"/>
+                            <xsd:enumeration value="mongo"/>
+                            <xsd:enumeration value="blin"/>
+                            <xsd:enumeration value="ugaritic"/>
+                            <xsd:enumeration value="hiri_motu"/>
+                            <xsd:enumeration value="soninke"/>
+                            <xsd:enumeration value="tok_pisin"/>
+                            <xsd:enumeration value="osage"/>
+                            <xsd:enumeration value="romany"/>
+                            <xsd:enumeration value="byelorussian"/>
+                            <xsd:enumeration value="maharati"/>
+                            <xsd:enumeration value="duala"/>
+                            <xsd:enumeration value="american_sign_language"/>
+                            <xsd:enumeration value="marwari"/>
+                            <xsd:enumeration value="sicilian"/>
+                            <xsd:enumeration value="akkadian"/>
+                            <xsd:enumeration value="timne"/>
+                            <xsd:enumeration value="tumbuka"/>
+                            <xsd:enumeration value="greek"/>
+                            <xsd:enumeration value="basa"/>
+                            <xsd:enumeration value="kabardian"/>
+                            <xsd:enumeration value="southern_sotho"/>
+                            <xsd:enumeration value="haida"/>
+                            <xsd:enumeration value="basque"/>
+                            <xsd:enumeration value="chipewyan"/>
+                            <xsd:enumeration value="serbo-croatian"/>
+                            <xsd:enumeration value="finnish"/>
+                            <xsd:enumeration value="venda"/>
+                            <xsd:enumeration value="avaric"/>
+                            <xsd:enumeration value="croatian"/>
+                            <xsd:enumeration value="hittite"/>
+                            <xsd:enumeration value="southern_altai"/>
+                            <xsd:enumeration value="salishan_languages"/>
+                            <xsd:enumeration value="mari"/>
+                            <xsd:enumeration value="mende"/>
+                            <xsd:enumeration value="nahuatl"/>
+                            <xsd:enumeration value="haitian"/>
+                            <xsd:enumeration value="maori"/>
+                            <xsd:enumeration value="sukuma"/>
+                            <xsd:enumeration value="corsican"/>
+                            <xsd:enumeration value="ingush"/>
+                            <xsd:enumeration value="nyoro"/>
+                            <xsd:enumeration value="washo"/>
+                            <xsd:enumeration value="none"/>
+                            <xsd:enumeration value="romansh"/>
+                            <xsd:enumeration value="inupiaq"/>
+                            <xsd:enumeration value="mossi"/>
+                            <xsd:enumeration value="buginese"/>
+                            <xsd:enumeration value="pali"/>
+                            <xsd:enumeration value="inupiak"/>
+                            <xsd:enumeration value="nias"/>
+                            <xsd:enumeration value="vai"/>
+                            <xsd:enumeration value="kumaoni"/>
+                            <xsd:enumeration value="russian"/>
+                            <xsd:enumeration value="chichewa"/>
+                            <xsd:enumeration value="lahnda"/>
+                            <xsd:enumeration value="nogai"/>
+                            <xsd:enumeration value="french_creole"/>
+                            <xsd:enumeration value="iban"/>
+                            <xsd:enumeration value="manobo_languages"/>
+                            <xsd:enumeration value="nubian_languages"/>
+                            <xsd:enumeration value="pig_latin"/>
+                            <xsd:enumeration value="cornish"/>
+                            <xsd:enumeration value="walamo"/>
+                            <xsd:enumeration value="afar"/>
+                            <xsd:enumeration value="yiddish"/>
+                            <xsd:enumeration value="bantu"/>
+                            <xsd:enumeration value="avestan"/>
+                            <xsd:enumeration value="grebo"/>
+                            <xsd:enumeration value="irish"/>
+                            <xsd:enumeration value="kannada"/>
+                            <xsd:enumeration value="niuean"/>
+                            <xsd:enumeration value="acoli"/>
+                            <xsd:enumeration value="unknown"/>
+                            <xsd:enumeration value="norwegian_nynorsk"/>
+                            <xsd:enumeration value="arabic"/>
+                            <xsd:enumeration value="dari"/>
+                            <xsd:enumeration value="multilingual"/>
+                            <xsd:enumeration value="indonesian"/>
+                            <xsd:enumeration value="danish"/>
+                            <xsd:enumeration value="philippine_languages"/>
+                            <xsd:enumeration value="chamorro"/>
+                            <xsd:enumeration value="tetum"/>
+                            <xsd:enumeration value="tonga_nyasa"/>
+                            <xsd:enumeration value="lingala"/>
+                            <xsd:enumeration value="zhuang"/>
+                            <xsd:enumeration value="batak"/>
+                            <xsd:enumeration value="zapotec"/>
+                            <xsd:enumeration value="caddo"/>
+                            <xsd:enumeration value="catalan"/>
+                            <xsd:enumeration value="cebuano"/>
+                            <xsd:enumeration value="skolt_sami"/>
+                            <xsd:enumeration value="kirghiz"/>
+                            <xsd:enumeration value="munda_languages"/>
+                            <xsd:enumeration value="old_slavonic"/>
+                            <xsd:enumeration value="ganda"/>
+                            <xsd:enumeration value="serer"/>
+                            <xsd:enumeration value="lezghian"/>
+                            <xsd:enumeration value="tlingit"/>
+                            <xsd:enumeration value="hupa"/>
+                            <xsd:enumeration value="unqualified"/>
+                            <xsd:enumeration value="provencal"/>
+                            <xsd:enumeration value="chuukese"/>
+                            <xsd:enumeration value="cambodian"/>
+                            <xsd:enumeration value="caucasian_languages"/>
+                            <xsd:enumeration value="slovakian"/>
+                            <xsd:enumeration value="waray"/>
+                            <xsd:enumeration value="fang"/>
+                            <xsd:enumeration value="swedish"/>
+                            <xsd:enumeration value="maithili"/>
+                            <xsd:enumeration value="alsatian"/>
+                            <xsd:enumeration value="kutenai"/>
+                            <xsd:enumeration value="wolof"/>
+                            <xsd:enumeration value="bashkir"/>
+                            <xsd:enumeration value="luba_lulua"/>
+                            <xsd:enumeration value="fulah"/>
+                            <xsd:enumeration value="kpelle"/>
+                            <xsd:enumeration value="slavic"/>
+                            <xsd:enumeration value="kurdish"/>
+                            <xsd:enumeration value="turkish"/>
+                            <xsd:enumeration value="cheyenne"/>
+                            <xsd:enumeration value="macedonian"/>
+                            <xsd:enumeration value="tokelau"/>
+                            <xsd:enumeration value="tigrinya"/>
+                            <xsd:enumeration value="santali"/>
+                            <xsd:enumeration value="crimean_tatar"/>
+                            <xsd:enumeration value="south_american_indian"/>
+                            <xsd:enumeration value="lozi"/>
+                            <xsd:enumeration value="ainu"/>
+                            <xsd:enumeration value="sesotho"/>
+                            <xsd:enumeration value="mapudungun"/>
+                            <xsd:enumeration value="athapascan_languages"/>
+                            <xsd:enumeration value="coptic"/>
+                            <xsd:enumeration value="pahlavi"/>
+                            <xsd:enumeration value="malayalam"/>
+                            <xsd:enumeration value="chuvash"/>
+                            <xsd:enumeration value="urdu"/>
+                            <xsd:enumeration value="land_dayak_languages"/>
+                            <xsd:enumeration value="portuguese"/>
+                            <xsd:enumeration value="latin_spanish"/>
+                            <xsd:enumeration value="bemba"/>
+                            <xsd:enumeration value="oromo"/>
+                            <xsd:enumeration value="frisian"/>
+                            <xsd:enumeration value="amharic"/>
+                            <xsd:enumeration value="kongo"/>
+                            <xsd:enumeration value="chibcha"/>
+                            <xsd:enumeration value="masai"/>
+                            <xsd:enumeration value="iloko"/>
+                            <xsd:enumeration value="hiligaynon"/>
+                            <xsd:enumeration value="finno_ugrian"/>
+                            <xsd:enumeration value="tuvalu"/>
+                            <xsd:enumeration value="tajik"/>
+                            <xsd:enumeration value="volapuk"/>
+                            <xsd:enumeration value="balinese"/>
+                            <xsd:enumeration value="kimbundu"/>
+                            <xsd:enumeration value="creole"/>
+                            <xsd:enumeration value="middle_dutch"/>
+                            <xsd:enumeration value="tonga"/>
+                            <xsd:enumeration value="tulu"/>
+                            <xsd:enumeration value="samaritan"/>
+                            <xsd:enumeration value="konkani"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="Codabar" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="Color" type="SuperLongStringNotNull"/>
+                <xsd:element minOccurs="0" name="Contributor" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="CountryString" type="LongStringNotNull"/>
+                <xsd:element minOccurs="0" name="HazmatException" type="TwoThousandString"/>
+                <xsd:element minOccurs="0" name="NumberofIncludedCameras" type="LongString"/>
+                <xsd:element minOccurs="0" name="ItemDisplayDiameter" type="LengthDimension"/>
+                <xsd:element minOccurs="0" name="ItemDisplayHeight" type="LengthDimension"/>
+                <xsd:element minOccurs="0" name="DisplayLength" type="LengthDimension"/>
+                <xsd:element minOccurs="0" name="DisplayVolume" type="VolumeDimension"/>
+                <xsd:element minOccurs="0" name="DisplayWeight" type="WeightDimension"/>
+                <xsd:element minOccurs="0" name="ItemDisplayWidth" type="LengthDimension"/>
+                <xsd:element minOccurs="0" name="LanguageOriginal">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="german"/>
+                            <xsd:enumeration value="aragonese"/>
+                            <xsd:enumeration value="sidamo"/>
+                            <xsd:enumeration value="altaic_languages"/>
+                            <xsd:enumeration value="luo"/>
+                            <xsd:enumeration value="papuan_languages"/>
+                            <xsd:enumeration value="khotanese"/>
+                            <xsd:enumeration value="kinyarwanda"/>
+                            <xsd:enumeration value="elamite"/>
+                            <xsd:enumeration value="hausa"/>
+                            <xsd:enumeration value="dutch"/>
+                            <xsd:enumeration value="old_french"/>
+                            <xsd:enumeration value="classical_syriac"/>
+                            <xsd:enumeration value="flemish"/>
+                            <xsd:enumeration value="kokborok"/>
+                            <xsd:enumeration value="songhai_languages"/>
+                            <xsd:enumeration value="nepali"/>
+                            <xsd:enumeration value="makasar"/>
+                            <xsd:enumeration value="ancient_greek"/>
+                            <xsd:enumeration value="sardinian"/>
+                            <xsd:enumeration value="niger_kordofanian_languages"/>
+                            <xsd:enumeration value="chinook_jargon"/>
+                            <xsd:enumeration value="cayuga"/>
+                            <xsd:enumeration value="castillian"/>
+                            <xsd:enumeration value="old_irish"/>
+                            <xsd:enumeration value="persian"/>
+                            <xsd:enumeration value="aleut"/>
+                            <xsd:enumeration value="jula"/>
+                            <xsd:enumeration value="siksika"/>
+                            <xsd:enumeration value="pohnpeian"/>
+                            <xsd:enumeration value="nzima"/>
+                            <xsd:enumeration value="chiricahua"/>
+                            <xsd:enumeration value="siswati"/>
+                            <xsd:enumeration value="sumerian"/>
+                            <xsd:enumeration value="north_american_indian_languages"/>
+                            <xsd:enumeration value="pidgin_english"/>
+                            <xsd:enumeration value="minangkabau"/>
+                            <xsd:enumeration value="dravidian_languages"/>
+                            <xsd:enumeration value="gorontalo"/>
+                            <xsd:enumeration value="slovak"/>
+                            <xsd:enumeration value="hebrew"/>
+                            <xsd:enumeration value="sasak"/>
+                            <xsd:enumeration value="northern_sami"/>
+                            <xsd:enumeration value="ekajuk"/>
+                            <xsd:enumeration value="chechen"/>
+                            <xsd:enumeration value="selkup"/>
+                            <xsd:enumeration value="kirundi"/>
+                            <xsd:enumeration value="braj"/>
+                            <xsd:enumeration value="celtic_languages"/>
+                            <xsd:enumeration value="bengali"/>
+                            <xsd:enumeration value="azerbaijani"/>
+                            <xsd:enumeration value="upper_sorbian"/>
+                            <xsd:enumeration value="sorbian_languages"/>
+                            <xsd:enumeration value="scots"/>
+                            <xsd:enumeration value="afrikaans"/>
+                            <xsd:enumeration value="sami"/>
+                            <xsd:enumeration value="umbundu"/>
+                            <xsd:enumeration value="australian_languages"/>
+                            <xsd:enumeration value="assyrian"/>
+                            <xsd:enumeration value="navaho"/>
+                            <xsd:enumeration value="khoisan_languages"/>
+                            <xsd:enumeration value="chamic_languages"/>
+                            <xsd:enumeration value="lithuanian"/>
+                            <xsd:enumeration value="bambara"/>
+                            <xsd:enumeration value="vietnamese"/>
+                            <xsd:enumeration value="bini"/>
+                            <xsd:enumeration value="maltese"/>
+                            <xsd:enumeration value="slave_athapascan"/>
+                            <xsd:enumeration value="mandar"/>
+                            <xsd:enumeration value="susu"/>
+                            <xsd:enumeration value="lule_sami"/>
+                            <xsd:enumeration value="apache_languages"/>
+                            <xsd:enumeration value="artificial_languages"/>
+                            <xsd:enumeration value="algonquian_languages"/>
+                            <xsd:enumeration value="bikol"/>
+                            <xsd:enumeration value="sanskrit"/>
+                            <xsd:enumeration value="tuvinian"/>
+                            <xsd:enumeration value="bihari"/>
+                            <xsd:enumeration value="wakashan_languages"/>
+                            <xsd:enumeration value="gaelic_scots"/>
+                            <xsd:enumeration value="tatar"/>
+                            <xsd:enumeration value="luba_katanga"/>
+                            <xsd:enumeration value="kumyk"/>
+                            <xsd:enumeration value="welsh"/>
+                            <xsd:enumeration value="chinese"/>
+                            <xsd:enumeration value="japanese"/>
+                            <xsd:enumeration value="beja"/>
+                            <xsd:enumeration value="norwegian_bokmal"/>
+                            <xsd:enumeration value="tzeltal"/>
+                            <xsd:enumeration value="tiv"/>
+                            <xsd:enumeration value="angika"/>
+                            <xsd:enumeration value="scots_gaelic"/>
+                            <xsd:enumeration value="garo"/>
+                            <xsd:enumeration value="otomian_languages"/>
+                            <xsd:enumeration value="north_ndebele"/>
+                            <xsd:enumeration value="dhivehi"/>
+                            <xsd:enumeration value="aramaic"/>
+                            <xsd:enumeration value="rarotongan"/>
+                            <xsd:enumeration value="setswana"/>
+                            <xsd:enumeration value="kanuri"/>
+                            <xsd:enumeration value="mon_khmer_languages"/>
+                            <xsd:enumeration value="haryanvi"/>
+                            <xsd:enumeration value="zaza"/>
+                            <xsd:enumeration value="lushai"/>
+                            <xsd:enumeration value="ijo_languages"/>
+                            <xsd:enumeration value="zande_languages"/>
+                            <xsd:enumeration value="indic"/>
+                            <xsd:enumeration value="sandawe"/>
+                            <xsd:enumeration value="fon"/>
+                            <xsd:enumeration value="ndonga"/>
+                            <xsd:enumeration value="xhosa"/>
+                            <xsd:enumeration value="judeo_persian"/>
+                            <xsd:enumeration value="taiwanese_chinese"/>
+                            <xsd:enumeration value="karen_languages"/>
+                            <xsd:enumeration value="bribri"/>
+                            <xsd:enumeration value="marathi"/>
+                            <xsd:enumeration value="sinhalese"/>
+                            <xsd:enumeration value="inuktitut"/>
+                            <xsd:enumeration value="tigre"/>
+                            <xsd:enumeration value="slovene"/>
+                            <xsd:enumeration value="choctaw"/>
+                            <xsd:enumeration value="ga"/>
+                            <xsd:enumeration value="northern_frisian"/>
+                            <xsd:enumeration value="yugoslavian"/>
+                            <xsd:enumeration value="mirandese"/>
+                            <xsd:enumeration value="nauru"/>
+                            <xsd:enumeration value="spanish"/>
+                            <xsd:enumeration value="somali"/>
+                            <xsd:enumeration value="dakota"/>
+                            <xsd:enumeration value="syriac"/>
+                            <xsd:enumeration value="french_canadian"/>
+                            <xsd:enumeration value="lower_sorbian"/>
+                            <xsd:enumeration value="punjabi"/>
+                            <xsd:enumeration value="inari_sami"/>
+                            <xsd:enumeration value="gwichin"/>
+                            <xsd:enumeration value="inuktitun"/>
+                            <xsd:enumeration value="erzya"/>
+                            <xsd:enumeration value="cushitic_languages"/>
+                            <xsd:enumeration value="kikuyu"/>
+                            <xsd:enumeration value="quechua"/>
+                            <xsd:enumeration value="nilo_saharan_languages"/>
+                            <xsd:enumeration value="sino_tibetan"/>
+                            <xsd:enumeration value="kalaallisut"/>
+                            <xsd:enumeration value="asturian"/>
+                            <xsd:enumeration value="romance"/>
+                            <xsd:enumeration value="pampanga"/>
+                            <xsd:enumeration value="fanti"/>
+                            <xsd:enumeration value="bislama"/>
+                            <xsd:enumeration value="bahasa"/>
+                            <xsd:enumeration value="aromanian"/>
+                            <xsd:enumeration value="madurese"/>
+                            <xsd:enumeration value="pedi"/>
+                            <xsd:enumeration value="norwegian"/>
+                            <xsd:enumeration value="herero"/>
+                            <xsd:enumeration value="yoruba"/>
+                            <xsd:enumeration value="ottoman_turkish"/>
+                            <xsd:enumeration value="latin"/>
+                            <xsd:enumeration value="middle_english"/>
+                            <xsd:enumeration value="gilbertese"/>
+                            <xsd:enumeration value="french"/>
+                            <xsd:enumeration value="georgian"/>
+                            <xsd:enumeration value="portuguese_brazilian"/>
+                            <xsd:enumeration value="old_provencal"/>
+                            <xsd:enumeration value="tamashek"/>
+                            <xsd:enumeration value="serbian"/>
+                            <xsd:enumeration value="marshallese"/>
+                            <xsd:enumeration value="kru_languages"/>
+                            <xsd:enumeration value="kashubian"/>
+                            <xsd:enumeration value="chhattisgarhi"/>
+                            <xsd:enumeration value="kosraean"/>
+                            <xsd:enumeration value="hindi"/>
+                            <xsd:enumeration value="esperanto"/>
+                            <xsd:enumeration value="kazakh"/>
+                            <xsd:enumeration value="gayo"/>
+                            <xsd:enumeration value="afghan_pashtu"/>
+                            <xsd:enumeration value="rapanui"/>
+                            <xsd:enumeration value="ewondo"/>
+                            <xsd:enumeration value="egyptian"/>
+                            <xsd:enumeration value="gibberish"/>
+                            <xsd:enumeration value="khmer"/>
+                            <xsd:enumeration value="banda_languages"/>
+                            <xsd:enumeration value="hungarian"/>
+                            <xsd:enumeration value="moksha"/>
+                            <xsd:enumeration value="creek"/>
+                            <xsd:enumeration value="luiseno"/>
+                            <xsd:enumeration value="karelian"/>
+                            <xsd:enumeration value="greenlandic"/>
+                            <xsd:enumeration value="samoan"/>
+                            <xsd:enumeration value="romansch"/>
+                            <xsd:enumeration value="berber"/>
+                            <xsd:enumeration value="cree"/>
+                            <xsd:enumeration value="gothic"/>
+                            <xsd:enumeration value="nyamwezi"/>
+                            <xsd:enumeration value="magahi"/>
+                            <xsd:enumeration value="shona"/>
+                            <xsd:enumeration value="lunda"/>
+                            <xsd:enumeration value="uzbek"/>
+                            <xsd:enumeration value="arawak"/>
+                            <xsd:enumeration value="friulian"/>
+                            <xsd:enumeration value="fiji"/>
+                            <xsd:enumeration value="turkmen"/>
+                            <xsd:enumeration value="old_persian"/>
+                            <xsd:enumeration value="shan"/>
+                            <xsd:enumeration value="latvian"/>
+                            <xsd:enumeration value="old_english"/>
+                            <xsd:enumeration value="tsonga"/>
+                            <xsd:enumeration value="faroese"/>
+                            <xsd:enumeration value="votic"/>
+                            <xsd:enumeration value="ossetian"/>
+                            <xsd:enumeration value="iroquoian_languages"/>
+                            <xsd:enumeration value="yupik_languages"/>
+                            <xsd:enumeration value="dargwa"/>
+                            <xsd:enumeration value="papiamento"/>
+                            <xsd:enumeration value="phoenician"/>
+                            <xsd:enumeration value="mandingo"/>
+                            <xsd:enumeration value="delaware"/>
+                            <xsd:enumeration value="low_german"/>
+                            <xsd:enumeration value="lao"/>
+                            <xsd:enumeration value="mongolian"/>
+                            <xsd:enumeration value="telugu"/>
+                            <xsd:enumeration value="abkhazian"/>
+                            <xsd:enumeration value="chagatai"/>
+                            <xsd:enumeration value="achinese"/>
+                            <xsd:enumeration value="udmurt"/>
+                            <xsd:enumeration value="siouan_languages"/>
+                            <xsd:enumeration value="malagasy"/>
+                            <xsd:enumeration value="pashto"/>
+                            <xsd:enumeration value="thai"/>
+                            <xsd:enumeration value="efik"/>
+                            <xsd:enumeration value="luxembourgish"/>
+                            <xsd:enumeration value="bodo"/>
+                            <xsd:enumeration value="gbaya"/>
+                            <xsd:enumeration value="kara_kalpak"/>
+                            <xsd:enumeration value="eastern_frisian"/>
+                            <xsd:enumeration value="nepal_bhasa"/>
+                            <xsd:enumeration value="malay"/>
+                            <xsd:enumeration value="germanic_languages"/>
+                            <xsd:enumeration value="tsimshian"/>
+                            <xsd:enumeration value="hokkien"/>
+                            <xsd:enumeration value="adangme"/>
+                            <xsd:enumeration value="dogri"/>
+                            <xsd:enumeration value="lamba"/>
+                            <xsd:enumeration value="sogdian"/>
+                            <xsd:enumeration value="scandanavian_languages"/>
+                            <xsd:enumeration value="middle_french"/>
+                            <xsd:enumeration value="afrihili"/>
+                            <xsd:enumeration value="estonian"/>
+                            <xsd:enumeration value="sichuan_yi"/>
+                            <xsd:enumeration value="portuguese_creole"/>
+                            <xsd:enumeration value="igbo"/>
+                            <xsd:enumeration value="awadhi"/>
+                            <xsd:enumeration value="ukranian"/>
+                            <xsd:enumeration value="interlingua"/>
+                            <xsd:enumeration value="gahrwali"/>
+                            <xsd:enumeration value="mizo"/>
+                            <xsd:enumeration value="interlingue"/>
+                            <xsd:enumeration value="cantonese_chinese"/>
+                            <xsd:enumeration value="albanian"/>
+                            <xsd:enumeration value="italian"/>
+                            <xsd:enumeration value="adygei"/>
+                            <xsd:enumeration value="korean"/>
+                            <xsd:enumeration value="khasi"/>
+                            <xsd:enumeration value="tupi_languages"/>
+                            <xsd:enumeration value="lojban"/>
+                            <xsd:enumeration value="ewe"/>
+                            <xsd:enumeration value="gullah"/>
+                            <xsd:enumeration value="simplified_chinese"/>
+                            <xsd:enumeration value="prakrit_languages"/>
+                            <xsd:enumeration value="akan"/>
+                            <xsd:enumeration value="kashmiri"/>
+                            <xsd:enumeration value="bosnian"/>
+                            <xsd:enumeration value="klingon"/>
+                            <xsd:enumeration value="tai_languages"/>
+                            <xsd:enumeration value="dzongkha"/>
+                            <xsd:enumeration value="belgian"/>
+                            <xsd:enumeration value="manipuri"/>
+                            <xsd:enumeration value="lapp"/>
+                            <xsd:enumeration value="guarani"/>
+                            <xsd:enumeration value="valencian"/>
+                            <xsd:enumeration value="sangho"/>
+                            <xsd:enumeration value="yapese"/>
+                            <xsd:enumeration value="zuni"/>
+                            <xsd:enumeration value="kuanyama"/>
+                            <xsd:enumeration value="bhutani"/>
+                            <xsd:enumeration value="english"/>
+                            <xsd:enumeration value="sign_language"/>
+                            <xsd:enumeration value="czech"/>
+                            <xsd:enumeration value="hawaiian"/>
+                            <xsd:enumeration value="south_ndebele"/>
+                            <xsd:enumeration value="palauan"/>
+                            <xsd:enumeration value="geez"/>
+                            <xsd:enumeration value="austronesian"/>
+                            <xsd:enumeration value="tahitian"/>
+                            <xsd:enumeration value="ladino"/>
+                            <xsd:enumeration value="dinka"/>
+                            <xsd:enumeration value="komi"/>
+                            <xsd:enumeration value="bhojpuri"/>
+                            <xsd:enumeration value="old_norse"/>
+                            <xsd:enumeration value="walloon"/>
+                            <xsd:enumeration value="central_american_indian_languages"/>
+                            <xsd:enumeration value="javanese"/>
+                            <xsd:enumeration value="belarusian"/>
+                            <xsd:enumeration value="tibetan"/>
+                            <xsd:enumeration value="zulu"/>
+                            <xsd:enumeration value="cherokee"/>
+                            <xsd:enumeration value="swahili"/>
+                            <xsd:enumeration value="iranian_languages"/>
+                            <xsd:enumeration value="himachali_languages"/>
+                            <xsd:enumeration value="oriya"/>
+                            <xsd:enumeration value="galibi_carib"/>
+                            <xsd:enumeration value="middle_irish"/>
+                            <xsd:enumeration value="icelandic"/>
+                            <xsd:enumeration value="classical_newari"/>
+                            <xsd:enumeration value="baltic_languages"/>
+                            <xsd:enumeration value="kamba"/>
+                            <xsd:enumeration value="twi"/>
+                            <xsd:enumeration value="afro_asiatic_languages"/>
+                            <xsd:enumeration value="gujarati"/>
+                            <xsd:enumeration value="nyankole"/>
+                            <xsd:enumeration value="baluchi"/>
+                            <xsd:enumeration value="uighur"/>
+                            <xsd:enumeration value="occitan"/>
+                            <xsd:enumeration value="pangasinan"/>
+                            <xsd:enumeration value="semitic_languages"/>
+                            <xsd:enumeration value="sundanese"/>
+                            <xsd:enumeration value="nko"/>
+                            <xsd:enumeration value="tamil"/>
+                            <xsd:enumeration value="gondi"/>
+                            <xsd:enumeration value="judeo_arabic"/>
+                            <xsd:enumeration value="arapaho"/>
+                            <xsd:enumeration value="micmac"/>
+                            <xsd:enumeration value="mohawk"/>
+                            <xsd:enumeration value="yao"/>
+                            <xsd:enumeration value="sranan_tongo"/>
+                            <xsd:enumeration value="farsi"/>
+                            <xsd:enumeration value="bliss"/>
+                            <xsd:enumeration value="gallegan"/>
+                            <xsd:enumeration value="buryat"/>
+                            <xsd:enumeration value="manx"/>
+                            <xsd:enumeration value="tagalog"/>
+                            <xsd:enumeration value="assamese"/>
+                            <xsd:enumeration value="kurukh"/>
+                            <xsd:enumeration value="swiss_german"/>
+                            <xsd:enumeration value="scandinavian_languages"/>
+                            <xsd:enumeration value="old_high_german"/>
+                            <xsd:enumeration value="mandarin_chinese"/>
+                            <xsd:enumeration value="polish"/>
+                            <xsd:enumeration value="kabyle"/>
+                            <xsd:enumeration value="galician"/>
+                            <xsd:enumeration value="mayan"/>
+                            <xsd:enumeration value="ukrainian"/>
+                            <xsd:enumeration value="bamileke_languages"/>
+                            <xsd:enumeration value="zenaga"/>
+                            <xsd:enumeration value="kalmyk"/>
+                            <xsd:enumeration value="ojibwa"/>
+                            <xsd:enumeration value="tereno"/>
+                            <xsd:enumeration value="karachay_balkar"/>
+                            <xsd:enumeration value="yakut"/>
+                            <xsd:enumeration value="filipino"/>
+                            <xsd:enumeration value="rajasthani"/>
+                            <xsd:enumeration value="aymara"/>
+                            <xsd:enumeration value="kawi"/>
+                            <xsd:enumeration value="manchu"/>
+                            <xsd:enumeration value="traditional_chinese"/>
+                            <xsd:enumeration value="romanian"/>
+                            <xsd:enumeration value="limburgan"/>
+                            <xsd:enumeration value="southern_sami"/>
+                            <xsd:enumeration value="burmese"/>
+                            <xsd:enumeration value="armenian"/>
+                            <xsd:enumeration value="breton"/>
+                            <xsd:enumeration value="hmong"/>
+                            <xsd:enumeration value="indo_european"/>
+                            <xsd:enumeration value="middle_high_german"/>
+                            <xsd:enumeration value="ido"/>
+                            <xsd:enumeration value="sindhi"/>
+                            <xsd:enumeration value="bulgarian"/>
+                            <xsd:enumeration value="neapolitan"/>
+                            <xsd:enumeration value="kachin"/>
+                            <xsd:enumeration value="dogrib"/>
+                            <xsd:enumeration value="moldavian"/>
+                            <xsd:enumeration value="mongo"/>
+                            <xsd:enumeration value="blin"/>
+                            <xsd:enumeration value="ugaritic"/>
+                            <xsd:enumeration value="hiri_motu"/>
+                            <xsd:enumeration value="soninke"/>
+                            <xsd:enumeration value="tok_pisin"/>
+                            <xsd:enumeration value="osage"/>
+                            <xsd:enumeration value="romany"/>
+                            <xsd:enumeration value="byelorussian"/>
+                            <xsd:enumeration value="maharati"/>
+                            <xsd:enumeration value="duala"/>
+                            <xsd:enumeration value="american_sign_language"/>
+                            <xsd:enumeration value="marwari"/>
+                            <xsd:enumeration value="sicilian"/>
+                            <xsd:enumeration value="akkadian"/>
+                            <xsd:enumeration value="timne"/>
+                            <xsd:enumeration value="tumbuka"/>
+                            <xsd:enumeration value="greek"/>
+                            <xsd:enumeration value="basa"/>
+                            <xsd:enumeration value="kabardian"/>
+                            <xsd:enumeration value="southern_sotho"/>
+                            <xsd:enumeration value="haida"/>
+                            <xsd:enumeration value="basque"/>
+                            <xsd:enumeration value="chipewyan"/>
+                            <xsd:enumeration value="serbo-croatian"/>
+                            <xsd:enumeration value="finnish"/>
+                            <xsd:enumeration value="venda"/>
+                            <xsd:enumeration value="avaric"/>
+                            <xsd:enumeration value="croatian"/>
+                            <xsd:enumeration value="hittite"/>
+                            <xsd:enumeration value="southern_altai"/>
+                            <xsd:enumeration value="salishan_languages"/>
+                            <xsd:enumeration value="mari"/>
+                            <xsd:enumeration value="mende"/>
+                            <xsd:enumeration value="nahuatl"/>
+                            <xsd:enumeration value="haitian"/>
+                            <xsd:enumeration value="maori"/>
+                            <xsd:enumeration value="sukuma"/>
+                            <xsd:enumeration value="corsican"/>
+                            <xsd:enumeration value="ingush"/>
+                            <xsd:enumeration value="nyoro"/>
+                            <xsd:enumeration value="washo"/>
+                            <xsd:enumeration value="none"/>
+                            <xsd:enumeration value="romansh"/>
+                            <xsd:enumeration value="inupiaq"/>
+                            <xsd:enumeration value="mossi"/>
+                            <xsd:enumeration value="buginese"/>
+                            <xsd:enumeration value="pali"/>
+                            <xsd:enumeration value="inupiak"/>
+                            <xsd:enumeration value="nias"/>
+                            <xsd:enumeration value="vai"/>
+                            <xsd:enumeration value="kumaoni"/>
+                            <xsd:enumeration value="russian"/>
+                            <xsd:enumeration value="chichewa"/>
+                            <xsd:enumeration value="lahnda"/>
+                            <xsd:enumeration value="nogai"/>
+                            <xsd:enumeration value="french_creole"/>
+                            <xsd:enumeration value="iban"/>
+                            <xsd:enumeration value="manobo_languages"/>
+                            <xsd:enumeration value="nubian_languages"/>
+                            <xsd:enumeration value="pig_latin"/>
+                            <xsd:enumeration value="cornish"/>
+                            <xsd:enumeration value="walamo"/>
+                            <xsd:enumeration value="afar"/>
+                            <xsd:enumeration value="yiddish"/>
+                            <xsd:enumeration value="bantu"/>
+                            <xsd:enumeration value="avestan"/>
+                            <xsd:enumeration value="grebo"/>
+                            <xsd:enumeration value="irish"/>
+                            <xsd:enumeration value="kannada"/>
+                            <xsd:enumeration value="niuean"/>
+                            <xsd:enumeration value="acoli"/>
+                            <xsd:enumeration value="unknown"/>
+                            <xsd:enumeration value="norwegian_nynorsk"/>
+                            <xsd:enumeration value="arabic"/>
+                            <xsd:enumeration value="dari"/>
+                            <xsd:enumeration value="multilingual"/>
+                            <xsd:enumeration value="indonesian"/>
+                            <xsd:enumeration value="danish"/>
+                            <xsd:enumeration value="philippine_languages"/>
+                            <xsd:enumeration value="chamorro"/>
+                            <xsd:enumeration value="tetum"/>
+                            <xsd:enumeration value="tonga_nyasa"/>
+                            <xsd:enumeration value="lingala"/>
+                            <xsd:enumeration value="zhuang"/>
+                            <xsd:enumeration value="batak"/>
+                            <xsd:enumeration value="zapotec"/>
+                            <xsd:enumeration value="caddo"/>
+                            <xsd:enumeration value="catalan"/>
+                            <xsd:enumeration value="cebuano"/>
+                            <xsd:enumeration value="skolt_sami"/>
+                            <xsd:enumeration value="kirghiz"/>
+                            <xsd:enumeration value="munda_languages"/>
+                            <xsd:enumeration value="old_slavonic"/>
+                            <xsd:enumeration value="ganda"/>
+                            <xsd:enumeration value="serer"/>
+                            <xsd:enumeration value="lezghian"/>
+                            <xsd:enumeration value="tlingit"/>
+                            <xsd:enumeration value="hupa"/>
+                            <xsd:enumeration value="unqualified"/>
+                            <xsd:enumeration value="provencal"/>
+                            <xsd:enumeration value="chuukese"/>
+                            <xsd:enumeration value="cambodian"/>
+                            <xsd:enumeration value="caucasian_languages"/>
+                            <xsd:enumeration value="slovakian"/>
+                            <xsd:enumeration value="waray"/>
+                            <xsd:enumeration value="fang"/>
+                            <xsd:enumeration value="swedish"/>
+                            <xsd:enumeration value="maithili"/>
+                            <xsd:enumeration value="alsatian"/>
+                            <xsd:enumeration value="kutenai"/>
+                            <xsd:enumeration value="wolof"/>
+                            <xsd:enumeration value="bashkir"/>
+                            <xsd:enumeration value="luba_lulua"/>
+                            <xsd:enumeration value="fulah"/>
+                            <xsd:enumeration value="kpelle"/>
+                            <xsd:enumeration value="slavic"/>
+                            <xsd:enumeration value="kurdish"/>
+                            <xsd:enumeration value="turkish"/>
+                            <xsd:enumeration value="cheyenne"/>
+                            <xsd:enumeration value="macedonian"/>
+                            <xsd:enumeration value="tokelau"/>
+                            <xsd:enumeration value="tigrinya"/>
+                            <xsd:enumeration value="santali"/>
+                            <xsd:enumeration value="crimean_tatar"/>
+                            <xsd:enumeration value="south_american_indian"/>
+                            <xsd:enumeration value="lozi"/>
+                            <xsd:enumeration value="ainu"/>
+                            <xsd:enumeration value="sesotho"/>
+                            <xsd:enumeration value="mapudungun"/>
+                            <xsd:enumeration value="athapascan_languages"/>
+                            <xsd:enumeration value="coptic"/>
+                            <xsd:enumeration value="pahlavi"/>
+                            <xsd:enumeration value="malayalam"/>
+                            <xsd:enumeration value="chuvash"/>
+                            <xsd:enumeration value="urdu"/>
+                            <xsd:enumeration value="land_dayak_languages"/>
+                            <xsd:enumeration value="portuguese"/>
+                            <xsd:enumeration value="latin_spanish"/>
+                            <xsd:enumeration value="bemba"/>
+                            <xsd:enumeration value="oromo"/>
+                            <xsd:enumeration value="frisian"/>
+                            <xsd:enumeration value="amharic"/>
+                            <xsd:enumeration value="kongo"/>
+                            <xsd:enumeration value="chibcha"/>
+                            <xsd:enumeration value="masai"/>
+                            <xsd:enumeration value="iloko"/>
+                            <xsd:enumeration value="hiligaynon"/>
+                            <xsd:enumeration value="finno_ugrian"/>
+                            <xsd:enumeration value="tuvalu"/>
+                            <xsd:enumeration value="tajik"/>
+                            <xsd:enumeration value="volapuk"/>
+                            <xsd:enumeration value="balinese"/>
+                            <xsd:enumeration value="kimbundu"/>
+                            <xsd:enumeration value="creole"/>
+                            <xsd:enumeration value="middle_dutch"/>
+                            <xsd:enumeration value="tonga"/>
+                            <xsd:enumeration value="tulu"/>
+                            <xsd:enumeration value="samaritan"/>
+                            <xsd:enumeration value="konkani"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="LanguageSubtitled">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="german"/>
+                            <xsd:enumeration value="aragonese"/>
+                            <xsd:enumeration value="sidamo"/>
+                            <xsd:enumeration value="altaic_languages"/>
+                            <xsd:enumeration value="luo"/>
+                            <xsd:enumeration value="papuan_languages"/>
+                            <xsd:enumeration value="khotanese"/>
+                            <xsd:enumeration value="kinyarwanda"/>
+                            <xsd:enumeration value="elamite"/>
+                            <xsd:enumeration value="hausa"/>
+                            <xsd:enumeration value="dutch"/>
+                            <xsd:enumeration value="old_french"/>
+                            <xsd:enumeration value="classical_syriac"/>
+                            <xsd:enumeration value="flemish"/>
+                            <xsd:enumeration value="kokborok"/>
+                            <xsd:enumeration value="songhai_languages"/>
+                            <xsd:enumeration value="nepali"/>
+                            <xsd:enumeration value="makasar"/>
+                            <xsd:enumeration value="ancient_greek"/>
+                            <xsd:enumeration value="sardinian"/>
+                            <xsd:enumeration value="niger_kordofanian_languages"/>
+                            <xsd:enumeration value="chinook_jargon"/>
+                            <xsd:enumeration value="cayuga"/>
+                            <xsd:enumeration value="castillian"/>
+                            <xsd:enumeration value="old_irish"/>
+                            <xsd:enumeration value="persian"/>
+                            <xsd:enumeration value="aleut"/>
+                            <xsd:enumeration value="jula"/>
+                            <xsd:enumeration value="siksika"/>
+                            <xsd:enumeration value="pohnpeian"/>
+                            <xsd:enumeration value="nzima"/>
+                            <xsd:enumeration value="chiricahua"/>
+                            <xsd:enumeration value="siswati"/>
+                            <xsd:enumeration value="sumerian"/>
+                            <xsd:enumeration value="north_american_indian_languages"/>
+                            <xsd:enumeration value="pidgin_english"/>
+                            <xsd:enumeration value="minangkabau"/>
+                            <xsd:enumeration value="dravidian_languages"/>
+                            <xsd:enumeration value="gorontalo"/>
+                            <xsd:enumeration value="slovak"/>
+                            <xsd:enumeration value="hebrew"/>
+                            <xsd:enumeration value="sasak"/>
+                            <xsd:enumeration value="northern_sami"/>
+                            <xsd:enumeration value="ekajuk"/>
+                            <xsd:enumeration value="chechen"/>
+                            <xsd:enumeration value="selkup"/>
+                            <xsd:enumeration value="kirundi"/>
+                            <xsd:enumeration value="braj"/>
+                            <xsd:enumeration value="celtic_languages"/>
+                            <xsd:enumeration value="bengali"/>
+                            <xsd:enumeration value="azerbaijani"/>
+                            <xsd:enumeration value="upper_sorbian"/>
+                            <xsd:enumeration value="sorbian_languages"/>
+                            <xsd:enumeration value="scots"/>
+                            <xsd:enumeration value="afrikaans"/>
+                            <xsd:enumeration value="sami"/>
+                            <xsd:enumeration value="umbundu"/>
+                            <xsd:enumeration value="australian_languages"/>
+                            <xsd:enumeration value="assyrian"/>
+                            <xsd:enumeration value="navaho"/>
+                            <xsd:enumeration value="khoisan_languages"/>
+                            <xsd:enumeration value="chamic_languages"/>
+                            <xsd:enumeration value="lithuanian"/>
+                            <xsd:enumeration value="bambara"/>
+                            <xsd:enumeration value="vietnamese"/>
+                            <xsd:enumeration value="bini"/>
+                            <xsd:enumeration value="maltese"/>
+                            <xsd:enumeration value="slave_athapascan"/>
+                            <xsd:enumeration value="mandar"/>
+                            <xsd:enumeration value="susu"/>
+                            <xsd:enumeration value="lule_sami"/>
+                            <xsd:enumeration value="apache_languages"/>
+                            <xsd:enumeration value="artificial_languages"/>
+                            <xsd:enumeration value="algonquian_languages"/>
+                            <xsd:enumeration value="bikol"/>
+                            <xsd:enumeration value="sanskrit"/>
+                            <xsd:enumeration value="tuvinian"/>
+                            <xsd:enumeration value="bihari"/>
+                            <xsd:enumeration value="wakashan_languages"/>
+                            <xsd:enumeration value="gaelic_scots"/>
+                            <xsd:enumeration value="tatar"/>
+                            <xsd:enumeration value="luba_katanga"/>
+                            <xsd:enumeration value="kumyk"/>
+                            <xsd:enumeration value="welsh"/>
+                            <xsd:enumeration value="chinese"/>
+                            <xsd:enumeration value="japanese"/>
+                            <xsd:enumeration value="beja"/>
+                            <xsd:enumeration value="norwegian_bokmal"/>
+                            <xsd:enumeration value="tzeltal"/>
+                            <xsd:enumeration value="tiv"/>
+                            <xsd:enumeration value="angika"/>
+                            <xsd:enumeration value="scots_gaelic"/>
+                            <xsd:enumeration value="garo"/>
+                            <xsd:enumeration value="otomian_languages"/>
+                            <xsd:enumeration value="north_ndebele"/>
+                            <xsd:enumeration value="dhivehi"/>
+                            <xsd:enumeration value="aramaic"/>
+                            <xsd:enumeration value="rarotongan"/>
+                            <xsd:enumeration value="setswana"/>
+                            <xsd:enumeration value="kanuri"/>
+                            <xsd:enumeration value="mon_khmer_languages"/>
+                            <xsd:enumeration value="haryanvi"/>
+                            <xsd:enumeration value="zaza"/>
+                            <xsd:enumeration value="lushai"/>
+                            <xsd:enumeration value="ijo_languages"/>
+                            <xsd:enumeration value="zande_languages"/>
+                            <xsd:enumeration value="indic"/>
+                            <xsd:enumeration value="sandawe"/>
+                            <xsd:enumeration value="fon"/>
+                            <xsd:enumeration value="ndonga"/>
+                            <xsd:enumeration value="xhosa"/>
+                            <xsd:enumeration value="judeo_persian"/>
+                            <xsd:enumeration value="taiwanese_chinese"/>
+                            <xsd:enumeration value="karen_languages"/>
+                            <xsd:enumeration value="bribri"/>
+                            <xsd:enumeration value="marathi"/>
+                            <xsd:enumeration value="sinhalese"/>
+                            <xsd:enumeration value="inuktitut"/>
+                            <xsd:enumeration value="tigre"/>
+                            <xsd:enumeration value="slovene"/>
+                            <xsd:enumeration value="choctaw"/>
+                            <xsd:enumeration value="ga"/>
+                            <xsd:enumeration value="northern_frisian"/>
+                            <xsd:enumeration value="yugoslavian"/>
+                            <xsd:enumeration value="mirandese"/>
+                            <xsd:enumeration value="nauru"/>
+                            <xsd:enumeration value="spanish"/>
+                            <xsd:enumeration value="somali"/>
+                            <xsd:enumeration value="dakota"/>
+                            <xsd:enumeration value="syriac"/>
+                            <xsd:enumeration value="french_canadian"/>
+                            <xsd:enumeration value="lower_sorbian"/>
+                            <xsd:enumeration value="punjabi"/>
+                            <xsd:enumeration value="inari_sami"/>
+                            <xsd:enumeration value="gwichin"/>
+                            <xsd:enumeration value="inuktitun"/>
+                            <xsd:enumeration value="erzya"/>
+                            <xsd:enumeration value="cushitic_languages"/>
+                            <xsd:enumeration value="kikuyu"/>
+                            <xsd:enumeration value="quechua"/>
+                            <xsd:enumeration value="nilo_saharan_languages"/>
+                            <xsd:enumeration value="sino_tibetan"/>
+                            <xsd:enumeration value="kalaallisut"/>
+                            <xsd:enumeration value="asturian"/>
+                            <xsd:enumeration value="romance"/>
+                            <xsd:enumeration value="pampanga"/>
+                            <xsd:enumeration value="fanti"/>
+                            <xsd:enumeration value="bislama"/>
+                            <xsd:enumeration value="bahasa"/>
+                            <xsd:enumeration value="aromanian"/>
+                            <xsd:enumeration value="madurese"/>
+                            <xsd:enumeration value="pedi"/>
+                            <xsd:enumeration value="norwegian"/>
+                            <xsd:enumeration value="herero"/>
+                            <xsd:enumeration value="yoruba"/>
+                            <xsd:enumeration value="ottoman_turkish"/>
+                            <xsd:enumeration value="latin"/>
+                            <xsd:enumeration value="middle_english"/>
+                            <xsd:enumeration value="gilbertese"/>
+                            <xsd:enumeration value="french"/>
+                            <xsd:enumeration value="georgian"/>
+                            <xsd:enumeration value="portuguese_brazilian"/>
+                            <xsd:enumeration value="old_provencal"/>
+                            <xsd:enumeration value="tamashek"/>
+                            <xsd:enumeration value="serbian"/>
+                            <xsd:enumeration value="marshallese"/>
+                            <xsd:enumeration value="kru_languages"/>
+                            <xsd:enumeration value="kashubian"/>
+                            <xsd:enumeration value="chhattisgarhi"/>
+                            <xsd:enumeration value="kosraean"/>
+                            <xsd:enumeration value="hindi"/>
+                            <xsd:enumeration value="esperanto"/>
+                            <xsd:enumeration value="kazakh"/>
+                            <xsd:enumeration value="gayo"/>
+                            <xsd:enumeration value="afghan_pashtu"/>
+                            <xsd:enumeration value="rapanui"/>
+                            <xsd:enumeration value="ewondo"/>
+                            <xsd:enumeration value="egyptian"/>
+                            <xsd:enumeration value="gibberish"/>
+                            <xsd:enumeration value="khmer"/>
+                            <xsd:enumeration value="banda_languages"/>
+                            <xsd:enumeration value="hungarian"/>
+                            <xsd:enumeration value="moksha"/>
+                            <xsd:enumeration value="creek"/>
+                            <xsd:enumeration value="luiseno"/>
+                            <xsd:enumeration value="karelian"/>
+                            <xsd:enumeration value="greenlandic"/>
+                            <xsd:enumeration value="samoan"/>
+                            <xsd:enumeration value="romansch"/>
+                            <xsd:enumeration value="berber"/>
+                            <xsd:enumeration value="cree"/>
+                            <xsd:enumeration value="gothic"/>
+                            <xsd:enumeration value="nyamwezi"/>
+                            <xsd:enumeration value="magahi"/>
+                            <xsd:enumeration value="shona"/>
+                            <xsd:enumeration value="lunda"/>
+                            <xsd:enumeration value="uzbek"/>
+                            <xsd:enumeration value="arawak"/>
+                            <xsd:enumeration value="friulian"/>
+                            <xsd:enumeration value="fiji"/>
+                            <xsd:enumeration value="turkmen"/>
+                            <xsd:enumeration value="old_persian"/>
+                            <xsd:enumeration value="shan"/>
+                            <xsd:enumeration value="latvian"/>
+                            <xsd:enumeration value="old_english"/>
+                            <xsd:enumeration value="tsonga"/>
+                            <xsd:enumeration value="faroese"/>
+                            <xsd:enumeration value="votic"/>
+                            <xsd:enumeration value="ossetian"/>
+                            <xsd:enumeration value="iroquoian_languages"/>
+                            <xsd:enumeration value="yupik_languages"/>
+                            <xsd:enumeration value="dargwa"/>
+                            <xsd:enumeration value="papiamento"/>
+                            <xsd:enumeration value="phoenician"/>
+                            <xsd:enumeration value="mandingo"/>
+                            <xsd:enumeration value="delaware"/>
+                            <xsd:enumeration value="low_german"/>
+                            <xsd:enumeration value="lao"/>
+                            <xsd:enumeration value="mongolian"/>
+                            <xsd:enumeration value="telugu"/>
+                            <xsd:enumeration value="abkhazian"/>
+                            <xsd:enumeration value="chagatai"/>
+                            <xsd:enumeration value="achinese"/>
+                            <xsd:enumeration value="udmurt"/>
+                            <xsd:enumeration value="siouan_languages"/>
+                            <xsd:enumeration value="malagasy"/>
+                            <xsd:enumeration value="pashto"/>
+                            <xsd:enumeration value="thai"/>
+                            <xsd:enumeration value="efik"/>
+                            <xsd:enumeration value="luxembourgish"/>
+                            <xsd:enumeration value="bodo"/>
+                            <xsd:enumeration value="gbaya"/>
+                            <xsd:enumeration value="kara_kalpak"/>
+                            <xsd:enumeration value="eastern_frisian"/>
+                            <xsd:enumeration value="nepal_bhasa"/>
+                            <xsd:enumeration value="malay"/>
+                            <xsd:enumeration value="germanic_languages"/>
+                            <xsd:enumeration value="tsimshian"/>
+                            <xsd:enumeration value="hokkien"/>
+                            <xsd:enumeration value="adangme"/>
+                            <xsd:enumeration value="dogri"/>
+                            <xsd:enumeration value="lamba"/>
+                            <xsd:enumeration value="sogdian"/>
+                            <xsd:enumeration value="scandanavian_languages"/>
+                            <xsd:enumeration value="middle_french"/>
+                            <xsd:enumeration value="afrihili"/>
+                            <xsd:enumeration value="estonian"/>
+                            <xsd:enumeration value="sichuan_yi"/>
+                            <xsd:enumeration value="portuguese_creole"/>
+                            <xsd:enumeration value="igbo"/>
+                            <xsd:enumeration value="awadhi"/>
+                            <xsd:enumeration value="ukranian"/>
+                            <xsd:enumeration value="interlingua"/>
+                            <xsd:enumeration value="gahrwali"/>
+                            <xsd:enumeration value="mizo"/>
+                            <xsd:enumeration value="interlingue"/>
+                            <xsd:enumeration value="cantonese_chinese"/>
+                            <xsd:enumeration value="albanian"/>
+                            <xsd:enumeration value="italian"/>
+                            <xsd:enumeration value="adygei"/>
+                            <xsd:enumeration value="korean"/>
+                            <xsd:enumeration value="khasi"/>
+                            <xsd:enumeration value="tupi_languages"/>
+                            <xsd:enumeration value="lojban"/>
+                            <xsd:enumeration value="ewe"/>
+                            <xsd:enumeration value="gullah"/>
+                            <xsd:enumeration value="simplified_chinese"/>
+                            <xsd:enumeration value="prakrit_languages"/>
+                            <xsd:enumeration value="akan"/>
+                            <xsd:enumeration value="kashmiri"/>
+                            <xsd:enumeration value="bosnian"/>
+                            <xsd:enumeration value="klingon"/>
+                            <xsd:enumeration value="tai_languages"/>
+                            <xsd:enumeration value="dzongkha"/>
+                            <xsd:enumeration value="belgian"/>
+                            <xsd:enumeration value="manipuri"/>
+                            <xsd:enumeration value="lapp"/>
+                            <xsd:enumeration value="guarani"/>
+                            <xsd:enumeration value="valencian"/>
+                            <xsd:enumeration value="sangho"/>
+                            <xsd:enumeration value="yapese"/>
+                            <xsd:enumeration value="zuni"/>
+                            <xsd:enumeration value="kuanyama"/>
+                            <xsd:enumeration value="bhutani"/>
+                            <xsd:enumeration value="english"/>
+                            <xsd:enumeration value="sign_language"/>
+                            <xsd:enumeration value="czech"/>
+                            <xsd:enumeration value="hawaiian"/>
+                            <xsd:enumeration value="south_ndebele"/>
+                            <xsd:enumeration value="palauan"/>
+                            <xsd:enumeration value="geez"/>
+                            <xsd:enumeration value="austronesian"/>
+                            <xsd:enumeration value="tahitian"/>
+                            <xsd:enumeration value="ladino"/>
+                            <xsd:enumeration value="dinka"/>
+                            <xsd:enumeration value="komi"/>
+                            <xsd:enumeration value="bhojpuri"/>
+                            <xsd:enumeration value="old_norse"/>
+                            <xsd:enumeration value="walloon"/>
+                            <xsd:enumeration value="central_american_indian_languages"/>
+                            <xsd:enumeration value="javanese"/>
+                            <xsd:enumeration value="belarusian"/>
+                            <xsd:enumeration value="tibetan"/>
+                            <xsd:enumeration value="zulu"/>
+                            <xsd:enumeration value="cherokee"/>
+                            <xsd:enumeration value="swahili"/>
+                            <xsd:enumeration value="iranian_languages"/>
+                            <xsd:enumeration value="himachali_languages"/>
+                            <xsd:enumeration value="oriya"/>
+                            <xsd:enumeration value="galibi_carib"/>
+                            <xsd:enumeration value="middle_irish"/>
+                            <xsd:enumeration value="icelandic"/>
+                            <xsd:enumeration value="classical_newari"/>
+                            <xsd:enumeration value="baltic_languages"/>
+                            <xsd:enumeration value="kamba"/>
+                            <xsd:enumeration value="twi"/>
+                            <xsd:enumeration value="afro_asiatic_languages"/>
+                            <xsd:enumeration value="gujarati"/>
+                            <xsd:enumeration value="nyankole"/>
+                            <xsd:enumeration value="baluchi"/>
+                            <xsd:enumeration value="uighur"/>
+                            <xsd:enumeration value="occitan"/>
+                            <xsd:enumeration value="pangasinan"/>
+                            <xsd:enumeration value="semitic_languages"/>
+                            <xsd:enumeration value="sundanese"/>
+                            <xsd:enumeration value="nko"/>
+                            <xsd:enumeration value="tamil"/>
+                            <xsd:enumeration value="gondi"/>
+                            <xsd:enumeration value="judeo_arabic"/>
+                            <xsd:enumeration value="arapaho"/>
+                            <xsd:enumeration value="micmac"/>
+                            <xsd:enumeration value="mohawk"/>
+                            <xsd:enumeration value="yao"/>
+                            <xsd:enumeration value="sranan_tongo"/>
+                            <xsd:enumeration value="farsi"/>
+                            <xsd:enumeration value="bliss"/>
+                            <xsd:enumeration value="gallegan"/>
+                            <xsd:enumeration value="buryat"/>
+                            <xsd:enumeration value="manx"/>
+                            <xsd:enumeration value="tagalog"/>
+                            <xsd:enumeration value="assamese"/>
+                            <xsd:enumeration value="kurukh"/>
+                            <xsd:enumeration value="swiss_german"/>
+                            <xsd:enumeration value="scandinavian_languages"/>
+                            <xsd:enumeration value="old_high_german"/>
+                            <xsd:enumeration value="mandarin_chinese"/>
+                            <xsd:enumeration value="polish"/>
+                            <xsd:enumeration value="kabyle"/>
+                            <xsd:enumeration value="galician"/>
+                            <xsd:enumeration value="mayan"/>
+                            <xsd:enumeration value="ukrainian"/>
+                            <xsd:enumeration value="bamileke_languages"/>
+                            <xsd:enumeration value="zenaga"/>
+                            <xsd:enumeration value="kalmyk"/>
+                            <xsd:enumeration value="ojibwa"/>
+                            <xsd:enumeration value="tereno"/>
+                            <xsd:enumeration value="karachay_balkar"/>
+                            <xsd:enumeration value="yakut"/>
+                            <xsd:enumeration value="filipino"/>
+                            <xsd:enumeration value="rajasthani"/>
+                            <xsd:enumeration value="aymara"/>
+                            <xsd:enumeration value="kawi"/>
+                            <xsd:enumeration value="manchu"/>
+                            <xsd:enumeration value="traditional_chinese"/>
+                            <xsd:enumeration value="romanian"/>
+                            <xsd:enumeration value="limburgan"/>
+                            <xsd:enumeration value="southern_sami"/>
+                            <xsd:enumeration value="burmese"/>
+                            <xsd:enumeration value="armenian"/>
+                            <xsd:enumeration value="breton"/>
+                            <xsd:enumeration value="hmong"/>
+                            <xsd:enumeration value="indo_european"/>
+                            <xsd:enumeration value="middle_high_german"/>
+                            <xsd:enumeration value="ido"/>
+                            <xsd:enumeration value="sindhi"/>
+                            <xsd:enumeration value="bulgarian"/>
+                            <xsd:enumeration value="neapolitan"/>
+                            <xsd:enumeration value="kachin"/>
+                            <xsd:enumeration value="dogrib"/>
+                            <xsd:enumeration value="moldavian"/>
+                            <xsd:enumeration value="mongo"/>
+                            <xsd:enumeration value="blin"/>
+                            <xsd:enumeration value="ugaritic"/>
+                            <xsd:enumeration value="hiri_motu"/>
+                            <xsd:enumeration value="soninke"/>
+                            <xsd:enumeration value="tok_pisin"/>
+                            <xsd:enumeration value="osage"/>
+                            <xsd:enumeration value="romany"/>
+                            <xsd:enumeration value="byelorussian"/>
+                            <xsd:enumeration value="maharati"/>
+                            <xsd:enumeration value="duala"/>
+                            <xsd:enumeration value="american_sign_language"/>
+                            <xsd:enumeration value="marwari"/>
+                            <xsd:enumeration value="sicilian"/>
+                            <xsd:enumeration value="akkadian"/>
+                            <xsd:enumeration value="timne"/>
+                            <xsd:enumeration value="tumbuka"/>
+                            <xsd:enumeration value="greek"/>
+                            <xsd:enumeration value="basa"/>
+                            <xsd:enumeration value="kabardian"/>
+                            <xsd:enumeration value="southern_sotho"/>
+                            <xsd:enumeration value="haida"/>
+                            <xsd:enumeration value="basque"/>
+                            <xsd:enumeration value="chipewyan"/>
+                            <xsd:enumeration value="serbo-croatian"/>
+                            <xsd:enumeration value="finnish"/>
+                            <xsd:enumeration value="venda"/>
+                            <xsd:enumeration value="avaric"/>
+                            <xsd:enumeration value="croatian"/>
+                            <xsd:enumeration value="hittite"/>
+                            <xsd:enumeration value="southern_altai"/>
+                            <xsd:enumeration value="salishan_languages"/>
+                            <xsd:enumeration value="mari"/>
+                            <xsd:enumeration value="mende"/>
+                            <xsd:enumeration value="nahuatl"/>
+                            <xsd:enumeration value="haitian"/>
+                            <xsd:enumeration value="maori"/>
+                            <xsd:enumeration value="sukuma"/>
+                            <xsd:enumeration value="corsican"/>
+                            <xsd:enumeration value="ingush"/>
+                            <xsd:enumeration value="nyoro"/>
+                            <xsd:enumeration value="washo"/>
+                            <xsd:enumeration value="none"/>
+                            <xsd:enumeration value="romansh"/>
+                            <xsd:enumeration value="inupiaq"/>
+                            <xsd:enumeration value="mossi"/>
+                            <xsd:enumeration value="buginese"/>
+                            <xsd:enumeration value="pali"/>
+                            <xsd:enumeration value="inupiak"/>
+                            <xsd:enumeration value="nias"/>
+                            <xsd:enumeration value="vai"/>
+                            <xsd:enumeration value="kumaoni"/>
+                            <xsd:enumeration value="russian"/>
+                            <xsd:enumeration value="chichewa"/>
+                            <xsd:enumeration value="lahnda"/>
+                            <xsd:enumeration value="nogai"/>
+                            <xsd:enumeration value="french_creole"/>
+                            <xsd:enumeration value="iban"/>
+                            <xsd:enumeration value="manobo_languages"/>
+                            <xsd:enumeration value="nubian_languages"/>
+                            <xsd:enumeration value="pig_latin"/>
+                            <xsd:enumeration value="cornish"/>
+                            <xsd:enumeration value="walamo"/>
+                            <xsd:enumeration value="afar"/>
+                            <xsd:enumeration value="yiddish"/>
+                            <xsd:enumeration value="bantu"/>
+                            <xsd:enumeration value="avestan"/>
+                            <xsd:enumeration value="grebo"/>
+                            <xsd:enumeration value="irish"/>
+                            <xsd:enumeration value="kannada"/>
+                            <xsd:enumeration value="niuean"/>
+                            <xsd:enumeration value="acoli"/>
+                            <xsd:enumeration value="unknown"/>
+                            <xsd:enumeration value="norwegian_nynorsk"/>
+                            <xsd:enumeration value="arabic"/>
+                            <xsd:enumeration value="dari"/>
+                            <xsd:enumeration value="multilingual"/>
+                            <xsd:enumeration value="indonesian"/>
+                            <xsd:enumeration value="danish"/>
+                            <xsd:enumeration value="philippine_languages"/>
+                            <xsd:enumeration value="chamorro"/>
+                            <xsd:enumeration value="tetum"/>
+                            <xsd:enumeration value="tonga_nyasa"/>
+                            <xsd:enumeration value="lingala"/>
+                            <xsd:enumeration value="zhuang"/>
+                            <xsd:enumeration value="batak"/>
+                            <xsd:enumeration value="zapotec"/>
+                            <xsd:enumeration value="caddo"/>
+                            <xsd:enumeration value="catalan"/>
+                            <xsd:enumeration value="cebuano"/>
+                            <xsd:enumeration value="skolt_sami"/>
+                            <xsd:enumeration value="kirghiz"/>
+                            <xsd:enumeration value="munda_languages"/>
+                            <xsd:enumeration value="old_slavonic"/>
+                            <xsd:enumeration value="ganda"/>
+                            <xsd:enumeration value="serer"/>
+                            <xsd:enumeration value="lezghian"/>
+                            <xsd:enumeration value="tlingit"/>
+                            <xsd:enumeration value="hupa"/>
+                            <xsd:enumeration value="unqualified"/>
+                            <xsd:enumeration value="provencal"/>
+                            <xsd:enumeration value="chuukese"/>
+                            <xsd:enumeration value="cambodian"/>
+                            <xsd:enumeration value="caucasian_languages"/>
+                            <xsd:enumeration value="slovakian"/>
+                            <xsd:enumeration value="waray"/>
+                            <xsd:enumeration value="fang"/>
+                            <xsd:enumeration value="swedish"/>
+                            <xsd:enumeration value="maithili"/>
+                            <xsd:enumeration value="alsatian"/>
+                            <xsd:enumeration value="kutenai"/>
+                            <xsd:enumeration value="wolof"/>
+                            <xsd:enumeration value="bashkir"/>
+                            <xsd:enumeration value="luba_lulua"/>
+                            <xsd:enumeration value="fulah"/>
+                            <xsd:enumeration value="kpelle"/>
+                            <xsd:enumeration value="slavic"/>
+                            <xsd:enumeration value="kurdish"/>
+                            <xsd:enumeration value="turkish"/>
+                            <xsd:enumeration value="cheyenne"/>
+                            <xsd:enumeration value="macedonian"/>
+                            <xsd:enumeration value="tokelau"/>
+                            <xsd:enumeration value="tigrinya"/>
+                            <xsd:enumeration value="santali"/>
+                            <xsd:enumeration value="crimean_tatar"/>
+                            <xsd:enumeration value="south_american_indian"/>
+                            <xsd:enumeration value="lozi"/>
+                            <xsd:enumeration value="ainu"/>
+                            <xsd:enumeration value="sesotho"/>
+                            <xsd:enumeration value="mapudungun"/>
+                            <xsd:enumeration value="athapascan_languages"/>
+                            <xsd:enumeration value="coptic"/>
+                            <xsd:enumeration value="pahlavi"/>
+                            <xsd:enumeration value="malayalam"/>
+                            <xsd:enumeration value="chuvash"/>
+                            <xsd:enumeration value="urdu"/>
+                            <xsd:enumeration value="land_dayak_languages"/>
+                            <xsd:enumeration value="portuguese"/>
+                            <xsd:enumeration value="latin_spanish"/>
+                            <xsd:enumeration value="bemba"/>
+                            <xsd:enumeration value="oromo"/>
+                            <xsd:enumeration value="frisian"/>
+                            <xsd:enumeration value="amharic"/>
+                            <xsd:enumeration value="kongo"/>
+                            <xsd:enumeration value="chibcha"/>
+                            <xsd:enumeration value="masai"/>
+                            <xsd:enumeration value="iloko"/>
+                            <xsd:enumeration value="hiligaynon"/>
+                            <xsd:enumeration value="finno_ugrian"/>
+                            <xsd:enumeration value="tuvalu"/>
+                            <xsd:enumeration value="tajik"/>
+                            <xsd:enumeration value="volapuk"/>
+                            <xsd:enumeration value="balinese"/>
+                            <xsd:enumeration value="kimbundu"/>
+                            <xsd:enumeration value="creole"/>
+                            <xsd:enumeration value="middle_dutch"/>
+                            <xsd:enumeration value="tonga"/>
+                            <xsd:enumeration value="tulu"/>
+                            <xsd:enumeration value="samaritan"/>
+                            <xsd:enumeration value="konkani"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="MatchingCatalogNumber" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="MinimumAgeRecommendation" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="ModelNumber" type="FortyStringNotNull"/>
+                <xsd:element minOccurs="0" name="ArtistBiography" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="OriginalPublicationDate" type="xsd:dateTime"/>
+                <xsd:element maxOccurs="20" minOccurs="0" name="PlatinumKeywords" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="PowerSource" type="FortyStringNotNull"/>
+                <xsd:element minOccurs="0" name="SpecificationMet" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="TargetAudienceBase" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="FishType" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="VersionForCountry">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="PR"/>
+                            <xsd:enumeration value="PS"/>
+                            <xsd:enumeration value="PT"/>
+                            <xsd:enumeration value="PW"/>
+                            <xsd:enumeration value="PY"/>
+                            <xsd:enumeration value="QA"/>
+                            <xsd:enumeration value="AC"/>
+                            <xsd:enumeration value="AD"/>
+                            <xsd:enumeration value="AE"/>
+                            <xsd:enumeration value="AF"/>
+                            <xsd:enumeration value="AG"/>
+                            <xsd:enumeration value="AI"/>
+                            <xsd:enumeration value="AL"/>
+                            <xsd:enumeration value="AM"/>
+                            <xsd:enumeration value="AN"/>
+                            <xsd:enumeration value="AO"/>
+                            <xsd:enumeration value="AQ"/>
+                            <xsd:enumeration value="AR"/>
+                            <xsd:enumeration value="AS"/>
+                            <xsd:enumeration value="RE"/>
+                            <xsd:enumeration value="AT"/>
+                            <xsd:enumeration value="AU"/>
+                            <xsd:enumeration value="AW"/>
+                            <xsd:enumeration value="AX"/>
+                            <xsd:enumeration value="AZ"/>
+                            <xsd:enumeration value="RO"/>
+                            <xsd:enumeration value="BA"/>
+                            <xsd:enumeration value="BB"/>
+                            <xsd:enumeration value="RS"/>
+                            <xsd:enumeration value="BD"/>
+                            <xsd:enumeration value="RU"/>
+                            <xsd:enumeration value="BE"/>
+                            <xsd:enumeration value="BF"/>
+                            <xsd:enumeration value="BG"/>
+                            <xsd:enumeration value="RW"/>
+                            <xsd:enumeration value="BH"/>
+                            <xsd:enumeration value="BI"/>
+                            <xsd:enumeration value="BJ"/>
+                            <xsd:enumeration value="BL"/>
+                            <xsd:enumeration value="BM"/>
+                            <xsd:enumeration value="BN"/>
+                            <xsd:enumeration value="BO"/>
+                            <xsd:enumeration value="SA"/>
+                            <xsd:enumeration value="BQ"/>
+                            <xsd:enumeration value="SB"/>
+                            <xsd:enumeration value="BR"/>
+                            <xsd:enumeration value="SC"/>
+                            <xsd:enumeration value="BS"/>
+                            <xsd:enumeration value="SD"/>
+                            <xsd:enumeration value="BT"/>
+                            <xsd:enumeration value="SE"/>
+                            <xsd:enumeration value="BV"/>
+                            <xsd:enumeration value="SG"/>
+                            <xsd:enumeration value="SH"/>
+                            <xsd:enumeration value="BW"/>
+                            <xsd:enumeration value="SI"/>
+                            <xsd:enumeration value="SJ"/>
+                            <xsd:enumeration value="BY"/>
+                            <xsd:enumeration value="SK"/>
+                            <xsd:enumeration value="BZ"/>
+                            <xsd:enumeration value="SL"/>
+                            <xsd:enumeration value="SM"/>
+                            <xsd:enumeration value="SN"/>
+                            <xsd:enumeration value="SO"/>
+                            <xsd:enumeration value="CA"/>
+                            <xsd:enumeration value="SR"/>
+                            <xsd:enumeration value="SS"/>
+                            <xsd:enumeration value="CC"/>
+                            <xsd:enumeration value="CD"/>
+                            <xsd:enumeration value="ST"/>
+                            <xsd:enumeration value="SV"/>
+                            <xsd:enumeration value="CF"/>
+                            <xsd:enumeration value="CG"/>
+                            <xsd:enumeration value="CH"/>
+                            <xsd:enumeration value="SX"/>
+                            <xsd:enumeration value="CI"/>
+                            <xsd:enumeration value="SY"/>
+                            <xsd:enumeration value="SZ"/>
+                            <xsd:enumeration value="CK"/>
+                            <xsd:enumeration value="CL"/>
+                            <xsd:enumeration value="CM"/>
+                            <xsd:enumeration value="CN"/>
+                            <xsd:enumeration value="CO"/>
+                            <xsd:enumeration value="TA"/>
+                            <xsd:enumeration value="CR"/>
+                            <xsd:enumeration value="TC"/>
+                            <xsd:enumeration value="TD"/>
+                            <xsd:enumeration value="CS"/>
+                            <xsd:enumeration value="CU"/>
+                            <xsd:enumeration value="TF"/>
+                            <xsd:enumeration value="CV"/>
+                            <xsd:enumeration value="TG"/>
+                            <xsd:enumeration value="CW"/>
+                            <xsd:enumeration value="TH"/>
+                            <xsd:enumeration value="CX"/>
+                            <xsd:enumeration value="TJ"/>
+                            <xsd:enumeration value="CY"/>
+                            <xsd:enumeration value="TK"/>
+                            <xsd:enumeration value="CZ"/>
+                            <xsd:enumeration value="TL"/>
+                            <xsd:enumeration value="TM"/>
+                            <xsd:enumeration value="TN"/>
+                            <xsd:enumeration value="TO"/>
+                            <xsd:enumeration value="TP"/>
+                            <xsd:enumeration value="TR"/>
+                            <xsd:enumeration value="TT"/>
+                            <xsd:enumeration value="DE"/>
+                            <xsd:enumeration value="TV"/>
+                            <xsd:enumeration value="TW"/>
+                            <xsd:enumeration value="DJ"/>
+                            <xsd:enumeration value="TZ"/>
+                            <xsd:enumeration value="DK"/>
+                            <xsd:enumeration value="DM"/>
+                            <xsd:enumeration value="DO"/>
+                            <xsd:enumeration value="UA"/>
+                            <xsd:enumeration value="UG"/>
+                            <xsd:enumeration value="UK"/>
+                            <xsd:enumeration value="DZ"/>
+                            <xsd:enumeration value="UM"/>
+                            <xsd:enumeration value="US"/>
+                            <xsd:enumeration value="EC"/>
+                            <xsd:enumeration value="EE"/>
+                            <xsd:enumeration value="EG"/>
+                            <xsd:enumeration value="EH"/>
+                            <xsd:enumeration value="UY"/>
+                            <xsd:enumeration value="UZ"/>
+                            <xsd:enumeration value="VA"/>
+                            <xsd:enumeration value="ER"/>
+                            <xsd:enumeration value="VC"/>
+                            <xsd:enumeration value="ES"/>
+                            <xsd:enumeration value="VE"/>
+                            <xsd:enumeration value="ET"/>
+                            <xsd:enumeration value="VG"/>
+                            <xsd:enumeration value="VI"/>
+                            <xsd:enumeration value="VN"/>
+                            <xsd:enumeration value="VU"/>
+                            <xsd:enumeration value="FI"/>
+                            <xsd:enumeration value="FJ"/>
+                            <xsd:enumeration value="FK"/>
+                            <xsd:enumeration value="FM"/>
+                            <xsd:enumeration value="FO"/>
+                            <xsd:enumeration value="FR"/>
+                            <xsd:enumeration value="WD"/>
+                            <xsd:enumeration value="WF"/>
+                            <xsd:enumeration value="GA"/>
+                            <xsd:enumeration value="GB"/>
+                            <xsd:enumeration value="WS"/>
+                            <xsd:enumeration value="GD"/>
+                            <xsd:enumeration value="GE"/>
+                            <xsd:enumeration value="GF"/>
+                            <xsd:enumeration value="GG"/>
+                            <xsd:enumeration value="GH"/>
+                            <xsd:enumeration value="GI"/>
+                            <xsd:enumeration value="WZ"/>
+                            <xsd:enumeration value="GL"/>
+                            <xsd:enumeration value="GM"/>
+                            <xsd:enumeration value="GN"/>
+                            <xsd:enumeration value="GP"/>
+                            <xsd:enumeration value="GQ"/>
+                            <xsd:enumeration value="XB"/>
+                            <xsd:enumeration value="GR"/>
+                            <xsd:enumeration value="XC"/>
+                            <xsd:enumeration value="GS"/>
+                            <xsd:enumeration value="XE"/>
+                            <xsd:enumeration value="GT"/>
+                            <xsd:enumeration value="GU"/>
+                            <xsd:enumeration value="GW"/>
+                            <xsd:enumeration value="GY"/>
+                            <xsd:enumeration value="XK"/>
+                            <xsd:enumeration value="XM"/>
+                            <xsd:enumeration value="XN"/>
+                            <xsd:enumeration value="XY"/>
+                            <xsd:enumeration value="HK"/>
+                            <xsd:enumeration value="HM"/>
+                            <xsd:enumeration value="HN"/>
+                            <xsd:enumeration value="HR"/>
+                            <xsd:enumeration value="HT"/>
+                            <xsd:enumeration value="YE"/>
+                            <xsd:enumeration value="HU"/>
+                            <xsd:enumeration value="IC"/>
+                            <xsd:enumeration value="ID"/>
+                            <xsd:enumeration value="YT"/>
+                            <xsd:enumeration value="YU"/>
+                            <xsd:enumeration value="IE"/>
+                            <xsd:enumeration value="IL"/>
+                            <xsd:enumeration value="IM"/>
+                            <xsd:enumeration value="IN"/>
+                            <xsd:enumeration value="IO"/>
+                            <xsd:enumeration value="ZA"/>
+                            <xsd:enumeration value="IQ"/>
+                            <xsd:enumeration value="IR"/>
+                            <xsd:enumeration value="IS"/>
+                            <xsd:enumeration value="IT"/>
+                            <xsd:enumeration value="ZM"/>
+                            <xsd:enumeration value="ZR"/>
+                            <xsd:enumeration value="JE"/>
+                            <xsd:enumeration value="ZW"/>
+                            <xsd:enumeration value="JM"/>
+                            <xsd:enumeration value="JO"/>
+                            <xsd:enumeration value="JP"/>
+                            <xsd:enumeration value="unknown"/>
+                            <xsd:enumeration value="KE"/>
+                            <xsd:enumeration value="KG"/>
+                            <xsd:enumeration value="KH"/>
+                            <xsd:enumeration value="KI"/>
+                            <xsd:enumeration value="KM"/>
+                            <xsd:enumeration value="KN"/>
+                            <xsd:enumeration value="KP"/>
+                            <xsd:enumeration value="KR"/>
+                            <xsd:enumeration value="KW"/>
+                            <xsd:enumeration value="KY"/>
+                            <xsd:enumeration value="KZ"/>
+                            <xsd:enumeration value="LA"/>
+                            <xsd:enumeration value="LB"/>
+                            <xsd:enumeration value="LC"/>
+                            <xsd:enumeration value="LI"/>
+                            <xsd:enumeration value="LK"/>
+                            <xsd:enumeration value="LR"/>
+                            <xsd:enumeration value="LS"/>
+                            <xsd:enumeration value="LT"/>
+                            <xsd:enumeration value="LU"/>
+                            <xsd:enumeration value="LV"/>
+                            <xsd:enumeration value="LY"/>
+                            <xsd:enumeration value="MA"/>
+                            <xsd:enumeration value="MC"/>
+                            <xsd:enumeration value="MD"/>
+                            <xsd:enumeration value="ME"/>
+                            <xsd:enumeration value="MF"/>
+                            <xsd:enumeration value="MG"/>
+                            <xsd:enumeration value="MH"/>
+                            <xsd:enumeration value="MK"/>
+                            <xsd:enumeration value="ML"/>
+                            <xsd:enumeration value="MM"/>
+                            <xsd:enumeration value="MN"/>
+                            <xsd:enumeration value="MO"/>
+                            <xsd:enumeration value="MP"/>
+                            <xsd:enumeration value="MQ"/>
+                            <xsd:enumeration value="MR"/>
+                            <xsd:enumeration value="MS"/>
+                            <xsd:enumeration value="MT"/>
+                            <xsd:enumeration value="MU"/>
+                            <xsd:enumeration value="MV"/>
+                            <xsd:enumeration value="MW"/>
+                            <xsd:enumeration value="MX"/>
+                            <xsd:enumeration value="MY"/>
+                            <xsd:enumeration value="MZ"/>
+                            <xsd:enumeration value="NA"/>
+                            <xsd:enumeration value="NC"/>
+                            <xsd:enumeration value="NE"/>
+                            <xsd:enumeration value="NF"/>
+                            <xsd:enumeration value="NG"/>
+                            <xsd:enumeration value="NI"/>
+                            <xsd:enumeration value="NL"/>
+                            <xsd:enumeration value="NO"/>
+                            <xsd:enumeration value="NP"/>
+                            <xsd:enumeration value="NR"/>
+                            <xsd:enumeration value="NU"/>
+                            <xsd:enumeration value="NZ"/>
+                            <xsd:enumeration value="OM"/>
+                            <xsd:enumeration value="PA"/>
+                            <xsd:enumeration value="PE"/>
+                            <xsd:enumeration value="PF"/>
+                            <xsd:enumeration value="PG"/>
+                            <xsd:enumeration value="PH"/>
+                            <xsd:enumeration value="PK"/>
+                            <xsd:enumeration value="PL"/>
+                            <xsd:enumeration value="PM"/>
+                            <xsd:enumeration value="PN"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="VideoTapeRecordingSpeed">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="lp"/>
+                            <xsd:enumeration value="slp"/>
+                            <xsd:enumeration value="ep"/>
+                            <xsd:enumeration value="sp"/>
+                            <xsd:enumeration value="unknown"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="VideoVHS">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" name="AspectRatio" type="VideoAspectRatioType"/>
+                <xsd:element minOccurs="0" name="BBFCRating" type="BBFC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="CNCRating" type="CNC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="CBFCRating" type="CBFC_Rating_Type"/>
+                <xsd:element minOccurs="0" name="FSKRating" type="FSK_Rating_Type"/>
+                <xsd:element minOccurs="0" name="MPAARating" type="MPAARatingType"/>
+                <xsd:element minOccurs="0" name="ItalianAgeRating" type="ItalianAgeRatingType"/>
+                <xsd:element minOccurs="0" name="ICAARating" type="ICAARatingType"/>
+                <xsd:element minOccurs="0" name="MediaType" type="VideoVHSMediaType"/>
+                <xsd:element minOccurs="0" name="NumberOfItems" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="RunTime" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="VideotapeRecordingSpeed" type="VideotapeRecordingSpeedType"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Format" type="VideoFormatType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="AudioEncoding" type="AudioEncodingType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="Language" type="LanguageStringType"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="SubtitleLanguage" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" name="PublicationDate" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="TheatricalReleaseDate" type="xsd:dateTime"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Actor" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Director" type="FortyStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Host" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Narrator" type="StringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="Producer" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="10" minOccurs="0" name="PrimaryContributor" type="MediumStringNotNull"/>
+                <xsd:element maxOccurs="5" minOccurs="0" name="SubjectKeywords" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="IsAdultProduct" type="xsd:boolean"/>
+                <xsd:element minOccurs="0" name="Genre" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="CountryOfOrigin" type="CountryOfOriginType"/>
+                <xsd:element minOccurs="0" name="Binding" type="VideoBindingType"/>
+                <xsd:element minOccurs="0" name="Chromatism" type="ChromatismType"/>
+                <xsd:element minOccurs="0" name="Subtitle" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="PackageTypeName" type="MediumStringNotNull"/>
+                <xsd:element minOccurs="0" name="Publisher" type="HundredString"/>
+                <xsd:element minOccurs="0" name="McPrcWxjz" type="HundredString"/>
+                <xsd:element minOccurs="0" name="PublishingCompany" type="HundredString"/>
+                <xsd:element minOccurs="0" name="ProductionCompany" type="HundredString"/>
+                <xsd:element minOccurs="0" name="OriginalLanguageTitle" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="DVDStructureSides" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="DVDStructureLayers" type="xsd:positiveInteger"/>
+                <xsd:element maxOccurs="3" minOccurs="0" name="LanguageDubbed" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" name="LanguageSubtitlesForHearingImpaired" type="LanguageStringType"/>
+                <xsd:element minOccurs="0" ref="Battery"/>
+                <xsd:element minOccurs="0" name="BatteryAverageLife" type="BatteryLifeDimension"/>
+                <xsd:element minOccurs="0" name="BatteryAverageLifeStandby" type="Dimension"/>
+                <xsd:element minOccurs="0" name="BatteryChargeTime" type="Dimension"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryEnergyContent" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryPackaging">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="batteries_contained_in_equipment"/>
+                            <xsd:enumeration value="batteries_only"/>
+                            <xsd:enumeration value="batteries_packed_with_equipment"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="LithiumBatteryVoltage" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="LithiumBatteryWeight" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="NumberOfLithiumIonCells" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull"/>
+                <xsd:element minOccurs="0" name="MfrWarrantyDescriptionType" type="StringNotNull"/>
+                <xsd:element minOccurs="0" name="SellerWarrantyDescription">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:normalizedString">
+                            <xsd:maxLength value="1500"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="Warnings" type="LongStringNotNull"/>
+                <xsd:element minOccurs="0" name="Studio" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="SourceCountryCode" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="VideoDVDMediaType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="dvd"/>
+            <xsd:enumeration value="hd_dvd"/>
+            <xsd:enumeration value="blu_ray"/>
+            <xsd:enumeration value="videodisc"/>
+            <xsd:enumeration value="dvd_i"/>
+            <xsd:enumeration value="dvd_r"/>
+            <xsd:enumeration value="umd"/>
+            <xsd:enumeration value="video_cd"/>
+            <xsd:enumeration value="mini_disc"/>
+            <xsd:enumeration value="laser_disc"/>
+            <xsd:enumeration value="cassette"/>
+            <xsd:enumeration value="blu_ray"/>
+            <xsd:enumeration value="audioCD"/>
+            <xsd:enumeration value="usb_flash_drive"/>
+            <xsd:enumeration value="mp3_cd"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VideoVHSMediaType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="VHStape"/>
+            <xsd:enumeration value="videotape"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="DVDRegionType">
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="8"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VideoFormatType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ac-3"/>
+            <xsd:enumeration value="dolby"/>
+            <xsd:enumeration value="thx"/>
+            <xsd:enumeration value="pal"/>
+            <xsd:enumeration value="ntsc"/>
+            <xsd:enumeration value="bw"/>
+            <xsd:enumeration value="color"/>
+            <xsd:enumeration value="subtitled"/>
+            <xsd:enumeration value="dubbed"/>
+            <xsd:enumeration value="closed-captioned"/>
+            <xsd:enumeration value="import"/>
+            <xsd:enumeration value="remastered"/>
+            <xsd:enumeration value="widescreen"/>
+            <xsd:enumeration value="hi-fidelity"/>
+            <xsd:enumeration value="collectors_edition"/>
+            <xsd:enumeration value="silent"/>
+            <xsd:enumeration value="directors_cut"/>
+            <xsd:enumeration value="full_screen"/>
+            <xsd:enumeration value="anamorphic"/>
+            <xsd:enumeration value="surround"/>
+            <xsd:enumeration value="dts_stereo"/>
+            <xsd:enumeration value="dvd_video"/>
+            <xsd:enumeration value="vhs"/>
+            <xsd:enumeration value="vhs_c"/>
+            <xsd:enumeration value="hybrid_sacd"/>
+            <xsd:enumeration value="digital_sound"/>
+            <xsd:enumeration value="deluxe_edition"/>
+            <xsd:enumeration value="special_extended_version"/>
+            <xsd:enumeration value="special_limited_edition"/>
+            <xsd:enumeration value="mono"/>
+            <xsd:enumeration value="dual_disc"/>
+            <xsd:enumeration value="value_price"/>
+            <xsd:enumeration value="multisystem"/>
+            <xsd:enumeration value="hd_dvd"/>
+            <xsd:enumeration value="blu_ray"/>
+            <xsd:enumeration value="umd"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BBFC_Rating_Type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ages_12_and_over"/>
+            <xsd:enumeration value="ages_15_and_over"/>
+            <xsd:enumeration value="ages_18_and_over"/>
+            <xsd:enumeration value="exempt"/>
+            <xsd:enumeration value="parental_guidance"/>
+            <xsd:enumeration value="to_be_announced"/>
+            <xsd:enumeration value="universal"/>
+            <xsd:enumeration value="universal_childrens"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="CBFC_Rating_Type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="adults_only"/>
+            <xsd:enumeration value="parental_guidance"/>
+            <xsd:enumeration value="special_audience"/>
+            <xsd:enumeration value="Universal"/>
+            <xsd:enumeration value="not_rated"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="CNC_Rating_Type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="universal"/>
+            <xsd:enumeration value="parental_guidance"/>
+            <xsd:enumeration value="ages_12_and_over"/>
+            <xsd:enumeration value="ages_14_and_over"/>
+            <xsd:enumeration value="ages_16_and_over"/>
+            <xsd:enumeration value="ages_18_and_over"/>
+            <xsd:enumeration value="ages_18_and_over_x_rated"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="FSK_Rating_Type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ages_6_and_over"/>
+            <xsd:enumeration value="ages_12_and_over"/>
+            <xsd:enumeration value="ages_16_and_over"/>
+            <xsd:enumeration value="ages_18_and_over"/>
+            <xsd:enumeration value="checked_by_legal_department"/>
+            <xsd:enumeration value="cannot_publicize"/>
+            <xsd:enumeration value="not_checked"/>
+            <xsd:enumeration value="unknown"/>
+            <xsd:enumeration value="without_age_limitation"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="MPAARatingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="g"/>
+            <xsd:enumeration value="nc-17"/>
+            <xsd:enumeration value="pg"/>
+            <xsd:enumeration value="pg-13"/>
+            <xsd:enumeration value="nr"/>
+            <xsd:enumeration value="unrated"/>
+            <xsd:enumeration value="r"/>
+            <xsd:enumeration value="x"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ItalianAgeRatingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="vm18"/>
+            <xsd:enumeration value="vm14"/>
+            <xsd:enumeration value="t"/>
+            <xsd:enumeration value="x"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ICAARatingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ages_12_and_over"/>
+            <xsd:enumeration value="ages_16_and_over"/>
+            <xsd:enumeration value="ages_18_and_over"/>
+            <xsd:enumeration value="ages_7_and_over"/>
+            <xsd:enumeration value="ages_7_and_over_recommended_for_children"/>
+            <xsd:enumeration value="all_ages"/>
+            <xsd:enumeration value="all_ages_recommended_for_children"/>
+            <xsd:enumeration value="rated_x"/>
+            <xsd:enumeration value="to_be_announced"/>
+            <xsd:enumeration value="unknown"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VideoAspectRatioType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="1.33:1"/>
+            <xsd:enumeration value="1.37:1"/>
+            <xsd:enumeration value="1.44:1"/>
+            <xsd:enumeration value="1.55:1"/>
+            <xsd:enumeration value="1.66:1"/>
+            <xsd:enumeration value="1.75:1"/>
+            <xsd:enumeration value="1.77:1"/>
+            <xsd:enumeration value="1.78:1"/>
+            <xsd:enumeration value="1.85:1"/>
+            <xsd:enumeration value="2.20:1"/>
+            <xsd:enumeration value="2.35:1"/>
+            <xsd:enumeration value="2.40:1"/>
+            <xsd:enumeration value="2.55:1"/>
+            <xsd:enumeration value="2:1"/>
+            <xsd:enumeration value="unknown_aspect_ratio"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VideoBindingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="dvd"/>
+            <xsd:enumeration value="blu_ray"/>
+            <xsd:enumeration value="hd_dvd"/>
+            <xsd:enumeration value="umd"/>
+            <xsd:enumeration value="VHStape"/>
+            <xsd:enumeration value="videotape"/>
+            <xsd:enumeration value="cassette"/>
+            <xsd:enumeration value="mp3_cd"/>
+            <xsd:enumeration value="cd_rom"/>
+            <xsd:enumeration value="audioCD"/>
+            <xsd:enumeration value="dvd_r"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ChromatismType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="black_and_white"/>
+            <xsd:enumeration value="color"/>
+            <xsd:enumeration value="color/black_and_white"/>
+            <xsd:enumeration value="colorized"/>
+            <xsd:enumeration value="tinted"/>
+            <xsd:enumeration value="unknown_chromatism"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

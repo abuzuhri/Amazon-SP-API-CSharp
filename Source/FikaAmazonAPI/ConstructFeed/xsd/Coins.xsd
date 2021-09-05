@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by V Swetha (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	
+	<xsd:element name="Coins">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="Coin"/>
+							<xsd:element ref="CollectibleCoins"/>
+							<xsd:element ref="Bullion"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Coin">
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="MintMark" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DenominationUnit" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeriesTitle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Variety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubVariety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateNumber" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitGrouping" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EdgeStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ArtistID" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EstatePeriod" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitCoint" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="TotalMetalWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="MetalStamp" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="LabelDescription" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CollectibleCoins">
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="MintMark" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DenominationUnit" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeriesTitle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Variety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubVariety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateNumber" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitGrouping" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EdgeStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ArtistID" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EstatePeriod" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitCoint" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="TotalMetalWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="MetalStamp" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="LabelDescription" type="StringNotNull" minOccurs="0"/>
+
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Bullion">
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="MintMark" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DenominationUnit" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeriesTitle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Variety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubVariety" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradedBy" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateNumber" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitGrouping" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EdgeStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Designer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ArtistID" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EstatePeriod" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="UnitCoint" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="TotalMetalWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="MetalStamp" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="LabelDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BackLabelImageUrl" type="xsd:anyURI" minOccurs="0"/>
+				<xsd:element name="FabricType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MetalType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ContactPlatingMaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Model" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CertificateType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Importer" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerContactInformation" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

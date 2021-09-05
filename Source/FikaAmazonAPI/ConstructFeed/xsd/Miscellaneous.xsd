@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Revision="$Revision: #4 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!--
+    $Date: 2005/04/01 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+
+    <xsd:element name="Miscellaneous">
+      <xsd:complexType>
+	<xsd:sequence>
+          <xsd:element name="ProductType" type="MiscType"/>
+          <xsd:element name="ProductCategory" type="MiscType" minOccurs="0"/>
+          <xsd:element name="ProductSubcategory" type="MiscSubtype" minOccurs="0"/>
+          <xsd:element name="Manufacturer" type="FortyStringNotNull" minOccurs="0"/>
+          <xsd:element name="Keywords" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+          <xsd:element name="Color" type="SuperLongStringNotNull" minOccurs="0"/>
+          <xsd:element name="Size" type="FortyStringNotNull" minOccurs="0"/>
+          <xsd:element name="EventDate" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="ModelName" type="FortyStringNotNull" minOccurs="0"/>
+          <xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+          <xsd:element name="MfrPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+ 
+    <xsd:simpleType name="MiscType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Antiques"/>
+            <xsd:enumeration value="Art"/>
+            <xsd:enumeration value="Car_Parts_and_Accessories"/>
+            <xsd:enumeration value="Coins"/>
+            <xsd:enumeration value="Collectibles"/>
+            <xsd:enumeration value="Crafts"/>
+            <xsd:enumeration value="Event_Tickets"/>
+            <xsd:enumeration value="Flowers"/>
+            <xsd:enumeration value="Gifts_and_Occasions"/>
+            <xsd:enumeration value="Gourmet_Food_and_Wine"/>
+            <xsd:enumeration value="Hobbies"/>
+            <xsd:enumeration value="Home_Furniture_and_Decor"/>
+            <xsd:enumeration value="Home_Lighting_and_Lamps"/>
+            <xsd:enumeration value="Home_Organizers_and_Storage"/>
+            <xsd:enumeration value="Jewelry_and_Gems"/>
+            <xsd:enumeration value="Luggage"/>
+            <xsd:enumeration value="Major_Home_Appliances"/>
+            <xsd:enumeration value="Medical_Supplies"/>
+            <xsd:enumeration value="Motorcycles"/>
+            <xsd:enumeration value="Musical_Instruments"/>
+            <xsd:enumeration value="Pet_Supplies"/>
+            <xsd:enumeration value="Pottery_and_Glass"/>
+            <xsd:enumeration value="Prints_and_Posters"/>
+            <xsd:enumeration value="Scientific_Supplies"/>
+            <xsd:enumeration value="Sporting_Goods"/>
+            <xsd:enumeration value="Sports_Memorabilia"/>
+            <xsd:enumeration value="Stamps"/>
+            <xsd:enumeration value="Teaching_and_School_Supplies"/>
+            <xsd:enumeration value="Watch"/>
+            <xsd:enumeration value="Wholesale_and_Industrial"/>
+            <xsd:enumeration value="Misc_Other"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+ 
+    <xsd:simpleType name="MiscSubtype">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Decorative_Arts"/>
+            <xsd:enumeration value="Furniture"/>
+            <xsd:enumeration value="Rugs_Carpets"/>
+            <xsd:enumeration value="Silver"/>
+            <xsd:enumeration value="Textiles_Linens"/>
+            <xsd:enumeration value="Drawings"/>
+            <xsd:enumeration value="Mixed_Media"/>
+            <xsd:enumeration value="Paintings"/>
+            <xsd:enumeration value="Sculptures_Carvings"/>
+            <xsd:enumeration value="Car_Accessories"/>
+            <xsd:enumeration value="Car_Parts"/>
+            <xsd:enumeration value="Car_Performance"/>
+            <xsd:enumeration value="Truck_Accessories"/>
+            <xsd:enumeration value="Truck_Parts"/>
+            <xsd:enumeration value="Truck_Performance"/>
+            <xsd:enumeration value="Coins_US"/>
+            <xsd:enumeration value="Coins_World"/>
+            <xsd:enumeration value="Paper_Money_US"/>
+            <xsd:enumeration value="Paper_Money_World"/>
+            <xsd:enumeration value="Scripophily"/>
+            <xsd:enumeration value="Autographs"/>
+            <xsd:enumeration value="Comics"/>
+            <xsd:enumeration value="Holiday_Seasonal"/>
+            <xsd:enumeration value="Militaria"/>
+            <xsd:enumeration value="Trading_Cards"/>
+            <xsd:enumeration value="Corsages"/>
+            <xsd:enumeration value="Exotics"/>
+            <xsd:enumeration value="Flowering_Plants"/>
+            <xsd:enumeration value="Green_Plants"/>
+            <xsd:enumeration value="Mixed_Arrangements"/>
+            <xsd:enumeration value="Single_Flower"/>
+            <xsd:enumeration value="Anniversary"/>
+            <xsd:enumeration value="Birthday"/>
+            <xsd:enumeration value="Holiday"/>
+            <xsd:enumeration value="Wedding"/>
+            <xsd:enumeration value="Cheese"/>
+            <xsd:enumeration value="Wine"/>
+            <xsd:enumeration value="Furniture"/>
+            <xsd:enumeration value="Decor"/>
+            <xsd:enumeration value="Lighting"/>
+            <xsd:enumeration value="Lamps"/>
+            <xsd:enumeration value="Indoor"/>
+            <xsd:enumeration value="Outdoor"/>
+            <xsd:enumeration value="Jewelry"/>
+            <xsd:enumeration value="Gems"/>
+            <xsd:enumeration value="Garment_Bags"/>
+            <xsd:enumeration value="Duffle_Bags"/>
+            <xsd:enumeration value="Kitchen"/>
+            <xsd:enumeration value="Laundry"/>
+            <xsd:enumeration value="Hospital_Supplies"/>
+            <xsd:enumeration value="Home_Health"/>
+            <xsd:enumeration value="Motorcyles"/>
+            <xsd:enumeration value="Motorcycle_Parts"/>
+            <xsd:enumeration value="Motorcycle_Protective_Gear"/>
+            <xsd:enumeration value="Pet_Care"/>
+            <xsd:enumeration value="Pet_Food"/>
+            <xsd:enumeration value="Pet_Toys"/>
+            <xsd:enumeration value="Glass"/>
+            <xsd:enumeration value="Pottery"/>
+            <xsd:enumeration value="Posters"/>
+            <xsd:enumeration value="Prints"/>
+            <xsd:enumeration value="Lab_Supplies"/>
+            <xsd:enumeration value="Sporting_Goods"/>
+            <xsd:enumeration value="Outdoor_Gear"/>
+            <xsd:enumeration value="Marine"/>
+            <xsd:enumeration value="Autographs"/>
+            <xsd:enumeration value="Trading_Cards"/>
+            <xsd:enumeration value="Stamps_US"/>
+            <xsd:enumeration value="Stamps_World"/>
+            <xsd:enumeration value="Preschool"/>
+            <xsd:enumeration value="K-12"/>
+            <xsd:enumeration value="Special_Needs"/>
+            <xsd:enumeration value="Men"/>
+            <xsd:enumeration value="Women"/>
+            <xsd:enumeration value="Kids"/>
+            <xsd:enumeration value="Agriculture"/>
+            <xsd:enumeration value="Architecture"/>
+            <xsd:enumeration value="Construction"/>
+            <xsd:enumeration value="Marine"/>
+            <xsd:enumeration value="Metalworking"/>
+            <xsd:enumeration value="Other"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

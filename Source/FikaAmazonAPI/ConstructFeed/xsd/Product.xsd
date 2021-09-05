@@ -1,0 +1,1543 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by sunil sachdev (amazon.com) -->
+<!-- Revision="$Revision: #12 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2007/10/31 $
+ 
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:include schemaLocation="ClothingAccessories.xsd"/>
+	<xsd:include schemaLocation="Amazon.xsd"/>
+	<xsd:include schemaLocation="ProductClothing.xsd"/>
+	<xsd:include schemaLocation="Miscellaneous.xsd"/>
+	<xsd:include schemaLocation="CameraPhoto.xsd"/>
+	<xsd:include schemaLocation="Home.xsd"/>
+	<xsd:include schemaLocation="Sports.xsd"/>
+	<xsd:include schemaLocation="SportsMemorabilia.xsd"/>
+	<xsd:include schemaLocation="EntertainmentCollectibles.xsd"/>
+	<xsd:include schemaLocation="HomeImprovement.xsd"/>
+	<xsd:include schemaLocation="Tools.xsd"/>
+	<xsd:include schemaLocation="FoodAndBeverages.xsd"/>
+	<xsd:include schemaLocation="Gourmet.xsd"/>
+	<xsd:include schemaLocation="Jewelry.xsd"/>
+	<xsd:include schemaLocation="Health.xsd"/>
+	<xsd:include schemaLocation="CE.xsd"/>
+	<xsd:include schemaLocation="Computers.xsd"/>
+	<xsd:include schemaLocation="SWVG.xsd"/>
+	<xsd:include schemaLocation="Wireless.xsd"/>
+	<xsd:include schemaLocation="Beauty.xsd"/>
+	<xsd:include schemaLocation="Office.xsd"/>
+	<xsd:include schemaLocation="MusicalInstruments.xsd"/>
+	<xsd:include schemaLocation="AutoAccessory.xsd"/>
+	<xsd:include schemaLocation="PetSupplies.xsd"/>
+	<xsd:include schemaLocation="ToysBaby.xsd"/>
+	<xsd:include schemaLocation="Baby.xsd"/>
+	<xsd:include schemaLocation="TiresAndWheels.xsd"/>
+	<xsd:include schemaLocation="Music.xsd"/>
+	<xsd:include schemaLocation="Video.xsd"/>
+	<xsd:include schemaLocation="Lighting.xsd"/>
+	<xsd:include schemaLocation="LargeAppliances.xsd"/>
+	<xsd:include schemaLocation="FBA.xsd"/>
+	<xsd:include schemaLocation="Toys.xsd"/>
+	<xsd:include schemaLocation="GiftCards.xsd"/>
+	<xsd:include schemaLocation="LabSupplies.xsd"/>
+	<xsd:include schemaLocation="EducationSupplies.xsd"/>
+	<xsd:include schemaLocation="RawMaterials.xsd"/>
+	<xsd:include schemaLocation="PowerTransmission.xsd"/>
+	<xsd:include schemaLocation="Industrial.xsd"/>
+	<xsd:include schemaLocation="Shoes.xsd"/>
+	<xsd:include schemaLocation="Motorcycles.xsd"/>
+	<xsd:include schemaLocation="MaterialHandling.xsd"/>
+	<xsd:include schemaLocation="MechanicalFasteners.xsd"/>
+	<xsd:include schemaLocation="FoodServiceAndJanSan.xsd"/>
+	<xsd:include schemaLocation="WineAndAlcohol.xsd"/>
+	<xsd:include schemaLocation="EUCompliance.xsd"/>
+	<xsd:include schemaLocation="Books.xsd"/>
+	<xsd:include schemaLocation="AdditionalProductInformation.xsd"/>
+	<xsd:include schemaLocation="Arts.xsd"/>
+	<xsd:include schemaLocation="Luggage.xsd"/>	
+	<xsd:include schemaLocation="Outdoors.xsd"/>
+	<xsd:include schemaLocation="Coins.xsd"/>
+	<xsd:include schemaLocation="Furniture.xsd"/>
+	<xsd:include schemaLocation="LuxuryBeauty.xsd"/>
+	<xsd:include schemaLocation="Collectibles.xsd"/>
+	<xsd:include schemaLocation="ProfessionalHealthCare.xsd"/>
+	<xsd:include schemaLocation="ThreeDPrinting.xsd"/>
+	<xsd:include schemaLocation="LightMotor.xsd"/>
+	
+	<!--
+    Please read the corresponding documentation that contains the recommended values for UsedFor, ItemType,
+    OtherItemAttributes, TargetAudience, and SubjectContent.
+    -->
+	<xsd:element name="Product">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SKU"/>
+				<xsd:element ref="StandardProductID" minOccurs="0"/>
+				<xsd:element name="GtinExemptionReason" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="bundle"/>
+							<xsd:enumeration value="part"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>				
+				<xsd:element ref="RelatedProductID" minOccurs="0"/>				
+				<xsd:element ref="ProductTaxCode" minOccurs="0"/>
+				<xsd:element name="LaunchDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="DiscontinueDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="ReleaseDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="ExternalProductUrl" type="xsd:anyURI" minOccurs="0"/>
+				<xsd:element name="Condition" type="ConditionInfo" minOccurs="0"/>
+				<xsd:element name="Rebate" type="RebateType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation> Use this field to indicate the number of units included
+							in the item you are offering for sale, such that each unit is packaged
+							for individual sale. </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation> Use this field to indicate the number of discrete items
+							included in the item you are offering for sale, such that each item is
+							not packaged for individual sale. For example, if you are selling a case
+							of 10 packages of socks, and each package contains 3 pairs of socks, the
+							case would have ItemPackageQuantity = 10 and NumberOfItems = 30.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="LiquidVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DescriptionData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Title" type="LongStringNotNull"/>
+							<xsd:element name="Brand" type="HundredString" minOccurs="0"/>
+							<xsd:element name="Designer" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Description" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="2000"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BulletPoint" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+							<xsd:element name="ItemDimensions" type="Dimensions" minOccurs="0"/>
+							<xsd:element name="PackageDimensions" type="Dimensions" minOccurs="0"/>
+							<xsd:element name="PackageWeight" type="PositiveWeightDimension" minOccurs="0"/>
+							<xsd:element name="ShippingWeight" type="PositiveWeightDimension" minOccurs="0"/>
+							<xsd:element name="MerchantCatalogNumber" type="FortyStringNotNull" minOccurs="0"/>
+							<xsd:element name="MSRP" type="CurrencyAmount" minOccurs="0"/>
+							<xsd:element name="MSRPWithTax" type="CurrencyAmount" minOccurs="0"/>
+							<xsd:element name="MaxOrderQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="SerialNumberRequired" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="Prop65" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="CPSIAWarning" minOccurs="0" maxOccurs="4">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="choking_hazard_balloon"/>
+										<xsd:enumeration value="choking_hazard_contains_a_marble"/>
+										<xsd:enumeration value="choking_hazard_contains_small_ball"/>
+										<xsd:enumeration value="choking_hazard_is_a_marble"/>
+										<xsd:enumeration value="choking_hazard_is_a_small_ball"/>
+										<xsd:enumeration value="choking_hazard_small_parts"/>
+										<xsd:enumeration value="no_warning_applicable"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CPSIAWarningDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+							<xsd:element name="LegalDisclaimer" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="2500"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Manufacturer" type="HundredString" minOccurs="0"/>
+							<xsd:element name="MfrPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+							<!-- The enforced limit for all countries is 250 bytes not counting spaces with the exception of non-clothing or luggage product types in Japan, which are allowed up to 500 bytes not counting spaces.-->
+							<xsd:element name="SearchTerms" type="LongString" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="PlatinumKeywords" type="StringNotNull" minOccurs="0" maxOccurs="20"/>
+							<xsd:element name="Memorabilia" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="Autographed" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="UsedFor" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+							<xsd:element name="ItemType" type="LongStringNotNull" minOccurs="0"/>
+							<xsd:element name="OtherItemAttributes" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+							<xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0" maxOccurs="4"/>
+							<xsd:element name="SubjectContent" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+							<xsd:element name="IsGiftWrapAvailable" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="IsGiftMessageAvailable" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="PromotionKeywords" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+							<xsd:element name="IsDiscontinuedByManufacturer" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="DeliveryScheduleGroupID" type="StringNotNull" minOccurs="0"/>
+							<xsd:element ref="DeliveryChannel" minOccurs="0" maxOccurs="2"/>
+							<xsd:element name="ExternalProductInformation" type="StringNotNull" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="MaxAggregateShipQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+							<!-- RecommendedBrowseNode and FEDAS_ID are for use by European merchants only. -->
+							<xsd:element name="RecommendedBrowseNode" type="xsd:positiveInteger" minOccurs="0" maxOccurs="2"/>
+							<xsd:element name="MerchantShippingGroupName" type="LongString" minOccurs="0" />
+							<xsd:element name="FEDAS_ID" minOccurs="0">
+								<!-- Please do not include periods or delimiters. -->
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:length value="6" fixed="true"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TSDAgeWarning" minOccurs="0" maxOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="not_suitable_under_36_months"/>
+										<xsd:enumeration value="not_suitable_under_3_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_4_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_5_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_6_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_7_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_8_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_9_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_10_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_11_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_12_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_13_years_supervision"/>
+										<xsd:enumeration value="not_suitable_under_14_years_supervision"/>
+										<xsd:enumeration value="no_warning_applicable"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TSDWarning" minOccurs="0" maxOccurs="8">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="only_domestic_use"/>
+										<xsd:enumeration value="adult_supervision_required"/>
+										<xsd:enumeration value="protective_equipment_required"/>
+										<xsd:enumeration value="water_adult_supervision_required"/>
+										<xsd:enumeration value="toy_inside"/>
+										<xsd:enumeration value="no_protective_equipment"/>
+										<xsd:enumeration value="risk_of_entanglement"/>
+										<xsd:enumeration value="fragrances_allergy_risk"/>
+										<xsd:enumeration value="no_warning_applicable"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TSDLanguage" minOccurs="0" maxOccurs="21">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="English"/>
+										<xsd:enumeration value="French"/>
+										<xsd:enumeration value="German"/>
+										<xsd:enumeration value="Italian"/>
+										<xsd:enumeration value="Spanish"/>
+										<xsd:enumeration value="Dutch"/>
+										<xsd:enumeration value="Polish"/>
+										<xsd:enumeration value="Bulgarian"/>
+										<xsd:enumeration value="Czech"/>
+										<xsd:enumeration value="Danish"/>
+										<xsd:enumeration value="Estonian"/>
+										<xsd:enumeration value="Finnish"/>
+										<xsd:enumeration value="Greek"/>
+										<xsd:enumeration value="Hungarian"/>
+										<xsd:enumeration value="Latvian"/>
+										<xsd:enumeration value="Lithuanian"/>
+										<xsd:enumeration value="Portuguese"/>
+										<xsd:enumeration value="Romanian"/>
+										<xsd:enumeration value="Slovak"/>
+										<xsd:enumeration value="Slovene"/>
+										<xsd:enumeration value="Swedish"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OptionalPaymentTypeExclusion" minOccurs="0" maxOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="cash_on_delivery"/>
+										<xsd:enumeration value="cvs"/>
+										<xsd:enumeration value="exclude_none"/>
+										<xsd:enumeration value="exclude cod"/>
+										<xsd:enumeration value="exclude cvs"/>
+										<xsd:enumeration value="exclude cod and cvs"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DistributionDesignation" type="DistributionDesignationValues" minOccurs="0"/>
+							<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+							<xsd:element ref="Battery" minOccurs="0"/>
+							<xsd:element name="BatteryCellType" type="BatteryCellTypeValues" minOccurs="0"/>
+							<xsd:element name="BatteryWeight" type="WeightDimension" minOccurs="0"/>
+							<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="batteries_contained_in_equipment"/>
+										<xsd:enumeration value="batteries_only"/>
+										<xsd:enumeration value="batteries_packed_with_equipment"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LithiumBatteryEnergyContent" type="EnergyConsumptionDimension" minOccurs="0"/>
+							<xsd:element name="LithiumBatteryWeight" type="WeightDimension" minOccurs="0"/>
+							<xsd:element name="ItemWeight" type="WeightDimension" minOccurs="0"/>
+							<xsd:element name="ItemVolume" type="VolumeDimension" minOccurs="0"/>
+							<xsd:element name="FlashPoint" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="GHSClassificationClass" minOccurs="0" maxOccurs="3">
+								<xsd:simpleType>
+									<xsd:restriction base="StringNotNull">
+										<xsd:enumeration value="explosive"/>
+										<xsd:enumeration value="oxidizing"/>
+										<xsd:enumeration value="toxic"/>
+										<xsd:enumeration value="corrosive"/>
+										<xsd:enumeration value="amzn_specific_no_label_with_warning"/>
+										<xsd:enumeration value="flammable"/>
+										<xsd:enumeration value="irritant"/>
+										<xsd:enumeration value="health_hazard"/>
+										<xsd:enumeration value="environmentally_damaging"/>
+										<xsd:enumeration value="compressed_gas"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SupplierDeclaredDGHZRegulation" minOccurs="0" maxOccurs="5">
+								<xsd:simpleType>
+									<xsd:restriction base="StringNotNull">
+										<xsd:enumeration value="ghs"/>
+										<xsd:enumeration value="storage"/>
+										<xsd:enumeration value="waste"/>
+										<xsd:enumeration value="not_applicable"/>
+										<xsd:enumeration value="transportation"/>
+										<xsd:enumeration value="other"/>
+										<xsd:enumeration value="unknown"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="HazmatUnitedNationsRegulatoryID" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="SafetyDataSheetURL" type="xsd:anyURI" minOccurs="0"/>
+				<xsd:element name="CaliforniaProposition65ComplianceType" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="alcoholic_beverage"/>
+							<xsd:enumeration value="chemical"/>
+							<xsd:enumeration value="diesel_engines"/>
+							<xsd:enumeration value="food"/>
+							<xsd:enumeration value="furniture"/>
+							<xsd:enumeration value="on_product_cancer"/>
+							<xsd:enumeration value="on_product_combined_cancer_reproductive"/>
+							<xsd:enumeration value="on_product_reproductive"/>
+							<xsd:enumeration value="passenger_or_off_road_vehicle"/>
+							<xsd:enumeration value="raw_wood"/>
+							<xsd:enumeration value="recreational_vessel"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+						<xsd:element name="CaliforniaProposition65ChemicalNames1"  type="CaliforniaProposition65ChemicalNamesType"  minOccurs="0"/>
+						<xsd:element name="CaliforniaProposition65ChemicalNames2"  type="CaliforniaProposition65ChemicalNamesType"  minOccurs="0"/>
+						<xsd:element name="CaliforniaProposition65ChemicalNames3"  type="CaliforniaProposition65ChemicalNamesType"  minOccurs="0"/>
+						<xsd:element name="CaliforniaProposition65ChemicalNames4"  type="CaliforniaProposition65ChemicalNamesType"  minOccurs="0"/>
+						<xsd:element name="CaliforniaProposition65ChemicalNames5"  type="CaliforniaProposition65ChemicalNamesType"  minOccurs="0"/>
+						<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/> 
+						<xsd:element name="ExternalRollingNoise" type="xsd:positiveInteger" minOccurs="0"/> 
+						<xsd:element name="DepartmentName" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="FcStorageMethod" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="FcShelfLife" type="DateIntegerDimension" minOccurs="0"/> 
+						<xsd:element name="FdaPremarketApprovalNumberPma" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="FormFactor" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="PlanExpirationDate" type="xsd:dateTime" minOccurs="0"/> 
+						<xsd:element name="ActiveIngredients" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="ProductExpirationType" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="PitchCircleDiameter" type="LengthDimension" minOccurs="0"/>
+						<xsd:element name="PEGIRating" type="PEGIRatingType" minOccurs="0"/> 
+						<xsd:element name="USKRating" type="USKRatingType" minOccurs="0"/>
+						<xsd:element name="AssemblyInstructions" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="SoftwareMediaFormat" type="StringNotNull" minOccurs="0"/>
+                        <!-- applicable only for IN marketplace -->
+						<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0" />
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0" />
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="Importer" type="StringNotNull" minOccurs="0" />
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="ImporterContactInformation" type="String" minOccurs="0" />
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="PackerContactInformation" type="String" minOccurs="0" />
+						<xsd:element name="UnitCount" type="xsd:decimal" minOccurs="0" />
+						<xsd:element name="PPUCountType" type="StringNotNull" minOccurs="0" />
+						<!-- applicable only for IN marketplace -->
+						<xsd:element name="LotOfferingExpirationDate" type="xsd:dateTime" minOccurs="0" />
+						<xsd:element name="HardwarePlatform" type="MediumStringNotNull" minOccurs="0"/> 
+						<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/> 
+						<xsd:element name="LegalComplianceCertificationMetadata" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="LegalComplianceCertificationStatus" minOccurs="0" maxOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="compliant"/>
+										<xsd:enumeration value="noncompliant"/>
+										<xsd:enumeration value="exempt"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LegalComplianceCertificationValue" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<!-- The input Value for ImportDesignation that is supported in BR is any integer bewtween : 0-8*/ -->
+							<xsd:element name="ImportDesignation" type="String" minOccurs="0" />
+							<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="AmazonMaturityRating" type="AmazonMaturityRatingType" minOccurs="0"/>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="IdentityPackage" type="IdentityPackageType" minOccurs="0"/>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="CanShipInOriginalContainer" type="xsd:boolean" minOccurs="0"/>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="ItemUnitOfMeasureUnit" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="feet"/>
+											<xsd:enumeration value="centimeters"/>
+											<xsd:enumeration value="millimeters"/>
+											<xsd:enumeration value="quarts"/>
+											<xsd:enumeration value="liters"/>
+											<xsd:enumeration value="ounces"/>
+											<xsd:enumeration value="fluid_ounces"/>
+											<xsd:enumeration value="square_centimeters"/>
+											<xsd:enumeration value="square_meters"/>
+											<xsd:enumeration value="cubic_feet"/>
+											<xsd:enumeration value="milligrams"/>
+											<xsd:enumeration value="cubic_meters"/>
+											<xsd:enumeration value="cubic_centimeters"/>
+											<xsd:enumeration value="meters"/>
+											<xsd:enumeration value="pints"/>
+											<xsd:enumeration value="inches"/>
+											<xsd:enumeration value="square_inches"/>
+											<xsd:enumeration value="pounds"/>
+											<xsd:enumeration value="gallons"/>
+											<xsd:enumeration value="cubic_inches"/>
+											<xsd:enumeration value="kilograms"/>
+											<xsd:enumeration value="square_feet"/>
+											<xsd:enumeration value="grams"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="ItemUnitOfMeasureValue" type="PositiveInteger" minOccurs="0" />
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="ItemUnitOfMeasureDimension" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="weight"/>
+											<xsd:enumeration value="volume"/>
+											<xsd:enumeration value="area"/>
+											<xsd:enumeration value="length"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="TaxTreatmentValue" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="csosn_102"/>
+											<xsd:enumeration value="csosn_103"/>
+											<xsd:enumeration value="csosn_300"/>
+											<xsd:enumeration value="csosn_400"/>
+											<xsd:enumeration value="csosn_500"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="TaxClassificationCodeValue" type="xsd:string" minOccurs="0" />
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="TaxLegalProceedingSourceValue" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="sefaz"/>
+											<xsd:enumeration value="justica_federal"/>
+											<xsd:enumeration value="justica_estadual"/>
+											<xsd:enumeration value="secex_rfb"/>
+											<xsd:enumeration value="other"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="TaxLegalProceedingIdentification" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="60"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="InvoiceLegalCitation" minOccurs="0">
+							<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="500"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="ExTipi" minOccurs="0">
+							<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="NcmCode" minOccurs="0" >
+							<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:maxLength value="8"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- applicable only for BR*/ -->
+							<xsd:element name="ContributorSupplyChainRole" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+											<xsd:enumeration value="distributor"/>
+											<xsd:enumeration value="importer"/>
+											<xsd:enumeration value="manufacturer"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+				<xsd:element name="DiscoveryData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Priority" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:positiveInteger">
+										<xsd:minInclusive value="1"/>
+										<xsd:maxInclusive value="10"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BrowseExclusion" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="RecommendationExclusion" type="xsd:boolean" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ProductData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="ClothingAccessories"/>
+							<xsd:element ref="Clothing"/>
+							<xsd:element ref="Miscellaneous"/>
+							<xsd:element ref="CameraPhoto"/>
+							<xsd:element ref="Home"/>
+							<xsd:element ref="Sports"/>
+							<xsd:element ref="SportsMemorabilia"/>
+							<xsd:element ref="EntertainmentCollectibles"/>
+							<xsd:element ref="HomeImprovement"/>
+							<xsd:element ref="Tools"/>
+							<xsd:element ref="FoodAndBeverages"/>
+							<xsd:element ref="Gourmet"/>
+							<xsd:element ref="Jewelry"/>
+							<xsd:element ref="Health"/>
+							<xsd:element ref="CE"/>
+							<xsd:element ref="Computers"/>
+							<xsd:element ref="SoftwareVideoGames"/>
+							<xsd:element ref="Wireless"/>
+							<xsd:element ref="Beauty"/>
+							<xsd:element ref="Office"/>
+							<xsd:element ref="MusicalInstruments"/>
+							<xsd:element ref="AutoAccessory"/>
+							<xsd:element ref="PetSupplies"/>
+							<xsd:element ref="ToysBaby"/>
+							<xsd:element ref="Baby"/>
+							<xsd:element ref="TiresAndWheels"/>
+							<xsd:element ref="Music"/>
+							<xsd:element ref="Video"/>
+							<xsd:element ref="Lighting"/>
+							<xsd:element ref="LargeAppliances"/>
+							<xsd:element ref="FBA"/>
+							<xsd:element ref="Toys"/>
+							<xsd:element ref="GiftCard"/>
+							<xsd:element ref="LabSupplies"/>
+							<xsd:element ref="EducationSupplies"/>
+							<xsd:element ref="RawMaterials"/>
+							<xsd:element ref="PowerTransmission"/>
+							<xsd:element ref="Industrial"/>
+							<xsd:element ref="Shoes"/>
+							<xsd:element ref="Motorcycles"/>
+							<xsd:element ref="MaterialHandling"/>
+							<xsd:element ref="MechanicalFasteners"/>
+							<xsd:element ref="FoodServiceAndJanSan"/>
+							<xsd:element ref="WineAndAlcohol"/>
+							<xsd:element ref="EUCompliance"/>
+							<xsd:element ref="Books"/>
+							<xsd:element ref="AdditionalProductInformation"/>
+							<xsd:element ref="Arts"/>
+							<xsd:element ref="Luggage"/>	
+							<xsd:element ref="Outdoors"/>	
+							<xsd:element ref="Coins"/>
+							<xsd:element ref="Furniture"/>
+							<xsd:element ref="LuxuryBeauty"/>
+							<xsd:element ref="Collectibles"/>
+							<xsd:element ref="ProfessionalHealthCare"/>
+							<xsd:element ref="ThreeDPrinting"/>
+							<xsd:element ref="LightMotor"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ShippedByFreight" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="EnhancedImageURL" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="Amazon-Vendor-Only" minOccurs="0"/>
+				<xsd:element ref="Amazon-Only" minOccurs="0"/>
+				<xsd:element name="RegisteredParameter" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="PrivateLabel"/>
+							<xsd:enumeration value="Specialized"/>
+							<xsd:enumeration value="NonConsumer"/>
+							<xsd:enumeration value="PreConfigured"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>	
+				<xsd:element name="NationalStockNumber" type="StringNotNull" minOccurs="0" maxOccurs="1"/>
+	            <xsd:element name="UnspscCode" type="StringNotNull" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="UVPListPrice" type="CurrencyAmount" minOccurs="0"/>
+				<!--
+				 ##################################################
+				 # US - legal attributes. Applicable only for US
+				 ##################################################
+				-->
+				<xsd:element name="PesticideMarkingType" minOccurs="0" maxOccurs="3">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="epa_registration_number"/>
+							<xsd:enumeration value="epa_establishment_number"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="PesticideMarkingRegistrationStatus" minOccurs="0" maxOccurs="3">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="fifra_registration_required"/>
+							<xsd:enumeration value="fifra_registration_exempt"/>
+							<xsd:enumeration value="fifra_not_considered_pesticide"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="PesticideMarkingCertificationNumber" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+				<!--Consumable Mandatory Attribute in EU5, JP, US*/ -->
+				<xsd:element minOccurs="0" name="MeltingTemperature" type="MeltingTemperatureDimension"/>
+				<!--Optional Attribute in EU5*/ -->
+				<xsd:element name="MinimumOrderQuantity" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LiquidateRemainder" type="xsd:boolean" minOccurs="0"/>
+				<!--Optional Attribute in US, CA, EU5*/ -->
+				<xsd:element name="IsHeatSensitive" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element minOccurs="0" name="ItemForm" type="String"/>
+				<!--Net Content Count Attributes, Optional in US, EU5, JP, IN, AU, CA*/ -->
+				<xsd:element minOccurs="0" name="NetContentCount" type="NetContentCountUnit"/>
+				<xsd:element minOccurs="0" name="NetContentWeight" type="WeightDimension"/>
+				<xsd:element minOccurs="0" name="NetContentVolume" type="VolumeDimension"/>
+				<xsd:element minOccurs="0" name="NetContentLength" type="LengthDimension"/>
+				<xsd:element minOccurs="0" name="NetContentArea" type="AreaDimension"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+     ##################################################
+     # Dimensions types
+     ##################################################
+    -->
+	<xsd:complexType name="Dimensions">
+		<xsd:sequence>
+			<xsd:element name="Length" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Width" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Height" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Weight" type="WeightDimension" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SpatialDimensions">
+		<xsd:sequence>
+			<xsd:element name="Length" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Width" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="Height" type="LengthDimension" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--
+     ##################################################
+     # CaliforniaProposition65ChemicalNames Type
+     ##################################################
+    -->	
+	<xsd:simpleType name="CaliforniaProposition65ChemicalNamesType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="butyl_benzyl_phthalate_bbp_d"/>
+			<xsd:enumeration value="di_2_ethylhexyl_phthalate_dehp"/>
+			<xsd:enumeration value="di_isodecyl_phthalate_didp"/>
+			<xsd:enumeration value="diisononyl_phthalate_dinp"/>
+			<xsd:enumeration value="di_n_butyl_phthalate_dbp"/>
+			<xsd:enumeration value="di_n_hexyl_phthalate_dn_hp"/>
+			<xsd:enumeration value="formaldehyde_gas"/>
+			<xsd:enumeration value="lead"/>
+			<xsd:enumeration value="lead_acetate"/>
+			<xsd:enumeration value="lead_and_lead_compounds"/>
+			<xsd:enumeration value="lead_phosphate"/>
+			<xsd:enumeration value="lead_subacetate"/>
+			<xsd:enumeration value="1_2_chloro_3_4_me_1_nitrosou_methyl_ccnu"/>
+			<xsd:enumeration value="1_2_chloro_3_cycloh_1_nitroso_ccnu_lomus"/>
+			<xsd:enumeration value="1_1_1_2_tetrachloroethane"/>
+			<xsd:enumeration value="1_1_2_2_tetrachloroethane"/>
+			<xsd:enumeration value="1_1_dichlor_2_2_bis_p_chlorop_ethyle_dde"/>
+			<xsd:enumeration value="1_1_dichloroethane"/>
+			<xsd:enumeration value="1_1_dimethylhydrazine_udmh"/>
+			<xsd:enumeration value="1_2_3_trichloropropane"/>
+			<xsd:enumeration value="1_2_dibromo_3_chloropropane_dbcp"/>
+			<xsd:enumeration value="1_2_dichloropropane"/>
+			<xsd:enumeration value="1_2_diethylhydrazine"/>
+			<xsd:enumeration value="1_2_dimethylhydrazine"/>
+			<xsd:enumeration value="1_3_butadiene"/>
+			<xsd:enumeration value="1_3_dichloro_2_propanol_1_3_dcp"/>
+			<xsd:enumeration value="1_3_dichloropropene"/>
+			<xsd:enumeration value="1_3_dinitropyrene"/>
+			<xsd:enumeration value="1_3_propane_sultone"/>
+			<xsd:enumeration value="1_4_butanediol_dimethanesulfona_busulfan"/>
+			<xsd:enumeration value="1_4_dichloro_2_butene"/>
+			<xsd:enumeration value="1_4_dioxane"/>
+			<xsd:enumeration value="1_6_dinitropyrene"/>
+			<xsd:enumeration value="1_8_dinitropyrene"/>
+			<xsd:enumeration value="1_5_nitrofurfurylidene_amino_2_imidazoli"/>
+			<xsd:enumeration value="1_amino_2_4_dibromoanthraquinone"/>
+			<xsd:enumeration value="1_amino_2_methylanthraquinone"/>
+			<xsd:enumeration value="1_bromopropane_1_bp"/>
+			<xsd:enumeration value="1_chloro_4_nitrobenzene"/>
+			<xsd:enumeration value="1_hydroxyanthraquinone"/>
+			<xsd:enumeration value="1_naphthylamine"/>
+			<xsd:enumeration value="1_nitropyrene"/>
+			<xsd:enumeration value="2_2_formylhyd_4_5_nitro_2_furyl_thiazole"/>
+			<xsd:enumeration value="2_2_bis_bromomethyl_1_3_propanediol"/>
+			<xsd:enumeration value="2_3_7_8_tetrachlorodibenzo_p_dioxin_tcdd"/>
+			<xsd:enumeration value="2_3_dibromo_1_propanol"/>
+			<xsd:enumeration value="2_4_5_trimethy_and_its_strong_acid_salts"/>
+			<xsd:enumeration value="2_4_6_trichlorophenol"/>
+			<xsd:enumeration value="2_4_6_trinitrotoluene_tnt"/>
+			<xsd:enumeration value="2_4_d_butyric_acid"/>
+			<xsd:enumeration value="2_4_diamino_6_chloro_s_triazine_dact"/>
+			<xsd:enumeration value="2_4_diaminoanisole"/>
+			<xsd:enumeration value="2_4_diaminoanisole_sulfate"/>
+			<xsd:enumeration value="2_4_diaminotoluene"/>
+			<xsd:enumeration value="2_4_dinitrotoluene"/>
+			<xsd:enumeration value="2_4_hexa_89_tra_tra_isome_11_cis_tra_iso"/>
+			<xsd:enumeration value="2_5_hexanedione"/>
+			<xsd:enumeration value="2_6_dimethyl_n_nitrosomorpholine_dmnm"/>
+			<xsd:enumeration value="2_6_dinitrotoluene"/>
+			<xsd:enumeration value="2_6_xylidine_2_6_dimethylaniline"/>
+			<xsd:enumeration value="2_acetylaminofluorene"/>
+			<xsd:enumeration value="2_amino_5_5_nitro_2_furyl_1_3_4_thiadiaz"/>
+			<xsd:enumeration value="2_aminoanthraquinone"/>
+			<xsd:enumeration value="2_aminofluorene"/>
+			<xsd:enumeration value="2_bromopropane_2_bp"/>
+			<xsd:enumeration value="2_chloropropionic_acid"/>
+			<xsd:enumeration value="2_mercaptobenzothiazole"/>
+			<xsd:enumeration value="2_methyl_1_nitroanth_of_uncertain_purity"/>
+			<xsd:enumeration value="2_methylaziridine_propyleneimine"/>
+			<xsd:enumeration value="2_methylimidazole"/>
+			<xsd:enumeration value="2_naphthylamine"/>
+			<xsd:enumeration value="2_nitrofluorene"/>
+			<xsd:enumeration value="2_nitropropane"/>
+			<xsd:enumeration value="3_n_nitrosomethylamino_propionitrile"/>
+			<xsd:enumeration value="3_3_4_4_tetrachloroazobenzene"/>
+			<xsd:enumeration value="3_3_dichloro_4_4_diamino_diphenyl_ether"/>
+			<xsd:enumeration value="3_3_dichlorobenzidine"/>
+			<xsd:enumeration value="3_3_dichlorobenzidine_dihydrochloride"/>
+			<xsd:enumeration value="3_3_dimethoxybenzidine_o_dianisidine"/>
+			<xsd:enumeration value="3_3_dimethoxybenzidine_dihydrochloride"/>
+			<xsd:enumeration value="3_3_dimet_base_dyes_metabo_to_3_3_dimeth"/>
+			<xsd:enumeration value="3_3_dimethylbenzidine_ortho_tolidine"/>
+			<xsd:enumeration value="3_3_dimethylbenzidine_dihydrochloride"/>
+			<xsd:enumeration value="3_3_dimeth_based_dyes_metabo_to_3_3_dime"/>
+			<xsd:enumeration value="3_7_dinitrofluoranthene"/>
+			<xsd:enumeration value="3_9_dinitrofluoranthene"/>
+			<xsd:enumeration value="3_amino_9_ethylcarbazole_hydrochloride"/>
+			<xsd:enumeration value="3_chloro_2_methylpropene"/>
+			<xsd:enumeration value="3_methylcholanthrene"/>
+			<xsd:enumeration value="3_monochloropropane_1_2_diol_3_mcpd"/>
+			<xsd:enumeration value="4_n_nitrosomethyl_1_3_pyridyl_1_butanone"/>
+			<xsd:enumeration value="4_4_diaminodiphen_ether_4_4_oxydianiline"/>
+			<xsd:enumeration value="4_4_methylene_bis_2_chloroaniline"/>
+			<xsd:enumeration value="4_4_methylene_bis_2_methylaniline"/>
+			<xsd:enumeration value="4_4_methylene_bis_n_n_dimethyl_benzenami"/>
+			<xsd:enumeration value="4_4_methylenedianiline"/>
+			<xsd:enumeration value="4_4_methylenedianiline_dihydrochloride"/>
+			<xsd:enumeration value="4_4_thiodianiline"/>
+			<xsd:enumeration value="4_amino_2_nitrophenol"/>
+			<xsd:enumeration value="4_aminobiphenyl_4_aminodiphenyl"/>
+			<xsd:enumeration value="4_chloro_o_phenylenediamine"/>
+			<xsd:enumeration value="4_dimethylaminoazobenzene"/>
+			<xsd:enumeration value="4_methylimidazole"/>
+			<xsd:enumeration value="4_nitrobiphenyl"/>
+			<xsd:enumeration value="4_nitropyrene"/>
+			<xsd:enumeration value="4_vinyl_1_cycloh_diepoxide_vinyl_cyclohe"/>
+			<xsd:enumeration value="4_vinylcyclohexene"/>
+			<xsd:enumeration value="5_morpho_3_5_nitrofurf_idene_amino_2_oxa"/>
+			<xsd:enumeration value="5_chloro_o_toluidi_its_strong_acid_salts"/>
+			<xsd:enumeration value="5_methoxypsor_with_ultraviolet_a_therapy"/>
+			<xsd:enumeration value="5_methylchrysene"/>
+			<xsd:enumeration value="5_nitroacenaphthene"/>
+			<xsd:enumeration value="6_nitrochrysene"/>
+			<xsd:enumeration value="7_12_dimethylbenz_a_anthracene"/>
+			<xsd:enumeration value="7_h_dibenzo_c_g_carbazole"/>
+			<xsd:enumeration value="8_methoxypsor_with_ultraviolet_a_therapy"/>
+			<xsd:enumeration value="a_alpha_c_2_amino_9_h_pyrido_2_3_b_indol"/>
+			<xsd:enumeration value="abiraterone_acetate"/>
+			<xsd:enumeration value="acetaldehyde"/>
+			<xsd:enumeration value="acetamide"/>
+			<xsd:enumeration value="acetazolamide"/>
+			<xsd:enumeration value="acetochlor"/>
+			<xsd:enumeration value="acetohydroxamic_acid"/>
+			<xsd:enumeration value="acifluorfen_sodium"/>
+			<xsd:enumeration value="acrylamide"/>
+			<xsd:enumeration value="acrylonitrile"/>
+			<xsd:enumeration value="actinomycin_d"/>
+			<xsd:enumeration value="af_2_2_2_furyl_3_5_nitro_2_furyl_acrylam"/>
+			<xsd:enumeration value="aflatoxins"/>
+			<xsd:enumeration value="alachlor"/>
+			<xsd:enumeration value="alc_bev_when_associated_w_alcohol_abuse"/>
+			<xsd:enumeration value="aldrin"/>
+			<xsd:enumeration value="all_trans_retinoic_acid"/>
+			<xsd:enumeration value="aloe_vera_non_decolor_whole_leaf_extract"/>
+			<xsd:enumeration value="alprazolam"/>
+			<xsd:enumeration value="altretamine"/>
+			<xsd:enumeration value="amantadine_hydrochloride"/>
+			<xsd:enumeration value="amikacin_sulfate"/>
+			<xsd:enumeration value="aminoglutethimide"/>
+			<xsd:enumeration value="aminoglycosides"/>
+			<xsd:enumeration value="aminopterin"/>
+			<xsd:enumeration value="amiodarone_hydrochloride"/>
+			<xsd:enumeration value="amitraz"/>
+			<xsd:enumeration value="amitrole"/>
+			<xsd:enumeration value="amoxapine"/>
+			<xsd:enumeration value="amsacrine"/>
+			<xsd:enumeration value="anabolic_steroids"/>
+			<xsd:enumeration value="analgesic_mixtures_containing_phenacetin"/>
+			<xsd:enumeration value="androstenedione"/>
+			<xsd:enumeration value="angiote_converting_enzyme_ace_inhibitors"/>
+			<xsd:enumeration value="aniline"/>
+			<xsd:enumeration value="aniline_hydrochloride"/>
+			<xsd:enumeration value="anisindione"/>
+			<xsd:enumeration value="anthraquinone"/>
+			<xsd:enumeration value="antimony_oxide_antimony_trioxide"/>
+			<xsd:enumeration value="aramite"/>
+			<xsd:enumeration value="areca_nut"/>
+			<xsd:enumeration value="aristolochic_acids"/>
+			<xsd:enumeration value="arsenic_inorganic_arsenic_compounds"/>
+			<xsd:enumeration value="arsenic_inorganic_oxides"/>
+			<xsd:enumeration value="asbestos"/>
+			<xsd:enumeration value="aspirin"/>
+			<xsd:enumeration value="atenolol"/>
+			<xsd:enumeration value="atrazine"/>
+			<xsd:enumeration value="auramine"/>
+			<xsd:enumeration value="auranofin"/>
+			<xsd:enumeration value="avermectin_b_1_abamectin"/>
+			<xsd:enumeration value="azacitidine"/>
+			<xsd:enumeration value="azaserine"/>
+			<xsd:enumeration value="azathioprine"/>
+			<xsd:enumeration value="azobenzene"/>
+			<xsd:enumeration value="barbiturates"/>
+			<xsd:enumeration value="beclomethasone_dipropionate"/>
+			<xsd:enumeration value="benomyl"/>
+			<xsd:enumeration value="benthiavalicarb_isopropyl"/>
+			<xsd:enumeration value="benz_a_anthracene"/>
+			<xsd:enumeration value="benzene"/>
+			<xsd:enumeration value="benzidine_and_its_salts"/>
+			<xsd:enumeration value="benzidine_based_dyes"/>
+			<xsd:enumeration value="benzo_a_pyrene"/>
+			<xsd:enumeration value="benzo_b_fluoranthene"/>
+			<xsd:enumeration value="benzo_j_fluoranthene"/>
+			<xsd:enumeration value="benzo_k_fluoranthene"/>
+			<xsd:enumeration value="benzodiazepines"/>
+			<xsd:enumeration value="benzofuran"/>
+			<xsd:enumeration value="benzophenone"/>
+			<xsd:enumeration value="benzotrichloride"/>
+			<xsd:enumeration value="benzphetamine_hydrochloride"/>
+			<xsd:enumeration value="benzyl_chloride"/>
+			<xsd:enumeration value="benzyl_violet_4_b"/>
+			<xsd:enumeration value="beryllium"/>
+			<xsd:enumeration value="beryllium_and_beryllium_compounds"/>
+			<xsd:enumeration value="beryllium_oxide"/>
+			<xsd:enumeration value="beryllium_sulfate"/>
+			<xsd:enumeration value="beta_butyrolactone"/>
+			<xsd:enumeration value="beta_myrcene"/>
+			<xsd:enumeration value="beta_propiolactone"/>
+			<xsd:enumeration value="betel_quid_with_tobacco"/>
+			<xsd:enumeration value="betel_quid_without_tobacco"/>
+			<xsd:enumeration value="bis_2_chloro_1_methyleth_ether_technical"/>
+			<xsd:enumeration value="bis_2_chloroethyl_ether"/>
+			<xsd:enumeration value="bis_chloromethyl_ether"/>
+			<xsd:enumeration value="bischloroethyl_nitrosourea_bcnu_carmusti"/>
+			<xsd:enumeration value="bisphenol_a_bpa"/>
+			<xsd:enumeration value="bitumens_extracts_steam_refined_air_refi"/>
+			<xsd:enumeration value="bracken_fern"/>
+			<xsd:enumeration value="bromacil_lithium_salt"/>
+			<xsd:enumeration value="bromate"/>
+			<xsd:enumeration value="bromochloroacetic_acid"/>
+			<xsd:enumeration value="bromodichloroacetic_acid"/>
+			<xsd:enumeration value="bromodichloromethane"/>
+			<xsd:enumeration value="bromoethane"/>
+			<xsd:enumeration value="bromoform"/>
+			<xsd:enumeration value="bromoxynil"/>
+			<xsd:enumeration value="bromoxynil_octanoate"/>
+			<xsd:enumeration value="butabarbital_sodium"/>
+			<xsd:enumeration value="butylated_hydroxyanisole"/>
+			<xsd:enumeration value="c_i_acid_red_114"/>
+			<xsd:enumeration value="c_i_basic_red_9_monohydrochloride"/>
+			<xsd:enumeration value="c_i_direct_blue_15"/>
+			<xsd:enumeration value="c_i_direct_blue_218"/>
+			<xsd:enumeration value="c_i_disperse_yellow_3"/>
+			<xsd:enumeration value="c_i_solvent_yellow_14"/>
+			<xsd:enumeration value="cacodylic_acid"/>
+			<xsd:enumeration value="cadmium"/>
+			<xsd:enumeration value="cadmium_and_cadmium_compounds"/>
+			<xsd:enumeration value="caffeic_acid"/>
+			<xsd:enumeration value="captafol"/>
+			<xsd:enumeration value="captan"/>
+			<xsd:enumeration value="carbamazepine"/>
+			<xsd:enumeration value="carbaryl"/>
+			<xsd:enumeration value="carbazole"/>
+			<xsd:enumeration value="carb_bla_airborne_unbou_part_of_res_size"/>
+			<xsd:enumeration value="carbon_disulfide"/>
+			<xsd:enumeration value="carbon_monoxide"/>
+			<xsd:enumeration value="carbon_tetrachloride"/>
+			<xsd:enumeration value="carbon_black_extracts"/>
+			<xsd:enumeration value="carboplatin"/>
+			<xsd:enumeration value="catechol"/>
+			<xsd:enumeration value="ceramic_fiber_airbor_part_respirable_siz"/>
+			<xsd:enumeration value="certain_combined_chemotherapy_for_lympho"/>
+			<xsd:enumeration value="chenodiol"/>
+			<xsd:enumeration value="chloral"/>
+			<xsd:enumeration value="chloral_hydrate"/>
+			<xsd:enumeration value="chlorambucil"/>
+			<xsd:enumeration value="chloramphenicol_sodium_succinate"/>
+			<xsd:enumeration value="chlorcyclizine_hydrochloride"/>
+			<xsd:enumeration value="chlordane"/>
+			<xsd:enumeration value="chlordecone_kepone"/>
+			<xsd:enumeration value="chlordiazepoxide"/>
+			<xsd:enumeration value="chlordiazepoxide_hydrochloride"/>
+			<xsd:enumeration value="chlordimeform"/>
+			<xsd:enumeration value="chlorendic_acid"/>
+			<xsd:enumeration value="chl_pa_av_ch_len_c12_ap_60_pcnt_chlo_wgt"/>
+			<xsd:enumeration value="chloroethane_ethyl_chloride"/>
+			<xsd:enumeration value="chloroform"/>
+			<xsd:enumeration value="chloromethyl_methyl_ether_technical_grad"/>
+			<xsd:enumeration value="chloroprene"/>
+			<xsd:enumeration value="chlorothalonil"/>
+			<xsd:enumeration value="chlorotrianisene"/>
+			<xsd:enumeration value="chlorozotocin"/>
+			<xsd:enumeration value="chlorpyrifos"/>
+			<xsd:enumeration value="chromium_hexavalent_compounds"/>
+			<xsd:enumeration value="chrysene"/>
+			<xsd:enumeration value="ciclosporin_cyclosporin_a_cyclosporine"/>
+			<xsd:enumeration value="cidofovir"/>
+			<xsd:enumeration value="cinnamyl_anthranilate"/>
+			<xsd:enumeration value="cisplatin"/>
+			<xsd:enumeration value="citrus_red_no_2"/>
+			<xsd:enumeration value="cladribine"/>
+			<xsd:enumeration value="clarithromycin"/>
+			<xsd:enumeration value="clobetasol_propionate"/>
+			<xsd:enumeration value="clofibrate"/>
+			<xsd:enumeration value="clomiphene_citrate"/>
+			<xsd:enumeration value="clorazepate_dipotassium"/>
+			<xsd:enumeration value="cmnp_pyrazachlor"/>
+			<xsd:enumeration value="cobalt_ii_oxide"/>
+			<xsd:enumeration value="cobalt_metal_powder"/>
+			<xsd:enumeration value="cobalt_sulfate"/>
+			<xsd:enumeration value="cobalt_sulfate_heptahydrate"/>
+			<xsd:enumeration value="cocaine"/>
+			<xsd:enumeration value="coconut_oil_diet_condensate_cocamid_diet"/>
+			<xsd:enumeration value="codeine_phosphate"/>
+			<xsd:enumeration value="coke_oven_emissions"/>
+			<xsd:enumeration value="colchicine"/>
+			<xsd:enumeration value="conjugated_estrogens"/>
+			<xsd:enumeration value="creosotes"/>
+			<xsd:enumeration value="cumene"/>
+			<xsd:enumeration value="cupferron"/>
+			<xsd:enumeration value="cyanazine"/>
+			<xsd:enumeration value="cyan_salt_tha_rea_dis_in_solut_exp_as_cy"/>
+			<xsd:enumeration value="cycasin"/>
+			<xsd:enumeration value="cycloate"/>
+			<xsd:enumeration value="cycloheximide"/>
+			<xsd:enumeration value="cyclopenta_cd_pyrene"/>
+			<xsd:enumeration value="cyclophosphamide_anhydrous"/>
+			<xsd:enumeration value="cyclophosphamide_hydrated"/>
+			<xsd:enumeration value="cyhexatin"/>
+			<xsd:enumeration value="cytarabine"/>
+			<xsd:enumeration value="cytembena"/>
+			<xsd:enumeration value="d_c_orange_no_17"/>
+			<xsd:enumeration value="d_c_red_no_19"/>
+			<xsd:enumeration value="d_c_red_no_8"/>
+			<xsd:enumeration value="d_c_red_no_9"/>
+			<xsd:enumeration value="dacarbazine"/>
+			<xsd:enumeration value="daminozide"/>
+			<xsd:enumeration value="danazol"/>
+			<xsd:enumeration value="dantron_chrysazin_1_8_dihydroxyanthraqui"/>
+			<xsd:enumeration value="daunomycin"/>
+			<xsd:enumeration value="daunorubicin_hydrochloride"/>
+			<xsd:enumeration value="ddd_dichlorodiphenyl_dichloroethane"/>
+			<xsd:enumeration value="dde_dichlorodiphenyl_dichloroethylene"/>
+			<xsd:enumeration value="ddt_dichlorodiphenyl_trichloroethane"/>
+			<xsd:enumeration value="ddvp_dichlorvos"/>
+			<xsd:enumeration value="demeclocyclin_hydrochloride_internal_use"/>
+			<xsd:enumeration value="des_ethyl_atrazine_dea"/>
+			<xsd:enumeration value="des_isopropyl_atrazine_dia"/>
+			<xsd:enumeration value="diazepam"/>
+			<xsd:enumeration value="diazoaminobenzene"/>
+			<xsd:enumeration value="diazoxide"/>
+			<xsd:enumeration value="dibenz_a_c_anthracene"/>
+			<xsd:enumeration value="dibenz_a_h_acridine"/>
+			<xsd:enumeration value="dibenz_a_h_anthracene"/>
+			<xsd:enumeration value="dibenz_a_j_acridine"/>
+			<xsd:enumeration value="dibenz_a_j_anthracene"/>
+			<xsd:enumeration value="dibenzanthracenes"/>
+			<xsd:enumeration value="dibenzo_a_e_pyrene"/>
+			<xsd:enumeration value="dibenzo_a_h_pyrene"/>
+			<xsd:enumeration value="dibenzo_a_i_pyrene"/>
+			<xsd:enumeration value="dibenzo_a_l_pyrene"/>
+			<xsd:enumeration value="dibromoacetic_acid"/>
+			<xsd:enumeration value="dibromoacetonitrile"/>
+			<xsd:enumeration value="dichloroacetic_acid"/>
+			<xsd:enumeration value="dichloromethane_methylene_chloride"/>
+			<xsd:enumeration value="dichlorophene"/>
+			<xsd:enumeration value="dichlorphenamide"/>
+			<xsd:enumeration value="diclofop_methyl"/>
+			<xsd:enumeration value="dicumarol"/>
+			<xsd:enumeration value="dieldrin"/>
+			<xsd:enumeration value="diepoxybutane"/>
+			<xsd:enumeration value="diesel_engine_exhaust"/>
+			<xsd:enumeration value="diethanolamine"/>
+			<xsd:enumeration value="diethyl_sulfate"/>
+			<xsd:enumeration value="diethylstilbestrol_des"/>
+			<xsd:enumeration value="diflunisal"/>
+			<xsd:enumeration value="diglycidyl_resorcinol_ether_dgre"/>
+			<xsd:enumeration value="dihydroergotamine_mesylate"/>
+			<xsd:enumeration value="dihydrosafrole"/>
+			<xsd:enumeration value="diisopropyl_sulfate"/>
+			<xsd:enumeration value="diltiazem_hydrochloride"/>
+			<xsd:enumeration value="dimethyl_sulfate"/>
+			<xsd:enumeration value="dimethylcarbamoyl_chloride"/>
+			<xsd:enumeration value="dimethylvinylchloride"/>
+			<xsd:enumeration value="dinitrotoluene_technical_grade"/>
+			<xsd:enumeration value="dinitrotoluene_mixture_2_4_2_6"/>
+			<xsd:enumeration value="dinocap"/>
+			<xsd:enumeration value="dinoseb"/>
+			<xsd:enumeration value="di_n_propyl_isocinchom_mgk_repellent_326"/>
+			<xsd:enumeration value="diphenylhydantoin_phenytoin"/>
+			<xsd:enumeration value="diphenylhydantoin_phenytoin_sodium_salt"/>
+			<xsd:enumeration value="direct_black_38_technical_grade"/>
+			<xsd:enumeration value="direct_blue_6_technical_grade"/>
+			<xsd:enumeration value="direct_brown_95_technical_grade"/>
+			<xsd:enumeration value="disodium_cyanodithioimidocarbonate"/>
+			<xsd:enumeration value="disperse_blue_1"/>
+			<xsd:enumeration value="diuron"/>
+			<xsd:enumeration value="doxorubicin_hydrochloride_adriamycin"/>
+			<xsd:enumeration value="doxycycline_internal_use"/>
+			<xsd:enumeration value="doxycycline_calcium_internal_use"/>
+			<xsd:enumeration value="doxycycline_hyclate_internal_use"/>
+			<xsd:enumeration value="doxycycline_monohydrate_internal_use"/>
+			<xsd:enumeration value="emissions_from_combustion_of_coal"/>
+			<xsd:enumeration value="emissi_fr_hi_temp_unrefined_rapeseed_oil"/>
+			<xsd:enumeration value="endrin"/>
+			<xsd:enumeration value="environmental_tobacco_smoke_ets"/>
+			<xsd:enumeration value="epichlorohydrin"/>
+			<xsd:enumeration value="epoxiconazole"/>
+			<xsd:enumeration value="ergotamine_tartrate"/>
+			<xsd:enumeration value="erionite"/>
+			<xsd:enumeration value="estradiol_17_b"/>
+			<xsd:enumeration value="estragole"/>
+			<xsd:enumeration value="estrog_progest_comb_used_as_menop_therap"/>
+			<xsd:enumeration value="estrogens_steroidal"/>
+			<xsd:enumeration value="estrone"/>
+			<xsd:enumeration value="estropipate"/>
+			<xsd:enumeration value="ethanol_in_alcoholic_beverages"/>
+			<xsd:enumeration value="ethinylestradiol"/>
+			<xsd:enumeration value="ethionamide"/>
+			<xsd:enumeration value="ethoprop"/>
+			<xsd:enumeration value="ethyl_acrylate"/>
+			<xsd:enumeration value="ethyl_alcohol_in_alcoholic_beverages"/>
+			<xsd:enumeration value="ethyl_dipropylthiocarbamate"/>
+			<xsd:enumeration value="ethyl_methanesulfonate"/>
+			<xsd:enumeration value="ethyl_4_4_dichlorobenzilate"/>
+			<xsd:enumeration value="ethylbenzene"/>
+			<xsd:enumeration value="ethylene_dibromide"/>
+			<xsd:enumeration value="ethylene_dichloride_1_2_dichloroethane"/>
+			<xsd:enumeration value="ethylene_glycol_ingested"/>
+			<xsd:enumeration value="ethylene_glycol_monoethyl_ether"/>
+			<xsd:enumeration value="ethylene_glycol_monoethyl_ether_acetate"/>
+			<xsd:enumeration value="ethylene_glycol_monomethyl_ether"/>
+			<xsd:enumeration value="ethylene_glycol_monomethyl_ether_acetate"/>
+			<xsd:enumeration value="ethylene_oxide"/>
+			<xsd:enumeration value="ethylene_thiourea"/>
+			<xsd:enumeration value="ethyleneimine_aziridine"/>
+			<xsd:enumeration value="etodolac"/>
+			<xsd:enumeration value="etoposide"/>
+			<xsd:enumeration value="etoposide_in_comb_with_cispla_and_bleomy"/>
+			<xsd:enumeration value="etretinate"/>
+			<xsd:enumeration value="fenoxaprop_ethyl"/>
+			<xsd:enumeration value="fenoxycarb"/>
+			<xsd:enumeration value="filgrastim"/>
+			<xsd:enumeration value="fluazifop_butyl"/>
+			<xsd:enumeration value="flunisolide"/>
+			<xsd:enumeration value="fluorouracil"/>
+			<xsd:enumeration value="fluoxymesterone"/>
+			<xsd:enumeration value="flurazepam_hydrochloride"/>
+			<xsd:enumeration value="flurbiprofen"/>
+			<xsd:enumeration value="flutamide"/>
+			<xsd:enumeration value="fluticasone_propionate"/>
+			<xsd:enumeration value="fluvalinate"/>
+			<xsd:enumeration value="folpet"/>
+			<xsd:enumeration value="fumonisin_b_1"/>
+			<xsd:enumeration value="furan"/>
+			<xsd:enumeration value="furazolidone"/>
+			<xsd:enumeration value="furfuryl_alcohol"/>
+			<xsd:enumeration value="furmecyclox"/>
+			<xsd:enumeration value="fusarin_c"/>
+			<xsd:enumeration value="gallium_arsenide"/>
+			<xsd:enumeration value="ganciclovir"/>
+			<xsd:enumeration value="ganciclovir_sodium"/>
+			<xsd:enumeration value="gaso_engine_exhaust_condensates_extracts"/>
+			<xsd:enumeration value="gemfibrozil"/>
+			<xsd:enumeration value="glass_wool_fibers_inhalable_and_biopersi"/>
+			<xsd:enumeration value="glu_p_1_2_amino_6_meth_1_2_a_3_2_d_imida"/>
+			<xsd:enumeration value="glu_p_2_2_aminodip_1_2_a_3_2_d_imidazole"/>
+			<xsd:enumeration value="glycidaldehyde"/>
+			<xsd:enumeration value="glycidol"/>
+			<xsd:enumeration value="glyphosate"/>
+			<xsd:enumeration value="goldenseal_root_powder"/>
+			<xsd:enumeration value="goserelin_acetate"/>
+			<xsd:enumeration value="griseofulvin"/>
+			<xsd:enumeration value="gyromitrin_acetaldehyde_methylformylhydr"/>
+			<xsd:enumeration value="halazepam"/>
+			<xsd:enumeration value="halobetasol_propionate"/>
+			<xsd:enumeration value="haloperidol"/>
+			<xsd:enumeration value="halothane"/>
+			<xsd:enumeration value="hc_blue_1"/>
+			<xsd:enumeration value="heptachlor"/>
+			<xsd:enumeration value="heptachlor_epoxide"/>
+			<xsd:enumeration value="herb_remed_cont_plant_spec_genus_aristol"/>
+			<xsd:enumeration value="hexachlorobenzene"/>
+			<xsd:enumeration value="hexachlorobutadiene"/>
+			<xsd:enumeration value="hexachlorocyclohexane_alpha_isomer"/>
+			<xsd:enumeration value="hexachlorocyclohexane_beta_isomer"/>
+			<xsd:enumeration value="hexachlorocyclohexane_gamma_isomer"/>
+			<xsd:enumeration value="hexachlorocyclohexane_technical_grade"/>
+			<xsd:enumeration value="hexachlorodibenzodioxin"/>
+			<xsd:enumeration value="hexachloroethane"/>
+			<xsd:enumeration value="hexafluoroacetone"/>
+			<xsd:enumeration value="hexamethylphosphoramide"/>
+			<xsd:enumeration value="histrelin_acetate"/>
+			<xsd:enumeration value="hydramethylnon"/>
+			<xsd:enumeration value="hydrazine"/>
+			<xsd:enumeration value="hydrazine_sulfate"/>
+			<xsd:enumeration value="hydrazobenzene_1_2_diphenylhydrazine"/>
+			<xsd:enumeration value="hydrogen_cyanide"/>
+			<xsd:enumeration value="hydrogen_cyanide_hcn_and_cyanide_salts"/>
+			<xsd:enumeration value="hydroxyurea"/>
+			<xsd:enumeration value="idarubicin_hydrochloride"/>
+			<xsd:enumeration value="ifosfamide"/>
+			<xsd:enumeration value="imazalil"/>
+			<xsd:enumeration value="indeno_1_2_3_cd_pyrene"/>
+			<xsd:enumeration value="indium_phosphide"/>
+			<xsd:enumeration value="iodine_131"/>
+			<xsd:enumeration value="iprodione"/>
+			<xsd:enumeration value="iprovalicarb"/>
+			<xsd:enumeration value="iq_2_amino_3_methylimida_4_5_f_quinoline"/>
+			<xsd:enumeration value="iron_dextran_complex"/>
+			<xsd:enumeration value="isobutyl_nitrite"/>
+			<xsd:enumeration value="isoprene"/>
+			<xsd:enumeration value="isopyrazam"/>
+			<xsd:enumeration value="isotretinoin"/>
+			<xsd:enumeration value="isoxaflutole"/>
+			<xsd:enumeration value="kresoxim_methyl"/>
+			<xsd:enumeration value="lactofen"/>
+			<xsd:enumeration value="lasiocarpine"/>
+			<xsd:enumeration value="leather_dust"/>
+			<xsd:enumeration value="leuprolide_acetate"/>
+			<xsd:enumeration value="levodopa"/>
+			<xsd:enumeration value="levonorgestrel_implants"/>
+			<xsd:enumeration value="lindane_and_other_hexachlorocycl_isomers"/>
+			<xsd:enumeration value="linuron"/>
+			<xsd:enumeration value="lithium_carbonate"/>
+			<xsd:enumeration value="lithium_citrate"/>
+			<xsd:enumeration value="lorazepam"/>
+			<xsd:enumeration value="lovastatin"/>
+			<xsd:enumeration value="lynestrenol"/>
+			<xsd:enumeration value="malathion"/>
+			<xsd:enumeration value="malonaldehyde_sodium_salt"/>
+			<xsd:enumeration value="mancozeb"/>
+			<xsd:enumeration value="maneb"/>
+			<xsd:enumeration value="marijuana_smoke"/>
+			<xsd:enumeration value="m_dinitrobenzene"/>
+			<xsd:enumeration value="me_a_alph_c_2_am_3_met_9_h_pyr_2_3_b_ind"/>
+			<xsd:enumeration value="mebendazole"/>
+			<xsd:enumeration value="medroxyprogesterone_acetate"/>
+			<xsd:enumeration value="megestrol_acetate"/>
+			<xsd:enumeration value="me_iq_2_amino_3_4_dimeth_4_5_f_quinoline"/>
+			<xsd:enumeration value="me_i_qx_2_amino_3_8_dimethyl_4_5_f_quino"/>
+			<xsd:enumeration value="melphalan"/>
+			<xsd:enumeration value="menotropins"/>
+			<xsd:enumeration value="mepanipyrim"/>
+			<xsd:enumeration value="meprobamate"/>
+			<xsd:enumeration value="mercaptopurine"/>
+			<xsd:enumeration value="mercury_and_mercury_compounds"/>
+			<xsd:enumeration value="merphalan"/>
+			<xsd:enumeration value="mestranol"/>
+			<xsd:enumeration value="metam_potassium"/>
+			<xsd:enumeration value="methacycline_hydrochloride"/>
+			<xsd:enumeration value="metham_sodium"/>
+			<xsd:enumeration value="methanol"/>
+			<xsd:enumeration value="methazole"/>
+			<xsd:enumeration value="methimazole"/>
+			<xsd:enumeration value="methotrexate"/>
+			<xsd:enumeration value="methotrexate_sodium"/>
+			<xsd:enumeration value="methyl_bromide_as_a_structural_fumigant"/>
+			<xsd:enumeration value="methyl_carbamate"/>
+			<xsd:enumeration value="methyl_chloride"/>
+			<xsd:enumeration value="methyl_iodide"/>
+			<xsd:enumeration value="methyl_isobutyl_ketone"/>
+			<xsd:enumeration value="methyl_isobutyl_ketone_mibk"/>
+			<xsd:enumeration value="methyl_isocyanate_mic"/>
+			<xsd:enumeration value="methyl_mercury"/>
+			<xsd:enumeration value="methyl_methanesulfonate"/>
+			<xsd:enumeration value="methylazoxymethanol"/>
+			<xsd:enumeration value="methylazoxymethanol_acetate"/>
+			<xsd:enumeration value="methyleugenol"/>
+			<xsd:enumeration value="methylhydrazine"/>
+			<xsd:enumeration value="methylhydrazine_and_its_salts"/>
+			<xsd:enumeration value="methylhydrazine_sulfate"/>
+			<xsd:enumeration value="methylmercury_compounds"/>
+			<xsd:enumeration value="methyl_n_butyl_ketone"/>
+			<xsd:enumeration value="methyltestosterone"/>
+			<xsd:enumeration value="methylthiouracil"/>
+			<xsd:enumeration value="metiram"/>
+			<xsd:enumeration value="metronidazole"/>
+			<xsd:enumeration value="michlers_ketone"/>
+			<xsd:enumeration value="midazolam_hydrochloride"/>
+			<xsd:enumeration value="minocycline_hydrochloride_internal_use"/>
+			<xsd:enumeration value="mirex"/>
+			<xsd:enumeration value="misoprostol"/>
+			<xsd:enumeration value="mitomycin_c"/>
+			<xsd:enumeration value="mitoxantrone_hydrochloride"/>
+			<xsd:enumeration value="molinate"/>
+			<xsd:enumeration value="mon_13900_furilazole"/>
+			<xsd:enumeration value="mon_4660_dichl_1_oxa_4_azaspi_4_5_decane"/>
+			<xsd:enumeration value="monocrotaline"/>
+			<xsd:enumeration value="mop_vincr_pred_nitrogen_mustard_proc_mix"/>
+			<xsd:enumeration value="mustard_gas"/>
+			<xsd:enumeration value="mx_3_chloro_4_dich_5_hydr_2_5_h_furanone"/>
+			<xsd:enumeration value="myclobutanil"/>
+			<xsd:enumeration value="n_n_bis_2_chloroethyl_2_naphthyla_chlorn"/>
+			<xsd:enumeration value="n_n_diacetylbenzidine"/>
+			<xsd:enumeration value="n_n_dimethylacetamide"/>
+			<xsd:enumeration value="n_n_dimethylformamide"/>
+			<xsd:enumeration value="n_n_dimethyl_p_toluidine"/>
+			<xsd:enumeration value="n_4_5_nitro_2_furyl_2_thiazolyl_acetamid"/>
+			<xsd:enumeration value="nabam"/>
+			<xsd:enumeration value="nafarelin_acetate"/>
+			<xsd:enumeration value="nafenopin"/>
+			<xsd:enumeration value="nalidixic_acid"/>
+			<xsd:enumeration value="naphthalene"/>
+			<xsd:enumeration value="n_carboxymethyl_n_nitrosourea"/>
+			<xsd:enumeration value="neomycin_sulfate_internal_use"/>
+			<xsd:enumeration value="netilmicin_sulfate"/>
+			<xsd:enumeration value="n_hexane"/>
+			<xsd:enumeration value="nickel_metallic"/>
+			<xsd:enumeration value="nickel_acetate"/>
+			<xsd:enumeration value="nickel_carbonate"/>
+			<xsd:enumeration value="nickel_carbonyl"/>
+			<xsd:enumeration value="nickel_compounds"/>
+			<xsd:enumeration value="nickel_hydroxide"/>
+			<xsd:enumeration value="nickel_oxide"/>
+			<xsd:enumeration value="nickel_refine_dust_from_the_pyromet_proc"/>
+			<xsd:enumeration value="nickel_subsulfide"/>
+			<xsd:enumeration value="nickelocene"/>
+			<xsd:enumeration value="nicotine"/>
+			<xsd:enumeration value="nifedipine"/>
+			<xsd:enumeration value="nimodipine"/>
+			<xsd:enumeration value="niridazole"/>
+			<xsd:enumeration value="nitrapyrin"/>
+			<xsd:enumeration value="nitrilotriacetic_acid"/>
+			<xsd:enumeration value="nitrilot_acid_trisodium_salt_monohydrate"/>
+			<xsd:enumeration value="nitrobenzene"/>
+			<xsd:enumeration value="nitrofen_technical_grade"/>
+			<xsd:enumeration value="nitrofurantoin"/>
+			<xsd:enumeration value="nitrofurazone"/>
+			<xsd:enumeration value="nitrogen_mustard_mechlorethamine"/>
+			<xsd:enumeration value="nitrogen_mustard_hydrochl_mechl_hydrochl"/>
+			<xsd:enumeration value="nitrogen_mustard_n_oxide"/>
+			<xsd:enumeration value="nitrogen_mustard_n_oxide_hydrochloride"/>
+			<xsd:enumeration value="nitromethane"/>
+			<xsd:enumeration value="nitrous_oxide"/>
+			<xsd:enumeration value="n_methyl_n_nitro_n_nitrosoguanidine"/>
+			<xsd:enumeration value="n_methylolacrylamide"/>
+			<xsd:enumeration value="n_methylpyrrolidone"/>
+			<xsd:enumeration value="n_nitrosodiethanolamine"/>
+			<xsd:enumeration value="n_nitrosodiethylamine"/>
+			<xsd:enumeration value="n_nitrosodimethylamine"/>
+			<xsd:enumeration value="n_nitrosodi_n_butylamine"/>
+			<xsd:enumeration value="n_nitrosodi_n_propylamine"/>
+			<xsd:enumeration value="n_nitrosodiphenylamine"/>
+			<xsd:enumeration value="n_nitrosomethylethylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_butylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_decylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_dodecylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_heptylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_hexylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_nonylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_octylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_pentylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_propylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_tetradecylamine"/>
+			<xsd:enumeration value="n_nitrosomethyl_n_undecylamine"/>
+			<xsd:enumeration value="n_nitrosomethylvinylamine"/>
+			<xsd:enumeration value="n_nitrosomorpholine"/>
+			<xsd:enumeration value="n_nitroso_n_ethylurea"/>
+			<xsd:enumeration value="n_nitroso_n_methylurea"/>
+			<xsd:enumeration value="n_nitroso_n_methylurethane"/>
+			<xsd:enumeration value="n_nitrosonornicotine"/>
+			<xsd:enumeration value="n_nitrosopiperidine"/>
+			<xsd:enumeration value="n_nitrosopyrrolidine"/>
+			<xsd:enumeration value="n_nitrososarcosine"/>
+			<xsd:enumeration value="norethisterone_norethindrone"/>
+			<xsd:enumeration value="norethis_norethindrone_ethinyl_estradiol"/>
+			<xsd:enumeration value="norethisterone_norethindrone_mestranol"/>
+			<xsd:enumeration value="norethiste_acetate_norethindrone_acetate"/>
+			<xsd:enumeration value="norethynodrel"/>
+			<xsd:enumeration value="norgestrel"/>
+			<xsd:enumeration value="o_p_ddt"/>
+			<xsd:enumeration value="o_aminoazotoluene"/>
+			<xsd:enumeration value="o_anisidine"/>
+			<xsd:enumeration value="o_anisidine_hydrochloride"/>
+			<xsd:enumeration value="ochratoxin_a"/>
+			<xsd:enumeration value="o_dinitrobenzene"/>
+			<xsd:enumeration value="oil_orange_ss"/>
+			<xsd:enumeration value="o_nitroanisole"/>
+			<xsd:enumeration value="o_nitrotoluene"/>
+			<xsd:enumeration value="o_phenylenediamine"/>
+			<xsd:enumeration value="o_phenylenediamine_and_its_salts"/>
+			<xsd:enumeration value="o_phenylenediamine_dihydochloride"/>
+			<xsd:enumeration value="o_phenylphenate_sodium"/>
+			<xsd:enumeration value="o_phenylphenol"/>
+			<xsd:enumeration value="oral_contraceptives_combined"/>
+			<xsd:enumeration value="oral_contraceptives_sequential"/>
+			<xsd:enumeration value="oryzalin"/>
+			<xsd:enumeration value="o_toluidine"/>
+			<xsd:enumeration value="o_toluidine_hydrochloride"/>
+			<xsd:enumeration value="oxadiazon"/>
+			<xsd:enumeration value="oxazepam"/>
+			<xsd:enumeration value="oxydemeton_methyl"/>
+			<xsd:enumeration value="oxymetholone"/>
+			<xsd:enumeration value="oxytetracycline_internal_use"/>
+			<xsd:enumeration value="oxytetracycli_hydrochloride_internal_use"/>
+			<xsd:enumeration value="oxythioquinox_chinomethionat"/>
+			<xsd:enumeration value="p_p_ddt"/>
+			<xsd:enumeration value="p_a_a_a_tetrachlorotoluene"/>
+			<xsd:enumeration value="paclitaxel"/>
+			<xsd:enumeration value="palygorskite_fibers_5_mm_in_length"/>
+			<xsd:enumeration value="p_aminoazobenzene"/>
+			<xsd:enumeration value="panfuran_s"/>
+			<xsd:enumeration value="paramethadione"/>
+			<xsd:enumeration value="parathion"/>
+			<xsd:enumeration value="p_chloroaniline"/>
+			<xsd:enumeration value="p_chloroaniline_hydrochloride"/>
+			<xsd:enumeration value="p_chloro_o_toluidine"/>
+			<xsd:enumeration value="p_chloro_o_toluidine_hydrochloride"/>
+			<xsd:enumeration value="p_chloro_o_toluidine_strong_acid_salts"/>
+			<xsd:enumeration value="p_cresidine"/>
+			<xsd:enumeration value="p_dichlorobenzene"/>
+			<xsd:enumeration value="p_dinitrobenzene"/>
+			<xsd:enumeration value="penicillamine"/>
+			<xsd:enumeration value="pent_ether_mixture_de_71_technical_grade"/>
+			<xsd:enumeration value="pentachlorophenol"/>
+			<xsd:enumeration value="pent_and_by_prod_of_its_synt_com_mixture"/>
+			<xsd:enumeration value="pentobarbital_sodium"/>
+			<xsd:enumeration value="pentosan_polysulfate_sodium"/>
+			<xsd:enumeration value="pentostatin"/>
+			<xsd:enumeration value="perfluorooctane_sulfonate_pfos"/>
+			<xsd:enumeration value="perfluorooctanoic_acid_pfoa"/>
+			<xsd:enumeration value="pertuzumab"/>
+			<xsd:enumeration value="phenacemide"/>
+			<xsd:enumeration value="phenacetin"/>
+			<xsd:enumeration value="phenazopyridine"/>
+			<xsd:enumeration value="phenazopyridine_hydrochloride"/>
+			<xsd:enumeration value="phenesterin"/>
+			<xsd:enumeration value="phenobarbital"/>
+			<xsd:enumeration value="phenolphthalein"/>
+			<xsd:enumeration value="phenoxybenzamine"/>
+			<xsd:enumeration value="phenoxybenzamine_hydrochloride"/>
+			<xsd:enumeration value="phenprocoumon"/>
+			<xsd:enumeration value="phenyl_glycidyl_ether"/>
+			<xsd:enumeration value="phenylhydrazine"/>
+			<xsd:enumeration value="phenylhydrazine_and_its_salts"/>
+			<xsd:enumeration value="phenylhydrazine_hydrochloride"/>
+			<xsd:enumeration value="phenylphosphine"/>
+			<xsd:enumeration value="phi_p_2_amino_1_methyl_6_phen_4_5_b_pyri"/>
+			<xsd:enumeration value="pimozide"/>
+			<xsd:enumeration value="pioglitazone"/>
+			<xsd:enumeration value="pipobroman"/>
+			<xsd:enumeration value="pirimicarb"/>
+			<xsd:enumeration value="plicamycin"/>
+			<xsd:enumeration value="p_nitrosodiphenylamine"/>
+			<xsd:enumeration value="polybrominated_biphenyls"/>
+			<xsd:enumeration value="polychlorinated_biphenyls"/>
+			<xsd:enumeration value="pol_bip_con_60_or_mor_pcnt_chlo_mole_wgt"/>
+			<xsd:enumeration value="polychlorinated_dibenzofurans"/>
+			<xsd:enumeration value="polychlorinated_dibenzo_p_dioxins"/>
+			<xsd:enumeration value="polygeenan"/>
+			<xsd:enumeration value="ponceau_3_r"/>
+			<xsd:enumeration value="ponceau_mx"/>
+			<xsd:enumeration value="potassium_bromate"/>
+			<xsd:enumeration value="potassium_cyanide"/>
+			<xsd:enumeration value="potassium_dimethyldithiocarbamate"/>
+			<xsd:enumeration value="pravastatin_sodium"/>
+			<xsd:enumeration value="prednisolone_sodium_phosphate"/>
+			<xsd:enumeration value="primidone"/>
+			<xsd:enumeration value="procarbazine"/>
+			<xsd:enumeration value="procarbazine_hydrochloride"/>
+			<xsd:enumeration value="procymidone"/>
+			<xsd:enumeration value="progesterone"/>
+			<xsd:enumeration value="pronamide"/>
+			<xsd:enumeration value="propachlor"/>
+			<xsd:enumeration value="propargite"/>
+			<xsd:enumeration value="propazine"/>
+			<xsd:enumeration value="propoxur"/>
+			<xsd:enumeration value="propylene_glycol_mono_t_butyl_ether"/>
+			<xsd:enumeration value="propylene_oxide"/>
+			<xsd:enumeration value="propylthiouracil"/>
+			<xsd:enumeration value="pulegone"/>
+			<xsd:enumeration value="pymetrozine"/>
+			<xsd:enumeration value="pyridine"/>
+			<xsd:enumeration value="pyrimethamine"/>
+			<xsd:enumeration value="quazepam"/>
+			<xsd:enumeration value="quinoline_and_its_strong_acid_salts"/>
+			<xsd:enumeration value="quizalofop_ethyl"/>
+			<xsd:enumeration value="radionuclides"/>
+			<xsd:enumeration value="reserpine"/>
+			<xsd:enumeration value="residual_heavy_fuel_oils"/>
+			<xsd:enumeration value="resmethrin"/>
+			<xsd:enumeration value="re_re_es_in_da_do_in_ex_of_10_iu_3_re_eq"/>
+			<xsd:enumeration value="ribavirin"/>
+			<xsd:enumeration value="riddelliine"/>
+			<xsd:enumeration value="rifampin"/>
+			<xsd:enumeration value="s_s_s_tributyl_phosphorotri_tribufos_def"/>
+			<xsd:enumeration value="safrole"/>
+			<xsd:enumeration value="salted_fish_chinese_style"/>
+			<xsd:enumeration value="secobarbital_sodium"/>
+			<xsd:enumeration value="sedaxane"/>
+			<xsd:enumeration value="selenium_sulfide"/>
+			<xsd:enumeration value="sermorelin_acetate"/>
+			<xsd:enumeration value="shale_oils"/>
+			<xsd:enumeration value="sili_crys_airbo_partic_of_respirable_siz"/>
+			<xsd:enumeration value="simazine"/>
+			<xsd:enumeration value="sodium_cyanide"/>
+			<xsd:enumeration value="sodium_dimethyldithiocarbamate"/>
+			<xsd:enumeration value="sodium_fluoroacetate"/>
+			<xsd:enumeration value="so_ta_a_mi_oi_un_an_mi_tr_oi_an_us_en_oi"/>
+			<xsd:enumeration value="spirodiclofen"/>
+			<xsd:enumeration value="spironolactone"/>
+			<xsd:enumeration value="stanozolol"/>
+			<xsd:enumeration value="sterigmatocystin"/>
+			<xsd:enumeration value="streptomycin_sulfate"/>
+			<xsd:enumeration value="streptozocin_streptozotocin"/>
+			<xsd:enumeration value="streptozotocin_streptozocin"/>
+			<xsd:enumeration value="strong_inorga_acid_mists_cont_sulfu_acid"/>
+			<xsd:enumeration value="styrene"/>
+			<xsd:enumeration value="styrene_oxide"/>
+			<xsd:enumeration value="sulfallate"/>
+			<xsd:enumeration value="sulfasalazine_salicylazosulfapyridine"/>
+			<xsd:enumeration value="sulfur_dioxidee"/>
+			<xsd:enumeration value="sulindac"/>
+			<xsd:enumeration value="talc_containing_asbestiform_fibers"/>
+			<xsd:enumeration value="tamoxifen_and_its_salts"/>
+			<xsd:enumeration value="tamoxifen_citrate"/>
+			<xsd:enumeration value="temazepam"/>
+			<xsd:enumeration value="teniposide"/>
+			<xsd:enumeration value="terbacil"/>
+			<xsd:enumeration value="teriparatide"/>
+			<xsd:enumeration value="terrazole"/>
+			<xsd:enumeration value="testosterone_and_its_esters"/>
+			<xsd:enumeration value="testosterone_cypionate"/>
+			<xsd:enumeration value="testosterone_enanthate"/>
+			<xsd:enumeration value="tetrabromobisphenol_a"/>
+			<xsd:enumeration value="tetrachloroethylene_perchloroethylene"/>
+			<xsd:enumeration value="tetrachlorvinphos"/>
+			<xsd:enumeration value="tetracycline_internal_use"/>
+			<xsd:enumeration value="tetracycline_hydrochloride_internal_use"/>
+			<xsd:enumeration value="tetracyclines_internal_use"/>
+			<xsd:enumeration value="tetrafluoroethylene"/>
+			<xsd:enumeration value="tetranitromethane"/>
+			<xsd:enumeration value="thalidomide"/>
+			<xsd:enumeration value="thioacetamide"/>
+			<xsd:enumeration value="thiodicarb"/>
+			<xsd:enumeration value="thioguanine"/>
+			<xsd:enumeration value="thiophanate_methyl"/>
+			<xsd:enumeration value="thiouracil"/>
+			<xsd:enumeration value="thiourea"/>
+			<xsd:enumeration value="thorium_dioxide"/>
+			<xsd:enumeration value="tit_dio_airb_unb_part_of_respirable_size"/>
+			<xsd:enumeration value="tobacco_smoke"/>
+			<xsd:enumeration value="tobacco_smoke_primary"/>
+			<xsd:enumeration value="tobacco_oral_use_of_smokeless_products"/>
+			<xsd:enumeration value="tobramycin_sulfate"/>
+			<xsd:enumeration value="toluene"/>
+			<xsd:enumeration value="toluene_diisocyanate"/>
+			<xsd:enumeration value="topiramate"/>
+			<xsd:enumeration value="toxaphene_polychlorinated_camphenes"/>
+			<xsd:enumeration value="toxins_derived_from_fusari_mon_fusa_vert"/>
+			<xsd:enumeration value="tran_2_dim_met_5_2_5_ni_2_fu_vi_1_3_4_ox"/>
+			<xsd:enumeration value="treosulfan"/>
+			<xsd:enumeration value="triadimefon"/>
+			<xsd:enumeration value="triamterene"/>
+			<xsd:enumeration value="triazolam"/>
+			<xsd:enumeration value="tributyltin_methacrylate"/>
+			<xsd:enumeration value="trichlormethine_trimustine_hydrochloride"/>
+			<xsd:enumeration value="trichloroacetic_acid"/>
+			<xsd:enumeration value="trichloroethylene"/>
+			<xsd:enumeration value="trientine_hydrochloride"/>
+			<xsd:enumeration value="triforine"/>
+			<xsd:enumeration value="trilostane"/>
+			<xsd:enumeration value="trimethadione"/>
+			<xsd:enumeration value="trimethyl_phosphate"/>
+			<xsd:enumeration value="trimetrexate_glucuronate"/>
+			<xsd:enumeration value="trim_rx"/>
+			<xsd:enumeration value="triphenyltin_hydroxide"/>
+			<xsd:enumeration value="tris_1_3_dichloro_2_propyl_phospha_tdcpp"/>
+			<xsd:enumeration value="tris_1_aziridinyl_phosp_sulfide_thiotepa"/>
+			<xsd:enumeration value="tris_2_3_dibromopropyl_phosphate"/>
+			<xsd:enumeration value="tris_2_chloroethyl_phosphate"/>
+			<xsd:enumeration value="trp_p_1_tryptophan_p_1"/>
+			<xsd:enumeration value="trp_p_2_tryptophan_p_2"/>
+			<xsd:enumeration value="trypan_blue_commercial_grade"/>
+			<xsd:enumeration value="unleaded_gasoline_wholly_vaporized"/>
+			<xsd:enumeration value="uracil_mustard"/>
+			<xsd:enumeration value="urethane_ethyl_carbamate"/>
+			<xsd:enumeration value="urofollitropin"/>
+			<xsd:enumeration value="valproate_valproic_acid"/>
+			<xsd:enumeration value="vanadium_pentoxid_ortho_crystalline_form"/>
+			<xsd:enumeration value="vinblastine_sulfate"/>
+			<xsd:enumeration value="vinclozolin"/>
+			<xsd:enumeration value="vincristine_sulfate"/>
+			<xsd:enumeration value="vinyl_bromide"/>
+			<xsd:enumeration value="vinyl_chloride"/>
+			<xsd:enumeration value="vinyl_cyclohe_dioxide_4_vinyl_1_cycl_die"/>
+			<xsd:enumeration value="vinyl_fluoride"/>
+			<xsd:enumeration value="vinyl_trichloride_1_1_2_trichloroethane"/>
+			<xsd:enumeration value="vinylidene_chloride_1_1_dichloroethylene"/>
+			<xsd:enumeration value="vismodegib"/>
+			<xsd:enumeration value="warfarin"/>
+			<xsd:enumeration value="wood_dust"/>
+			<xsd:enumeration value="zalcitabine"/>
+			<xsd:enumeration value="zidovudine_azt"/>
+			<xsd:enumeration value="zileuton"/>
+			<xsd:enumeration value="alpha_methyl_styrene_alpha_methylstyrene"/>
+			<xsd:enumeration value="gentian_violet_crystal_violet"/>
+			<xsd:enumeration value="n_nitrosohexamethyleneimine"/>
+			<xsd:enumeration value="nickel_soluble_compounds"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

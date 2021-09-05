@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+  			 $Date: 2012/06/28/ $      
+         AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+         confidential and proprietary information of Amazon.com and may not be reproduced,
+         distributed or used, in whole or in part, for any purpose other than as necessary 
+         to list products for sale on the www.amazon.com web site pursuant to an agreement
+         with Amazon.com.
+	-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="EUCompliance">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="EuLabelingHazard" type="xsd:string" minOccurs="0" maxOccurs="10"/>
+                <xsd:element name="EuLabelingPrecautionary" type="xsd:string" minOccurs="0" maxOccurs="10"/>
+                <xsd:element name="EuLabelingRisk" type="xsd:string" minOccurs="0" maxOccurs="10"/>
+                <xsd:element name="EuLabelingSafety" type="xsd:string" minOccurs="0" maxOccurs="10"/>
+                <xsd:element name="LithiumBatteryWeight" type="WeightDimension" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

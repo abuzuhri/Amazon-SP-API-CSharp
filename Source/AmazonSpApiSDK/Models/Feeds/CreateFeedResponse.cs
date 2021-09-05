@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Feeds
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public CreateFeedResponse()
+        {
+            this.Payload = default(CreateFeedResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// Gets or Sets Payload
         /// </summary>

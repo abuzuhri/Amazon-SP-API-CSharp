@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by V Swetha (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	
+	<xsd:element name="EntertainmentCollectibles">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="EntertainmentMemorabilia"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="EntertainmentMemorabilia">
+	<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Actor" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Artist" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="AuthenticatedBy" type="AuthenticatedByType" minOccurs="1"/>
+				<xsd:element name="AuthenticityNumber" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Band" type="HundredString" minOccurs="0"/>
+				<xsd:element name="CollectibleType" type="CollectibleType" minOccurs="1"/>
+				<xsd:element name="Composer" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="ConditionProvidedBy" type="ConditionProvidedByType" minOccurs="1"/>
+				<xsd:element name="Conductor" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="DateOfPerformance" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="DisplayDepth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="EntertainmentBrand" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EntertainmentType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EventName" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Genre" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsPerformanceUsed" type="HundredString" minOccurs="0"/>
+				<xsd:element name="GradeRating" type="HundredString" minOccurs="1"/>
+				<xsd:element name="ItemThicknessString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="LimitedEditionQuantity" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="LimitedEditionNumber" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Publisher" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfItems"  type="PositiveInteger" minOccurs="0" />
+				<xsd:element name="NumberOfPages" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="Orchestra" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Packaging" type="MediumStringNotNull" minOccurs="0"/>
+				<xsd:element name="PublicationDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="SafetyWarning" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SignedBy" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Studio" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SubjectKeywords" type="HundredString" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="VenueName" type="HundredString" minOccurs="0"/>
+				<xsd:element name="VinylRecordDetails" type="VinylRecordDetailsType" minOccurs="0"/>
+				<xsd:element name="WhatsInTheBox" type="HundredString" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Year" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MakeAnOfferMinimumPercentage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="SeriesNumber" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="CardNumber" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="IsVeryHighValue" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Contributor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AdditionalProductInformation" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="CollectibleType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="original"/>
+			<xsd:enumeration value="original_limited_edition"/>
+			<xsd:enumeration value="reproduced"/>
+			<xsd:enumeration value="reproduced_limited_edition"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ConditionProvidedByType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="psa"/>
+			<xsd:enumeration value="seller"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AuthenticatedByType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="psa"/>
+			<xsd:enumeration value="seller"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

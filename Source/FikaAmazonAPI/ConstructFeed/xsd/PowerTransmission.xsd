@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Sunitha Basodi (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 20011/07/26 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="PowerTransmission">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:simpleType>
+						<xsd:restriction base="HundredString">
+							<xsd:enumeration value="BearingsAndBushings"/>
+							<xsd:enumeration value="Belts"/>
+							<xsd:enumeration value="CompressionSprings"/>
+							<xsd:enumeration value="ExtensionSprings"/>
+							<xsd:enumeration value="FlexibleCouplings"/>
+							<xsd:enumeration value="Gears"/>
+							<xsd:enumeration value="RigidCouplings"/>
+							<xsd:enumeration value="ShaftCollar"/>
+							<xsd:enumeration value="TorsionSprings"/>
+							<xsd:enumeration value="LinearGuidesAndRails"/>
+							<xsd:enumeration value="Pulleys"/>
+							<xsd:enumeration value="RollerChain"/>
+							<xsd:enumeration value="CouplingsCollarsAndUniversalJoints"/>
+							<xsd:enumeration value="Springs"/>
+							<xsd:enumeration value="Sprockets"/>
+							<xsd:enumeration value="UniversalJoints"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ActiveCoils" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="AxialMisalignment" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="BeltCrossSection" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="BeltWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="BodyOutsideDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="BoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CompressedLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DeflectionAngle" type="DegreeDimension" minOccurs="0"/>
+				<xsd:element name="FaceWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="FlangeOutsideDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="FlangeThickness" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="GuideSupportType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HubDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="HubProjection" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="Dimension" minOccurs="0"/>
+				<xsd:element name="ItemPitch" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ItemThickness" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="KeyWayDepth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="KeyWayWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="LegLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="LoadCapacity" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>				
+				<xsd:element name="MaximumAngularMisalignment" type="DegreeDimension" minOccurs="0"/>
+				<xsd:element name="MaximumParallelMisalignment" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumRotationalSpeed" type="SpeedDimension" minOccurs="0"/>
+				<xsd:element name="MaximumSpringCompressionLoad" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="MaximumTensionLoad" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="MaximumTorque" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="MinimumSpringCompressionLoad" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="NumberOfBands" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfGrooves" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfTeeth" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="OuterRingWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SetScrewThreadType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SlideTravelDistance" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpringRate" type="TorqueType" minOccurs="0"/>
+				<xsd:element name="SpringWindDirection" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StrandType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TradeSizeName" type="HundredString" minOccurs="0"/>
+				<xsd:element name="WireDiameter" type="LengthDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

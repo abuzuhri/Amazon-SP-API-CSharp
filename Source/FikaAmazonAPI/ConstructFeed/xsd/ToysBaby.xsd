@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #14 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/03/27 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    ###############################################################
+    # ToysAndGames Classification Data
+    ###############################################################
+    -->
+	<!-- For ItemType element use the values toys-and-games or baby-products -->
+	<xsd:element name="ToysBaby">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:simpleType>
+						<xsd:restriction base="MediumStringNotNull">
+							<xsd:enumeration value="ToysAndGames"/>
+							<xsd:enumeration value="BabyProducts"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="AgeRecommendation" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="AlertType" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="AssemblyInstructions" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AssemblyTime" type="AssemblyTimeDimension" minOccurs="0"/>
+				<xsd:element name="BaseDepth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="BaseWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CarrierWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="BatteryLifeDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="Dimension" minOccurs="0"/>
+				<xsd:element name="FrequencyResponse" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="MainVideoMonitorScreenSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumAnchoringWeightCapacity" type="WeightDimension"
+					minOccurs="0"/>
+				<xsd:element name="MaximumItemWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumRangeIndoors" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumRangeOpenSPace" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PortableDisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SeatBackInteriorHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SeatHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SeatInteriorWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="UserHipToKneeDistance" type="StringLengthOptionalDimension"
+					minOccurs="0"/>
+				<xsd:element name="UserKneeToFootDistance" type="StringLengthOptionalDimension"
+					minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="BaseType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BottleNippleType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BottleType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BrakeStyle" type="HundredString" minOccurs="0"/>
+				<xsd:element name="CommunicationInterface" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="HundredString" minOccurs="0"/>
+				<xsd:element name="CompatibleDevices" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ControlType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ConversionOptions" type="HundredString" minOccurs="0"/>
+				<xsd:element name="CustomerPackageType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CanShipInOriginalContainer" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="DishwasherSafe" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExtraSeatCompatible" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FoldedSizeWithoutWheels" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FulfillReadinessCond" type="FulfillReadiness" minOccurs="0"/>
+				<xsd:element name="FurnitureFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="HardwareVisibility" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="HarnessType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Ingredients" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CarSeatWeightGroupEU" type="CarSeatWeightGroupEUType" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="InstallationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsFragile" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsPortable" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsSoldInStores" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ItemPackageContents" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Lifestyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfHeightPositions" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfPositions" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ManufacturerSafetyWarning" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ModelNumber" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OperationMode" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Orientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PiecesIncludedInPurchase" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="PowerFunctionality" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerSourceType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RailType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ReclinesFlat" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeatingCapacity" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="SpecificUsesForProduct" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SkillLevel" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SuspensionType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TotalTravel" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Wheels" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="WirelessCommunicationTechnology" type="HundredString"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfPlayers" type="TwentyStringNotNull" minOccurs="0"/>
+				<xsd:element ref="Recall" minOccurs="0"/>
+				<xsd:element name="ToyAwardName" type="ToyAwardType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="AwardsWon" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element ref="WeightRecommendation" minOccurs="0"/>
+				<xsd:element ref="HeightRecommendation" minOccurs="0"/>
+				<xsd:element ref="ForwardFacingWeight" minOccurs="0"/>
+				<xsd:element name="HarnessMaximumWeightCapacity" type="WeightDimension"
+					minOccurs="0"/>
+				<xsd:element name="HarnessMaximumHeightCapacity" type="LengthDimension"
+					minOccurs="0"/>
+				<xsd:element ref="RearFacingWeight" minOccurs="0"/>
+				<xsd:element ref="ShoulderHarnessHeight" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:length value="2" fixed="true"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FoldedSize" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImportDesignation" type="String" minOccurs="0" />
+				<xsd:element name="CountryAsLabeled" type="CountryOfOriginType" minOccurs="0"/>				
+				<xsd:element name="FurDescription" type="LongString" minOccurs="0"/>				
+				<xsd:element name="FabricType" type="MediumStringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="MaterialType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="CareInstructions" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="SpecialFeatures" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="5"/>
+				<xsd:element name="HandleHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SeatLength" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="StringNotNull">
+								<xsd:attribute name="unitOfMeasure" type="LengthUnitOfMeasure"
+									use="optional"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="SeatWidth" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="StringNotNull">
+								<xsd:attribute name="unitOfMeasure" type="LengthUnitOfMeasure"
+									use="optional"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="TireMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TireDiameter" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="StringNotNull">
+								<xsd:attribute name="unitOfMeasure" type="LengthUnitOfMeasure"
+									use="optional"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="DisplayHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWidth" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="TwentyStringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- VariationData is only supported for BabyProducts -->
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="CustomerPackageType"/>
+										<xsd:enumeration value="ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="StyleName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="SizeName-StyleName-CustomerPackageType"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="EngineType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="HazmatItem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IdentityPackageType" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="StringNotNull">
+							<xsd:enumeration value="bulk"/>
+							<xsd:enumeration value="frustration_free"/>
+							<xsd:enumeration value="traditional"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="SafetyRating" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Voltage" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="Wattage" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumIon" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumMetal" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfFrequencyChannels" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfControlChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FrequencyBandsSupported" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="EducationalValue" type="HundredString" minOccurs="0"/>
+				<xsd:element name="IncludesRemote" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="RecommendedUse" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RemoteControlTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RailGauge" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Scale" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecificationMet" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Subject" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubjectCharacter" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialTypeFree" type="StringNotNull" minOccurs="0"
+					maxOccurs="5"/>
+				<xsd:element name="SensorTechnology" type="StringNotNull" minOccurs="0"
+					maxOccurs="5"/>
+				<xsd:element name="SensorType" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="TrayType" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="ItemSpecialty" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

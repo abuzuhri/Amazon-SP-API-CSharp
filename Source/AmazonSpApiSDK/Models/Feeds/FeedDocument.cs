@@ -50,7 +50,7 @@ namespace AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="FeedDocument" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FeedDocument() { }
+        public FeedDocument() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedDocument" /> class.
         /// </summary>

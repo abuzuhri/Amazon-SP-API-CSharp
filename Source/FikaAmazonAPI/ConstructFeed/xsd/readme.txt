@@ -1,0 +1,1 @@
+xsd.exe /c Product.xsd /n:{Data.TEST}

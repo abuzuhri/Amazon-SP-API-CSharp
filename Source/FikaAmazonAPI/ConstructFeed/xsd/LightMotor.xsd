@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xsd:include schemaLocation="amzn-base.xsd"/>
+   <xsd:element name="LightMotor">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="ProductType">
+               <xsd:complexType>
+                  <xsd:choice>
+                     <xsd:element ref="LightMotorVehicle"/>
+                  </xsd:choice>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="LightMotorVehicle">
+      <xsd:complexType>
+         <xsd:sequence>
+			<xsd:element name="MaximumOperatingDistance" type="LengthIntegerDimension" minOccurs="0"/>
+			<xsd:element name="AutomotiveRegionId" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="BodyStyle" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="InteriorColorMap" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="InteriorColorName" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="MaximumCompatibleNumberOfSeats" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="MultimediaFunctionality" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="TransmissionType" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="Configuration" type="String" minOccurs="0"/>
+			<xsd:element name="DriveSystem" type="String" minOccurs="0"/>
+			<xsd:element name="EngineType" type="String" minOccurs="0"/>
+			<xsd:element name="EnvironmentalDescription" type="String" minOccurs="0"/>
+			<xsd:element name="FuelType" type="String" minOccurs="0"/>
+			<xsd:element name="IncludedFeatures" type="String" minOccurs="0"/>
+			<xsd:element name="Indications" type="String" minOccurs="0"/>
+			<xsd:element name="MaximumOutputPower" type="String" minOccurs="0"/>
+			<xsd:element name="Model" type="String" minOccurs="0"/>
+			<xsd:element name="ModelName" type="String" minOccurs="0"/>
+			<xsd:element name="ModelYear" type="String" minOccurs="0"/>
+			<xsd:element name="NumberOfDoors" type="String" minOccurs="0"/>
+			<xsd:element name="OfferAdditionalDetails" type="String" minOccurs="0"/>
+			<xsd:element name="PreviousOwnerCount" type="String" minOccurs="0"/>
+			<xsd:element name="SpecialFeatures" type="String" minOccurs="0"/>
+			<xsd:element name="StyleName" type="String" minOccurs="0"/>
+			<xsd:element name="TireType" type="String" minOccurs="0"/>
+			<xsd:element name="MaximumHorsepower" type="String" minOccurs="0"/>
+			<xsd:element name="WheelMaterial" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="VariationData" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Parentage">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="parent"/>
+									<xsd:enumeration value="child"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="VariationTheme" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="stylename-colorname-configuration"/> 
+									<xsd:enumeration value="stylename-configuration-colorname-interiorcolorname"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="EuEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass"	minOccurs="0"/>			
+			<xsd:element name="Acceleration" type="AccelerationUnit" minOccurs="0"/>
+			<xsd:element name="Mileage" type="MileageUnit" minOccurs="0"/>			
+			<xsd:element name="Co2Emission" type="LMVEmissionsDimension" minOccurs="0"/>
+			<xsd:element name="FuelEconomyCity" type="FuelDimension" minOccurs="0"/>
+			<xsd:element name="FuelEconomyHighway" type="FuelDimension" minOccurs="0"/>
+			<xsd:element name="FuelEconomyCombined" type="FuelDimension" minOccurs="0"/>
+			<xsd:element name="EngineDisplacement" type="EngineDisplacementUnit" minOccurs="0"/>
+			<xsd:element name="FuelCapacity" type="FuelCapacityUnit" minOccurs="0"/>
+			<xsd:element name="MaximumSpeed" type="MaximumSpeedUnit" minOccurs="0"/>
+			<xsd:element name="WheelBase" type="CycleLengthDimension" minOccurs="0"/>
+			</xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+			
+			
+			<xsd:complexType name="AccelerationUnit">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="AccelerationUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="AccelerationUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="0_to_100_kmh"/>
+					<xsd:enumeration value="0_to_60_mph"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="MileageUnit">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="MileageUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="MileageUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="miles"/>
+					<xsd:enumeration value="Kilometer"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:complexType name="LMVEmissionsDimension">
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="unitOfMeasure" type="LMVEmissionsDimensionUnitOfMeasure" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+				<xsd:simpleType name="LMVEmissionsDimensionUnitOfMeasure">
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="grams_per_kilometer"/>
+						
+					</xsd:restriction>
+				</xsd:simpleType>
+
+
+
+			<xsd:complexType name="FuelDimension">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="FuelDimensionUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="FuelDimensionUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="miles_per_gallon"/>
+						<xsd:enumeration value="liters_per_100_kilometers"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			
+			<xsd:complexType name="EngineDisplacementUnit">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="EngineDisplacementUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="EngineDisplacementUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="cubic_centimeters"/>
+					<xsd:enumeration value="liter"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="FuelCapacityUnit">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="FuelCapacityUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="FuelCapacityUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="cubic_centimeters"/>
+					<xsd:enumeration value="liter"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+
+			<xsd:complexType name="MaximumSpeedUnit">
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="unitOfMeasure" type="MaximumSpeedUnitOfMeasure" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+			<xsd:simpleType name="MaximumSpeedUnitOfMeasure">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="kilometers_per_hour"/>
+					<xsd:enumeration value="miles_per_gallon"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+</xsd:schema>

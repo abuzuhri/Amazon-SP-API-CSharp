@@ -28,7 +28,7 @@ namespace AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="CreateFeedDocumentResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateFeedDocumentResult() { }
+        public CreateFeedDocumentResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateFeedDocumentResult" /> class.
         /// </summary>

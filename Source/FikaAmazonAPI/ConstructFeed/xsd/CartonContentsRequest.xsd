@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!--
+  $Date: 2006/11/21 $
+
+  AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+  confidential and proprietary information of Amazon.com and may not be reproduced, 
+  distributed or used, in whole or in part, for any purpose other than as necessary 
+  to list products for sale on the www.amazon.com web site pursuant to an agreement 
+  with Amazon.com.
+    -->
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="CartonContentsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ShipmentId">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:pattern value="FBA[A-Z0-9]+" />
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="NumCartons" type="xsd:positiveInteger" />
+                <xsd:element name="Carton" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="CartonId">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="[a-zA-Z0-9]+" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="Item" maxOccurs="200">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="SKU"/>
+                                        <xsd:element name="QuantityShipped" type="xsd:positiveInteger" />
+                                        <xsd:element name="QuantityInCase" type="xsd:positiveInteger" default="1"/>
+                                        <xsd:element name="ExpirationDate" type="xsd:date" minOccurs="0" />
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

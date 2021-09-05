@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2006/11/21 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Inventory">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SKU"/>
+				<xsd:element ref="FulfillmentCenterID" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:element name="Available" type="xsd:boolean"/>
+					<xsd:element name="Quantity" type="xsd:nonNegativeInteger"/>
+					<xsd:element name="Lookup">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="FulfillmentNetwork"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:element name="RestockDate" type="xsd:date" minOccurs="0"/>
+				<xsd:element name="FulfillmentLatency" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SwitchFulfillmentTo" minOccurs="0">
+					<!-- Use this element if you are switching the 
+							fulfillment method for your item.  
+						If you are switching from AFN to MFN, use "MFN"
+						If you are switching from MFN to AFN, use "AFN"
+					-->
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="MFN"/>
+							<xsd:enumeration value="AFN"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+
