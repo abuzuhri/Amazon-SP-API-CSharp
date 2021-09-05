@@ -42,14 +42,14 @@ The purpose of this package is to have an easy way of getting started with the A
 
 
 ---
-### Installation
+## Installation
 
 ```powershell
 Install-Package CSharpAmazonSpAPI -Version 1.0.1
 ```
 
 ---
-### Keys
+## Keys
 | Name | Description |
 | --- | --- |
 | AccessKey | AWS USER ACCESS KEY |
@@ -62,9 +62,9 @@ Install-Package CSharpAmazonSpAPI -Version 1.0.1
 For more information about keys please check [Amazon Selling Partner Api developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md). 
 
 ---
-### Usage
+## Usage
 
-## Configration
+### Configration
 ```CSharp
     AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
     {
@@ -78,14 +78,14 @@ For more information about keys please check [Amazon Selling Partner Api develop
 
 ```
 
-## Order Lsit ,For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
+### Order Lsit ,For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
 ```CSharp
    var orders= amazonConnection.Orders.ListOrders();
             
 ```
 
 
-## Order Lsit with parameter
+### Order Lsit with parameter
 ```CSharp
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
@@ -103,7 +103,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
             
 ```
 
-## Report Lsit ,For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
+### Report Lsit ,For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
 ```CSharp
             var parameters = new ParameterReportList();
             parameters.pageSize = 100;
@@ -114,7 +114,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
             var reports=amazonConnection.Reports.GetReports(parameters);
 ```
 
-## Custom Report
+### Custom Report
 ```CSharp
             var parameters = new ParameterCreateReportSpecification();
             parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
@@ -127,7 +127,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
             var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
-## Product Pricing ,For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
+### Product Pricing ,For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
@@ -138,7 +138,7 @@ var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPrici
 
 ```
 
-## Product Competitive Price
+### Product Competitive Price
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
@@ -150,7 +150,7 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```
 
 
-## Notifications Create Destination,For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+### Notifications Create Destination,For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
 ```CSharp
 
 //EventBridge
@@ -174,7 +174,7 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
             });
 ```
 
-## Notifications read messages
+### Notifications read messages
 ```CSharp
 
             var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
@@ -200,35 +200,66 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
             }
         }
 
+```
+
+### Feed Submit
+Here Full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
+Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as its big work and effort but all classes are partial for easy change and you can generate xml outside and use our library for get data , now we support only sumit existed product , change quantity and change price
+```CSharp
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<PriceMessage>();
+            list.Add(new PriceMessage()
+            {
+                SKU = "8201031206122...",
+                StandardPrice = new StandardPrice()
+                {
+                    currency = BaseCurrencyCode.AED.ToString(),
+                    Value = (201.0522M).ToString("0.00")
+                }
+            });
+            createDocument.AddPriceMessage(list);
+
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+
+            Thread.Sleep(1000*30);
+
+            var feedOutput=amazonConnection.Feed.GetFeed(feedID);
+
+            var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+            var reportOutpit = outPut.Url;
 
 ```
 
 ---
-### Q & A
+## Q & A
 
 If you have questions, please ask in GitHub discussions 
 
 [![discussions](https://img.shields.io/badge/github-discussions-brightgreen?style=for-the-badge&logo=github)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/discussions)
 
 ---
-### ToDo
+## ToDo
 
 - Improve documentation
 
 ---
-### Notes
+## Notes
 
 If you are looking for a complete Feedback solution, you might want to consider giving [Soon.se](https://www.soon.se) a shot.
 
 ---
-### Support & Consultation
+## Support & Consultation
 
 We offer consultation on everything SP-API related. Book your meeting here:
 
 [![Book Meeting](https://img.shields.io/badge/meeting-book%20now-blue?style=for-the-badge)](https://calendly.com/tareq-abuzuhri/)
 
 ---
-### Thanks
+## Thanks
 
 Thanks go out to everybody who worked on this package.
 

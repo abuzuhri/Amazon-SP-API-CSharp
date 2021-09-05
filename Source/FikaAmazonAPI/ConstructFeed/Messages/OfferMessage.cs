@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class ProductMessage
+    public partial class OfferMessage
     {
         public string SKU { get; set; }
 

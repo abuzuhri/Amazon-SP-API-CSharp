@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static FikaAmazonAPI.ConstructFeed.BaseXML;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Test
@@ -75,8 +76,9 @@ namespace FikaAmazonAPI.Test
             var data2 = amazonConnection.Feed.CancelFeed("194146018872");
         }
         [TestMethod]
-        public void SubmitFeed()
+        public void SubmitFeedInventory()
         {
+            //
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
             var list = new List<InventoryMessage>();
             list.Add(new InventoryMessage()
@@ -89,8 +91,37 @@ namespace FikaAmazonAPI.Test
             var xml = createDocument.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_INVENTORY_AVAILABILITY_DATA);
+
         }
-        
+
+        [TestMethod]
+        public void SubmitFeedPRICING()
+        {
+
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<PriceMessage>();
+            list.Add(new PriceMessage()
+            {
+                SKU = "8201031206122...",
+                StandardPrice = new StandardPrice()
+                {
+                    currency = BaseCurrencyCode.AED.ToString(),
+                    Value = (201.0522M).ToString("0.00")
+                }
+            });
+            createDocument.AddPriceMessage(list);
+
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+
+            var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+
+            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+            var reportOutpit = outPut.Url;
+        }
 
     }
 }

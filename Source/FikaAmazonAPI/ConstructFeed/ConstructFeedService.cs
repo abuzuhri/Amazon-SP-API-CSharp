@@ -39,6 +39,22 @@ namespace FikaAmazonAPI.ConstructFeed
                 });
             }
             envelope.Message = msgs;
+            envelope.MessageType = Utils.Constants.FeedMessageType.Price;
+        }
+        public void AddOfferMessage(IList<OfferMessage> messages, Constants.OperationType operationType= Constants.OperationType.Update)
+        {
+            var msgs = new List<BaseMessage>();
+            int index = 1;
+            foreach (var itm in messages)
+            {
+                msgs.Add(new BaseMessage()
+                {
+                    MessageID = index++,
+                    Offer = itm,
+                    OperationType = operationType
+                });
+            }
+            envelope.Message = msgs;
             envelope.MessageType = Utils.Constants.FeedMessageType.Product;
 
         }
