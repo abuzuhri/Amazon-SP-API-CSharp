@@ -1,14 +1,43 @@
-﻿using System;
+﻿using AmazonSpApiSDK.Models.ShipmentInvoicing;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FikaAmazonAPI.Services
 {
-    public class ShipmentInvoicingService : RequestService
+    public partial class ShipmentInvoicingService : RequestService
     {
         public ShipmentInvoicingService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
 
+        }
+
+        public ShipmentDetail GetShipmentDetails(string shipmentId)
+        {
+            CreateAuthorizedRequest(ShipmentInvoicingApiUrls.GetShipmentDetails(shipmentId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetShipmentDetailsResponse>();
+
+            if(response!=null && response.Payload!=null)
+                return response.Payload;
+
+            return null;
+        }
+        public bool SubmitInvoice(string shipmentId, SubmitInvoiceRequest submitInvoiceRequest)
+        {
+            CreateAuthorizedRequest(ShipmentInvoicingApiUrls.SubmitInvoice(shipmentId), RestSharp.Method.POST,postJsonObj: submitInvoiceRequest);
+            var response = ExecuteRequest<SubmitInvoiceResponse>();
+
+            return true;
+        }
+        public ShipmentInvoiceStatusInfo GetInvoiceStatus(string shipmentId)
+        {
+            CreateAuthorizedRequest(ShipmentInvoicingApiUrls.GetInvoiceStatus(shipmentId), RestSharp.Method.GET);
+            var response = ExecuteRequest<GetInvoiceStatusResponse>();
+
+            if (response != null && response.Payload != null)
+                return response.Payload;
+
+            return null;
         }
     }
 }

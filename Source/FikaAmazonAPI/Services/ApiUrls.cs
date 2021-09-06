@@ -243,7 +243,13 @@ namespace AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/privilege";
             }
         }
-
+        protected class ShipmentInvoicingApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/fba/outbound/brazil/v0";
+            public static string GetShipmentDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string SubmitInvoice(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice";
+            public static string GetInvoiceStatus(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice/status";
+        }
         protected class ProductFeeApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/fees/v0";
