@@ -33,6 +33,11 @@ namespace AmazonSpApiSDK.Models.MerchantFulfillment
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public GetAdditionalSellerInputsResponse()
+        {
+            this.Payload = default(GetAdditionalSellerInputsResult);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// Gets or Sets Payload

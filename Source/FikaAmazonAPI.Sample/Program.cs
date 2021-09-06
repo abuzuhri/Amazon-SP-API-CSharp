@@ -26,8 +26,6 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -41,31 +39,6 @@ namespace FikaAmazonAPI.Sample
             });
 
 
-            var feeddata=amazonConnection.Feed.GetFeed("195102018875");
-
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
-
-            var list = new List<PriceMessage>();
-            list.Add(new PriceMessage()
-            {
-                SKU = "8201031206122...",
-                StandardPrice = new StandardPrice()
-                {
-                    currency = BaseCurrencyCode.AED.ToString(),
-                    Value = (201.0522M).ToString("0.00")
-                }
-            });
-            createDocument.AddPriceMessage(list);
-
-            var xml = createDocument.GetXML();
-
-            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
-
-            var feedOutput=amazonConnection.Feed.GetFeed(feedID);
-            
-            var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
-
-            var reportOutpit = outPut.Url;
 
 
             Console.ReadLine();

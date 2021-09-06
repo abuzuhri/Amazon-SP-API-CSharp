@@ -43,7 +43,34 @@ namespace AmazonSpApiSDK.Services
                 get => $"/get_item_aspects_for_category";
             }
         }
-
+        protected class MerchantFulfillmentApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/mfn/v0";
+            
+            public static string GetEligibleShipmentServicesOld
+            {
+                get => $"{_resourceBaseUrl}/eligibleServices";
+            }
+            public static string GetEligibleShipmentServices
+            {
+                get => $"{_resourceBaseUrl}/eligibleShippingServices";
+            }
+            public static string CreateShipment
+            {
+                get => $"{_resourceBaseUrl}/shipments";
+            }
+            public static string GetAdditionalSellerInputsOld
+            {
+                get => $"{_resourceBaseUrl}/sellerInputs";
+            }
+            public static string GetAdditionalSellerInputs
+            {
+                get => $"{_resourceBaseUrl}/additionalSellerInputs";
+            }
+            public static string GetShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string CancelShipmentOld(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
+        }
         protected class NotificationApiUrls
         {
             private readonly static string _resourceBaseUrl = "/notifications/v1";

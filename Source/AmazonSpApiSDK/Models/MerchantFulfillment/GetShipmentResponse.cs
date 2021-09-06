@@ -33,6 +33,11 @@ namespace AmazonSpApiSDK.Models.MerchantFulfillment
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public GetShipmentResponse()
+        {
+            this.Payload = default(Shipment);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the getShipment operation.
