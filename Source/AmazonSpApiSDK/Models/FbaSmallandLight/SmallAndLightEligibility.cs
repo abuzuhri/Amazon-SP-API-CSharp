@@ -33,7 +33,7 @@ namespace AmazonSpApiSDK.Models.FbaSmallandLight
         /// Initializes a new instance of the <see cref="SmallAndLightEligibility" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SmallAndLightEligibility() { }
+        public SmallAndLightEligibility() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SmallAndLightEligibility" /> class.
         /// </summary>
