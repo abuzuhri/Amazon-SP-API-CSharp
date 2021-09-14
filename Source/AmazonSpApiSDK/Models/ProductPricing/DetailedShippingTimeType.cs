@@ -64,7 +64,7 @@ namespace AmazonSpApiSDK.Models.ProductPricing
         /// <param name="MaximumHours">The maximum time, in hours, that the item will likely be shipped after the order has been placed..</param>
         /// <param name="AvailableDate">The date when the item will be available for shipping. Only displayed for items that are not currently available for shipping..</param>
         /// <param name="AvailabilityType">Indicates whether the item is available for shipping now, or on a known or an unknown date in the future. If known, the availableDate property indicates the date that the item will be available for shipping. Possible values: NOW, FUTURE_WITHOUT_DATE, FUTURE_WITH_DATE..</param>
-        public DetailedShippingTimeType(long? MinimumHours = default(long?), long? MaximumHours = default(long?), decimal? AvailableDate = default(decimal?), AvailabilityTypeEnum? AvailabilityType = default(AvailabilityTypeEnum?))
+        public DetailedShippingTimeType(long? MinimumHours = default(long?), long? MaximumHours = default(long?), DateTime? AvailableDate = default(DateTime?), AvailabilityTypeEnum? AvailabilityType = default(AvailabilityTypeEnum?))
         {
             this.MinimumHours = MinimumHours;
             this.MaximumHours = MaximumHours;
@@ -91,7 +91,7 @@ namespace AmazonSpApiSDK.Models.ProductPricing
         /// </summary>
         /// <value>The date when the item will be available for shipping. Only displayed for items that are not currently available for shipping.</value>
         [DataMember(Name = "availableDate", EmitDefaultValue = false)]
-        public decimal? AvailableDate { get; set; }
+        public DateTime? AvailableDate { get; set; }
 
 
         /// <summary>
