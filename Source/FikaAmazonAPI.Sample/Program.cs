@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.Sample
 
             });
 
-
+            var all = amazonConnection.Orders.GetOrders(new ParameterOrderList() { });
 
 
             Console.ReadLine();

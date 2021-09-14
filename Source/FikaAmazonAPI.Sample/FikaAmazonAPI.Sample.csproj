@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AWSSDK.Core.3.7.2.8\lib\net45\AWSSDK.Core.dll</HintPath>
+      <HintPath>..\..\packages\AWSSDK.Core.3.7.3.5\lib\net45\AWSSDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="AWSSDK.SecurityToken, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AWSSDK.SecurityToken.3.7.1.41\lib\net45\AWSSDK.SecurityToken.dll</HintPath>
+      <HintPath>..\..\packages\AWSSDK.SecurityToken.3.7.1.55\lib\net45\AWSSDK.SecurityToken.dll</HintPath>
     </Reference>
     <Reference Include="AWSSDK.SQS, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AWSSDK.SQS.3.7.0.52\lib\net45\AWSSDK.SQS.dll</HintPath>
@@ -88,7 +88,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\AWSSDK.SecurityToken.3.7.1.41\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
+    <Analyzer Include="..\..\packages\AWSSDK.SecurityToken.3.7.1.55\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
     <Analyzer Include="..\..\packages\AWSSDK.SQS.3.7.0.52\analyzers\dotnet\cs\AWSSDK.SQS.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
