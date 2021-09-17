@@ -43,10 +43,10 @@ The purpose of this package is to have an easy way of getting started with the A
 
 
 ---
-## Installation
+## Installation [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/)
 
 ```powershell
-Install-Package CSharpAmazonSpAPI -Version 1.0.1
+Install-Package CSharpAmazonSpAPI -Version 1.0.2
 ```
 
 ---
