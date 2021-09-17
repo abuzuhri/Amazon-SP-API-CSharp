@@ -33,6 +33,11 @@ namespace AmazonSpApiSDK.Models.Shipping
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public RetrieveShippingLabelResponse()
+        {
+            this.Payload = default(RetrieveShippingLabelResult);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for retrieveShippingLabel operation

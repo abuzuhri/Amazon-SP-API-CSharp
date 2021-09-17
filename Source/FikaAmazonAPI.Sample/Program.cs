@@ -26,6 +26,7 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -38,7 +39,7 @@ namespace FikaAmazonAPI.Sample
 
             });
 
-            var all = amazonConnection.Orders.GetOrders(new ParameterOrderList() { });
+            var all = amazonConnection.Shipping.GetAccount();
 
 
             Console.ReadLine();

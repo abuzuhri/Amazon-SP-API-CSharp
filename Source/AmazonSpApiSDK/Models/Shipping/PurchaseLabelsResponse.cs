@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Shipping
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public PurchaseLabelsResponse()
+        {
+            this.Payload = default(PurchaseLabelsResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for purchaseLabels operation
         /// </summary>

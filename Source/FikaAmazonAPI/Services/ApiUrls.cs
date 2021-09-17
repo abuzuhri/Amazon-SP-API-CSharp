@@ -43,6 +43,31 @@ namespace AmazonSpApiSDK.Services
                 get => $"/get_item_aspects_for_category";
             }
         }
+        protected class ShippingApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/shipping/v1";
+            public static string CreateShipment
+            {
+                get => $"{_resourceBaseUrl}/shipments";
+            }
+            public static string PurchaseShipment
+            {
+                get => $"{_resourceBaseUrl}/purchaseShipment";
+            }
+            public static string GetRates
+            {
+                get => $"{_resourceBaseUrl}/rates";
+            }
+            public static string GetAccount
+            {
+                get => $"{_resourceBaseUrl}/account";
+            }
+            public static string GetShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
+            public static string PurchaseLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/purchaseLabels";
+            public static string RetrieveShippingLabel(string shipmentId,string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
+            public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
+        }
         protected class FBASmallAndLightApiUrls
         {
             private readonly static string _resourceBaseUrl = "/fba/smallAndLight/v1";

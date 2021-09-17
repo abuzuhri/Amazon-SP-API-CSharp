@@ -31,7 +31,10 @@ namespace AmazonSpApiSDK.Models.Shipping
         {
             this.Errors = Errors;
         }
-
+        public CancelShipmentResponse()
+        {
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// Encountered errors for the operation.
         /// </summary>

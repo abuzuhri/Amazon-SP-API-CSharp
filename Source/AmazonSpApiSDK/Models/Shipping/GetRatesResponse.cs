@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Shipping
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetRatesResponse()
+        {
+            this.Payload = default(GetRatesResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for getRates operation
         /// </summary>

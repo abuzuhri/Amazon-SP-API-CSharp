@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Shipping
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetAccountResponse()
+        {
+            this.Payload = default(Account);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for getAccount operation
         /// </summary>

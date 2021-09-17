@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.Shipping
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetTrackingInformationResponse()
+        {
+            this.Payload = default(TrackingInformation);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for getTrackingInformation operation
         /// </summary>
