@@ -38,13 +38,11 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates
 
             });
+            var order=amazonConnection.Orders.GetOrder("404-0078335-4357942");
+            var all2 = amazonConnection.Messaging.GetAttributes("404-0078335-4357942");
+            var all = amazonConnection.Messaging.GetMessagingActionsForOrder("404-0078335-4357942");
 
-            var all = amazonConnection.FbaInboundEligibility.GetItemEligibilityPreview(new Parameter.FbaInboundEligibility.ParameterGetItemEligibilityPreview()
-            {
-                marketplaceIds=new List<string> { MarketPlace.UnitedArabEmirates.ID },
-                asin= "B07Q2R45XG",
-                program=AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview.ProgramEnum.INBOUND
-            });
+
 
 
             Console.ReadLine();

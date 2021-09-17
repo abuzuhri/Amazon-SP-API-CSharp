@@ -68,10 +68,10 @@ namespace FikaAmazonAPI.Services
             RefreshToken(isGrantless);
             CreateRequest(url, method);
             if (postJsonObj != null)
-            {
                 AddJsonBody(postJsonObj);
-            }
-            else  AddQueryParameters(queryParameters);
+            if (queryParameters!=null)
+                AddQueryParameters(queryParameters);
+
             AddAccessToken();
         }
 

@@ -75,6 +75,23 @@ namespace AmazonSpApiSDK.Services
             public static string RetrieveShippingLabel(string shipmentId,string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
             public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
         }
+        protected class MessaginApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/messaging/v1";
+
+            public static string GetMessagingActionsForOrder(string amazonOrderId, string marketplaceIds) => $"{_resourceBaseUrl}/orders/{amazonOrderId}?marketplaceIds={marketplaceIds}";
+            public static string ConfirmCustomizationDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmCustomizationDetails";
+            public static string CreateConfirmDeliveryDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmDeliveryDetails";
+            public static string CreateLegalDisclosure(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/legalDisclosure";
+            public static string CreateNegativeFeedbackRemoval(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/negativeFeedbackRemoval";
+            public static string CreateConfirmOrderDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmOrderDetails";
+            public static string CreateConfirmServiceDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmServiceDetails";
+            public static string CreateAmazonMotors(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/amazonMotors";
+            public static string CreateWarranty(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/warranty";
+            public static string GetAttributes(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
+            public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
+            public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
+        }
         protected class FBASmallAndLightApiUrls
         {
             private readonly static string _resourceBaseUrl = "/fba/smallAndLight/v1";
