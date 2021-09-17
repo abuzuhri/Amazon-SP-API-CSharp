@@ -33,7 +33,11 @@ namespace AmazonSpApiSDK.Models.FbaInbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetItemEligibilityPreviewResponse()
+        {
+            this.Payload = default(ItemEligibilityPreview);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getItemEligibilityPreview operation.
         /// </summary>

@@ -97,6 +97,8 @@ namespace FikaAmazonAPI
             this._FbaInventory = new FbaInventoryService(this.Credentials);
             this._FbaOutbound = new FbaOutboundService(this.Credentials);
             this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials);
+            this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials);
+            this._AplusContent = new AplusContentService(this.Credentials);
             this._Feed = new FeedService(this.Credentials);
             this._ListingsItem = new ListingsItemService(this.Credentials);
             this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);

@@ -26,7 +26,6 @@ namespace AmazonSpApiSDK.Services
                 get => $"identity/v1/oauth2/token";
             }
         }
-
         protected class TaxonomyApiUrls
         {
             private readonly static string _resourceBaseUrl = "/commerce/taxonomy/v1_beta";
@@ -41,6 +40,14 @@ namespace AmazonSpApiSDK.Services
             public static string GetItemAspectsForCategory
             {
                 get => $"/get_item_aspects_for_category";
+            }
+        }
+        protected class FBAInboundEligibiltyApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/fba/inbound/v1";
+            public static string GetItemEligibilityPreview
+            {
+                get => $"{_resourceBaseUrl}/eligibility/itemPreview";
             }
         }
         protected class ShippingApiUrls

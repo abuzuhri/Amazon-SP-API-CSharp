@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AmazonSpApiSDK.Models.FbaInbound;
+using FikaAmazonAPI.Parameter.FbaInboundEligibility;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +11,16 @@ namespace FikaAmazonAPI.Services
         public FbaInboundEligibilityService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
 
+        }
+
+        public ItemEligibilityPreview GetItemEligibilityPreview(ParameterGetItemEligibilityPreview parameterGetItemEligibilityPreview)
+        {
+            var parameter = parameterGetItemEligibilityPreview.getParameters();
+            CreateAuthorizedRequest(FBAInboundEligibiltyApiUrls.GetItemEligibilityPreview, RestSharp.Method.GET, parameter);
+            var response = ExecuteRequest<GetItemEligibilityPreviewResponse>();
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
         }
     }
 }

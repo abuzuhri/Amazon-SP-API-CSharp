@@ -39,7 +39,12 @@ namespace FikaAmazonAPI.Sample
 
             });
 
-            var all = amazonConnection.Shipping.GetAccount();
+            var all = amazonConnection.FbaInboundEligibility.GetItemEligibilityPreview(new Parameter.FbaInboundEligibility.ParameterGetItemEligibilityPreview()
+            {
+                marketplaceIds=new List<string> { MarketPlace.UnitedArabEmirates.ID },
+                asin= "B07Q2R45XG",
+                program=AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview.ProgramEnum.INBOUND
+            });
 
 
             Console.ReadLine();
