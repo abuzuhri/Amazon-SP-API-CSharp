@@ -78,10 +78,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AmazonSpApiSDK\AmazonSpApiSDK.csproj">
-      <Project>{f0eb3c36-21a7-4325-9ae8-a3fe88028b90}</Project>
-      <Name>AmazonSpApiSDK</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FikaAmazonAPI\FikaAmazonAPI.csproj">
       <Project>{70a12c48-bd11-4485-9266-9d0d86d3821d}</Project>
       <Name>FikaAmazonAPI</Name>

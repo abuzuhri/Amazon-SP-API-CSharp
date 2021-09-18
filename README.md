@@ -46,7 +46,7 @@ The purpose of this package is to have an easy way of getting started with the A
 ## Installation
 
 ```powershell
-Install-Package CSharpAmazonSpAPI -Version 1.0.1
+Install-Package CSharpAmazonSpAPI -Version 1.0.4
 ```
 
 ---
