@@ -89,16 +89,10 @@ For more information about keys please check [Amazon Selling Partner Api develop
 ### Order Lsit with parameter
 ```CSharp
             ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
             serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-
-            serachOrderList.AmazonOrderIds = new List<string>();
-            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
-            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
-            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
-            serachOrderList.AmazonOrderIds.Add("999-9999999-9999999");
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+            serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
             var orders = amazonConnection.Orders.GetOrders(serachOrderList);
             
