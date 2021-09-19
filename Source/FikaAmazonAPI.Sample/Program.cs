@@ -38,9 +38,14 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates
 
             });
-            var order=amazonConnection.Orders.GetOrder("404-0078335-4357942");
-            var all2 = amazonConnection.Messaging.GetAttributes("404-0078335-4357942");
-            var all = amazonConnection.Messaging.GetMessagingActionsForOrder("404-0078335-4357942");
+
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+            serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 
 
