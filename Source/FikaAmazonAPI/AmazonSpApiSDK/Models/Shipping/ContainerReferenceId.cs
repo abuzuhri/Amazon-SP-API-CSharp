@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Shipping
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
 {
     /// <summary>
     /// An identifier for the container. This must be unique within all the containers in the same shipment.

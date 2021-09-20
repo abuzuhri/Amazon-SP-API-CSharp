@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
     /// <summary>
     /// Contact information for the person in the seller&#39;s organization who is responsible for a Less Than Truckload/Full Truckload (LTL/FTL) shipment.

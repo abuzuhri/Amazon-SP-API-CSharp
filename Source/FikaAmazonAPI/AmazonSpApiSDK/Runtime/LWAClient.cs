@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.Services;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.IO;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class LWAClient
     {
@@ -29,7 +31,7 @@ namespace AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="lwaAccessTokenRequestMeta">LWA AccessTokenRequest metadata</param>
         /// <returns>LWA Access Token</returns>
-        public virtual string GetAccessToken()
+        public virtual TokenResponse GetAccessToken()
         {
             LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
             var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, Method.POST);
@@ -38,7 +40,6 @@ namespace AmazonSpApiSDK.Runtime
 
             accessTokenRequest.AddParameter(JsonMediaType, jsonRequestBody, ParameterType.RequestBody);
 
-            string accessToken;
             try
             {
                 var response = RestClient.Execute(accessTokenRequest);
@@ -48,16 +49,15 @@ namespace AmazonSpApiSDK.Runtime
                     throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
                 }
 
-                JObject responseJson = JObject.Parse(response.Content);
+                TokenResponse tokenService = new TokenResponse();
 
-                accessToken = responseJson.GetValue(AccessTokenKey).ToString();
+                var tokenRespoce = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
+                return tokenRespoce;
             }
             catch (Exception e)
             {
                 throw new SystemException("Error getting LWA Access Token", e);
             }
-
-            return accessToken;
         }
 
         private bool IsSuccessful(IRestResponse response)

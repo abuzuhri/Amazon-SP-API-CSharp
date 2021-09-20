@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentOutbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
     /// <summary>
     /// The COD (Cash On Delivery) charges that you associate with a COD fulfillment order.

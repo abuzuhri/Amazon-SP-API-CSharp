@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace AmazonSpApiSDK.Models.FulfillmentOutbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
     /// <summary>
     /// A code for why the item is invalid for return.

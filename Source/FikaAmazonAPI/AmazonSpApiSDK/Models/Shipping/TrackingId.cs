@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Shipping
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
 {
     /// <summary>
     /// The tracking id generated to each shipment. It contains a series of letters or digits or both.

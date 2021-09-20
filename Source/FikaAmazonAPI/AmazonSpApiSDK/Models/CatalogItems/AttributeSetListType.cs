@@ -16,7 +16,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.CatalogItems
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
 {
     /// <summary>
     /// The attributes of the item.

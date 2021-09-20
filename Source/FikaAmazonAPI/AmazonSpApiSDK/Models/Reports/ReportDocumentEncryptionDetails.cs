@@ -17,7 +17,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Reports
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
 {
     /// <summary>
     /// Encryption details required for decryption of a report document&#39;s contents.

@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.MerchantFulfillment
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
 {
     /// <summary>
     /// A carrier whose terms and conditions have not been accepted by the seller.

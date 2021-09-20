@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
     /// <summary>
     /// Labeling requirements and item preparation instructions to help you prepare items for shipment to Amazon&#39;s fulfillment network.

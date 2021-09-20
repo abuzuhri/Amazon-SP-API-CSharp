@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.CatalogItems;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ShipmentInvoicing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
     public class SubmitInvoiceResponse : IEquatable<SubmitInvoiceResponse>, IValidatableObject
     {/// <summary>

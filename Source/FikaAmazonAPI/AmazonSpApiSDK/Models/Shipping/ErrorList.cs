@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Shipping
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
 {
     /// <summary>
     /// A list of error responses returned when a request is unsuccessful.

@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
     /// <summary>
     /// The request schema for an inbound shipment.

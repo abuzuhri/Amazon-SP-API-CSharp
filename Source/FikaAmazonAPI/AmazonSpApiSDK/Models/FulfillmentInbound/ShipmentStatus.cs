@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace AmazonSpApiSDK.Models.FulfillmentInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
     /// <summary>
     /// Indicates the status of the inbound shipment. When used with the createInboundShipment operation, WORKING is the only valid value. When used with the updateInboundShipment operation, possible values are WORKING, SHIPPED or CANCELLED.

@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.MerchantFulfillment
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
 {
     /// <summary>
     /// A carrier who is temporarily unavailable, most likely due to a service outage experienced by the carrier.

@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Shipping
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
 {
     /// <summary>
     /// The two digit country code. In ISO 3166-1 alpha-2 format.

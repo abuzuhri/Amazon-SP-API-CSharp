@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductPricing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
     /// <summary>
     /// Specifies the identifiers used to uniquely identify an item.

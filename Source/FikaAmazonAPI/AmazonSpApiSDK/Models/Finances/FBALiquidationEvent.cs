@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Finances
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
 {
     /// <summary>
     /// A payment event for Fulfillment by Amazon (FBA) inventory liquidation. This event is used only in the US marketplace.

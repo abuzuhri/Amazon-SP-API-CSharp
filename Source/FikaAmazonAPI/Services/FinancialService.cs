@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Finances;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
 using FikaAmazonAPI.Parameter.Finance;
 using System;
 using System.Collections.Generic;

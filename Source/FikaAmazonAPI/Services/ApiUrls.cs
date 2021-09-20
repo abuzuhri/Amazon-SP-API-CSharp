@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AmazonSpApiSDK.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
 
     public static class EnvironemntManager

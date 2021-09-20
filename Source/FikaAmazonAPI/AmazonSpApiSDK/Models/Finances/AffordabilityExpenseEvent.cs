@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Finances
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
 {
     /// <summary>
     /// An expense related to an affordability promotion.

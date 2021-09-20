@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentOutbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
     /// <summary>
     /// Return authorization information for items accepted for return.

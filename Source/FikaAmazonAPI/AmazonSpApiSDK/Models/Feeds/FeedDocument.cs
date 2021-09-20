@@ -17,7 +17,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Feeds
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
 {
     /// <summary>
     /// FeedDocument

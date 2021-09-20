@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Authorization
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization
 {
     /// <summary>
     /// Error response returned when the request is unsuccessful.

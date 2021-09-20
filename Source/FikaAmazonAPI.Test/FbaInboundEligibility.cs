@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Test
             {
                 marketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
                 asin = "B07Q2R45XG",
-                program = AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview.ProgramEnum.INBOUND
+                program = FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview.ProgramEnum.INBOUND
             });
         }
     }

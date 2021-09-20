@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sales
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
 {
     /// <summary>
     /// A set of order metrics, each scoped to a particular time interval.

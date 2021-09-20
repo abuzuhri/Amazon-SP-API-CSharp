@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
     /// <summary>
     /// Information returned by Amazon about a Small Parcel shipment by an Amazon-partnered carrier.

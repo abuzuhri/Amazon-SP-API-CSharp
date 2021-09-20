@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInventory
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
 {
     /// <summary>
     /// An error response returned when the request is unsuccessful.

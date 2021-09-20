@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
 {
     /// <summary>
     /// The Amazon-defined identifier for an order placed by the buyer, in 3-7-7 format.

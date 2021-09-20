@@ -17,7 +17,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaSmallandLight
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
 {
     /// <summary>
     /// Request schema for submitting items for which to retrieve fee estimates.

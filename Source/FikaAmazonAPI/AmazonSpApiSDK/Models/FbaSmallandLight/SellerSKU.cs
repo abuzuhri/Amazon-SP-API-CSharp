@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaSmallandLight
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
 {
     /// <summary>
     /// Identifies an item in the given marketplace. SellerSKU is qualified by the seller&#39;s SellerId, which is included with every operation that you submit.

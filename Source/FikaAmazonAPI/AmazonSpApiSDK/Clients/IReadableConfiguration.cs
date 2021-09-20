@@ -11,7 +11,7 @@
 
 using System.Collections.Generic;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// Represents a readable-only configuration contract.

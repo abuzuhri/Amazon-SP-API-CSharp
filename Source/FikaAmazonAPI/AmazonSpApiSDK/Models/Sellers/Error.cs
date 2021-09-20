@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sellers
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
 {
     /// <summary>
     /// Error response returned when the request is unsuccessful.

@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductPricing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
     /// <summary>
     /// A list of product attributes if they are applicable to the product that is returned.

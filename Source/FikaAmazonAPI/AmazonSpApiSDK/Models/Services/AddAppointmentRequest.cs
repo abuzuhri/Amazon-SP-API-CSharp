@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
 {
     /// <summary>
     /// Input for add appointment operation.

@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.MerchantFulfillment;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using System;
 using System.Collections.Generic;
 using System.Text;

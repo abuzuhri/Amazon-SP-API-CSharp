@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Finances;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ShipmentInvoicing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
     public partial class GetShipmentDetailsResponse : IEquatable<GetShipmentDetailsResponse>, IValidatableObject
     {

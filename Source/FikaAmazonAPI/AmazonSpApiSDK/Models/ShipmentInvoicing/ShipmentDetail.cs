@@ -1,10 +1,10 @@
-﻿using AmazonSpApiSDK.Models.Orders;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ShipmentInvoicing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
     public class ShipmentDetail : IEquatable<ShipmentDetail>, IValidatableObject
     {

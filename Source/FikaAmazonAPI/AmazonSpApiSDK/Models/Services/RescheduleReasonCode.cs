@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
 {
     /// <summary>
     /// Appointment reschedule reason code.

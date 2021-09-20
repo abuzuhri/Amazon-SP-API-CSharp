@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound
 {
     /// <summary>
     /// A list of error responses returned when a request is unsuccessful.

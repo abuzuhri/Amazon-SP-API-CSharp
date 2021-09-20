@@ -2,7 +2,7 @@
 using System;
 using System.Net;
 
-namespace AmazonSpApiSDK.Models.Exceptions
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 {
     public class AmazonException : Exception
     {

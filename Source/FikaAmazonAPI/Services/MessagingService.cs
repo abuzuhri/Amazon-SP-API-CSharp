@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Messaging;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Text;

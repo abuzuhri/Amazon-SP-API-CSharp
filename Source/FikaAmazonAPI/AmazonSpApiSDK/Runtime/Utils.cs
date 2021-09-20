@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public static class Utils
     {

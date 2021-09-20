@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AmazonSpApiSDK.Models.Notifications
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 {
     /// <summary>
     /// The information required to create an Amazon Simple Queue Service (Amazon SQS) queue destination.

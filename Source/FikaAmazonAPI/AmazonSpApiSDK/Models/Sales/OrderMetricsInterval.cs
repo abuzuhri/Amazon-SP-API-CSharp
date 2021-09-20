@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sales
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
 {
     /// <summary>
     /// Contains order metrics.

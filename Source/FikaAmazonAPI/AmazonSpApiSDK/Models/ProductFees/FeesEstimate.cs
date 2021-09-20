@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductFees
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
 {
     /// <summary>
     /// The total estimated fees for an item and a list of details.

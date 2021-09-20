@@ -17,7 +17,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Reports
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
 {
     /// <summary>
     /// Detailed information about a report schedule.

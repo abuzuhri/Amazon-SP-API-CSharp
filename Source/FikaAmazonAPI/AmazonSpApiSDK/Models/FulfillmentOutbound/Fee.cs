@@ -17,7 +17,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentOutbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
     /// <summary>
     /// Fee type and cost.

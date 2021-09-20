@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInventory
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
 {
     /// <summary>
     /// The process of returning the results to a request in batches of a defined size called pages. This is done to exercise some control over result size and overall throughput. It&#39;s a form of traffic management.

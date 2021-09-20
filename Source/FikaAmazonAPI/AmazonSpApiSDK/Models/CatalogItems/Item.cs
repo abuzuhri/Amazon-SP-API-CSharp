@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.CatalogItems
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
 {
     /// <summary>
     /// An item in the Amazon catalog.

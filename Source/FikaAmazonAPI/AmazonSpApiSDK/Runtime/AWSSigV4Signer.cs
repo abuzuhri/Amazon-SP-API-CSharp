@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class AWSSigV4Signer
 

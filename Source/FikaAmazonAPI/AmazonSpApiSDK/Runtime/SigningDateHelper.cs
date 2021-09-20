@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class SigningDateHelper : IDateHelper
     {

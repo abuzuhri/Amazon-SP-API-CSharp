@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Orders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
     /// Buyer information for custom orders from the Amazon Custom program.

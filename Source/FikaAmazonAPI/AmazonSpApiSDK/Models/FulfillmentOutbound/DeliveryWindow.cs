@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FulfillmentOutbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
     /// <summary>
     /// The time range within which a Scheduled Delivery fulfillment order should be delivered.

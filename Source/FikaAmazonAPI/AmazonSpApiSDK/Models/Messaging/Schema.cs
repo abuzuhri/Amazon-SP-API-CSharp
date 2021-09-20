@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-namespace AmazonSpApiSDK.Models.Messaging
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
     /// <summary>
     /// A JSON schema document describing the expected payload of the action. This object can be validated against &lt;a href&#x3D;http://json-schema.org/draft-04/schema&gt;http://json-schema.org/draft-04/schema&lt;/a&gt;.

@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.CatalogItems
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
 {
     /// <summary>
     /// A list of variation relationship information, if applicable for the item.

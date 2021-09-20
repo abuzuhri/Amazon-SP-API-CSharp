@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Finances
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
 {
     /// <summary>
     /// Contains all information related to a financial event.

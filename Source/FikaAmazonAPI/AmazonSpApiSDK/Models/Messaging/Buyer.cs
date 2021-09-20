@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AmazonSpApiSDK.Models.Messaging
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
     /// <summary>
     /// Information about the buyer.

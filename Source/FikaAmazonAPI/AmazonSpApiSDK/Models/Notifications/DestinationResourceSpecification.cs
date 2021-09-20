@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Notifications
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 {
     /// <summary>
     /// The information required to create a destination resource. Applications should use one resource type (sqs or eventBridge) per destination.

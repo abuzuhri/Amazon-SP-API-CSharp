@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Notifications
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 {
     /// <summary>
     /// Represents a subscription to receive notifications.

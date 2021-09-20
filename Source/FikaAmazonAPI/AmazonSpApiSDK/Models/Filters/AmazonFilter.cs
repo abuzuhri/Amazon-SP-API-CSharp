@@ -1,4 +1,4 @@
-﻿namespace AmazonSpApiSDK.Models.Filters
+﻿namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Filters
 {
     public class AmazonFilter
     {

@@ -18,7 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// API client is mainly responsible for making the HTTP call to the API backend.
@@ -288,7 +288,7 @@ namespace AmazonSpApiSDK.Clients
         /// <returns>Object representation of the JSON string.</returns>
         public object Deserialize(IRestResponse response, Type type)
         {
-            IList<Parameter> headers = response.Headers;
+            IList<RestSharp.Parameter> headers = response.Headers;
             if (type == typeof(byte[])) // return byte array
             {
                 return response.RawBytes;

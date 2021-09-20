@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 
 
-namespace AmazonSpApiSDK.Models.Upload
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
 {
     /// <summary>
     /// An error response returned when the request is unsuccessful.

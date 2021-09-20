@@ -1,7 +1,7 @@
-﻿using AmazonSpApiSDK.Api.Orders;
-using AmazonSpApiSDK.Clients;
-using AmazonSpApiSDK.Models;
-using AmazonSpApiSDK.Models.Orders;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Api.Orders;
+using FikaAmazonAPI.AmazonSpApiSDK.Clients;
+using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Utils;
 using RestSharp;

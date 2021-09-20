@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Upload;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Upload;
 using FikaAmazonAPI.Parameter.Upload;
 using System;
 using System.Collections.Generic;

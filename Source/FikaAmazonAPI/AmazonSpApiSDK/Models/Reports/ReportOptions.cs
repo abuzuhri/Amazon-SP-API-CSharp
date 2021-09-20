@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Reports
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
 {
     /// <summary>
     /// Additional information passed to reports. This varies by report type.

@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-namespace AmazonSpApiSDK.Models.Messaging
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
     /// <summary>
     /// The response schema for the createNegativeFeedbackRemoval operation.

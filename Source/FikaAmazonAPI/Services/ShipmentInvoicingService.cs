@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.ShipmentInvoicing;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing;
 using System;
 using System.Collections.Generic;
 using System.Text;

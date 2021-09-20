@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Solicitations
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations
 {
     /// <summary>
     /// A simple object containing the name of the template.

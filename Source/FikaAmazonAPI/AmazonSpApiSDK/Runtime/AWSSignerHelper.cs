@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class AWSSignerHelper
     {
@@ -142,7 +142,7 @@ namespace AmazonSpApiSDK.Runtime
         /// <returns>Hexadecimal hashed value of payload in the body of request</returns>
         public virtual string HashRequestBody(IRestRequest request)
         {
-            Parameter body = request.Parameters.FirstOrDefault(parameter => ParameterType.RequestBody.Equals(parameter.Type));
+            RestSharp.Parameter body = request.Parameters.FirstOrDefault(parameter => ParameterType.RequestBody.Equals(parameter.Type));
             string value = body != null ? body.Value.ToString() : string.Empty;
             return Utils.ToHex(Utils.Hash(value));
         }

@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInventory
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
 {
     /// <summary>
     /// Summarized inventory details. This object will not appear if the details parameter in the request is false.

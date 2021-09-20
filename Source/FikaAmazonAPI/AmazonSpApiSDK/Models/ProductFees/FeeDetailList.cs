@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductFees
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
 {
     /// <summary>
     /// A list of other fees that contribute to a given fee.

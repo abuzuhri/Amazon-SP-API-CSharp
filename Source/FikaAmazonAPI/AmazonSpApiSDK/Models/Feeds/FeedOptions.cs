@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Feeds
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
 {
     /// <summary>
     /// Additional options to control the feed. These vary by feed type.

@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.FbaInventory;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
 using FikaAmazonAPI.Parameter.FbaInventory;
 using System;
 using System.Collections.Generic;

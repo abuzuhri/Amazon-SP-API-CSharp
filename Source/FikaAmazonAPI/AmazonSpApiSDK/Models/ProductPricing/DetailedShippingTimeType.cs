@@ -16,7 +16,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductPricing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
     /// <summary>
     /// The time range in which an item will likely be shipped once an order has been placed.

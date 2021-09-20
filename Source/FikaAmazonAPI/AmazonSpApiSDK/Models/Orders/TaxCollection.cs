@@ -16,7 +16,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Orders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
     /// Information about withheld taxes.

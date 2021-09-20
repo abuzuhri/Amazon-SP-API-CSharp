@@ -10,7 +10,7 @@
 
 using System;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// API Exception

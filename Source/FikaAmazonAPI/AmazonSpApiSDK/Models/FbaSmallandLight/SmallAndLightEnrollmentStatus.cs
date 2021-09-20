@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace AmazonSpApiSDK.Models.FbaSmallandLight
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
 {
     /// <summary>
     /// The Small and Light enrollment status of the item.

@@ -1,9 +1,9 @@
-﻿using AmazonSpApiSDK.Models;
-using AmazonSpApiSDK.Models.CatalogItems;
-using AmazonSpApiSDK.Models.Exceptions;
-using AmazonSpApiSDK.Models.Filters;
-using AmazonSpApiSDK.Models.Orders;
-using AmazonSpApiSDK.Services;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using RestSharp;
@@ -16,6 +16,7 @@ namespace FikaAmazonAPI.Services
 {
     public class RequestService : ApiUrls
     {
+        private string AccessTokenHeaderName = "x-amz-access-token";
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
@@ -154,7 +155,7 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddAccessToken()
         {
-            Request.AddHeader(AmazonSpApiSDK.Runtime.LWAAuthorizationSigner.AccessTokenHeaderName, AccessToken);
+            Request.AddHeader(AccessTokenHeaderName, AccessToken);
         }
 
         protected void RefreshToken(bool isGrantless=false)

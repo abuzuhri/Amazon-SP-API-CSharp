@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sales
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
 {
     /// <summary>
     /// The response schema for the getOrderMetrics operation.

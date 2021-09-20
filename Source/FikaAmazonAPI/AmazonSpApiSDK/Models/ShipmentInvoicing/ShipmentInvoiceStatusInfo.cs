@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ShipmentInvoicing
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
     public partial class ShipmentInvoiceStatusInfo
     {

@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Sellers;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers;
 using System;
 using System.Collections.Generic;
 using System.Text;

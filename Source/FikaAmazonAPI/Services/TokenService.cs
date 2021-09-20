@@ -1,8 +1,8 @@
 ﻿using Amazon;
 using Amazon.SecurityToken;
 using Amazon.SecurityToken.Model;
-using AmazonSpApiSDK.Models;
-using AmazonSpApiSDK.Runtime;
+using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.Utils;
 using RestSharp;
 using System;
@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.Services
             var Client = new LWAClient(lwaCredentials);
             var accessToken = Client.GetAccessToken();
 
-            return accessToken;
+            return accessToken.access_token;
         }
 
 

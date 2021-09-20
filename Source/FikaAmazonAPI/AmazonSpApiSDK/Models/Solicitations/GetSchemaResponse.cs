@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Solicitations
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations
 {
     /// <summary>
     /// GetSchemaResponse

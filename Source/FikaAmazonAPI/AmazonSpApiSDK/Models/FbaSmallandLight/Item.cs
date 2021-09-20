@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaSmallandLight
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
 {
     /// <summary>
     /// An item to be sold.

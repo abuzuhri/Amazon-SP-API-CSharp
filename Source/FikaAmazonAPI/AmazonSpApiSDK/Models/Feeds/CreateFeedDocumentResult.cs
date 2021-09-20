@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Feeds
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
 {
     /// <summary>
     /// Information required to encrypt and upload a feed document&#39;s contents.

@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Orders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
     /// The number of Amazon Points offered with the purchase of an item, and their monetary value.

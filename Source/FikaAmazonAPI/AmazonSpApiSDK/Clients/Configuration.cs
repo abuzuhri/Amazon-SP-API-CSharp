@@ -13,7 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// Represents a set of configuration settings

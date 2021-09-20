@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-namespace AmazonSpApiSDK.Models.Messaging
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
     /// <summary>
     /// Represents a file uploaded to a destination that was created by the createUploadDestination operation of the Uploads API.

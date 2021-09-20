@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sellers
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
 {
     /// <summary>
     /// Detailed information that is specific to a seller in a Marketplace.

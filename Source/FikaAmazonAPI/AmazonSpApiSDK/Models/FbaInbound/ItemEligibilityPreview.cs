@@ -18,7 +18,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInbound
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound
 {
     /// <summary>
     /// The response object which contains the ASIN, marketplaceId if required, eligibility program, the eligibility status (boolean), and a list of ineligibility reason codes.

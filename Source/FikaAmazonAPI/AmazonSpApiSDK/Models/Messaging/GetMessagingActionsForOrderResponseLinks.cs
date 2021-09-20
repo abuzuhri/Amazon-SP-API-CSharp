@@ -13,7 +13,7 @@ using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace AmazonSpApiSDK.Models.Messaging
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
     public class GetMessagingActionsForOrderResponseLinks : IEquatable<GetMessagingActionsForOrderResponseLinks>, IValidatableObject
     {

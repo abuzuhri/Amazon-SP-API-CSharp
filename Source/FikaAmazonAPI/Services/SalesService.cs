@@ -1,5 +1,5 @@
-﻿using AmazonSpApiSDK.Models.Sales;
-using AmazonSpApiSDK.Models.Sellers;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers;
 using FikaAmazonAPI.Parameter.Sales;
 using System;
 using System.Collections.Generic;

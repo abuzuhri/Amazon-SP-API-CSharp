@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
 {
     /// <summary>
     /// A technician who is assigned to perform the service job in part or in full.

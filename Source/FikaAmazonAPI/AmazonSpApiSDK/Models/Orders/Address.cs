@@ -17,7 +17,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Orders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
     /// The shipping address for the order.

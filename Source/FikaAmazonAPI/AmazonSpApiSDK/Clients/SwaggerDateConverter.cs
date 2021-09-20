@@ -10,7 +10,7 @@
 
 using Newtonsoft.Json.Converters;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// Formatter for 'date' swagger formats ss defined by full-date - RFC3339

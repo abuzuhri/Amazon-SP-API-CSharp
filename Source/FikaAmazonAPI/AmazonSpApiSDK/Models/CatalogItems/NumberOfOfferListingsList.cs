@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.CatalogItems
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
 {
     /// <summary>
     /// The number of active offer listings for the item that was submitted. The listing count is returned by condition, one for each listing condition value that is returned. Possible listing condition values are: Any, New, Used, Collectible, Refurbished, or Club.

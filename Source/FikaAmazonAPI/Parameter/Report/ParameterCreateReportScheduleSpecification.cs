@@ -1,8 +1,8 @@
-﻿using AmazonSpApiSDK.Models.Reports;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
-using static AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report

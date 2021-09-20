@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Feeds;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
 using FikaAmazonAPI.Parameter.Feed;
 using FikaAmazonAPI.Utils;
 using System;

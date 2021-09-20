@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview;
 
 namespace FikaAmazonAPI.Parameter.FbaInboundEligibility
 {

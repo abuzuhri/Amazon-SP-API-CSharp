@@ -16,7 +16,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AmazonSpApiSDK.Models.Services
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
 {
     /// <summary>
     /// Information about the seller of the service job.

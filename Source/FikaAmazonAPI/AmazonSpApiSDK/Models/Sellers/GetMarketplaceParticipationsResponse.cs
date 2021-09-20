@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Sellers
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
 {
     /// <summary>
     /// The response schema for the getMarketplaceParticipations operation.

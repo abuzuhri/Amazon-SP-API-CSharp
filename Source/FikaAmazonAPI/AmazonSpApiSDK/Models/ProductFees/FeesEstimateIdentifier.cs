@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.ProductFees
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
 {
     /// <summary>
     /// An item identifier, marketplace, time of request, and other details that identify an estimate.

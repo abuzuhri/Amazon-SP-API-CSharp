@@ -11,7 +11,7 @@
 
 using System;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// Represents configuration aspects required to interact with the API endpoints.

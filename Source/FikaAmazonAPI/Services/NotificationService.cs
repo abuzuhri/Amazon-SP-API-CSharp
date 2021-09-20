@@ -1,6 +1,6 @@
 ﻿using Amazon.SQS;
 using Amazon.SQS.Model;
-using AmazonSpApiSDK.Models.Notifications;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications;
 using FikaAmazonAPI.NotificationMessages;
 using FikaAmazonAPI.Parameter.Notification;
 using Newtonsoft.Json;

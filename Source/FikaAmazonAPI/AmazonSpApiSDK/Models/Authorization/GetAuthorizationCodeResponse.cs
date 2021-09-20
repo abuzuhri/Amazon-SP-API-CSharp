@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.Authorization
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization
 {
     /// <summary>
     /// The response schema for the GetAuthorizationCode operation.

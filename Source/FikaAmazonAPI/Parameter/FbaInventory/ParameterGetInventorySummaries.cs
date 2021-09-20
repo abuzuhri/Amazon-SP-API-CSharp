@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static AmazonSpApiSDK.Models.FbaInventory.Granularity;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory.Granularity;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.FbaInventory

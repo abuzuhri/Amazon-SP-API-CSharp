@@ -12,7 +12,7 @@
 using RestSharp;
 using System;
 
-namespace AmazonSpApiSDK.Clients
+namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
 {
     /// <summary>
     /// A delegate to ExceptionFactory method

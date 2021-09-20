@@ -16,7 +16,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaSmallandLight
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
 {
     /// <summary>
     /// The Small and Light eligibility status of the item indicated by the specified seller SKU.

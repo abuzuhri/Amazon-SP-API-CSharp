@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AmazonSpApiSDK.Runtime
+namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class LWAAccessTokenRequestMeta
     {

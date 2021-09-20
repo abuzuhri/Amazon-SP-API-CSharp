@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.Shipping;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping;
 using System;
 using System.Collections.Generic;
 using System.Text;

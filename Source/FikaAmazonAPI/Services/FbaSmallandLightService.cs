@@ -1,4 +1,4 @@
-﻿using AmazonSpApiSDK.Models.FbaSmallandLight;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
 using System;
 using System.Collections.Generic;
 using System.Text;

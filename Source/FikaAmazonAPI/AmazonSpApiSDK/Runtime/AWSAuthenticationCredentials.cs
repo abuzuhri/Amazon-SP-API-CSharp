@@ -1,4 +1,4 @@
-﻿namespace AmazonSpApiSDK.Runtime
+﻿namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     public class AWSAuthenticationCredentials
     {

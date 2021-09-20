@@ -17,7 +17,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AmazonSpApiSDK.Models.FbaInventory
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
 {
     /// <summary>
     /// The misplaced or warehouse damaged inventory that is actively being confirmed at our fulfillment centers.

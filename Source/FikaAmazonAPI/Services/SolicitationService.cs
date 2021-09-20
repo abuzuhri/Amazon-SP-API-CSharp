@@ -1,5 +1,5 @@
-﻿using AmazonSpApiSDK.Models;
-using AmazonSpApiSDK.Models.Solicitations;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations;
 using System;
 using System.Collections.Generic;
 using System.Text;

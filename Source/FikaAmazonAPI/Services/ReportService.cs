@@ -1,6 +1,6 @@
-﻿using AmazonSpApiSDK.Models;
-using AmazonSpApiSDK.Models.Orders;
-using AmazonSpApiSDK.Models.Reports;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
 using System;

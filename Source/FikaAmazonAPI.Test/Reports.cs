@@ -89,7 +89,7 @@ namespace FikaAmazonAPI.Test
 
             var parameters = new ParameterCreateReportScheduleSpecification();
             parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL;
-            parameters.period = AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification.PeriodEnum.PT30M;
+            parameters.period = FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification.PeriodEnum.PT30M;
 
             parameters.marketplaceIds = new MarketplaceIds();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
