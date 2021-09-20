@@ -9,9 +9,13 @@ The purpose of this package is to have an easy way of getting started with the A
 
 ---
 ### Requirements
-- Newtonsoft.Json
-- RestSharp
-- AWSSDK.SecurityToken
+- [AWSSDK.SecurityToken](https://www.nuget.org/packages/AWSSDK.SecurityToken/)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
+- [AWSSDK.SQS](https://www.nuget.org/packages/AWSSDK.SQS/)
+- [RestSharp](https://www.nuget.org/packages/RestSharp/)
+- [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
+- [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
+- [XSerializer](https://www.nuget.org/packages/XSerializer/)
 
 
 ---
