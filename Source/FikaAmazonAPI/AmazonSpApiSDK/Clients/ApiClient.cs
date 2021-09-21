@@ -427,7 +427,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Clients
         /// <param name="fromObject">Object to be casted</param>
         /// <param name="toObject">Target type</param>
         /// <returns>Casted object</returns>
-        public static dynamic ConvertType(dynamic fromObject, Type toObject) => Convert.ChangeType(fromObject, toObject);
+        public static dynamic ConvertType(dynamic fromObject, Type toObject)
+        {
+            return Convert.ChangeType(fromObject, toObject);
+        }
 
         /// <summary>
         /// Convert stream to byte array
