@@ -305,6 +305,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{SellerSKU}/feesEstimate";
             public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
         }
+        protected class TokenApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/tokens/2021-03-01";
+            public static string RestrictedDataToken
+            {
+                get => $"{_resourceBaseUrl}/restrictedDataToken";
+            }
+        }
         protected class SolicitationsApiUrls
         {
             private readonly static string _resourceBaseUrl = "/solicitations/v1";
@@ -338,7 +346,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/summaries";
             }
         }
-        protected class OrdersApiUrls
+        public class OrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/orders/v0";
             public static string Orders

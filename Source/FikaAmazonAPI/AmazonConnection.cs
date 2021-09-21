@@ -36,8 +36,10 @@ namespace FikaAmazonAPI
         public ShipmentInvoicingService ShipmentInvoicing => this._ShipmentInvoicing ?? throw _NoCredentials;
         public ShippingService Shipping => this._Shipping ?? throw _NoCredentials;
         public UploadService Upload => this._Upload ?? throw _NoCredentials;
+        public TokenService Tokens => this._Tokens ?? throw _NoCredentials;
 
 
+        
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
         private SolicitationService _Solicitations { get; set; }
@@ -64,7 +66,7 @@ namespace FikaAmazonAPI
         private ShippingService _Shipping { get; set; }
         private UploadService _Upload { get; set; }
 
-
+        private TokenService _Tokens { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
@@ -111,6 +113,7 @@ namespace FikaAmazonAPI
             this._ShipmentInvoicing= new ShipmentInvoicingService(this.Credentials);
             this._Shipping= new ShippingService(this.Credentials);
             this._Upload= new UploadService(this.Credentials);
+            this._Tokens= new TokenService(this.Credentials);
         }
     }
 }

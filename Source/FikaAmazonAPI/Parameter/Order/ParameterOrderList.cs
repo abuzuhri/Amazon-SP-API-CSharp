@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.Search;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace FikaAmazonAPI.Parameter.Order
 {
-    public class ParameterOrderList :  ParameterBased
+    public class ParameterOrderList :  ParameterBased, IParameterBasedPII
     {
         /// <summary>
         /// A date used for selecting orders created after (or at) a specified time. Only orders placed after the specified time are returned. Either the CreatedAfter parameter or the LastUpdatedAfter parameter is required. Both cannot be empty. The date must be in ISO 8601 format.	
@@ -81,6 +82,7 @@ namespace FikaAmazonAPI.Parameter.Order
         /// The store chain store identifier. Linked to a specific store in a store chain.	
         /// </summary>
         public string StoreChainStoreId { get; set; }
-
+        public bool IsNeedRestrictedDataToken { get; set; }
+        public CreateRestrictedDataTokenRequest RestrictedDataTokenRequest { get; set; }
     }
 }

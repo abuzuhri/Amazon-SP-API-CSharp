@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.Search
 {
     public class ParameterBased
     {
-        public List<KeyValuePair<string, string>> getParameters()
+        public virtual List<KeyValuePair<string, string>> getParameters()
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             Type t = this.GetType(); // Where obj is object whose properties you need.
@@ -24,6 +24,9 @@ namespace FikaAmazonAPI.Search
                 {
                     var PropertyType = p.PropertyType;
                     var propTypeName = p.PropertyType.Name;
+
+                    if (propTypeName == "IsNeedRestrictedDataToken" || propTypeName == "RestrictedDataTokenRequest")
+                        continue;
 
                     string output = "";
                     if (PropertyType == typeof(DateTime) || PropertyType == typeof(Nullable<DateTime>))
@@ -64,17 +67,17 @@ namespace FikaAmazonAPI.Search
 
             return queryParameters;
         }
-        public static bool IsNullableEnum(Type t)
+        private static bool IsNullableEnum(Type t)
         {
             Type u = Nullable.GetUnderlyingType(t);
             return (u != null) && u.IsEnum;
         }
-        public static bool IsEnumerableOfEnum(Type type)
+        private static bool IsEnumerableOfEnum(Type type)
         {
             return GetEnumerableTypes(type).Any(t => t.IsEnum);
         }
-        
-        public static bool IsEnumerable(Type type)
+
+        private static bool IsEnumerable(Type type)
         {
             if (type.IsInterface)
             {
@@ -89,7 +92,7 @@ namespace FikaAmazonAPI.Search
 
             return false;
         }
-        public static IEnumerable<Type> GetEnumerableTypes(Type type)
+        private static IEnumerable<Type> GetEnumerableTypes(Type type)
         {
             if (type.IsInterface)
             {

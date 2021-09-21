@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using RestSharp.Serializers;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
+using FikaAmazonAPI.Search;
 
 namespace FikaAmazonAPI.Services
 {
@@ -24,6 +27,7 @@ namespace FikaAmazonAPI.Services
         protected string AmazonSandboxUrl { get; set; }
         protected string AmazonProductionUrl { get; set; }
         protected string AccessToken { get; set; }
+
         protected string ApiBaseUrl
         {
             get
@@ -44,19 +48,11 @@ namespace FikaAmazonAPI.Services
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
 
             MarketPlace = amazonCredential.MarketPlace;
+            
         }
 
-        /// <summary>
-        /// Checks if token is refreshed after creating the sevice instance
-        /// </summary>
-        /// <param name="lastUpdated">last time the tokken was updated</param>
-        /// <returns></returns>
-        public bool IsAccessTokenRefreshed(DateTime lastUpdated)
-        {
-            return true; //; lastUpdated != ClientToken.LastUpdated;
-        }
 
-        private void CreateRequest(string url, Method method)
+        private void CreateRequest(string url, RestSharp.Method method)
         {
             RequestClient = new RestClient(ApiBaseUrl);
             Request = new RestRequest(url, method);
@@ -64,9 +60,14 @@ namespace FikaAmazonAPI.Services
 
 
 
-        protected void CreateAuthorizedRequest(string url, Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null,bool isGrantless=false)
+        protected void CreateAuthorizedRequest(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null, TokenDataType tokenDataType=TokenDataType.Normal,object parameter=null)
         {
-            RefreshToken(isGrantless);
+            var PiiObject = parameter as IParameterBasedPII;
+            if (PiiObject != null && PiiObject.IsNeedRestrictedDataToken)
+            {
+                RefreshToken(TokenDataType.PII, PiiObject.RestrictedDataTokenRequest);
+            }
+            else RefreshToken(tokenDataType);
             CreateRequest(url, method);
             if (postJsonObj != null)
                 AddJsonBody(postJsonObj);
@@ -76,7 +77,7 @@ namespace FikaAmazonAPI.Services
             AddAccessToken();
         }
 
-        protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, Method method)
+        protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
         {
             RefreshToken();
             if (filter.NextPage != null)
@@ -96,7 +97,7 @@ namespace FikaAmazonAPI.Services
         /// <returns>Returns data of T type</returns>
         protected T ExecuteRequest<T>() where T : new()
         {
-            Request = TokenService.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential.RoleArn, AmazonCredential.AccessKey, AmazonCredential.SecretKey, AmazonCredential.MarketPlace.Region.RegionName);
+            Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential.RoleArn, AmazonCredential.AccessKey, AmazonCredential.SecretKey, AmazonCredential.MarketPlace.Region.RegionName);
             var response = RequestClient.Execute<T>(Request);
             //response.Headers
             ///TODO
@@ -158,35 +159,39 @@ namespace FikaAmazonAPI.Services
             Request.AddHeader(AccessTokenHeaderName, AccessToken);
         }
 
-        protected void RefreshToken(bool isGrantless=false)
+        protected void RefreshToken(TokenDataType tokenDataType=TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
         {
-            AccessToken = TokenService.RefreshAccessToken(AmazonCredential, isGrantless);
+            var token = AmazonCredential.CacheTokenData.GetToken(tokenDataType);
+            if(token==null)
+            {
+                if(tokenDataType== TokenDataType.PII)
+                {
+                    var pii = CreateRestrictedDataToken(requestPII);
+                    token=new TokenResponse()
+                    {
+                        access_token = pii.RestrictedDataToken,
+                        expires_in = pii.ExpiresIn
+                    };
+
+                }
+                else
+                {
+                    token = TokenGeneration.RefreshAccessToken(AmazonCredential, tokenDataType);
+                }
+
+                AmazonCredential.CacheTokenData.SetToken(tokenDataType, token);
+            }
+                
+
+            AccessToken = token.access_token;
         }
 
-    }
-
-
-    public class JsonNetSerializer : ISerializer
-    {
-        public string Serialize(object obj) =>
-            JsonConvert.SerializeObject(obj);
-
-        //public string Serialize(BodyParameter bodyParameter) =>
-        //    JsonConvert.SerializeObject(bodyParameter.Value);
-
-        public T Deserialize<T>(IRestResponse response) =>
-            JsonConvert.DeserializeObject<T>(response.Content);
-
-        public string[] SupportedContentTypes { get; } =
+        public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-                "application/json", "text/json", "text/x-json", "text/javascript", "*+json"
-            };
-
-        public string ContentType { get; set; } = "application/json";
-
-        public DataFormat DataFormat { get; } = DataFormat.Json;
-
-
-
+            CreateAuthorizedRequest(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
+            var response = ExecuteRequest<CreateRestrictedDataTokenResponse>();
+            return response;
+        }
     }
+
 }

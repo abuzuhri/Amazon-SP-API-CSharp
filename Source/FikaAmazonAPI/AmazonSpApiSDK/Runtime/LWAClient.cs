@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public virtual TokenResponse GetAccessToken()
         {
             LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
-            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, Method.POST);
+            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath,RestSharp.Method.POST);
 
             string jsonRequestBody = JsonConvert.SerializeObject(lwaAccessTokenRequestMeta);
 

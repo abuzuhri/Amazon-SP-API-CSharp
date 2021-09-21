@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.Utils;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,9 +15,11 @@ namespace FikaAmazonAPI
         public string ClientSecret { get; set; }
         public string RefreshToken { get; set; }
         public MarketPlace MarketPlace { get; set; }
-
+        public CacheTokenData CacheTokenData { get; set; }
+        
         public AmazonCredential()
         {
+            CacheTokenData = new CacheTokenData();
         }
         public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret)
         {

@@ -18,6 +18,9 @@ using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 using static FikaAmazonAPI.Utils.Constants;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Services;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
 
 namespace FikaAmazonAPI.Sample
 {
@@ -39,14 +42,32 @@ namespace FikaAmazonAPI.Sample
 
             });
 
+
+
+
+            var restrictedResource = new RestrictedResource();
+            restrictedResource.method = Method.GET.ToString();
+            restrictedResource.path = ApiUrls.OrdersApiUrls.Orders;
+            restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
+
+
+            var createRDT = new CreateRestrictedDataTokenRequest()
+            {
+                restrictedResources = new List<RestrictedResource> { restrictedResource }
+            };
+
+
+
+
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
             serachOrderList.OrderStatuses = new List<OrderStatuses>();
             serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
             serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+            serachOrderList.RestrictedDataTokenRequest = createRDT;
+            serachOrderList.IsNeedRestrictedDataToken = true;
 
             var orders = amazonConnection.Orders.GetOrders(serachOrderList);
-
 
 
 

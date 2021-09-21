@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
@@ -34,7 +35,7 @@ namespace FikaAmazonAPI.Services
 
         public Destination CreateDestination(CreateDestinationRequest request)
         {
-            CreateAuthorizedRequest(NotificationApiUrls.CreateDestination, RestSharp.Method.POST, postJsonObj: request, isGrantless: true);
+            CreateAuthorizedRequest(NotificationApiUrls.CreateDestination, RestSharp.Method.POST, postJsonObj: request,tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<CreateDestinationResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -42,7 +43,7 @@ namespace FikaAmazonAPI.Services
         }
         public List<Destination> GetDestinations()
         {
-            CreateAuthorizedRequest(NotificationApiUrls.GetDestinations, RestSharp.Method.GET,isGrantless:true);
+            CreateAuthorizedRequest(NotificationApiUrls.GetDestinations, RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<GetDestinationsResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -50,7 +51,7 @@ namespace FikaAmazonAPI.Services
         }
         public Destination GetDestination(string destinationId)
         {
-            CreateAuthorizedRequest(NotificationApiUrls.GetDestination(destinationId), RestSharp.Method.GET, isGrantless: true);
+            CreateAuthorizedRequest(NotificationApiUrls.GetDestination(destinationId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<GetDestinationResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -58,7 +59,7 @@ namespace FikaAmazonAPI.Services
         }
         public bool DeleteDestination(string destinationId)
         {
-            CreateAuthorizedRequest(NotificationApiUrls.DeleteDestination(destinationId), RestSharp.Method.DELETE, isGrantless: true);
+            CreateAuthorizedRequest(NotificationApiUrls.DeleteDestination(destinationId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<DeleteDestinationResponse>();
             if (response != null && response.Errors != null)
                 return false;
@@ -77,7 +78,7 @@ namespace FikaAmazonAPI.Services
 
         public Subscription GetSubscriptionById(NotificationType notificationType,string subscriptionId)
         {
-            CreateAuthorizedRequest(NotificationApiUrls.GetSubscriptionById(notificationType.ToString(),subscriptionId), RestSharp.Method.GET,isGrantless:true);
+            CreateAuthorizedRequest(NotificationApiUrls.GetSubscriptionById(notificationType.ToString(),subscriptionId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<GetSubscriptionByIdResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -85,7 +86,7 @@ namespace FikaAmazonAPI.Services
         }
         public bool DeleteSubscriptionById(NotificationType notificationType, string subscriptionId)
         {
-            CreateAuthorizedRequest(NotificationApiUrls.DeleteSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.DELETE, isGrantless: true);
+            CreateAuthorizedRequest(NotificationApiUrls.DeleteSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
             var response = ExecuteRequest<DeleteSubscriptionByIdResponse>();
             if (response != null && response.Errors != null)
                 return false;
