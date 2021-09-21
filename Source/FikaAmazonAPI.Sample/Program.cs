@@ -65,10 +65,14 @@ namespace FikaAmazonAPI.Sample
             serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
             serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
             serachOrderList.RestrictedDataTokenRequest = createRDT;
-            serachOrderList.IsNeedRestrictedDataToken = true;
+            serachOrderList.IsNeedRestrictedDataToken = false;
 
             var orders = amazonConnection.Orders.GetOrders(serachOrderList);
-
+            var order = amazonConnection.Orders.GetOrder(new ParameterGetOrder() { 
+                OrderId= "405-5895000-9009106",
+                
+            });
+            var orderss = amazonConnection.Orders.GetOrders(serachOrderList);
 
 
             Console.ReadLine();

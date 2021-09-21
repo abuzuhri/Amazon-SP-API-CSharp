@@ -37,32 +37,45 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, string roleARN, string accessKey, string secretKey,string region)
+        public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
         {
-            AssumeRoleResponse response1 = null;
-            using (var STSClient = new AmazonSecurityTokenServiceClient(accessKey, secretKey)) //, RegionEndpoint.USEast1
+            var dataToken = amazonCredential.CacheTokenData.GetAWSAuthenticationTokenData();
+            if (dataToken == null)
             {
-                var req = new AssumeRoleRequest()
+                AssumeRoleResponse response1 = null;
+                using (var STSClient = new AmazonSecurityTokenServiceClient(amazonCredential.AccessKey, amazonCredential.SecretKey))
                 {
-                    RoleArn = roleARN,
-                    DurationSeconds = 950, //put anything you want here
-                    RoleSessionName = Guid.NewGuid().ToString()
+                    var req = new AssumeRoleRequest()
+                    {
+                        RoleArn = amazonCredential.RoleArn,
+                        DurationSeconds = 950, //put anything you want here
+                        RoleSessionName = Guid.NewGuid().ToString()
+                    };
+
+                    response1 = STSClient.AssumeRoleAsync(req, new CancellationToken()).Result;
+                }
+
+                //auth step 3
+                var awsAuthenticationCredentials = new AWSAuthenticationCredentials
+                {
+                    AccessKeyId = response1.Credentials.AccessKeyId,
+                    SecretKey = response1.Credentials.SecretAccessKey,
+                    Region = amazonCredential.MarketPlace.Region.RegionName
                 };
 
-                response1 = STSClient.AssumeRoleAsync(req, new CancellationToken()).Result;
+                amazonCredential.CacheTokenData.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
+                {
+                    AWSAuthenticationCredential= awsAuthenticationCredentials,
+                    SessionToken= response1.Credentials.SessionToken,
+                    Expiration= response1.Credentials.Expiration
+                });
+                dataToken = amazonCredential.CacheTokenData.GetAWSAuthenticationTokenData();
             }
+            
+            
+            restRequest.AddHeader("x-amz-security-token", dataToken.SessionToken);
 
-            //auth step 3
-            var awsAuthenticationCredentials = new AWSAuthenticationCredentials
-            {
-                AccessKeyId = response1.Credentials.AccessKeyId,
-                SecretKey = response1.Credentials.SecretAccessKey,
-                Region = region
-            };
-
-            restRequest.AddHeader("x-amz-security-token", response1.Credentials.SessionToken);
-
-            return new AWSSigV4Signer(awsAuthenticationCredentials)
+            return new AWSSigV4Signer(dataToken.AWSAuthenticationCredential)
                             .Sign(restRequest, host);
         }
     }

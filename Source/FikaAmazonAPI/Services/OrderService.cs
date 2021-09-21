@@ -53,9 +53,9 @@ namespace FikaAmazonAPI.Services
 
         #endregion
 
-        public CreateReportResult GetOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
+        public CreateReportResult GetOrder(ParameterGetOrder parameter)
         {
-            CreateAuthorizedRequest(OrdersApiUrls.Order(orderId), RestSharp.Method.GET);
+            CreateAuthorizedRequest(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.GET,parameter: parameter);
             var response = ExecuteRequest<GetOrderResponse>();
            return response.Payload;
         }

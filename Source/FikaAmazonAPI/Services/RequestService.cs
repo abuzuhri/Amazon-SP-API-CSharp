@@ -97,7 +97,7 @@ namespace FikaAmazonAPI.Services
         /// <returns>Returns data of T type</returns>
         protected T ExecuteRequest<T>() where T : new()
         {
-            Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential.RoleArn, AmazonCredential.AccessKey, AmazonCredential.SecretKey, AmazonCredential.MarketPlace.Region.RegionName);
+            Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential);
             var response = RequestClient.Execute<T>(Request);
             //response.Headers
             ///TODO

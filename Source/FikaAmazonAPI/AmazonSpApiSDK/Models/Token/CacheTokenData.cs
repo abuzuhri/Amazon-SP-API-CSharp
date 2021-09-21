@@ -9,7 +9,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         protected TokenResponse NormalAccessToken { get; set; }
         protected TokenResponse PIIAccessToken { get; set; }
         protected TokenResponse GrantlessAccessToken { get; set; }
+        protected AWSAuthenticationTokenData AWSAuthenticationTokenData { get; set; }
 
+        public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
+        {
+            if (AWSAuthenticationTokenData != null && AWSAuthenticationTokenData.Expiration > DateTime.Now)
+                return AWSAuthenticationTokenData;
+            else return null;
+        }
         public TokenResponse GetToken(TokenDataType tokenDataType)
         {
             TokenResponse token = null; 
@@ -35,6 +42,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
                 else return null;
             }
         }
+        public void SetAWSAuthenticationTokenData(AWSAuthenticationTokenData tokenData)
+        {
+            AWSAuthenticationTokenData = tokenData;
+        }
         public void SetToken(TokenDataType tokenDataType, TokenResponse token)
         {
             
@@ -44,7 +55,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             }
             else if (tokenDataType == TokenDataType.PII)
             {
-                //its not true to save PII token 
+                //its not true to save PII token and reuse it with other request
                 //PIIAccessToken=token;
             }
             else if (tokenDataType == TokenDataType.Grantless)
