@@ -70,7 +70,6 @@ namespace FikaAmazonAPI.Sample
             var orders = amazonConnection.Orders.GetOrders(serachOrderList);
             var order = amazonConnection.Orders.GetOrder(new ParameterGetOrder() { 
                 OrderId= "405-5895000-9009106",
-                
             });
             var orderss = amazonConnection.Orders.GetOrders(serachOrderList);
 

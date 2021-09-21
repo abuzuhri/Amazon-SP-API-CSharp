@@ -186,11 +186,13 @@ namespace FikaAmazonAPI.Services
             AccessToken = token.access_token;
         }
 
-        public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
+        public CreateRestrictedDataTokenData CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
             CreateAuthorizedRequest(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
             var response = ExecuteRequest<CreateRestrictedDataTokenResponse>();
-            return response;
+            if(response!=null && response.Payload!=null)
+                return response.Payload;
+            return null;
         }
     }
 
