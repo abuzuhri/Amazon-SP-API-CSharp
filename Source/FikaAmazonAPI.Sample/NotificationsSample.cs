@@ -1,7 +1,5 @@
 ﻿using FikaAmazonAPI.NotificationMessages;
 using FikaAmazonAPI.Parameter.Notification;
-using FikaAmazonAPI.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +7,34 @@ using System.Text;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Test
+namespace FikaAmazonAPI.Sample
 {
-    [TestClass]
-    public class Notifications
+    public class NotificationsSample
     {
         AmazonConnection amazonConnection;
-        public Notifications()
+        public NotificationsSample(AmazonConnection amazonConnection)
         {
-            amazonConnection = new AmazonConnection(new AmazonCredential()
-            {
-                AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
-                SecretKey = Environment.GetEnvironmentVariable("SecretKey"),
-                RoleArn = Environment.GetEnvironmentVariable("RoleArn"),
-                ClientId = Environment.GetEnvironmentVariable("ClientId"),
-                ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
-                RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates
-
-            });
-
+            this.amazonConnection = amazonConnection;
         }
 
-        [TestMethod]
+
         public void GetSubscription()
         {
             var data = amazonConnection.Notification.GetSubscription(NotificationType.ANY_OFFER_CHANGED);
         }
-        [TestMethod]
+
         public void GetDestinations()
         {
             var data = amazonConnection.Notification.GetDestinations();
         }
 
-        [TestMethod]
+
         public void DeleteDestination()
         {
             var data = amazonConnection.Notification.DeleteDestination("99999999-999-4699-999-9999999999999");
         }
 
-        [TestMethod]
+
         public void CreateDestination()
         {
             //EventBridge
@@ -73,7 +59,7 @@ namespace FikaAmazonAPI.Test
 
         }
 
-        [TestMethod]
+
         public void StartReceivingNotificationMessages()
         {
             var SQL_URL = "https://sqs.us-east-2.amazonaws.com/239917024027/ICANL_SQS";
@@ -97,6 +83,5 @@ namespace FikaAmazonAPI.Test
                 //Your Code here
             }
         }
-
     }
 }

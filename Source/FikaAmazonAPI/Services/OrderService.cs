@@ -3,6 +3,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Clients;
 using FikaAmazonAPI.AmazonSpApiSDK.Models;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.Parameter.Order;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using RestSharp;
 using System;
@@ -61,10 +62,10 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public OrderItemList GetOrderItems(string orderId)
+        public OrderItemList GetOrderItems(string orderId,IParameterBasedPII ParameterBasedPII=null)
         {
             var orderItemList = new OrderItemList();
-            CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET);
+            CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET,parameter: ParameterBasedPII);
             var response = ExecuteRequest<GetOrderItemsResponse>();
             var nextToken = response.Payload.NextToken;
             orderItemList.AddRange(response.Payload.OrderItems);

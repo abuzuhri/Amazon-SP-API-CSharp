@@ -43,35 +43,9 @@ namespace FikaAmazonAPI.Sample
             });
 
 
+            OrdersSample ordersSample = new OrdersSample(amazonConnection);
 
-
-            var restrictedResource = new RestrictedResource();
-            restrictedResource.method = Method.GET.ToString();
-            restrictedResource.path = ApiUrls.OrdersApiUrls.Orders;
-            restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
-
-
-            var createRDT = new CreateRestrictedDataTokenRequest()
-            {
-                restrictedResources = new List<RestrictedResource> { restrictedResource }
-            };
-
-
-
-
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-            serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
-            serachOrderList.RestrictedDataTokenRequest = createRDT;
-            serachOrderList.IsNeedRestrictedDataToken = false;
-
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
-            var order = amazonConnection.Orders.GetOrder(new ParameterGetOrder() { 
-                OrderId= "405-5895000-9009106",
-            });
-            var orderss = amazonConnection.Orders.GetOrders(serachOrderList);
+            ordersSample.GetOrders();
 
 
             Console.ReadLine();

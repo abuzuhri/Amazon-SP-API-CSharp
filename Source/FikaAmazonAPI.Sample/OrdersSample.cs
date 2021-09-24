@@ -1,33 +1,21 @@
-using FikaAmazonAPI.Parameter.Order;
-using FikaAmazonAPI.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FikaAmazonAPI.Parameter.Order;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Test
+namespace FikaAmazonAPI.Sample
 {
-    [TestClass]
-    public class Orders
+    public class OrdersSample
     {
         AmazonConnection amazonConnection;
-        public Orders()
+        public OrdersSample(AmazonConnection amazonConnection)
         {
-            amazonConnection = new AmazonConnection(new AmazonCredential()
-            {
-                AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
-                SecretKey = Environment.GetEnvironmentVariable("SecretKey"),
-                RoleArn = Environment.GetEnvironmentVariable("RoleArn"),
-                ClientId = Environment.GetEnvironmentVariable("ClientId"),
-                ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
-                RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates
-
-            });
-
+            this.amazonConnection = amazonConnection;
         }
 
-        [TestMethod]
         public void GetOrders()
         {
             ParameterOrderList serachOrderList = new ParameterOrderList();
@@ -46,25 +34,25 @@ namespace FikaAmazonAPI.Test
         }
 
 
-        [TestMethod]
+        
         public void GetOrderBuyerInfo()
         {
             var BuyerInfo = amazonConnection.Orders.GetOrderBuyerInfo("402-0467973-4229120");
         }
 
-        [TestMethod]
+        
         public void GetOrderAddress()
         {
             var Address = amazonConnection.Orders.GetOrderAddress("402-0467973-4229120");
         }
 
-        [TestMethod]
+        
         public void GetOrderItems()
         {
             var Items = amazonConnection.Orders.GetOrderItems("402-0467973-4229120");
         }
 
-        [TestMethod]
+        
         public void GetOrderItemsBuyerInfo()
         {
             var ItemsBuyerInfo = amazonConnection.Orders.GetOrderItemsBuyerInfo("402-0467973-4229120");

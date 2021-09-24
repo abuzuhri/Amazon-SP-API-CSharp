@@ -69,9 +69,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CatalogItemsSample.cs" />
     <Compile Include="CustomMessageReceiver.cs" />
+    <Compile Include="FbaInboundEligibilitySample.cs" />
+    <Compile Include="FeedsSample.cs" />
+    <Compile Include="FinancialSample.cs" />
+    <Compile Include="NotificationsSample.cs" />
+    <Compile Include="OrdersSample.cs" />
+    <Compile Include="ProductPricingSample.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsSample.cs" />
+    <Compile Include="SolicitationsSample.cs" />
+    <Compile Include="TokenSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

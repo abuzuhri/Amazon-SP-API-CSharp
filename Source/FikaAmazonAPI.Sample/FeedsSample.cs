@@ -1,7 +1,6 @@
 ﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +9,17 @@ using System.Threading.Tasks;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Test
+namespace FikaAmazonAPI.Sample
 {
-    [TestClass]
-    public class Feeds
+    public class FeedsSample
     {
         AmazonConnection amazonConnection;
-        public Feeds()
+        public FeedsSample(AmazonConnection amazonConnection)
         {
-            amazonConnection = new AmazonConnection(new AmazonCredential()
-            {
-                AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
-                SecretKey = Environment.GetEnvironmentVariable("SecretKey"),
-                RoleArn = Environment.GetEnvironmentVariable("RoleArn"),
-                ClientId = Environment.GetEnvironmentVariable("ClientId"),
-                ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
-                RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates
-
-            });
-
+            this.amazonConnection = amazonConnection;
         }
 
 
-
-        [TestMethod]
         public void GetFeeds()
         {
 
@@ -49,7 +34,7 @@ namespace FikaAmazonAPI.Test
             });
         }
 
-        [TestMethod]
+
         public void CreateFeedDocument()
         {
 
@@ -57,28 +42,27 @@ namespace FikaAmazonAPI.Test
         }
 
 
-        [TestMethod]
+
         public void GetFeedDocument()
         {
 
             var data2 = amazonConnection.Feed.GetFeedDocument("amzn1.tortuga.3.92d8fd38-6ccf-49be-979f-6dc27375ea3e.T2DF7HINJ0NRA2");
         }
-        [TestMethod]
+
         public void GetFeed()
         {
 
             var data2 = amazonConnection.Feed.GetFeed("194146018872");
         }
-        [TestMethod]
+
         public void CancelFeed()
         {
 
             var data2 = amazonConnection.Feed.CancelFeed("194146018872");
         }
-        [TestMethod]
+
         public void SubmitFeedInventory()
         {
-            //
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
             var list = new List<InventoryMessage>();
             list.Add(new InventoryMessage()
@@ -94,7 +78,7 @@ namespace FikaAmazonAPI.Test
 
         }
 
-        [TestMethod]
+
         public void SubmitFeedPRICING()
         {
 
@@ -122,6 +106,5 @@ namespace FikaAmazonAPI.Test
 
             var reportOutpit = outPut.Url;
         }
-
     }
 }
