@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing;
+using FikaAmazonAPI.Parameter;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,9 +13,9 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        public ShipmentDetail GetShipmentDetails(string shipmentId)
+        public ShipmentDetail GetShipmentDetails(string shipmentId, ParameterBasedPII parameterBasedPII)
         {
-            CreateAuthorizedRequest(ShipmentInvoicingApiUrls.GetShipmentDetails(shipmentId), RestSharp.Method.GET);
+            CreateAuthorizedRequest(ShipmentInvoicingApiUrls.GetShipmentDetails(shipmentId), RestSharp.Method.GET,parameter: parameterBasedPII);
             var response = ExecuteRequest<GetShipmentDetailsResponse>();
 
             if(response!=null && response.Payload!=null)

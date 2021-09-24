@@ -28,6 +28,7 @@ namespace FikaAmazonAPI.Sample
     {
         static async Task Main(string[] args)
         {
+nment.SetEnvironmentVariable("RefreshToken", "Atzr|IwEBIB_EWhQekUsF08ZtXWccm5chfM8K7t6Cw_U6G5YtEvJ2ZQmCV_r8jcr_4htXf64mBG1pXxDShTydP3vyRyTdAaXctrj5Kf1LWBVJdlOh05TPWgGbqag-GU1_IAqp0dQ4hG6jrTc30B1n7pzIX2boXyFejZprrldZWbgXmC5yEHue9_-_Qdv7CBQmeWDYeOALvx2s2ZmJqNw_q6IvIUttSeE5cbgNJ3nqxtfzlnJxAu928NQnBN_8t3RJ6r1gRDE6bDgpDOOL_uxB3fN9KAmKPfoa3eRDAPjiivuM81TgIvwYFtcUiuGWnqYhlYKs6gxpxfk");
 
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()

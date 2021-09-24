@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
+using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,28 +35,18 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public Shipment GetShipment(string shipmentId)
+        public Shipment GetShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.GET);
+            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.GET,parameter: ParameterBasedPII);
 
             var response = ExecuteRequest<GetShipmentResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public Shipment CancelShipment(string shipmentId)
+        public Shipment CancelShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.DELETE);
-
-            var response = ExecuteRequest<GetShipmentResponse>();
-            if (response != null && response.Payload != null)
-                return response.Payload;
-            return null;
-        }
-
-        public Shipment CancelShipmentOld(string shipmentId)
-        {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.PUT);
+            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.DELETE, parameter: ParameterBasedPII);
 
             var response = ExecuteRequest<GetShipmentResponse>();
             if (response != null && response.Payload != null)
@@ -63,9 +54,19 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest)
+        public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.POST,postJsonObj: createShipmentRequest);
+            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.PUT, parameter: ParameterBasedPII);
+
+            var response = ExecuteRequest<GetShipmentResponse>();
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
+        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII ParameterBasedPII = null)
+        {
+            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.POST,postJsonObj: createShipmentRequest, parameter: ParameterBasedPII);
 
             var response = ExecuteRequest<CreateShipmentResponse>();
             if (response != null && response.Payload != null)

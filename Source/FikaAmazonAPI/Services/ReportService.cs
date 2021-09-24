@@ -2,6 +2,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Parameter.Report;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
@@ -109,9 +110,9 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public ReportDocument GetReportDocument(string reportDocumentId)
+        public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET);
+            CreateAuthorizedRequest(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET,parameter: ParameterBasedPII);
             var response = ExecuteRequest<ReportDocument>();
             if (response != null)
                 return response;
