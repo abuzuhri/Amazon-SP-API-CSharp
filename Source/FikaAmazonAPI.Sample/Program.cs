@@ -43,9 +43,12 @@ namespace FikaAmazonAPI.Sample
             });
 
 
-            OrdersSample ordersSample = new OrdersSample(amazonConnection);
+            FulFillmentInboundSample fulFillmentInboundSample = new FulFillmentInboundSample(amazonConnection);
+            //fulFillmentInboundSample.GetInboundGuidance();
+            fulFillmentInboundSample.GetPrepInstructions();
 
-            ordersSample.GetOrders();
+            //OrdersSample ordersSample = new OrdersSample(amazonConnection);
+            //ordersSample.GetOrders();
 
 
             Console.ReadLine();

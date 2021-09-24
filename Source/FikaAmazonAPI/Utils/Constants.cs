@@ -28,6 +28,50 @@ namespace FikaAmazonAPI.Utils
             Delete,
             PartialUpdate,
         }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShipmentStatusList
+        {
+            WORKING,
+            SHIPPED,
+            RECEIVING,
+            CANCELLED,
+            DELETED,
+            CLOSED,
+            ERROR,
+            IN_TRANSIT,
+            DELIVERED,
+            CHECKED_IN,
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum QueryType
+        {
+            SHIPMENT,
+            DATE_RANGE,
+            NEXT_TOKEN
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PageType
+        {
+            PackageLabel_Letter_2,
+            PackageLabel_Letter_4,
+            PackageLabel_Letter_6,
+            PackageLabel_Letter_6_CarrierLeft,
+            PackageLabel_A4_2,
+            PackageLabel_A4_4,
+            PackageLabel_Plain_Paper,
+            PackageLabel_Plain_Paper_CarrierBottom,
+            PackageLabel_Thermal,
+            PackageLabel_Thermal_Unified,
+            PackageLabel_Thermal_NonPCP,
+            PackageLabel_Thermal_No_Carrier_Rotation
+        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum LabelType
+        {
+            BARCODE_2D,
+            UNIQUE,
+            PALLET
+        }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FeedType

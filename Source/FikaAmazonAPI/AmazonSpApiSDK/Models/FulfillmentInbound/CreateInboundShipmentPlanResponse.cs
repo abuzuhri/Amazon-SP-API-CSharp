@@ -33,7 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public CreateInboundShipmentPlanResponse()
+        {
+            this.Payload = default(CreateInboundShipmentPlanResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the createInboundShipmentPlan operation.
         /// </summary>

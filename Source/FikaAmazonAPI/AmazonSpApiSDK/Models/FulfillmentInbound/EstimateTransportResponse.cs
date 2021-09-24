@@ -33,6 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public EstimateTransportResponse()
+        {
+            this.Payload = default(CommonTransportResult);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the estimateTransport operation.

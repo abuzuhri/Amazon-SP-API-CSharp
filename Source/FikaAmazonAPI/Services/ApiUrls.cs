@@ -50,6 +50,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/eligibility/itemPreview";
             }
         }
+        protected class FulFillmentOutboundyApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/fba/inbound/v0";
+            public static string GetInboundGuidance
+            {
+                get => $"{_resourceBaseUrl}/itemsGuidance";
+            }
+            public static string CreateInboundShipmentPlan
+            {
+                get => $"{_resourceBaseUrl}/plans";
+            }
+            public static string UpdateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string CreateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            public static string GetPreorderInfo(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder";
+            public static string ConfirmPreorder(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder/confirm";
+            public static string GetPrepInstructions
+            {
+                get => $"{_resourceBaseUrl}/prepInstructions";
+            }
+            public static string GetTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
+            public static string PutTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
+            public static string VoidTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/void";
+            public static string EstimateTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/estimate";
+            public static string ConfirmTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/confirm";
+            public static string GetLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/labels";
+            public static string GetBillOfLading(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/billOfLading";
+            public static string GetShipments
+            {
+                get => $"{_resourceBaseUrl}/shipments";
+            }
+            public static string GetShipmentItemsByShipmentId(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/items";
+            public static string GetShipmentItems
+            {
+                get => $"{_resourceBaseUrl}/shipmentItems";
+            }
+        }
         protected class ShippingApiUrls
         {
             private readonly static string _resourceBaseUrl = "/shipping/v1";

@@ -74,6 +74,7 @@
     <Compile Include="FbaInboundEligibilitySample.cs" />
     <Compile Include="FeedsSample.cs" />
     <Compile Include="FinancialSample.cs" />
+    <Compile Include="FulFillmentInboundSample.cs" />
     <Compile Include="NotificationsSample.cs" />
     <Compile Include="OrdersSample.cs" />
     <Compile Include="ProductPricingSample.cs" />

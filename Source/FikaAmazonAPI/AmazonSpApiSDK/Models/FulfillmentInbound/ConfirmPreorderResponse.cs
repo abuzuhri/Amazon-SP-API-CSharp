@@ -33,7 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public ConfirmPreorderResponse()
+        {
+            this.Payload = default(ConfirmPreorderResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the confirmPreorder operation.
         /// </summary>
