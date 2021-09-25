@@ -3,6 +3,7 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 
 namespace FikaAmazonAPI
 {
@@ -15,8 +16,10 @@ namespace FikaAmazonAPI
         public string ClientSecret { get; set; }
         public string RefreshToken { get; set; }
         public MarketPlace MarketPlace { get; set; }
-        public CacheTokenData CacheTokenData { get; set; }
-        
+        private CacheTokenData CacheTokenData { get; set; }
+        public bool IsActiveLimitRate { get; set; } = true;
+
+
         public AmazonCredential()
         {
             CacheTokenData = new CacheTokenData();
@@ -29,6 +32,23 @@ namespace FikaAmazonAPI
             this.ClientId = ClientId;
             this.ClientSecret = ClientSecret;
             this.RefreshToken = RefreshToken;
+        }
+
+        public TokenResponse GetToken(TokenDataType tokenDataType)
+        {
+            return CacheTokenData.GetToken(tokenDataType);
+        }
+        public void SetToken(TokenDataType tokenDataType, TokenResponse token)
+        {
+            CacheTokenData.SetToken(tokenDataType, token);
+        }
+        public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
+        {
+            return CacheTokenData.GetAWSAuthenticationTokenData();
+        }
+        public void SetAWSAuthenticationTokenData(AWSAuthenticationTokenData tokenData)
+        {
+            CacheTokenData.SetAWSAuthenticationTokenData(tokenData);
         }
     }
 }

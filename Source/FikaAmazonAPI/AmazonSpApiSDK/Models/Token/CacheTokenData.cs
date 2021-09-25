@@ -17,6 +17,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
                 return AWSAuthenticationTokenData;
             else return null;
         }
+        public void SetAWSAuthenticationTokenData(AWSAuthenticationTokenData tokenData)
+        {
+            AWSAuthenticationTokenData = tokenData;
+        }
         public TokenResponse GetToken(TokenDataType tokenDataType)
         {
             TokenResponse token = null; 
@@ -42,10 +46,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
                 else return null;
             }
         }
-        public void SetAWSAuthenticationTokenData(AWSAuthenticationTokenData tokenData)
-        {
-            AWSAuthenticationTokenData = tokenData;
-        }
+
         public void SetToken(TokenDataType tokenDataType, TokenResponse token)
         {
             

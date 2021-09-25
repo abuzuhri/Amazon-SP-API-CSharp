@@ -29,7 +29,6 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -38,16 +37,22 @@ namespace FikaAmazonAPI.Sample
                 ClientId = Environment.GetEnvironmentVariable("ClientId"),
                 ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
                 RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates
+                MarketPlace = MarketPlace.UnitedArabEmirates,
+                IsActiveLimitRate=true
 
             });
 
-            var data4 = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+
+            for(int i = 0; i < 10000; i++)
             {
-                ItemCondition = ItemCondition.New,
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asin = "B00LZ0VSMI"
-            });
+                var data4 = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+                {
+                    ItemCondition = ItemCondition.New,
+                    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                    Asin = "B00LZ0VSMI"
+                });
+            }
+
 
             var data3 = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
             {

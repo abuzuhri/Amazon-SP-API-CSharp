@@ -14,12 +14,15 @@ using RestSharp.Serializers;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using FikaAmazonAPI.Search;
+using System.Linq;
+using System.Threading;
 
 namespace FikaAmazonAPI.Services
 {
     public class RequestService : ApiUrls
     {
-        private string AccessTokenHeaderName = "x-amz-access-token";
+        private readonly string AccessTokenHeaderName = "x-amz-access-token";
+        private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
@@ -99,17 +102,42 @@ namespace FikaAmazonAPI.Services
         {
             Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential);
             var response = RequestClient.Execute<T>(Request);
-            //response.Headers
-            ///TODO
-            ///x-amzn-RateLimit-Limit
-            ///https://github.com/gilyas/selling-partner-api-bootstrap/blob/2f075c1690882bdc3b1e8e916f67ec88f14b36d1/lambda/src/main/java/cn/amazon/aws/rp/spapi/lambda/requestlimiter/ApiProxy.java#L147
-
+            SleepForRateLimit(response.Headers);
             ParseResponse(response);
+            
             if (response.StatusCode==HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
             {
                 response.Data = JsonConvert.DeserializeObject<T>(response.Content);
             }
             return response.Data;
+        }
+
+        private void SleepForRateLimit(IList<RestSharp.Parameter> headers)
+        {
+            try
+            {
+                if (AmazonCredential.IsActiveLimitRate)
+                {
+                    var limitHeader = headers.Where(a => a.Name == RateLimitLimitHeaderName).FirstOrDefault();
+                    if (limitHeader != null)
+                    {
+                        var RateLimitValue = limitHeader.Value.ToString();
+                        float rate = 0;
+                        if(float.TryParse(RateLimitValue,out rate))
+                        {
+                            if (rate > 0)
+                            {
+                                int sleepTime = (int)(1 / rate*1000);
+                                Thread.Sleep(sleepTime);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
         /// <summary>
@@ -161,7 +189,7 @@ namespace FikaAmazonAPI.Services
 
         protected void RefreshToken(TokenDataType tokenDataType=TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
         {
-            var token = AmazonCredential.CacheTokenData.GetToken(tokenDataType);
+            var token = AmazonCredential.GetToken(tokenDataType);
             if(token==null)
             {
                 if(tokenDataType== TokenDataType.PII)
@@ -179,7 +207,7 @@ namespace FikaAmazonAPI.Services
                     token = TokenGeneration.RefreshAccessToken(AmazonCredential, tokenDataType);
                 }
 
-                AmazonCredential.CacheTokenData.SetToken(tokenDataType, token);
+                AmazonCredential.SetToken(tokenDataType, token);
             }
                 
 

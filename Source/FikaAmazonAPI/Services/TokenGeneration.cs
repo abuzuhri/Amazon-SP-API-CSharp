@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.Services
 
         public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
         {
-            var dataToken = amazonCredential.CacheTokenData.GetAWSAuthenticationTokenData();
+            var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             if (dataToken == null)
             {
                 AssumeRoleResponse response1 = null;
@@ -63,13 +63,13 @@ namespace FikaAmazonAPI.Services
                     Region = amazonCredential.MarketPlace.Region.RegionName
                 };
 
-                amazonCredential.CacheTokenData.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
+                amazonCredential.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
                 {
                     AWSAuthenticationCredential= awsAuthenticationCredentials,
                     SessionToken= response1.Credentials.SessionToken,
                     Expiration= response1.Credentials.Expiration
                 });
-                dataToken = amazonCredential.CacheTokenData.GetAWSAuthenticationTokenData();
+                dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             }
             
             

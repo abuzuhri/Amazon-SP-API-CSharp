@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -76,7 +77,7 @@ namespace FikaAmazonAPI.Sample
         {
 
             var parameters = new ParameterCreateReportScheduleSpecification();
-            parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL;
+            parameters.reportType = ReportTypes.GET_AFN_INVENTORY_DATA;
             parameters.period = FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification.PeriodEnum.PT30M;
 
             parameters.marketplaceIds = new MarketplaceIds();
@@ -111,6 +112,35 @@ namespace FikaAmazonAPI.Sample
 
             var data = amazonConnection.Reports.GetReportDocument("50039018867");
 
+        }
+
+        public string CreateReport_GET_MERCHANT_LISTINGS_ALL_DATA()
+        {
+
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+
+            parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+
+            var reportId = amazonConnection.Reports.CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
+            {
+                var reportData = amazonConnection.Reports.GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+                else Thread.Sleep(1000 * 60);
+            }
+
+            return filePath;
         }
 
 
