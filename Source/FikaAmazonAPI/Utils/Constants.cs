@@ -283,8 +283,28 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OfferTypeEnum
         {
+            /// <summary>
+            /// Enum B2C for value: B2C
+            /// </summary>
+            [EnumMember(Value = "B2C")]
             B2C,
+            /// <summary>
+            /// Enum B2B for value: B2B
+            /// </summary>
+            [EnumMember(Value = "B2B")]
             B2B
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+
+        public enum QuantityDiscountType
+        {
+
+            /// <summary>
+            /// Enum QUANTITYDISCOUNT for value: QUANTITY_DISCOUNT
+            /// </summary>
+            [EnumMember(Value = "QUANTITY_DISCOUNT")]
+            QUANTITYDISCOUNT = 1
         }
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BuyerType

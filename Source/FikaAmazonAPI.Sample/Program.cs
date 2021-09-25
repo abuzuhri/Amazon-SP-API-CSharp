@@ -42,6 +42,34 @@ namespace FikaAmazonAPI.Sample
 
             });
 
+            var data4 = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+            {
+                ItemCondition = ItemCondition.New,
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asin = "B00LZ0VSMI"
+            });
+
+            var data3 = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asins = new string[] { "B00LZ0VSMI" },
+
+            });
+
+            var data2 = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                Asins = new string[] { "B00LZ0VSMI" }
+            });
+
+            var data= amazonConnection.ProductPricing.GetListingOffers(new Parameter.ProductPricing.ParameterGetListingOffers()
+            {
+                ItemCondition=ItemCondition.New,
+                MarketplaceId=MarketPlace.UnitedArabEmirates.ID,
+                SellerSKU= "3282770207736."
+            });
+
+            //B00LZ0VSMI
 
             FulFillmentInboundSample fulFillmentInboundSample = new FulFillmentInboundSample(amazonConnection);
             //fulFillmentInboundSample.GetInboundGuidance();
