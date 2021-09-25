@@ -50,7 +50,41 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/eligibility/itemPreview";
             }
         }
-        protected class FulFillmentOutboundyApiUrls
+        protected class FulFillmentOutboundApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/ba/outbound/2020-07-01";
+            public static string GetFulfillmentPreview
+            {
+                get => $"{_resourceBaseUrl}/fulfillmentOrders/preview";
+            }
+            public static string ListAllFulfillmentOrders
+            {
+                get => $"{_resourceBaseUrl}/fulfillmentOrders";
+            }
+            public static string CreateFulfillmentOrder
+            {
+                get => $"{_resourceBaseUrl}/fulfillmentOrders";
+            }
+            public static string GetPackageTrackingDetails
+            {
+                get => $"{_resourceBaseUrl}/tracking";
+            }
+            public static string ListReturnReasonCodes
+            {
+                get => $"{_resourceBaseUrl}/returnReasonCodes";
+            }
+            public static string CreateFulfillmentReturn(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/return";
+            public static string GetFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
+            public static string UpdateFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
+            public static string CancelFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/cancel";
+            public static string GetFeatures
+            {
+                get => $"{_resourceBaseUrl}/features";
+            }
+            public static string GetFeatureInventory(string featureName) => $"{_resourceBaseUrl}/features/inventory/{featureName}";
+            public static string GetFeatureSKU(string featureName,string sellerSku) => $"{_resourceBaseUrl}/features/inventory/{featureName}/{sellerSku}";
+        }
+        protected class FulFillmentInboundApiUrls
         {
             private readonly static string _resourceBaseUrl = "/fba/inbound/v0";
             public static string GetInboundGuidance

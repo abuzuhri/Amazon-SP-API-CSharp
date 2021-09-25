@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
         public GetInboundGuidanceResult GetInboundGuidance(ParameterGetInboundGuidance parameterGetInboundGuidance)
         {
             var parameter = parameterGetInboundGuidance.getParameters();
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
 
             var response = ExecuteRequest<GetInboundGuidanceResponse>();
             if (response != null && response.Payload != null)
@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.Services
         }
         public CreateInboundShipmentPlanResult CreateInboundShipmentPlan(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest)
         {
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.CreateInboundShipmentPlan, RestSharp.Method.POST,postJsonObj: createInboundShipmentPlanRequest);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.CreateInboundShipmentPlan, RestSharp.Method.POST,postJsonObj: createInboundShipmentPlanRequest);
 
             var response = ExecuteRequest<CreateInboundShipmentPlanResponse>();
             if (response != null && response.Payload != null)
@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.Services
         }
         public InboundShipmentResult UpdateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.UpdateInboundShipment(shipmentId), RestSharp.Method.PUT,postJsonObj: inboundShipmentRequest);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.UpdateInboundShipment(shipmentId), RestSharp.Method.PUT,postJsonObj: inboundShipmentRequest);
 
             var response = ExecuteRequest<InboundShipmentResponse>();
             if (response != null && response.Payload != null)
@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.Services
         }
         public InboundShipmentResult CreateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.CreateInboundShipment(shipmentId), RestSharp.Method.POST,postJsonObj: inboundShipmentRequest);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.CreateInboundShipment(shipmentId), RestSharp.Method.POST,postJsonObj: inboundShipmentRequest);
 
             var response = ExecuteRequest<InboundShipmentResponse>();
             if (response != null && response.Payload != null)
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetPreorderInfo(shipmentId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetPreorderInfo(shipmentId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<InboundShipmentResponse>();
             if (response != null && response.Payload != null)
@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
             queryParameters.Add(new KeyValuePair<string, string>("NeedByDate", NeedByDate.ToString("YYYY-MM-DD")));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.ConfirmPreorder(shipmentId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmPreorder(shipmentId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<ConfirmPreorderResponse>();
             if (response != null && response.Payload != null)
@@ -78,7 +78,7 @@ namespace FikaAmazonAPI.Services
         public GetPrepInstructionsResult GetPrepInstructions(ParameterGetPrepInstructions parameterGetPrepInstructions)
         {
             var parameter = parameterGetPrepInstructions.getParameters();
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
 
             var response = ExecuteRequest<GetPrepInstructionsResponse>();
             if (response != null && response.Payload != null)
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetTransportDetails(shipmentId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetTransportDetails(shipmentId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<GetTransportDetailsResponse>();
             if (response != null && response.Payload != null)
@@ -100,7 +100,7 @@ namespace FikaAmazonAPI.Services
 
         public CommonTransportResult PutTransportDetails(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest)
         {
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.PutTransportDetails(shipmentId), RestSharp.Method.PUT, postJsonObj: putTransportDetailsRequest);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.PutTransportDetails(shipmentId), RestSharp.Method.PUT, postJsonObj: putTransportDetailsRequest);
 
             var response = ExecuteRequest<PutTransportDetailsResponse>();
             if (response != null && response.Payload != null)
@@ -112,7 +112,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.VoidTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.VoidTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
             var response = ExecuteRequest<VoidTransportResponse>();
             if (response != null && response.Payload != null)
@@ -124,7 +124,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.EstimateTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.EstimateTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
             var response = ExecuteRequest<EstimateTransportResponse>();
             if (response != null && response.Payload != null)
@@ -136,7 +136,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.ConfirmTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
             var response = ExecuteRequest<ConfirmTransportResponse>();
             if (response != null && response.Payload != null)
@@ -146,7 +146,7 @@ namespace FikaAmazonAPI.Services
         public GetPrepInstructionsResult GetLabels(ParameterGetLabels parameterGetLabels)
         {
             var parameter = parameterGetLabels.getParameters();
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.GET, parameter);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.GET, parameter);
 
             var response = ExecuteRequest<GetPrepInstructionsResponse>();
             if (response != null && response.Payload != null)
@@ -158,7 +158,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetBillOfLading(shipmentId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetBillOfLading(shipmentId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<GetBillOfLadingResponse>();
             if (response != null && response.Payload != null)
@@ -168,17 +168,17 @@ namespace FikaAmazonAPI.Services
         public GetShipmentsResult GetShipments(ParameterGetShipments parameterGetLabels)
         {
             var parameter = parameterGetLabels.getParameters();
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetShipments, RestSharp.Method.GET, parameter);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipments, RestSharp.Method.GET, parameter);
 
             var response = ExecuteRequest<GetShipmentsResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetShipmentsResult GetShipmentItems(ParameterShipmentItems parameterShipmentItems)
+        public GetShipmentsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems)
         {
             var parameter = parameterShipmentItems.getParameters();
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetShipmentItems, RestSharp.Method.GET, parameter);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipmentItems, RestSharp.Method.GET, parameter);
 
             var response = ExecuteRequest<GetShipmentsResponse>();
             if (response != null && response.Payload != null)
@@ -190,7 +190,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentOutboundyApiUrls.GetShipmentItemsByShipmentId(shipmentId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipmentItemsByShipmentId(shipmentId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<GetShipmentItemsResponse>();
             if (response != null && response.Payload != null)

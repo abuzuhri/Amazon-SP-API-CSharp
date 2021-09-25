@@ -33,6 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
+        public ListAllFulfillmentOrdersResponse()
+        {
+            this.Payload = default(ListAllFulfillmentOrdersResult);
+            this.Errors = default(ErrorList);
+        }
 
         /// <summary>
         /// The payload for the listAllFulfillmentOrders operation.

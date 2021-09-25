@@ -31,7 +31,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         {
             this.Errors = Errors;
         }
-
+        public CancelFulfillmentOrderResponse()
+        {
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// One or more unexpected errors occurred during the cancelFulfillmentOrder operation.
         /// </summary>

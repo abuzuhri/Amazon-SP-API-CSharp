@@ -33,7 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetFulfillmentPreviewResponse()
+        {
+            this.Payload = default(GetFulfillmentPreviewResult);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The response payload for the getFulfillmentPreview operation.
         /// </summary>

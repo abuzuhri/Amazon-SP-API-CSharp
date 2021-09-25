@@ -33,7 +33,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.Payload = Payload;
             this.Errors = Errors;
         }
-
+        public GetPackageTrackingDetailsResponse()
+        {
+            this.Payload = default(PackageTrackingDetails);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getPackageTrackingDetails operation.
         /// </summary>
