@@ -51,7 +51,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
         /// <param name="TotalGemWeight">The total gem weight variation of an item..</param>
         /// <param name="PackageQuantity">The package quantity variation of an item..</param>
         /// <param name="ItemDimensions">The item dimensions relationship of an item..</param>
-        public RelationshipType(string Color = default(string), string Edition = default(string), string Flavor = default(string), List<string> GemType = default(List<string>), string GolfClubFlex = default(string), string HandOrientation = default(string), string HardwarePlatform = default(string), List<string> MaterialType = default(List<string>), string MetalType = default(string), string Model = default(string), List<string> OperatingSystem = default(List<string>), string ProductTypeSubcategory = default(string), string RingSize = default(string), string ShaftMaterial = default(string), string Scent = default(string), string Size = default(string), string SizePerPearl = default(string), DecimalWithUnits GolfClubLoft = default(DecimalWithUnits), DecimalWithUnits TotalDiamondWeight = default(DecimalWithUnits), DecimalWithUnits TotalGemWeight = default(DecimalWithUnits), int? PackageQuantity = default(int?), DimensionType ItemDimensions = default(DimensionType))
+        /// <param name="Identifiers">The item Identifiers relationship of an item..</param>
+        public RelationshipType(string Color = default(string), string Edition = default(string), string Flavor = default(string), List<string> GemType = default(List<string>), string GolfClubFlex = default(string), string HandOrientation = default(string), string HardwarePlatform = default(string), List<string> MaterialType = default(List<string>), string MetalType = default(string), string Model = default(string), List<string> OperatingSystem = default(List<string>), string ProductTypeSubcategory = default(string), string RingSize = default(string), string ShaftMaterial = default(string), string Scent = default(string), string Size = default(string), string SizePerPearl = default(string), DecimalWithUnits GolfClubLoft = default(DecimalWithUnits), DecimalWithUnits TotalDiamondWeight = default(DecimalWithUnits), DecimalWithUnits TotalGemWeight = default(DecimalWithUnits), int? PackageQuantity = default(int?), DimensionType ItemDimensions = default(DimensionType), IdentifierType Identifiers = default(IdentifierType))
         {
             this.Color = Color;
             this.Edition = Edition;
@@ -75,6 +76,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
             this.TotalGemWeight = TotalGemWeight;
             this.PackageQuantity = PackageQuantity;
             this.ItemDimensions = ItemDimensions;
+            this.Identifiers = Identifiers;
         }
 
         /// <summary>
@@ -232,6 +234,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
         public DimensionType ItemDimensions { get; set; }
 
         /// <summary>
+        /// The identifiers that uniquely identify the item.
+        /// </summary>
+        /// <value>The identifiers that uniquely identify the item.</value>
+        [DataMember(Name = "Identifiers", EmitDefaultValue = false)]
+        public IdentifierType Identifiers { get; set; }
+
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -261,6 +271,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
             sb.Append("  TotalGemWeight: ").Append(TotalGemWeight).Append("\n");
             sb.Append("  PackageQuantity: ").Append(PackageQuantity).Append("\n");
             sb.Append("  ItemDimensions: ").Append(ItemDimensions).Append("\n");
+            sb.Append("  Identifiers: ").Append(Identifiers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -404,6 +415,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
                     this.ItemDimensions == input.ItemDimensions ||
                     (this.ItemDimensions != null &&
                     this.ItemDimensions.Equals(input.ItemDimensions))
+                ) &&
+                (
+                    this.Identifiers == input.Identifiers ||
+                    (this.Identifiers != null &&
+                    this.Identifiers.Equals(input.Identifiers))
                 );
         }
 
@@ -460,6 +476,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
                     hashCode = hashCode * 59 + this.PackageQuantity.GetHashCode();
                 if (this.ItemDimensions != null)
                     hashCode = hashCode * 59 + this.ItemDimensions.GetHashCode();
+                if (this.Identifiers != null)
+                    hashCode = hashCode * 59 + this.Identifiers.GetHashCode();
                 return hashCode;
             }
         }
