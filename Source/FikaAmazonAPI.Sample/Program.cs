@@ -29,6 +29,7 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -49,6 +50,7 @@ namespace FikaAmazonAPI.Sample
                 MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
                 Asin = "B0143R13RY"
             });
+
 
 
             var data3 = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
