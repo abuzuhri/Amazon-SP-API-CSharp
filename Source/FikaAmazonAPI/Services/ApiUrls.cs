@@ -3,9 +3,9 @@
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
 
-    public static class EnvironemntManager
+    public static class EnvironmentManager
     {
-        public static Environments Environemnt { get; set; } = Environments.Production;
+        public static Environments Environment { get; set; } = Environments.Production;
         public enum Environments
         {
             Sandbox, Production

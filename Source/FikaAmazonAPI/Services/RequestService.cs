@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.Services
         {
             get
             {
-                return EnvironemntManager.Environemnt == EnvironemntManager.Environments.Sandbox ? AmazonSandboxUrl : AmazonProductionUrl;
+                return EnvironmentManager.Environment == EnvironmentManager.Environments.Sandbox ? AmazonSandboxUrl : AmazonProductionUrl;
             }
         }
 
