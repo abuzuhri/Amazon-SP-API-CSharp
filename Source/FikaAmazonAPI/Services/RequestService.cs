@@ -16,6 +16,7 @@ using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using FikaAmazonAPI.Search;
 using System.Linq;
 using System.Threading;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
@@ -35,7 +36,7 @@ namespace FikaAmazonAPI.Services
         {
             get
             {
-                return EnvironemntManager.Environemnt == EnvironemntManager.Environments.Sandbox ? AmazonSandboxUrl : AmazonProductionUrl;
+                return AmazonCredential.Environment == Environments.Sandbox ? AmazonSandboxUrl : AmazonProductionUrl;
             }
         }
 

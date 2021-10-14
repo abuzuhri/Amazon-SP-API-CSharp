@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 
         public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
         {
-            if (AWSAuthenticationTokenData != null && AWSAuthenticationTokenData.Expiration > DateTime.Now)
+            if (AWSAuthenticationTokenData != null && AWSAuthenticationTokenData.Expiration > DateTime.Now.Date.AddSeconds(-10))
                 return AWSAuthenticationTokenData;
             else return null;
         }

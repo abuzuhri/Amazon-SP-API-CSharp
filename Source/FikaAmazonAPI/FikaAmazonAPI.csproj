@@ -8,14 +8,18 @@
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.10</Version>
-    <AssemblyVersion>1.0.1.10</AssemblyVersion>
-    <FileVersion>1.0.1.10</FileVersion>
+    <Version>1.0.12</Version>
+    <AssemblyVersion>1.0.1.12</AssemblyVersion>
+    <FileVersion>1.0.1.12</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</RepositoryUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageTags>Amazon SP-API MWS Amazon-SP-API Amazon Selling</PackageTags>
+	<PackageReleaseNotes></PackageReleaseNotes>
+	<NeutralLanguage>en-US</NeutralLanguage>
+	<Description>.Net C# library for the new Amazon Selling Partner API</Description>
     
   </PropertyGroup>
   <ItemGroup>

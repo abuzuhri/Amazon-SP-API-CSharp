@@ -39,9 +39,10 @@ namespace FikaAmazonAPI.Sample
                 ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
                 RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
                 MarketPlace = MarketPlace.UnitedArabEmirates,
-                IsActiveLimitRate=true
+                IsActiveLimitRate = true,
+                Environment = Environments.Production
 
-            });
+            }) ;
 
 
             var data4 = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()

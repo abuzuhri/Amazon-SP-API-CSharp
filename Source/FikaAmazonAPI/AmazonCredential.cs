@@ -1,9 +1,11 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI
 {
@@ -18,6 +20,8 @@ namespace FikaAmazonAPI
         public MarketPlace MarketPlace { get; set; }
         private CacheTokenData CacheTokenData { get; set; }
         public bool IsActiveLimitRate { get; set; } = true;
+        public Environments Environment { get; set; } = Environments.Production;
+        
 
 
         public AmazonCredential()

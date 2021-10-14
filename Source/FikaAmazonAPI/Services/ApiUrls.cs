@@ -2,16 +2,6 @@
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
-
-    public static class EnvironemntManager
-    {
-        public static Environments Environemnt { get; set; } = Environments.Production;
-        public enum Environments
-        {
-            Sandbox, Production
-        }
-    }
-
     public class ApiUrls
     {
 

@@ -127,6 +127,35 @@ For more information about keys please check [Amazon Selling Partner Api develop
             var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
+
+### Report GET_MERCHANT_LISTINGS_ALL_DATA sample
+```CSharp
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+
+            parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+
+            var reportId = amazonConnection.Reports.CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
+            {
+                Thread.Sleep(1000 * 60);
+                var reportData = amazonConnection.Reports.GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+            }
+
+            //filePath for report
+```
+
 ### Product Pricing ,For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
 
