@@ -34,18 +34,18 @@ namespace FikaAmazonAPI.Services
             orderList = response.Payload.Orders;
             while (!string.IsNullOrEmpty(nextToken))
             {
-                var orderPayload = GetByNextToken(nextToken);
+                var orderPayload = GetByNextToken(nextToken, serachOrderList.MarketplaceIds);
                 orderList.AddRange(orderPayload.Orders);
                 nextToken = orderPayload.NextToken;
             }
             return orderList;
         }
 
-        private OrdersList GetByNextToken(string nextToken)
+        private OrdersList GetByNextToken(string nextToken, IList<string> marketplaceIds)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
-
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", marketplaceIds)));
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
             var response = ExecuteRequest<GetOrdersResponse>();
