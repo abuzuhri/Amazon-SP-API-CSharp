@@ -33,8 +33,8 @@ namespace FikaAmazonAPI.Utils
         public static MarketPlace Germany { get { return new MarketPlace("A1PA6795UKMFR9", Region.Europe, Country.DE); } }
         public static MarketPlace Italy { get { return new MarketPlace("APJ6JRA9NG5V4", Region.Europe, Country.IT); } }
         public static MarketPlace Sweden { get { return new MarketPlace("A2NODRKZP88ZB9", Region.Europe, Country.SE); } }
-        public static MarketPlace Poland { get { return new MarketPlace("ARBP9OOSHTCHU", Region.Europe, Country.EG); } }
-        public static MarketPlace Egypt { get { return new MarketPlace("A1C3SOZRARQ6R3", Region.Europe, Country.PL); } }
+        public static MarketPlace Egypt { get { return new MarketPlace("ARBP9OOSHTCHU", Region.Europe, Country.EG); } }
+        public static MarketPlace Poland { get { return new MarketPlace("A1C3SOZRARQ6R3", Region.Europe, Country.PL); } }
         public static MarketPlace Turkey { get { return new MarketPlace("A33AVAJ2PDY3EV", Region.Europe, Country.TR); } }
         public static MarketPlace UnitedArabEmirates { get { return new MarketPlace("A2VIGQ35RCS4UG", Region.Europe, Country.AE); } }
         public static MarketPlace India { get { return new MarketPlace("A21TJRUUN4KGV", Region.Europe, Country.IN); } }
