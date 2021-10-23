@@ -17,7 +17,8 @@ namespace FikaAmazonAPI.Utils
             Country = country;
         }
 
-        
+
+        //https://docs.developer.amazonservices.com/en_UK/dev_guide/DG_Endpoints.html
 
         //NorthAmerica
         public static MarketPlace US { get { return new MarketPlace("ATVPDKIKX0DER", Region.NorthAmerica, Country.US); } }

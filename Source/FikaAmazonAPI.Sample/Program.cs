@@ -39,27 +39,25 @@ namespace FikaAmazonAPI.Sample
                 ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
                 RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
                 MarketPlace = MarketPlace.UnitedArabEmirates,
-                IsActiveLimitRate = true,
-                Environment = Environments.Production
+                IsActiveLimitRate = true
 
             }) ;
 
 
-            var data4 = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+            
+
+            while (true)
             {
-                ItemCondition = ItemCondition.New,
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asin = "B0143R13RY"
-            });
+                var ddata = amazonConnection.CatalogItem.GetCatalogItem("B0096IS4GE");
+                if(ddata.AttributeSets!=null && ddata.AttributeSets.Count > 0)
+                {
+                    var itm = ddata.AttributeSets[0];
+                    Console.WriteLine("Brand > " + itm.Brand);
+                    Console.WriteLine("ProductGroup > " + itm.ProductGroup);
+                }
+                
+            }
 
-
-
-            var data3 = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
-            {
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asins = new string[] { "B00LZ0VSMI" },
-
-            });
 
             var data2 = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
             {

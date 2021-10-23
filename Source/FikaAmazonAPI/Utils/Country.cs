@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Utils
         public static Country TR { get { return new Country("TR", "Turkey", "com.tr", "https://sellercentral.amazon.com.tr", "https://vendorcentral.amazon.com.tr"); } }
         public static Country AE { get { return new Country("AE", "United Arab Emirates", "ae", "https://sellercentral.amazon.ae", "https://vendorcentral.amazon.me"); } }
         public static Country IN { get { return new Country("IN", "India", "in", "https://sellercentral.amazon.in", "https://www.vendorcentral.in"); } }
-        public static Country SA { get { return new Country("SA", "Saudi Arabia", "sa", "", "https://vendorcentral.amazon.me"); } }
+        public static Country SA { get { return new Country("SA", "Saudi Arabia", "sa", "https://sellercentral.amazon.sa", "https://vendorcentral.amazon.me"); } }
 
 
 

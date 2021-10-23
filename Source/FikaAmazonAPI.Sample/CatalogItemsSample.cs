@@ -18,13 +18,13 @@ namespace FikaAmazonAPI.Sample
         
         public void GetCatalogItem()
         {
-            var item = amazonConnection.CatalogItem.GetCatalogItem(MarketPlace.UnitedArabEmirates.ID, "B00CZC5F0G");
+            var item = amazonConnection.CatalogItem.GetCatalogItem("B00CZC5F0G");
 
         }
         
         public void ListCatalogCategories()
         {
-            var item = amazonConnection.CatalogItem.ListCatalogCategories(MarketPlace.UnitedArabEmirates.ID, "B00CZC5F0G");
+            var item = amazonConnection.CatalogItem.ListCatalogCategories("B00CZC5F0G");
 
         }
 
