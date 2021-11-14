@@ -25,7 +25,6 @@ namespace FikaAmazonAPI.Services
             var response = ExecuteRequest<GetReportsResponseV00>();
             parameterReportList.nextToken = response.NextToken;
             var list = response.Reports;
-            list.AddRange(list);
 
             while (!string.IsNullOrEmpty(parameterReportList.nextToken))
             {
