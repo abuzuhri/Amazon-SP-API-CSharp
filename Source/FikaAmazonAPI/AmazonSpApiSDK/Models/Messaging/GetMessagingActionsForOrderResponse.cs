@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// <param name="links">links.</param>
         /// <param name="embedded">embedded.</param>
         /// <param name="errors">errors.</param>
-        public GetMessagingActionsForOrderResponse(GetMessagingActionsForOrderResponseLinks links = default(GetMessagingActionsForOrderResponseLinks), IList<GetMessagingActionResponse> embedded = default(IList<GetMessagingActionResponse>))
+        public GetMessagingActionsForOrderResponse(GetMessagingActionsForOrderResponseLinks links = default(GetMessagingActionsForOrderResponseLinks), Embedded embedded = default(Embedded))
         {
             this.Links = links;
             this.Embedded = embedded;
@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         public GetMessagingActionsForOrderResponse()
         {
             this.Links = default(GetMessagingActionsForOrderResponseLinks);
-            this.Embedded = default(IList<GetMessagingActionResponse>);
+            this.Embedded = default(Embedded);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// Gets or Sets Embedded
         /// </summary>
         [DataMember(Name="_embedded", EmitDefaultValue=false)]
-        public IList<GetMessagingActionResponse> Embedded { get; set; }
+        public Embedded Embedded { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors

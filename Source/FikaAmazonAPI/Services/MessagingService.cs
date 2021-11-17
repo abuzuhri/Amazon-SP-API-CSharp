@@ -15,7 +15,10 @@ namespace FikaAmazonAPI.Services
 
         public GetMessagingActionsForOrderResponse GetMessagingActionsForOrder(string amazonOrderId)
         {
-            CreateAuthorizedRequest(MessaginApiUrls.GetMessagingActionsForOrder(amazonOrderId, MarketPlace.ID), RestSharp.Method.GET);
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+
+            CreateAuthorizedRequest(MessaginApiUrls.GetMessagingActionsForOrder(amazonOrderId), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<GetMessagingActionsForOrderResponse>();
 
@@ -27,7 +30,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.ConfirmCustomizationDetails(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createConfirmCustomizationDetailsRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.ConfirmCustomizationDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmCustomizationDetailsRequest);
 
             var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>();
             if (response != null)
@@ -40,7 +43,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmDeliveryDetails(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createConfirmCustomizationDetailsRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmDeliveryDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmCustomizationDetailsRequest);
 
             var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>();
             if (response != null)
@@ -48,13 +51,13 @@ namespace FikaAmazonAPI.Services
             return false;
 
         }
-        
+
         public bool CreateLegalDisclosure(string amazonOrderId, CreateLegalDisclosureRequest createLegalDisclosureRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.CreateLegalDisclosure(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createLegalDisclosureRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateLegalDisclosure(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createLegalDisclosureRequest);
 
             var response = ExecuteRequest<CreateLegalDisclosureResponse>();
             if (response != null)
@@ -80,7 +83,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmOrderDetails(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createConfirmOrderDetailsRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmOrderDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmOrderDetailsRequest);
 
             var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
             if (response != null)
@@ -93,7 +96,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmServiceDetails(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createConfirmServiceDetailsRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmServiceDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmServiceDetailsRequest);
 
             var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
             if (response != null)
@@ -105,7 +108,7 @@ namespace FikaAmazonAPI.Services
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
-            CreateAuthorizedRequest(MessaginApiUrls.CreateAmazonMotors(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createAmazonMotorsRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateAmazonMotors(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createAmazonMotorsRequest);
 
             var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
             if (response != null)
@@ -116,7 +119,7 @@ namespace FikaAmazonAPI.Services
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
-            CreateAuthorizedRequest(MessaginApiUrls.CreateWarranty(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createWarrantyRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateWarranty(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createWarrantyRequest);
 
             var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
             if (response != null)
@@ -139,7 +142,7 @@ namespace FikaAmazonAPI.Services
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
-            CreateAuthorizedRequest(MessaginApiUrls.CreateDigitalAccessKey(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createDigitalAccessKeyRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateDigitalAccessKey(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createDigitalAccessKeyRequest);
 
             var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
             if (response != null)
@@ -150,7 +153,7 @@ namespace FikaAmazonAPI.Services
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
-            CreateAuthorizedRequest(MessaginApiUrls.CreateUnexpectedProblem(amazonOrderId), RestSharp.Method.POST, queryParameters,postJsonObj: createUnexpectedProblemRequest);
+            CreateAuthorizedRequest(MessaginApiUrls.CreateUnexpectedProblem(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createUnexpectedProblemRequest);
 
             var response = ExecuteRequest<CreateUnexpectedProblemResponse>();
             if (response != null)
@@ -159,6 +162,6 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        
+
     }
 }
