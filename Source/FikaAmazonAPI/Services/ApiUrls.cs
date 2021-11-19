@@ -328,7 +328,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ListFinancialEventsByOrderId(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/financialEvents";
             public static string ListFinancialEvents
             {
-                get => $"{_resourceBaseUrl}/listFinancialEvents";
+                get => $"{_resourceBaseUrl}/financialEvents";
             }
         }
 
