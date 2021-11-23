@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
             var response = ExecuteRequest<GetInventorySummariesResponse>();
-            var nextToken = response.Pagination?.NextToken;// Pagination is Null at last page
+            var nextToken = response.Pagination?.NextToken;
             list.Add(response.Payload.InventorySummaries);
             while (!string.IsNullOrEmpty(nextToken))
             {
