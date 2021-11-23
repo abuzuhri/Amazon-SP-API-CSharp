@@ -36,6 +36,7 @@ namespace FikaAmazonAPI
             this.ClientId = ClientId;
             this.ClientSecret = ClientSecret;
             this.RefreshToken = RefreshToken;
+            CacheTokenData = new CacheTokenData();
         }
 
         public TokenResponse GetToken(TokenDataType tokenDataType)
