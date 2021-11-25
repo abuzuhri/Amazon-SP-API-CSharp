@@ -28,7 +28,7 @@ namespace FikaAmazonAPI
         {
             CacheTokenData = new CacheTokenData();
         }
-        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret)
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret,string RefreshToken)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;
