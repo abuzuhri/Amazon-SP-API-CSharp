@@ -65,7 +65,7 @@ Install-Package CSharpAmazonSpAPI
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
 
-For more information about keys please check [Amazon Selling Partner Api developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md). 
+For more information about keys please check [Amazon Selling Partner Api developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
 
 ---
 ## Usage
