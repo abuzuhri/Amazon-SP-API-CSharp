@@ -15,42 +15,43 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
+
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
     /// The response schema for the getOrder operation.
     /// </summary>
     [DataContract]
-    public partial class GetOrderResponse : IEquatable<GetOrderResponse>, IValidatableObject
+    public partial class GetOrderResponse :  IEquatable<GetOrderResponse>, IValidatableObject
     {
-        public GetOrderResponse()
-        {
-            this.Payload = default(CreateReportResult);
-            this.Errors = default(ErrorList);
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOrderResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getOrder operation..</param>
-        /// <param name="Errors">One or more unexpected errors occurred during the getOrder operation..</param>
-        public GetOrderResponse(CreateReportResult Payload = default(CreateReportResult), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getOrder operation..</param>
+        /// <param name="errors">One or more unexpected errors occurred during the getOrder operation..</param>
+        public GetOrderResponse(Order payload = default(Order), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
+        }
+        public GetOrderResponse()
+        {
+            this.Payload = default(Order);
+            this.Errors = default(ErrorList);
         }
 
         /// <summary>
         /// The payload for the getOrder operation.
         /// </summary>
         /// <value>The payload for the getOrder operation.</value>
-        [DataMember(Name = "payload", EmitDefaultValue = false)]
-        public CreateReportResult Payload { get; set; }
+        [DataMember(Name="payload", EmitDefaultValue=false)]
+        public Order Payload { get; set; }
 
         /// <summary>
         /// One or more unexpected errors occurred during the getOrder operation.
         /// </summary>
         /// <value>One or more unexpected errors occurred during the getOrder operation.</value>
-        [DataMember(Name = "errors", EmitDefaultValue = false)]
+        [DataMember(Name="errors", EmitDefaultValue=false)]
         public ErrorList Errors { get; set; }
 
         /// <summary>
@@ -66,12 +67,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("}\n");
             return sb.ToString();
         }
-
+  
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -96,12 +97,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             if (input == null)
                 return false;
 
-            return
+            return 
                 (
                     this.Payload == input.Payload ||
                     (this.Payload != null &&
                     this.Payload.Equals(input.Payload))
-                ) &&
+                ) && 
                 (
                     this.Errors == input.Errors ||
                     (this.Errors != null &&

@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-
+            
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -43,8 +43,12 @@ namespace FikaAmazonAPI.Sample
 
             }) ;
 
+            var orderData=amazonConnection.Orders.GetOrder(new ParameterGetOrder()
+            {
+                OrderId = "404-6678802-8633900"
+            });
 
-            
+
 
             while (true)
             {
