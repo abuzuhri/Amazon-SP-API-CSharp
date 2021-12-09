@@ -5,7 +5,7 @@ This is an API Binding in .Net C# for the new Amazon Selling Partner API.
 
 This library is based on the output of [swagger-codegen](https://app.swaggerhub.com/home) with the [OpenAPI files provided by Amazon](https://github.com/amzn/selling-partner-api-models/tree/main/models) and has been modified by the contributors.
 
-The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using c#, you can watch this [Youtube](https://www.youtube.com/watch?v=1gZJBCoMr70) video for easy start your project
+The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using C#, you can watch this [Youtube](https://www.youtube.com/watch?v=1gZJBCoMr70) video for easy start your project
 
 ---
 ### Requirements
@@ -36,7 +36,7 @@ The purpose of this package is to have an easy way of getting started with the A
 - [x] [FulFillmentOutbound](https://github.com/amzn/selling-partner-api-docs/tree/main/references/fulfillment-outbound-api)
 - [x] [MerchantFulFillment](https://github.com/amzn/selling-partner-api-docs/blob/main/references/merchant-fulfillment-api/merchantFulfillmentV0.md)
 - [x] [Messaging](https://github.com/amzn/selling-partner-api-docs/blob/main/references/messaging-api/messaging.md)
-- [x] [Notifications](https://github.com/amzn/selling-partner-api-docs/blob/main/references/notifications-api/notifications.md) for configration read [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/notifications-api-use-case-guide/notifications-use-case-guide-v1.md)
+- [x] [Notifications](https://github.com/amzn/selling-partner-api-docs/blob/main/references/notifications-api/notifications.md) for configuration read [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/notifications-api-use-case-guide/notifications-use-case-guide-v1.md)
 - [x] [ProductFeesV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-fees-api/productFeesV0.md)
 - [x] [ProductPricingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-pricing-api/productPricingV0.md)
 - [x] [Sales](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sales-api/sales.md)
@@ -65,12 +65,12 @@ Install-Package CSharpAmazonSpAPI
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
 
-For more information about keys please check [Amazon Selling Partner Api developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
+For more information about keys please check [Amazon Selling Partner API developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
 
 ---
 ## Usage
 
-### Configration
+### Configuration
 ```CSharp
     AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
     {
@@ -84,14 +84,14 @@ For more information about keys please check [Amazon Selling Partner Api develop
 
 ```
 
-### Order Lsit ,For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
+### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
 ```CSharp
    var orders= amazonConnection.Orders.ListOrders();
             
 ```
 
 
-### Order Lsit with parameter
+### Order List with parameter
 ```CSharp
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
@@ -103,7 +103,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
             
 ```
 
-### Report Lsit ,For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
+### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
 ```CSharp
             var parameters = new ParameterReportList();
             parameters.pageSize = 100;
@@ -156,7 +156,7 @@ For more information about keys please check [Amazon Selling Partner Api develop
             //filePath for report
 ```
 
-### Product Pricing ,For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
+### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
@@ -179,7 +179,7 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```
 
 
-### Notifications Create Destination,For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
 ```CSharp
 
 //EventBridge
@@ -232,8 +232,8 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```
 
 ### Feed Submit
-Here Full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
-Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as its big work and effort but all classes are partial for easy change and you can generate xml outside and use our library for get data , now we support only sumit existed product , change quantity and change price
+Here full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
+Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and use our library to get data, now we support only submit existing product, change quantity and change price
 ```CSharp
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
 
