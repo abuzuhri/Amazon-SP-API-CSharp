@@ -64,6 +64,8 @@ Install-Package CSharpAmazonSpAPI
 | Region | Marketplace region |
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
+| RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
+
 
 For more information about keys please check [Amazon Selling Partner API developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
 
