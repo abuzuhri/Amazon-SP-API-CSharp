@@ -86,7 +86,7 @@ For more information about keys please check [Amazon Selling Partner API develop
 
 ```
 
-### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
+### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Sample/OrdersSample.cs).
 ```CSharp
    var orders= amazonConnection.Orders.ListOrders();
             
@@ -105,7 +105,7 @@ For more information about keys please check [Amazon Selling Partner API develop
             
 ```
 
-### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
+### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Sample/ReportsSample.cs).
 ```CSharp
             var parameters = new ParameterReportList();
             parameters.pageSize = 100;
@@ -158,7 +158,7 @@ For more information about keys please check [Amazon Selling Partner API develop
             //filePath for report
 ```
 
-### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
+### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Sample/ProductPricingSample.cs).
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
@@ -181,7 +181,7 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```
 
 
-### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Sample/NotificationsSample.cs).
 ```CSharp
 
 //EventBridge
