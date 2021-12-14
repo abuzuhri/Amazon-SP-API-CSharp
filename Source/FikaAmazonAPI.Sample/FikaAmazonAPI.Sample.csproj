@@ -64,9 +64,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XSerializer, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9ab97cfaa8f0c80a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XSerializer.0.4.4\lib\net40\XSerializer.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatalogItemsSample.cs" />
