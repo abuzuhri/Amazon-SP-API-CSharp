@@ -88,7 +88,11 @@ For more information about keys please check [Amazon Selling Partner API develop
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
 ```CSharp
-   var orders= amazonConnection.Orders.ListOrders();
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
             
 ```
 
