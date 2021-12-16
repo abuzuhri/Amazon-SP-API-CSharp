@@ -21,7 +21,7 @@ The purpose of this package is to have an easy way of getting started with the A
 
 ---
 ### Tasks
-##Seller
+#### Seller
 
 - [x] [OrdersV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/orders-api/ordersV0.md)
 - [x] [Reports](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2020-09-04.md)
@@ -47,16 +47,16 @@ The purpose of this package is to have an easy way of getting started with the A
 - [x] [Solicitations](https://github.com/amzn/selling-partner-api-docs/blob/main/references/solicitations-api/solicitations.md)
 - [x] [Token](https://github.com/amzn/selling-partner-api-docs/blob/main/references/tokens-api/tokens_2021-03-01.md) for [doc PII](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md) NOT TESTED
 
-##Vendor 
-- [] [VendorOrders](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-orders-api/vendorOrders.md)
-- [] [VendorDirectFulfillmentInventoryV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-inventory-api/vendorDirectFulfillmentInventoryV1.md)
+#### Vendor 
+- [ ] [VendorOrders](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-orders-api/vendorOrders.md)
+- [ ] [VendorDirectFulfillmentInventoryV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-inventory-api/vendorDirectFulfillmentInventoryV1.md)
 - [x] [VendorDirectFulfillmentOrdersV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-orders-api/vendorDirectFulfillmentOrdersV1.md)
-- [] [VendorDirectFulfillmentPaymentsV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-payments-api/vendorDirectFulfillmentPaymentsV1.md)
-- [] [VendorDirectFulfillmentShippingV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-shipping-api/vendorDirectFulfillmentShippingV1.md)
-- [] [VendorDirectFulfillmentTransactionsV1](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-direct-fulfillment-transactions-api)
-- [] [vendorInvoices](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-invoices-api/vendorInvoices.md)
-- [] [VendorShipments](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-shipments-api)
-- [] [VendorTransactionStatus](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-transaction-status-api)
+- [ ] [VendorDirectFulfillmentPaymentsV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-payments-api/vendorDirectFulfillmentPaymentsV1.md)
+- [ ] [VendorDirectFulfillmentShippingV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-shipping-api/vendorDirectFulfillmentShippingV1.md)
+- [ ] [VendorDirectFulfillmentTransactionsV1](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-direct-fulfillment-transactions-api)
+- [ ] [vendorInvoices](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-invoices-api/vendorInvoices.md)
+- [ ] [VendorShipments](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-shipments-api)
+- [ ] [VendorTransactionStatus](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-transaction-status-api)
 
 
 
