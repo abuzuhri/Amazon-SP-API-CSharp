@@ -29,7 +29,8 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-            
+
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -42,6 +43,9 @@ namespace FikaAmazonAPI.Sample
                 IsActiveLimitRate = true
 
             }) ;
+
+            var order2s = amazonConnection.VendorDirectFulfillmentOrders.GetOrder("UNrSh9H8R");
+
 
             var orderData=amazonConnection.Orders.GetOrder(new ParameterGetOrder()
             {

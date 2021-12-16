@@ -80,6 +80,7 @@
     <Compile Include="ReportsSample.cs" />
     <Compile Include="SolicitationsSample.cs" />
     <Compile Include="TokenSample.cs" />
+    <Compile Include="VendorDirectFulfillmentOrderSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
