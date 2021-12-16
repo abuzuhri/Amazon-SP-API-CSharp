@@ -22,13 +22,16 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
             var response = ExecuteRequest<GetInventorySummariesResponse>();
-            var nextToken = response.Pagination?.NextToken;
             list.Add(response.Payload.InventorySummaries);
-            while (!string.IsNullOrEmpty(nextToken))
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
-                var nextresponse = GetInventorySummariesByNextToken(nextToken,ParameterGetInventorySummaries);
-                list.Add(nextresponse.Payload.InventorySummaries);
-                nextToken = nextresponse.Pagination?.NextToken;
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken))
+                {
+                    var getInventorySummaries = GetInventorySummariesByNextToken(nextToken);
+                    list.Add(getInventorySummaries.Payload.InventorySummaries);
+                    nextToken = getInventorySummaries.Pagination?.NextToken;
+                }
             }
             return list;
         }
