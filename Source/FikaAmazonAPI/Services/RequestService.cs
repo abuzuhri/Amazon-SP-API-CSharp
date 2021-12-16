@@ -196,12 +196,18 @@ namespace FikaAmazonAPI.Services
                 if(tokenDataType== TokenDataType.PII)
                 {
                     var pii = CreateRestrictedDataToken(requestPII);
-                    token=new TokenResponse()
+                    if (pii != null)
                     {
-                        access_token = pii.RestrictedDataToken,
-                        expires_in = pii.ExpiresIn
-                    };
-
+                        token = new TokenResponse()
+                        {
+                            access_token = pii.RestrictedDataToken,
+                            expires_in = pii.ExpiresIn
+                        };
+                    }
+                    else
+                    {
+                       throw new ArgumentNullException(nameof(pii));
+                    }
                 }
                 else
                 {
@@ -215,13 +221,11 @@ namespace FikaAmazonAPI.Services
             AccessToken = token.access_token;
         }
 
-        public CreateRestrictedDataTokenData CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
+        public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
             CreateAuthorizedRequest(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
             var response = ExecuteRequest<CreateRestrictedDataTokenResponse>();
-            if(response!=null && response.Payload!=null)
-                return response.Payload;
-            return null;
+            return response;
         }
     }
 

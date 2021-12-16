@@ -15,8 +15,9 @@ namespace FikaAmazonAPI.Services
 
         public FeesEstimateResult GetMyFeesEstimateForSKU(string SKU, FeesEstimateRequest feesEstimateRequest)
         {
-            
-            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST,postJsonObj: feesEstimateRequest);
+            var Payload = new { FeesEstimateRequest = feesEstimateRequest };
+
+            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST,postJsonObj: Payload);
             var response = ExecuteRequest<GetMyFeesEstimateResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
@@ -24,8 +25,9 @@ namespace FikaAmazonAPI.Services
         }
         public FeesEstimateResult GetMyFeesEstimateForASIN(string ASIN, FeesEstimateRequest feesEstimateRequest)
         {
-
-            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: feesEstimateRequest);
+            var Payload = new { FeesEstimateRequest = feesEstimateRequest };
+        
+            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: Payload);
             var response = ExecuteRequest<GetMyFeesEstimateResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;

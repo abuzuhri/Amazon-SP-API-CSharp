@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
 using FikaAmazonAPI.Parameter.FbaInventory;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
             var response = ExecuteRequest<GetInventorySummariesResponse>();
-
             list.Add(response.Payload.InventorySummaries);
             if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
@@ -37,14 +36,14 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        private GetInventorySummariesResponse GetInventorySummariesByNextToken(string nextToken)
+        private GetInventorySummariesResponse GetInventorySummariesByNextToken(string nextToken,ParameterGetInventorySummaries parameterGetInventorySummaries)
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+            parameterGetInventorySummaries.nextToken = nextToken;
+            var param = parameterGetInventorySummaries.getParameters();
 
-
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventGroups, RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
             var response = ExecuteRequest<GetInventorySummariesResponse>();
+
             return response;
         }
     }

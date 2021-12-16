@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
     /// Order information.
     /// </summary>
     [DataContract]
-    public partial class CreateReportResult : IEquatable<CreateReportResult>, IValidatableObject
+    public partial class Order : IEquatable<Order>, IValidatableObject
     {
         /// <summary>
         /// The current order status.
@@ -194,140 +194,128 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         [DataMember(Name = "OrderType", EmitDefaultValue = false)]
         public OrderTypeEnum? OrderType { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
+        /// Initializes a new instance of the <see cref="Order" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public CreateReportResult() { }
+        protected Order() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateReportResult" /> class.
+        /// Initializes a new instance of the <see cref="Order" /> class.
         /// </summary>
-        /// <param name="AmazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
-        /// <param name="SellerOrderId">A seller-defined order identifier..</param>
-        /// <param name="PurchaseDate">The date when the order was created. (required).</param>
-        /// <param name="LastUpdateDate">The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01. (required).</param>
-        /// <param name="OrderStatus">The current order status. (required).</param>
-        /// <param name="FulfillmentChannel">Whether the order was fulfilled by Amazon (AFN) or by the seller (MFN)..</param>
-        /// <param name="SalesChannel">The sales channel of the first item in the order..</param>
-        /// <param name="OrderChannel">The order channel of the first item in the order..</param>
-        /// <param name="ShipServiceLevel">The shipment service level of the order..</param>
-        /// <param name="OrderTotal">The total charge for this order..</param>
-        /// <param name="NumberOfItemsShipped">The number of items shipped..</param>
-        /// <param name="NumberOfItemsUnshipped">The number of items unshipped..</param>
-        /// <param name="PaymentExecutionDetail">Information about sub-payment methods for a Cash On Delivery (COD) order.  Note: For a COD order that is paid for using one sub-payment method, one PaymentExecutionDetailItem object is returned, with PaymentExecutionDetailItem/PaymentMethod &#x3D; COD. For a COD order that is paid for using multiple sub-payment methods, two or more PaymentExecutionDetailItem objects are returned..</param>
-        /// <param name="PaymentMethod">The payment method for the order. This property is limited to Cash On Delivery (COD) and Convenience Store (CVS) payment methods. Unless you need the specific COD payment information provided by the PaymentExecutionDetailItem object, we recommend using the PaymentMethodDetails property to get payment method information..</param>
-        /// <param name="PaymentMethodDetails">A list of payment methods for the order..</param>
-        /// <param name="MarketplaceId">The identifier for the marketplace where the order was placed..</param>
-        /// <param name="ShipmentServiceLevelCategory">The shipment service level category of the order.  Possible values: Expedited, FreeEconomy, NextDay, SameDay, SecondDay, Scheduled, Standard..</param>
-        /// <param name="EasyShipShipmentStatus">The status of the Amazon Easy Ship order. This property is included only for Amazon Easy Ship orders.  Possible values: PendingPickUp, LabelCanceled, PickedUp, OutForDelivery, Damaged, Delivered, RejectedByBuyer, Undeliverable, ReturnedToSeller, ReturningToSeller..</param>
-        /// <param name="CbaDisplayableShippingLabel">Custom ship label for Checkout by Amazon (CBA)..</param>
-        /// <param name="OrderType">The type of the order..</param>
-        /// <param name="EarliestShipDate">The start of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: EarliestShipDate might not be returned for orders placed before February 1, 2013..</param>
-        /// <param name="LatestShipDate">The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013..</param>
-        /// <param name="EarliestDeliveryDate">The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders..</param>
-        /// <param name="LatestDeliveryDate">The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status..</param>
-        /// <param name="IsBusinessOrder">When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer..</param>
-        /// <param name="IsPrime">When true, the order is a seller-fulfilled Amazon Prime order..</param>
-        /// <param name="IsPremiumOrder">When true, the order has a Premium Shipping Service Level Agreement. For more information about Premium Shipping orders, see \&quot;Premium Shipping Options\&quot; in the Seller Central Help for your marketplace..</param>
-        /// <param name="IsGlobalExpressEnabled">When true, the order is a GlobalExpress order..</param>
-        /// <param name="ReplacedOrderId">The order ID value for the order that is being replaced. Returned only if IsReplacementOrder &#x3D; true..</param>
-        /// <param name="IsReplacementOrder">When true, this is a replacement order..</param>
-        /// <param name="PromiseResponseDueDate">Indicates the date by which the seller must respond to the buyer with an estimated ship date. Returned only for Sourcing on Demand orders..</param>
-        /// <param name="IsEstimatedShipDateSet">When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders..</param>
-        /// <param name="IsSoldByAB">When true, the item within this order was bought and re-sold by Amazon Business EU SARL (ABEU). By buying and instantly re-selling your items, ABEU becomes the seller of record, making your inventory available for sale to customers who would not otherwise purchase from a third-party seller..</param>
-        /// <param name="AssignedShipFromLocationAddress">The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location..</param>
-        /// <param name="FulfillmentInstruction">Contains the instructions about the fulfillment like where should it be fulfilled from..</param>
-        public CreateReportResult(string AmazonOrderId = default(string), string SellerOrderId = default(string), string PurchaseDate = default(string), string LastUpdateDate = default(string), OrderStatusEnum OrderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? FulfillmentChannel = default(FulfillmentChannelEnum?), string SalesChannel = default(string), string OrderChannel = default(string), string ShipServiceLevel = default(string), Money OrderTotal = default(Money), int? NumberOfItemsShipped = default(int?), int? NumberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList PaymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? PaymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList PaymentMethodDetails = default(PaymentMethodDetailItemList), string MarketplaceId = default(string), string ShipmentServiceLevelCategory = default(string), string EasyShipShipmentStatus = default(string), string CbaDisplayableShippingLabel = default(string), OrderTypeEnum? OrderType = default(OrderTypeEnum?), string EarliestShipDate = default(string), string LatestShipDate = default(string), string EarliestDeliveryDate = default(string), string LatestDeliveryDate = default(string), bool? IsBusinessOrder = default(bool?), bool? IsPrime = default(bool?), bool? IsPremiumOrder = default(bool?), bool? IsGlobalExpressEnabled = default(bool?), string ReplacedOrderId = default(string), bool? IsReplacementOrder = default(bool?), string PromiseResponseDueDate = default(string), bool? IsEstimatedShipDateSet = default(bool?), bool? IsSoldByAB = default(bool?), Address AssignedShipFromLocationAddress = default(Address), FulfillmentInstruction FulfillmentInstruction = default(FulfillmentInstruction))
+        /// <param name="amazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
+        /// <param name="sellerOrderId">A seller-defined order identifier..</param>
+        /// <param name="purchaseDate">The date when the order was created. (required).</param>
+        /// <param name="lastUpdateDate">The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01. (required).</param>
+        /// <param name="orderStatus">The current order status. (required).</param>
+        /// <param name="fulfillmentChannel">Whether the order was fulfilled by Amazon (AFN) or by the seller (MFN)..</param>
+        /// <param name="salesChannel">The sales channel of the first item in the order..</param>
+        /// <param name="orderChannel">The order channel of the first item in the order..</param>
+        /// <param name="shipServiceLevel">The shipment service level of the order..</param>
+        /// <param name="orderTotal">The total charge for this order..</param>
+        /// <param name="numberOfItemsShipped">The number of items shipped..</param>
+        /// <param name="numberOfItemsUnshipped">The number of items unshipped..</param>
+        /// <param name="paymentExecutionDetail">Information about sub-payment methods for a Cash On Delivery (COD) order.  Note: For a COD order that is paid for using one sub-payment method, one PaymentExecutionDetailItem object is returned, with PaymentExecutionDetailItem/PaymentMethod &#x3D; COD. For a COD order that is paid for using multiple sub-payment methods, two or more PaymentExecutionDetailItem objects are returned..</param>
+        /// <param name="paymentMethod">The payment method for the order. This property is limited to Cash On Delivery (COD) and Convenience Store (CVS) payment methods. Unless you need the specific COD payment information provided by the PaymentExecutionDetailItem object, we recommend using the PaymentMethodDetails property to get payment method information..</param>
+        /// <param name="paymentMethodDetails">A list of payment methods for the order..</param>
+        /// <param name="marketplaceId">The identifier for the marketplace where the order was placed..</param>
+        /// <param name="shipmentServiceLevelCategory">The shipment service level category of the order.  Possible values: Expedited, FreeEconomy, NextDay, SameDay, SecondDay, Scheduled, Standard..</param>
+        /// <param name="easyShipShipmentStatus">The status of the Amazon Easy Ship order. This property is included only for Amazon Easy Ship orders.  Possible values: PendingPickUp, LabelCanceled, PickedUp, OutForDelivery, Damaged, Delivered, RejectedByBuyer, Undeliverable, ReturnedToSeller, ReturningToSeller..</param>
+        /// <param name="cbaDisplayableShippingLabel">Custom ship label for Checkout by Amazon (CBA)..</param>
+        /// <param name="orderType">The type of the order..</param>
+        /// <param name="earliestShipDate">The start of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: EarliestShipDate might not be returned for orders placed before February 1, 2013..</param>
+        /// <param name="latestShipDate">The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013..</param>
+        /// <param name="earliestDeliveryDate">The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders..</param>
+        /// <param name="latestDeliveryDate">The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status..</param>
+        /// <param name="isBusinessOrder">When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer..</param>
+        /// <param name="isPrime">When true, the order is a seller-fulfilled Amazon Prime order..</param>
+        /// <param name="isPremiumOrder">When true, the order has a Premium Shipping Service Level Agreement. For more information about Premium Shipping orders, see \&quot;Premium Shipping Options\&quot; in the Seller Central Help for your marketplace..</param>
+        /// <param name="isGlobalExpressEnabled">When true, the order is a GlobalExpress order..</param>
+        /// <param name="replacedOrderId">The order ID value for the order that is being replaced. Returned only if IsReplacementOrder &#x3D; true..</param>
+        /// <param name="isReplacementOrder">When true, this is a replacement order..</param>
+        /// <param name="promiseResponseDueDate">Indicates the date by which the seller must respond to the buyer with an estimated ship date. Returned only for Sourcing on Demand orders..</param>
+        /// <param name="isEstimatedShipDateSet">When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders..</param>
+        /// <param name="isSoldByAB">When true, the item within this order was bought and re-sold by Amazon Business EU SARL (ABEU). By buying and instantly re-selling your items, ABEU becomes the seller of record, making your inventory available for sale to customers who would not otherwise purchase from a third-party seller..</param>
+        /// <param name="defaultShipFromLocationAddress">The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location..</param>
+        /// <param name="fulfillmentInstruction">Contains the instructions about the fulfillment like where should it be fulfilled from..</param>
+        /// <param name="isISPU">When true, this order is marked to be picked up from a store rather than delivered..</param>
+        /// <param name="marketplaceTaxInfo">Tax information about the marketplace..</param>
+        /// <param name="sellerDisplayName">The seller’s friendly name registered in the marketplace..</param>
+        /// <param name="shippingAddress">shippingAddress.</param>
+        /// <param name="buyerInfo">buyerInfo.</param>
+        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum orderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
         {
-            // to ensure "AmazonOrderId" is required (not null)
-            if (AmazonOrderId == null)
+            // to ensure "amazonOrderId" is required (not null)
+            if (amazonOrderId == null)
             {
-                throw new InvalidDataException("AmazonOrderId is a required property for Order and cannot be null");
+                throw new InvalidDataException("amazonOrderId is a required property for Order and cannot be null");
             }
             else
             {
-                this.AmazonOrderId = AmazonOrderId;
+                this.AmazonOrderId = amazonOrderId;
             }
-            // to ensure "PurchaseDate" is required (not null)
-            if (PurchaseDate == null)
+            // to ensure "purchaseDate" is required (not null)
+            if (purchaseDate == null)
             {
-                throw new InvalidDataException("PurchaseDate is a required property for Order and cannot be null");
+                throw new InvalidDataException("purchaseDate is a required property for Order and cannot be null");
             }
             else
             {
-                this.PurchaseDate = PurchaseDate;
+                this.PurchaseDate = purchaseDate;
             }
-            // to ensure "LastUpdateDate" is required (not null)
-            if (LastUpdateDate == null)
+            // to ensure "lastUpdateDate" is required (not null)
+            if (lastUpdateDate == null)
             {
-                throw new InvalidDataException("LastUpdateDate is a required property for Order and cannot be null");
+                throw new InvalidDataException("lastUpdateDate is a required property for Order and cannot be null");
             }
             else
             {
-                this.LastUpdateDate = LastUpdateDate;
+                this.LastUpdateDate = lastUpdateDate;
             }
-            // to ensure "OrderStatus" is required (not null)
-            if (OrderStatus == null)
+            // to ensure "orderStatus" is required (not null)
+            if (orderStatus == null)
             {
-                throw new InvalidDataException("OrderStatus is a required property for Order and cannot be null");
+                throw new InvalidDataException("orderStatus is a required property for Order and cannot be null");
             }
             else
             {
-                this.OrderStatus = OrderStatus;
+                this.OrderStatus = orderStatus;
             }
-            this.SellerOrderId = SellerOrderId;
-            this.FulfillmentChannel = FulfillmentChannel;
-            this.SalesChannel = SalesChannel;
-            this.OrderChannel = OrderChannel;
-            this.ShipServiceLevel = ShipServiceLevel;
-            this.OrderTotal = OrderTotal;
-            this.NumberOfItemsShipped = NumberOfItemsShipped;
-            this.NumberOfItemsUnshipped = NumberOfItemsUnshipped;
-            this.PaymentExecutionDetail = PaymentExecutionDetail;
-            this.PaymentMethod = PaymentMethod;
-            this.PaymentMethodDetails = PaymentMethodDetails;
-            this.MarketplaceId = MarketplaceId;
-            this.ShipmentServiceLevelCategory = ShipmentServiceLevelCategory;
-            this.EasyShipShipmentStatus = EasyShipShipmentStatus;
-            this.CbaDisplayableShippingLabel = CbaDisplayableShippingLabel;
-            this.OrderType = OrderType;
-            this.EarliestShipDate = EarliestShipDate;
-            this.LatestShipDate = LatestShipDate;
-            this.EarliestDeliveryDate = EarliestDeliveryDate;
-            this.LatestDeliveryDate = LatestDeliveryDate;
-            this.IsBusinessOrder = IsBusinessOrder;
-            this.IsPrime = IsPrime;
-            this.IsPremiumOrder = IsPremiumOrder;
-            this.IsGlobalExpressEnabled = IsGlobalExpressEnabled;
-            this.ReplacedOrderId = ReplacedOrderId;
-            this.IsReplacementOrder = IsReplacementOrder;
-            this.PromiseResponseDueDate = PromiseResponseDueDate;
-            this.IsEstimatedShipDateSet = IsEstimatedShipDateSet;
-            this.IsSoldByAB = IsSoldByAB;
-            this.AssignedShipFromLocationAddress = AssignedShipFromLocationAddress;
-            this.FulfillmentInstruction = FulfillmentInstruction;
+            this.SellerOrderId = sellerOrderId;
+            this.FulfillmentChannel = fulfillmentChannel;
+            this.SalesChannel = salesChannel;
+            this.OrderChannel = orderChannel;
+            this.ShipServiceLevel = shipServiceLevel;
+            this.OrderTotal = orderTotal;
+            this.NumberOfItemsShipped = numberOfItemsShipped;
+            this.NumberOfItemsUnshipped = numberOfItemsUnshipped;
+            this.PaymentExecutionDetail = paymentExecutionDetail;
+            this.PaymentMethod = paymentMethod;
+            this.PaymentMethodDetails = paymentMethodDetails;
+            this.MarketplaceId = marketplaceId;
+            this.ShipmentServiceLevelCategory = shipmentServiceLevelCategory;
+            this.EasyShipShipmentStatus = easyShipShipmentStatus;
+            this.CbaDisplayableShippingLabel = cbaDisplayableShippingLabel;
+            this.OrderType = orderType;
+            this.EarliestShipDate = earliestShipDate;
+            this.LatestShipDate = latestShipDate;
+            this.EarliestDeliveryDate = earliestDeliveryDate;
+            this.LatestDeliveryDate = latestDeliveryDate;
+            this.IsBusinessOrder = isBusinessOrder;
+            this.IsPrime = isPrime;
+            this.IsPremiumOrder = isPremiumOrder;
+            this.IsGlobalExpressEnabled = isGlobalExpressEnabled;
+            this.ReplacedOrderId = replacedOrderId;
+            this.IsReplacementOrder = isReplacementOrder;
+            this.PromiseResponseDueDate = promiseResponseDueDate;
+            this.IsEstimatedShipDateSet = isEstimatedShipDateSet;
+            this.IsSoldByAB = isSoldByAB;
+            this.DefaultShipFromLocationAddress = defaultShipFromLocationAddress;
+            this.FulfillmentInstruction = fulfillmentInstruction;
+            this.IsISPU = isISPU;
+            this.MarketplaceTaxInfo = marketplaceTaxInfo;
+            this.SellerDisplayName = sellerDisplayName;
+            this.ShippingAddress = shippingAddress;
+            this.BuyerInfo = buyerInfo;
         }
-
-
-        /// <summary>
-        /// A list of orderline items.
-        /// </summary>
-        /// <value>A list of orderline items.</value>
-        [DataMember(Name = "LineItems", EmitDefaultValue = false)]
-        public OrderItemList LineItems { get; set; }
-
-        /// <summary>
-        /// Buyer info
-        /// </summary>
-        /// <value>A list of payment methods for the order.</value>
-        [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
-        public OrderBuyerInfo BuyerInfo { get; set; }
-
-        /// <summary>
-        /// Shipment info
-        /// </summary>
-        /// <value>Shipment info.</value>
-        [DataMember(Name = "ShipmentInfo", EmitDefaultValue = false)]
-        public Address ShipmentInfo { get; set; }
 
         /// <summary>
         /// An Amazon-defined order identifier, in 3-7-7 format.
@@ -540,8 +528,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location.
         /// </summary>
         /// <value>The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location.</value>
-        [DataMember(Name = "AssignedShipFromLocationAddress", EmitDefaultValue = false)]
-        public Address AssignedShipFromLocationAddress { get; set; }
+        [DataMember(Name = "DefaultShipFromLocationAddress", EmitDefaultValue = false)]
+        public Address DefaultShipFromLocationAddress { get; set; }
 
         /// <summary>
         /// Contains the instructions about the fulfillment like where should it be fulfilled from.
@@ -549,6 +537,39 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>Contains the instructions about the fulfillment like where should it be fulfilled from.</value>
         [DataMember(Name = "FulfillmentInstruction", EmitDefaultValue = false)]
         public FulfillmentInstruction FulfillmentInstruction { get; set; }
+
+        /// <summary>
+        /// When true, this order is marked to be picked up from a store rather than delivered.
+        /// </summary>
+        /// <value>When true, this order is marked to be picked up from a store rather than delivered.</value>
+        [DataMember(Name = "IsISPU", EmitDefaultValue = false)]
+        public bool? IsISPU { get; set; }
+
+        /// <summary>
+        /// Tax information about the marketplace.
+        /// </summary>
+        /// <value>Tax information about the marketplace.</value>
+        [DataMember(Name = "MarketplaceTaxInfo", EmitDefaultValue = false)]
+        public MarketplaceTaxInfo MarketplaceTaxInfo { get; set; }
+
+        /// <summary>
+        /// The seller’s friendly name registered in the marketplace.
+        /// </summary>
+        /// <value>The seller’s friendly name registered in the marketplace.</value>
+        [DataMember(Name = "SellerDisplayName", EmitDefaultValue = false)]
+        public string SellerDisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ShippingAddress
+        /// </summary>
+        [DataMember(Name = "ShippingAddress", EmitDefaultValue = false)]
+        public Address ShippingAddress { get; set; }
+
+        /// <summary>
+        /// Gets or Sets BuyerInfo
+        /// </summary>
+        [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
+        public BuyerInfo BuyerInfo { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -591,8 +612,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  PromiseResponseDueDate: ").Append(PromiseResponseDueDate).Append("\n");
             sb.Append("  IsEstimatedShipDateSet: ").Append(IsEstimatedShipDateSet).Append("\n");
             sb.Append("  IsSoldByAB: ").Append(IsSoldByAB).Append("\n");
-            sb.Append("  AssignedShipFromLocationAddress: ").Append(AssignedShipFromLocationAddress).Append("\n");
+            sb.Append("  DefaultShipFromLocationAddress: ").Append(DefaultShipFromLocationAddress).Append("\n");
             sb.Append("  FulfillmentInstruction: ").Append(FulfillmentInstruction).Append("\n");
+            sb.Append("  IsISPU: ").Append(IsISPU).Append("\n");
+            sb.Append("  MarketplaceTaxInfo: ").Append(MarketplaceTaxInfo).Append("\n");
+            sb.Append("  SellerDisplayName: ").Append(SellerDisplayName).Append("\n");
+            sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
+            sb.Append("  BuyerInfo: ").Append(BuyerInfo).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -601,7 +627,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -613,7 +639,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CreateReportResult);
+            return this.Equals(input as Order);
         }
 
         /// <summary>
@@ -621,7 +647,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <param name="input">Instance of Order to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CreateReportResult input)
+        public bool Equals(Order input)
         {
             if (input == null)
                 return false;
@@ -793,14 +819,39 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.IsSoldByAB.Equals(input.IsSoldByAB))
                 ) &&
                 (
-                    this.AssignedShipFromLocationAddress == input.AssignedShipFromLocationAddress ||
-                    (this.AssignedShipFromLocationAddress != null &&
-                    this.AssignedShipFromLocationAddress.Equals(input.AssignedShipFromLocationAddress))
+                    this.DefaultShipFromLocationAddress == input.DefaultShipFromLocationAddress ||
+                    (this.DefaultShipFromLocationAddress != null &&
+                    this.DefaultShipFromLocationAddress.Equals(input.DefaultShipFromLocationAddress))
                 ) &&
                 (
                     this.FulfillmentInstruction == input.FulfillmentInstruction ||
                     (this.FulfillmentInstruction != null &&
                     this.FulfillmentInstruction.Equals(input.FulfillmentInstruction))
+                ) &&
+                (
+                    this.IsISPU == input.IsISPU ||
+                    (this.IsISPU != null &&
+                    this.IsISPU.Equals(input.IsISPU))
+                ) &&
+                (
+                    this.MarketplaceTaxInfo == input.MarketplaceTaxInfo ||
+                    (this.MarketplaceTaxInfo != null &&
+                    this.MarketplaceTaxInfo.Equals(input.MarketplaceTaxInfo))
+                ) &&
+                (
+                    this.SellerDisplayName == input.SellerDisplayName ||
+                    (this.SellerDisplayName != null &&
+                    this.SellerDisplayName.Equals(input.SellerDisplayName))
+                ) &&
+                (
+                    this.ShippingAddress == input.ShippingAddress ||
+                    (this.ShippingAddress != null &&
+                    this.ShippingAddress.Equals(input.ShippingAddress))
+                ) &&
+                (
+                    this.BuyerInfo == input.BuyerInfo ||
+                    (this.BuyerInfo != null &&
+                    this.BuyerInfo.Equals(input.BuyerInfo))
                 );
         }
 
@@ -879,10 +930,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.IsEstimatedShipDateSet.GetHashCode();
                 if (this.IsSoldByAB != null)
                     hashCode = hashCode * 59 + this.IsSoldByAB.GetHashCode();
-                if (this.AssignedShipFromLocationAddress != null)
-                    hashCode = hashCode * 59 + this.AssignedShipFromLocationAddress.GetHashCode();
+                if (this.DefaultShipFromLocationAddress != null)
+                    hashCode = hashCode * 59 + this.DefaultShipFromLocationAddress.GetHashCode();
                 if (this.FulfillmentInstruction != null)
                     hashCode = hashCode * 59 + this.FulfillmentInstruction.GetHashCode();
+                if (this.IsISPU != null)
+                    hashCode = hashCode * 59 + this.IsISPU.GetHashCode();
+                if (this.MarketplaceTaxInfo != null)
+                    hashCode = hashCode * 59 + this.MarketplaceTaxInfo.GetHashCode();
+                if (this.SellerDisplayName != null)
+                    hashCode = hashCode * 59 + this.SellerDisplayName.GetHashCode();
+                if (this.ShippingAddress != null)
+                    hashCode = hashCode * 59 + this.ShippingAddress.GetHashCode();
+                if (this.BuyerInfo != null)
+                    hashCode = hashCode * 59 + this.BuyerInfo.GetHashCode();
                 return hashCode;
             }
         }

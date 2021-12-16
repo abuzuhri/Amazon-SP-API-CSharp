@@ -272,6 +272,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
 
         }
+        protected class VendorDirectFulfillmentOrdersApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/vendor/directFulfillment/orders/v1";
+            public static string GetOrders
+            {
+                get => $"{_resourceBaseUrl}/purchaseOrders";
+            }
+            public static string SubmitAcknowledgement
+            {
+                get => $"{_resourceBaseUrl}/acknowledgements";
+            }
+            public static string GetOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
+        }
         protected class UploadApiUrls
         {
             private readonly static string _resourceBaseUrl = "/uploads/2020-11-01";

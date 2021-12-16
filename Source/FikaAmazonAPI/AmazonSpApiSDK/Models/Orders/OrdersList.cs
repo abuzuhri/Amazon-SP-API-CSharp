@@ -28,28 +28,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="OrdersList" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public OrdersList() { }
+        protected OrdersList() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OrdersList" /> class.
         /// </summary>
-        /// <param name="Orders">Orders (required).</param>
-        /// <param name="NextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
-        /// <param name="LastUpdatedBefore">A date used for selecting orders that were last updated before (or at) a specified time. An update is defined as any change in order status, including the creation of a new order. Includes updates made by Amazon and by the seller. All dates must be in ISO 8601 format..</param>
-        /// <param name="CreatedBefore">A date used for selecting orders created before (or at) a specified time. Only orders placed before the specified time are returned. The date must be in ISO 8601 format..</param>
-        public OrdersList(OrderList Orders = default(OrderList), string NextToken = default(string), string LastUpdatedBefore = default(string), string CreatedBefore = default(string))
+        /// <param name="orders">orders (required).</param>
+        /// <param name="nextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
+        /// <param name="lastUpdatedBefore">A date used for selecting orders that were last updated before (or at) a specified time. An update is defined as any change in order status, including the creation of a new order. Includes updates made by Amazon and by the seller. All dates must be in ISO 8601 format..</param>
+        /// <param name="createdBefore">A date used for selecting orders created before (or at) a specified time. Only orders placed before the specified time are returned. The date must be in ISO 8601 format..</param>
+        public OrdersList(OrderList orders = default(OrderList), string nextToken = default(string), string lastUpdatedBefore = default(string), string createdBefore = default(string))
         {
-            // to ensure "Orders" is required (not null)
-            if (Orders == null)
+            // to ensure "orders" is required (not null)
+            if (orders == null)
             {
-                throw new InvalidDataException("Orders is a required property for OrdersList and cannot be null");
+                throw new InvalidDataException("orders is a required property for OrdersList and cannot be null");
             }
             else
             {
-                this.Orders = Orders;
+                this.Orders = orders;
             }
-            this.NextToken = NextToken;
-            this.LastUpdatedBefore = LastUpdatedBefore;
-            this.CreatedBefore = CreatedBefore;
+            this.NextToken = nextToken;
+            this.LastUpdatedBefore = lastUpdatedBefore;
+            this.CreatedBefore = createdBefore;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -178,5 +178,4 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             yield break;
         }
     }
-
 }

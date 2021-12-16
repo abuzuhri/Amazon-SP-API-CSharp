@@ -145,6 +145,28 @@ namespace FikaAmazonAPI.Utils
             ACCOUNT_STATUS_CHANGED,
             EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE
         }
+
+        /// <summary>
+        /// SortOrder
+        /// </summary>
+        /// <value>Current Sort Order.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SortOrderEnum
+        {
+
+            /// <summary>
+            /// Enum ASC for value: ASC
+            /// </summary>
+            [EnumMember(Value = "ASC")]
+            ASC = 1,
+
+            /// <summary>
+            /// Enum DESC for value: DESC
+            /// </summary>
+            [EnumMember(Value = "DESC")]
+            DESC = 2
+        }
+
         [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of OrderStatus values
