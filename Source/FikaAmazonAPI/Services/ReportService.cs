@@ -125,59 +125,44 @@ namespace FikaAmazonAPI.Services
 
         private string GetFile(ReportDocument reportDocument)
         {
-            bool IsCompressionFile = false;
-            bool IsEncryptedFile = false;
+            bool isCompressionFile = false;
+            bool isEncryptedFile = reportDocument.EncryptionDetails != null;
 
-            if (reportDocument.EncryptionDetails != null)
-                IsEncryptedFile = true;
-            if (reportDocument.CompressionAlgorithm != null && reportDocument.CompressionAlgorithm.HasValue && reportDocument.CompressionAlgorithm.Value == ReportDocument.CompressionAlgorithmEnum.GZIP)
-                IsCompressionFile = true;
-
+            if (reportDocument.CompressionAlgorithm is ReportDocument.CompressionAlgorithmEnum.GZIP)
+                isCompressionFile = true;
 
             var client = new System.Net.WebClient();
             string fileName = Guid.NewGuid().ToString();
-            
 
-            if (IsCompressionFile)
+            if (isCompressionFile)
             {
                 client.Headers[System.Net.HttpRequestHeader.AcceptEncoding] = "gzip";
                 fileName += ".gz";
-            }else fileName += ".txt";
+            }
+            else fileName += ".txt";
 
             string tempFilePath = Path.Combine(Path.GetTempPath() + fileName);
 
-
-
-            if (IsEncryptedFile)
+            if (isEncryptedFile)
             {
                 //Later will check
-                //byte[] rawData = client.DownloadData(reportDocument.Url);
-                //byte[] key = Convert.FromBase64String(reportDocument.EncryptionDetails.Key);
-                //byte[] iv = Convert.FromBase64String(reportDocument.EncryptionDetails.InitializationVector);
-                //var reportData = FileTransform.DecryptString(key, iv, rawData);
-                //File.WriteAllText(tempFilePath, reportData);
-                return tempFilePath;
+                byte[] rawData = client.DownloadData(reportDocument.Url);
+                byte[] key = Convert.FromBase64String(reportDocument.EncryptionDetails.Key);
+                byte[] iv = Convert.FromBase64String(reportDocument.EncryptionDetails.InitializationVector);
+                var reportData = FileTransform.DecryptString(key, iv, rawData);
+                File.WriteAllText(tempFilePath, reportData);
             }
             else
             {
-                
                 var stream = client.OpenRead(reportDocument.Url);
-                //var responseStream = new System.IO.Compression.GZipStream(rawData, System.IO.Compression.CompressionMode.Decompress);
                 using (Stream s = File.Create(tempFilePath))
                 {
-                    stream.CopyTo(s);
+                    stream?.CopyTo(s);
                 }
-
-               return FileTransform.Decompress(tempFilePath);
-                //SaveStreamToFile(tempFilePath, responseStream);
-
             }
 
-            
+            return isCompressionFile ? FileTransform.Decompress(tempFilePath) : tempFilePath;
         }
-
-
-
 
         public void SaveStreamToFile(string fileFullPath, Stream stream)
         {
