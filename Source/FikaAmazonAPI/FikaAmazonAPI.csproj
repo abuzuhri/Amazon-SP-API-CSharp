@@ -8,9 +8,9 @@
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.19</Version>
-    <AssemblyVersion>1.0.1.19</AssemblyVersion>
-    <FileVersion>1.0.1.19</FileVersion>
+    <Version>1.0.20</Version>
+    <AssemblyVersion>1.0.1.20</AssemblyVersion>
+    <FileVersion>1.0.1.20</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -21,6 +21,7 @@
 	<NeutralLanguage>en-US</NeutralLanguage>
 	<Description>.Net C# library for the new Amazon Selling Partner API</Description>
 	<RepositoryType>git</RepositoryType>
+	<PackageIcon>icon.jpg</PackageIcon>
     
   </PropertyGroup>
   <ItemGroup>
@@ -46,6 +47,10 @@
     <Folder Include="Parameter\Authorization\" />
   </ItemGroup>
   <ItemGroup>
+        <None Include="..\..\Others\icon\icon.jpg">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 </Project>
