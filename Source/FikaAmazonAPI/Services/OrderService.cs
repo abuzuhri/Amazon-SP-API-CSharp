@@ -21,20 +21,20 @@ namespace FikaAmazonAPI.Services
 
         #region GetOrders
 
-        public OrderList GetOrders(ParameterOrderList serachOrderList)
+        public OrderList GetOrders(ParameterOrderList searchOrderList)
         {
             var orderList = new OrderList();
 
-            var queryParameters = serachOrderList.getParameters();
+            var queryParameters = searchOrderList.getParameters();
 
 
-            CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: serachOrderList);
+            CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: searchOrderList);
             var response = ExecuteRequest<GetOrdersResponse>();
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
             while (!string.IsNullOrEmpty(nextToken))
             {
-                var orderPayload = GetByNextToken(nextToken, serachOrderList.MarketplaceIds);
+                var orderPayload = GetByNextToken(nextToken, searchOrderList.MarketplaceIds);
                 orderList.AddRange(orderPayload.Orders);
                 nextToken = orderPayload.NextToken;
             }
