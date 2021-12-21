@@ -123,6 +123,28 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 ```
 
+### Order List data from Sandbox
+```CSharp
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     AccessKey = "AKIAXXXXXXXXXXXXXXX",
+     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     Environment=Environments.Sandbox
+});
+
+var orders = amazonConnection.Orders.GetOrders
+        (
+         new FikaAmazonAPI.Parameter.Order.ParameterOrderList()
+             {
+              TestCase = Constants.TestCase200
+             }
+        );
+```
+
 ### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
 ```CSharp
 var parameters = new ParameterReportList();

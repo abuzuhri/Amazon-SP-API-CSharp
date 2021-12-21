@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Utils
                 queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("CreatedAfter", Constants.TestCase200),
-                    new KeyValuePair<string, string>("MarketplaceIds", "ATVPDKIKX0DER")
+                    new KeyValuePair<string, string>("MarketplaceIds", MarketPlace.US.ID)
                 });
             }
 
