@@ -30,6 +30,12 @@ namespace FikaAmazonAPI.NotificationMessages
         public bool IsFulfilledByAmazon { get; set; }
 
         /// <summary>
+        /// Indicates if the offer is buy box winner
+        /// </summary>
+        [JsonProperty("IsBuyBoxWinner")]
+        public bool IsBuyBoxWinner { get; set; }
+
+        /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("ListingPrice")]
