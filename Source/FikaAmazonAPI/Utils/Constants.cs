@@ -11,6 +11,7 @@ namespace FikaAmazonAPI.Utils
     {
         public readonly static string AmazonToeknEndPoint = "https://api.amazon.com/auth/o2/token";
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
+        public readonly static string TestCase200 = "TEST_CASE_200";
         
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Environments

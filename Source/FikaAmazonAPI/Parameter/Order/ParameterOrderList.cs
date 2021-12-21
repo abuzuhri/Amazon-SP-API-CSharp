@@ -9,8 +9,13 @@ using System.Text;
 
 namespace FikaAmazonAPI.Parameter.Order
 {
-    public class ParameterOrderList :  ParameterBased, IParameterBasedPII
+    public class ParameterOrderList :  ParameterBased, IParameterBasedPII, IHasParameterizedTestCase
     {
+        public ParameterOrderList()
+        {
+            SandboxQueryParameters = Sandbox.SandboxQueryParameters<ParameterOrderList>();
+        }
+
         /// <summary>
         /// A date used for selecting orders created after (or at) a specified time. Only orders placed after the specified time are returned. Either the CreatedAfter parameter or the LastUpdatedAfter parameter is required. Both cannot be empty. The date must be in ISO 8601 format.	
         /// </summary>
@@ -84,5 +89,8 @@ namespace FikaAmazonAPI.Parameter.Order
         public string StoreChainStoreId { get; set; }
         public bool IsNeedRestrictedDataToken { get; set; }
         public CreateRestrictedDataTokenRequest RestrictedDataTokenRequest { get; set; }
+        public string TestCase { get; set; }
+
+        public Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters { get; }
     }
 }

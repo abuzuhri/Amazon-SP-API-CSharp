@@ -25,8 +25,7 @@ namespace FikaAmazonAPI.Services
         {
             var orderList = new OrderList();
 
-            var queryParameters = searchOrderList.getParameters();
-
+            var queryParameters = searchOrderList.getParameters(this.AmazonCredential.Environment == Constants.Environments.Sandbox);
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: searchOrderList);
             var response = ExecuteRequest<GetOrdersResponse>();
