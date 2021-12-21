@@ -102,88 +102,88 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Reports.cs).
 ```CSharp
-     ParameterOrderList serachOrderList = new ParameterOrderList();
-     serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-     serachOrderList.OrderStatuses = new List<OrderStatuses>();
-     serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-     var orders = amazonConnection.Orders.GetOrders(serachOrderList);
-     
+ParameterOrderList serachOrderList = new ParameterOrderList();
+serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+serachOrderList.OrderStatuses = new List<OrderStatuses>();
+serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+
 ```
 
 
 ### Order List with parameter
 ```CSharp
-     ParameterOrderList serachOrderList = new ParameterOrderList();
-     serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-     serachOrderList.OrderStatuses = new List<OrderStatuses>();
-     serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-     serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+ParameterOrderList serachOrderList = new ParameterOrderList();
+serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+serachOrderList.OrderStatuses = new List<OrderStatuses>();
+serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
-     var orders = amazonConnection.Orders.GetOrders(serachOrderList);
-     
+var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+
 ```
 
 ### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).
 ```CSharp
-     var parameters = new ParameterReportList();
-     parameters.pageSize = 100;
-     parameters.reportTypes = new List<ReportTypes>();
-     parameters.reportTypes.Add(ReportTypes.GET_AFN_INVENTORY_DATA);
-     parameters.marketplaceIds = new List<string>();
-     parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
-     var reports=amazonConnection.Reports.GetReports(parameters);
+var parameters = new ParameterReportList();
+parameters.pageSize = 100;
+parameters.reportTypes = new List<ReportTypes>();
+parameters.reportTypes.Add(ReportTypes.GET_AFN_INVENTORY_DATA);
+parameters.marketplaceIds = new List<string>();
+parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+var reports=amazonConnection.Reports.GetReports(parameters);
 ```
 
 ### Custom Report
 ```CSharp
-     var parameters = new ParameterCreateReportSpecification();
-     parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
-     parameters.dataStartTime = DateTime.UtcNow.AddDays(-30);
-     parameters.dataEndTime = DateTime.UtcNow.AddDays(-10);
-     parameters.marketplaceIds = new MarketplaceIds();
-     parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
-     parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
+var parameters = new ParameterCreateReportSpecification();
+parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
+parameters.dataStartTime = DateTime.UtcNow.AddDays(-30);
+parameters.dataEndTime = DateTime.UtcNow.AddDays(-10);
+parameters.marketplaceIds = new MarketplaceIds();
+parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
 
-     var report= amazonConnection.Reports.CreateReport(parameters);
+var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
 
 ### Report GET_MERCHANT_LISTINGS_ALL_DATA sample
 ```CSharp
-     var parameters = new ParameterCreateReportSpecification();
-     parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
+var parameters = new ParameterCreateReportSpecification();
+parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
 
-     parameters.marketplaceIds = new MarketplaceIds();
-     parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+parameters.marketplaceIds = new MarketplaceIds();
+parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
-     parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
 
-     var reportId = amazonConnection.Reports.CreateReport(parameters);
-     var filePath = string.Empty;
-     string ReportDocumentId = string.Empty;
+var reportId = amazonConnection.Reports.CreateReport(parameters);
+var filePath = string.Empty;
+string ReportDocumentId = string.Empty;
 
-     while (string.IsNullOrEmpty(ReportDocumentId))
-     {
-         Thread.Sleep(1000 * 60);
-         var reportData = amazonConnection.Reports.GetReport(reportId);
-         if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
-         {
-             filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
-             break;
-         }
-     }
+while (string.IsNullOrEmpty(ReportDocumentId))
+{
+    Thread.Sleep(1000 * 60);
+    var reportData = amazonConnection.Reports.GetReport(reportId);
+    if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+    {
+        filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+        break;
+    }
+}
 
-     //filePath for report
+//filePath for report
 ```
 
 ### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
-     {
-         MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-         Asins = new string[] { "B00CZC5F0G" }
-     });
+{
+    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+    Asins = new string[] { "B00CZC5F0G" }
+});
 
 ```
 
@@ -191,11 +191,11 @@ var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPrici
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
-     {
-         MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-         Asins = new string[] { "B00CZC5F0G" },
+{
+    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+    Asins = new string[] { "B00CZC5F0G" },
 
-     });
+});
 ```
 
 
@@ -203,41 +203,38 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```CSharp
 
 //EventBridge
-     var data = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
-     {
-         Name = "CompanyName",
-         ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification()
-         {
-             EventBridge = new AmazonSpApiSDK.Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
-         }
-     });
+var data = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
+{
+    Name = "CompanyName",
+    ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification()
+    {
+        EventBridge = new AmazonSpApiSDK.Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
+    }
+});
 
-     //SQS
-     var dataSqs = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
-     {
-         Name = "CompanyName_AE",
-         ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
-         {
-             Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
-         }
-     });
+//SQS
+var dataSqs = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
+{
+    Name = "CompanyName_AE",
+    ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
+    {
+        Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+    }
+});
 ```
 
 ### Notifications read messages
 ```CSharp
 
-     var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
-     ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
+var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
+ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
 
-     CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
-
-
-     amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
+CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
 
 
-        public class CustomMessageReceiver : IMessageReceiver
-        {
-
+amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
+public class CustomMessageReceiver : IMessageReceiver
+{
      public void ErrorCatch(Exception ex)
      {
          //Your code here
@@ -247,7 +244,7 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
      {
          //Your Code here
      }
-        }
+}
 
 ```
 
@@ -255,31 +252,31 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 Here full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
 Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and use our library to get data, now we support only submit existing product, change quantity and change price , I list most of XSD here Source\FikaAmazonAPI\ConstructFeed\xsd its will help you easy generate class and add it in your app to generate final feed xml.
 ```CSharp
-     ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
 
-     var list = new List<PriceMessage>();
-     list.Add(new PriceMessage()
-     {
-         SKU = "8201031206122...",
-         StandardPrice = new StandardPrice()
-         {
-             currency = BaseCurrencyCode.AED.ToString(),
-             Value = (201.0522M).ToString("0.00")
-         }
-     });
-     createDocument.AddPriceMessage(list);
+var list = new List<PriceMessage>();
+list.Add(new PriceMessage()
+{
+    SKU = "8201031206122...",
+    StandardPrice = new StandardPrice()
+    {
+        currency = BaseCurrencyCode.AED.ToString(),
+        Value = (201.0522M).ToString("0.00")
+    }
+});
+createDocument.AddPriceMessage(list);
 
-     var xml = createDocument.GetXML();
+var xml = createDocument.GetXML();
 
-     var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
-     Thread.Sleep(1000*30);
+Thread.Sleep(1000*30);
 
-     var feedOutput=amazonConnection.Feed.GetFeed(feedID);
+var feedOutput=amazonConnection.Feed.GetFeed(feedID);
 
-     var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
 
-     var reportOutpit = outPut.Url;
+var reportOutpit = outPut.Url;
 
 ```
 
