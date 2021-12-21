@@ -205,23 +205,23 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
 
 //EventBridge
 var data = amazonConnection.Notification.CreateDestination(
-    new Models.Notifications.CreateDestinationRequest()
+    new Notifications.CreateDestinationRequest()
     {
         Name = "CompanyName",
-        ResourceSpecification = new Models.Notifications.DestinationResourceSpecification()
+        ResourceSpecification = new Notifications.DestinationResourceSpecification()
         {
-            EventBridge = new Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
+            EventBridge = new Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
         }
     });
 
 //SQS
 var dataSqs = amazonConnection.Notification.CreateDestination(
-    new Models.Notifications.CreateDestinationRequest()
+    new Notifications.CreateDestinationRequest()
     {
         Name = "CompanyName_AE",
-        ResourceSpecification = new Models.Notifications.DestinationResourceSpecification
+        ResourceSpecification = new Notifications.DestinationResourceSpecification
         {
-            Sqs = new Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+            Sqs = new Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
         }
     });
 ```
