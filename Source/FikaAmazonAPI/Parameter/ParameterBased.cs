@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.Utils;
+﻿using FikaAmazonAPI.Parameter;
+using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -11,10 +12,28 @@ namespace FikaAmazonAPI.Search
 {
     public class ParameterBased
     {
-        public virtual List<KeyValuePair<string, string>> getParameters()
+        public virtual List<KeyValuePair<string, string>> getParameters(bool isSandbox = false)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             Type t = this.GetType(); // Where obj is object whose properties you need.
+            if (isSandbox)
+            {
+                if (typeof(IHasParameterizedTestCase).IsAssignableFrom(t))
+                {
+                    var queryParametersProperties = t.GetInterfaces().FirstOrDefault(x => x == typeof(IHasParameterizedTestCase)).GetProperties();
+                    var testCasePropertyValue = queryParametersProperties.FirstOrDefault(x => x.Name == nameof(IHasParameterizedTestCase.TestCase))?.GetValue(this);
+                    if (testCasePropertyValue != null && testCasePropertyValue is string testCase)
+                    {
+                        var sandboxQueryParametersPropertyValue = queryParametersProperties.FirstOrDefault(x => x.Name == nameof(IHasParameterizedTestCase.SandboxQueryParameters))?.GetValue(this);
+                        if (sandboxQueryParametersPropertyValue != null && sandboxQueryParametersPropertyValue is Dictionary<string, List<KeyValuePair<string, string>>> sandboxQueryParameters)
+                        {
+                            if (sandboxQueryParameters.ContainsKey(testCase))
+                                return sandboxQueryParameters[testCase];
+                        }
+
+                    }
+                }
+            }
             PropertyInfo[] pi = t.GetProperties();
             foreach (PropertyInfo p in pi)
             {
@@ -67,6 +86,7 @@ namespace FikaAmazonAPI.Search
 
             return queryParameters;
         }
+
         private static bool IsNullableEnum(Type t)
         {
             Type u = Nullable.GetUnderlyingType(t);
