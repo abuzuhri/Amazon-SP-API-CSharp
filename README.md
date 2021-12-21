@@ -179,23 +179,24 @@ while (string.IsNullOrEmpty(ReportDocumentId))
 ### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
 
-var data = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
-{
-    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-    Asins = new string[] { "B00CZC5F0G" }
-});
+var data = amazonConnection.ProductPricing.GetPricing(
+    new Parameter.ProductPricing.ParameterGetPricing()
+    {
+        MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+        Asins = new string[] { "B00CZC5F0G" }
+    });
 
 ```
 
 ### Product Competitive Price
 ```CSharp
 
-var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
-{
-    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-    Asins = new string[] { "B00CZC5F0G" },
-
-});
+var data = amazonConnection.ProductPricing.GetCompetitivePricing(
+    new Parameter.ProductPricing.ParameterGetCompetitivePricing()
+    {
+        MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+        Asins = new string[] { "B00CZC5F0G" },
+    });
 ```
 
 
@@ -203,31 +204,36 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.P
 ```CSharp
 
 //EventBridge
-var data = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
-{
-    Name = "CompanyName",
-    ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification()
+var data = amazonConnection.Notification.CreateDestination(
+    new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
     {
-        EventBridge = new AmazonSpApiSDK.Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
-    }
-});
+        Name = "CompanyName",
+        ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification()
+        {
+            EventBridge = new AmazonSpApiSDK.Models.Notifications.EventBridgeResourceSpecification("us-east-2", "999999999")
+        }
+    });
 
 //SQS
-var dataSqs = amazonConnection.Notification.CreateDestination(new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
-{
-    Name = "CompanyName_AE",
-    ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
+var dataSqs = amazonConnection.Notification.CreateDestination(
+    new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
     {
-        Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
-    }
-});
+        Name = "CompanyName_AE",
+        ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
+        {
+            Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+        }
+    });
 ```
 
 ### Notifications read messages
 ```CSharp
 
 var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
-ParameterMessageReceiver param = new ParameterMessageReceiver(Environment.GetEnvironmentVariable("AccessKey"), Environment.GetEnvironmentVariable("SecretKey"), SQL_URL, Amazon.RegionEndpoint.USEast2);
+ParameterMessageReceiver param = new ParameterMessageReceiver(
+                    Environment.GetEnvironmentVariable("AccessKey"), 
+                    Environment.GetEnvironmentVariable("SecretKey"), 
+                    SQL_URL, Amazon.RegionEndpoint.USEast2);
 
 CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
 
