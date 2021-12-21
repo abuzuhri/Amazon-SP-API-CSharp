@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         /// Initializes a new instance of the <see cref="FeesEstimateRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FeesEstimateRequest() { }
+        public FeesEstimateRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FeesEstimateRequest" /> class.
         /// </summary>
@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         /// <param name="IsAmazonFulfilled">When true, the offer is fulfilled by Amazon..</param>
         /// <param name="PriceToEstimateFees">The product price that the fee estimate is based on. (required).</param>
         /// <param name="Identifier">The product price on which the fee estimate is based. (required).</param>
-        public FeesEstimateRequest(string MarketplaceId = default(string), bool? IsAmazonFulfilled = default(bool?), PriceToEstimateFees PriceToEstimateFees = default(PriceToEstimateFees), string Identifier = default(string))
+        public FeesEstimateRequest(string MarketplaceId, bool? IsAmazonFulfilled = default(bool?), PriceToEstimateFees PriceToEstimateFees = default(PriceToEstimateFees), string Identifier = default(string))
         {
             // to ensure "MarketplaceId" is required (not null)
             if (MarketplaceId == null)
@@ -67,12 +67,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
             }
             this.IsAmazonFulfilled = IsAmazonFulfilled;
         }
-
-        /// <summary>
-        /// A marketplace identifier.
-        /// </summary>
-        /// <value>A marketplace identifier.</value>
-        [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
+            /// <summary>
+            /// A marketplace identifier.
+            /// </summary>
+            /// <value>A marketplace identifier.</value>
+            [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
         /// <summary>

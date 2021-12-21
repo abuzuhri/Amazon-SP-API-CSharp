@@ -31,7 +31,17 @@ namespace FikaAmazonAPI.Sample
             amazonConnection.Reports.GetReports(parameters);
         }
 
-        
+        public void GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs()
+        {
+            var parameters = new ParameterReportList();
+            parameters.pageSize = 100;
+            parameters.reportTypes = new List<ReportTypes>();
+            parameters.reportTypes.Add(ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE);
+            parameters.marketplaceIds = new List<string>();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+            var reports=amazonConnection.Reports.GetReports(parameters);
+        }
+
         public void CreateReport()
         {
 
@@ -125,6 +135,7 @@ namespace FikaAmazonAPI.Sample
 
             parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
 
+
             var reportId = amazonConnection.Reports.CreateReport(parameters);
             var filePath = string.Empty;
             string ReportDocumentId = string.Empty;
@@ -143,6 +154,42 @@ namespace FikaAmazonAPI.Sample
             return filePath;
         }
 
+        public string CreateReport_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE()
+        {
+
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+
+
+            parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+
+            parameters.dataStartTime = DateTime.UtcNow.AddDays(-50);
+            parameters.dataEndTime = DateTime.UtcNow.AddDays(-1);
+
+            var reportId = amazonConnection.Reports.CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
+            {
+                var reportData = amazonConnection.Reports.GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+                if(reportData.ProcessingStatus== AmazonSpApiSDK.Models.Reports.Report.ProcessingStatusEnum.FATAL)
+                {
+                    throw new Exception("Error with Generate report");
+                }
+                else Thread.Sleep(1000 * 60);
+            }
+
+            return filePath;
+        }
 
         public void GetReportFile()
         {

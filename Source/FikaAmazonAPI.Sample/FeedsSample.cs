@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.Sample
             {
                 SKU = "8201031206122...",
                 Quantity = 2,
-                FulfillmentLatency = "12"
+                FulfillmentLatency = "11",
             });
             createDocument.AddInventoryMessage(list);
             var xml = createDocument.GetXML();
@@ -78,7 +78,34 @@ namespace FikaAmazonAPI.Sample
 
         }
 
+        /// <summary>
+        /// UnderTest
+        /// </summary>
+        //public void SubmitFeedMaxOrderQuantity()
+        //{
+        //    ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            
+        //    var list = new List<ProductMessage>();
+        //    list.Add(new ProductMessage()
+        //    {
+        //        SKU = "8201031206122...",
+        //        StandardProductID = new ConstructFeed.Messages.StandardProductID()
+        //        {
+        //            Type = "ASIN",
+        //            Value= "B08CDYB2DC"
+        //        },
+        //        DescriptionData = new DescriptionData()
+        //        {
+        //            MaxOrderQuantity=2,
+        //            Title= "REBUNE RE-2061-1Hot Air Styler Hair Styler 1000 Watts 3 In 1"
+        //        }
+        //    });
+        //    createDocument.AddProductMessage(list,OperationType.Update);
+        //    var xml = createDocument.GetXML();
 
+        //    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
+
+        //}
         public void SubmitFeedPRICING()
         {
 

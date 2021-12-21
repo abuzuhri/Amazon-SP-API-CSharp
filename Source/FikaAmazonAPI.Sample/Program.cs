@@ -44,13 +44,30 @@ namespace FikaAmazonAPI.Sample
 
             }) ;
 
-            var order2s = amazonConnection.VendorDirectFulfillmentOrders.GetOrder("UNrSh9H8R");
+            ReportsSample reportsSample = new ReportsSample(amazonConnection);
+            reportsSample.GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs();
+            reportsSample.CreateReport_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE();
+
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedInventory();
 
 
-            var orderData=amazonConnection.Orders.GetOrder(new ParameterGetOrder()
-            {
-                OrderId = "404-6678802-8633900"
-            });
+            amazonConnection.ProductFee.GetMyFeesEstimateForSKU("SKU1 + SKU2-FBA",
+                            new AmazonSpApiSDK.Models.ProductFees.FeesEstimateRequest()
+                            {
+                                Identifier = "00001",
+                                IsAmazonFulfilled = true,
+                                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                                PriceToEstimateFees = new AmazonSpApiSDK.Models.ProductFees.PriceToEstimateFees(new AmazonSpApiSDK.Models.ProductFees.MoneyType("AED", 200))
+                            });
+
+            //var order2s = amazonConnection.VendorDirectFulfillmentOrders.GetOrder("UNrSh9H8R");
+
+
+            //var orderData=amazonConnection.Orders.GetOrder(new ParameterGetOrder()
+            //{
+            //    OrderId = "404-6678802-8633900"
+            //});
 
 
 
