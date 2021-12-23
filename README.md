@@ -251,11 +251,11 @@ var dataSqs = amazonConnection.Notification.CreateDestination(
 ### Notifications read messages
 ```CSharp
 
-var SQL_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
+var SQS_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
 ParameterMessageReceiver param = new ParameterMessageReceiver(
                     Environment.GetEnvironmentVariable("AccessKey"), 
                     Environment.GetEnvironmentVariable("SecretKey"), 
-                    SQL_URL, Amazon.RegionEndpoint.USEast2);
+                    SQS_URL, Amazon.RegionEndpoint.USEast2);
 
 CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
 
