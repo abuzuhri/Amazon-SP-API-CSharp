@@ -1,16 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>CSharpAmazonSpAPI</PackageId>
     <Authors>Tareq Abuzuhri</Authors>
     <Company>Cozly AB</Company>
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.21</Version>
-    <AssemblyVersion>1.0.1.21</AssemblyVersion>
-    <FileVersion>1.0.1.21</FileVersion>
+    <Version>1.0.22</Version>
+    <AssemblyVersion>1.0.1.22</AssemblyVersion>
+    <FileVersion>1.0.1.22</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -22,6 +21,7 @@
 	<Description>.Net C# library for the new Amazon Selling Partner API</Description>
 	<RepositoryType>git</RepositoryType>
 	<PackageIcon>icon.jpg</PackageIcon>
+	<TargetFramework>netstandard2.0</TargetFramework>
     
   </PropertyGroup>
   <ItemGroup>

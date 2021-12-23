@@ -30,7 +30,6 @@ namespace FikaAmazonAPI.Sample
         {
 
 
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -44,12 +43,14 @@ namespace FikaAmazonAPI.Sample
 
             }) ;
 
-            ReportsSample reportsSample = new ReportsSample(amazonConnection);
-            reportsSample.GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs();
-            reportsSample.CreateReport_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE();
+            //ReportsSample reportsSample = new ReportsSample(amazonConnection);
 
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            //feedsSample.SubmitFeedInventory();
+            //reportsSample.GetReportGET_FBA_REIMBURSEMENTS_DATA();
+            //reportsSample.GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs();
+            //reportsSample.CreateReport_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE();
+
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            ////feedsSample.SubmitFeedInventory();
 
 
             amazonConnection.ProductFee.GetMyFeesEstimateForSKU("SKU1 + SKU2-FBA",

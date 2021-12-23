@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.Parameter.Report;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
@@ -191,6 +192,54 @@ namespace FikaAmazonAPI.Sample
             return filePath;
         }
 
+
+        public string CreateReportAndDawnload(ReportTypes reportTypes,DateTime? dataStartTime=null,DateTime? dataEndTime=null, ReportOptions reportOptions=null)
+        {
+
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = reportTypes;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+
+            if(reportOptions!=null)
+                parameters.reportOptions = reportOptions;
+
+            if(dataStartTime.HasValue)
+                parameters.dataStartTime = dataStartTime;
+            if(dataEndTime.HasValue)
+                parameters.dataEndTime = dataEndTime;
+
+            var reportId = amazonConnection.Reports.CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
+            {
+                var reportData = amazonConnection.Reports.GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+                if (reportData.ProcessingStatus == AmazonSpApiSDK.Models.Reports.Report.ProcessingStatusEnum.FATAL)
+                {
+                    throw new Exception("Error with Generate report");
+                }
+                else Thread.Sleep(1000 * 60);
+            }
+
+            return filePath;
+        }
+
+
+
+        public void GetReportGET_FBA_REIMBURSEMENTS_DATA()
+        {
+            DateTime startDate = new DateTime(2021, 10, 03);
+            DateTime endDate = new DateTime(2021, 10, 10);
+            var reportPath = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, endDate);
+        }
         public void GetReportFile()
         {
 

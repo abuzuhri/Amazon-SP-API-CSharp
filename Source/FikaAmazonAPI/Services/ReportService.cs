@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
@@ -189,5 +191,52 @@ namespace FikaAmazonAPI.Services
             return true;
         }
         #endregion
+
+
+        public string CreateReportAndDownloadFile(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
+        {
+
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = reportTypes;
+            
+            parameters.marketplaceIds = new MarketplaceIds();
+            
+            parameters.marketplaceIds.Add(this.MarketPlace.ID);
+
+            if (reportOptions != null)
+                parameters.reportOptions = reportOptions;
+
+            if (dataStartTime.HasValue)
+                parameters.dataStartTime = dataStartTime;
+            if (dataEndTime.HasValue)
+                parameters.dataEndTime = dataEndTime;
+
+            var reportId = CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
+            {
+                var reportData = GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    filePath = GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+                if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.FATAL)
+                {
+                    throw new Exception("Error with Generate report FATAL");
+                }
+                if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.CANCELLED)
+                {
+                    throw new Exception("Error with Generate report CANCELLED");
+                }
+                else Thread.Sleep(1000 * 60);
+            }
+
+            return filePath;
+        }
+
+
     }
 }
