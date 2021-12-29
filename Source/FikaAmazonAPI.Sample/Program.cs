@@ -21,6 +21,7 @@ using static FikaAmazonAPI.Utils.Constants;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 
 namespace FikaAmazonAPI.Sample
 {
@@ -30,6 +31,7 @@ namespace FikaAmazonAPI.Sample
         {
 
 
+            
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -38,12 +40,37 @@ namespace FikaAmazonAPI.Sample
                 ClientId = Environment.GetEnvironmentVariable("ClientId"),
                 ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
                 RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates,
+                MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
-
             }) ;
 
-            //ReportsSample reportsSample = new ReportsSample(amazonConnection);
+            var marketplaceById = MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG");
+
+            var data2222=amazonConnection.Seller.GetMarketplaceParticipations();
+
+
+            ReportsSample reportsSample = new ReportsSample(amazonConnection);
+
+            DateTime startDate = new DateTime(2021, 10, 03);
+            //DateTime endDate = new DateTime(2021, 10, 10);
+            //ReportOptions reportOptions = new ReportOptions();
+            //reportOptions.Add("ShowSalesChannel","true");
+            //reportOptions.Add("", "");
+
+            //getCatalogItem
+            var CatList2=amazonConnection.CatalogItem.GetCatalogItem("B07NP8W4FM");
+            var CatList=amazonConnection.CatalogItem.GetCatalogItem("B01N1LL62W");
+            var CatList3=amazonConnection.CatalogItem.GetCatalogItem("B01J28O9C0");
+
+            var ddd = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
+            {
+                Asins = new[] { "B07XWTQ6HW" },
+                MarketplaceId =MarketPlace.UnitedArabEmirates.ID
+            }) ;
+
+            var data11111=amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
+            var data=amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
+
 
             //reportsSample.GetReportGET_FBA_REIMBURSEMENTS_DATA();
             //reportsSample.GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs();
@@ -91,7 +118,7 @@ namespace FikaAmazonAPI.Sample
                 Asins = new string[] { "B00LZ0VSMI" }
             });
 
-            var data= amazonConnection.ProductPricing.GetListingOffers(new Parameter.ProductPricing.ParameterGetListingOffers()
+            var data3= amazonConnection.ProductPricing.GetListingOffers(new Parameter.ProductPricing.ParameterGetListingOffers()
             {
                 ItemCondition=ItemCondition.New,
                 MarketplaceId=MarketPlace.UnitedArabEmirates.ID,

@@ -1,22 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FikaAmazonAPI.Utils
 {
     public class MarketPlace
     {
+
         public string ID { get; set; }
         public Region Region { get; set; }
 
         public Country Country { get; set; }
+         
         private MarketPlace(string id, Region region, Country country)
         {
             ID = id;
             Region = region;
             Country = country;
         }
+        
+        public static MarketPlace GetMarketPlaceByID(string id)
+        {
+            var list =new List<MarketPlace>();
+            //NorthAmerica
+            list.Add(US); list.Add(Canada); list.Add(Mexico); list.Add(Brazil);
+            //Europe
+            list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Netherlands); 
+            list.Add(Germany); list.Add(Italy); list.Add(Sweden); list.Add(Egypt);
+            list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates); list.Add(India);
+            //FarEast
+            list.Add(Singapore); list.Add(Australia); list.Add(Japan);
 
+            return list.FirstOrDefault(a => a.ID == id);
+        }
 
         //https://docs.developer.amazonservices.com/en_UK/dev_guide/DG_Endpoints.html
 

@@ -234,11 +234,15 @@ namespace FikaAmazonAPI.Sample
 
 
 
+        public void GetReport_GET_SELLER_FEEDBACK_DATA()
+        {
+            DateTime startDate = new DateTime(2021, 10, 03);
+            var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_SELLER_FEEDBACK_DATA, startDate, null, null);
+        }
         public void GetReportGET_FBA_REIMBURSEMENTS_DATA()
         {
             DateTime startDate = new DateTime(2021, 10, 03);
-            DateTime endDate = new DateTime(2021, 10, 10);
-            var reportPath = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, endDate);
+            var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
         }
         public void GetReportFile()
         {
