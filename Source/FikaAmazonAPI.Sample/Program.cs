@@ -22,6 +22,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 
 namespace FikaAmazonAPI.Sample
 {
@@ -43,6 +44,10 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
             }) ;
+
+            DateTime startDate11 = new DateTime(2021, 10, 03);
+            var data111 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_SELLER_FEEDBACK_DATA, startDate11, null, null);
+
 
             var marketplaceById = MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG");
 

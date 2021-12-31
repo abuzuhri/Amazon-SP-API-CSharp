@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="Height">The height dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Height..</param>
         /// <param name="Unit">The unit of measurement. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Unit..</param>
         /// <param name="PredefinedPackageDimensions">PredefinedPackageDimensions.</param>
-        public PackageDimensions(PackageDimension Length = default(PackageDimension), PackageDimension Width = default(PackageDimension), PackageDimension Height = default(PackageDimension), UnitOfLength? Unit = default(UnitOfLength?), PredefinedPackageDimensions? PredefinedPackageDimensions = default(PredefinedPackageDimensions?))
+        public PackageDimensions(double? Length = default(double?), double? Width = default(double?), double? Height = default(double?), UnitOfLength? Unit = default(UnitOfLength?), PredefinedPackageDimensions? PredefinedPackageDimensions = default(PredefinedPackageDimensions?))
         {
             this.Length = Length;
             this.Width = Width;
@@ -56,21 +56,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// </summary>
         /// <value>The length dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Length.</value>
         [DataMember(Name = "Length", EmitDefaultValue = false)]
-        public PackageDimension Length { get; set; }
+        public double? Length { get; set; }
 
         /// <summary>
         /// The width dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Width.
         /// </summary>
         /// <value>The width dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Width.</value>
         [DataMember(Name = "Width", EmitDefaultValue = false)]
-        public PackageDimension Width { get; set; }
+        public double? Width { get; set; }
 
         /// <summary>
         /// The height dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Height.
         /// </summary>
         /// <value>The height dimension. If you don&#39;t specify PredefinedPackageDimensions, you must specify the Height.</value>
         [DataMember(Name = "Height", EmitDefaultValue = false)]
-        public PackageDimension Height { get; set; }
+        public double? Height { get; set; }
 
 
 
