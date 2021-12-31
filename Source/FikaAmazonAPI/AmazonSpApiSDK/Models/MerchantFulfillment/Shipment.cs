@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="TrackingId">TrackingId.</param>
         /// <param name="CreatedDate">The date and time the shipment was created. (required).</param>
         /// <param name="LastUpdatedDate">The date and time of the last update..</param>
-        public Shipment(ShipmentId ShipmentId = default(ShipmentId), AmazonOrderId AmazonOrderId = default(AmazonOrderId), SellerOrderId SellerOrderId = default(SellerOrderId), ItemList ItemList = default(ItemList), Address ShipFromAddress = default(Address), Address ShipToAddress = default(Address), PackageDimensions PackageDimensions = default(PackageDimensions), Weight Weight = default(Weight), CurrencyAmount Insurance = default(CurrencyAmount), ShippingService ShippingService = default(ShippingService), Label Label = default(Label), ShipmentStatus Status = default(ShipmentStatus), TrackingId TrackingId = default(TrackingId), Timestamp CreatedDate = default(Timestamp), Timestamp LastUpdatedDate = default(Timestamp))
+        public Shipment(ShipmentId ShipmentId = default(ShipmentId), string AmazonOrderId = default(string), SellerOrderId SellerOrderId = default(SellerOrderId), ItemList ItemList = default(ItemList), Address ShipFromAddress = default(Address), Address ShipToAddress = default(Address), PackageDimensions PackageDimensions = default(PackageDimensions), Weight Weight = default(Weight), CurrencyAmount Insurance = default(CurrencyAmount), ShippingService ShippingService = default(ShippingService), Label Label = default(Label), ShipmentStatus Status = default(ShipmentStatus), TrackingId TrackingId = default(TrackingId), Timestamp CreatedDate = default(Timestamp), Timestamp LastUpdatedDate = default(Timestamp))
         {
             // to ensure "ShipmentId" is required (not null)
             if (ShipmentId == null)
@@ -178,7 +178,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Gets or Sets AmazonOrderId
         /// </summary>
         [DataMember(Name = "AmazonOrderId", EmitDefaultValue = false)]
-        public AmazonOrderId AmazonOrderId { get; set; }
+        public string AmazonOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets SellerOrderId

@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="ShipDate">When used in a request, this is the date and time that the seller wants to ship the package. When used in a response, this is the date and time that the package can be shipped by the indicated method..</param>
         /// <param name="ShippingServiceOptions">Extra services offered by the carrier. (required).</param>
         /// <param name="LabelCustomization">Label customization options..</param>
-        public ShipmentRequestDetails(AmazonOrderId AmazonOrderId = default(AmazonOrderId), SellerOrderId SellerOrderId = default(SellerOrderId), ItemList ItemList = default(ItemList), Address ShipFromAddress = default(Address), PackageDimensions PackageDimensions = default(PackageDimensions), Weight Weight = default(Weight), Timestamp MustArriveByDate = default(Timestamp), Timestamp ShipDate = default(Timestamp), ShippingServiceOptions ShippingServiceOptions = default(ShippingServiceOptions), LabelCustomization LabelCustomization = default(LabelCustomization))
+        public ShipmentRequestDetails(string AmazonOrderId = default(string), string SellerOrderId = default(string), ItemList ItemList = default(ItemList), Address ShipFromAddress = default(Address), PackageDimensions PackageDimensions = default(PackageDimensions), Weight Weight = default(Weight), Timestamp MustArriveByDate = default(Timestamp), Timestamp ShipDate = default(Timestamp), ShippingServiceOptions ShippingServiceOptions = default(ShippingServiceOptions), LabelCustomization LabelCustomization = default(LabelCustomization))
         {
             // to ensure "AmazonOrderId" is required (not null)
             if (AmazonOrderId == null)
@@ -109,14 +109,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// </summary>
         /// <value>An Amazon-defined order identifier in 3-7-7 format.</value>
         [DataMember(Name = "AmazonOrderId", EmitDefaultValue = false)]
-        public AmazonOrderId AmazonOrderId { get; set; }
+        public string AmazonOrderId { get; set; }
 
         /// <summary>
         /// A seller-defined order identifier.
         /// </summary>
         /// <value>A seller-defined order identifier.</value>
         [DataMember(Name = "SellerOrderId", EmitDefaultValue = false)]
-        public SellerOrderId SellerOrderId { get; set; }
+        public string SellerOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets ItemList

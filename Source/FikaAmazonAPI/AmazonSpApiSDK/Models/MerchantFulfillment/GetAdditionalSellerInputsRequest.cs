@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="ShippingServiceId">ShippingServiceId (required).</param>
         /// <param name="ShipFromAddress">The address from which to ship. (required).</param>
         /// <param name="OrderId">An Amazon defined order identifier (required).</param>
-        public GetAdditionalSellerInputsRequest(ShippingServiceIdentifier ShippingServiceId = default(ShippingServiceIdentifier), Address ShipFromAddress = default(Address), AmazonOrderId OrderId = default(AmazonOrderId))
+        public GetAdditionalSellerInputsRequest(ShippingServiceIdentifier ShippingServiceId = default(ShippingServiceIdentifier), Address ShipFromAddress = default(Address), string OrderId = default(string))
         {
             // to ensure "ShippingServiceId" is required (not null)
             if (ShippingServiceId == null)
@@ -84,7 +84,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// </summary>
         /// <value>An Amazon defined order identifier</value>
         [DataMember(Name = "OrderId", EmitDefaultValue = false)]
-        public AmazonOrderId OrderId { get; set; }
+        public string OrderId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
