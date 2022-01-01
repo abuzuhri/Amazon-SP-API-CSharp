@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Services
                     var req = new AssumeRoleRequest()
                     {
                         RoleArn = amazonCredential.RoleArn,
-                        DurationSeconds = 950, //put anything you want here
+                        DurationSeconds = 3600,
                         RoleSessionName = Guid.NewGuid().ToString()
                     };
 

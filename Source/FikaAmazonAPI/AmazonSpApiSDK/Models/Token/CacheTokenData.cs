@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 
         public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
         {
-            if (AWSAuthenticationTokenData != null && AWSAuthenticationTokenData.Expiration > DateTime.Now.Date.AddSeconds(-10))
+            if (AWSAuthenticationTokenData != null && AWSAuthenticationTokenData.Expiration.AddSeconds(-60) > DateTime.Now)
                 return AWSAuthenticationTokenData;
             else return null;
         }
@@ -78,7 +78,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             if (dateCreated == null)
                 return false;
             else
-                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > expiresIn;
+                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn-60); //Add Margent to a void expaired token
         }
     }
 

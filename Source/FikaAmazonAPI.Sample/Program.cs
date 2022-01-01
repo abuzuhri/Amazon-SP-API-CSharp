@@ -32,7 +32,6 @@ namespace FikaAmazonAPI.Sample
         {
 
 
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -44,6 +43,15 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
             }) ;
+
+            //while (true)
+            //{
+            //    var fromDate = DateTime.UtcNow.AddDays(-3);
+            //    var toDate = DateTime.UtcNow.AddDays(-1);
+            //    var ddddd = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate);
+            //    Console.WriteLine(ddddd);
+            //}
+
 
             DateTime startDate11 = new DateTime(2021, 10, 03);
             var data111 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_SELLER_FEEDBACK_DATA, startDate11, null, null);
