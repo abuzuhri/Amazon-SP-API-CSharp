@@ -369,7 +369,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
         public OrderItemBuyerInfo BuyerInfo { get; set; }
 
-        
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
