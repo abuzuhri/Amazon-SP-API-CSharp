@@ -91,7 +91,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="IsTransparency">When true, transparency codes are required..</param>
         /// <param name="IossNumber">The IOSS number of the seller. Sellers selling in the EU will be assigned a unique IOSS number that must be listed on all packages sent to the EU..</param>
         /// <param name="DeemedResellerCategory">The category of deemed reseller. This applies to selling partners that are not based in the EU and is used to help them meet the VAT Deemed Reseller tax laws in the EU and UK..</param>
-        public OrderItem(string ASIN = default(string), string SellerSKU = default(string), string OrderItemId = default(string), string Title = default(string), int? QuantityOrdered = default(int?), int? QuantityShipped = default(int?), ProductInfoDetail ProductInfo = default(ProductInfoDetail), PointsGrantedDetail PointsGranted = default(PointsGrantedDetail), Money ItemPrice = default(Money), Money ShippingPrice = default(Money), Money ItemTax = default(Money), Money ShippingTax = default(Money), Money ShippingDiscount = default(Money), Money ShippingDiscountTax = default(Money), Money PromotionDiscount = default(Money), Money PromotionDiscountTax = default(Money), PromotionIdList PromotionIds = default(PromotionIdList), Money CODFee = default(Money), Money CODFeeDiscount = default(Money), bool? IsGift = default(bool?), string ConditionNote = default(string), string ConditionId = default(string), string ConditionSubtypeId = default(string), string ScheduledDeliveryStartDate = default(string), string ScheduledDeliveryEndDate = default(string), string PriceDesignation = default(string), TaxCollection TaxCollection = default(TaxCollection), bool? SerialNumberRequired = default(bool?), bool? IsTransparency = default(bool?), string IossNumber = default(string), DeemedResellerCategoryEnum? DeemedResellerCategory = default(DeemedResellerCategoryEnum?))
+        /// <param name="BuyerInfo">The Buyer Info .</param>
+
+        public OrderItem(string ASIN = default(string), string SellerSKU = default(string), string OrderItemId = default(string), string Title = default(string), int? QuantityOrdered = default(int?), int? QuantityShipped = default(int?), ProductInfoDetail ProductInfo = default(ProductInfoDetail), PointsGrantedDetail PointsGranted = default(PointsGrantedDetail), Money ItemPrice = default(Money), Money ShippingPrice = default(Money), Money ItemTax = default(Money), Money ShippingTax = default(Money), Money ShippingDiscount = default(Money), Money ShippingDiscountTax = default(Money), Money PromotionDiscount = default(Money), Money PromotionDiscountTax = default(Money), PromotionIdList PromotionIds = default(PromotionIdList), Money CODFee = default(Money), Money CODFeeDiscount = default(Money), bool? IsGift = default(bool?), string ConditionNote = default(string), string ConditionId = default(string), string ConditionSubtypeId = default(string), string ScheduledDeliveryStartDate = default(string), string ScheduledDeliveryEndDate = default(string), string PriceDesignation = default(string), TaxCollection TaxCollection = default(TaxCollection), bool? SerialNumberRequired = default(bool?), bool? IsTransparency = default(bool?), string IossNumber = default(string), DeemedResellerCategoryEnum? DeemedResellerCategory = default(DeemedResellerCategoryEnum?), OrderItemBuyerInfo BuyerInfo = default(OrderItemBuyerInfo))
         {
             // to ensure "ASIN" is required (not null)
             if (ASIN == null)
@@ -148,6 +150,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.IsTransparency = IsTransparency;
             this.IossNumber = IossNumber;
             this.DeemedResellerCategory = DeemedResellerCategory;
+            this.BuyerInfo = BuyerInfo;
         }
 
         /// <summary>
@@ -359,7 +362,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         [DataMember(Name = "IossNumber", EmitDefaultValue = false)]
         public string IossNumber { get; set; }
 
+        /// <summary>
+        /// Gets or Sets BuyerInfo
+        /// </summary>
+        /// <value>Gets or Sets BuyerInfo</value>
+        [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
+        public OrderItemBuyerInfo BuyerInfo { get; set; }
 
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -399,6 +409,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  IsTransparency: ").Append(IsTransparency).Append("\n");
             sb.Append("  IossNumber: ").Append(IossNumber).Append("\n");
             sb.Append("  DeemedResellerCategory: ").Append(DeemedResellerCategory).Append("\n");
+            sb.Append("  BuyerInfo: ").Append(BuyerInfo).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -587,6 +598,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.DeemedResellerCategory == input.DeemedResellerCategory ||
                     (this.DeemedResellerCategory != null &&
                     this.DeemedResellerCategory.Equals(input.DeemedResellerCategory))
+                ) &&
+                (
+                    this.BuyerInfo == input.BuyerInfo ||
+                    (this.BuyerInfo != null &&
+                    this.BuyerInfo.Equals(input.BuyerInfo))
                 );
         }
 
@@ -661,6 +677,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.IossNumber.GetHashCode();
                 if (this.DeemedResellerCategory != null)
                     hashCode = hashCode * 59 + this.DeemedResellerCategory.GetHashCode();
+                if (this.BuyerInfo != null)
+                    hashCode = hashCode * 59 + this.BuyerInfo.GetHashCode();
                 return hashCode;
             }
         }
