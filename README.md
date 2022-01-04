@@ -46,7 +46,7 @@ The purpose of this package is to have an easy way of getting started with the A
 - [x] [Sellers](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sellers-api/sellers.md)
 - [ ] [Services](https://github.com/amzn/selling-partner-api-docs/blob/main/references/services-api/services.md)
 - [x] [Solicitations](https://github.com/amzn/selling-partner-api-docs/blob/main/references/solicitations-api/solicitations.md)
-- [x] [Token](https://github.com/amzn/selling-partner-api-docs/blob/main/references/tokens-api/tokens_2021-03-01.md) for [doc PII](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md) NOT TESTED
+- [x] [Token](https://github.com/amzn/selling-partner-api-docs/blob/main/references/tokens-api/tokens_2021-03-01.md) for [doc PII](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md)
 
 #### Vendor 
 - [ ] [VendorOrders](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-orders-api/vendorOrders.md)
@@ -307,6 +307,24 @@ var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId
 
 var reportOutpit = outPut.Url;
 
+```
+
+---
+## Usage Plans and Rate Limits in the Selling Partner API
+
+Please read this doc to get all information about this limitation
+https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-plans-rate-limits/Usage-Plans-and-Rate-Limits.md
+
+we calc waiting time by read x-amzn-RateLimit-Limit header `int sleepTime = (int)(1 / header["x-amzn-RateLimit-Limit"]*1000);`
+
+You can also disable libary from handelling limitaion by set IsActiveLimitRate=false in AmazonCredential
+```CSharp
+var amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+      .
+      .
+      IsActiveLimitRate=false
+});
 ```
 
 ---
