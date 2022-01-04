@@ -229,12 +229,47 @@ namespace FikaAmazonAPI.Services
                 }
                 if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.CANCELLED)
                 {
-                    throw new Exception("Error with Generate report CANCELLED");
+                    return null;
                 }
                 else Thread.Sleep(1000 * 60);
             }
 
             return filePath;
+        }
+
+
+        public IList<string> DownloadExistingReportAndDownloadFile(ReportTypes reportTypes, DateTime? createdSince = null, DateTime? createdUntil = null)
+        {
+
+            var parameters = new ParameterReportList();
+            parameters.reportTypes = new List<ReportTypes>();
+            parameters.reportTypes.Add(reportTypes);
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(this.MarketPlace.ID);
+
+
+            if (createdSince.HasValue)
+                parameters.createdSince = createdSince;
+            if (createdUntil.HasValue)
+                parameters.createdUntil = createdUntil;
+
+            var reports = GetReports(parameters);
+
+            var reportsPath =new List<string>();
+
+
+            foreach (var reportData in reports)
+            {
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    var filePath = GetReportFile(reportData.ReportDocumentId);
+                    reportsPath.Add(filePath);
+                   
+                }
+            }
+
+            return reportsPath;
         }
 
 

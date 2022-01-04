@@ -44,6 +44,16 @@ namespace FikaAmazonAPI.Sample
                 IsActiveLimitRate = true
             }) ;
 
+            //createdSince cannot be after createdUntil
+            DateTime createdSince = DateTime.UtcNow.AddDays(-60);
+            DateTime createdUntil = DateTime.UtcNow;
+
+            var data222221 = amazonConnection.Reports.DownloadExistingReportAndDownloadFile(
+                                                 ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2, 
+                                                 createdSince, 
+                                                 createdUntil);
+
+
             //while (true)
             //{
             //    var fromDate = DateTime.UtcNow.AddDays(-3);
@@ -59,94 +69,7 @@ namespace FikaAmazonAPI.Sample
 
             var marketplaceById = MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG");
 
-            var data2222=amazonConnection.Seller.GetMarketplaceParticipations();
-
-
-            ReportsSample reportsSample = new ReportsSample(amazonConnection);
-
-            DateTime startDate = new DateTime(2021, 10, 03);
-            //DateTime endDate = new DateTime(2021, 10, 10);
-            //ReportOptions reportOptions = new ReportOptions();
-            //reportOptions.Add("ShowSalesChannel","true");
-            //reportOptions.Add("", "");
-
-            //getCatalogItem
-            var CatList2=amazonConnection.CatalogItem.GetCatalogItem("B07NP8W4FM");
-            var CatList=amazonConnection.CatalogItem.GetCatalogItem("B01N1LL62W");
-            var CatList3=amazonConnection.CatalogItem.GetCatalogItem("B01J28O9C0");
-
-            var ddd = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
-            {
-                Asins = new[] { "B07XWTQ6HW" },
-                MarketplaceId =MarketPlace.UnitedArabEmirates.ID
-            }) ;
-
-            var data11111=amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
-            var data=amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
-
-
-            //reportsSample.GetReportGET_FBA_REIMBURSEMENTS_DATA();
-            //reportsSample.GetReportGET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATEs();
-            //reportsSample.CreateReport_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE();
-
-            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            ////feedsSample.SubmitFeedInventory();
-
-
-            amazonConnection.ProductFee.GetMyFeesEstimateForSKU("SKU1 + SKU2-FBA",
-                            new AmazonSpApiSDK.Models.ProductFees.FeesEstimateRequest()
-                            {
-                                Identifier = "00001",
-                                IsAmazonFulfilled = true,
-                                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                                PriceToEstimateFees = new AmazonSpApiSDK.Models.ProductFees.PriceToEstimateFees(new AmazonSpApiSDK.Models.ProductFees.MoneyType("AED", 200))
-                            });
-
-            //var order2s = amazonConnection.VendorDirectFulfillmentOrders.GetOrder("UNrSh9H8R");
-
-
-            //var orderData=amazonConnection.Orders.GetOrder(new ParameterGetOrder()
-            //{
-            //    OrderId = "404-6678802-8633900"
-            //});
-
-
-
-            while (true)
-            {
-                var ddata = amazonConnection.CatalogItem.GetCatalogItem("B0096IS4GE");
-                if(ddata.AttributeSets!=null && ddata.AttributeSets.Count > 0)
-                {
-                    var itm = ddata.AttributeSets[0];
-                    Console.WriteLine("Brand > " + itm.Brand);
-                    Console.WriteLine("ProductGroup > " + itm.ProductGroup);
-                }
-                
-            }
-
-
-            var data2 = amazonConnection.ProductPricing.GetPricing(new Parameter.ProductPricing.ParameterGetPricing()
-            {
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asins = new string[] { "B00LZ0VSMI" }
-            });
-
-            var data3= amazonConnection.ProductPricing.GetListingOffers(new Parameter.ProductPricing.ParameterGetListingOffers()
-            {
-                ItemCondition=ItemCondition.New,
-                MarketplaceId=MarketPlace.UnitedArabEmirates.ID,
-                SellerSKU= "3282770207736."
-            });
-
-            //B00LZ0VSMI
-
-            FulFillmentInboundSample fulFillmentInboundSample = new FulFillmentInboundSample(amazonConnection);
-            //fulFillmentInboundSample.GetInboundGuidance();
-            fulFillmentInboundSample.GetPrepInstructions();
-
-            //OrdersSample ordersSample = new OrdersSample(amazonConnection);
-            //ordersSample.GetOrders();
-
+            
 
             Console.ReadLine();
             

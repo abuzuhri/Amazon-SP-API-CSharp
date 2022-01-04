@@ -195,43 +195,19 @@ namespace FikaAmazonAPI.Sample
 
         public string CreateReportAndDawnload(ReportTypes reportTypes,DateTime? dataStartTime=null,DateTime? dataEndTime=null, ReportOptions reportOptions=null)
         {
-
-            var parameters = new ParameterCreateReportSpecification();
-            parameters.reportType = reportTypes;
-
-            parameters.marketplaceIds = new MarketplaceIds();
-            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
-
-            if(reportOptions!=null)
-                parameters.reportOptions = reportOptions;
-
-            if(dataStartTime.HasValue)
-                parameters.dataStartTime = dataStartTime;
-            if(dataEndTime.HasValue)
-                parameters.dataEndTime = dataEndTime;
-
-            var reportId = amazonConnection.Reports.CreateReport(parameters);
-            var filePath = string.Empty;
-            string ReportDocumentId = string.Empty;
-
-            while (string.IsNullOrEmpty(ReportDocumentId))
-            {
-                var reportData = amazonConnection.Reports.GetReport(reportId);
-                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
-                {
-                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
-                    break;
-                }
-                if (reportData.ProcessingStatus == AmazonSpApiSDK.Models.Reports.Report.ProcessingStatusEnum.FATAL)
-                {
-                    throw new Exception("Error with Generate report");
-                }
-                else Thread.Sleep(1000 * 60);
-            }
-
-            return filePath;
+          return  amazonConnection.Reports.CreateReportAndDownloadFile(reportTypes, dataStartTime, dataEndTime, reportOptions);
         }
 
+        public void DownloadExistingReportAndDownloadFile()
+        {
+            DateTime createdSince = DateTime.UtcNow.AddDays(-60);
+            DateTime createdUntil = DateTime.UtcNow;
+
+            var paths = amazonConnection.Reports.DownloadExistingReportAndDownloadFile(
+                                                 ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2,
+                                                 createdSince,
+                                                 createdUntil);
+        }
 
 
         public void GetReport_GET_SELLER_FEEDBACK_DATA()
