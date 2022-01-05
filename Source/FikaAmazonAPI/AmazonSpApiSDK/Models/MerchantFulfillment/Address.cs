@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Address() { }
+        public Address() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="PostalCode">PostalCode (required).</param>
         /// <param name="CountryCode">CountryCode (required).</param>
         /// <param name="Phone">Phone (required).</param>
-        public Address(AddressName Name = default(AddressName), AddressLine1 AddressLine1 = default(AddressLine1), AddressLine2 AddressLine2 = default(AddressLine2), AddressLine3 AddressLine3 = default(AddressLine3), DistrictOrCounty DistrictOrCounty = default(DistrictOrCounty), EmailAddress Email = default(EmailAddress), City City = default(City), StateOrProvinceCode StateOrProvinceCode = default(StateOrProvinceCode), PostalCode PostalCode = default(PostalCode), CountryCode CountryCode = default(CountryCode), PhoneNumber Phone = default(PhoneNumber))
+        public Address(string Name = default(string), string AddressLine1 = default(string), string AddressLine2 = default(string), string AddressLine3 = default(string), string DistrictOrCounty = default(string), string Email = default(string), string City = default(string), string StateOrProvinceCode = default(string), string PostalCode = default(string), string CountryCode = default(string), string Phone = default(string))
         {
             // to ensure "Name" is required (not null)
             if (Name == null)
@@ -118,67 +118,67 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "Name", EmitDefaultValue = false)]
-        public AddressName Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets AddressLine1
         /// </summary>
         [DataMember(Name = "AddressLine1", EmitDefaultValue = false)]
-        public AddressLine1 AddressLine1 { get; set; }
+        public string AddressLine1 { get; set; }
 
         /// <summary>
         /// Gets or Sets AddressLine2
         /// </summary>
         [DataMember(Name = "AddressLine2", EmitDefaultValue = false)]
-        public AddressLine2 AddressLine2 { get; set; }
+        public string AddressLine2 { get; set; }
 
         /// <summary>
         /// Gets or Sets AddressLine3
         /// </summary>
         [DataMember(Name = "AddressLine3", EmitDefaultValue = false)]
-        public AddressLine3 AddressLine3 { get; set; }
+        public string AddressLine3 { get; set; }
 
         /// <summary>
         /// Gets or Sets DistrictOrCounty
         /// </summary>
         [DataMember(Name = "DistrictOrCounty", EmitDefaultValue = false)]
-        public DistrictOrCounty DistrictOrCounty { get; set; }
+        public string DistrictOrCounty { get; set; }
 
         /// <summary>
         /// Gets or Sets Email
         /// </summary>
         [DataMember(Name = "Email", EmitDefaultValue = false)]
-        public EmailAddress Email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or Sets City
         /// </summary>
         [DataMember(Name = "City", EmitDefaultValue = false)]
-        public City City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// Gets or Sets StateOrProvinceCode
         /// </summary>
         [DataMember(Name = "StateOrProvinceCode", EmitDefaultValue = false)]
-        public StateOrProvinceCode StateOrProvinceCode { get; set; }
+        public string StateOrProvinceCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
         [DataMember(Name = "PostalCode", EmitDefaultValue = false)]
-        public PostalCode PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
         [DataMember(Name = "CountryCode", EmitDefaultValue = false)]
-        public CountryCode CountryCode { get; set; }
+        public string CountryCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Phone
         /// </summary>
         [DataMember(Name = "Phone", EmitDefaultValue = false)]
-        public PhoneNumber Phone { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

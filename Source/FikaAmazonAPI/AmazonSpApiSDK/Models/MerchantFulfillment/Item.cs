@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Item() { }
+        public Item() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="ItemDescription">ItemDescription.</param>
         /// <param name="TransparencyCodeList">TransparencyCodeList.</param>
         /// <param name="ItemLevelSellerInputsList">A list of additional seller inputs required to ship this item using the chosen shipping service..</param>
-        public Item(OrderItemId OrderItemId = default(OrderItemId), ItemQuantity Quantity = default(ItemQuantity), Weight ItemWeight = default(Weight), ItemDescription ItemDescription = default(ItemDescription), TransparencyCodeList TransparencyCodeList = default(TransparencyCodeList), AdditionalSellerInputsList ItemLevelSellerInputsList = default(AdditionalSellerInputsList))
+        public Item(string OrderItemId = default(string), int Quantity = default(int), Weight ItemWeight = default(Weight), string ItemDescription = default(string), TransparencyCodeList TransparencyCodeList = default(TransparencyCodeList), AdditionalSellerInputsList ItemLevelSellerInputsList = default(AdditionalSellerInputsList))
         {
             // to ensure "OrderItemId" is required (not null)
             if (OrderItemId == null)
@@ -68,13 +68,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Gets or Sets OrderItemId
         /// </summary>
         [DataMember(Name = "OrderItemId", EmitDefaultValue = false)]
-        public OrderItemId OrderItemId { get; set; }
+        public string OrderItemId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public ItemQuantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Gets or Sets ItemWeight
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Gets or Sets ItemDescription
         /// </summary>
         [DataMember(Name = "ItemDescription", EmitDefaultValue = false)]
-        public ItemDescription ItemDescription { get; set; }
+        public string ItemDescription { get; set; }
 
         /// <summary>
         /// Gets or Sets TransparencyCodeList

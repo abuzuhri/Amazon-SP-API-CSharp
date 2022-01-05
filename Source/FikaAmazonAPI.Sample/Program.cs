@@ -31,7 +31,6 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -43,6 +42,61 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
             }) ;
+
+
+            GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest = new GetEligibleShipmentServicesRequest()
+            {
+                ShippingOfferingFilter = new ShippingOfferingFilter()
+                {
+                    CarrierWillPickUp = CarrierWillPickUpOption.CarrierWillPickUp,
+                    DeliveryExperience = DeliveryExperienceOption.NoTracking,
+                    IncludePackingSlipWithLabel = true,
+                    IncludeComplexShippingOptions = false
+                },
+                ShipmentRequestDetails = new ShipmentRequestDetails()
+                {
+
+                    AmazonOrderId = "22-333333-3333333333",
+                    ItemList = new ItemList()
+                    {
+                        new Item()
+                        {
+                            ItemDescription ="AAAAA",
+                            Quantity=1,
+                            OrderItemId="11111111"
+
+                        }
+                    },
+                    ShipFromAddress =new Address()
+                    {
+                        AddressLine1 ="addd",
+                        City="AAAA",
+                        DistrictOrCounty="",
+                        Email="sss@isskd.com",
+                        Name="TEST",
+                        PostalCode="97122",
+                        CountryCode="AE",
+                        Phone="+97150999999"
+                    },
+                    PackageDimensions=new PackageDimensions()
+                    {
+                        Height =1,
+                        Length=1,
+                        Width=1,
+                        Unit=UnitOfLength.Centimeters
+                    },
+                    Weight=new Weight(1,UnitOfWeight.G),
+                    ShippingServiceOptions=new ShippingServiceOptions()
+                    {
+                        DeliveryExperience=DeliveryExperienceType.NoTracking,
+                        CarrierWillPickUp=false
+
+                    }
+                },
+                
+            };
+
+            var reilt=amazonConnection.MerchantFulfillment.GetEligibleShipmentServices(getEligibleShipmentServicesRequest);
 
             //createdSince cannot be after createdUntil
             DateTime createdSince = DateTime.UtcNow.AddDays(-60);
