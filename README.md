@@ -315,7 +315,9 @@ var reportOutpit = outPut.Url;
 Please read this doc to get all information about this limitation
 https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-plans-rate-limits/Usage-Plans-and-Rate-Limits.md
 
-we calc waiting time by read x-amzn-RateLimit-Limit header `int sleepTime = (int)(1 / header["x-amzn-RateLimit-Limit"]*1000);`
+we calc waiting time by read x-amzn-RateLimit-Limit header 
+
+`int sleepTime = (int)(1 / header["x-amzn-RateLimit-Limit"]*1000);`
 
 You can also disable libary from handelling limitaion by set IsActiveLimitRate=false in AmazonCredential
 ```CSharp
