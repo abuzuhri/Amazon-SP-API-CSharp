@@ -23,6 +23,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
+using FikaAmazonAPI.Parameter.Finance;
 
 namespace FikaAmazonAPI.Sample
 {
@@ -43,6 +44,11 @@ namespace FikaAmazonAPI.Sample
                 IsActiveLimitRate = true
             }) ;
 
+            var parameters = new ParameterListFinancialEvents();
+            parameters.PostedAfter = new DateTime(2021, 12, 1);
+            var fEvents = amazonConnection.Financial.ListFinancialEvents(parameters);
+
+            //var rb=amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_STORAGE_FEE_CHARGES_DATA,DateTime.UtcNow.AddDays(-60), DateTime.UtcNow.AddDays(-1));
 
             GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest = new GetEligibleShipmentServicesRequest()
             {
@@ -96,7 +102,7 @@ namespace FikaAmazonAPI.Sample
                 
             };
 
-            var reilt=amazonConnection.MerchantFulfillment.GetEligibleShipmentServices(getEligibleShipmentServicesRequest);
+            var result=amazonConnection.MerchantFulfillment.GetEligibleShipmentServices(getEligibleShipmentServicesRequest);
 
             //createdSince cannot be after createdUntil
             DateTime createdSince = DateTime.UtcNow.AddDays(-60);
