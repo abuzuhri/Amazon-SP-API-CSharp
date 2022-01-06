@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="TemporarilyUnavailableCarrier" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TemporarilyUnavailableCarrier() { }
+        public TemporarilyUnavailableCarrier() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TemporarilyUnavailableCarrier" /> class.
         /// </summary>

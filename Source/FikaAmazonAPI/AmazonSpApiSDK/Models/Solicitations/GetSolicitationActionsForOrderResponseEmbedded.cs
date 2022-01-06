@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations
         /// Initializes a new instance of the <see cref="GetSolicitationActionsForOrderResponseEmbedded" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetSolicitationActionsForOrderResponseEmbedded() { }
+        public GetSolicitationActionsForOrderResponseEmbedded() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSolicitationActionsForOrderResponseEmbedded" /> class.
         /// </summary>

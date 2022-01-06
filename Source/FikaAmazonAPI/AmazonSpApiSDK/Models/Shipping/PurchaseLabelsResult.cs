@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="PurchaseLabelsResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PurchaseLabelsResult() { }
+        public PurchaseLabelsResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PurchaseLabelsResult" /> class.
         /// </summary>

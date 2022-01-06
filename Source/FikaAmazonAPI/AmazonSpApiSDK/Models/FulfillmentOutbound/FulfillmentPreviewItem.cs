@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="FulfillmentPreviewItem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FulfillmentPreviewItem() { }
+        public FulfillmentPreviewItem() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentPreviewItem" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="Summary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Summary() { }
+        public Summary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Summary" /> class.
         /// </summary>

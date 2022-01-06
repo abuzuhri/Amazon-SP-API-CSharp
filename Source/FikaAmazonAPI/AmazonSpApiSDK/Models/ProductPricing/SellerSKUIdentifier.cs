@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="SellerSKUIdentifier" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SellerSKUIdentifier() { }
+        public SellerSKUIdentifier() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SellerSKUIdentifier" /> class.
         /// </summary>

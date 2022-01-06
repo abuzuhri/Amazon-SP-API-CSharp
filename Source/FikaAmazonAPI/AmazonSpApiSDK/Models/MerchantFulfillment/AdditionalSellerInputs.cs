@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="AdditionalSellerInputs" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AdditionalSellerInputs() { }
+        public AdditionalSellerInputs() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionalSellerInputs" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="SellerFeedbackType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SellerFeedbackType() { }
+        public SellerFeedbackType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SellerFeedbackType" /> class.
         /// </summary>

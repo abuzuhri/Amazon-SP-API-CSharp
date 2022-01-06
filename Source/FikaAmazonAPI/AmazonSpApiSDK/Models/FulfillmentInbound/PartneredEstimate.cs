@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="PartneredEstimate" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PartneredEstimate() { }
+        public PartneredEstimate() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredEstimate" /> class.
         /// </summary>

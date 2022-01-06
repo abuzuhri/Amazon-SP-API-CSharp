@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="FileContents" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FileContents() { }
+        public FileContents() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FileContents" /> class.
         /// </summary>

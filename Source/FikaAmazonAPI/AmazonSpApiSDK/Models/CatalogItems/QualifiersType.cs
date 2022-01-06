@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems
         /// Initializes a new instance of the <see cref="QualifiersType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected QualifiersType() { }
+        public QualifiersType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="QualifiersType" /> class.
         /// </summary>

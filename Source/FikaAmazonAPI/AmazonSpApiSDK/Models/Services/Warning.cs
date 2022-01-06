@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// Initializes a new instance of the <see cref="Warning" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Warning() { }
+        public Warning() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Warning" /> class.
         /// </summary>

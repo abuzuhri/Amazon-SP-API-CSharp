@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations
         /// Initializes a new instance of the <see cref="SolicitationsAction" /> class.
         /// </summary>
         [JsonConstructor]
-        protected SolicitationsAction() { }
+        public SolicitationsAction() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SolicitationsAction" /> class.
         /// </summary>

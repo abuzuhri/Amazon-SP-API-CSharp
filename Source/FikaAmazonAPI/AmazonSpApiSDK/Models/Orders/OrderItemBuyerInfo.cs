@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="OrderItemBuyerInfo" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OrderItemBuyerInfo() { }
+        public OrderItemBuyerInfo() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderItemBuyerInfo" /> class.
         /// </summary>

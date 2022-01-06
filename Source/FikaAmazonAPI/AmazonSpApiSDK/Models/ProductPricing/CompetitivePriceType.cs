@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="CompetitivePriceType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CompetitivePriceType() { }
+        public CompetitivePriceType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CompetitivePriceType" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="CODSettings" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CODSettings() { }
+        public CODSettings() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CODSettings" /> class.
         /// </summary>

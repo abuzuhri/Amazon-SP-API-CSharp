@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="GetRatesRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetRatesRequest() { }
+        public GetRatesRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRatesRequest" /> class.
         /// </summary>

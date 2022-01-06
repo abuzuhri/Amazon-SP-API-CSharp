@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="PutTransportDetailsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PutTransportDetailsRequest() { }
+        public PutTransportDetailsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PutTransportDetailsRequest" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="NonPartneredLtlDataInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected NonPartneredLtlDataInput() { }
+        public NonPartneredLtlDataInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredLtlDataInput" /> class.
         /// </summary>

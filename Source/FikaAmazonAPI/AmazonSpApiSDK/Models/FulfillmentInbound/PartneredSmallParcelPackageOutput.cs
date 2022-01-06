@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="PartneredSmallParcelPackageOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PartneredSmallParcelPackageOutput() { }
+        public PartneredSmallParcelPackageOutput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredSmallParcelPackageOutput" /> class.
         /// </summary>

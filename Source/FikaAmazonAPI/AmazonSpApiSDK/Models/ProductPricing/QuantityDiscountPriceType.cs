@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="QuantityDiscountPriceType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected QuantityDiscountPriceType() { }
+        public QuantityDiscountPriceType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="QuantityDiscountPriceType" /> class.
         /// </summary>

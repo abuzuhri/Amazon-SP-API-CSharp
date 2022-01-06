@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="ReturnAuthorization" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ReturnAuthorization() { }
+        public ReturnAuthorization() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnAuthorization" /> class.
         /// </summary>

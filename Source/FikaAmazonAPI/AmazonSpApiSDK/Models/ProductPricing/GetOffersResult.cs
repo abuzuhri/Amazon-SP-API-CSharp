@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="GetOffersResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetOffersResult() { }
+        public GetOffersResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOffersResult" /> class.
         /// </summary>

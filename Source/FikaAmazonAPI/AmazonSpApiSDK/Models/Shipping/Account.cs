@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Account() { }
+        public Account() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>

@@ -62,7 +62,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
         /// Initializes a new instance of the <see cref="ResearchingQuantityEntry" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ResearchingQuantityEntry() { }
+        public ResearchingQuantityEntry() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ResearchingQuantityEntry" /> class.
         /// </summary>

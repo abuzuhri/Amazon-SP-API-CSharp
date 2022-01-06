@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="Weight" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Weight() { }
+        public Weight() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Weight" /> class.
         /// </summary>

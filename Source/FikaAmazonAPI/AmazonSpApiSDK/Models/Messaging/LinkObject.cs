@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// Initializes a new instance of the <see cref="LinkObject" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LinkObject() { }
+        public LinkObject() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkObject" /> class.
         /// </summary>

@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Address() { }
+        public Address() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>

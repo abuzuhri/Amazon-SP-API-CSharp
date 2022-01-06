@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="RetrieveShippingLabelResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RetrieveShippingLabelResult() { }
+        public RetrieveShippingLabelResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveShippingLabelResult" /> class.
         /// </summary>

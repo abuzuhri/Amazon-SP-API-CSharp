@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// Initializes a new instance of the <see cref="MessagingAction" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected MessagingAction() { }
+        public MessagingAction() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="MessagingAction" /> class.
         /// </summary>

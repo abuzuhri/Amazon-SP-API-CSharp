@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations
         /// Initializes a new instance of the <see cref="GetSchemaResponseLinks" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetSchemaResponseLinks() { }
+        public GetSchemaResponseLinks() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetSchemaResponseLinks" /> class.
         /// </summary>

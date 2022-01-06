@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="TermsAndConditionsNotAcceptedCarrier" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TermsAndConditionsNotAcceptedCarrier() { }
+        public TermsAndConditionsNotAcceptedCarrier() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TermsAndConditionsNotAcceptedCarrier" /> class.
         /// </summary>

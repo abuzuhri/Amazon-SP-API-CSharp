@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="AvailableCarrierWillPickUpOption" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AvailableCarrierWillPickUpOption() { }
+        public AvailableCarrierWillPickUpOption() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AvailableCarrierWillPickUpOption" /> class.
         /// </summary>

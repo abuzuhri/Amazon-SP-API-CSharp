@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
         /// Initializes a new instance of the <see cref="CreateReportSpecification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateReportSpecification() { }
+        public CreateReportSpecification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateReportSpecification" /> class.
         /// </summary>

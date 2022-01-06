@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// Initializes a new instance of the <see cref="AppointmentTime" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AppointmentTime() { }
+        public AppointmentTime() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentTime" /> class.
         /// </summary>

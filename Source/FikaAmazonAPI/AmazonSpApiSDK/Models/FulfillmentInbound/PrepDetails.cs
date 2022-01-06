@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="PrepDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PrepDetails() { }
+        public PrepDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PrepDetails" /> class.
         /// </summary>

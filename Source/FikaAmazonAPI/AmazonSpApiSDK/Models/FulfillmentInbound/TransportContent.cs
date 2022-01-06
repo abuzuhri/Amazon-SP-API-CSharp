@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="TransportContent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TransportContent() { }
+        public TransportContent() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportContent" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="ASINIdentifier" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ASINIdentifier() { }
+        public ASINIdentifier() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ASINIdentifier" /> class.
         /// </summary>

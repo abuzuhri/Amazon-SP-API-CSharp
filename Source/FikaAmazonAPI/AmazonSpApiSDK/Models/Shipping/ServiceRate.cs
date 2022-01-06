@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="ServiceRate" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ServiceRate() { }
+        public ServiceRate() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceRate" /> class.
         /// </summary>

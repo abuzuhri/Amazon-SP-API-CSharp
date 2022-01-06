@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
         /// Initializes a new instance of the <see cref="Money" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Money() { }
+        public Money() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Money" /> class.
         /// </summary>

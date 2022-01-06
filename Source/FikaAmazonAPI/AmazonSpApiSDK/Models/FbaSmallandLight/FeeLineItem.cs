@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// Initializes a new instance of the <see cref="FeeLineItem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FeeLineItem() { }
+        public FeeLineItem() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FeeLineItem" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="Currency" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Currency() { }
+        public Currency() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class.
         /// </summary>

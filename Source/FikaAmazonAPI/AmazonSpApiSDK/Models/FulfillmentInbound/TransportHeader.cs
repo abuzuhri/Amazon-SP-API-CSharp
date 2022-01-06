@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="TransportHeader" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TransportHeader() { }
+        public TransportHeader() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportHeader" /> class.
         /// </summary>

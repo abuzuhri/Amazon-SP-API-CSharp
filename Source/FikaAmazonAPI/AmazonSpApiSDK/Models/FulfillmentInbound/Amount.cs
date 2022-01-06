@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="Amount" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Amount() { }
+        public Amount() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Amount" /> class.
         /// </summary>

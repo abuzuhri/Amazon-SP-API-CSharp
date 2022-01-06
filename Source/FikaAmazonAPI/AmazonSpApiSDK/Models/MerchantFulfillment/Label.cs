@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="Label" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Label() { }
+        public Label() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Label" /> class.
         /// </summary>

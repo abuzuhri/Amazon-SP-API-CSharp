@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders
         /// Initializes a new instance of the <see cref="PartyIdentification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PartyIdentification() { }
+        public PartyIdentification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PartyIdentification" /> class.
         /// </summary>

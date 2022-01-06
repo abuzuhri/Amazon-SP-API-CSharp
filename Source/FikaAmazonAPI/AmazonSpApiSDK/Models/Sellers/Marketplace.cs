@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
         /// Initializes a new instance of the <see cref="Marketplace" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Marketplace() { }
+        public Marketplace() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Marketplace" /> class.
         /// </summary>

@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="Dimensions" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Dimensions() { }
+        public Dimensions() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Dimensions" /> class.
         /// </summary>

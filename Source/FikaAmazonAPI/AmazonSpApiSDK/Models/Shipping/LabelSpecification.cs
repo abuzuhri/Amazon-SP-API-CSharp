@@ -71,7 +71,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="LabelSpecification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LabelSpecification() { }
+        public LabelSpecification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelSpecification" /> class.
         /// </summary>

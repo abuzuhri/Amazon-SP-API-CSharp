@@ -301,7 +301,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound
         /// Initializes a new instance of the <see cref="ItemEligibilityPreview" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ItemEligibilityPreview() { }
+        public ItemEligibilityPreview() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemEligibilityPreview" /> class.
         /// </summary>

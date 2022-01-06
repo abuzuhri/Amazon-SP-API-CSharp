@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Initializes a new instance of the <see cref="EventBridgeResource" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EventBridgeResource() { }
+        public EventBridgeResource() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="EventBridgeResource" /> class.
         /// </summary>

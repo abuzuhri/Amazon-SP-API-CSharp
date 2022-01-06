@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="InvalidItemReason" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InvalidItemReason() { }
+        public InvalidItemReason() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidItemReason" /> class.
         /// </summary>

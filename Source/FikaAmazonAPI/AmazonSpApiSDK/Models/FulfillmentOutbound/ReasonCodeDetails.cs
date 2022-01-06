@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="ReasonCodeDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ReasonCodeDetails() { }
+        public ReasonCodeDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ReasonCodeDetails" /> class.
         /// </summary>

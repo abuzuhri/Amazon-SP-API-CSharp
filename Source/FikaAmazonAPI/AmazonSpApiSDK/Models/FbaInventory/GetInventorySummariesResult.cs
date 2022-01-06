@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
         /// Initializes a new instance of the <see cref="GetInventorySummariesResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetInventorySummariesResult() { }
+        public GetInventorySummariesResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetInventorySummariesResult" /> class.
         /// </summary>

@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="FeedDocumentEncryptionDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FeedDocumentEncryptionDetails() { }
+        public FeedDocumentEncryptionDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedDocumentEncryptionDetails" /> class.
         /// </summary>

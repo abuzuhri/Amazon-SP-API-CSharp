@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="Pallet" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Pallet() { }
+        public Pallet() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Pallet" /> class.
         /// </summary>

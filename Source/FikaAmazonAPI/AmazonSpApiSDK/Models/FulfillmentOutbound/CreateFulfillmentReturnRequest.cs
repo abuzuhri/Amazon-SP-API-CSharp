@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="CreateFulfillmentReturnRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateFulfillmentReturnRequest() { }
+        public CreateFulfillmentReturnRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateFulfillmentReturnRequest" /> class.
         /// </summary>

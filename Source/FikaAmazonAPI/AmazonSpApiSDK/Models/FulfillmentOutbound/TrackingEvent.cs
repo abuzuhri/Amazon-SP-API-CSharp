@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="TrackingEvent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TrackingEvent() { }
+        public TrackingEvent() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingEvent" /> class.
         /// </summary>

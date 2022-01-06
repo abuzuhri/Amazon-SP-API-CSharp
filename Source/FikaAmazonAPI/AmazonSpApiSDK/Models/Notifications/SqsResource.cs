@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Initializes a new instance of the <see cref="SqsResource" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SqsResource() { }
+        public SqsResource() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SqsResource" /> class.
         /// </summary>

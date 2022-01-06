@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="DeliveryWindow" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DeliveryWindow() { }
+        public DeliveryWindow() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="DeliveryWindow" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Initializes a new instance of the <see cref="Destination" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Destination() { }
+        public Destination() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Destination" /> class.
         /// </summary>

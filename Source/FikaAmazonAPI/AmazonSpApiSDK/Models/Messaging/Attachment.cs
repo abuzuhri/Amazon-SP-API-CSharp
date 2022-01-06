@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
         /// Initializes a new instance of the <see cref="Attachment" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Attachment() { }
+        public Attachment() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Attachment" /> class.
         /// </summary>

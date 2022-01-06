@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="Fee" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Fee() { }
+        public Fee() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Fee" /> class.
         /// </summary>

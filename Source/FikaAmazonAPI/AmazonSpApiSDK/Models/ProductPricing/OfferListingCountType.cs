@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="OfferListingCountType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OfferListingCountType() { }
+        public OfferListingCountType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OfferListingCountType" /> class.
         /// </summary>

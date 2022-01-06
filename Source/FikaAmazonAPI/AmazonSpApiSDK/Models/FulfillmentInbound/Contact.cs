@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="Contact" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Contact() { }
+        public Contact() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Contact" /> class.
         /// </summary>

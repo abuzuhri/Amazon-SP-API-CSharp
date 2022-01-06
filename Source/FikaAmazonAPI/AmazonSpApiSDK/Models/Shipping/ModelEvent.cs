@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="ModelEvent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ModelEvent() { }
+        public ModelEvent() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelEvent" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
         /// Initializes a new instance of the <see cref="AffordabilityExpenseEvent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AffordabilityExpenseEvent() { }
+        public AffordabilityExpenseEvent() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AffordabilityExpenseEvent" /> class.
         /// </summary>

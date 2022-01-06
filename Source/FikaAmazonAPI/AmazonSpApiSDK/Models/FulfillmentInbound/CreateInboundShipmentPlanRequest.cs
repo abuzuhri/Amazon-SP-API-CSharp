@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="CreateInboundShipmentPlanRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateInboundShipmentPlanRequest() { }
+        public CreateInboundShipmentPlanRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInboundShipmentPlanRequest" /> class.
         /// </summary>

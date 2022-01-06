@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="Error" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Error() { }
+        public Error() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Error" /> class.
         /// </summary>

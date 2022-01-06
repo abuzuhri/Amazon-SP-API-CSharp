@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="SKUInboundGuidance" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SKUInboundGuidance() { }
+        public SKUInboundGuidance() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SKUInboundGuidance" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
         /// Initializes a new instance of the <see cref="Participation" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Participation() { }
+        public Participation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Participation" /> class.
         /// </summary>

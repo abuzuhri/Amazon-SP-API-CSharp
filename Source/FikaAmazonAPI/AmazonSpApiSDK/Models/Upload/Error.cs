@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
         /// Initializes a new instance of the <see cref="Error" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Error() { }
+        public Error() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Error" /> class.
         /// </summary>

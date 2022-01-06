@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Reports
         /// Initializes a new instance of the <see cref="ReportDocumentEncryptionDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ReportDocumentEncryptionDetails() { }
+        public ReportDocumentEncryptionDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportDocumentEncryptionDetails" /> class.
         /// </summary>

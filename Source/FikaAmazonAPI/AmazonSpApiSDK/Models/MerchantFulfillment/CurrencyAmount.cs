@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="CurrencyAmount" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CurrencyAmount() { }
+        public CurrencyAmount() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyAmount" /> class.
         /// </summary>

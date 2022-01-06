@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="AvailableDeliveryExperienceOption" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AvailableDeliveryExperienceOption() { }
+        public AvailableDeliveryExperienceOption() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AvailableDeliveryExperienceOption" /> class.
         /// </summary>

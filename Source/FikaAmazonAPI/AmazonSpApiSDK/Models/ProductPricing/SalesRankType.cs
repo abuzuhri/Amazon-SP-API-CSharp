@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="SalesRankType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SalesRankType() { }
+        public SalesRankType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SalesRankType" /> class.
         /// </summary>

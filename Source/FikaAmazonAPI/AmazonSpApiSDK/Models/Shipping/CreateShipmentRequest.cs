@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="CreateShipmentRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateShipmentRequest() { }
+        public CreateShipmentRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateShipmentRequest" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         /// Initializes a new instance of the <see cref="PriceToEstimateFees" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PriceToEstimateFees() { }
+        public PriceToEstimateFees() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceToEstimateFees" /> class.
         /// </summary>

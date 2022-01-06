@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="Constraint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Constraint() { }
+        public Constraint() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Constraint" /> class.
         /// </summary>

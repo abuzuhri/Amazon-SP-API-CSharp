@@ -32,6 +32,8 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
+
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),

@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders
         /// Initializes a new instance of the <see cref="OrderDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OrderDetails() { }
+        public OrderDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderDetails" /> class.
         /// </summary>

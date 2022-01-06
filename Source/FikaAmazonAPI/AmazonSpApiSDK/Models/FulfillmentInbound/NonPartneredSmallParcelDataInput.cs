@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelDataInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected NonPartneredSmallParcelDataInput() { }
+        public NonPartneredSmallParcelDataInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelDataInput" /> class.
         /// </summary>

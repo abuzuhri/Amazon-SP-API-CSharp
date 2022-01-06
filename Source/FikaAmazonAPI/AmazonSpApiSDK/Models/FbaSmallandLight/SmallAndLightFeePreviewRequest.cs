@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// Initializes a new instance of the <see cref="SmallAndLightFeePreviewRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SmallAndLightFeePreviewRequest() { }
+        public SmallAndLightFeePreviewRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SmallAndLightFeePreviewRequest" /> class.
         /// </summary>

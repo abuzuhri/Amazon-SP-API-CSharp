@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="GetFeatureSkuResult" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GetFeatureSkuResult() { }
+        public GetFeatureSkuResult() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GetFeatureSkuResult" /> class.
         /// </summary>

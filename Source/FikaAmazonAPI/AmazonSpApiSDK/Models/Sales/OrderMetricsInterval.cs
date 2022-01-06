@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
         /// Initializes a new instance of the <see cref="OrderMetricsInterval" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OrderMetricsInterval() { }
+        public OrderMetricsInterval() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderMetricsInterval" /> class.
         /// </summary>

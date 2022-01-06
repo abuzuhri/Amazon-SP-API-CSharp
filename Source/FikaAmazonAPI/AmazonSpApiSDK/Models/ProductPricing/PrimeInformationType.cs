@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="PrimeInformationType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PrimeInformationType() { }
+        public PrimeInformationType() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PrimeInformationType" /> class.
         /// </summary>

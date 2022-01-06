@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Initializes a new instance of the <see cref="TrackingInformation" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TrackingInformation() { }
+        public TrackingInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingInformation" /> class.
         /// </summary>

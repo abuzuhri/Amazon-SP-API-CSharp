@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds
         /// Initializes a new instance of the <see cref="CreateFeedDocumentSpecification" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateFeedDocumentSpecification() { }
+        public CreateFeedDocumentSpecification() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateFeedDocumentSpecification" /> class.
         /// </summary>

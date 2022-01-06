@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="PackageTrackingDetails" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PackageTrackingDetails() { }
+        public PackageTrackingDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PackageTrackingDetails" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="ItemLevelFields" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ItemLevelFields() { }
+        public ItemLevelFields() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemLevelFields" /> class.
         /// </summary>

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Initializes a new instance of the <see cref="ScheduledDeliveryInfo" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ScheduledDeliveryInfo() { }
+        public ScheduledDeliveryInfo() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduledDeliveryInfo" /> class.
         /// </summary>

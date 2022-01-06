@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="PartneredLtlDataOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PartneredLtlDataOutput() { }
+        public PartneredLtlDataOutput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredLtlDataOutput" /> class.
         /// </summary>

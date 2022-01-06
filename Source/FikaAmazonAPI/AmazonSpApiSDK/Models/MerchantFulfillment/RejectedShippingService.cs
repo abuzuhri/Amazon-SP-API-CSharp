@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Initializes a new instance of the <see cref="RejectedShippingService" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RejectedShippingService() { }
+        public RejectedShippingService() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="RejectedShippingService" /> class.
         /// </summary>
