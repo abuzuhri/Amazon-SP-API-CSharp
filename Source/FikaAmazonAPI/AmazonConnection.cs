@@ -76,10 +76,11 @@ namespace FikaAmazonAPI
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
-
-        public AmazonConnection(AmazonCredential Credentials)
+        public string RefNumber { get; set; }
+        public AmazonConnection(AmazonCredential Credentials,string RefNumber=null)
         {
             this.Authenticate(Credentials);
+            this.RefNumber = RefNumber;
         }
 
         public void Authenticate(AmazonCredential Credentials)

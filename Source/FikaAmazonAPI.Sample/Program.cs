@@ -32,6 +32,12 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
+            Environment.SetEnvironmentVariable("AccessKey", "AKIATPXBLIMN573RXY67");
+            Environment.SetEnvironmentVariable("SecretKey", "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");
+            Environment.SetEnvironmentVariable("RoleArn", "arn:aws:iam::239917024027:role/IcanloSpApiRole");
+            Environment.SetEnvironmentVariable("ClientId", "amzn1.application-oa2-client.60e302fbf260411fb308ad0c635a1c30");
+            Environment.SetEnvironmentVariable("ClientSecret", "7dab6ccaa0d51dab00a796e5bc3b08e411368413b7b80dfbe228eb47ad289db5");
+            Environment.SetEnvironmentVariable("RefreshToken", "Atzr|IwEBIB_EWhQekUsF08ZtXWccm5chfM8K7t6Cw_U6G5YtEvJ2ZQmCV_r8jcr_4htXf64mBG1pXxDShTydP3vyRyTdAaXctrj5Kf1LWBVJdlOh05TPWgGbqag-GU1_IAqp0dQ4hG6jrTc30B1n7pzIX2boXyFejZprrldZWbgXmC5yEHue9_-_Qdv7CBQmeWDYeOALvx2s2ZmJqNw_q6IvIUttSeE5cbgNJ3nqxtfzlnJxAu928NQnBN_8t3RJ6r1gRDE6bDgpDOOL_uxB3fN9KAmKPfoa3eRDAPjiivuM81TgIvwYFtcUiuGWnqYhlYKs6gxpxfk");
 
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
@@ -45,6 +51,8 @@ namespace FikaAmazonAPI.Sample
                 MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
             }) ;
+
+            var dddd= amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_INVENTORY_AGED_DATA);
 
             var parameters = new ParameterListFinancialEvents();
             parameters.PostedAfter = new DateTime(2021, 12, 1);
