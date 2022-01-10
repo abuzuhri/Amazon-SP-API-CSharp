@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.Sample
                 RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
                 MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
                 IsActiveLimitRate = true
-            }) ;
+            });
 
             var dddd= amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_INVENTORY_AGED_DATA);
 
