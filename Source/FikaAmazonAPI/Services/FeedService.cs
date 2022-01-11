@@ -1,4 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
+using FikaAmazonAPI.ConstructFeed;
+using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Feed;
 using FikaAmazonAPI.Utils;
 using System;
@@ -57,7 +59,7 @@ namespace FikaAmazonAPI.Services
 
         public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification)
         {
-            CreateAuthorizedRequest(FeedsApiUrls.CreateFeed, RestSharp.Method.POST,postJsonObj: createFeedSpecification);
+            CreateAuthorizedRequest(FeedsApiUrls.CreateFeed, RestSharp.Method.POST, postJsonObj: createFeedSpecification);
             var response = ExecuteRequest<CreateFeedResult>();
 
             return response;
@@ -66,7 +68,7 @@ namespace FikaAmazonAPI.Services
         {
             CreateAuthorizedRequest(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.GET);
             var response = ExecuteRequest<Feed>();
-            if(response!=null)
+            if (response != null)
                 return response;
             return null;
         }
@@ -88,6 +90,24 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        public ProcessingReportMessage GetFeedDocumentProcessingReport(string url)
+        {
+            ProcessingReportMessage processingReport = null;
+            try
+            {
+                var stream = GetStreamFromUrl(url);
+                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
+                var response = (FeedAmazonEnvelope)xmlSerializer.Deserialize(stream);
+                processingReport= response.Message[0].ProcessingReport;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return processingReport;
+
+        }
+
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType)
         {
             var contxt = LinqHelper.GetEnumMemberValue(contentType);
@@ -106,7 +126,7 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public string SubmitFeed(string xml, FeedType feedType,FeedOptions feedOptions=null)
+        public string SubmitFeed(string xml, FeedType feedType, FeedOptions feedOptions = null)
         {
 
             //FIrst Step get doc
@@ -120,13 +140,22 @@ namespace FikaAmazonAPI.Services
                 FeedType = feedType.ToString(),
                 InputFeedDocumentId = feedCreate.FeedDocumentId,
                 MarketplaceIds = new List<string> { MarketPlace.ID },
-                FeedOptions= feedOptions
+                FeedOptions = feedOptions
             };
 
             //Submit XML
-            var feed=CreateFeed(createFeedSpecification);
+            var feed = CreateFeed(createFeedSpecification);
 
             return feed.FeedId;
+        }
+        private static Stream GetStreamFromUrl(string url)
+        {
+            byte[] imageData = null;
+
+            using (var wc = new System.Net.WebClient())
+                imageData = wc.DownloadData(url);
+
+            return new MemoryStream(imageData);
         }
 
         private string postXMLData(string destinationUrl, string requestXml)
