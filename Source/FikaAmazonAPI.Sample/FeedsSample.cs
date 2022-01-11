@@ -131,7 +131,10 @@ namespace FikaAmazonAPI.Sample
 
             var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
 
-            var reportOutpit = outPut.Url;
+            var reportOutput = outPut.Url;
+
+
+            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutput);
         }
     }
 }
