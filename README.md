@@ -307,6 +307,8 @@ var outPut=amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId
 
 var reportOutpit = outPut.Url;
 
+var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
+
 ```
 
 ---
