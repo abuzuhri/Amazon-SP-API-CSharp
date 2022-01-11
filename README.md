@@ -281,7 +281,7 @@ public class CustomMessageReceiver : IMessageReceiver
 Here full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
 Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and use our library to get data, now we support only submit existing product, change quantity and change price , I list most of XSD here Source\FikaAmazonAPI\ConstructFeed\xsd its will help you easy generate class and add it in your app to generate final feed xml.
 ```CSharp
-ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
 
 var list = new List<PriceMessage>();
 list.Add(new PriceMessage()
