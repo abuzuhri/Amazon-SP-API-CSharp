@@ -106,7 +106,7 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public string SubmitFeed(string xml, FeedType feedType,FeedOptions feedOptions=null)
+        public string SubmitFeed(string xml, FeedType feedType, FeedOptions feedOptions = null, List<string> marketPlaceIds = null)
         {
 
             //FIrst Step get doc
@@ -119,7 +119,7 @@ namespace FikaAmazonAPI.Services
             {
                 FeedType = feedType.ToString(),
                 InputFeedDocumentId = feedCreate.FeedDocumentId,
-                MarketplaceIds = new List<string> { MarketPlace.ID },
+                MarketplaceIds = marketPlaceIds ?? new List<string> { MarketPlace.ID },
                 FeedOptions= feedOptions
             };
 

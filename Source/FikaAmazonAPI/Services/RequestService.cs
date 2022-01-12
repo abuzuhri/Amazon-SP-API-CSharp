@@ -158,13 +158,18 @@ namespace FikaAmazonAPI.Services
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
                 return;
             if (response.StatusCode == HttpStatusCode.NotFound)
-                throw new NotFoundException("Resource that you are looking for is not found", response);
-            else
+                throw new AmazonNotFoundException("Resource that you are looking for is not found", response);
+            if (response.StatusCode == HttpStatusCode.Forbidden)
             {
-                Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details"+ response.Content);
-                throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
+                var error = response.Content.ConvertToErrorResponse();
+                if (error != null && error.Errors.Any(x => x.Code == HttpStatusCode.Unauthorized))
+                {
+                    throw new AmazonUnauthorizedException("Access to requested resource is denied.", response);
+                }
             }
-                
+            
+            Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
+            throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
         }
 
         protected void AddQueryParameters(List<KeyValuePair<string, string>> queryParameters)
