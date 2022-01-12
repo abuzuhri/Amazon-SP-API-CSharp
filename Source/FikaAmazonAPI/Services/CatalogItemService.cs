@@ -20,6 +20,16 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
                 throw new InvalidDataException("MarketplaceId is a required property and cannot be null or empty");
 
+            if (
+                string.IsNullOrEmpty(parameterListCatalogItems.Query) &&
+                string.IsNullOrEmpty(parameterListCatalogItems.SellerSKU) &&
+                string.IsNullOrEmpty(parameterListCatalogItems.UPC) &&
+                string.IsNullOrEmpty(parameterListCatalogItems.EAN) &&
+                string.IsNullOrEmpty(parameterListCatalogItems.ISBN) &&
+                string.IsNullOrEmpty(parameterListCatalogItems.JAN)
+                )
+                throw new InvalidDataException("At least one of Query, SellerSKU, UPC, EAN, ISBN, JAN is also required and cannot be null or empty");
+
             List<Item> list = new List<Item>();
 
             var parameter = parameterListCatalogItems.getParameters();

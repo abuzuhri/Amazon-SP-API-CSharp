@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.Utils
         [JsonProperty("message")]
         public string Message { get; set; }
         [JsonProperty("code")]
-        public HttpStatusCode Code { get; set; }
+        public string Code { get; set; }
         [JsonProperty("details")]
         public string Details { get; set; }
     }
