@@ -126,18 +126,7 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public string SubmitFeed(string xml, FeedType feedType, FeedOptions feedOptions = null)
-        {
-            return SubmitFeed(xml, feedType, new List<string> { MarketPlace.ID }, feedOptions);
-        }
-
-        /// <summary>
-        /// read full step  https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <param name="feedType"></param>
-        /// <returns></returns>
-        public string SubmitFeed(string xml, FeedType feedType, List<string> marketPlaceIds, FeedOptions feedOptions = null)
+        public string SubmitFeed(string xml, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null)
         {
 
             //FIrst Step get doc
@@ -150,7 +139,7 @@ namespace FikaAmazonAPI.Services
             {
                 FeedType = feedType.ToString(),
                 InputFeedDocumentId = feedCreate.FeedDocumentId,
-                MarketplaceIds = marketPlaceIds,
+                MarketplaceIds = marketPlaceIds ?? new List<string> { MarketPlace.ID },
                 FeedOptions = feedOptions
             };
 
