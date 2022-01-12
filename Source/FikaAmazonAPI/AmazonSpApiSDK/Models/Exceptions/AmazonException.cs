@@ -20,9 +20,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     }
 
-    public class NotFoundException : AmazonException
+    public class AmazonNotFoundException : AmazonException
     {
-        public NotFoundException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonNotFoundException(string msg, IRestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
+
+    public class AmazonUnauthorizedException : AmazonException
+    {
+        public AmazonUnauthorizedException(string msg, IRestResponse response = null) : base(msg, response)
         {
 
         }
