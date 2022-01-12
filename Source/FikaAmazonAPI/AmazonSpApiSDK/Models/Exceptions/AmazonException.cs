@@ -36,6 +36,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         }
     }
 
+    public class AmazonInvalidInputException : AmazonException
+    {
+        public AmazonInvalidInputException(string msg, IRestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
+
     public class ExceptionResponse
     {
         public string Content { get; set; }

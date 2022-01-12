@@ -162,12 +162,20 @@ namespace FikaAmazonAPI.Services
             if (response.StatusCode == HttpStatusCode.Forbidden)
             {
                 var error = response.Content.ConvertToErrorResponse();
-                if (error != null && error.Errors.Any(x => x.Code == HttpStatusCode.Unauthorized))
+                if (error != null && error.Errors.Any(x => x.Code.Equals("Unauthorized")))
                 {
                     throw new AmazonUnauthorizedException("Access to requested resource is denied.", response);
                 }
             }
-            
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var error = response.Content.ConvertToErrorResponse();
+                if (error != null && error.Errors.Any(x => x.Code.Equals("InvalidInput")))
+                {
+                    throw new AmazonInvalidInputException("Invalid input found", response);
+                }
+            }
+
             Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
         }
