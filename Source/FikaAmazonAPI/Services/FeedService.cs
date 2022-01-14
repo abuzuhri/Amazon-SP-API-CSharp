@@ -115,9 +115,13 @@ namespace FikaAmazonAPI.Services
                 processingReport = response.Message[0].ProcessingReport;
               
             }
+            catch(AmazonProcessingReportDeserializeException ex)
+            {
+                throw ex;
+            }
             catch(Exception ex)
             {
-              
+                
             }
             return processingReport;
         }
