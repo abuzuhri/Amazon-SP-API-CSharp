@@ -157,25 +157,30 @@ namespace FikaAmazonAPI.Services
         {
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
                 return;
-            if (response.StatusCode == HttpStatusCode.NotFound)
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
                 throw new AmazonNotFoundException("Resource that you are looking for is not found", response);
-            if (response.StatusCode == HttpStatusCode.Forbidden)
-            {
-                var error = response.Content.ConvertToErrorResponse();
-                if (error != null && error.Errors.Any(x => x.Code.Equals("Unauthorized")))
-                {
-                    throw new AmazonUnauthorizedException("Access to requested resource is denied.", response);
-                }
             }
-            if (response.StatusCode == HttpStatusCode.BadRequest)
+            else
             {
-                var error = response.Content.ConvertToErrorResponse();
-                if (error != null && error.Errors.Any(x => x.Code.Equals("InvalidInput")))
+                var errorResponse = response.Content.ConvertToErrorResponse();
+                if(errorResponse != null)
                 {
-                    throw new AmazonInvalidInputException("Invalid input found", response);
-                }
-            }
+                    var error = errorResponse.Errors.FirstOrDefault();
 
+                    switch (error.Code)
+                    {
+                        case "Unauthorized":
+                            throw new AmazonUnauthorizedException(error.Message, response);
+                        case "InvalidSignature":
+                            throw new AmazonInvalidSignatureException(error.Message, response);
+                        case "InvalidInput":
+                            throw new AmazonInvalidInputException(error.Message, response);
+                    }
+                    
+                }
+            }
+           
             Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
         }

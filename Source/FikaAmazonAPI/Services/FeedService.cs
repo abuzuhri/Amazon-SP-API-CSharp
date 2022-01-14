@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
 using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Feed;
@@ -93,19 +94,32 @@ namespace FikaAmazonAPI.Services
         public ProcessingReportMessage GetFeedDocumentProcessingReport(string url)
         {
             ProcessingReportMessage processingReport = null;
+            string responseContent;
             try
             {
                 var stream = GetStreamFromUrl(url);
                 var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
-                var response = (FeedAmazonEnvelope)xmlSerializer.Deserialize(stream);
-                processingReport= response.Message[0].ProcessingReport;
+                FeedAmazonEnvelope response = null;
+
+                try
+                {
+                    response = (FeedAmazonEnvelope)xmlSerializer.Deserialize(stream);
+                }
+                catch (Exception e)
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    responseContent = reader.ReadToEnd();
+                    throw new AmazonProcessingReportDeserializeException("Something went wrong on deserialize report stream", responseContent);
+                }
+
+                processingReport = response.Message[0].ProcessingReport;
+              
             }
             catch(Exception ex)
             {
-
+              
             }
             return processingReport;
-
         }
 
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType)

@@ -44,6 +44,23 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         }
     }
 
+    public class AmazonInvalidSignatureException : AmazonException
+    {
+        public AmazonInvalidSignatureException(string msg, IRestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
+
+    public class AmazonProcessingReportDeserializeException : AmazonException
+    {
+        public string ReportContent { get; set; }
+        public AmazonProcessingReportDeserializeException(string msg, string reportContent, IRestResponse response = null) : base(msg, response)
+        {
+            ReportContent = reportContent;
+        }
+    }
+
     public class ExceptionResponse
     {
         public string Content { get; set; }
