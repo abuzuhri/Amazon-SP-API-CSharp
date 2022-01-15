@@ -14,74 +14,24 @@ namespace FikaAmazonAPI.ReportGeneration
             _amazonConnections = amazonConnections;
         }
 
-        public List<ReimbursementsOrderRow> ReimbursementsOrder { get; set; } = new List<ReimbursementsOrderRow>();
-        public List<FeedbackOrderRow> FeedbackOrder { get; set; } = new List<FeedbackOrderRow>();
-        public List<ReturnFBMOrderRow> ReturnFBMOrder { get; set; } = new List<ReturnFBMOrderRow>();
-        public List<ReturnFBAOrderRow> ReturnFBAOrder { get; set; } = new List<ReturnFBAOrderRow>();
-        public List<SettlementOrderRow> SettlementOrder { get; set; } = new List<SettlementOrderRow>();
-        public List<ProductsRow> Products { get; set; } = new List<ProductsRow>();
-        public List<InventoryAgingRow> InventoryAging { get; set; } = new List<InventoryAgingRow>();
-
-        private void ConvertReport(string path, ReportTypes reportName, string refNumber)
-        {
-            if (reportName == ReportTypes.GET_FBA_REIMBURSEMENTS_DATA)
-            {
-                ReimbursementsOrderReport report = new ReimbursementsOrderReport(path, refNumber);
-                ReimbursementsOrder.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_SELLER_FEEDBACK_DATA)
-            {
-                FeedbackOrderReport report = new FeedbackOrderReport(path, refNumber);
-                FeedbackOrder.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE)
-            {
-                ReturnFBMOrderReport report = new ReturnFBMOrderReport(path, refNumber);
-                ReturnFBMOrder.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA)
-            {
-                ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, refNumber);
-                ReturnFBAOrder.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2)
-            {
-                SettlementOrderReport report = new SettlementOrderReport(path, refNumber);
-                SettlementOrder.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA)
-            {
-                ProductsReport report = new ProductsReport(path, refNumber);
-                Products.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_AFN_INVENTORY_DATA)
-            {
-                //ProductsReport report = new ProductsReport(path,refNumber);
-                //ProductsReport.AddRange(report.Data);
-            }
-            else if (reportName == ReportTypes.GET_FBA_INVENTORY_AGED_DATA)
-            {
-                InventoryAgingReport report = new InventoryAgingReport(path, refNumber);
-                InventoryAging.AddRange(report.Data);
-            }
-        }
-
-
         #region feedback
-        public void GetFeedbackFromDays(int days)
+        public List<FeedbackOrderRow> GetFeedbackFromDays(int days)
         {
             DateTime dateTime = DateTime.UtcNow.AddDays(-1 * days);
-            GetFeedbackFromDate(dateTime);
+            return GetFeedbackFromDate(dateTime);
         }
-        public void GetFeedbackFromDate(DateTime dateTime)
+        public List<FeedbackOrderRow> GetFeedbackFromDate(DateTime dateTime)
         {
+            List<FeedbackOrderRow> list=new List<FeedbackOrderRow>();
             foreach (var connection in _amazonConnections)
             {
                 var path = GetFeedbackFromDate(connection, dateTime);
-                ConvertReport(path, ReportTypes.GET_SELLER_FEEDBACK_DATA, connection.RefNumber);
+                FeedbackOrderReport report = new FeedbackOrderReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
-        public string GetFeedbackFromDate(AmazonConnection amazonConnection, DateTime dateTime)
+        private string GetFeedbackFromDate(AmazonConnection amazonConnection, DateTime dateTime)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_SELLER_FEEDBACK_DATA, dateTime);
         }
@@ -89,16 +39,19 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Reimbursement
 
-        public void GetReimbursementsOrder(DateTime fromDate, DateTime toDate)
+        public IList<ReimbursementsOrderRow> GetReimbursementsOrder(DateTime fromDate, DateTime toDate)
         {
+            List<ReimbursementsOrderRow> list = new List<ReimbursementsOrderRow>();
             foreach (var connection in _amazonConnections)
             {
                 var path = GetReimbursementsOrder(connection, fromDate, toDate);
-                ConvertReport(path, ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, connection.RefNumber);
+                ReimbursementsOrderReport report = new ReimbursementsOrderReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
 
-        public string GetReimbursementsOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private string GetReimbursementsOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, fromDate, toDate);
         }
@@ -108,16 +61,20 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region ReturnFBAOrder
 
-        public void GetReturnFBAOrder(DateTime fromDate, DateTime toDate)
+        public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate)
         {
+            List<ReturnFBAOrderRow> list=new List<ReturnFBAOrderRow>();
+
             foreach (var connection in _amazonConnections)
             {
                 var path = GetReturnFBAOrder(connection, fromDate, toDate);
-                ConvertReport(path, ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, connection.RefNumber);
+                ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
 
-        public string GetReturnFBAOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private string GetReturnFBAOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate);
         }
@@ -127,13 +84,17 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region ReturnFBMOrder
 
-        public void GetReturnMFNOrder(DateTime fromDate, DateTime toDate)
+        public List<ReturnFBMOrderRow> GetReturnMFNOrder(DateTime fromDate, DateTime toDate)
         {
+            List<ReturnFBMOrderRow> list=new List<ReturnFBMOrderRow>();
             foreach (var connection in _amazonConnections)
             {
                 var path = GetReturnMFNOrder(connection, fromDate, toDate);
-                ConvertReport(path, ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE, connection.RefNumber);
+
+                ReturnFBMOrderReport report = new ReturnFBMOrderReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
         public string GetReturnMFNOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
@@ -144,27 +105,29 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region Settlement
-        public void GetSettlementOrder(int days)
+        public List<SettlementOrderRow> GetSettlementOrder(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
             DateTime toDate = DateTime.UtcNow;
-            GetSettlementOrder(fromDate, toDate);
+            return GetSettlementOrder(fromDate, toDate);
         }
-        public void GetSettlementOrder(DateTime fromDate, DateTime toDate)
+        public List<SettlementOrderRow> GetSettlementOrder(DateTime fromDate, DateTime toDate)
         {
+            List<SettlementOrderRow> list=new List<SettlementOrderRow>();
             foreach (var connection in _amazonConnections)
             {
                 var paths = GetSettlementOrder(connection, fromDate, toDate);
                 foreach (var path in paths)
                 {
-                    ConvertReport(path, ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2, connection.RefNumber);
+                    SettlementOrderReport report = new SettlementOrderReport(path, connection.RefNumber);
+                    list.AddRange(report.Data);
                 }
             }
+            return list;
         }
-        public IList<string> GetSettlementOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private IList<string> GetSettlementOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
             return amazonConnection.Reports.DownloadExistingReportAndDownloadFile(ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2, fromDate, toDate);
-
         }
         #endregion
 
@@ -174,42 +137,95 @@ namespace FikaAmazonAPI.ReportGeneration
             foreach (var connection in _amazonConnections)
             {
                 var path = GetInventoryQty(connection);
-                ConvertReport(path, ReportTypes.GET_AFN_INVENTORY_DATA, connection.RefNumber);
+                throw new Exception("Report not finished");
             }
         }
-        public string GetInventoryQty(AmazonConnection amazonConnection)
+        private string GetInventoryQty(AmazonConnection amazonConnection)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_AFN_INVENTORY_DATA);
         }
         #endregion
 
         #region GetInventoryAging
-        public void GetInventoryAging()
+        public List<InventoryAgingRow> GetInventoryAging()
         {
+            List<InventoryAgingRow> list=new List<InventoryAgingRow>();
+
             foreach (var connection in _amazonConnections)
             {
                 var path = GetInventoryAging(connection);
-                ConvertReport(path, ReportTypes.GET_FBA_INVENTORY_AGED_DATA, connection.RefNumber);
+                InventoryAgingReport report = new InventoryAgingReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
-        public string GetInventoryAging(AmazonConnection amazonConnection)
+        private string GetInventoryAging(AmazonConnection amazonConnection)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_INVENTORY_AGED_DATA);
         }
         #endregion
 
         #region Products
-        public void GetProducts()
+        public List<ProductsRow> GetProducts()
         {
+            List<ProductsRow> list=new List<ProductsRow>();
             foreach (var connection in _amazonConnections)
             {
                 var path = GetProducts(connection);
-                ConvertReport(path, ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA, connection.RefNumber);
+                ProductsReport report = new ProductsReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
             }
+            return list;
         }
-        public string GetProducts(AmazonConnection amazonConnection)
+        private string GetProducts(AmazonConnection amazonConnection)
         {
             return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
+        }
+        #endregion
+
+        #region Orders
+        public List<OrdersRow> GetOrdersByLastUpdate(int days)
+        {
+            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
+            DateTime toDate = DateTime.UtcNow;
+            return GetOrdersByLastUpdate(fromDate, toDate);
+        }
+        public List<OrdersRow> GetOrdersByLastUpdate(DateTime fromDate, DateTime toDate)
+        {
+            List<OrdersRow> list = new List<OrdersRow>();
+            foreach (var connection in _amazonConnections)
+            {
+                var path = GetOrdersByLastUpdate(connection, fromDate, toDate);
+                OrdersReport report = new OrdersReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
+            }
+            return list;
+        }
+        private string GetOrdersByLastUpdate(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL, fromDate, toDate);
+        }
+
+        public List<OrdersRow> GetOrdersByOrderDate(int days)
+        {
+            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
+            DateTime toDate = DateTime.UtcNow;
+            return GetOrdersByOrderDate(fromDate,toDate);
+        }
+        public List<OrdersRow> GetOrdersByOrderDate(DateTime fromDate, DateTime toDate)
+        {
+            List<OrdersRow> list = new List<OrdersRow>();
+            foreach (var connection in _amazonConnections)
+            {
+                var path = GetOrdersByOrderDate(connection, fromDate, toDate);
+                OrdersReport report = new OrdersReport(path, connection.RefNumber);
+                list.AddRange(report.Data);
+            }
+            return list;
+        }
+        private string GetOrdersByOrderDate(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
         #endregion
 

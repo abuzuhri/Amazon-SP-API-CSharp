@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string AmazonOrderId { get; set; }
         public string Reason { get; set; }
         public string SKU { get; set; }
-        public int FNSKU { get; set; }
+        public string FNSKU { get; set; }
         public string ASIN { get; set; }
         public string ProductName { get; set; }
         public string Condition { get; set; }
@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.AmazonOrderId = values[3];
             row.Reason = values[4];
             row.SKU = values[5];
-            row.FNSKU = Convert.ToInt32(values[6]);
+            row.FNSKU = values[6];
             row.ASIN = values[7];
             row.ProductName = values[8];
             row.Condition = values[9];

@@ -24,6 +24,7 @@ using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using FikaAmazonAPI.Parameter.Finance;
+using FikaAmazonAPI.ReportGeneration;
 
 namespace FikaAmazonAPI.Sample
 {
@@ -46,21 +47,65 @@ namespace FikaAmazonAPI.Sample
             });
 
 
-            while (true)
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+
+            parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+
+            amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL, DateTime.UtcNow.AddDays(-10), DateTime.UtcNow.AddDays(-1));
+            amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_PENDING_ORDERS_DATA);
+
+            var reportId = amazonConnection.Reports.CreateReport(parameters);
+            var filePath = string.Empty;
+            string ReportDocumentId = string.Empty;
+
+            while (string.IsNullOrEmpty(ReportDocumentId))
             {
-                var data = amazonConnection.ProductPricing.GetItemOffers(new FikaAmazonAPI.Parameter.ProductPricing.ParameterGetItemOffers()
+                var reportData = amazonConnection.Reports.GetReport(reportId);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
                 {
-                    ItemCondition = ItemCondition.New,
-                    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                    Asin = "B000JNAMJ2"
-                });
-                Console.Write(".");
+                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
+                    break;
+                }
+                else Thread.Sleep(1000 * 60);
             }
 
+            
+
+            IList<AmazonConnection> amazonConnections = new List<AmazonConnection>();
+            amazonConnections.Add(amazonConnection);
+
+            ReportManager reportManager = new ReportManager(amazonConnections);
+            reportManager.GetOrdersByOrderDate(DateTime.UtcNow.AddDays(-10), DateTime.UtcNow.AddDays(-1));
+            reportManager.GetInventoryQty();
 
 
-            var dddd= amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_INVENTORY_AGED_DATA);
 
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            var list = new List<InventoryMessage>();
+            list.Add(new InventoryMessage()
+            {
+                SKU = "82010312061.22...",
+                Quantity = 2,
+                FulfillmentLatency = "11",
+            });
+            createDocument.AddInventoryMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_INVENTORY_AVAILABILITY_DATA);
+
+            Thread.Sleep(1000 * 30);
+
+            var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+
+            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+            Thread.Sleep(1000 * 30);
+            var reportOutpit = outPut.Url;
+
+            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutpit);
 
 
             Console.ReadLine();

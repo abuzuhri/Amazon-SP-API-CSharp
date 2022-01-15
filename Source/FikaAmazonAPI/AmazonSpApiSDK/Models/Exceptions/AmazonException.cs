@@ -43,6 +43,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
         }
     }
+    public class AmazonQuotaExceededException : AmazonException
+    {
+        public AmazonQuotaExceededException(string msg, IRestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
 
     public class AmazonInvalidSignatureException : AmazonException
     {

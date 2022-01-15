@@ -163,6 +163,8 @@ namespace FikaAmazonAPI.Services
             }
             else
             {
+                Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
+
                 var errorResponse = response.Content.ConvertToErrorResponse();
                 if(errorResponse != null)
                 {
@@ -176,12 +178,13 @@ namespace FikaAmazonAPI.Services
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":
                             throw new AmazonInvalidInputException(error.Message, response);
+                        case "QuotaExceeded":
+                            throw new AmazonQuotaExceededException(error.Message, response);
                     }
                     
                 }
             }
            
-            Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
         }
 
