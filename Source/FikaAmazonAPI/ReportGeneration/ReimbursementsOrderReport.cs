@@ -8,9 +8,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReimbursementsOrderReport
     {
-        public List<ReimbursementsOrderRow> Data { get; set; }
+        public List<ReimbursementsOrderRow> Data { get; set; }=new List<ReimbursementsOrderRow>();
         public ReimbursementsOrderReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             List<ReimbursementsOrderRow> values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => ReimbursementsOrderRow.FromCsv(v, refNumber))

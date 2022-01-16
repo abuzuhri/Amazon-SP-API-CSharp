@@ -8,9 +8,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReturnFBMOrderReport
     {
-        public List<ReturnFBMOrderRow> Data { get; set; }
+        public List<ReturnFBMOrderRow> Data { get; set; }=new List<ReturnFBMOrderRow>();
         public ReturnFBMOrderReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             List<ReturnFBMOrderRow> values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => ReturnFBMOrderRow.FromCsv(v, refNumber))

@@ -8,9 +8,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class OrdersReport
     {
-        public List<OrdersRow> Data { get; set; }
+        public List<OrdersRow> Data { get; set; }=new List<OrdersRow>();
         public OrdersReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             var values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => OrdersRow.FromCsv(v, refNumber))
@@ -71,14 +73,14 @@ namespace FikaAmazonAPI.ReportGeneration
             row.ItemStatus = values[12];
             row.Quantity = DataConverter.GetInt(values[13]);
             row.Currency = values[14];
-            row.ItemPrice = DataConverter.GetInt(values[15]);
-            row.ItemTax = DataConverter.GetInt(values[16]);
-            row.ShippingPrice = DataConverter.GetInt(values[17]);
-            row.ShippingTax = DataConverter.GetInt(values[18]);
-            row.GiftWrapPrice = DataConverter.GetInt(values[19]);
-            row.GiftWrapTax = DataConverter.GetInt(values[20]);
-            row.ItemPromotionDiscount = DataConverter.GetInt(values[21]);
-            row.ShipPromotionDiscount = DataConverter.GetInt(values[22]);
+            row.ItemPrice = DataConverter.GetDecimal(values[15]);
+            row.ItemTax = DataConverter.GetDecimal(values[16]);
+            row.ShippingPrice = DataConverter.GetDecimal(values[17]);
+            row.ShippingTax = DataConverter.GetDecimal(values[18]);
+            row.GiftWrapPrice = DataConverter.GetDecimal(values[19]);
+            row.GiftWrapTax = DataConverter.GetDecimal(values[20]);
+            row.ItemPromotionDiscount = DataConverter.GetDecimal(values[21]);
+            row.ShipPromotionDiscount = DataConverter.GetDecimal(values[22]);
             row.ShipCity = values[23];
             row.ShipState = values[24];
             row.ShipPostalCode = values[25];

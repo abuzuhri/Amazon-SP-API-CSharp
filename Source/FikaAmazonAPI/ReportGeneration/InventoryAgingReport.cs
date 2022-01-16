@@ -8,9 +8,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class InventoryAgingReport
     {
-        public List<InventoryAgingRow> Data { get; set; }
+        public List<InventoryAgingRow> Data { get; set; }=new List<InventoryAgingRow>();
         public InventoryAgingReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             var values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => InventoryAgingRow.FromCsv(v, refNumber))

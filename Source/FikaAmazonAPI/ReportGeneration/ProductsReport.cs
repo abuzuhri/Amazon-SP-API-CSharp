@@ -8,9 +8,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class ProductsReport
     {
-        public List<ProductsRow> Data { get; set; }
+        public List<ProductsRow> Data { get; set; }=new List<ProductsRow>();
         public ProductsReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             var values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => ProductsRow.FromCsv(v, refNumber))

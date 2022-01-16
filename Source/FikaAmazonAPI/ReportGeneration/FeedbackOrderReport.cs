@@ -9,9 +9,11 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class FeedbackOrderReport
     {
-        public List<FeedbackOrderRow> Data { get; set; }
+        public List<FeedbackOrderRow> Data { get; set; }=new List<FeedbackOrderRow>();
         public FeedbackOrderReport(string path, string refNumber)
         {
+            if (string.IsNullOrEmpty(path))
+                return;
             List<FeedbackOrderRow> values = File.ReadAllLines(path)
                                            .Skip(1)
                                            .Select(v => FeedbackOrderRow.FromCsv(v, refNumber))
