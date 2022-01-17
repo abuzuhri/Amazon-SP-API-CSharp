@@ -33,7 +33,6 @@ namespace FikaAmazonAPI.Sample
         static async Task Main(string[] args)
         {
 
-            
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
@@ -79,6 +78,8 @@ namespace FikaAmazonAPI.Sample
             amazonConnections.Add(amazonConnection);
 
             ReportManager reportManager = new ReportManager(amazonConnections);
+            reportManager.GetFeedbackFromDays(370);
+            reportManager.GetSettlementOrder(DateTime.UtcNow.AddDays(-1000), DateTime.UtcNow.AddDays(-1));
             reportManager.GetOrdersByOrderDate(DateTime.UtcNow.AddDays(-10), DateTime.UtcNow.AddDays(-1));
             reportManager.GetInventoryQty();
 

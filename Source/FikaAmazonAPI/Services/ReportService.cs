@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Parameter.Report;
@@ -21,6 +22,16 @@ namespace FikaAmazonAPI.Services
         #region GetReport
         public List<Report> GetReports(ParameterReportList parameterReportList)
         {
+            if (parameterReportList.createdSince.HasValue)
+            {
+                var totalDays = (parameterReportList.createdSince.Value - DateTime.UtcNow).TotalDays;
+                if (totalDays > 90)
+                {
+                    throw new AmazonInvalidInputException("Amazon api not accepting createdSince more than 90 days ,"+
+                        "The earliest report creation date and time for reports to include in the response, in ISO 8601 date time format. The default is 90 days ago. Reports are retained for a maximum of 90 days. https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2021-06-30.md#parameters");
+                }
+
+            }
             var parameters = parameterReportList.getParameters();
 
             CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
