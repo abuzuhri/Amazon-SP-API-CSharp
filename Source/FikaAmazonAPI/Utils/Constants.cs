@@ -78,7 +78,9 @@ namespace FikaAmazonAPI.Utils
             UNIQUE,
             PALLET
         }
-
+        /// <summary>
+        /// List of all FeedType https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FeedType
         {
@@ -114,7 +116,12 @@ namespace FikaAmazonAPI.Utils
             POST_FLAT_FILE_FBA_UPDATE_INBOUND_PLAN,
             POST_FLAT_FILE_FBA_CREATE_REMOVAL,
             RFQ_UPLOAD_FEED,
-            POST_EASYSHIP_DOCUMENTS
+            POST_EASYSHIP_DOCUMENTS,
+
+
+            UPLOAD_VAT_INVOICE
+
+
 
 
         }
@@ -451,7 +458,9 @@ namespace FikaAmazonAPI.Utils
             [EnumMember(Value = "text/xml; charset=UTF-8")]
             XML,
             [EnumMember(Value = "application/json; charset=UTF-8")]
-            JSON
+            JSON,
+            [EnumMember(Value = "application/pdf; charset=UTF-8")]
+            PDF
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

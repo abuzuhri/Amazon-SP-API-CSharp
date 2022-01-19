@@ -45,43 +45,21 @@ namespace FikaAmazonAPI.Sample
                 IsActiveLimitRate = true
             });
 
+            var options = new AmazonSpApiSDK.Models.Feeds.FeedOptions();
+            options.Add("DocumentType", "Invoice");
+            options.Add("InvoiceNumber", "FV-EUR/1/2/3");
+            options.Add("OrderId", "???-???????-?????");
+            options.Add("TotalAmount", "39.37");
+            options.Add("TotalVATAmount", "6.29");
 
-            var parameters = new ParameterCreateReportSpecification();
-            parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
 
-            parameters.marketplaceIds = new MarketplaceIds();
-            parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
-            parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
+            var feedresultPDF = amazonConnection.Feed.SubmitFeed(@"C:\Users\tareq\Downloads\224129324d8e2096ec0a70f223572eda36.pdf"
+                                                    , FeedType.UPLOAD_VAT_INVOICE
+                                                    , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
+                                                    , options
+                                                    , ContentType.PDF);
 
-            amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL, DateTime.UtcNow.AddDays(-10), DateTime.UtcNow.AddDays(-1));
-            amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_PENDING_ORDERS_DATA);
-
-            var reportId = amazonConnection.Reports.CreateReport(parameters);
-            var filePath = string.Empty;
-            string ReportDocumentId = string.Empty;
-
-            while (string.IsNullOrEmpty(ReportDocumentId))
-            {
-                var reportData = amazonConnection.Reports.GetReport(reportId);
-                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
-                {
-                    filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
-                    break;
-                }
-                else Thread.Sleep(1000 * 60);
-            }
-
-            
-
-            IList<AmazonConnection> amazonConnections = new List<AmazonConnection>();
-            amazonConnections.Add(amazonConnection);
-
-            ReportManager reportManager = new ReportManager(amazonConnections);
-            reportManager.GetFeedbackFromDays(370);
-            reportManager.GetSettlementOrder(DateTime.UtcNow.AddDays(-1000), DateTime.UtcNow.AddDays(-1));
-            reportManager.GetOrdersByOrderDate(DateTime.UtcNow.AddDays(-10), DateTime.UtcNow.AddDays(-1));
-            reportManager.GetInventoryQty();
 
 
 

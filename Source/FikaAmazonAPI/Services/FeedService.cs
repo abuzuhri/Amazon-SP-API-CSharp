@@ -144,14 +144,22 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public string SubmitFeed(string xml, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null)
+        public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null,ContentType contentType= ContentType.XML)
         {
 
-            //FIrst Step get doc
-            var feedCreate = CreateFeedDocument(ContentType.XML);
+            //We are creating Feed Document
+            var feedCreate = CreateFeedDocument(contentType);
 
-            //POST XML
-            var responce = postXMLData(feedCreate.Url, xml);
+            var responce = string.Empty;
+            //Uploading encoded invoice file
+            if (contentType == ContentType.PDF)
+            {
+                responce = postFileData(feedCreate.Url, XmlContentOrFilePath, ContentType.PDF);
+            }
+            else
+            {
+                responce = postXMLData(feedCreate.Url, XmlContentOrFilePath);
+            }
 
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
             {
@@ -178,12 +186,12 @@ namespace FikaAmazonAPI.Services
             return new MemoryStream(imageData);
         }
 
-        private string postXMLData(string destinationUrl, string requestXml)
+        private string postXMLData(string destinationUrl, string requestXml, ContentType contentType= ContentType.XML)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
             byte[] bytes;
             bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
-            request.ContentType = LinqHelper.GetEnumMemberValue(ContentType.XML);
+            request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
             request.Method = "PUT";
             Stream requestStream = request.GetRequestStream();
@@ -199,5 +207,28 @@ namespace FikaAmazonAPI.Services
             }
             return null;
         }
+
+        private string postFileData(string destinationUrl, string pathFile, ContentType contentType = ContentType.XML)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
+            byte[] bytes= File.ReadAllBytes(pathFile);
+            //bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
+            request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
+            request.ContentLength = bytes.Length;
+            request.Method = "PUT";
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(bytes, 0, bytes.Length);
+            requestStream.Close();
+            HttpWebResponse response;
+            response = (HttpWebResponse)request.GetResponse();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream responseStream = response.GetResponseStream();
+                string responseStr = new StreamReader(responseStream).ReadToEnd();
+                return responseStr;
+            }
+            return null;
+        }
+
     }
 }
