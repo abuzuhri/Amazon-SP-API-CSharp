@@ -1,4 +1,4 @@
-# Amazon Selling Partner API C#  [![Build status](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_apis/build/status/Amazon-SP-API-CSharp)](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_build/latest?definitionId=4) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
+# Amazon Selling Partner API C# 🚀  [![Build status](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_apis/build/status/Amazon-SP-API-CSharp)](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_build/latest?definitionId=4) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
 
 
 This is an API Binding in .Net C# for the new Amazon Selling Partner API.
@@ -170,6 +170,10 @@ parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
 var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
+### Report Manager 🚀🧑‍🚀✨
+Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for all reports ....
+
+SOON WILL ADD
 
 ### Report GET_MERCHANT_LISTINGS_ALL_DATA sample
 ```CSharp
@@ -352,7 +356,7 @@ https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-pl
 
 we calc waiting time by read x-amzn-RateLimit-Limit header 
 
-`int sleepTime = (int)(1 / header["x-amzn-RateLimit-Limit"]*1000);`
+`int sleepTime = (int)((1 / header["x-amzn-RateLimit-Limit"] ) * 1000);`
 
 You can also disable libary from handelling limitaion by set IsActiveLimitRate=false in AmazonCredential
 ```CSharp
