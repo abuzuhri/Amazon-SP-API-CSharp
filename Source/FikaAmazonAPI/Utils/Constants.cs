@@ -460,7 +460,9 @@ namespace FikaAmazonAPI.Utils
             [EnumMember(Value = "application/json; charset=UTF-8")]
             JSON,
             [EnumMember(Value = "application/pdf; charset=UTF-8")]
-            PDF
+            PDF,
+            [EnumMember(Value = "text/tab-separated-values; charset=UTF-8")]
+            TXT,
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

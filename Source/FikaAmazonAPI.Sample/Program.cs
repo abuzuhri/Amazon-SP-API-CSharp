@@ -54,6 +54,26 @@ namespace FikaAmazonAPI.Sample
 
 
 
+            string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
+
+            var feedresultTXT = amazonConnection.Feed.SubmitFeed(text
+                                                    , FeedType.POST_FLAT_FILE_INVLOADER_DATA
+                                                    , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
+                                                    , options
+                                                    , ContentType.TXT);
+
+            Thread.Sleep(1000 * 30);
+
+            var feedOutput = amazonConnection.Feed.GetFeed("234729019012");
+
+            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+            var reportOutpit = outPut.Url;
+
+            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
+
+            //234729019012
+
             var feedresultPDF = amazonConnection.Feed.SubmitFeed(@"C:\Users\tareq\Downloads\224129324d8e2096ec0a70f223572eda36.pdf"
                                                     , FeedType.UPLOAD_VAT_INVOICE
                                                     , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
@@ -78,13 +98,13 @@ namespace FikaAmazonAPI.Sample
 
             Thread.Sleep(1000 * 30);
 
-            var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+            //var feedOutput = amazonConnection.Feed.GetFeed(feedID);
 
-            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
-            Thread.Sleep(1000 * 30);
-            var reportOutpit = outPut.Url;
+            //var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+            //Thread.Sleep(1000 * 30);
+            //var reportOutpit = outPut.Url;
 
-            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutpit);
+            //var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutpit);
 
 
             Console.ReadLine();

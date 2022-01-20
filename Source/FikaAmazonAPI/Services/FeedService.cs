@@ -154,7 +154,11 @@ namespace FikaAmazonAPI.Services
             //Uploading encoded invoice file
             if (contentType == ContentType.PDF)
             {
-                responce = postFileData(feedCreate.Url, XmlContentOrFilePath, ContentType.PDF);
+                responce = postFileData(feedCreate.Url, XmlContentOrFilePath, contentType);
+            }
+            else if(contentType == ContentType.TXT)
+            {
+                responce = postXMLData(feedCreate.Url, XmlContentOrFilePath, contentType);
             }
             else
             {
