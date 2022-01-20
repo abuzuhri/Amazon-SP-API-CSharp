@@ -11,10 +11,10 @@ namespace FikaAmazonAPI.ReportGeneration
         private const int DAY_30 = 30;
         private const int DAY_60 = 60;
         private const int DAY_90 = 90;
-        private IList<AmazonConnection> _amazonConnections { get; set; }
-        public ReportManager(IList<AmazonConnection> amazonConnections)
+        private AmazonConnection _amazonConnection { get; set; }
+        public ReportManager(AmazonConnection amazonConnection)
         {
-            _amazonConnections = amazonConnections;
+            _amazonConnection = amazonConnection;
         }
 
         #region feedback
@@ -26,14 +26,9 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public List<FeedbackOrderRow> GetFeedbackFromDate(DateTime fromDate, DateTime toDate)
         {
-            List<FeedbackOrderRow> list=new List<FeedbackOrderRow>();
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetFeedbackFromDate(connection, fromDate, toDate);
-                FeedbackOrderReport report = new FeedbackOrderReport(path, connection.RefNumber);
-                list.AddRange(report.Data);
-            }
-            return list;
+            var path = GetFeedbackFromDate(_amazonConnection, fromDate, toDate);
+            FeedbackOrderReport report = new FeedbackOrderReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
         private string GetFeedbackFromDate(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
@@ -50,14 +45,9 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public IList<ReimbursementsOrderRow> GetReimbursementsOrder(DateTime fromDate, DateTime toDate)
         {
-            List<ReimbursementsOrderRow> list = new List<ReimbursementsOrderRow>();
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetReimbursementsOrder(connection, fromDate, toDate);
-                ReimbursementsOrderReport report = new ReimbursementsOrderReport(path, connection.RefNumber);
-                list.AddRange(report.Data);
-            }
-            return list;
+            var path = GetReimbursementsOrder(_amazonConnection, fromDate, toDate);
+            ReimbursementsOrderReport report = new ReimbursementsOrderReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
 
         private string GetReimbursementsOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
@@ -77,15 +67,10 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate)
         {
-            List<ReturnFBAOrderRow> list=new List<ReturnFBAOrderRow>();
-
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetReturnFBAOrder(connection, fromDate, toDate);
-                ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, connection.RefNumber);
-                list.AddRange(report.Data);
-            }
-            return list;
+            var path = GetReturnFBAOrder(_amazonConnection, fromDate, toDate);
+            ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, _amazonConnection.RefNumber);
+  
+            return report.Data;
         }
 
         private string GetReturnFBAOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
@@ -107,15 +92,12 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             List<ReturnFBMOrderRow> list=new List<ReturnFBMOrderRow>();
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_60);
-            foreach (var connection in _amazonConnections)
+            foreach (var date in dateList)
             {
-                foreach(var date in dateList)
-                {
-                    var path = GetReturnMFNOrder(connection, date.StartDate, date.EndDate);
+                var path = GetReturnMFNOrder(_amazonConnection, date.StartDate, date.EndDate);
 
-                    ReturnFBMOrderReport report = new ReturnFBMOrderReport(path, connection.RefNumber);
-                    list.AddRange(report.Data);
-                }
+                ReturnFBMOrderReport report = new ReturnFBMOrderReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
             }
             return list;
         }
@@ -141,17 +123,13 @@ namespace FikaAmazonAPI.ReportGeneration
             if (totalDays > 90)
                 fromDate = DateTime.UtcNow.AddDays(-90);
 
-            foreach (var connection in _amazonConnections)
+            var paths = GetSettlementOrder(_amazonConnection, fromDate, toDate);
+            foreach (var path in paths)
             {
-
-                var paths = GetSettlementOrder(connection, fromDate, toDate);
-                foreach (var path in paths)
-                {
-                    SettlementOrderReport report = new SettlementOrderReport(path, connection.RefNumber);
-                    list.AddRange(report.Data);
-                }
-
+                SettlementOrderReport report = new SettlementOrderReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
             }
+
             return list;
         }
         private IList<string> GetSettlementOrder(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
@@ -163,11 +141,8 @@ namespace FikaAmazonAPI.ReportGeneration
         #region GetInventoryQty
         public void GetInventoryQty()
         {
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetInventoryQty(connection);
-                throw new Exception("Report not finished");
-            }
+            //var path = GetInventoryQty(_amazonConnections);
+            throw new Exception("Report not finished");
         }
         private string GetInventoryQty(AmazonConnection amazonConnection)
         {
@@ -178,15 +153,9 @@ namespace FikaAmazonAPI.ReportGeneration
         #region GetInventoryAging
         public List<InventoryAgingRow> GetInventoryAging()
         {
-            List<InventoryAgingRow> list=new List<InventoryAgingRow>();
-
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetInventoryAging(connection);
-                InventoryAgingReport report = new InventoryAgingReport(path, connection.RefNumber);
-                list.AddRange(report.Data);
-            }
-            return list;
+            var path = GetInventoryAging(_amazonConnection);
+            InventoryAgingReport report = new InventoryAgingReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
         private string GetInventoryAging(AmazonConnection amazonConnection)
         {
@@ -197,14 +166,9 @@ namespace FikaAmazonAPI.ReportGeneration
         #region Products
         public List<ProductsRow> GetProducts()
         {
-            List<ProductsRow> list=new List<ProductsRow>();
-            foreach (var connection in _amazonConnections)
-            {
-                var path = GetProducts(connection);
-                ProductsReport report = new ProductsReport(path, connection.RefNumber);
-                list.AddRange(report.Data);
-            }
-            return list;
+            var path = GetProducts(_amazonConnection);
+            ProductsReport report = new ProductsReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
         private string GetProducts(AmazonConnection amazonConnection)
         {
@@ -223,14 +187,11 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             List<OrdersRow> list = new List<OrdersRow>();
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
-            foreach (var connection in _amazonConnections)
+            foreach (var range in dateList)
             {
-                foreach (var range in dateList)
-                {
-                    var path = GetOrdersByLastUpdate(connection, range.StartDate, range.EndDate);
-                    OrdersReport report = new OrdersReport(path, connection.RefNumber);
-                    list.AddRange(report.Data);
-                }
+                var path = GetOrdersByLastUpdate(_amazonConnection, range.StartDate, range.EndDate);
+                OrdersReport report = new OrdersReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
             }
             return list;
         }
@@ -249,14 +210,11 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             List<OrdersRow> list = new List<OrdersRow>();
             var dateList=ReportDateRange.GetDateRange(fromDate, toDate,DAY_30);
-            foreach (var connection in _amazonConnections)
+            foreach (var range in dateList)
             {
-                foreach(var range in dateList)
-                {
-                    var path = GetOrdersByOrderDate(connection, range.StartDate, range.EndDate);
-                    OrdersReport report = new OrdersReport(path, connection.RefNumber);
-                    list.AddRange(report.Data);
-                }
+                var path = GetOrdersByOrderDate(_amazonConnection, range.StartDate, range.EndDate);
+                OrdersReport report = new OrdersReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
             }
             return list;
         }
