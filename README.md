@@ -17,6 +17,11 @@ The purpose of this package is to have an easy way of getting started with the A
 - [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
 - [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
 
+---
+### Useful links
+##### [Selling Partner API](https://developer-docs.amazon.com/sp-api)
+##### [Amazon MWS to SP-API Migration Guide](https://developer-docs.amazon.com/sp-api/docs/amazon-mws-to-sp-api-migration-guide#mapping-apis-from-amazon-mws-to-the-selling-partner-api)
+##### [SP-API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
 
 
 ---
