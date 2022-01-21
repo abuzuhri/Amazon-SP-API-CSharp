@@ -45,6 +45,28 @@ namespace FikaAmazonAPI.Sample
                 IsActiveLimitRate = true
             });
 
+            string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
+
+            var feedresultTXT = amazonConnection.Feed.SubmitFeed(text
+                                                    , FeedType.POST_FLAT_FILE_INVLOADER_DATA
+                                                    , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
+                                                    , null
+                                                    , ContentType.TXT);
+
+
+            string pathURL = string.Empty;
+            while (pathURL == string.Empty)
+            {
+                Thread.Sleep(1000 * 30);
+                var feedOutput = amazonConnection.Feed.GetFeed(feedresultTXT);
+                if (feedOutput.ProcessingStatus == AmazonSpApiSDK.Models.Feeds.Feed.ProcessingStatusEnum.DONE)
+                {
+                    var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+                    pathURL = outPut.Url;
+                }
+            }
+
 
             ReportManager reportManager = new ReportManager(amazonConnection);
             var products=reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
@@ -67,23 +89,8 @@ namespace FikaAmazonAPI.Sample
 
 
 
-            string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
 
-            var feedresultTXT = amazonConnection.Feed.SubmitFeed(text
-                                                    , FeedType.POST_FLAT_FILE_INVLOADER_DATA
-                                                    , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
-                                                    , null
-                                                    , ContentType.TXT);
 
-            Thread.Sleep(1000 * 30);
-
-            var feedOutput = amazonConnection.Feed.GetFeed(feedresultTXT);
-
-            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
-
-            var reportOutpit = outPut.Url;
-
-            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
 
             //234729019012
 

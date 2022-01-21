@@ -22,6 +22,10 @@ The purpose of this package is to have an easy way of getting started with the A
 ##### [Selling Partner API](https://developer-docs.amazon.com/sp-api)
 ##### [Amazon MWS to SP-API Migration Guide](https://developer-docs.amazon.com/sp-api/docs/amazon-mws-to-sp-api-migration-guide#mapping-apis-from-amazon-mws-to-the-selling-partner-api)
 ##### [SP-API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+##### [Using Postman for Selling Partner API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+##### [Test Project with pure C# code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Others/PureCodeSampleForTest)
+##### [Sample Code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Source/FikaAmazonAPI.Sample)
+
 
 
 ---
