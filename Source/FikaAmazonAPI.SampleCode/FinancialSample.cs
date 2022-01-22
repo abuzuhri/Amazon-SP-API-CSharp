@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FikaAmazonAPI.Sample
+namespace FikaAmazonAPI.SampleCode
 {
     public class FinancialSample
     {

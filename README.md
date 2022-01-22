@@ -25,7 +25,7 @@ The purpose of this package is to have an easy way of getting started with the A
 ##### [Using Postman for Selling Partner API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
 ##### [Test Project with pure C# code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Others/PureCodeSampleForTest)
 ##### [Sample Code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Source/FikaAmazonAPI.Sample)
-
+##### [Creating And Configuring AWS](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
 
 
 ---

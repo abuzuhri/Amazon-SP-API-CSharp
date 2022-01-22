@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FikaAmazonAPI.Sample
+namespace FikaAmazonAPI.SampleCodeCode
 {
-    public class VendorDirectFulfillmentOrderSample
+    internal class Class1
     {
-
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Sample
+namespace FikaAmazonAPI.SampleCode
 {
     public class FeedsSample
     {
@@ -135,6 +135,35 @@ namespace FikaAmazonAPI.Sample
 
 
             var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutput);
+        }
+
+        public void FeebPostOrderFullfillment()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+
+            var list = new List<OrderFulfillmentMessage>();
+
+            list.Add(new OrderFulfillmentMessage()
+            {
+                AmazonOrderID = "{orderId}",
+                FulfillmentDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                FulfillmentData = new FulfillmentData()
+                {
+                    CarrierName = "Correos Express",
+                    ShippingMethod = "ePaq",
+                    ShipperTrackingNumber = "{trackingNumber}"
+                }
+            });
+            createDocument.AddOrderFulfillmentMessage(list);
+
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_ORDER_FULFILLMENT_DATA);
+
+
+            var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
         }
     }
 }

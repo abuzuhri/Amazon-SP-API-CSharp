@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Sample
+namespace FikaAmazonAPI.SampleCode
 {
     public class ReportsSample
     {
