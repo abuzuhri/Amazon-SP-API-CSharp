@@ -39,8 +39,6 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
-            
-
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
