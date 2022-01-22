@@ -25,6 +25,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.ReportGeneration;
+using Microsoft.Extensions.Configuration;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -32,16 +33,23 @@ namespace FikaAmazonAPI.SampleCode
     {
         static async Task Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .AddUserSecrets<Program>()
+            .Build();
+
+            
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
-                AccessKey = Environment.GetEnvironmentVariable("AccessKey"),
-                SecretKey = Environment.GetEnvironmentVariable("SecretKey"),
-                RoleArn = Environment.GetEnvironmentVariable("RoleArn"),
-                ClientId = Environment.GetEnvironmentVariable("ClientId"),
-                ClientSecret = Environment.GetEnvironmentVariable("ClientSecret"),
-                RefreshToken = Environment.GetEnvironmentVariable("RefreshToken"),
-                MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
+                AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
+                SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
+                RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
+                ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
+                ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
+                RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
+                MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
 
