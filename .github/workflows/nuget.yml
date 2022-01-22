@@ -32,3 +32,6 @@ jobs:
 
     - name: PushNuget
       run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
+      
+    - name: PushGithub
+      run: dotnet nuget push "**/*.nupkg" --source "github" --skip-duplicate --source "github"
