@@ -1,4 +1,4 @@
-# Amazon Selling Partner API C# 🚀  [![Build status](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_apis/build/status/Amazon-SP-API-CSharp)](https://dev.azure.com/FikaAmazonSpAPI/Amazon-SP-API-CSharp/_build/latest?definitionId=4) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
+# Amazon Selling Partner API C# 🚀 [![.NET](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
 
 
 This is an API Binding in .Net C# for the new Amazon Selling Partner API.
