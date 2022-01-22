@@ -1,10 +1,11 @@
 name: CD-NuGet
 
-on:
+
+
+on:  
   push:
-    tags:
-    - '[0-9]+.[0-9]+.[0-9]+'
-    - '[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+    branches: [ main ]
+
 
 jobs:
   build:
