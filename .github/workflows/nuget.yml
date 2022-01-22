@@ -34,6 +34,7 @@ jobs:
       run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
       
 
-    - name: PushNuget
-      run: dotnet nuget push "**/*.nupkg" --source "github" --api-key ${{ secrets.USERGIHUB_TOKEN }} --skip-duplicate
+    - name: PushToGithub
+      run: dotnet nuget add source https://nuget.pkg.github.com/abuzuhri/index.json --name GitHub --username abuzuhri --password ${{ secrets.USERGIHUB_TOKEN }} 
+
             
