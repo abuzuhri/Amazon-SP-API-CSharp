@@ -21,7 +21,7 @@ jobs:
 
     - name: Pack
       run: |
-        dotnet pack --configuration Release
-    - name: Deploy
-      run: |
-        dotnet nuget push ./source/FikaAmazonAPI/bin/Release/*.nupkg -s nuget.org -k ${{ secrets.NUGET_TOKEN }} -s https://www.nuget.org/api/v2/symbolpackage 
+        dotnet pack ./Source/FikaAmazonAPI/*/*/*.csproj  Release
+
+    - name: PushNuget
+      run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
