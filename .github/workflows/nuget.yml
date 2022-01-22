@@ -26,11 +26,7 @@ jobs:
     - name: Build
       run: dotnet build ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj --configuration Release --no-restore
  
-deploy_to_nuget:
-    needs: build
-    runs-on: ubuntu-latest
     
-    steps:
     - name: Pack
       run: |
         dotnet pack ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj  --configuration Release
@@ -38,16 +34,26 @@ deploy_to_nuget:
     - name: PushNuget
       run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
 
-deploy_to_github:
-    needs: deploy_to_nuget
-    runs-on: ubuntu-latest
-    
-    steps:
+
     - name: Add github package source
       run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.USERGIHUB_TOKEN }}
       
+
     - name: Push to GitHub Packages
       run: dotnet nuget push "**/*.nupkg" --skip-duplicate --source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.USERGIHUB_TOKEN }}
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+          GITHUB_TOKEN: ${{ secrets.USERGIHUB_TOKEN }}
+      with:
+          tag_name: v${{ github.event.head_commit.id }}
+          release_name: Release ${{ github.event.head_commit.timestamp }}
+          draft: false
+          prerelease: false
+        
+        
             
