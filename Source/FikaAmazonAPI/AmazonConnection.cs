@@ -9,8 +9,6 @@ namespace FikaAmazonAPI
     {
         private AmazonCredential Credentials { get; set; }
 
-        
-
         public OrderService Orders => this._Orders ?? throw _NoCredentials;
         public ReportService Reports => this._Reports ?? throw _NoCredentials;
         public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
