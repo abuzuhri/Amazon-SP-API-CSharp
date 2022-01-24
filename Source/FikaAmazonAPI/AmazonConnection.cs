@@ -8,7 +8,6 @@ namespace FikaAmazonAPI
     public class AmazonConnection
     {
         private AmazonCredential Credentials { get; set; }
-
         
 
         public OrderService Orders => this._Orders ?? throw _NoCredentials;
