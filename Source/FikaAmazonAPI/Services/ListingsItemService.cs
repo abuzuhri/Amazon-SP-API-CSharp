@@ -12,7 +12,6 @@ namespace FikaAmazonAPI.Services
     {
         public ListingsItemService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-
         }
 
         public Item GetListingsItem(string sellerId, string sku, ParameterGetListingsItem listingsItemParameters)
