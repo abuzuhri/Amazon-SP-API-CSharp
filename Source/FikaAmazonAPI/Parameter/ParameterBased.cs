@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.Search
             PropertyInfo[] pi = t.GetProperties();
             foreach (PropertyInfo p in pi)
             {
-
+                if (p.CustomAttributes.Any(x => x.AttributeType == typeof(IgnoreToAddParameterAttribute))) continue;
                 var value = p.GetValue(this);
                 if (value != null)
                 {

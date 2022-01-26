@@ -519,6 +519,17 @@ namespace FikaAmazonAPI.Utils
             WebstoreItem,
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ListingsIncludedData
+        {
+            Summaries,
+            Attributes,
+            Issues,
+            Offers,
+            FulfillmentAvailability,
+            Procurement
+        }
+
 
         ///// <summary>
         ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.

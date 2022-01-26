@@ -19,10 +19,7 @@ namespace FikaAmazonAPI.SampleCode
         {
             var orders = amazonConnection.Orders.GetOrders
             (
-                 new FikaAmazonAPI.Parameter.Order.ParameterOrderList()
-                 {
-                     TestCase = Constants.TestCase200
-                 }
+                 new FikaAmazonAPI.Parameter.Order.ParameterOrderList(Constants.TestCase200)
             );
         }
     }
