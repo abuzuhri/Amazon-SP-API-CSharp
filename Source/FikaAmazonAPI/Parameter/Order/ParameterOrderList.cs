@@ -11,9 +11,13 @@ namespace FikaAmazonAPI.Parameter.Order
 {
     public class ParameterOrderList :  ParameterBased, IParameterBasedPII, IHasParameterizedTestCase
     {
-        public ParameterOrderList()
+        public ParameterOrderList(string testCase = "")
         {
-            SandboxQueryParameters = Sandbox.SandboxQueryParameters<ParameterOrderList>();
+            if (!string.IsNullOrEmpty(testCase))
+            {
+                TestCase = testCase;
+                SandboxQueryParameters = Sandbox.SandboxQueryParameters<ParameterOrderList>(TestCase);
+            }
         }
 
         /// <summary>

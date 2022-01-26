@@ -446,9 +446,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             }
             public static string GetCatalogItem(string asin) => $"{_resourceBaseUrl}/items/{asin}";
         }
+
+        protected class ListingsItemsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "listings/2021-08-01/items";
+            public static string GetListingsItem(string sellerId, string sku) => $"{_resourceBaseUrl}/{sellerId}/{sku}";
+        }
     }
-
-
-
-
 }
