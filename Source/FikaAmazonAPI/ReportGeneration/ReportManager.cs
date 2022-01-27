@@ -38,23 +38,6 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region Performance
-        public SellerFeedBackDataResult GetSellerFeedBackDataFromDays(int days)
-        {
-            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
-            DateTime toDate = DateTime.UtcNow;
-            return GetSellerPerformance(fromDate, toDate);
-        }
-        public SellerFeedBackDataResult GetSellerPerformance(DateTime fromDate, DateTime toDate)
-        {
-            var path = GetSellerPerformance(_amazonConnection, fromDate, toDate);
-            SellerFeedBackData sellerPerformanceReport = new SellerFeedBackData(path);
-            return sellerPerformanceReport.Data;
-        }
-
-        private string GetSellerPerformance(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
-        {
-            return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_SELLER_FEEDBACK_DATA, fromDate);
-        }
         #endregion
 
         #region Reimbursement
