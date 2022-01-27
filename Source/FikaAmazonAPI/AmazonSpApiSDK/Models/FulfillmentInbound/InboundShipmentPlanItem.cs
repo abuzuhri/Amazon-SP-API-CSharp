@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="FulfillmentNetworkSKU">Amazon&#39;s fulfillment network SKU of the item. (required).</param>
         /// <param name="Quantity">The item quantity that you are shipping. (required).</param>
         /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentPlanItem(string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), Quantity Quantity = default(Quantity), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        public InboundShipmentPlanItem(string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int Quantity = default(int), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The item quantity that you are shipping.</value>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Gets or Sets PrepDetailsList

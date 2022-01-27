@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="SellerFulfillmentOrderItemId">A fulfillment order item identifier that the seller created with a call to the createFulfillmentOrder operation. (required).</param>
         /// <param name="EstimatedShippingWeight">The estimated shipping weight of the item quantity for a single item, as identified by sellerSKU, in a shipment..</param>
         /// <param name="ShippingWeightCalculationMethod">The method used to calculate EstimatedShippingWeight..</param>
-        public FulfillmentPreviewItem(string SellerSKU = default(string), Quantity Quantity = default(Quantity), string SellerFulfillmentOrderItemId = default(string), Weight EstimatedShippingWeight = default(Weight), ShippingWeightCalculationMethodEnum? ShippingWeightCalculationMethod = default(ShippingWeightCalculationMethodEnum?))
+        public FulfillmentPreviewItem(string SellerSKU = default(string), int Quantity = default(int), string SellerFulfillmentOrderItemId = default(string), Weight EstimatedShippingWeight = default(Weight), ShippingWeightCalculationMethodEnum? ShippingWeightCalculationMethod = default(ShippingWeightCalculationMethodEnum?))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -110,7 +110,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The item quantity.</value>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier that the seller created with a call to the createFulfillmentOrder operation.

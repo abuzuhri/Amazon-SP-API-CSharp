@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="SellerSKU">The seller SKU of the item. (required).</param>
         /// <param name="Quantity">Quantity (required).</param>
         /// <param name="SellerFulfillmentOrderItemId">A fulfillment order item identifier that the seller creates to track items in the fulfillment preview. (required).</param>
-        public GetFulfillmentPreviewItem(string SellerSKU = default(string), Quantity Quantity = default(Quantity), string SellerFulfillmentOrderItemId = default(string))
+        public GetFulfillmentPreviewItem(string SellerSKU = default(string), int Quantity = default(int), string SellerFulfillmentOrderItemId = default(string))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -77,7 +77,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier that the seller creates to track items in the fulfillment preview.

@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="SellerFulfillmentOrderItemId">The fulfillment order item identifier that the seller created and submitted with a call to the createFulfillmentOrder operation. (required).</param>
         /// <param name="Quantity">Quantity (required).</param>
         /// <param name="PackageNumber">An identifier for the package that contains the item quantity..</param>
-        public FulfillmentShipmentItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), Quantity Quantity = default(Quantity), int? PackageNumber = default(int?))
+        public FulfillmentShipmentItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), int Quantity = default(int), int? PackageNumber = default(int?))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// An identifier for the package that contains the item quantity.

@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="QuantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
         /// <param name="ReleaseDate">The date that a pre-order item will be available for sale..</param>
         /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentItem(string ShipmentId = default(string), string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), Quantity QuantityShipped = default(Quantity), Quantity QuantityReceived = default(Quantity), Quantity QuantityInCase = default(Quantity), DateStringType ReleaseDate = default(DateStringType), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        public InboundShipmentItem(string ShipmentId = default(string), string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int QuantityShipped = default(int), int QuantityReceived = default(int), int QuantityInCase = default(int), DateStringType ReleaseDate = default(DateStringType), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -94,21 +94,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The item quantity that you are shipping.</value>
         [DataMember(Name = "QuantityShipped", EmitDefaultValue = false)]
-        public Quantity QuantityShipped { get; set; }
+        public int QuantityShipped { get; set; }
 
         /// <summary>
         /// The item quantity that has been received at an Amazon fulfillment center.
         /// </summary>
         /// <value>The item quantity that has been received at an Amazon fulfillment center.</value>
         [DataMember(Name = "QuantityReceived", EmitDefaultValue = false)]
-        public Quantity QuantityReceived { get; set; }
+        public int QuantityReceived { get; set; }
 
         /// <summary>
         /// The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.
         /// </summary>
         /// <value>The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.</value>
         [DataMember(Name = "QuantityInCase", EmitDefaultValue = false)]
-        public Quantity QuantityInCase { get; set; }
+        public int QuantityInCase { get; set; }
 
         /// <summary>
         /// The date that a pre-order item will be available for sale.

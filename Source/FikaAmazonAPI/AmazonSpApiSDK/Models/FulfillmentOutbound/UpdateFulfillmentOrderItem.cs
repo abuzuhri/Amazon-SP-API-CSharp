@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="PerUnitDeclaredValue">The monetary value assigned by the seller to this item..</param>
         /// <param name="PerUnitPrice">The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
         /// <param name="PerUnitTax">The tax on the amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
-        public UpdateFulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), Quantity Quantity = default(Quantity), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), Currency PerUnitDeclaredValue = default(Currency), Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency))
+        public UpdateFulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), int Quantity = default(int), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), Currency PerUnitDeclaredValue = default(Currency), Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency))
         {
             // to ensure "SellerFulfillmentOrderItemId" is required (not null)
             if (SellerFulfillmentOrderItemId == null)
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// A message to the gift recipient, if applicable.

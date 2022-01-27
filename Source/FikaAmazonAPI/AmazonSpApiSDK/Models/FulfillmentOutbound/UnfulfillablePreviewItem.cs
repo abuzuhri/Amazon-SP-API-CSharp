@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="Quantity">Quantity (required).</param>
         /// <param name="SellerFulfillmentOrderItemId">A fulfillment order item identifier created with a call to the getFulfillmentPreview operation. (required).</param>
         /// <param name="ItemUnfulfillableReasons">Error codes associated with the fulfillment order preview that indicate why the item is unfulfillable..</param>
-        public UnfulfillablePreviewItem(string SellerSKU = default(string), Quantity Quantity = default(Quantity), string SellerFulfillmentOrderItemId = default(string), StringList ItemUnfulfillableReasons = default(StringList))
+        public UnfulfillablePreviewItem(string SellerSKU = default(string), int Quantity = default(int), string SellerFulfillmentOrderItemId = default(string), StringList ItemUnfulfillableReasons = default(StringList))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -79,7 +79,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier created with a call to the getFulfillmentPreview operation.

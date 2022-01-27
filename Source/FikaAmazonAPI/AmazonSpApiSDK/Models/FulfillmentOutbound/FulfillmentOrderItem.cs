@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="PerUnitPrice">The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
         /// <param name="PerUnitTax">The tax on the amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
         /// <param name="PerUnitDeclaredValue">The monetary value assigned by the seller to this item..</param>
-        public FulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), Quantity Quantity = default(Quantity), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), Quantity CancelledQuantity = default(Quantity), Quantity UnfulfillableQuantity = default(Quantity), Timestamp EstimatedShipDateTime = default(Timestamp), Timestamp EstimatedArrivalDateTime = default(Timestamp), Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency), Currency PerUnitDeclaredValue = default(Currency))
+        public FulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), int Quantity = default(int), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), int CancelledQuantity = default(int), int UnfulfillableQuantity = default(int), Timestamp EstimatedShipDateTime = default(Timestamp), Timestamp EstimatedArrivalDateTime = default(Timestamp), Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency), Currency PerUnitDeclaredValue = default(Currency))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -122,7 +122,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public Quantity Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// A message to the gift recipient, if applicable.
@@ -157,14 +157,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The item quantity that was cancelled by the seller.</value>
         [DataMember(Name = "CancelledQuantity", EmitDefaultValue = false)]
-        public Quantity CancelledQuantity { get; set; }
+        public int CancelledQuantity { get; set; }
 
         /// <summary>
         /// The item quantity that is unfulfillable.
         /// </summary>
         /// <value>The item quantity that is unfulfillable.</value>
         [DataMember(Name = "UnfulfillableQuantity", EmitDefaultValue = false)]
-        public Quantity UnfulfillableQuantity { get; set; }
+        public int UnfulfillableQuantity { get; set; }
 
         /// <summary>
         /// The estimated date and time that the item quantity is scheduled to ship from the fulfillment center. Note that this value can change over time. If the shipment that contains the item quantity has been cancelled, EstimatedShipDateTime is not returned.
@@ -268,11 +268,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.SellerFulfillmentOrderItemId.Equals(input.SellerFulfillmentOrderItemId))
                 ) &&
                 (
-                    this.Quantity == input.Quantity ||
-                    (this.Quantity != null &&
-                    this.Quantity.Equals(input.Quantity))
-                ) &&
-                (
                     this.GiftMessage == input.GiftMessage ||
                     (this.GiftMessage != null &&
                     this.GiftMessage.Equals(input.GiftMessage))
@@ -291,16 +286,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.OrderItemDisposition == input.OrderItemDisposition ||
                     (this.OrderItemDisposition != null &&
                     this.OrderItemDisposition.Equals(input.OrderItemDisposition))
-                ) &&
-                (
-                    this.CancelledQuantity == input.CancelledQuantity ||
-                    (this.CancelledQuantity != null &&
-                    this.CancelledQuantity.Equals(input.CancelledQuantity))
-                ) &&
-                (
-                    this.UnfulfillableQuantity == input.UnfulfillableQuantity ||
-                    (this.UnfulfillableQuantity != null &&
-                    this.UnfulfillableQuantity.Equals(input.UnfulfillableQuantity))
                 ) &&
                 (
                     this.EstimatedShipDateTime == input.EstimatedShipDateTime ||
@@ -342,8 +327,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.SellerSKU.GetHashCode();
                 if (this.SellerFulfillmentOrderItemId != null)
                     hashCode = hashCode * 59 + this.SellerFulfillmentOrderItemId.GetHashCode();
-                if (this.Quantity != null)
-                    hashCode = hashCode * 59 + this.Quantity.GetHashCode();
                 if (this.GiftMessage != null)
                     hashCode = hashCode * 59 + this.GiftMessage.GetHashCode();
                 if (this.DisplayableComment != null)
@@ -352,10 +335,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentNetworkSKU.GetHashCode();
                 if (this.OrderItemDisposition != null)
                     hashCode = hashCode * 59 + this.OrderItemDisposition.GetHashCode();
-                if (this.CancelledQuantity != null)
-                    hashCode = hashCode * 59 + this.CancelledQuantity.GetHashCode();
-                if (this.UnfulfillableQuantity != null)
-                    hashCode = hashCode * 59 + this.UnfulfillableQuantity.GetHashCode();
                 if (this.EstimatedShipDateTime != null)
                     hashCode = hashCode * 59 + this.EstimatedShipDateTime.GetHashCode();
                 if (this.EstimatedArrivalDateTime != null)

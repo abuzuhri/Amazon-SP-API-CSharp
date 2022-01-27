@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="TotalUnits">The number of units to ship..</param>
         /// <param name="FeePerUnit">The manual processing fee per unit..</param>
         /// <param name="TotalFee">The total manual processing fee for the shipment..</param>
-        public BoxContentsFeeDetails(Quantity TotalUnits = default(Quantity), Amount FeePerUnit = default(Amount), Amount TotalFee = default(Amount))
+        public BoxContentsFeeDetails(int TotalUnits = default(int), Amount FeePerUnit = default(Amount), Amount TotalFee = default(Amount))
         {
             this.TotalUnits = TotalUnits;
             this.FeePerUnit = FeePerUnit;
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The number of units to ship.</value>
         [DataMember(Name = "TotalUnits", EmitDefaultValue = false)]
-        public Quantity TotalUnits { get; set; }
+        public int TotalUnits { get; set; }
 
         /// <summary>
         /// The manual processing fee per unit.
@@ -102,11 +102,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
                 return false;
 
             return
-                (
-                    this.TotalUnits == input.TotalUnits ||
-                    (this.TotalUnits != null &&
-                    this.TotalUnits.Equals(input.TotalUnits))
-                ) &&
+                
                 (
                     this.FeePerUnit == input.FeePerUnit ||
                     (this.FeePerUnit != null &&
@@ -128,8 +124,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.TotalUnits != null)
-                    hashCode = hashCode * 59 + this.TotalUnits.GetHashCode();
                 if (this.FeePerUnit != null)
                     hashCode = hashCode * 59 + this.FeePerUnit.GetHashCode();
                 if (this.TotalFee != null)
