@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
 
-            CreateAuthorizedRequest(MessaginApiUrls.GetMessagingActionsForOrder(amazonOrderId), RestSharp.Method.GET, queryParameters);
+            CreateAuthorizedRequest(MessaginApiUrls.GetMessagingActionsForOrder(amazonOrderId, MarketPlace.ID), RestSharp.Method.GET, queryParameters);
 
             var response = ExecuteRequest<GetMessagingActionsForOrderResponse>();
 

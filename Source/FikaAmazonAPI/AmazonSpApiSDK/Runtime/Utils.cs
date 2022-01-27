@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -28,6 +29,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                 }
             }
             return encoded.ToString();
+        }
+
+        /// <summary>
+        ///  Decode
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string UrlDecode(string data)
+        {
+            return WebUtility.UrlDecode(data);
         }
 
         /// <summary>
