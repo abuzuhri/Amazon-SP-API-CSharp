@@ -1,7 +1,18 @@
 ﻿using System;
+using System.Net;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
+
+    public static class EnvironemntManager
+    {
+        public static Environments Environemnt { get; set; } = Environments.Production;
+        public enum Environments
+        {
+            Sandbox, Production
+        }
+    }
+
     public class ApiUrls
     {
 
@@ -72,7 +83,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/features";
             }
             public static string GetFeatureInventory(string featureName) => $"{_resourceBaseUrl}/features/inventory/{featureName}";
-            public static string GetFeatureSKU(string featureName,string sellerSku) => $"{_resourceBaseUrl}/features/inventory/{featureName}/{sellerSku}";
+            public static string GetFeatureSKU(string featureName, string sellerSku) => $"{_resourceBaseUrl}/features/inventory/{featureName}/{sellerSku}";
         }
         protected class FulFillmentInboundApiUrls
         {
@@ -132,14 +143,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
             public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
             public static string PurchaseLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/purchaseLabels";
-            public static string RetrieveShippingLabel(string shipmentId,string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
+            public static string RetrieveShippingLabel(string shipmentId, string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
             public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
         }
         protected class MessaginApiUrls
         {
             private readonly static string _resourceBaseUrl = "/messaging/v1";
 
-            public static string GetMessagingActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
+            public static string GetMessagingActionsForOrder(string amazonOrderId, string marketplaceIds) => $"{_resourceBaseUrl}/orders/{amazonOrderId}?marketplaceIds={marketplaceIds}";
             public static string ConfirmCustomizationDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmCustomizationDetails";
             public static string CreateConfirmDeliveryDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmDeliveryDetails";
             public static string CreateLegalDisclosure(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/legalDisclosure";
@@ -168,7 +179,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class MerchantFulfillmentApiUrls
         {
             private readonly static string _resourceBaseUrl = "/mfn/v0";
-            
+
             public static string GetEligibleShipmentServicesOld
             {
                 get => $"{_resourceBaseUrl}/eligibleServices";
@@ -241,7 +252,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/competitivePrice";
             }
 
-            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{SellerSKU}/offers";
+            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{WebUtility.UrlEncode(SellerSKU)}/offers";
             public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
 
         }
@@ -267,10 +278,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/schedules";
             }
+
             public static string GetReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
             public static string CancelReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
             public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
-
         }
         protected class VendorDirectFulfillmentOrdersApiUrls
         {
@@ -375,7 +386,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class ProductFeeApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/fees/v0";
-            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{SellerSKU}/feesEstimate";
+            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{WebUtility.UrlEncode(SellerSKU)}/feesEstimate";
             public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
         }
         protected class TokenApiUrls
@@ -436,6 +447,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class CategoryApiUrls
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
+
+            private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01/items";
             public static string ListCatalogItems
             {
                 get => $"{_resourceBaseUrl}/items";
@@ -444,13 +457,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/categories";
             }
-            public static string GetCatalogItem(string asin) => $"{_resourceBaseUrl}/items/{asin}";
+            public static string GetCatalogItem(string asin) => $"{_202012resourceBaseUrl}/{asin}";
+
+            public static string SearchCatalogItems => $"{_202012resourceBaseUrl}";
         }
 
         protected class ListingsItemsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "listings/2021-08-01/items";
-            public static string GetListingsItem(string sellerId, string sku) => $"{_resourceBaseUrl}/{sellerId}/{sku}";
+            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
+
+            //https://stackoverflow.com/questions/575440/url-encoding-using-c-sharp/21771206#21771206
+            public static string GetListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+
+
+            public static string PutListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+
+            public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+
+            public static string PatchListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
         }
+
+        protected class ListingsRestrictionsApi
+        {
+            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
+            public static string GetListingsRestrictions() => $"{_resourceBaseUrl}/restrictions";
+        }
+
+        protected class ProductTypeDefinitionsApi
+        {
+            private readonly static string _resourceBaseUrl = "/definitions/2020-09-01/productTypes";
+            public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/{productType}";
+            public static string SearchDefinitionsProductTypes => $"{_resourceBaseUrl}";
+        }
+
     }
+
+
+
+
 }

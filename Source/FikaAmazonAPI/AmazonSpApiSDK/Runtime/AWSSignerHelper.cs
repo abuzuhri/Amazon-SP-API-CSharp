@@ -58,7 +58,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                 IEnumerable<string> encodedSegments = resource.Split(new char[] { '/' }, StringSplitOptions.None);
 
                 // Encode twice
-                encodedSegments = encodedSegments.Select(segment => Utils.UrlEncode(segment));
+                //use Utils.UrlDecode before Encode twice
+                encodedSegments = encodedSegments.Select(segment => Utils.UrlEncode(Utils.UrlDecode(segment)));
                 encodedSegments = encodedSegments.Select(segment => Utils.UrlEncode(segment));
 
                 canonicalUri += string.Join(Slash, encodedSegments.ToArray());

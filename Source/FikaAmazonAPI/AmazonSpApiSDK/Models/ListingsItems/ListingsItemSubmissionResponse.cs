@@ -60,7 +60,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// Initializes a new instance of the <see cref="ListingsItemSubmissionResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ListingsItemSubmissionResponse() { }
+        public ListingsItemSubmissionResponse() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ListingsItemSubmissionResponse" /> class.
         /// </summary>
