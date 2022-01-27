@@ -20,7 +20,7 @@ namespace FikaAmazonAPI.Parameter.Report
         /// <summary>
         /// A list of processing statuses used to filter reports.
         /// </summary>
-        public IList<ReportTypes> processingStatuses { get; set; }
+        public IList<ProcessingStatuses> processingStatuses { get; set; }
         /// <summary>
         /// A list of marketplace identifiers used to filter reports. The reports returned will match at least one of the marketplaces that you specify. Minimum : 1 Maximum : 10
         /// </summary>
