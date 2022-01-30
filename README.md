@@ -191,7 +191,7 @@ var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
 ### Report Manager 🚀🧑‍🚀✨
-Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for all reports ....
+Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
 ```CSharp
 ReportManager reportManager = new ReportManager(amazonConnection);
 var products = reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
