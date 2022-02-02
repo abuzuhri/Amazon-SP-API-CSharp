@@ -4,15 +4,48 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
+using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.Parameter.ListingsItems
+namespace FikaAmazonAPI.Parameter.ListingItem
 {
     public class ParameterGetListingsItem : ParameterBased
     {
         public ParameterGetListingsItem()
         {
         }
+
+        public bool Check()
+        {
+            if (TestCase == TestCase400)
+                sku = "BadSKU";
+            if (string.IsNullOrWhiteSpace(sellerId))
+            {
+                throw new InvalidDataException("SellerId is a required property for ParameterPutListingItem and cannot be null");
+            }
+            if (string.IsNullOrWhiteSpace(sku))
+            {
+                throw new InvalidDataException("Sku is a required property for ParameterPutListingItem and cannot be null");
+            }
+            if (marketplaceIds == null || !marketplaceIds.Any())
+            {
+                throw new InvalidDataException("MarketplaceIds is a required property for ParameterPutListingItem and cannot be null");
+            }
+            if (includedData is null)
+            {
+                includedData = new List<ListingsIncludedData>();
+                includedData.Add(ListingsIncludedData.Summaries);
+            }
+            if (includedData.Count == 0)
+                includedData.Add(ListingsIncludedData.Summaries);
+            return true;
+        }
+
+        public string sellerId { get; set; }
+
+        public string sku { get; set; }
 
         /// <summary>
         /// A list of MarketplaceId values. Used to select orders that were placed in the specified marketplaces. Max count : 50

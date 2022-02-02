@@ -1,5 +1,5 @@
 ﻿using FikaAmazonAPI.Parameter;
-using FikaAmazonAPI.Parameter.ListingsItems;
+using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
 using System;
@@ -31,8 +31,64 @@ namespace FikaAmazonAPI.Utils
                     queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
                     {
                         new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterGetListingsItem.marketplaceIds)),
-                        //new KeyValuePair<string, string>("issueLocale", "en_US"),
-                        //new KeyValuePair<string, string>("includedData", "Summaries"),
+                    });
+                }
+                else if (testCase.Equals(Constants.TestCase400))
+                {
+                    queryParameters.Add(Constants.TestCase400, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterGetListingsItem.marketplaceIds))
+                    });
+                }
+            }
+            else if (instance is ParameterPutListingItem parameterPutListingsItem)
+            {
+                if (testCase.Equals(Constants.TestCase200))
+                {
+                    queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterPutListingsItem.marketplaceIds)),
+                    });
+                }
+                else if (testCase.Equals(Constants.TestCase400))
+                {
+                    queryParameters.Add(Constants.TestCase400, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterPutListingsItem.marketplaceIds))
+                    });
+                }
+            }
+            else if (instance is ParameterDeleteListingItem parameterDeleteListingsItem)
+            {
+                if (testCase.Equals(Constants.TestCase200))
+                {
+                    queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterDeleteListingsItem.marketplaceIds)),
+                    });
+                }
+                else if (testCase.Equals(Constants.TestCase400))
+                {
+                    queryParameters.Add(Constants.TestCase400, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterDeleteListingsItem.marketplaceIds))
+                    });
+                }
+            }
+            else if (instance is ParameterPatchListingItem parameterPatchListingItem)
+            {
+                if (testCase.Equals(Constants.TestCase200))
+                {
+                    queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterPatchListingItem.marketplaceIds)),
+                    });
+                }
+                else if (testCase.Equals(Constants.TestCase400))
+                {
+                    queryParameters.Add(Constants.TestCase400, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterPatchListingItem.marketplaceIds))
                     });
                 }
             }
