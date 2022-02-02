@@ -40,7 +40,8 @@ The purpose of this package is to have an easy way of getting started with the A
 - [x] [Uploads](https://github.com/amzn/selling-partner-api-docs/blob/main/references/uploads-api/uploads_2020-11-01.md)
 - [x] [shipmentInvoicingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipment-invoicing-api/shipmentInvoicingV0.md)
 - [x] [Shippings](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipping-api/shipping.md)
-- [x] [CatalogItemsV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/catalog-items-api/catalogItemsV0.md)
+- [x] [CatalogItemsV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/catalog-items-api/catalogItemsV0.md) (deprecated  soon)
+- [ ] [CatalogItemsV20201201](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2020-12-01-reference)
 - [x] [FBAInventory](https://github.com/amzn/selling-partner-api-docs/tree/main/references/fba-inventory-api)
 - [x] [FBASmallAndLight](https://github.com/amzn/selling-partner-api-docs/blob/main/references/fba-small-and-light-api/fbaSmallandLight.md)
 - [x] [FBAInboundEligibility](https://github.com/amzn/selling-partner-api-docs/blob/main/references/fba-inbound-eligibility-api/fbaInbound.md)
@@ -190,7 +191,7 @@ var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
 ### Report Manager 🚀🧑‍🚀✨
-Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for all reports ....
+Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
 ```CSharp
 ReportManager reportManager = new ReportManager(amazonConnection);
 var products = reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
