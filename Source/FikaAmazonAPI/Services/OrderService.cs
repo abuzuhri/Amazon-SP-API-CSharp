@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
     {
         public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-            
+
         }
 
         #region GetOrders
@@ -25,6 +25,11 @@ namespace FikaAmazonAPI.Services
         {
             var orderList = new OrderList();
 
+            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
+            {
+                searchOrderList.MarketplaceIds=new List<string>();
+                searchOrderList.MarketplaceIds.Add(MarketPlace.ID);
+            }
             var queryParameters = searchOrderList.getParameters(this.AmazonCredential.Environment == Constants.Environments.Sandbox);
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: searchOrderList);

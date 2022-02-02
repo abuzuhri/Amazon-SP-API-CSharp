@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
-                throw new InvalidDataException("MarketplaceId is a required property and cannot be null or empty");
+                parameterListCatalogItems.MarketplaceId = MarketPlace.ID;
 
             if (
                 string.IsNullOrEmpty(parameterListCatalogItems.Query) &&
@@ -43,12 +43,12 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
+        //[Obsolete("This method is will be deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.")]
         public Item GetCatalogItem(string asin)
         {
-            
-            if(string.IsNullOrEmpty(asin))
-                throw new InvalidDataException("asin is a required property and cannot be null");
 
+            if (string.IsNullOrEmpty(asin))
+                throw new InvalidDataException("asin is a required property and cannot be null");
 
             var param = new List<KeyValuePair<string, string>>();
             param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
@@ -62,15 +62,33 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        //public Item GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem)
+        //{
 
-        public IList<Categories> ListCatalogCategories(string ASIN,string SellerSKU=null)
+        //    if (string.IsNullOrEmpty(parameterListCatalogItem.ASIN))
+        //        throw new InvalidDataException("asin is a required property and cannot be null");
+
+        //    if (parameterListCatalogItem == null || parameterListCatalogItem.MarketplaceIds == null || parameterListCatalogItem.MarketplaceIds.Count == 0)
+        //    {
+        //        parameterListCatalogItem.MarketplaceIds.Add(MarketPlace.ID);
+        //    }
+
+        //    var param = parameterListCatalogItem.getParameters();
+
+        //    CreateAuthorizedRequest(CategoryApiUrls.GetCatalogItem202012(parameterListCatalogItem.ASIN), RestSharp.Method.GET, param);
+        //    var response = ExecuteRequest<Item>();
+
+        //    return response;
+        //}
+
+        public IList<Categories> ListCatalogCategories(string ASIN,string SellerSKU=null,string MarketPlaceID = null)
         {
             if (string.IsNullOrEmpty(ASIN))
                 throw new InvalidDataException("ASIN is a required property and cannot be null or empty");
 
 
             var param = new List<KeyValuePair<string, string>>();
-            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlaceID ?? MarketPlace.ID));
             param.Add(new KeyValuePair<string, string>("ASIN", ASIN));
             if(!string.IsNullOrEmpty(SellerSKU))
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
