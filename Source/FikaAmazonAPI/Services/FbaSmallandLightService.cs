@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
         public SmallAndLightEnrollment GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.GET);
 
@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.Services
         public SmallAndLightEnrollment PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.PutSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.PUT, queryParameters);
@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.Services
         public bool DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.DeleteSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.DELETE, queryParameters);
@@ -57,7 +57,7 @@ namespace FikaAmazonAPI.Services
         {
 
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightEligibilityBySellerSKU(sellerSKU), RestSharp.Method.GET, queryParameters);
@@ -70,7 +70,7 @@ namespace FikaAmazonAPI.Services
         public List<FeePreview> GetSmallAndLightFeePreview(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightFeePreview, RestSharp.Method.POST,postJsonObj: smallAndLightFeePreviewRequest);
 

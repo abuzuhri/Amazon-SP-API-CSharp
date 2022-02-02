@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
             if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
             {
                 searchOrderList.MarketplaceIds=new List<string>();
-                searchOrderList.MarketplaceIds.Add(MarketPlace.ID);
+                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
             var queryParameters = searchOrderList.getParameters(this.AmazonCredential.Environment == Constants.Environments.Sandbox);
 

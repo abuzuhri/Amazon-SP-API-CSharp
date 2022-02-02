@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.Services
         public GetFeaturesResult GetFeatures()
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentOutboundApiUrls.GetFeatures, RestSharp.Method.GET, queryParameters);
 
@@ -115,7 +115,7 @@ namespace FikaAmazonAPI.Services
         public GetFeatureInventoryResult GetFeatureInventory(string featureName,string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
             if(string.IsNullOrEmpty(nextToken))
                 queryParameters.Add(new KeyValuePair<string, string>("nextToken", nextToken));
             if (string.IsNullOrEmpty(featureName))
@@ -131,7 +131,7 @@ namespace FikaAmazonAPI.Services
         public GetFeatureSkuResult GetFeatureSKU(string featureName,string sellerSku, string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
             if(string.IsNullOrEmpty(nextToken))
                 queryParameters.Add(new KeyValuePair<string, string>("nextToken", nextToken));
             if (string.IsNullOrEmpty(featureName))

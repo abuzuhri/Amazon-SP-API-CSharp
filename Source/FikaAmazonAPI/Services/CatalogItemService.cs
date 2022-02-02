@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
-                parameterListCatalogItems.MarketplaceId = MarketPlace.ID;
+                parameterListCatalogItems.MarketplaceId = AmazonCredential.MarketPlace.ID;
 
             if (
                 string.IsNullOrEmpty(parameterListCatalogItems.Query) &&
@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.Services
                 throw new InvalidDataException("asin is a required property and cannot be null");
 
             var param = new List<KeyValuePair<string, string>>();
-            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.GET, param);
             var response = ExecuteRequest<GetCatalogItemResponse>();
@@ -88,7 +88,7 @@ namespace FikaAmazonAPI.Services
 
 
             var param = new List<KeyValuePair<string, string>>();
-            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlaceID ?? MarketPlace.ID));
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlaceID ?? AmazonCredential.MarketPlace.ID));
             param.Add(new KeyValuePair<string, string>("ASIN", ASIN));
             if(!string.IsNullOrEmpty(SellerSKU))
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));

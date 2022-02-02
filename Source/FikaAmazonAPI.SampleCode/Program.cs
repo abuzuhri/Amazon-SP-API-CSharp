@@ -62,11 +62,6 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-
-            ReportManager reportManager1 = new ReportManager(amazonConnection);
-            reportManager1.GetSellerFeedBackDataFromDays(60);
-
-
             string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
 
             var feedresultTXT = amazonConnection.Feed.SubmitFeed(text

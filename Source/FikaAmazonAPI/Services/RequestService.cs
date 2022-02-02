@@ -27,7 +27,6 @@ namespace FikaAmazonAPI.Services
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
-        protected MarketPlace MarketPlace { get; set; }
         protected string AmazonSandboxUrl { get; set; }
         protected string AmazonProductionUrl { get; set; }
         protected string AccessToken { get; set; }
@@ -50,9 +49,6 @@ namespace FikaAmazonAPI.Services
             AmazonCredential = amazonCredential;
             AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
-
-            MarketPlace = amazonCredential.MarketPlace;
-            
         }
 
 
