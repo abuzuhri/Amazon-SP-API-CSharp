@@ -8,15 +8,10 @@ using System.Text;
 
 namespace FikaAmazonAPI.Parameter.ListingsItems
 {
-    public class ParameterGetListingsItem : ParameterBased, IHasParameterizedTestCase
+    public class ParameterGetListingsItem : ParameterBased
     {
-        public ParameterGetListingsItem(string testCase = "")
+        public ParameterGetListingsItem()
         {
-            if (!string.IsNullOrEmpty(testCase))
-            {
-                TestCase = testCase;
-                SandboxQueryParameters = Sandbox.SandboxQueryParameters<ParameterGetListingsItem>(TestCase);
-            }
         }
 
         /// <summary>
@@ -34,10 +29,5 @@ namespace FikaAmazonAPI.Parameter.ListingsItems
         /// A comma-delimited list of data sets to include in the response. Default: summaries.
         /// </summary>
         public IList<Constants.ListingsIncludedData> includedData { get; set; }
-
-        [IgnoreToAddParameter]
-        public string TestCase { get; set; }
-
-        public Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters { get; }
     }
 }

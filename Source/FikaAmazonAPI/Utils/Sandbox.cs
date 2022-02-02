@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.Parameter.Order;
+using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,10 +10,10 @@ namespace FikaAmazonAPI.Utils
 {
     internal static class Sandbox
     {
-        public static Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters<T>(string testCase) where T : IHasParameterizedTestCase
+        public static Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters<T>(T instance, string testCase) where T : ParameterBased
         {
             var queryParameters = new Dictionary<string, List<KeyValuePair<string, string>>>();
-            if (typeof(T) == typeof(ParameterOrderList))
+            if (instance is ParameterOrderList parameterOrderList)
             {
                 if (testCase.Equals(Constants.TestCase200))
                 {
@@ -23,11 +24,16 @@ namespace FikaAmazonAPI.Utils
                     });
                 }
             }
-            else if (typeof(T) == typeof(ParameterGetListingsItem))
+            else if (instance is ParameterGetListingsItem parameterGetListingsItem)
             {
                 if (testCase.Equals(Constants.TestCase200))
                 {
-
+                    queryParameters.Add(Constants.TestCase200, new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("marketplaceIds", string.Join(",", parameterGetListingsItem.marketplaceIds)),
+                        //new KeyValuePair<string, string>("issueLocale", "en_US"),
+                        //new KeyValuePair<string, string>("includedData", "Summaries"),
+                    });
                 }
             }
 

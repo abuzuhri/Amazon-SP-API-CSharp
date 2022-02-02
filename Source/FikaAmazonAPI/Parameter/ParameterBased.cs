@@ -12,29 +12,21 @@ namespace FikaAmazonAPI.Search
 {
     public class ParameterBased
     {
-        public virtual List<KeyValuePair<string, string>> getParameters(bool isSandbox = false)
+        [IgnoreToAddParameter]
+        public string TestCase { get; set; }
+
+        [IgnoreToAddParameter]
+        internal Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters { get; private set; }
+
+        public virtual List<KeyValuePair<string, string>> getParameters()
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            Type t = this.GetType(); // Where obj is object whose properties you need.
-            if (isSandbox)
+            if (!string.IsNullOrEmpty(TestCase))
             {
-                if (typeof(IHasParameterizedTestCase).IsAssignableFrom(t))
-                {
-                    var queryParametersProperties = t.GetInterfaces().FirstOrDefault(x => x == typeof(IHasParameterizedTestCase)).GetProperties();
-                    var testCasePropertyValue = queryParametersProperties.FirstOrDefault(x => x.Name == nameof(IHasParameterizedTestCase.TestCase))?.GetValue(this);
-                    if (testCasePropertyValue != null && testCasePropertyValue is string testCase)
-                    {
-                        var sandboxQueryParametersPropertyValue = queryParametersProperties.FirstOrDefault(x => x.Name == nameof(IHasParameterizedTestCase.SandboxQueryParameters))?.GetValue(this);
-                        if (sandboxQueryParametersPropertyValue != null && sandboxQueryParametersPropertyValue is Dictionary<string, List<KeyValuePair<string, string>>> sandboxQueryParameters)
-                        {
-                            if (sandboxQueryParameters.ContainsKey(testCase))
-                                return sandboxQueryParameters[testCase];
-                        }
-
-                    }
-                }
+                SandboxQueryParameters = Sandbox.SandboxQueryParameters(this, TestCase);
+                return SandboxQueryParameters[TestCase];
             }
-            PropertyInfo[] pi = t.GetProperties();
+            PropertyInfo[] pi = this.GetType().GetProperties();
             foreach (PropertyInfo p in pi)
             {
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(IgnoreToAddParameterAttribute))) continue;

@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.Services
             }
             if (listingsItemParameters.includedData.Count == 0)
                 listingsItemParameters.includedData.Add(ListingsIncludedData.Summaries);
-            var queryParameters = listingsItemParameters.getParameters(AmazonCredential.Environment == Environments.Sandbox);
+            var queryParameters = listingsItemParameters.getParameters();
             CreateAuthorizedRequest(ListingsItemsApiUrls.GetListingItem(sellerId, sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
             var response = ExecuteRequest<Item>();
 
