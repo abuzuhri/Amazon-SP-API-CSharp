@@ -448,7 +448,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
 
-            private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01/items";
+            private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01";
             public static string ListCatalogItems
             {
                 get => $"{_resourceBaseUrl}/items";
@@ -457,9 +457,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/categories";
             }
-            public static string GetCatalogItem(string asin) => $"{_202012resourceBaseUrl}/{asin}";
+            public static string GetCatalogItem(string asin) => $"{_resourceBaseUrl}/items/{asin}";
+            public static string GetCatalogItem202012(string asin) => $"{_202012resourceBaseUrl}/items/{asin}";
 
-            public static string SearchCatalogItems => $"{_202012resourceBaseUrl}";
+            public static string SearchCatalogItems => $"{_202012resourceBaseUrl}/items";
         }
 
         protected class ListingsItemsApiUrls

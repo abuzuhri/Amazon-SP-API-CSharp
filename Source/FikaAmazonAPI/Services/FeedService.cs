@@ -169,7 +169,7 @@ namespace FikaAmazonAPI.Services
             {
                 FeedType = feedType.ToString(),
                 InputFeedDocumentId = feedCreate.FeedDocumentId,
-                MarketplaceIds = marketPlaceIds ?? new List<string> { MarketPlace.ID },
+                MarketplaceIds = marketPlaceIds ?? new List<string> { AmazonCredential.MarketPlace.ID },
                 FeedOptions = feedOptions
             };
 

@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.Services
         public InboundShipmentResult GetPreorderInfo(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetPreorderInfo(shipmentId), RestSharp.Method.GET, queryParameters);
 
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
         public ConfirmPreorderResult ConfirmPreorder(string shipmentId,DateTime NeedByDate)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
             queryParameters.Add(new KeyValuePair<string, string>("NeedByDate", NeedByDate.ToString("YYYY-MM-DD")));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmPreorder(shipmentId), RestSharp.Method.GET, queryParameters);
@@ -88,7 +88,7 @@ namespace FikaAmazonAPI.Services
         public GetTransportDetailsResult GetTransportDetails(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetTransportDetails(shipmentId), RestSharp.Method.GET, queryParameters);
 
@@ -110,7 +110,7 @@ namespace FikaAmazonAPI.Services
         public CommonTransportResult VoidTransport(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.VoidTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
@@ -122,7 +122,7 @@ namespace FikaAmazonAPI.Services
         public CommonTransportResult EstimateTransport(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.EstimateTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
@@ -134,7 +134,7 @@ namespace FikaAmazonAPI.Services
         public CommonTransportResult ConfirmTransport(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
@@ -156,7 +156,7 @@ namespace FikaAmazonAPI.Services
         public BillOfLadingDownloadURL GetBillOfLading(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetBillOfLading(shipmentId), RestSharp.Method.GET, queryParameters);
 
@@ -188,7 +188,7 @@ namespace FikaAmazonAPI.Services
         public GetShipmentItemsResult GetShipmentItemsByShipmentId(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlace.ID));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipmentItemsByShipmentId(shipmentId), RestSharp.Method.GET, queryParameters);
 

@@ -26,6 +26,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.ReportGeneration;
 using Microsoft.Extensions.Configuration;
+using FikaAmazonAPI.Parameter.CatalogItems;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -51,11 +52,15 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
-
-            var list3=amazonConnection.Financial.ListFinancialEvents(new ParameterListFinancialEvents()
+            var list3 = amazonConnection.Financial.ListFinancialEvents(new ParameterListFinancialEvents()
             {
-                PostedAfter=DateTime.UtcNow.AddDays(-15)
+                PostedAfter = DateTime.UtcNow.AddDays(-15)
             });
+
+
+            var item = amazonConnection.CatalogItem.GetCatalogItem("B00CZC5F0G");
+
+
 
             string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
 

@@ -49,6 +49,19 @@ namespace FikaAmazonAPI.Utils
             DELIVERED,
             CHECKED_IN,
         }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum IncludedData
+        {
+            identifiers,
+            images,
+            productTypes,
+            salesRanks,
+            summaries,
+            variations,
+            vendorDetails
+        }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum QueryType
         {

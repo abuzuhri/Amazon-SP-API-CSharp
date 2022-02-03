@@ -212,7 +212,7 @@ namespace FikaAmazonAPI.Services
             
             parameters.marketplaceIds = new MarketplaceIds();
             
-            parameters.marketplaceIds.Add(this.MarketPlace.ID);
+            parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
 
             if (reportOptions != null)
                 parameters.reportOptions = reportOptions;
@@ -257,7 +257,7 @@ namespace FikaAmazonAPI.Services
             parameters.reportTypes.Add(reportTypes);
 
             parameters.marketplaceIds = new MarketplaceIds();
-            parameters.marketplaceIds.Add(this.MarketPlace.ID);
+            parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
 
 
             if (createdSince.HasValue)
