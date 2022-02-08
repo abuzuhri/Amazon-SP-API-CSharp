@@ -470,7 +470,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             //https://stackoverflow.com/questions/575440/url-encoding-using-c-sharp/21771206#21771206
             public static string GetListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
 
-
             public static string PutListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
 
             public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";

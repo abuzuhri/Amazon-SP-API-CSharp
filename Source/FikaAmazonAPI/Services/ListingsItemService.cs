@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
-using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -15,26 +14,12 @@ namespace FikaAmazonAPI.Services
         {
         }
 
-        public Item GetListingsItem(string sellerId, string sku, ParameterGetListingsItem listingsItemParameters)
+        public Item GetListingsItem(ParameterGetListingsItem listingsItemParameters)
         {
-            if (string.IsNullOrEmpty(sellerId))
-                throw new ArgumentException($"'{nameof(sellerId)}' cannot be null or empty.", nameof(sellerId));
-
-            if (string.IsNullOrEmpty(sku))
-                throw new ArgumentException($"'{nameof(sku)}' cannot be null or empty.", nameof(sku));
-
-            if (listingsItemParameters.includedData is null)
-            {
-                listingsItemParameters.includedData = new List<ListingsIncludedData>();
-                listingsItemParameters.includedData.Add(ListingsIncludedData.Summaries);
-            }
-            if (listingsItemParameters.includedData.Count == 0)
-                listingsItemParameters.includedData.Add(ListingsIncludedData.Summaries);
-            var queryParameters = listingsItemParameters.getParameters(AmazonCredential.Environment == Environments.Sandbox);
-            CreateAuthorizedRequest(ListingsItemsApiUrls.GetListingItem(sellerId, sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
-            var response = ExecuteRequest<Item>();
-
-            return response;
+            listingsItemParameters.Check();
+            var queryParameters = listingsItemParameters.getParameters();
+            CreateAuthorizedRequest(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
+            return ExecuteRequest<Item>();
         }
 
         public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem)
