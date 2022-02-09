@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Order;
@@ -107,6 +108,20 @@ namespace FikaAmazonAPI.SampleCode
             parameterBasedPII.RestrictedDataTokenRequest = createRDT;
 
             var order = amazonConnection.Orders.GetOrderItems("404-7777403-8594716", parameterBasedPII);
+        }
+
+        public OrderList GetOrderListFulfillmentChannels()
+        {
+            var parameterOrderList = new ParameterOrderList
+            {
+                CreatedAfter = DateTime.UtcNow.AddHours(-24),
+                FulfillmentChannels = new List<FulfillmentChannels> { FulfillmentChannels.MFN },
+                OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped, OrderStatuses.Shipped, OrderStatuses.PartiallyShipped }
+            };
+
+            var orders = amazonConnection.Orders.GetOrders(parameterOrderList);
+
+            return orders;
         }
 
         public void GetOrderItemsBuyerInfo()

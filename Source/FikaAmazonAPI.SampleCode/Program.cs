@@ -52,6 +52,21 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            OrdersSample ordersSample = new OrdersSample(amazonConnection);
+            
+            ordersSample.GetOrderListFulfillmentChannels();
+
+
+
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+
             var list3 = amazonConnection.Financial.ListFinancialEvents(new ParameterListFinancialEvents()
             {
                 PostedAfter = DateTime.UtcNow.AddDays(-15)

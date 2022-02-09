@@ -275,11 +275,13 @@ namespace FikaAmazonAPI.Utils
             /// <summary>
             /// Fulfillment by Amazon
             /// </summary>
-            FBA,
+            [EnumMember(Value = "FBN")]
+            FBN,
             /// <summary>
             /// Fulfilled by the seller
             /// </summary>
-            SellerFulfilled
+            [EnumMember(Value = "MFN")]
+            MFN
         }
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ProcessingStatuses
