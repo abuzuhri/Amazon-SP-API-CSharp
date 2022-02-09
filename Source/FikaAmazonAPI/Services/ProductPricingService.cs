@@ -1,8 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing;
 using FikaAmazonAPI.Parameter.ProductPricing;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

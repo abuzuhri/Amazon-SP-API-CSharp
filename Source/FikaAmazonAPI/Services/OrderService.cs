@@ -1,14 +1,7 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Api.Orders;
-using FikaAmazonAPI.AmazonSpApiSDK.Clients;
-using FikaAmazonAPI.AmazonSpApiSDK.Models;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
-using FikaAmazonAPI.Utils;
-using RestSharp;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

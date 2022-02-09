@@ -1,9 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers;
 using FikaAmazonAPI.Parameter.Sales;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

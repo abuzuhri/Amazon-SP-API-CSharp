@@ -1,8 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping;
 using FikaAmazonAPI.Parameter;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

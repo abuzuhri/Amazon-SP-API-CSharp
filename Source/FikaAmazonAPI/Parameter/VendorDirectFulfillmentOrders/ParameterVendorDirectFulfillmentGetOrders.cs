@@ -1,7 +1,5 @@
 ﻿using FikaAmazonAPI.Search;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders.OrderDetails;
 using static FikaAmazonAPI.Utils.Constants;
 

@@ -1,10 +1,7 @@
-﻿using FikaAmazonAPI.Parameter;
-using FikaAmazonAPI.Parameter.ListingItem;
+﻿using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Utils
 {

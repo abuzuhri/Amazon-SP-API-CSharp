@@ -1,8 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Upload;
 using FikaAmazonAPI.Parameter.Upload;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

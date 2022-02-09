@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FikaAmazonAPI.NotificationMessages
+﻿namespace FikaAmazonAPI.NotificationMessages
 {
     /// <summary>
     /// An explanation about the purpose of this instance.

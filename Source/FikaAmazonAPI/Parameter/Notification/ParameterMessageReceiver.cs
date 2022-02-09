@@ -1,9 +1,4 @@
 ﻿using Amazon;
-using Amazon.SQS.Model;
-using FikaAmazonAPI.NotificationMessages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Parameter.Notification
 {

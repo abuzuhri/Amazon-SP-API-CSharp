@@ -1,7 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
-using FikaAmazonAPI.Utils;
-using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {

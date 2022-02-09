@@ -1,7 +1,6 @@
 ﻿using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Feed

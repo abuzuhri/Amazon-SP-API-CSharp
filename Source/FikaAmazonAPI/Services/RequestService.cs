@@ -1,8 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
@@ -10,7 +7,6 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp.Serializers;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using FikaAmazonAPI.Search;

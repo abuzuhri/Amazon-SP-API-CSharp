@@ -1,7 +1,5 @@
-﻿using Amazon;
-using Amazon.SecurityToken;
+﻿using Amazon.SecurityToken;
 using Amazon.SecurityToken.Model;
-using FikaAmazonAPI.AmazonSpApiSDK.Models;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.Utils;

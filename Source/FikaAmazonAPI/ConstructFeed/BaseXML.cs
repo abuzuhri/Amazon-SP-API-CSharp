@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace FikaAmazonAPI.ConstructFeed
+﻿namespace FikaAmazonAPI.ConstructFeed
 {
     /// <summary>
     /// Data here came from Amazon Base XSD
