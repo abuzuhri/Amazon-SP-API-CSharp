@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,10 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 {
     public class ParameterDeleteListingItem: ParameterBased
     {
-
         public bool Check()
         {
+            if (TestCase == Constants.TestCase400)
+                sku = "BadSKU";
             if (string.IsNullOrWhiteSpace(this.sellerId))
             {
                 throw new InvalidDataException("SellerId is a required property for ParameterDeleteListingItem and cannot be null");

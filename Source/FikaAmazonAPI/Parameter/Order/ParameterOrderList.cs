@@ -9,15 +9,10 @@ using System.Text;
 
 namespace FikaAmazonAPI.Parameter.Order
 {
-    public class ParameterOrderList :  ParameterBased, IParameterBasedPII, IHasParameterizedTestCase
+    public class ParameterOrderList :  ParameterBased, IParameterBasedPII
     {
-        public ParameterOrderList(string testCase = "")
+        public ParameterOrderList()
         {
-            if (!string.IsNullOrEmpty(testCase))
-            {
-                TestCase = testCase;
-                SandboxQueryParameters = Sandbox.SandboxQueryParameters<ParameterOrderList>(TestCase);
-            }
         }
 
         /// <summary>
@@ -93,8 +88,5 @@ namespace FikaAmazonAPI.Parameter.Order
         public string StoreChainStoreId { get; set; }
         public bool IsNeedRestrictedDataToken { get; set; }
         public CreateRestrictedDataTokenRequest RestrictedDataTokenRequest { get; set; }
-        public string TestCase { get; set; }
-
-        public Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters { get; }
     }
 }

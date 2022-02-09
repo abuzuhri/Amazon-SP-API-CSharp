@@ -158,12 +158,12 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 });
 
 var orders = amazonConnection.Orders.GetOrders
-        (
-         new FikaAmazonAPI.Parameter.Order.ParameterOrderList()
-             {
-              TestCase = Constants.TestCase200
-             }
-        );
+(
+     new FikaAmazonAPI.Parameter.Order.ParameterOrderList
+     {
+         TestCase = Constants.TestCase200
+     }
+);
 ```
 
 ### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Orders.cs).

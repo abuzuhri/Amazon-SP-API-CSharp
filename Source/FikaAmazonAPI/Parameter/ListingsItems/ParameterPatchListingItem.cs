@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,8 @@ namespace FikaAmazonAPI.Parameter.ListingItem
     {
         public bool Check()
         {
+            if (TestCase == Constants.TestCase400)
+                sku = "BadSKU";
             if (string.IsNullOrWhiteSpace(this.sellerId))
             {
                 throw new InvalidDataException("SellerId is a required property for ParameterPatchListingItem and cannot be null");

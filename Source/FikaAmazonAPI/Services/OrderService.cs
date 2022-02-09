@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.Services
                 searchOrderList.MarketplaceIds=new List<string>();
                 searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
-            var queryParameters = searchOrderList.getParameters(this.AmazonCredential.Environment == Constants.Environments.Sandbox);
+            var queryParameters = searchOrderList.getParameters();
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: searchOrderList);
             var response = ExecuteRequest<GetOrdersResponse>();
