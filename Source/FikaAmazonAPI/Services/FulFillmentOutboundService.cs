@@ -1,9 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound;
 using FikaAmazonAPI.Parameter.FulFillmentInbound;
 using FikaAmazonAPI.Parameter.FulFillmentOutbound;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

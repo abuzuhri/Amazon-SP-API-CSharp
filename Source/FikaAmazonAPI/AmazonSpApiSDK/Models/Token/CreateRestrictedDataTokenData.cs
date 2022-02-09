@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
+﻿namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 {
     public class CreateRestrictedDataTokenData
     {

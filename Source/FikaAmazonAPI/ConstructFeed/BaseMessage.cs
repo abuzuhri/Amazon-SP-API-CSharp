@@ -1,7 +1,4 @@
 ﻿using FikaAmazonAPI.ConstructFeed.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 using static FikaAmazonAPI.Utils.Constants;
 

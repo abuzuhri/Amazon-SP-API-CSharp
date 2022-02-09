@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace FikaAmazonAPI.ConstructFeed.Messages
+﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
     public partial class OfferMessage
     {

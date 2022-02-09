@@ -1,7 +1,4 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

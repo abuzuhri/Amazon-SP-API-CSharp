@@ -1,11 +1,6 @@
 ﻿using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Utils;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml.Serialization;
 
 namespace FikaAmazonAPI.ConstructFeed
 {

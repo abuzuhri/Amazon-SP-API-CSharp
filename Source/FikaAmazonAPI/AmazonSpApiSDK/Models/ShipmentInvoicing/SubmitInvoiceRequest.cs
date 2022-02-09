@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
+﻿namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
     public class SubmitInvoiceRequest
     {

@@ -1,8 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations;
-using System;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

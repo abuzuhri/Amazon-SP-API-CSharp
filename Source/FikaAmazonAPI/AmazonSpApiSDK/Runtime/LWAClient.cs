@@ -1,7 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using FikaAmazonAPI.Services;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.IO;

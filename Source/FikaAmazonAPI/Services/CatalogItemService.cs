@@ -1,9 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
 using FikaAmazonAPI.Parameter.CatalogItems;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

@@ -1,8 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders;
 using FikaAmazonAPI.Parameter.VendorDirectFulfillmentOrders;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {

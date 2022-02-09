@@ -1,8 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Search;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Parameter.Order
 {

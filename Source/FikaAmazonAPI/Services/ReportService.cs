@@ -1,6 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Search;
@@ -8,7 +6,6 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using static FikaAmazonAPI.Utils.Constants;
 

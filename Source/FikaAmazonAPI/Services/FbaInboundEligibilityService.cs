@@ -1,8 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound;
 using FikaAmazonAPI.Parameter.FbaInboundEligibility;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FikaAmazonAPI.Services
 {
