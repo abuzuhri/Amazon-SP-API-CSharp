@@ -1,5 +1,7 @@
 ﻿using FikaAmazonAPI.Services;
+using FikaAmazonAPI.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace FikaAmazonAPI
 {
@@ -78,6 +80,8 @@ namespace FikaAmazonAPI
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
         }
+
+        private Dictionary<RateLimitType, RateLimits> UsagePlansTimings { get; set; }
 
         public void Authenticate(AmazonCredential Credentials)
         {
