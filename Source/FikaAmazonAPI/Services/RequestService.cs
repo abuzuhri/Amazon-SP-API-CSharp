@@ -134,7 +134,7 @@ namespace FikaAmazonAPI.Services
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
 #if DEBUG
-                        Console.WriteLine("Throttle max retry count reached");
+                        Console.WriteLine("Throttle max try count reached");
 #endif
                         throw;
                     }
@@ -173,7 +173,7 @@ namespace FikaAmazonAPI.Services
                         {
                             AmazonCredential.UsagePlansTimings[rateLimitType].SetRateLimit(rate);
                         }
-                        var time = AmazonCredential.UsagePlansTimings[rateLimitType].NextRate(RateLimitType.Order);
+                        var time = AmazonCredential.UsagePlansTimings[rateLimitType].NextRate(rateLimitType);
                     }
                 }
             }
