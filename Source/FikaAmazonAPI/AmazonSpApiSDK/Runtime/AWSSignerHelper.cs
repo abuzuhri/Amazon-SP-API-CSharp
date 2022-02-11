@@ -184,8 +184,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             DateTime signingDate = DateHelper.GetUtcNow();
 
-            restRequest.AddHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
-            restRequest.AddHeader(HostHeaderName, host);
+            restRequest.AddOrUpdateHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
+            restRequest.AddOrUpdateHeader(HostHeaderName, host);
 
             return signingDate;
         }
@@ -237,7 +237,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             authorizationHeaderValueBuilder.AppendFormat(" {0}={1},", SignedHeadersSubHeaderName, signedHeaders);
             authorizationHeaderValueBuilder.AppendFormat(" {0}={1}", SignatureSubHeaderName, signature);
 
-            restRequest.AddHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
+            restRequest.AddOrUpdateHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
         }
 
         private static string BuildScope(DateTime signingDate, string region)

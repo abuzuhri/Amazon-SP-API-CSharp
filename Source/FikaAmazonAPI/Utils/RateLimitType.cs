@@ -6,6 +6,7 @@ namespace FikaAmazonAPI.Utils
 {
     public enum RateLimitType
     {
+        UNSET,
         Order,
         Feed
     }

@@ -69,9 +69,9 @@ namespace FikaAmazonAPI.Services
                 });
                 dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             }
-            
-            
-            restRequest.AddHeader("x-amz-security-token", dataToken.SessionToken);
+
+
+            restRequest.AddOrUpdateHeader(RequestService.SecurityTokenHeaderName, dataToken.SessionToken);
 
             return new AWSSigV4Signer(dataToken.AWSAuthenticationCredential)
                             .Sign(restRequest, host);

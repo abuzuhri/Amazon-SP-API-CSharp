@@ -81,8 +81,6 @@ namespace FikaAmazonAPI
             this.RefNumber = RefNumber;
         }
 
-        private Dictionary<RateLimitType, RateLimits> UsagePlansTimings { get; set; }
-
         public void Authenticate(AmazonCredential Credentials)
         {
             if (this.Credentials == default(AmazonCredential))
