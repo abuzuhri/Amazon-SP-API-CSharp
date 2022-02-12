@@ -52,6 +52,18 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            while (true)
+            {
+                var data = amazonConnection.ProductPricing.GetItemOffers(new FikaAmazonAPI.Parameter.ProductPricing.ParameterGetItemOffers()
+                {
+                    ItemCondition = ItemCondition.New,
+                    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                    Asin = "B0010WW4XS"
+                });
+            }
+            
+
+
             OrdersSample ordersSample = new OrdersSample(amazonConnection);
             
             ordersSample.GetOrderListFulfillmentChannels();

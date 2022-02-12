@@ -75,7 +75,7 @@ namespace FikaAmazonAPI.Services
             var parameter = parameterListFinancials.getParameters();
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
 
             list.Add(response.Payload.FinancialEvents);
             var nextToken = response.Payload.NextToken;
@@ -97,7 +97,7 @@ namespace FikaAmazonAPI.Services
 
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
             return response.Payload;
         }
 

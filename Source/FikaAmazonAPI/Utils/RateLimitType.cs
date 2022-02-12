@@ -152,5 +152,11 @@ namespace FikaAmazonAPI.Utils
 
         Solicitations_GetSolicitationActionsForOrder,
         Solicitations_CreateProductReviewAndSellerFeedbackSolicitation,
+
+        Token_CreateRestrictedDataToken,
+
+        VendorDirectFulfillmentOrdersV1_GetOrders,
+        VendorDirectFulfillmentOrdersV1_GetOrder,
+        VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement,
     }
 }

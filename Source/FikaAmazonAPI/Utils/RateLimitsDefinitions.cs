@@ -152,6 +152,12 @@ namespace FikaAmazonAPI.Utils
             { RateLimitType.Solicitations_GetSolicitationActionsForOrder,                   new RateLimits(1.0M, 5) },
             { RateLimitType.Solicitations_CreateProductReviewAndSellerFeedbackSolicitation, new RateLimits(1.0M, 5) },
 
+            { RateLimitType.Token_CreateRestrictedDataToken, new RateLimits(1.0M, 10) },
+
+            { RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrders,      new RateLimits(10.0M, 10) },
+            { RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrder,       new RateLimits(10.0M, 10) },
+            { RateLimitType.VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement, new RateLimits(10.0M, 10) },
+
         };
     }
 }

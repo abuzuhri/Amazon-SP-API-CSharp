@@ -7,9 +7,9 @@
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.44</Version>
-    <AssemblyVersion>1.0.44</AssemblyVersion>
-    <FileVersion>1.0.44</FileVersion>
+    <Version>1.0.45.1-alpha</Version>
+    <AssemblyVersion>1.0.45</AssemblyVersion>
+    <FileVersion>1.0.45-alpha</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
