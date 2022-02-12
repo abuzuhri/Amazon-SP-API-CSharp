@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
@@ -14,7 +15,7 @@ namespace FikaAmazonAPI.Services
             listingsItemParameters.Check();
             var queryParameters = listingsItemParameters.getParameters();
             CreateAuthorizedRequest(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
-            return ExecuteRequest<Item>();
+            return ExecuteRequest<Item>(RateLimitType.ListingsItem_GetListingsItem);
         }
 
         public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem)
@@ -22,7 +23,7 @@ namespace FikaAmazonAPI.Services
             parameterPutListingItem.Check();
             var queryParameters = parameterPutListingItem.getParameters();
             CreateAuthorizedRequest(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.PUT, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>();
+            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PutListingsItem);
             return response;
         }
 
@@ -31,7 +32,7 @@ namespace FikaAmazonAPI.Services
             parameterDeleteListingItem.Check();
             var queryParameters = parameterDeleteListingItem.getParameters();
             CreateAuthorizedRequest(ListingsItemsApiUrls.DeleteListingItem(parameterDeleteListingItem.sellerId, parameterDeleteListingItem.sku), RestSharp.Method.DELETE, queryParameters: queryParameters);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>();
+            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_DeleteListingsItem);
             return response;
         }
 
@@ -40,7 +41,7 @@ namespace FikaAmazonAPI.Services
             parameterPatchListingItem.Check();
             var queryParameters = parameterPatchListingItem.getParameters();
             CreateAuthorizedRequest(ListingsItemsApiUrls.PatchListingItem(parameterPatchListingItem.sellerId, parameterPatchListingItem.sku), RestSharp.Method.PATCH, queryParameters: queryParameters, postJsonObj: parameterPatchListingItem.listingsItemPatchRequest);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>();
+            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PatchListingsItem);
             return response;
         }
     }

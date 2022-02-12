@@ -32,7 +32,7 @@ namespace FikaAmazonAPI.Services
             var parameters = parameterReportList.getParameters();
 
             CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
-            var response = ExecuteRequest<GetReportsResponseV00>();
+            var response = ExecuteRequest<GetReportsResponseV00>(RateLimitType.Report_GetReports);
             parameterReportList.nextToken = response.NextToken;
             var list = response.Reports;
 
@@ -49,7 +49,7 @@ namespace FikaAmazonAPI.Services
         {
 
             CreateAuthorizedRequest(ReportApiUrls.GetReport(reportId), RestSharp.Method.GET);
-            var response = ExecuteRequest<Report>();
+            var response = ExecuteRequest<Report>(RateLimitType.Report_GetReport);
             if (response != null)
                 return response;
             return null;
@@ -58,7 +58,7 @@ namespace FikaAmazonAPI.Services
         {
 
             CreateAuthorizedRequest(ReportApiUrls.CancelReport(reportId), RestSharp.Method.DELETE);
-            var response = ExecuteRequest<CancelReportResponse>();
+            var response = ExecuteRequest<CancelReportResponse>(RateLimitType.Report_CancelReport);
             if (response != null && response.Errors != null)
                 return false;
             return true;
@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.Services
         {
             var parameters = parametersSchedules.getParameters();
             CreateAuthorizedRequest(ReportApiUrls.GetReportSchedules, RestSharp.Method.GET, parameters);
-            var response = ExecuteRequest<GetReportSchedulesResponseV00>();
+            var response = ExecuteRequest<GetReportSchedulesResponseV00>(RateLimitType.Report_GetReportSchedules);
             if (response != null && response.ReportSchedules != null)
                 return response.ReportSchedules;
             return null;
@@ -81,14 +81,14 @@ namespace FikaAmazonAPI.Services
             var parameters = parameterReportListNew.getParameters();
 
             CreateAuthorizedRequest(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
-            var response = ExecuteRequest<GetReportsResponseV00>();
+            var response = ExecuteRequest<GetReportsResponseV00>(RateLimitType.Report_GetReports);
             return response;
         }
 
         public string CreateReport(ParameterCreateReportSpecification createReportSpecification)
         {
             CreateAuthorizedRequest(ReportApiUrls.CreateReport, RestSharp.Method.POST, null, createReportSpecification);
-            var response = ExecuteRequest<AmazonSpApiSDK.Models.Reports.CreateReportResult>();
+            var response = ExecuteRequest<AmazonSpApiSDK.Models.Reports.CreateReportResult>(RateLimitType.Report_CreateReport);
 
             if (response == null)
                 return null;
@@ -100,7 +100,7 @@ namespace FikaAmazonAPI.Services
         public string CreateReportSchedule(ParameterCreateReportScheduleSpecification createReportScheduleSpecification)
         {
             CreateAuthorizedRequest(ReportApiUrls.CreateReportSchedule, RestSharp.Method.POST, null, createReportScheduleSpecification);
-            var response = ExecuteRequest<CreateReportScheduleResult>();
+            var response = ExecuteRequest<CreateReportScheduleResult>(RateLimitType.Report_CreateReportSchedule);
 
             if (response == null)
                 return null;
@@ -113,7 +113,7 @@ namespace FikaAmazonAPI.Services
         {
 
             CreateAuthorizedRequest(ReportApiUrls.GetReportSchedule(reportScheduleId), RestSharp.Method.GET);
-            var response = ExecuteRequest<ReportSchedule>();
+            var response = ExecuteRequest<ReportSchedule>(RateLimitType.Report_GetReportSchedules);
             if (response != null)
                 return response;
             return null;
@@ -122,7 +122,7 @@ namespace FikaAmazonAPI.Services
         public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII ParameterBasedPII = null)
         {
             CreateAuthorizedRequest(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET,parameter: ParameterBasedPII);
-            var response = ExecuteRequest<ReportDocument>();
+            var response = ExecuteRequest<ReportDocument>(RateLimitType.Report_GetReportDocument);
             if (response != null)
                 return response;
             return null;
@@ -193,7 +193,7 @@ namespace FikaAmazonAPI.Services
         {
 
             CreateAuthorizedRequest(ReportApiUrls.CancelReportSchedule(reportScheduleId), RestSharp.Method.DELETE);
-            var response = ExecuteRequest<CancelReportScheduleResponse>();
+            var response = ExecuteRequest<CancelReportScheduleResponse>(RateLimitType.Report_CancelReportSchedule);
             if (response != null && response.Errors != null)
                 return false;
             return true;

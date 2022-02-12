@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Upload;
 using FikaAmazonAPI.Parameter.Upload;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
@@ -14,7 +15,7 @@ namespace FikaAmazonAPI.Services
         {
             
             CreateAuthorizedRequest(UploadApiUrls.CreateUploadDestinationForResource(parameterObj.resource), RestSharp.Method.POST,postJsonObj: parameterObj);
-            var response = ExecuteRequest<CreateUploadDestinationResponse>();
+            var response = ExecuteRequest<CreateUploadDestinationResponse>(RateLimitType.Upload_CreateUploadDestinationForResource);
             return response.Payload;
         }
     }

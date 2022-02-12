@@ -1,5 +1,6 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
 using FikaAmazonAPI.Parameter.FbaInventory;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -19,7 +20,7 @@ namespace FikaAmazonAPI.Services
             var param = ParameterGetInventorySummaries.getParameters();
 
             CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetInventorySummariesResponse>();
+            var response = ExecuteRequest<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
             list.Add(response.Payload.InventorySummaries);
             if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
@@ -40,7 +41,7 @@ namespace FikaAmazonAPI.Services
             var param = parameterGetInventorySummaries.getParameters();
 
             CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetInventorySummariesResponse>();
+            var response = ExecuteRequest<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
 
             return response;
         }

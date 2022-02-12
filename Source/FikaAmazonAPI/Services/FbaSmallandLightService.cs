@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -19,7 +20,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.GET);
 
-            var response = ExecuteRequest<SmallAndLightEnrollment>();
+            var response = ExecuteRequest<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU);
 
             return response;
 
@@ -32,7 +33,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.PutSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.PUT, queryParameters);
 
-            var response = ExecuteRequest<SmallAndLightEnrollment>();
+            var response = ExecuteRequest<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU);
 
             return response;
 
@@ -45,7 +46,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.DeleteSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.DELETE, queryParameters);
 
-            var response = ExecuteRequest<object>();
+            var response = ExecuteRequest<object>(RateLimitType.FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU);
 
             return true;
 
@@ -60,7 +61,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightEligibilityBySellerSKU(sellerSKU), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<SmallAndLightEligibility>();
+            var response = ExecuteRequest<SmallAndLightEligibility>(RateLimitType.FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU);
 
             return response;
 
@@ -72,7 +73,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(FBASmallAndLightApiUrls.GetSmallAndLightFeePreview, RestSharp.Method.POST,postJsonObj: smallAndLightFeePreviewRequest);
 
-            var response = ExecuteRequest<SmallAndLightFeePreviews>();
+            var response = ExecuteRequest<SmallAndLightFeePreviews>(RateLimitType.FbaSmallandLight_GetSmallAndLightFeePreview);
             if (response != null && response.Data != null)
                 return response.Data;
 
