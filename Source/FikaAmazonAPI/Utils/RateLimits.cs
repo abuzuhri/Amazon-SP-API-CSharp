@@ -31,16 +31,17 @@ namespace FikaAmazonAPI.Utils
 //#if DEBUG
             var nextRequestsSent = RequestsSent + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
-            string output = $"[RateLimits ,{rateLimitType,10}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
+            string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
             Console.WriteLine(output);
 //#endif
 
             if (RequestsSent >= Burst)
             {
+                var LastRequestTime = LastRequest;
                 while (true)
                 {
-                    LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
-                    if (LastRequest > DateTime.UtcNow)
+                    LastRequestTime = LastRequestTime.AddMilliseconds(ratePeriodMs);
+                    if (LastRequestTime > DateTime.UtcNow)
                         break;
                     else
                         RequestsSent -= 1;

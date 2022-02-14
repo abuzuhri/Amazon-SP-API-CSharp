@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.Services
                 var totalDays = (parameterReportList.createdSince.Value - DateTime.UtcNow).TotalDays;
                 if (totalDays > 90)
                 {
-                    throw new AmazonInvalidInputException("Amazon api not accepting createdSince more than 90 days ,"+
+                    throw new AmazonInvalidInputException("Amazon api not accepting createdSince more than 90 days ," +
                         "The earliest report creation date and time for reports to include in the response, in ISO 8601 date time format. The default is 90 days ago. Reports are retained for a maximum of 90 days. https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2021-06-30.md#parameters");
                 }
 
@@ -121,7 +121,7 @@ namespace FikaAmazonAPI.Services
 
         public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET,parameter: ParameterBasedPII);
+            CreateAuthorizedRequest(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET, parameter: ParameterBasedPII);
             var response = ExecuteRequest<ReportDocument>(RateLimitType.Report_GetReportDocument);
             if (response != null)
                 return response;
@@ -206,9 +206,9 @@ namespace FikaAmazonAPI.Services
 
             var parameters = new ParameterCreateReportSpecification();
             parameters.reportType = reportTypes;
-            
+
             parameters.marketplaceIds = new MarketplaceIds();
-            
+
             parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
 
             if (reportOptions != null)
@@ -239,7 +239,7 @@ namespace FikaAmazonAPI.Services
                 {
                     return null;
                 }
-                else Thread.Sleep(1000 * 60);
+                else Thread.Sleep(500);
             }
 
             return filePath;
@@ -264,7 +264,7 @@ namespace FikaAmazonAPI.Services
 
             var reports = GetReports(parameters);
 
-            var reportsPath =new List<string>();
+            var reportsPath = new List<string>();
 
 
             foreach (var reportData in reports)
@@ -273,7 +273,7 @@ namespace FikaAmazonAPI.Services
                 {
                     var filePath = GetReportFile(reportData.ReportDocumentId);
                     reportsPath.Add(filePath);
-                   
+
                 }
             }
 

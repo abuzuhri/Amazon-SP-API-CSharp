@@ -1,32 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using FikaAmazonAPI.AmazonSpApiSDK.Api.Sellers;
-using FikaAmazonAPI.AmazonSpApiSDK.Clients;
-using FikaAmazonAPI;
-using FikaAmazonAPI.ConstructFeed;
+﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
-using FikaAmazonAPI.Parameter;
-using FikaAmazonAPI.Parameter.Notification;
-using FikaAmazonAPI.Parameter.Order;
-using FikaAmazonAPI.Parameter.Report;
-using FikaAmazonAPI.Utils;
-using static FikaAmazonAPI.ConstructFeed.BaseXML;
-using static FikaAmazonAPI.Utils.Constants;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using FikaAmazonAPI.AmazonSpApiSDK.Services;
-using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.RestrictedResource;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using FikaAmazonAPI.Parameter.Finance;
+using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.ReportGeneration;
+using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
-using FikaAmazonAPI.Parameter.CatalogItems;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -52,6 +31,23 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            var dataaa = amazonConnection.FbaInventory.GetInventorySummaries(new Parameter.FbaInventory.ParameterGetInventorySummaries
+            {
+                granularityType = AmazonSpApiSDK.Models.FbaInventory.Granularity.GranularityTypeEnum.Marketplace,
+                granularityId = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value
+            }); ;
+
+            ReportManager reportManager = new ReportManager(amazonConnection);
+            var products = reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
+            var inventoryAging = reportManager.GetInventoryAging(); //GET_FBA_INVENTORY_AGED_DATA
+            var ordersByDate = reportManager.GetOrdersByOrderDate(90); //GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL
+            var ordersByLastUpdate = reportManager.GetOrdersByLastUpdate(90); //GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL
+            var settlementOrder = reportManager.GetSettlementOrder(90); //GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2
+            var returnMFNOrder = reportManager.GetReturnMFNOrder(90); //GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE
+            var returnFBAOrder = reportManager.GetReturnFBAOrder(90); //GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA
+            var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_REIMBURSEMENTS_DATA
+            var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
+
             while (true)
             {
                 var data = amazonConnection.ProductPricing.GetItemOffers(new FikaAmazonAPI.Parameter.ProductPricing.ParameterGetItemOffers()
@@ -61,11 +57,11 @@ namespace FikaAmazonAPI.SampleCode
                     Asin = "B0010WW4XS"
                 });
             }
-            
+
 
 
             OrdersSample ordersSample = new OrdersSample(amazonConnection);
-            
+
             ordersSample.GetOrderListFulfillmentChannels();
 
 
@@ -112,16 +108,6 @@ namespace FikaAmazonAPI.SampleCode
             }
 
 
-            ReportManager reportManager = new ReportManager(amazonConnection);
-            var products=reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
-            var inventoryAging = reportManager.GetInventoryAging(); //GET_FBA_INVENTORY_AGED_DATA
-            var ordersByDate = reportManager.GetOrdersByOrderDate(90); //GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL
-            var ordersByLastUpdate = reportManager.GetOrdersByLastUpdate(90); //GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL
-            var settlementOrder = reportManager.GetSettlementOrder(90); //GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2
-            var returnMFNOrder = reportManager.GetReturnMFNOrder(90); //GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE
-            var returnFBAOrder = reportManager.GetReturnFBAOrder(90); //GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA
-            var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_REIMBURSEMENTS_DATA
-            var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 
 
             var options = new AmazonSpApiSDK.Models.Feeds.FeedOptions();
@@ -172,7 +158,7 @@ namespace FikaAmazonAPI.SampleCode
 
 
             Console.ReadLine();
-            
+
         }
 
 
