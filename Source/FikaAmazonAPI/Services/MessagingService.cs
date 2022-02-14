@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -18,7 +19,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.GetMessagingActionsForOrder(amazonOrderId, AmazonCredential.MarketPlace.ID), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<GetMessagingActionsForOrderResponse>();
+            var response = ExecuteRequest<GetMessagingActionsForOrderResponse>(RateLimitType.Messaging_GetMessagingActionsForOrder);
 
             return response;
 
@@ -30,7 +31,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.ConfirmCustomizationDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmCustomizationDetailsRequest);
 
-            var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>(RateLimitType.Messaging_ConfirmCustomizationDetails);
             if (response != null)
                 return true;
             return false;
@@ -43,7 +44,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmDeliveryDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmCustomizationDetailsRequest);
 
-            var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmCustomizationDetailsResponse>(RateLimitType.Messaging_CreateConfirmDeliveryDetails);
             if (response != null)
                 return true;
             return false;
@@ -57,7 +58,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.CreateLegalDisclosure(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createLegalDisclosureRequest);
 
-            var response = ExecuteRequest<CreateLegalDisclosureResponse>();
+            var response = ExecuteRequest<CreateLegalDisclosureResponse>(RateLimitType.Messaging_CreateLegalDisclosure);
             if (response != null)
                 return true;
             return false;
@@ -70,7 +71,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.CreateNegativeFeedbackRemoval(amazonOrderId), RestSharp.Method.POST, queryParameters);
 
-            var response = ExecuteRequest<CreateNegativeFeedbackRemovalResponse>();
+            var response = ExecuteRequest<CreateNegativeFeedbackRemovalResponse>(RateLimitType.Messaging_CreateNegativeFeedbackRemoval);
             if (response != null)
                 return true;
             return false;
@@ -83,7 +84,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmOrderDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmOrderDetailsRequest);
 
-            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>(RateLimitType.Messaging_CreateConfirmOrderDetails);
             if (response != null)
                 return true;
             return false;
@@ -96,7 +97,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.CreateConfirmServiceDetails(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createConfirmServiceDetailsRequest);
 
-            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>(RateLimitType.Messaging_CreateConfirmServiceDetails);
             if (response != null)
                 return true;
             return false;
@@ -108,7 +109,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
             CreateAuthorizedRequest(MessaginApiUrls.CreateAmazonMotors(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createAmazonMotorsRequest);
 
-            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>(RateLimitType.Messaging_CreateAmazonMotors);
             if (response != null)
                 return true;
             return false;
@@ -119,7 +120,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
             CreateAuthorizedRequest(MessaginApiUrls.CreateWarranty(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createWarrantyRequest);
 
-            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>(RateLimitType.Messaging_CreateWarranty);
             if (response != null)
                 return true;
             return false;
@@ -131,7 +132,7 @@ namespace FikaAmazonAPI.Services
 
             CreateAuthorizedRequest(MessaginApiUrls.GetAttributes(amazonOrderId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<GetAttributesResponse>();
+            var response = ExecuteRequest<GetAttributesResponse>(RateLimitType.Messaging_GetAttributes);
 
             return response;
 
@@ -142,7 +143,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
             CreateAuthorizedRequest(MessaginApiUrls.CreateDigitalAccessKey(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createDigitalAccessKeyRequest);
 
-            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>();
+            var response = ExecuteRequest<CreateConfirmOrderDetailsResponse>(RateLimitType.Messaging_CreateDigitalAccessKey);
             if (response != null)
                 return true;
             return false;
@@ -153,7 +154,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
             CreateAuthorizedRequest(MessaginApiUrls.CreateUnexpectedProblem(amazonOrderId), RestSharp.Method.POST, queryParameters, postJsonObj: createUnexpectedProblemRequest);
 
-            var response = ExecuteRequest<CreateUnexpectedProblemResponse>();
+            var response = ExecuteRequest<CreateUnexpectedProblemResponse>(RateLimitType.Messaging_CreateUnexpectedProblem);
             if (response != null)
                 return true;
             return false;

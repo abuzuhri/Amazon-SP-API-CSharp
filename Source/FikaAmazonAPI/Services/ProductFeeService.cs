@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
@@ -15,7 +16,7 @@ namespace FikaAmazonAPI.Services
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
 
             CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST,postJsonObj: Payload);
-            var response = ExecuteRequest<GetMyFeesEstimateResponse>();
+            var response = ExecuteRequest<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForSKU);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
             return null;
@@ -25,7 +26,7 @@ namespace FikaAmazonAPI.Services
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
         
             CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: Payload);
-            var response = ExecuteRequest<GetMyFeesEstimateResponse>();
+            var response = ExecuteRequest<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForASIN);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
             return null;

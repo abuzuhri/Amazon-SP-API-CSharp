@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
 using FikaAmazonAPI.Parameter.Finance;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -19,7 +20,7 @@ namespace FikaAmazonAPI.Services
             var parameter = parameterListFinancialEventGroup.getParameters();
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventGroups , RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListFinancialEventGroupsResponse>();
+            var response = ExecuteRequest<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
 
             list.AddRange(response.Payload.FinancialEventGroupList);
             var nextToken = response.Payload.NextToken;
@@ -41,7 +42,7 @@ namespace FikaAmazonAPI.Services
 
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventGroups, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<ListFinancialEventGroupsResponse>();
+            var response = ExecuteRequest<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
             return response.Payload;
         }
 
@@ -49,21 +50,21 @@ namespace FikaAmazonAPI.Services
         public FinancialEvents ListFinancialEventsByGroupId(string eventGroupId)
         {
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByGroupId);
             return response.Payload.FinancialEvents;
         }
 
         public FinancialEvents ListFinancialEventsByOrderId(string orderId)
         {
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventsByOrderId(orderId), RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByOrderId);
             return response.Payload.FinancialEvents;
         }
 
         public FinancialEvents ListFinancialEvents()
         {
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
             return response.Payload.FinancialEvents;
         }
 
@@ -74,7 +75,7 @@ namespace FikaAmazonAPI.Services
             var parameter = parameterListFinancials.getParameters();
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
 
             list.Add(response.Payload.FinancialEvents);
             var nextToken = response.Payload.NextToken;
@@ -96,7 +97,7 @@ namespace FikaAmazonAPI.Services
 
 
             CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<ListFinancialEventsResponse>();
+            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
             return response.Payload;
         }
 

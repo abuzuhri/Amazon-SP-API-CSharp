@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Utils;
+using System.Collections.Generic;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -17,7 +18,7 @@ namespace FikaAmazonAPI
         private CacheTokenData CacheTokenData { get; set; }
         public bool IsActiveLimitRate { get; set; } = true;
         public Environments Environment { get; set; } = Environments.Production;
-        
+        public int MaxThrottledRetryCount { get; set; } = 3;
 
 
         public AmazonCredential()
@@ -51,5 +52,7 @@ namespace FikaAmazonAPI
         {
             CacheTokenData.SetAWSAuthenticationTokenData(tokenData);
         }
+        internal Dictionary<RateLimitType, RateLimits> UsagePlansTimings { get; set; } = RateLimitsDefinitions.RateLimitsTime;
+
     }
 }

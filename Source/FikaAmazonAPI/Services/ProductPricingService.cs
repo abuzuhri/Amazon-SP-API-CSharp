@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing;
 using FikaAmazonAPI.Parameter.ProductPricing;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -17,7 +18,7 @@ namespace FikaAmazonAPI.Services
             var param = parameterGetPricing.getParameters();
 
             CreateAuthorizedRequest(ProductPricingApiUrls.GetPricing, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetPricingResponse>();
+            var response = ExecuteRequest<GetPricingResponse>(RateLimitType.ProductPricing_GetPricing);
             if (response != null && response.Payload!=null)
                 return response.Payload;
             return null;
@@ -28,7 +29,7 @@ namespace FikaAmazonAPI.Services
             var param = parameterGetCompetitivePricing.getParameters();
 
             CreateAuthorizedRequest(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetPricingResponse>();
+            var response = ExecuteRequest<GetPricingResponse>(RateLimitType.ProductPricing_GetCompetitivePricing);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
@@ -39,7 +40,7 @@ namespace FikaAmazonAPI.Services
             var param = parameterGetListingOffers.getParameters();
 
             CreateAuthorizedRequest(ProductPricingApiUrls.GetListingOffers(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetOffersResponse>();
+            var response = ExecuteRequest<GetOffersResponse>(RateLimitType.ProductPricing_GetListingOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
@@ -50,7 +51,7 @@ namespace FikaAmazonAPI.Services
             var param = parameterGetItemOffers.getParameters();
 
             CreateAuthorizedRequest(ProductPricingApiUrls.GetItemOffers(parameterGetItemOffers.Asin), RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetOffersResponse>();
+            var response = ExecuteRequest<GetOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

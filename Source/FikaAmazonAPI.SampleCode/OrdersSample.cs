@@ -114,9 +114,9 @@ namespace FikaAmazonAPI.SampleCode
         {
             var parameterOrderList = new ParameterOrderList
             {
-                CreatedAfter = DateTime.UtcNow.AddHours(-24),
-                FulfillmentChannels = new List<FulfillmentChannels> { FulfillmentChannels.MFN },
-                OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped, OrderStatuses.Shipped, OrderStatuses.PartiallyShipped }
+                CreatedAfter = DateTime.UtcNow.AddDays(-24),
+                //FulfillmentChannels = new List<FulfillmentChannels> { FulfillmentChannels.AFN },
+                OrderStatuses = new List<OrderStatuses> { OrderStatuses.Shipped}
             };
 
             var orders = amazonConnection.Orders.GetOrders(parameterOrderList);

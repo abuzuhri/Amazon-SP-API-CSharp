@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
 using FikaAmazonAPI.Parameter.CatalogItems;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.IO;
 
@@ -33,7 +34,7 @@ namespace FikaAmazonAPI.Services
             var parameter = parameterListCatalogItems.getParameters();
 
             CreateAuthorizedRequest(CategoryApiUrls.ListCatalogItems, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListCatalogItemsResponse>();
+            var response = ExecuteRequest<ListCatalogItemsResponse>(RateLimitType.CatalogItems_ListCatalogItems);
 
             if (response != null && response.Payload != null && response.Payload.Items != null && response.Payload.Items.Count > 0)
                 list.AddRange(response.Payload.Items);
@@ -52,7 +53,7 @@ namespace FikaAmazonAPI.Services
             param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
             CreateAuthorizedRequest(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetCatalogItemResponse>();
+            var response = ExecuteRequest<GetCatalogItemResponse>(RateLimitType.CatalogItems_GetCatalogItem);
 
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -92,7 +93,7 @@ namespace FikaAmazonAPI.Services
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
 
             CreateAuthorizedRequest(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<ListCatalogCategoriesResponse>();
+            var response = ExecuteRequest<ListCatalogCategoriesResponse>(RateLimitType.CatalogItems_ListCatalogCategories);
 
             if (response != null && response.Payload != null)
                 return response.Payload;

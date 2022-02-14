@@ -26,26 +26,26 @@ namespace FikaAmazonAPI.Services
             var queryParameters = searchOrderList.getParameters();
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters,parameter: searchOrderList);
-            var response = ExecuteRequest<GetOrdersResponse>();
+            var response = ExecuteRequest<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
             while (!string.IsNullOrEmpty(nextToken))
             {
-                var orderPayload = GetByNextToken(nextToken, searchOrderList.MarketplaceIds);
+                var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList.MarketplaceIds);
                 orderList.AddRange(orderPayload.Orders);
                 nextToken = orderPayload.NextToken;
             }
             return orderList;
         }
 
-        private OrdersList GetByNextToken(string nextToken, IList<string> marketplaceIds)
+        private OrdersList GetGetOrdersByNextToken(string nextToken, IList<string> marketplaceIds)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", marketplaceIds)));
 
             CreateAuthorizedRequest(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<GetOrdersResponse>();
+            var response = ExecuteRequest<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             return response.Payload;
         }
 
@@ -54,7 +54,7 @@ namespace FikaAmazonAPI.Services
         public Order GetOrder(ParameterGetOrder parameter)
         {
             CreateAuthorizedRequest(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.GET,parameter: parameter);
-            var response = ExecuteRequest<GetOrderResponse>();
+            var response = ExecuteRequest<GetOrderResponse>(Utils.RateLimitType.Order_GetOrder);
             if (response != null && response.Payload != null)
                 return response.Payload;
             else return null;
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
         {
             var orderItemList = new OrderItemList();
             CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET,parameter: ParameterBasedPII);
-            var response = ExecuteRequest<GetOrderItemsResponse>();
+            var response = ExecuteRequest<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems);
             var nextToken = response.Payload.NextToken;
             orderItemList.AddRange(response.Payload.OrderItems);
             while (!string.IsNullOrEmpty(nextToken))
@@ -83,28 +83,28 @@ namespace FikaAmazonAPI.Services
 
 
             CreateAuthorizedRequest(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<GetOrderItemsResponse>();
+            var response = ExecuteRequest<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems);
             return response.Payload;
         }
 
         public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
             CreateAuthorizedRequest(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<GetOrderBuyerInfoResponse>();
+            var response = ExecuteRequest<GetOrderBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderBuyerInfo);
             return response.Payload;
         }
         
         public OrderItemsBuyerInfoList GetOrderItemsBuyerInfo(string orderId)
         {
             CreateAuthorizedRequest(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.GET);
-            var response = ExecuteRequest<GetOrderItemsBuyerInfoResponse>();
+            var response = ExecuteRequest<GetOrderItemsBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderItemsBuyerInfo);
             return response.Payload;
         }
 
         public Address GetOrderAddress(string orderId)
         {
             CreateAuthorizedRequest(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.GET);
-            var response = ExecuteRequest<GetOrderAddressResponse>();
+            var response = ExecuteRequest<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress);
             return response.Payload.ShippingAddress;
         }
     }

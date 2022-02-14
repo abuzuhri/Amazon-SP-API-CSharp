@@ -1,5 +1,7 @@
 ﻿using FikaAmazonAPI.Services;
+using FikaAmazonAPI.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace FikaAmazonAPI
 {
