@@ -273,8 +273,8 @@ namespace FikaAmazonAPI.Utils
             /// <summary>
             /// Fulfillment by Amazon
             /// </summary>
-            [EnumMember(Value = "FBN")]
-            FBN,
+            [EnumMember(Value = "AFN")]
+            AFN,
             /// <summary>
             /// Fulfilled by the seller
             /// </summary>

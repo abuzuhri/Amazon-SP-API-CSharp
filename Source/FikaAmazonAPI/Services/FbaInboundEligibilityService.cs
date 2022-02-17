@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound;
 using FikaAmazonAPI.Parameter.FbaInboundEligibility;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
@@ -14,7 +15,7 @@ namespace FikaAmazonAPI.Services
         {
             var parameter = parameterGetItemEligibilityPreview.getParameters();
             CreateAuthorizedRequest(FBAInboundEligibiltyApiUrls.GetItemEligibilityPreview, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<GetItemEligibilityPreviewResponse>();
+            var response = ExecuteRequest<GetItemEligibilityPreviewResponse>(RateLimitType.FBAInboundEligibility_GetItemEligibilityPreview);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

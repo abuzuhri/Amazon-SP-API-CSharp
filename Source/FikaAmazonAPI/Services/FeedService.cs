@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.Services
             var parameter = parameterGetFeed.getParameters();
 
             CreateAuthorizedRequest(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<GetFeedsResponseV00>();
+            var response = ExecuteRequest<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
 
             list.AddRange(response.Feeds);
             var nextToken = response.NextToken;
@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.Services
 
 
             CreateAuthorizedRequest(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<GetFeedsResponseV00>();
+            var response = ExecuteRequest<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
             return response;
         }
 
@@ -60,14 +60,14 @@ namespace FikaAmazonAPI.Services
         public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification)
         {
             CreateAuthorizedRequest(FeedsApiUrls.CreateFeed, RestSharp.Method.POST, postJsonObj: createFeedSpecification);
-            var response = ExecuteRequest<CreateFeedResult>();
+            var response = ExecuteRequest<CreateFeedResult>(RateLimitType.Feed_CreateFeed);
 
             return response;
         }
         public Feed GetFeed(string feedId)
         {
             CreateAuthorizedRequest(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.GET);
-            var response = ExecuteRequest<Feed>();
+            var response = ExecuteRequest<Feed>(RateLimitType.Feed_CreateFeed);
             if (response != null)
                 return response;
             return null;
@@ -75,7 +75,7 @@ namespace FikaAmazonAPI.Services
         public Feed CancelFeed(string feedId)
         {
             CreateAuthorizedRequest(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.DELETE);
-            var response = ExecuteRequest<Feed>();
+            var response = ExecuteRequest<Feed>(RateLimitType.Feed_CancelFeed);
             if (response != null)
                 return response;
             return null;
@@ -84,7 +84,7 @@ namespace FikaAmazonAPI.Services
         public FeedDocument GetFeedDocument(string feedDocumentId)
         {
             CreateAuthorizedRequest(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.GET);
-            var response = ExecuteRequest<FeedDocument>();
+            var response = ExecuteRequest<FeedDocument>(RateLimitType.Feed_GetFeedDocument);
             if (response != null)
                 return response;
             return null;
@@ -131,7 +131,7 @@ namespace FikaAmazonAPI.Services
             var createFeedDocumentSpecification = new AmazonSpApiSDK.Models.Feeds.CreateFeedDocumentSpecification(contxt);
 
             CreateAuthorizedRequest(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.POST, postJsonObj: createFeedDocumentSpecification);
-            var response = ExecuteRequest<CreateFeedDocumentResult>();
+            var response = ExecuteRequest<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument);
             if (response != null)
                 return response;
             return null;

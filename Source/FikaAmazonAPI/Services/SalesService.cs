@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
 using FikaAmazonAPI.Parameter.Sales;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Services
@@ -16,7 +17,7 @@ namespace FikaAmazonAPI.Services
         {
             var param = parameterGetOrderMetrics.getParameters();
             CreateAuthorizedRequest(SalesApiUrls.GetOrderMetrics, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetOrderMetricsResponse>();
+            var response = ExecuteRequest<GetOrderMetricsResponse>(RateLimitType.Sales_GetOrderMetrics);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

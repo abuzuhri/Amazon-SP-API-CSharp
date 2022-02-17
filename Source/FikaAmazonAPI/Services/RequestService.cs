@@ -13,12 +13,14 @@ using FikaAmazonAPI.Search;
 using System.Linq;
 using System.Threading;
 using static FikaAmazonAPI.Utils.Constants;
+using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 
 namespace FikaAmazonAPI.Services
 {
     public class RequestService : ApiUrls
     {
-        private readonly string AccessTokenHeaderName = "x-amz-access-token";
+        public static readonly string AccessTokenHeaderName = "x-amz-access-token";
+        public static readonly string SecurityTokenHeaderName = "x-amz-security-token";
         private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
@@ -70,7 +72,7 @@ namespace FikaAmazonAPI.Services
             if (queryParameters!=null)
                 AddQueryParameters(queryParameters);
 
-            AddAccessToken();
+            
         }
 
         protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
@@ -92,11 +94,13 @@ namespace FikaAmazonAPI.Services
         /// </summary>
         /// <typeparam name="T">Type to parse response to</typeparam>
         /// <returns>Returns data of T type</returns>
-        protected T ExecuteRequest<T>() where T : new()
+        protected T ExecuteRequestTry<T>(RateLimitType rateLimitType= RateLimitType.UNSET) where T : new()
         {
+            RestHeader();
+            AddAccessToken();
             Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential);
             var response = RequestClient.Execute<T>(Request);
-            SleepForRateLimit(response.Headers);
+            SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
             
             if (response.StatusCode==HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
@@ -105,26 +109,71 @@ namespace FikaAmazonAPI.Services
             }
             return response.Data;
         }
+        private void RestHeader()
+        {
+            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
+            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
+            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == AccessTokenHeaderName);
+            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == SecurityTokenHeaderName);
+        }
+        public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
+        {
+            var tryCount = 0;
+            while (true)
+            {
+                try
+                {
+                    return ExecuteRequestTry<T>(rateLimitType);
+                }
+                catch (AmazonQuotaExceededException ex)
+                {
+                    if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
+                    {
+#if DEBUG
+                        Console.WriteLine("Throttle max try count reached");
+#endif
+                        throw;
+                    }
 
-        private void SleepForRateLimit(IList<RestSharp.Parameter> headers)
+                    AmazonCredential.UsagePlansTimings[rateLimitType].Delay();
+                    tryCount++;
+                }
+            }
+        }
+
+        private void SleepForRateLimit(IList<RestSharp.Parameter> headers, RateLimitType rateLimitType = RateLimitType.UNSET)
         {
             try
             {
+                decimal rate = 0;
+                var limitHeader = headers.Where(a => a.Name == RateLimitLimitHeaderName).FirstOrDefault();
+                if (limitHeader != null)
+                {
+                    var RateLimitValue = limitHeader.Value.ToString();
+                    decimal.TryParse(RateLimitValue, out rate);
+                }
+
                 if (AmazonCredential.IsActiveLimitRate)
                 {
-                    var limitHeader = headers.Where(a => a.Name == RateLimitLimitHeaderName).FirstOrDefault();
-                    if (limitHeader != null)
+                    if(rateLimitType == RateLimitType.UNSET)
                     {
-                        var RateLimitValue = limitHeader.Value.ToString();
-                        float rate = 0;
-                        if(float.TryParse(RateLimitValue,out rate))
+                        if (rate > 0)
                         {
-                            if (rate > 0)
-                            {
-                                int sleepTime = (int)(1 / rate*1000);
-                                Thread.Sleep(sleepTime);
-                            }
+                            int sleepTime = (int)(1 / rate * 1000);
+                            Thread.Sleep(sleepTime);
                         }
+                    }
+                    else
+                    {
+                        if (rate > 0)
+                        {
+                            AmazonCredential.UsagePlansTimings[rateLimitType].SetRateLimit(rate);
+                        }
+                        var time = AmazonCredential.UsagePlansTimings[rateLimitType].NextRate(rateLimitType);
                     }
                 }
             }
@@ -199,7 +248,7 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddAccessToken()
         {
-            Request.AddHeader(AccessTokenHeaderName, AccessToken);
+            Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
         }
 
         protected void RefreshToken(TokenDataType tokenDataType=TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
