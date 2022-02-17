@@ -31,6 +31,8 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            var seller = await amazonConnection.Seller.GetMarketplaceParticipationsAsync();
+
             var dataaa = amazonConnection.FbaInventory.GetInventorySummaries(new Parameter.FbaInventory.ParameterGetInventorySummaries
             {
                 granularityType = AmazonSpApiSDK.Models.FbaInventory.Granularity.GranularityTypeEnum.Marketplace,

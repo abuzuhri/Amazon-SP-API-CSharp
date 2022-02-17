@@ -3,6 +3,7 @@ using FikaAmazonAPI.Parameter.CatalogItems;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -80,7 +81,7 @@ namespace FikaAmazonAPI.Services
         //    return response;
         //}
 
-        public IList<Categories> ListCatalogCategories(string ASIN,string SellerSKU=null,string MarketPlaceID = null)
+        public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null)
         {
             if (string.IsNullOrEmpty(ASIN))
                 throw new InvalidDataException("ASIN is a required property and cannot be null or empty");
@@ -89,7 +90,7 @@ namespace FikaAmazonAPI.Services
             var param = new List<KeyValuePair<string, string>>();
             param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlaceID ?? AmazonCredential.MarketPlace.ID));
             param.Add(new KeyValuePair<string, string>("ASIN", ASIN));
-            if(!string.IsNullOrEmpty(SellerSKU))
+            if (!string.IsNullOrEmpty(SellerSKU))
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
 
             CreateAuthorizedRequest(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.GET, param);
@@ -101,5 +102,25 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        public async Task<IList<Categories>> ListCatalogCategoriesAsync(string ASIN, string SellerSKU = null, string MarketPlaceID = null)
+        {
+            if (string.IsNullOrEmpty(ASIN))
+                throw new InvalidDataException("ASIN is a required property and cannot be null or empty");
+
+
+            var param = new List<KeyValuePair<string, string>>();
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", MarketPlaceID ?? AmazonCredential.MarketPlace.ID));
+            param.Add(new KeyValuePair<string, string>("ASIN", ASIN));
+            if (!string.IsNullOrEmpty(SellerSKU))
+                param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
+
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<ListCatalogCategoriesResponse>(RateLimitType.CatalogItems_ListCatalogCategories);
+
+            if (response != null && response.Payload != null)
+                return response.Payload;
+
+            return null;
+        }
     }
 }

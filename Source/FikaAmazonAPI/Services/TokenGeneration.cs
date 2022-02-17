@@ -7,6 +7,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 
 namespace FikaAmazonAPI.Services
@@ -17,19 +18,24 @@ namespace FikaAmazonAPI.Services
 
         public static TokenResponse RefreshAccessToken(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
         {
+           return RefreshAccessTokenAsync(credentials,tokenDataType).GetAwaiter().GetResult();
+        }
+
+        public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
+        {
             var lwaCredentials = new LWAAuthorizationCredentials()
             {
                 ClientId = credentials.ClientId,
                 ClientSecret = credentials.ClientSecret,
                 Endpoint = new Uri(Constants.AmazonToeknEndPoint),
                 RefreshToken = credentials.RefreshToken,
-                Scopes=null
+                Scopes = null
             };
-            if (tokenDataType== TokenDataType.Grantless)
+            if (tokenDataType == TokenDataType.Grantless)
                 lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
             var Client = new LWAClient(lwaCredentials);
-            var accessToken = Client.GetAccessToken();
+            var accessToken = await Client.GetAccessTokenAsync();
 
             return accessToken;
         }
@@ -63,9 +69,9 @@ namespace FikaAmazonAPI.Services
 
                 amazonCredential.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
                 {
-                    AWSAuthenticationCredential= awsAuthenticationCredentials,
-                    SessionToken= response1.Credentials.SessionToken,
-                    Expiration= response1.Credentials.Expiration
+                    AWSAuthenticationCredential = awsAuthenticationCredentials,
+                    SessionToken = response1.Credentials.SessionToken,
+                    Expiration = response1.Credentials.Expiration
                 });
                 dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             }
