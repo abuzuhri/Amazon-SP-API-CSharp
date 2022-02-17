@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
@@ -251,7 +252,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/competitivePrice";
             }
 
-            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{WebUtility.UrlEncode(SellerSKU)}/offers";
+            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/offers";
             public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
 
         }
@@ -385,7 +386,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class ProductFeeApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/fees/v0";
-            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{WebUtility.UrlEncode(SellerSKU)}/feesEstimate";
+            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/feesEstimate";
             public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
         }
         protected class TokenApiUrls
@@ -467,13 +468,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
 
             //https://stackoverflow.com/questions/575440/url-encoding-using-c-sharp/21771206#21771206
-            public static string GetListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+            public static string GetListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
 
-            public static string PutListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+            public static string PutListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
 
-            public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+            public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
 
-            public static string PatchListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{WebUtility.UrlEncode(sku)}";
+            public static string PatchListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
         }
 
         protected class ListingsRestrictionsApi
