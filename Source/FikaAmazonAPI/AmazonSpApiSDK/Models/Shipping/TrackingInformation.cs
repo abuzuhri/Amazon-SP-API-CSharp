@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="Summary">Summary (required).</param>
         /// <param name="PromisedDeliveryDate">PromisedDeliveryDate (required).</param>
         /// <param name="EventHistory">EventHistory (required).</param>
-        public TrackingInformation(TrackingId TrackingId = default(TrackingId), TrackingSummary Summary = default(TrackingSummary), PromisedDeliveryDate PromisedDeliveryDate = default(PromisedDeliveryDate), EventList EventHistory = default(EventList))
+        public TrackingInformation(string TrackingId = default(string), TrackingSummary Summary = default(TrackingSummary), PromisedDeliveryDate PromisedDeliveryDate = default(PromisedDeliveryDate), EventList EventHistory = default(EventList))
         {
             // to ensure "TrackingId" is required (not null)
             if (TrackingId == null)
@@ -80,7 +80,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Gets or Sets TrackingId
         /// </summary>
         [DataMember(Name = "trackingId", EmitDefaultValue = false)]
-        public TrackingId TrackingId { get; set; }
+        public string TrackingId { get; set; }
 
         /// <summary>
         /// Gets or Sets Summary

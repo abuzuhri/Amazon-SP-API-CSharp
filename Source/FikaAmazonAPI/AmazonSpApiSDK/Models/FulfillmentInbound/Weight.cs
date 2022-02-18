@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <param name="Value">The weight value. (required).</param>
         /// <param name="Unit">Unit (required).</param>
-        public Weight(BigDecimalType Value = default(BigDecimalType), UnitOfWeight Unit = default(UnitOfWeight))
+        public Weight(double Value = default(double), UnitOfWeight Unit = default(UnitOfWeight))
         {
             // to ensure "Value" is required (not null)
             if (Value == null)
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The weight value.</value>
         [DataMember(Name = "Value", EmitDefaultValue = false)]
-        public BigDecimalType Value { get; set; }
+        public double Value { get; set; }
 
 
         /// <summary>

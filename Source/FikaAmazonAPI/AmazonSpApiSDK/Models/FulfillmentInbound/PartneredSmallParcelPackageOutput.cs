@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="CarrierName">The carrier specified with a previous call to putTransportDetails. (required).</param>
         /// <param name="TrackingId">TrackingId (required).</param>
         /// <param name="PackageStatus">PackageStatus (required).</param>
-        public PartneredSmallParcelPackageOutput(Dimensions Dimensions = default(Dimensions), Weight Weight = default(Weight), string CarrierName = default(string), TrackingId TrackingId = default(TrackingId), PackageStatus PackageStatus = default(PackageStatus))
+        public PartneredSmallParcelPackageOutput(Dimensions Dimensions = default(Dimensions), Weight Weight = default(Weight), string CarrierName = default(string), string TrackingId = default(string), PackageStatus PackageStatus = default(PackageStatus))
         {
             // to ensure "Dimensions" is required (not null)
             if (Dimensions == null)
@@ -114,7 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets TrackingId
         /// </summary>
         [DataMember(Name = "TrackingId", EmitDefaultValue = false)]
-        public TrackingId TrackingId { get; set; }
+        public string TrackingId { get; set; }
 
 
         /// <summary>
