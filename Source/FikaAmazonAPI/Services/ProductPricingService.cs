@@ -2,6 +2,7 @@
 using FikaAmazonAPI.Parameter.ProductPricing;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -13,45 +14,53 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public IList<Price> GetPricing(ParameterGetPricing parameterGetPricing)
+        public IList<Price> GetPricing(ParameterGetPricing parameterGetPricing) =>
+            GetPricingAsync(parameterGetPricing).GetAwaiter().GetResult();
+        public async Task<IList<Price>> GetPricingAsync(ParameterGetPricing parameterGetPricing)
         {
             var param = parameterGetPricing.getParameters();
 
-            CreateAuthorizedRequest(ProductPricingApiUrls.GetPricing, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetPricingResponse>(RateLimitType.ProductPricing_GetPricing);
-            if (response != null && response.Payload!=null)
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetPricing, RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetPricingResponse>(RateLimitType.ProductPricing_GetPricing);
+            if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public IList<Price> GetCompetitivePricing(ParameterGetCompetitivePricing parameterGetCompetitivePricing)
+        public IList<Price> GetCompetitivePricing(ParameterGetCompetitivePricing parameterGetCompetitivePricing) =>
+            GetCompetitivePricingAsync(parameterGetCompetitivePricing).GetAwaiter().GetResult();
+        public async Task<IList<Price>> GetCompetitivePricingAsync(ParameterGetCompetitivePricing parameterGetCompetitivePricing)
         {
             var param = parameterGetCompetitivePricing.getParameters();
 
-            CreateAuthorizedRequest(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetPricingResponse>(RateLimitType.ProductPricing_GetCompetitivePricing);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetPricingResponse>(RateLimitType.ProductPricing_GetCompetitivePricing);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public GetOffersResult GetListingOffers(ParameterGetListingOffers parameterGetListingOffers)
+        public GetOffersResult GetListingOffers(ParameterGetListingOffers parameterGetListingOffers) =>
+            GetListingOffersAsync(parameterGetListingOffers).GetAwaiter().GetResult();
+        public async Task<GetOffersResult> GetListingOffersAsync(ParameterGetListingOffers parameterGetListingOffers)
         {
             var param = parameterGetListingOffers.getParameters();
 
-            CreateAuthorizedRequest(ProductPricingApiUrls.GetListingOffers(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetOffersResponse>(RateLimitType.ProductPricing_GetListingOffers);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffers(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetListingOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public GetOffersResult GetItemOffers(ParameterGetItemOffers parameterGetItemOffers)
+        public GetOffersResult GetItemOffers(ParameterGetItemOffers parameterGetItemOffers) =>
+            GetItemOffersAsync(parameterGetItemOffers).GetAwaiter().GetResult();
+        public async Task<GetOffersResult> GetItemOffersAsync(ParameterGetItemOffers parameterGetItemOffers)
         {
             var param = parameterGetItemOffers.getParameters();
 
-            CreateAuthorizedRequest(ProductPricingApiUrls.GetItemOffers(parameterGetItemOffers.Asin), RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetItemOffers(parameterGetItemOffers.Asin), RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

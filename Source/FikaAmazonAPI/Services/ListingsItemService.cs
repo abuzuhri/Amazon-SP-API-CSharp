@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Utils;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -10,38 +11,46 @@ namespace FikaAmazonAPI.Services
         {
         }
 
-        public Item GetListingsItem(ParameterGetListingsItem listingsItemParameters)
+        public Item GetListingsItem(ParameterGetListingsItem listingsItemParameters) =>
+            GetListingsItemAsync(listingsItemParameters).GetAwaiter().GetResult();
+        public async Task<Item> GetListingsItemAsync(ParameterGetListingsItem listingsItemParameters)
         {
             listingsItemParameters.Check();
             var queryParameters = listingsItemParameters.getParameters();
-            CreateAuthorizedRequest(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
-            return ExecuteRequest<Item>(RateLimitType.ListingsItem_GetListingsItem);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
+            return await ExecuteRequestAsync<Item>(RateLimitType.ListingsItem_GetListingsItem);
         }
 
-        public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem)
+        public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem) =>
+            PutListingsItemAsync(parameterPutListingItem).GetAwaiter().GetResult();
+        public async Task<ListingsItemSubmissionResponse> PutListingsItemAsync(ParameterPutListingItem parameterPutListingItem)
         {
             parameterPutListingItem.Check();
             var queryParameters = parameterPutListingItem.getParameters();
-            CreateAuthorizedRequest(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.PUT, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PutListingsItem);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.PUT, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters);
+            var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PutListingsItem);
             return response;
         }
 
-        public ListingsItemSubmissionResponse DeleteListingsItem(ParameterDeleteListingItem parameterDeleteListingItem)
+        public ListingsItemSubmissionResponse DeleteListingsItem(ParameterDeleteListingItem parameterDeleteListingItem) =>
+            DeleteListingsItemAsync(parameterDeleteListingItem).GetAwaiter().GetResult();
+        public async Task<ListingsItemSubmissionResponse> DeleteListingsItemAsync(ParameterDeleteListingItem parameterDeleteListingItem)
         {
             parameterDeleteListingItem.Check();
             var queryParameters = parameterDeleteListingItem.getParameters();
-            CreateAuthorizedRequest(ListingsItemsApiUrls.DeleteListingItem(parameterDeleteListingItem.sellerId, parameterDeleteListingItem.sku), RestSharp.Method.DELETE, queryParameters: queryParameters);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_DeleteListingsItem);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.DeleteListingItem(parameterDeleteListingItem.sellerId, parameterDeleteListingItem.sku), RestSharp.Method.DELETE, queryParameters: queryParameters);
+            var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_DeleteListingsItem);
             return response;
         }
 
-        public ListingsItemSubmissionResponse PatchListingsItem(ParameterPatchListingItem parameterPatchListingItem)
+        public ListingsItemSubmissionResponse PatchListingsItem(ParameterPatchListingItem parameterPatchListingItem) =>
+            PatchListingsItemAsync(parameterPatchListingItem).GetAwaiter().GetResult();
+        public async Task<ListingsItemSubmissionResponse> PatchListingsItemAsync(ParameterPatchListingItem parameterPatchListingItem)
         {
             parameterPatchListingItem.Check();
             var queryParameters = parameterPatchListingItem.getParameters();
-            CreateAuthorizedRequest(ListingsItemsApiUrls.PatchListingItem(parameterPatchListingItem.sellerId, parameterPatchListingItem.sku), RestSharp.Method.PATCH, queryParameters: queryParameters, postJsonObj: parameterPatchListingItem.listingsItemPatchRequest);
-            var response = ExecuteRequest<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PatchListingsItem);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PatchListingItem(parameterPatchListingItem.sellerId, parameterPatchListingItem.sku), RestSharp.Method.PATCH, queryParameters: queryParameters, postJsonObj: parameterPatchListingItem.listingsItemPatchRequest);
+            var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PatchListingsItem);
             return response;
         }
     }

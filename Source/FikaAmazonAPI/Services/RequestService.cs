@@ -1,19 +1,20 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
-using FikaAmazonAPI.Search;
 using System.Linq;
+using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
-using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 
 namespace FikaAmazonAPI.Services
 {
@@ -56,23 +57,19 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
-
-
-        protected void CreateAuthorizedRequest(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null,object postJsonObj=null, TokenDataType tokenDataType=TokenDataType.Normal,object parameter=null)
+        protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
         {
             var PiiObject = parameter as IParameterBasedPII;
             if (PiiObject != null && PiiObject.IsNeedRestrictedDataToken)
             {
-                RefreshToken(TokenDataType.PII, PiiObject.RestrictedDataTokenRequest);
+                await RefreshTokenAsync(TokenDataType.PII, PiiObject.RestrictedDataTokenRequest);
             }
-            else RefreshToken(tokenDataType);
+            else await RefreshTokenAsync(tokenDataType);
             CreateRequest(url, method);
             if (postJsonObj != null)
                 AddJsonBody(postJsonObj);
-            if (queryParameters!=null)
+            if (queryParameters != null)
                 AddQueryParameters(queryParameters);
-
-            
         }
 
         protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
@@ -94,16 +91,16 @@ namespace FikaAmazonAPI.Services
         /// </summary>
         /// <typeparam name="T">Type to parse response to</typeparam>
         /// <returns>Returns data of T type</returns>
-        protected T ExecuteRequestTry<T>(RateLimitType rateLimitType= RateLimitType.UNSET) where T : new()
+        protected async Task<T> ExecuteRequestTry<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         {
             RestHeader();
             AddAccessToken();
-            Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential);
-            var response = RequestClient.Execute<T>(Request);
+            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
+            var response = await RequestClient.ExecuteAsync<T>(Request);
             SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
-            
-            if (response.StatusCode==HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
+
+            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
             {
                 response.Data = JsonConvert.DeserializeObject<T>(response.Content);
             }
@@ -120,14 +117,20 @@ namespace FikaAmazonAPI.Services
             Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
                                                           && parameter.Name == SecurityTokenHeaderName);
         }
-        public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
+
+        //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
+        //{
+        //    return this.ExecuteRequestAsync<T>(rateLimitType).GetAwaiter().GetResult();
+        //}
+
+        public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         {
             var tryCount = 0;
             while (true)
             {
                 try
                 {
-                    return ExecuteRequestTry<T>(rateLimitType);
+                    return await ExecuteRequestTry<T>(rateLimitType);
                 }
                 catch (AmazonQuotaExceededException ex)
                 {
@@ -159,7 +162,7 @@ namespace FikaAmazonAPI.Services
 
                 if (AmazonCredential.IsActiveLimitRate)
                 {
-                    if(rateLimitType == RateLimitType.UNSET)
+                    if (rateLimitType == RateLimitType.UNSET)
                     {
                         if (rate > 0)
                         {
@@ -177,7 +180,7 @@ namespace FikaAmazonAPI.Services
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
@@ -208,7 +211,7 @@ namespace FikaAmazonAPI.Services
                 Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
 
                 var errorResponse = response.Content.ConvertToErrorResponse();
-                if(errorResponse != null)
+                if (errorResponse != null)
                 {
                     var error = errorResponse.Errors.FirstOrDefault();
 
@@ -223,10 +226,10 @@ namespace FikaAmazonAPI.Services
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
                     }
-                    
+
                 }
             }
-           
+
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
         }
 
@@ -251,12 +254,12 @@ namespace FikaAmazonAPI.Services
             Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
         }
 
-        protected void RefreshToken(TokenDataType tokenDataType=TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
+        protected void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
-            if(token==null)
+            if (token == null)
             {
-                if(tokenDataType== TokenDataType.PII)
+                if (tokenDataType == TokenDataType.PII)
                 {
                     var pii = CreateRestrictedDataToken(requestPII);
                     if (pii != null)
@@ -269,7 +272,7 @@ namespace FikaAmazonAPI.Services
                     }
                     else
                     {
-                       throw new ArgumentNullException(nameof(pii));
+                        throw new ArgumentNullException(nameof(pii));
                     }
                 }
                 else
@@ -279,15 +282,53 @@ namespace FikaAmazonAPI.Services
 
                 AmazonCredential.SetToken(tokenDataType, token);
             }
-                
+
+
+            AccessToken = token.access_token;
+        }
+
+        protected async Task RefreshTokenAsync(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
+        {
+            var token = AmazonCredential.GetToken(tokenDataType);
+            if (token == null)
+            {
+                if (tokenDataType == TokenDataType.PII)
+                {
+                    var pii = await CreateRestrictedDataTokenAsync(requestPII);
+                    if (pii != null)
+                    {
+                        token = new TokenResponse()
+                        {
+                            access_token = pii.RestrictedDataToken,
+                            expires_in = pii.ExpiresIn
+                        };
+                    }
+                    else
+                    {
+                        throw new ArgumentNullException(nameof(pii));
+                    }
+                }
+                else
+                {
+                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType);
+                }
+
+                AmazonCredential.SetToken(tokenDataType, token);
+            }
+
 
             AccessToken = token.access_token;
         }
 
         public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            CreateAuthorizedRequest(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
-            var response = ExecuteRequest<CreateRestrictedDataTokenResponse>();
+            return CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest).GetAwaiter().GetResult();
+        }
+
+        public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
+        {
+            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>();
             return response;
         }
     }

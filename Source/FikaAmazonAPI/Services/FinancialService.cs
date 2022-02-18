@@ -2,6 +2,7 @@
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -13,18 +14,21 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public IList<FinancialEventGroup> ListFinancialEventGroups(ParameterListFinancialEventGroup  parameterListFinancialEventGroup)
+        public IList<FinancialEventGroup> ListFinancialEventGroups(ParameterListFinancialEventGroup parameterListFinancialEventGroup) =>
+            ListFinancialEventGroupsAsync(parameterListFinancialEventGroup).GetAwaiter().GetResult();
+
+        public async Task<IList<FinancialEventGroup>> ListFinancialEventGroupsAsync(ParameterListFinancialEventGroup parameterListFinancialEventGroup)
         {
             List<FinancialEventGroup> list = new List<FinancialEventGroup>();
 
             var parameter = parameterListFinancialEventGroup.getParameters();
 
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventGroups , RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventGroups, RestSharp.Method.GET, parameter);
+            var response = await ExecuteRequestAsync<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
 
             list.AddRange(response.Payload.FinancialEventGroupList);
             var nextToken = response.Payload.NextToken;
-            
+
             while (!string.IsNullOrEmpty(nextToken))
             {
                 var data = GetFinancialEventGroupListByNextToken(nextToken);
@@ -35,47 +39,60 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        public ListFinancialEventGroupsPayload GetFinancialEventGroupListByNextToken(string nextToken)
+        public ListFinancialEventGroupsPayload GetFinancialEventGroupListByNextToken(string nextToken) =>
+            GetFinancialEventGroupListByNextTokenAsync(nextToken).GetAwaiter().GetResult();
+        public async Task<ListFinancialEventGroupsPayload> GetFinancialEventGroupListByNextTokenAsync(string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
 
 
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventGroups, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventGroups, RestSharp.Method.GET, queryParameters);
+            var response = await ExecuteRequestAsync<ListFinancialEventGroupsResponse>(RateLimitType.Financial_ListFinancialEventGroups);
             return response.Payload;
         }
 
 
-        public FinancialEvents ListFinancialEventsByGroupId(string eventGroupId)
+        public FinancialEvents ListFinancialEventsByGroupId(string eventGroupId) =>
+                ListFinancialEventsByGroupIdAsync(eventGroupId).GetAwaiter().GetResult();
+        public async Task<FinancialEvents> ListFinancialEventsByGroupIdAsync(string eventGroupId)
         {
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByGroupId);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByGroupId);
             return response.Payload.FinancialEvents;
         }
 
-        public FinancialEvents ListFinancialEventsByOrderId(string orderId)
+        public FinancialEvents ListFinancialEventsByOrderId(string orderId) =>
+            ListFinancialEventsByOrderIdAsync(orderId).GetAwaiter().GetResult();
+
+        public async Task<FinancialEvents> ListFinancialEventsByOrderIdAsync(string orderId)
         {
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEventsByOrderId(orderId), RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByOrderId);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByOrderId(orderId), RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByOrderId);
             return response.Payload.FinancialEvents;
         }
 
-        public FinancialEvents ListFinancialEvents()
+        public FinancialEvents ListFinancialEvents() =>
+            ListFinancialEventsAsync().GetAwaiter().GetResult();
+
+        public async Task<FinancialEvents> ListFinancialEventsAsync()
         {
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET);
-            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
             return response.Payload.FinancialEvents;
         }
 
-        public IList<FinancialEvents> ListFinancialEvents(ParameterListFinancialEvents parameterListFinancials)
+        public IList<FinancialEvents> ListFinancialEvents(ParameterListFinancialEvents parameterListFinancials) =>
+            ListFinancialEventsAsync(parameterListFinancials).GetAwaiter().GetResult();
+
+        public async Task<IList<FinancialEvents>> ListFinancialEventsAsync(ParameterListFinancialEvents parameterListFinancials)
         {
             List<FinancialEvents> list = new List<FinancialEvents>();
 
             var parameter = parameterListFinancials.getParameters();
 
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, parameter);
+            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
 
             list.Add(response.Payload.FinancialEvents);
             var nextToken = response.Payload.NextToken;
@@ -90,14 +107,17 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        private ListFinancialEventsPayload GetFinancialEventsByNextToken(string nextToken)
+        private ListFinancialEventsPayload GetFinancialEventsByNextToken(string nextToken) =>
+            GetFinancialEventsByNextTokenAsync(nextToken).GetAwaiter().GetResult();
+
+        private async Task<ListFinancialEventsPayload> GetFinancialEventsByNextTokenAsync(string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
 
 
-            CreateAuthorizedRequest(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEvents, RestSharp.Method.GET, queryParameters);
+            var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEvents);
             return response.Payload;
         }
 

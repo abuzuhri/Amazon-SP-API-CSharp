@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
 using FikaAmazonAPI.Utils;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -11,22 +12,27 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public FeesEstimateResult GetMyFeesEstimateForSKU(string SKU, FeesEstimateRequest feesEstimateRequest)
+        public FeesEstimateResult GetMyFeesEstimateForSKU(string SKU, FeesEstimateRequest feesEstimateRequest) =>
+            GetMyFeesEstimateForSKUAsync(SKU, feesEstimateRequest).GetAwaiter().GetResult();
+        public async Task<FeesEstimateResult> GetMyFeesEstimateForSKUAsync(string SKU, FeesEstimateRequest feesEstimateRequest)
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
 
-            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST,postJsonObj: Payload);
-            var response = ExecuteRequest<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForSKU);
+            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST, postJsonObj: Payload);
+            var response = await ExecuteRequestAsync<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForSKU);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
             return null;
         }
-        public FeesEstimateResult GetMyFeesEstimateForASIN(string ASIN, FeesEstimateRequest feesEstimateRequest)
+
+        public FeesEstimateResult GetMyFeesEstimateForASIN(string ASIN, FeesEstimateRequest feesEstimateRequest) =>
+            GetMyFeesEstimateForASINAsync(ASIN, feesEstimateRequest).GetAwaiter().GetResult();
+        public async Task<FeesEstimateResult> GetMyFeesEstimateForASINAsync(string ASIN, FeesEstimateRequest feesEstimateRequest)
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
-        
-            CreateAuthorizedRequest(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: Payload);
-            var response = ExecuteRequest<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForASIN);
+
+            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: Payload);
+            var response = await ExecuteRequestAsync<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForASIN);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
             return null;

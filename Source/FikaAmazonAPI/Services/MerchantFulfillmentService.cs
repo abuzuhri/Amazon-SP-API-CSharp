@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -12,80 +13,98 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        
-        public GetEligibleShipmentServicesResult GetEligibleShipmentServicesOld(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
+
+        public GetEligibleShipmentServicesResult GetEligibleShipmentServicesOld(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest) =>
+            GetEligibleShipmentServicesOldAsync(getEligibleShipmentServicesRequest).GetAwaiter().GetResult();
+        public async Task<GetEligibleShipmentServicesResult> GetEligibleShipmentServicesOldAsync(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
         {
 
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetEligibleShipmentServicesOld, RestSharp.Method.POST,postJsonObj: getEligibleShipmentServicesRequest);
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetEligibleShipmentServicesOld, RestSharp.Method.POST, postJsonObj: getEligibleShipmentServicesRequest);
 
-            var response = ExecuteRequest<GetEligibleShipmentServicesResponse>(RateLimitType.MerchantFulFillment_GetEligibleShipmentServicesOld);
-            if (response != null && response.Payload != null)
-                return response.Payload;
-            return null;
-        }
-        public GetEligibleShipmentServicesResult GetEligibleShipmentServices(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
-        {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetEligibleShipmentServices, RestSharp.Method.POST, postJsonObj: getEligibleShipmentServicesRequest);
-
-            var response = ExecuteRequest<GetEligibleShipmentServicesResponse>(RateLimitType.MerchantFulFillment_GetEligibleShipmentServices);
+            var response = await ExecuteRequestAsync<GetEligibleShipmentServicesResponse>(RateLimitType.MerchantFulFillment_GetEligibleShipmentServicesOld);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public Shipment GetShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
+        public GetEligibleShipmentServicesResult GetEligibleShipmentServices(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest) =>
+            GetEligibleShipmentServicesAsync(getEligibleShipmentServicesRequest).GetAwaiter().GetResult();
+        public async Task<GetEligibleShipmentServicesResult> GetEligibleShipmentServicesAsync(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.GET,parameter: ParameterBasedPII);
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetEligibleShipmentServices, RestSharp.Method.POST, postJsonObj: getEligibleShipmentServicesRequest);
 
-            var response = ExecuteRequest<GetShipmentResponse>(RateLimitType.MerchantFulFillment_GetShipment);
-            if (response != null && response.Payload != null)
-                return response.Payload;
-            return null;
-        }
-        public Shipment CancelShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
-        {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.DELETE, parameter: ParameterBasedPII);
-
-            var response = ExecuteRequest<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipment);
+            var response = await ExecuteRequestAsync<GetEligibleShipmentServicesResponse>(RateLimitType.MerchantFulFillment_GetEligibleShipmentServices);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
+        public Shipment GetShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null) =>
+            GetShipmentAsync(shipmentId, ParameterBasedPII = null).GetAwaiter().GetResult();
+        public async Task<Shipment> GetShipmentAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.PUT, parameter: ParameterBasedPII);
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.GET, parameter: ParameterBasedPII);
 
-            var response = ExecuteRequest<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipmentOld);
+            var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_GetShipment);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+        public Shipment CancelShipment(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
+            CancelShipmentAsync(shipmentId, parameterBasedPII).GetAwaiter().GetResult();
+        public async Task<Shipment> CancelShipmentAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null)
+        {
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.DELETE, parameter: parameterBasedPII);
+
+            var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipment);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII ParameterBasedPII = null)
+        public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
+            CancelShipmentOldAsync(shipmentId, parameterBasedPII).GetAwaiter().GetResult();
+        public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.POST,postJsonObj: createShipmentRequest, parameter: ParameterBasedPII);
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.PUT, parameter: ParameterBasedPII);
 
-            var response = ExecuteRequest<CreateShipmentResponse>(RateLimitType.MerchantFulFillment_CreateShipment);
+            var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipmentOld);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public GetAdditionalSellerInputsResult GetAdditionalSellerInputsOld(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
+        public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null) =>
+            CreateShipmentAsync(createShipmentRequest, parameterBasedPII).GetAwaiter().GetResult();
+        public async Task<Shipment> CreateShipmentAsync(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null)
         {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetAdditionalSellerInputsOld, RestSharp.Method.POST,postJsonObj: getAdditionalSellerInputsRequest);
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.POST, postJsonObj: createShipmentRequest, parameter: parameterBasedPII);
 
-            var response = ExecuteRequest<GetAdditionalSellerInputsResponse>(RateLimitType.MerchantFulFillment_GetAdditionalSellerInputsOld);
+            var response = await ExecuteRequestAsync<CreateShipmentResponse>(RateLimitType.MerchantFulFillment_CreateShipment);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetAdditionalSellerInputsResult GetAdditionalSellerInputs(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
-        {
-            CreateAuthorizedRequest(MerchantFulfillmentApiUrls.GetAdditionalSellerInputs, RestSharp.Method.POST, postJsonObj: getAdditionalSellerInputsRequest);
 
-            var response = ExecuteRequest<GetAdditionalSellerInputsResponse>(RateLimitType.MerchantFulFillment_GetAdditionalSellerInputs);
+        public GetAdditionalSellerInputsResult GetAdditionalSellerInputsOld(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest) =>
+            GetAdditionalSellerInputsOldAsync(getAdditionalSellerInputsRequest).GetAwaiter().GetResult();
+        public async Task<GetAdditionalSellerInputsResult> GetAdditionalSellerInputsOldAsync(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
+        {
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetAdditionalSellerInputsOld, RestSharp.Method.POST, postJsonObj: getAdditionalSellerInputsRequest);
+
+            var response = await ExecuteRequestAsync<GetAdditionalSellerInputsResponse>(RateLimitType.MerchantFulFillment_GetAdditionalSellerInputsOld);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
+        public GetAdditionalSellerInputsResult GetAdditionalSellerInputs(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest) =>
+            GetAdditionalSellerInputsAsync(getAdditionalSellerInputsRequest).GetAwaiter().GetResult();
+        public async Task<GetAdditionalSellerInputsResult> GetAdditionalSellerInputsAsync(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
+        {
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetAdditionalSellerInputs, RestSharp.Method.POST, postJsonObj: getAdditionalSellerInputsRequest);
+
+            var response = await ExecuteRequestAsync<GetAdditionalSellerInputsResponse>(RateLimitType.MerchantFulFillment_GetAdditionalSellerInputs);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
