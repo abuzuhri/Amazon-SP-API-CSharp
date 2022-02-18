@@ -31,19 +31,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelCustomization" /> class.
         /// </summary>
-        /// <param name="CustomTextForLabel">CustomTextForLabel.</param>
-        /// <param name="StandardIdForLabel">StandardIdForLabel.</param>
-        public LabelCustomization(CustomTextForLabel CustomTextForLabel = default(CustomTextForLabel), StandardIdForLabel? StandardIdForLabel = default(StandardIdForLabel?))
+        /// <param name="customTextForLabel">customTextForLabel.</param>
+        /// <param name="standardIdForLabel">standardIdForLabel.</param>
+        public LabelCustomization(string customTextForLabel = default(string), StandardIdForLabel? standardIdForLabel = default(StandardIdForLabel?))
         {
-            this.CustomTextForLabel = CustomTextForLabel;
-            this.StandardIdForLabel = StandardIdForLabel;
+            this.CustomTextForLabel = customTextForLabel;
+            this.StandardIdForLabel = standardIdForLabel;
         }
 
         /// <summary>
         /// Gets or Sets CustomTextForLabel
         /// </summary>
         [DataMember(Name = "CustomTextForLabel", EmitDefaultValue = false)]
-        public CustomTextForLabel CustomTextForLabel { get; set; }
+        public string CustomTextForLabel { get; set; }
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
