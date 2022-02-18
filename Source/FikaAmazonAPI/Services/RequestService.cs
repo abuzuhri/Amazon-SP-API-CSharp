@@ -1,20 +1,20 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
-using FikaAmazonAPI.Search;
 using System.Linq;
+using System.Net;
 using System.Threading;
-using static FikaAmazonAPI.Utils.Constants;
-using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using System.Threading.Tasks;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
@@ -57,13 +57,6 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
-
-
-        protected void CreateAuthorizedRequest(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
-        {
-            CreateAuthorizedRequestAsync(url, method, queryParameters, postJsonObj, tokenDataType, parameter).GetAwaiter().GetResult();
-        }
-
         protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
         {
             var PiiObject = parameter as IParameterBasedPII;
@@ -77,8 +70,6 @@ namespace FikaAmazonAPI.Services
                 AddJsonBody(postJsonObj);
             if (queryParameters != null)
                 AddQueryParameters(queryParameters);
-
-
         }
 
         protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
@@ -104,7 +95,7 @@ namespace FikaAmazonAPI.Services
         {
             RestHeader();
             AddAccessToken();
-            Request = TokenGeneration.SignWithSTSKeysAndSecurityToken(Request, RequestClient.BaseUrl.Host, AmazonCredential);
+            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
@@ -126,10 +117,11 @@ namespace FikaAmazonAPI.Services
             Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
                                                           && parameter.Name == SecurityTokenHeaderName);
         }
-        public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
-        {
-            return this.ExecuteRequestAsync<T>(rateLimitType).GetAwaiter().GetResult();
-        }
+
+        //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
+        //{
+        //    return this.ExecuteRequestAsync<T>(rateLimitType).GetAwaiter().GetResult();
+        //}
 
         public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         {
@@ -335,7 +327,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            CreateAuthorizedRequest(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
+            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
             var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>();
             return response;
         }

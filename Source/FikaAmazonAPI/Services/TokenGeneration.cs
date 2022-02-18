@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
 
         public static TokenResponse RefreshAccessToken(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
         {
-           return RefreshAccessTokenAsync(credentials,tokenDataType).GetAwaiter().GetResult();
+            return RefreshAccessTokenAsync(credentials, tokenDataType).GetAwaiter().GetResult();
         }
 
         public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public static IRestRequest SignWithSTSKeysAndSecurityToken(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
+        public static async Task<IRestRequest> SignWithSTSKeysAndSecurityTokenAsync(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
         {
             var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             if (dataToken == null)
@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.Services
                         RoleSessionName = Guid.NewGuid().ToString()
                     };
 
-                    response1 = STSClient.AssumeRoleAsync(req, new CancellationToken()).Result;
+                    response1 = await STSClient.AssumeRoleAsync(req, new CancellationToken());
                 }
 
                 //auth step 3

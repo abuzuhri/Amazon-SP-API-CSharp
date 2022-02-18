@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
@@ -22,14 +23,17 @@ namespace FikaAmazonAPI.Services
 
 
 
-        public IList<Feed> GetFeeds(ParameterGetFeed parameterGetFeed)
+        public async Task<IList<Feed>> GetFeeds(ParameterGetFeed parameterGetFeed) =>
+            GetFeedsAsync(parameterGetFeed).GetAwaiter().GetResult();
+
+        public async Task<IList<Feed>> GetFeedsAsync(ParameterGetFeed parameterGetFeed)
         {
             List<Feed> list = new List<Feed>();
 
             var parameter = parameterGetFeed.getParameters();
 
-            CreateAuthorizedRequest(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, parameter);
-            var response = ExecuteRequest<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, parameter);
+            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
 
             list.AddRange(response.Feeds);
             var nextToken = response.NextToken;
@@ -45,58 +49,76 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        private GetFeedsResponseV00 GetFeedsByNextToken(string nextToken)
+        public GetFeedsResponseV00 GetFeedsByNextToken(string nextToken) =>
+            GetFeedsByNextTokenAsync(nextToken).GetAwaiter().GetResult();
+
+        public async Task<GetFeedsResponseV00> GetFeedsByNextTokenAsync(string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("nextToken", nextToken));
 
 
-            CreateAuthorizedRequest(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, queryParameters);
-            var response = ExecuteRequest<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, queryParameters);
+            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
             return response;
         }
 
 
-        public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification)
+        public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification) =>
+            CreateFeedAsync(createFeedSpecification).GetAwaiter().GetResult();
+
+        public async Task<CreateFeedResult> CreateFeedAsync(CreateFeedSpecification createFeedSpecification)
         {
-            CreateAuthorizedRequest(FeedsApiUrls.CreateFeed, RestSharp.Method.POST, postJsonObj: createFeedSpecification);
-            var response = ExecuteRequest<CreateFeedResult>(RateLimitType.Feed_CreateFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeed, RestSharp.Method.POST, postJsonObj: createFeedSpecification);
+            var response = await ExecuteRequestAsync<CreateFeedResult>(RateLimitType.Feed_CreateFeed);
 
             return response;
         }
-        public Feed GetFeed(string feedId)
+        public Feed GetFeed(string feedId) =>
+            GetFeedAsync(feedId).GetAwaiter().GetResult();
+
+        public async Task<Feed> GetFeedAsync(string feedId)
         {
-            CreateAuthorizedRequest(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.GET);
-            var response = ExecuteRequest<Feed>(RateLimitType.Feed_CreateFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CreateFeed);
             if (response != null)
                 return response;
             return null;
         }
-        public Feed CancelFeed(string feedId)
+        public Feed CancelFeed(string feedId) =>
+            CancelFeedAsync(feedId).GetAwaiter().GetResult();
+
+        public async Task<Feed> CancelFeedAsync(string feedId)
         {
-            CreateAuthorizedRequest(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.DELETE);
-            var response = ExecuteRequest<Feed>(RateLimitType.Feed_CancelFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.DELETE);
+            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CancelFeed);
             if (response != null)
                 return response;
             return null;
         }
 
-        public FeedDocument GetFeedDocument(string feedDocumentId)
+        public FeedDocument GetFeedDocument(string feedDocumentId) =>
+            GetFeedDocumentAsync(feedDocumentId).GetAwaiter().GetResult();
+
+        public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId)
         {
-            CreateAuthorizedRequest(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.GET);
-            var response = ExecuteRequest<FeedDocument>(RateLimitType.Feed_GetFeedDocument);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<FeedDocument>(RateLimitType.Feed_GetFeedDocument);
             if (response != null)
                 return response;
             return null;
         }
 
-        public ProcessingReportMessage GetFeedDocumentProcessingReport(string url)
+        public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
+            GetFeedDocumentProcessingReportAsync(url).GetAwaiter().GetResult();
+
+        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
             ProcessingReportMessage processingReport = null;
             string responseContent;
             try
             {
-                var stream = GetStreamFromUrl(url);
+                var stream = await GetStreamFromUrlAsync(url);
                 var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
                 FeedAmazonEnvelope response = null;
 
@@ -112,30 +134,36 @@ namespace FikaAmazonAPI.Services
                 }
 
                 processingReport = response.Message[0].ProcessingReport;
-              
+
             }
-            catch(AmazonProcessingReportDeserializeException ex)
+            catch (AmazonProcessingReportDeserializeException ex)
             {
                 throw ex;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
             return processingReport;
         }
 
-        public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType)
+        public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType) =>
+            CreateFeedDocumentAsync(contentType).GetAwaiter().GetResult();
+
+        public async Task<CreateFeedDocumentResult> CreateFeedDocumentAsync(ContentType contentType)
         {
             var contxt = LinqHelper.GetEnumMemberValue(contentType);
             var createFeedDocumentSpecification = new AmazonSpApiSDK.Models.Feeds.CreateFeedDocumentSpecification(contxt);
 
-            CreateAuthorizedRequest(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.POST, postJsonObj: createFeedDocumentSpecification);
-            var response = ExecuteRequest<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.POST, postJsonObj: createFeedDocumentSpecification);
+            var response = await ExecuteRequestAsync<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument);
             if (response != null)
                 return response;
             return null;
         }
+
+        public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
+            SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType).GetAwaiter().GetResult();
 
         /// <summary>
         /// read full step  https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md
@@ -143,25 +171,24 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null,ContentType contentType= ContentType.XML)
+        public async Task<string> SubmitFeedAsync(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML)
         {
 
             //We are creating Feed Document
             var feedCreate = CreateFeedDocument(contentType);
 
-            var responce = string.Empty;
             //Uploading encoded invoice file
             if (contentType == ContentType.PDF)
             {
-                responce = postFileData(feedCreate.Url, XmlContentOrFilePath, contentType);
+                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
             }
-            else if(contentType == ContentType.TXT)
+            else if (contentType == ContentType.TXT)
             {
-                responce = postXMLData(feedCreate.Url, XmlContentOrFilePath, contentType);
+                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
             }
             else
             {
-                responce = postXMLData(feedCreate.Url, XmlContentOrFilePath);
+                _ = await PostXMLDataAsync(feedCreate.Url, XmlContentOrFilePath);
             }
 
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
@@ -173,23 +200,23 @@ namespace FikaAmazonAPI.Services
             };
 
             //Submit XML
-            var feed = CreateFeed(createFeedSpecification);
+            var feed = await CreateFeedAsync(createFeedSpecification);
 
             return feed.FeedId;
         }
 
 
-        private static Stream GetStreamFromUrl(string url)
+        private static async Task<Stream> GetStreamFromUrlAsync(string url)
         {
             byte[] imageData = null;
 
             using (var wc = new System.Net.WebClient())
-                imageData = wc.DownloadData(url);
+                imageData = await wc.DownloadDataTaskAsync(new Uri(url));
 
             return new MemoryStream(imageData);
         }
 
-        private string postXMLData(string destinationUrl, string requestXml, ContentType contentType= ContentType.XML)
+        private async Task<string> PostXMLDataAsync(string destinationUrl, string requestXml, ContentType contentType = ContentType.XML)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
             byte[] bytes;
@@ -197,11 +224,11 @@ namespace FikaAmazonAPI.Services
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
             request.Method = "PUT";
-            Stream requestStream = request.GetRequestStream();
+            Stream requestStream = await request.GetRequestStreamAsync();
             requestStream.Write(bytes, 0, bytes.Length);
             requestStream.Close();
             HttpWebResponse response;
-            response = (HttpWebResponse)request.GetResponse();
+            response = (HttpWebResponse)await request.GetResponseAsync();
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Stream responseStream = response.GetResponseStream();
@@ -211,10 +238,10 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        private string postFileData(string destinationUrl, string pathFile, ContentType contentType = ContentType.XML)
+        private async Task<string> PostFileDataAsync(string destinationUrl, string pathFile, ContentType contentType = ContentType.XML)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
-            byte[] bytes= File.ReadAllBytes(pathFile);
+            byte[] bytes = File.ReadAllBytes(pathFile);
             //bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
@@ -222,8 +249,7 @@ namespace FikaAmazonAPI.Services
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(bytes, 0, bytes.Length);
             requestStream.Close();
-            HttpWebResponse response;
-            response = (HttpWebResponse)request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Stream responseStream = response.GetResponseStream();

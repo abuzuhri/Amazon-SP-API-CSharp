@@ -2,6 +2,7 @@
 using FikaAmazonAPI.Parameter.VendorDirectFulfillmentOrders;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -13,33 +14,41 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public List<Order> GetOrders(ParameterVendorDirectFulfillmentGetOrders serachOrderList)
+        public List<Order> GetOrders(ParameterVendorDirectFulfillmentGetOrders serachOrderList) =>
+            GetOrdersAsync(serachOrderList).GetAwaiter().GetResult();
+        public async Task<List<Order>> GetOrdersAsync(ParameterVendorDirectFulfillmentGetOrders serachOrderList)
         {
             var orderList = new List<Order>();
 
             var queryParameters = serachOrderList.getParameters();
-            CreateAuthorizedRequest(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
-            var response = ExecuteRequest<GetOrdersResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrders);
+            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
+            var response = await ExecuteRequestAsync<GetOrdersResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrders);
             var nextToken = response.Payload?.Pagination?.NextToken;
             orderList.AddRange(response.Payload.Orders);
             while (!string.IsNullOrEmpty(nextToken))
             {
-                serachOrderList.NextToken= nextToken;
+                serachOrderList.NextToken = nextToken;
                 var orderPayload = GetOrders(serachOrderList);
                 orderList.AddRange(orderPayload);
             }
             return orderList;
         }
-        public Order GetOrder(string PurchaseOrderNumber)
+
+        public Order GetOrder(string PurchaseOrderNumber) =>
+            GetOrderAsync(PurchaseOrderNumber).GetAwaiter().GetResult();
+        public async Task<Order> GetOrderAsync(string PurchaseOrderNumber)
         {
-            CreateAuthorizedRequest(VendorDirectFulfillmentOrdersApiUrls.GetOrder(PurchaseOrderNumber), RestSharp.Method.GET);
-            var response = ExecuteRequest<GetOrderResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrder);
+            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrder(PurchaseOrderNumber), RestSharp.Method.GET);
+            var response = await ExecuteRequestAsync<GetOrderResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrder);
             return response.Payload;
         }
-        public TransactionId SubmitAcknowledgement(SubmitAcknowledgementRequest submitAcknowledgementRequest)
+
+        public TransactionId SubmitAcknowledgement(SubmitAcknowledgementRequest submitAcknowledgementRequest) =>
+            SubmitAcknowledgementAsync(submitAcknowledgementRequest).GetAwaiter().GetResult();
+        public async Task<TransactionId> SubmitAcknowledgementAsync(SubmitAcknowledgementRequest submitAcknowledgementRequest)
         {
-            CreateAuthorizedRequest(VendorDirectFulfillmentOrdersApiUrls.SubmitAcknowledgement, RestSharp.Method.POST, postJsonObj: submitAcknowledgementRequest);
-            var response = ExecuteRequest<SubmitAcknowledgementResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement);
+            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.SubmitAcknowledgement, RestSharp.Method.POST, postJsonObj: submitAcknowledgementRequest);
+            var response = await ExecuteRequestAsync<SubmitAcknowledgementResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement);
             return response.Payload;
         }
 

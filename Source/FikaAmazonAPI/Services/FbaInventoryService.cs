@@ -2,6 +2,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
 using FikaAmazonAPI.Parameter.FbaInventory;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -14,7 +15,10 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public List<InventorySummaries> GetInventorySummaries(ParameterGetInventorySummaries parameter)
+        public List<InventorySummaries> GetInventorySummaries(ParameterGetInventorySummaries parameter) =>
+            GetInventorySummariesAsync(parameter).GetAwaiter().GetResult();
+
+        public async Task<List<InventorySummaries>> GetInventorySummariesAsync(ParameterGetInventorySummaries parameter)
         {
             if (parameter.marketplaceIds == null || parameter.marketplaceIds.Count == 0)
             {
@@ -25,8 +29,8 @@ namespace FikaAmazonAPI.Services
             var list = new List<InventorySummaries>();
             var param = parameter.getParameters();
 
-            CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
+            await CreateAuthorizedRequestAsync(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
             list.Add(response.Payload.InventorySummaries);
             if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
@@ -41,13 +45,16 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        private GetInventorySummariesResponse GetInventorySummariesByNextToken(string nextToken, ParameterGetInventorySummaries parameterGetInventorySummaries)
+        public GetInventorySummariesResponse GetInventorySummariesByNextToken(string nextToken, ParameterGetInventorySummaries parameterGetInventorySummaries) =>
+            GetInventorySummariesByNextTokenAsync(nextToken, parameterGetInventorySummaries).GetAwaiter().GetResult();
+
+        public async Task<GetInventorySummariesResponse> GetInventorySummariesByNextTokenAsync(string nextToken, ParameterGetInventorySummaries parameterGetInventorySummaries)
         {
             parameterGetInventorySummaries.nextToken = nextToken;
             var param = parameterGetInventorySummaries.getParameters();
 
-            CreateAuthorizedRequest(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
-            var response = ExecuteRequest<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
+            await CreateAuthorizedRequestAsync(FbaInventoriesApiUrls.GetInventorySummaries, RestSharp.Method.GET, param);
+            var response = await ExecuteRequestAsync<GetInventorySummariesResponse>(RateLimitType.FbaInventory_GetInventorySummaries);
 
             return response;
         }

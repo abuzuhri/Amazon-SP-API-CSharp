@@ -3,6 +3,7 @@ using FikaAmazonAPI.Parameter.FulFillmentInbound;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
@@ -13,186 +14,244 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        public GetInboundGuidanceResult GetInboundGuidance(ParameterGetInboundGuidance parameterGetInboundGuidance)
+        public GetInboundGuidanceResult GetInboundGuidance(ParameterGetInboundGuidance parameterGetInboundGuidance) =>
+            GetInboundGuidanceAsync(parameterGetInboundGuidance).GetAwaiter().GetResult();
+        public async Task<GetInboundGuidanceResult> GetInboundGuidanceAsync(ParameterGetInboundGuidance parameterGetInboundGuidance)
         {
             var parameter = parameterGetInboundGuidance.getParameters();
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
 
-            var response = ExecuteRequest<GetInboundGuidanceResponse>(RateLimitType.FulFillmentInbound_GetInboundGuidance);
+            var response = await ExecuteRequestAsync<GetInboundGuidanceResponse>(RateLimitType.FulFillmentInbound_GetInboundGuidance);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public CreateInboundShipmentPlanResult CreateInboundShipmentPlan(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest)
+
+        public CreateInboundShipmentPlanResult CreateInboundShipmentPlan(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest) =>
+            CreateInboundShipmentPlanAsync(createInboundShipmentPlanRequest).GetAwaiter().GetResult();
+        public async Task<CreateInboundShipmentPlanResult> CreateInboundShipmentPlanAsync(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest)
         {
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.CreateInboundShipmentPlan, RestSharp.Method.POST,postJsonObj: createInboundShipmentPlanRequest);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateInboundShipmentPlan, RestSharp.Method.POST, postJsonObj: createInboundShipmentPlanRequest);
 
-            var response = ExecuteRequest<CreateInboundShipmentPlanResponse>(RateLimitType.FulFillmentInbound_CreateInboundShipmentPlan);
+            var response = await ExecuteRequestAsync<CreateInboundShipmentPlanResponse>(RateLimitType.FulFillmentInbound_CreateInboundShipmentPlan);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public InboundShipmentResult UpdateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
+
+        public InboundShipmentResult UpdateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest) =>
+            UpdateInboundShipmentAsync(shipmentId, inboundShipmentRequest).GetAwaiter().GetResult();
+        public async Task<InboundShipmentResult> UpdateInboundShipmentAsync(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.UpdateInboundShipment(shipmentId), RestSharp.Method.PUT,postJsonObj: inboundShipmentRequest);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateInboundShipment(shipmentId), RestSharp.Method.PUT, postJsonObj: inboundShipmentRequest);
 
-            var response = ExecuteRequest<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_UpdateInboundShipment);
+            var response = await ExecuteRequestAsync<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_UpdateInboundShipment);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public InboundShipmentResult CreateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
+
+        public InboundShipmentResult CreateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest) =>
+            CreateInboundShipmentAsync(shipmentId, inboundShipmentRequest).GetAwaiter().GetResult();
+
+        public async Task<InboundShipmentResult> CreateInboundShipmentAsync(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.CreateInboundShipment(shipmentId), RestSharp.Method.POST,postJsonObj: inboundShipmentRequest);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateInboundShipment(shipmentId), RestSharp.Method.POST, postJsonObj: inboundShipmentRequest);
 
-            var response = ExecuteRequest<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_CreateInboundShipment);
+            var response = await ExecuteRequestAsync<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_CreateInboundShipment);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public InboundShipmentResult GetPreorderInfo(string shipmentId)
+
+        public InboundShipmentResult GetPreorderInfo(string shipmentId) =>
+            GetPreorderInfoAsync(shipmentId).GetAwaiter().GetResult();
+
+        public async Task<InboundShipmentResult> GetPreorderInfoAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetPreorderInfo(shipmentId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetPreorderInfo(shipmentId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_GetPreorderInfo);
+            var response = await ExecuteRequestAsync<InboundShipmentResponse>(RateLimitType.FulFillmentInbound_GetPreorderInfo);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public ConfirmPreorderResult ConfirmPreorder(string shipmentId,DateTime NeedByDate)
+
+        public ConfirmPreorderResult ConfirmPreorder(string shipmentId, DateTime NeedByDate) =>
+            ConfirmPreorderAsync(shipmentId, NeedByDate).GetAwaiter().GetResult();
+
+        public async Task<ConfirmPreorderResult> ConfirmPreorderAsync(string shipmentId, DateTime NeedByDate)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
             queryParameters.Add(new KeyValuePair<string, string>("NeedByDate", NeedByDate.ToString("YYYY-MM-DD")));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmPreorder(shipmentId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmPreorder(shipmentId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<ConfirmPreorderResponse>(RateLimitType.FulFillmentInbound_ConfirmPreorder);
+            var response = await ExecuteRequestAsync<ConfirmPreorderResponse>(RateLimitType.FulFillmentInbound_ConfirmPreorder);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetPrepInstructionsResult GetPrepInstructions(ParameterGetPrepInstructions parameterGetPrepInstructions)
+
+        public GetPrepInstructionsResult GetPrepInstructions(ParameterGetPrepInstructions parameterGetPrepInstructions) =>
+            GetPrepInstructionsAsync(parameterGetPrepInstructions).GetAwaiter().GetResult();
+
+        public async Task<GetPrepInstructionsResult> GetPrepInstructionsAsync(ParameterGetPrepInstructions parameterGetPrepInstructions)
         {
             var parameter = parameterGetPrepInstructions.getParameters();
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.GET, parameter);
 
-            var response = ExecuteRequest<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetPrepInstructions);
+            var response = await ExecuteRequestAsync<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetPrepInstructions);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetTransportDetailsResult GetTransportDetails(string shipmentId)
+        public GetTransportDetailsResult GetTransportDetails(string shipmentId) =>
+            GetTransportDetailsAsync(shipmentId).GetAwaiter().GetResult();
+
+        public async Task<GetTransportDetailsResult> GetTransportDetailsAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetTransportDetails(shipmentId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetTransportDetails(shipmentId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<GetTransportDetailsResponse>(RateLimitType.FulFillmentInbound_GetTransportDetails);
+            var response = await ExecuteRequestAsync<GetTransportDetailsResponse>(RateLimitType.FulFillmentInbound_GetTransportDetails);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
 
-        public CommonTransportResult PutTransportDetails(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest)
+        public CommonTransportResult PutTransportDetails(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest) =>
+            PutTransportDetailsAsync(shipmentId, putTransportDetailsRequest).GetAwaiter().GetResult();
+
+        public async Task<CommonTransportResult> PutTransportDetailsAsync(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest)
         {
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.PutTransportDetails(shipmentId), RestSharp.Method.PUT, postJsonObj: putTransportDetailsRequest);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.PutTransportDetails(shipmentId), RestSharp.Method.PUT, postJsonObj: putTransportDetailsRequest);
 
-            var response = ExecuteRequest<PutTransportDetailsResponse>(RateLimitType.FulFillmentInbound_PutTransportDetails);
+            var response = await ExecuteRequestAsync<PutTransportDetailsResponse>(RateLimitType.FulFillmentInbound_PutTransportDetails);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public CommonTransportResult VoidTransport(string shipmentId)
-        {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.VoidTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+        public CommonTransportResult VoidTransport(string shipmentId) =>
+            VoidTransportAsync(shipmentId).GetAwaiter().GetResult();
 
-            var response = ExecuteRequest<VoidTransportResponse>(RateLimitType.FulFillmentInbound_VoidTransport);
-            if (response != null && response.Payload != null)
-                return response.Payload;
-            return null;
-        }
-        public CommonTransportResult EstimateTransport(string shipmentId)
+        public async Task<CommonTransportResult> VoidTransportAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.EstimateTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.VoidTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
-            var response = ExecuteRequest<EstimateTransportResponse>(RateLimitType.FulFillmentInbound_EstimateTransport);
+            var response = await ExecuteRequestAsync<VoidTransportResponse>(RateLimitType.FulFillmentInbound_VoidTransport);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public CommonTransportResult ConfirmTransport(string shipmentId)
+
+        public CommonTransportResult EstimateTransport(string shipmentId) =>
+            EstimateTransportAsync(shipmentId).GetAwaiter().GetResult();
+
+        public async Task<CommonTransportResult> EstimateTransportAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.ConfirmTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.EstimateTransport(shipmentId), RestSharp.Method.POST, queryParameters);
 
-            var response = ExecuteRequest<ConfirmTransportResponse>(RateLimitType.FulFillmentInbound_ConfirmTransport);
+            var response = await ExecuteRequestAsync<EstimateTransportResponse>(RateLimitType.FulFillmentInbound_EstimateTransport);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetPrepInstructionsResult GetLabels(ParameterGetLabels parameterGetLabels)
+
+        public CommonTransportResult ConfirmTransport(string shipmentId) =>
+            ConfirmTransportAsync(shipmentId).GetAwaiter().GetResult();
+
+        public async Task<CommonTransportResult> ConfirmTransportAsync(string shipmentId)
+        {
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
+
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmTransport(shipmentId), RestSharp.Method.POST, queryParameters);
+
+            var response = await ExecuteRequestAsync<ConfirmTransportResponse>(RateLimitType.FulFillmentInbound_ConfirmTransport);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
+        public GetPrepInstructionsResult GetLabels(ParameterGetLabels parameterGetLabels) =>
+            GetLabelsAsync(parameterGetLabels).GetAwaiter().GetResult();
+
+        public async Task<GetPrepInstructionsResult> GetLabelsAsync(ParameterGetLabels parameterGetLabels)
         {
             var parameter = parameterGetLabels.getParameters();
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.GET, parameter);
 
-            var response = ExecuteRequest<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetLabels);
+            var response = await ExecuteRequestAsync<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetLabels);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public BillOfLadingDownloadURL GetBillOfLading(string shipmentId)
+
+        public BillOfLadingDownloadURL GetBillOfLading(string shipmentId) =>
+            GetBillOfLadingAsync(shipmentId).GetAwaiter().GetResult();
+        public async Task<BillOfLadingDownloadURL> GetBillOfLadingAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetBillOfLading(shipmentId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetBillOfLading(shipmentId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<GetBillOfLadingResponse>(RateLimitType.FulFillmentInbound_GetBillOfLading);
+            var response = await ExecuteRequestAsync<GetBillOfLadingResponse>(RateLimitType.FulFillmentInbound_GetBillOfLading);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetShipmentsResult GetShipments(ParameterGetShipments parameterGetLabels)
+
+        public GetShipmentsResult GetShipments(ParameterGetShipments parameterGetLabels) =>
+            GetShipmentsAsync(parameterGetLabels).GetAwaiter().GetResult();
+
+        public async Task<GetShipmentsResult> GetShipmentsAsync(ParameterGetShipments parameterGetLabels)
         {
             var parameter = parameterGetLabels.getParameters();
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipments, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipments, RestSharp.Method.GET, parameter);
 
-            var response = ExecuteRequest<GetShipmentsResponse>(RateLimitType.FulFillmentInbound_GetShipments);
+            var response = await ExecuteRequestAsync<GetShipmentsResponse>(RateLimitType.FulFillmentInbound_GetShipments);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetShipmentItemsResult GetShipmentItemsByShipmentId(string shipmentId)
+
+        public GetShipmentItemsResult GetShipmentItemsByShipmentId(string shipmentId) =>
+            GetShipmentItemsByShipmentIdAsync(shipmentId).GetAwaiter().GetResult();
+        public async Task<GetShipmentItemsResult> GetShipmentItemsByShipmentIdAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipmentItemsByShipmentId(shipmentId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipmentItemsByShipmentId(shipmentId), RestSharp.Method.GET, queryParameters);
 
-            var response = ExecuteRequest<GetShipmentItemsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItemsByShipmentId);
+            var response = await ExecuteRequestAsync<GetShipmentItemsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItemsByShipmentId);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
         }
-        public GetShipmentsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems)
+        public GetShipmentsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems) =>
+            GetShipmentItemsAsync(parameterShipmentItems).GetAwaiter().GetResult();
+        public async Task<GetShipmentsResult> GetShipmentItemsAsync(ParameterListReturnReasonCodes parameterShipmentItems)
         {
             var parameter = parameterShipmentItems.getParameters();
-            CreateAuthorizedRequest(FulFillmentInboundApiUrls.GetShipmentItems, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipmentItems, RestSharp.Method.GET, parameter);
 
-            var response = ExecuteRequest<GetShipmentsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItems);
+            var response = await ExecuteRequestAsync<GetShipmentsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItems);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
