@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// <returns></returns>
         public static string UrlDecode(string data)
         {
-            return Uri.EscapeDataString(data);
+            return Uri.UnescapeDataString(data);
         }
 
         /// <summary>
