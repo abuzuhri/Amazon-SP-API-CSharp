@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelPackageInput" /> class.
         /// </summary>
         /// <param name="TrackingId">TrackingId (required).</param>
-        public NonPartneredSmallParcelPackageInput(TrackingId TrackingId = default(TrackingId))
+        public NonPartneredSmallParcelPackageInput(string TrackingId = default(string))
         {
             // to ensure "TrackingId" is required (not null)
             if (TrackingId == null)
@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets TrackingId
         /// </summary>
         [DataMember(Name = "TrackingId", EmitDefaultValue = false)]
-        public TrackingId TrackingId { get; set; }
+        public string TrackingId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

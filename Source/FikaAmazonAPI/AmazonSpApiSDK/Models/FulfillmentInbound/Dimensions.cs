@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="Width">The width dimension. (required).</param>
         /// <param name="Height">The height dimension. (required).</param>
         /// <param name="Unit">The unit of measurement for the dimensions. (required).</param>
-        public Dimensions(BigDecimalType Length = default(BigDecimalType), BigDecimalType Width = default(BigDecimalType), BigDecimalType Height = default(BigDecimalType), UnitOfMeasurement Unit = default(UnitOfMeasurement))
+        public Dimensions(double Length = default(double), double Width = default(double), double Height = default(double), UnitOfMeasurement Unit = default(UnitOfMeasurement))
         {
             // to ensure "Length" is required (not null)
             if (Length == null)
@@ -87,21 +87,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The length dimension.</value>
         [DataMember(Name = "Length", EmitDefaultValue = false)]
-        public BigDecimalType Length { get; set; }
+        public double Length { get; set; }
 
         /// <summary>
         /// The width dimension.
         /// </summary>
         /// <value>The width dimension.</value>
         [DataMember(Name = "Width", EmitDefaultValue = false)]
-        public BigDecimalType Width { get; set; }
+        public double Width { get; set; }
 
         /// <summary>
         /// The height dimension.
         /// </summary>
         /// <value>The height dimension.</value>
         [DataMember(Name = "Height", EmitDefaultValue = false)]
-        public BigDecimalType Height { get; set; }
+        public double Height { get; set; }
 
 
         /// <summary>

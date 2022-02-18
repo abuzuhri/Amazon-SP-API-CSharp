@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="CarrierName">The carrier that you are using for the inbound shipment. (required).</param>
         /// <param name="TrackingId">TrackingId (required).</param>
         /// <param name="PackageStatus">PackageStatus (required).</param>
-        public NonPartneredSmallParcelPackageOutput(string CarrierName = default(string), TrackingId TrackingId = default(TrackingId), PackageStatus PackageStatus = default(PackageStatus))
+        public NonPartneredSmallParcelPackageOutput(string CarrierName = default(string), string TrackingId = default(string), PackageStatus PackageStatus = default(PackageStatus))
         {
             // to ensure "CarrierName" is required (not null)
             if (CarrierName == null)
@@ -82,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets TrackingId
         /// </summary>
         [DataMember(Name = "TrackingId", EmitDefaultValue = false)]
-        public TrackingId TrackingId { get; set; }
+        public string TrackingId { get; set; }
 
 
         /// <summary>

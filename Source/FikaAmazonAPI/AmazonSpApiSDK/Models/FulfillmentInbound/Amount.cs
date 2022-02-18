@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <param name="CurrencyCode">CurrencyCode (required).</param>
         /// <param name="Value">The amount. (required).</param>
-        public Amount(CurrencyCode CurrencyCode = default(CurrencyCode), BigDecimalType Value = default(BigDecimalType))
+        public Amount(CurrencyCode CurrencyCode = default(CurrencyCode), double Value = default(double))
         {
             // to ensure "CurrencyCode" is required (not null)
             if (CurrencyCode == null)
@@ -67,7 +67,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The amount.</value>
         [DataMember(Name = "Value", EmitDefaultValue = false)]
-        public BigDecimalType Value { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
