@@ -31,6 +31,31 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+
+            //var parameterOrderList = new ParameterOrderList
+            //{
+            //    CreatedAfter = DateTime.UtcNow.AddHours(-24),
+            //    OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
+            //    IsNeedRestrictedDataToken = true,
+            //    RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
+            //    {
+            //        restrictedResources = new List<RestrictedResource>
+            //    {
+            //        new RestrictedResource
+            //        {
+            //            method = Method.GET.ToString(),
+            //            path = ApiUrls.OrdersApiUrls.Orders,
+            //            dataElements = new List<string> { "buyerInfo", "shippingAddress" }
+            //        }
+            //    }
+            //    }
+            //};
+
+            //var ordersqqqq = await amazonConnection.Orders.GetOrdersAsync(parameterOrderList);
+
+
+
+
             var seller = await amazonConnection.Seller.GetMarketplaceParticipationsAsync();
 
             var dataaa = await amazonConnection.FbaInventory.GetInventorySummariesAsync(new Parameter.FbaInventory.ParameterGetInventorySummaries
