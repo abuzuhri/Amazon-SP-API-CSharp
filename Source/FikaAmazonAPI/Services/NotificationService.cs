@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.Services
         //https://github.com/amzn/selling-partner-api-docs/blob/3fb7fcea1a828d31277a565af20cd4ef996b9dd7/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#grantless-operations
 
         public Subscription GetSubscription(NotificationType notificationType) =>
-            GetSubscriptionAsync(notificationType).GetAwaiter().GetResult();
+            Task.Run(() => GetSubscriptionAsync(notificationType)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> GetSubscriptionAsync(NotificationType notificationType)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscription(notificationType.ToString()), RestSharp.Method.GET);
@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.Services
         //createSubscription
 
         public Destination CreateDestination(CreateDestinationRequest request) =>
-            CreateDestinationAsync(request).GetAwaiter().GetResult();
+            Task.Run(() => CreateDestinationAsync(request)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Destination> CreateDestinationAsync(CreateDestinationRequest request)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateDestination, RestSharp.Method.POST, postJsonObj: request, tokenDataType: TokenDataType.Grantless);
@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public List<Destination> GetDestinations() =>
-            GetDestinationsAsync().GetAwaiter().GetResult();
+            Task.Run(() => GetDestinationsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<Destination>> GetDestinationsAsync()
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestinations, RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
@@ -58,7 +58,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
         public Destination GetDestination(string destinationId) =>
-            GetDestinationAsync(destinationId).GetAwaiter().GetResult();
+            Task.Run(() => GetDestinationAsync(destinationId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Destination> GetDestinationAsync(string destinationId)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestination(destinationId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool DeleteDestination(string destinationId) =>
-            DeleteDestinationAsync(destinationId).GetAwaiter().GetResult();
+            Task.Run(() => DeleteDestinationAsync(destinationId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> DeleteDestinationAsync(string destinationId)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteDestination(destinationId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
@@ -81,7 +81,7 @@ namespace FikaAmazonAPI.Services
 
 
         public Subscription CreateSubscription(ParameterCreateSubscription param) =>
-            CreateSubscriptionAsync(param).GetAwaiter().GetResult();
+            Task.Run(() => CreateSubscriptionAsync(param)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> CreateSubscriptionAsync(ParameterCreateSubscription param)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateSubscription(param.notificationType.ToString()), RestSharp.Method.POST, postJsonObj: param);
@@ -92,7 +92,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Subscription GetSubscriptionById(NotificationType notificationType, string subscriptionId) =>
-            GetSubscriptionByIdAsync(notificationType, subscriptionId).GetAwaiter().GetResult();
+            Task.Run(() => GetSubscriptionByIdAsync(notificationType, subscriptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> GetSubscriptionByIdAsync(NotificationType notificationType, string subscriptionId)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool DeleteSubscriptionById(NotificationType notificationType, string subscriptionId) =>
-            DeleteSubscriptionByIdAsync(notificationType, subscriptionId).GetAwaiter().GetResult();
+            Task.Run(() => DeleteSubscriptionByIdAsync(notificationType, subscriptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> DeleteSubscriptionByIdAsync(NotificationType notificationType, string subscriptionId)
         {
             await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
@@ -114,7 +114,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver) =>
-            StartReceivingNotificationMessagesAsync(param, messageReceiver).GetAwaiter().GetResult();
+            Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver)
         {

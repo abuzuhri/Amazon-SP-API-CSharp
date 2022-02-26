@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region feedback
         public List<FeedbackOrderRow> GetFeedbackFromDays(int days) =>
-            GetFeedbackFromDaysAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedbackFromDaysAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<FeedbackOrderRow>> GetFeedbackFromDaysAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Reimbursement
         public IList<ReimbursementsOrderRow> GetReimbursementsOrder(int days) =>
-            GetReimbursementsOrderAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetReimbursementsOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<ReimbursementsOrderRow>> GetReimbursementsOrderAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return await GetReimbursementsOrderAsync(fromDate, toDate);
         }
         public IList<ReimbursementsOrderRow> GetReimbursementsOrder(DateTime fromDate, DateTime toDate) =>
-            GetReimbursementsOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
+            Task.Run(() => GetReimbursementsOrderAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<ReimbursementsOrderRow>> GetReimbursementsOrderAsync(DateTime fromDate, DateTime toDate)
         {
             var path = await GetReimbursementsOrderAsync(_amazonConnection, fromDate, toDate);
@@ -67,7 +67,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region ReturnFBAOrder
         public List<ReturnFBAOrderRow> GetReturnFBAOrder(int days) =>
-            GetReturnFBAOrderAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetReturnFBAOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -76,7 +76,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
 
         public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate) =>
-            GetReturnFBAOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
+            Task.Run(() => GetReturnFBAOrderAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate)
         {
             var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate);
@@ -95,7 +95,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region ReturnFBMOrder
         public List<ReturnFBMOrderRow> GetReturnMFNOrder(int days) =>
-            GetReturnMFNOrderAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetReturnMFNOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<ReturnFBMOrderRow>> GetReturnMFNOrderAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return await GetReturnMFNOrderAsync(fromDate, toDate);
         }
         public List<ReturnFBMOrderRow> GetReturnMFNOrder(DateTime fromDate, DateTime toDate) =>
-            GetReturnMFNOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
+            Task.Run(() => GetReturnMFNOrderAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<ReturnFBMOrderRow>> GetReturnMFNOrderAsync(DateTime fromDate, DateTime toDate)
         {
             List<ReturnFBMOrderRow> list = new List<ReturnFBMOrderRow>();
@@ -125,7 +125,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Settlement
         public List<SettlementOrderRow> GetSettlementOrder(int days) =>
-            GetSettlementOrderAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetSettlementOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<SettlementOrderRow>> GetSettlementOrderAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -168,7 +168,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region GetInventoryAging
         public List<InventoryAgingRow> GetInventoryAging() =>
-            GetInventoryAgingAsync().GetAwaiter().GetResult();
+            Task.Run(() => GetInventoryAgingAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<InventoryAgingRow>> GetInventoryAgingAsync()
         {
             var path = await GetInventoryAgingAsync(_amazonConnection);
@@ -183,7 +183,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Products
         public List<ProductsRow> GetProducts() =>
-            GetProductsAsync().GetAwaiter().GetResult();
+            Task.Run(() => GetProductsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<ProductsRow>> GetProductsAsync()
         {
             var path = await GetProductsAsync(_amazonConnection);
@@ -198,7 +198,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #region Orders
         public List<OrdersRow> GetOrdersByLastUpdate(int days) =>
-            GetOrdersByLastUpdateAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetOrdersByLastUpdateAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrdersRow>> GetOrdersByLastUpdateAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -223,7 +223,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
 
         public List<OrdersRow> GetOrdersByOrderDate(int days) =>
-            GetOrdersByOrderDateAsync(days).GetAwaiter().GetResult();
+            Task.Run(() => GetOrdersByOrderDateAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrdersRow>> GetOrdersByOrderDateAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
@@ -231,7 +231,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return await GetOrdersByOrderDateAsync(fromDate, toDate);
         }
         public List<OrdersRow> GetOrdersByOrderDate(DateTime fromDate, DateTime toDate) =>
-            GetOrdersByOrderDateAsync(fromDate, toDate).GetAwaiter().GetResult();
+            Task.Run(() => GetOrdersByOrderDateAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrdersRow>> GetOrdersByOrderDateAsync(DateTime fromDate, DateTime toDate)
         {
             List<OrdersRow> list = new List<OrdersRow>();

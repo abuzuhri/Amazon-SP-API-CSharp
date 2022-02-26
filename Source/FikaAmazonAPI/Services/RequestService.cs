@@ -119,7 +119,7 @@ namespace FikaAmazonAPI.Services
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         //{
-        //    return this.ExecuteRequestAsync<T>(rateLimitType).GetAwaiter().GetResult();
+        //    return this.ExecuteRequestAsync<T>(rateLimitType)).ConfigureAwait(false).GetAwaiter().GetResult();
         //}
 
         public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -253,7 +253,7 @@ namespace FikaAmazonAPI.Services
             Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
         }
 
-        protected void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
+        protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)
@@ -276,7 +276,7 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = TokenGeneration.RefreshAccessToken(AmazonCredential, tokenDataType);
+                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType);
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);
@@ -321,7 +321,7 @@ namespace FikaAmazonAPI.Services
 
         public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            return CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest).GetAwaiter().GetResult();
+            return Task.Run(() => CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)

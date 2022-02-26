@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.Services
 
 
         public async Task<IList<Feed>> GetFeeds(ParameterGetFeed parameterGetFeed) =>
-            GetFeedsAsync(parameterGetFeed).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedsAsync(parameterGetFeed)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<Feed>> GetFeedsAsync(ParameterGetFeed parameterGetFeed)
         {
@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Services
 
 
         public GetFeedsResponseV00 GetFeedsByNextToken(string nextToken) =>
-            GetFeedsByNextTokenAsync(nextToken).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedsByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetFeedsResponseV00> GetFeedsByNextTokenAsync(string nextToken)
         {
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
 
 
         public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification) =>
-            CreateFeedAsync(createFeedSpecification).GetAwaiter().GetResult();
+            Task.Run(() => CreateFeedAsync(createFeedSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CreateFeedResult> CreateFeedAsync(CreateFeedSpecification createFeedSpecification)
         {
@@ -75,7 +75,7 @@ namespace FikaAmazonAPI.Services
             return response;
         }
         public Feed GetFeed(string feedId) =>
-            GetFeedAsync(feedId).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedAsync(feedId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<Feed> GetFeedAsync(string feedId)
         {
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
         public Feed CancelFeed(string feedId) =>
-            CancelFeedAsync(feedId).GetAwaiter().GetResult();
+            Task.Run(() => CancelFeedAsync(feedId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<Feed> CancelFeedAsync(string feedId)
         {
@@ -98,7 +98,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public FeedDocument GetFeedDocument(string feedDocumentId) =>
-            GetFeedDocumentAsync(feedDocumentId).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedDocumentAsync(feedDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId)
         {
@@ -110,7 +110,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
-            GetFeedDocumentProcessingReportAsync(url).GetAwaiter().GetResult();
+            Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
@@ -148,7 +148,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType) =>
-            CreateFeedDocumentAsync(contentType).GetAwaiter().GetResult();
+            Task.Run(() => CreateFeedDocumentAsync(contentType)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CreateFeedDocumentResult> CreateFeedDocumentAsync(ContentType contentType)
         {
@@ -163,7 +163,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
-            SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType).GetAwaiter().GetResult();
+            Task.Run(() => SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         /// <summary>
         /// read full step  https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md

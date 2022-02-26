@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public List<OrderMetricsInterval> GetOrderMetricsAsync(ParameterGetOrderMetrics parameterGetOrderMetrics) =>
-            GetOrderMetrics(parameterGetOrderMetrics).GetAwaiter().GetResult();
+            Task.Run(() => GetOrderMetrics(parameterGetOrderMetrics)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrderMetricsInterval>> GetOrderMetrics(ParameterGetOrderMetrics parameterGetOrderMetrics)
         {
             var param = parameterGetOrderMetrics.getParameters();

@@ -25,15 +25,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
         }
 
-        /// <summary>
-        /// Retrieves access token from LWA
-        /// </summary>
-        /// <param name="lwaAccessTokenRequestMeta">LWA AccessTokenRequest metadata</param>
-        /// <returns>LWA Access Token</returns>
-        public virtual TokenResponse GetAccessToken()
-        {
-            return GetAccessTokenAsync().GetAwaiter().GetResult();
-        }
 
         /// <summary>
         /// Retrieves access token from LWA
@@ -51,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             try
             {
-                var response = await RestClient.ExecuteAsync(accessTokenRequest);
+                var response = await RestClient.ExecuteAsync(accessTokenRequest).ConfigureAwait(false);
 
                 if (!IsSuccessful(response))
                 {
