@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetInboundGuidanceResult GetInboundGuidance(ParameterGetInboundGuidance parameterGetInboundGuidance) =>
-            Task.Run(() => GetInboundGuidanceAsync(parameterGetInboundGuidance)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetInboundGuidanceAsync(parameterGetInboundGuidance).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetInboundGuidanceResult> GetInboundGuidanceAsync(ParameterGetInboundGuidance parameterGetInboundGuidance)
         {
             var parameter = parameterGetInboundGuidance.getParameters();
@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CreateInboundShipmentPlanResult CreateInboundShipmentPlan(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest) =>
-            Task.Run(() => CreateInboundShipmentPlanAsync(createInboundShipmentPlanRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            CreateInboundShipmentPlanAsync(createInboundShipmentPlanRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<CreateInboundShipmentPlanResult> CreateInboundShipmentPlanAsync(CreateInboundShipmentPlanRequest createInboundShipmentPlanRequest)
         {
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateInboundShipmentPlan, RestSharp.Method.POST, postJsonObj: createInboundShipmentPlanRequest);
@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public InboundShipmentResult UpdateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest) =>
-            Task.Run(() => UpdateInboundShipmentAsync(shipmentId, inboundShipmentRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            UpdateInboundShipmentAsync(shipmentId, inboundShipmentRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<InboundShipmentResult> UpdateInboundShipmentAsync(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateInboundShipment(shipmentId), RestSharp.Method.PUT, postJsonObj: inboundShipmentRequest);
@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public InboundShipmentResult CreateInboundShipment(string shipmentId, InboundShipmentRequest inboundShipmentRequest) =>
-            Task.Run(() => CreateInboundShipmentAsync(shipmentId, inboundShipmentRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            CreateInboundShipmentAsync(shipmentId, inboundShipmentRequest).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<InboundShipmentResult> CreateInboundShipmentAsync(string shipmentId, InboundShipmentRequest inboundShipmentRequest)
         {
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public InboundShipmentResult GetPreorderInfo(string shipmentId) =>
-            Task.Run(() => GetPreorderInfoAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetPreorderInfoAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<InboundShipmentResult> GetPreorderInfoAsync(string shipmentId)
         {
@@ -81,7 +81,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ConfirmPreorderResult ConfirmPreorder(string shipmentId, DateTime NeedByDate) =>
-            Task.Run(() => ConfirmPreorderAsync(shipmentId, NeedByDate)).ConfigureAwait(false).GetAwaiter().GetResult();
+            ConfirmPreorderAsync(shipmentId, NeedByDate).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<ConfirmPreorderResult> ConfirmPreorderAsync(string shipmentId, DateTime NeedByDate)
         {
@@ -98,7 +98,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetPrepInstructionsResult GetPrepInstructions(ParameterGetPrepInstructions parameterGetPrepInstructions) =>
-            Task.Run(() => GetPrepInstructionsAsync(parameterGetPrepInstructions)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetPrepInstructionsAsync(parameterGetPrepInstructions).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetPrepInstructionsResult> GetPrepInstructionsAsync(ParameterGetPrepInstructions parameterGetPrepInstructions)
         {
@@ -111,7 +111,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
         public GetTransportDetailsResult GetTransportDetails(string shipmentId) =>
-            Task.Run(() => GetTransportDetailsAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetTransportDetailsAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetTransportDetailsResult> GetTransportDetailsAsync(string shipmentId)
         {
@@ -127,7 +127,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CommonTransportResult PutTransportDetails(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest) =>
-            Task.Run(() => PutTransportDetailsAsync(shipmentId, putTransportDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            PutTransportDetailsAsync(shipmentId, putTransportDetailsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CommonTransportResult> PutTransportDetailsAsync(string shipmentId, PutTransportDetailsRequest putTransportDetailsRequest)
         {
@@ -140,7 +140,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CommonTransportResult VoidTransport(string shipmentId) =>
-            Task.Run(() => VoidTransportAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            VoidTransportAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CommonTransportResult> VoidTransportAsync(string shipmentId)
         {
@@ -156,7 +156,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CommonTransportResult EstimateTransport(string shipmentId) =>
-            Task.Run(() => EstimateTransportAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            EstimateTransportAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CommonTransportResult> EstimateTransportAsync(string shipmentId)
         {
@@ -172,7 +172,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CommonTransportResult ConfirmTransport(string shipmentId) =>
-            Task.Run(() => ConfirmTransportAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            ConfirmTransportAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CommonTransportResult> ConfirmTransportAsync(string shipmentId)
         {
@@ -188,7 +188,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetPrepInstructionsResult GetLabels(ParameterGetLabels parameterGetLabels) =>
-            Task.Run(() => GetLabelsAsync(parameterGetLabels)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetLabelsAsync(parameterGetLabels).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetPrepInstructionsResult> GetLabelsAsync(ParameterGetLabels parameterGetLabels)
         {
@@ -202,7 +202,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public BillOfLadingDownloadURL GetBillOfLading(string shipmentId) =>
-            Task.Run(() => GetBillOfLadingAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetBillOfLadingAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<BillOfLadingDownloadURL> GetBillOfLadingAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -217,7 +217,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetShipmentsResult GetShipments(ParameterGetShipments parameterGetLabels) =>
-            Task.Run(() => GetShipmentsAsync(parameterGetLabels)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetShipmentsAsync(parameterGetLabels).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetShipmentsResult> GetShipmentsAsync(ParameterGetShipments parameterGetLabels)
         {
@@ -231,7 +231,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetShipmentItemsResult GetShipmentItemsByShipmentId(string shipmentId) =>
-            Task.Run(() => GetShipmentItemsByShipmentIdAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetShipmentItemsByShipmentIdAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetShipmentItemsResult> GetShipmentItemsByShipmentIdAsync(string shipmentId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -245,7 +245,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
         public GetShipmentsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems) =>
-            Task.Run(() => GetShipmentItemsAsync(parameterShipmentItems)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetShipmentItemsAsync(parameterShipmentItems).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetShipmentsResult> GetShipmentItemsAsync(ParameterListReturnReasonCodes parameterShipmentItems)
         {
             var parameter = parameterShipmentItems.getParameters();

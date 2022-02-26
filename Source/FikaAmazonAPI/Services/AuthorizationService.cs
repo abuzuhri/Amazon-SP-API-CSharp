@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.Services
         {
         }
         public string GetAuthorizationCode(ParameterAuthorizationCode parameterGetOrderMetrics) =>
-            Task.Run(() => GetAuthorizationCodeAsync(parameterGetOrderMetrics)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetAuthorizationCodeAsync(parameterGetOrderMetrics).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<string> GetAuthorizationCodeAsync(ParameterAuthorizationCode parameter)
         {

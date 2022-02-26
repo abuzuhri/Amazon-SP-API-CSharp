@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
 
 
         public List<InventorySummaries> GetInventorySummaries(ParameterGetInventorySummaries parameter) =>
-            Task.Run(() => GetInventorySummariesAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetInventorySummariesAsync(parameter).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<List<InventorySummaries>> GetInventorySummariesAsync(ParameterGetInventorySummaries parameter)
         {
@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetInventorySummariesResponse GetInventorySummariesByNextToken(string nextToken, ParameterGetInventorySummaries parameterGetInventorySummaries) =>
-            Task.Run(() => GetInventorySummariesByNextTokenAsync(nextToken, parameterGetInventorySummaries)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetInventorySummariesByNextTokenAsync(nextToken, parameterGetInventorySummaries).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetInventorySummariesResponse> GetInventorySummariesByNextTokenAsync(string nextToken, ParameterGetInventorySummaries parameterGetInventorySummaries)
         {

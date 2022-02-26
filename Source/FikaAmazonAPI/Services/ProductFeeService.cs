@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.Services
 
 
         public FeesEstimateResult GetMyFeesEstimateForSKU(string SKU, FeesEstimateRequest feesEstimateRequest) =>
-            Task.Run(() => GetMyFeesEstimateForSKUAsync(SKU, feesEstimateRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetMyFeesEstimateForSKUAsync(SKU, feesEstimateRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<FeesEstimateResult> GetMyFeesEstimateForSKUAsync(string SKU, FeesEstimateRequest feesEstimateRequest)
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public FeesEstimateResult GetMyFeesEstimateForASIN(string ASIN, FeesEstimateRequest feesEstimateRequest) =>
-            Task.Run(() => GetMyFeesEstimateForASINAsync(ASIN, feesEstimateRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetMyFeesEstimateForASINAsync(ASIN, feesEstimateRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<FeesEstimateResult> GetMyFeesEstimateForASINAsync(string ASIN, FeesEstimateRequest feesEstimateRequest)
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };

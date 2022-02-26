@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public List<MarketplaceParticipation> GetMarketplaceParticipations() =>
-                Task.Run(() => GetMarketplaceParticipationsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+                GetMarketplaceParticipationsAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<List<MarketplaceParticipation>> GetMarketplaceParticipationsAsync()
         {

@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public GetEligibleShipmentServicesResult GetEligibleShipmentServicesOld(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest) =>
-            Task.Run(() => GetEligibleShipmentServicesOldAsync(getEligibleShipmentServicesRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetEligibleShipmentServicesOldAsync(getEligibleShipmentServicesRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetEligibleShipmentServicesResult> GetEligibleShipmentServicesOldAsync(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
         {
 
@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetEligibleShipmentServicesResult GetEligibleShipmentServices(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest) =>
-            Task.Run(() => GetEligibleShipmentServicesAsync(getEligibleShipmentServicesRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetEligibleShipmentServicesAsync(getEligibleShipmentServicesRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetEligibleShipmentServicesResult> GetEligibleShipmentServicesAsync(GetEligibleShipmentServicesRequest getEligibleShipmentServicesRequest)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetEligibleShipmentServices, RestSharp.Method.POST, postJsonObj: getEligibleShipmentServicesRequest);
@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Shipment GetShipment(string shipmentId, IParameterBasedPII ParameterBasedPII = null) =>
-            Task.Run(() => GetShipmentAsync(shipmentId, ParameterBasedPII = null)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetShipmentAsync(shipmentId, ParameterBasedPII = null).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> GetShipmentAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.GET, parameter: ParameterBasedPII);
@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
         public Shipment CancelShipment(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => CancelShipmentAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
+            CancelShipmentAsync(shipmentId, parameterBasedPII).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> CancelShipmentAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.DELETE, parameter: parameterBasedPII);
@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => CancelShipmentOldAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
+            CancelShipmentOldAsync(shipmentId, parameterBasedPII).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.PUT, parameter: ParameterBasedPII);
@@ -75,7 +75,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Shipment CreateShipment(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => CreateShipmentAsync(createShipmentRequest, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
+            CreateShipmentAsync(createShipmentRequest, parameterBasedPII).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> CreateShipmentAsync(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.POST, postJsonObj: createShipmentRequest, parameter: parameterBasedPII);
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetAdditionalSellerInputsResult GetAdditionalSellerInputsOld(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest) =>
-            Task.Run(() => GetAdditionalSellerInputsOldAsync(getAdditionalSellerInputsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetAdditionalSellerInputsOldAsync(getAdditionalSellerInputsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetAdditionalSellerInputsResult> GetAdditionalSellerInputsOldAsync(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetAdditionalSellerInputsOld, RestSharp.Method.POST, postJsonObj: getAdditionalSellerInputsRequest);
@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetAdditionalSellerInputsResult GetAdditionalSellerInputs(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest) =>
-            Task.Run(() => GetAdditionalSellerInputsAsync(getAdditionalSellerInputsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetAdditionalSellerInputsAsync(getAdditionalSellerInputsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetAdditionalSellerInputsResult> GetAdditionalSellerInputsAsync(GetAdditionalSellerInputsRequest getAdditionalSellerInputsRequest)
         {
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetAdditionalSellerInputs, RestSharp.Method.POST, postJsonObj: getAdditionalSellerInputsRequest);

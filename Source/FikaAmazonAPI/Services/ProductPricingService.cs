@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public IList<Price> GetPricing(ParameterGetPricing parameterGetPricing) =>
-            Task.Run(() => GetPricingAsync(parameterGetPricing)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetPricingAsync(parameterGetPricing).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<Price>> GetPricingAsync(ParameterGetPricing parameterGetPricing)
         {
             var param = parameterGetPricing.getParameters();
@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public IList<Price> GetCompetitivePricing(ParameterGetCompetitivePricing parameterGetCompetitivePricing) =>
-            Task.Run(() => GetCompetitivePricingAsync(parameterGetCompetitivePricing)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetCompetitivePricingAsync(parameterGetCompetitivePricing).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<Price>> GetCompetitivePricingAsync(ParameterGetCompetitivePricing parameterGetCompetitivePricing)
         {
             var param = parameterGetCompetitivePricing.getParameters();
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetOffersResult GetListingOffers(ParameterGetListingOffers parameterGetListingOffers) =>
-            Task.Run(() => GetListingOffersAsync(parameterGetListingOffers)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetListingOffersAsync(parameterGetListingOffers).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetOffersResult> GetListingOffersAsync(ParameterGetListingOffers parameterGetListingOffers)
         {
             var param = parameterGetListingOffers.getParameters();
@@ -54,7 +54,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetOffersResult GetItemOffers(ParameterGetItemOffers parameterGetItemOffers) =>
-            Task.Run(() => GetItemOffersAsync(parameterGetItemOffers)).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetItemOffersAsync(parameterGetItemOffers).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetOffersResult> GetItemOffersAsync(ParameterGetItemOffers parameterGetItemOffers)
         {
             var param = parameterGetItemOffers.getParameters();
