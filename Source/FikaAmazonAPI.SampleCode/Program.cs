@@ -31,6 +31,15 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddDays(-100);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+
 
             //var parameterOrderList = new ParameterOrderList
             //{
@@ -93,14 +102,7 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
-
-
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
             var list3 = amazonConnection.Financial.ListFinancialEvents(new ParameterListFinancialEvents()
             {

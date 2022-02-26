@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
@@ -167,7 +166,7 @@ namespace FikaAmazonAPI.Services
                         if (rate > 0)
                         {
                             int sleepTime = (int)(1 / rate * 1000);
-                            Thread.Sleep(sleepTime);
+                            Task.Delay(sleepTime).Wait();
                         }
                     }
                     else

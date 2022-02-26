@@ -50,6 +50,8 @@ namespace FikaAmazonAPI.ReportGeneration
             DateTime toDate = DateTime.UtcNow;
             return await GetReimbursementsOrderAsync(fromDate, toDate);
         }
+        public IList<ReimbursementsOrderRow> GetReimbursementsOrder(DateTime fromDate, DateTime toDate) =>
+            GetReimbursementsOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
         public async Task<IList<ReimbursementsOrderRow>> GetReimbursementsOrderAsync(DateTime fromDate, DateTime toDate)
         {
             var path = await GetReimbursementsOrderAsync(_amazonConnection, fromDate, toDate);
@@ -72,6 +74,9 @@ namespace FikaAmazonAPI.ReportGeneration
             DateTime toDate = DateTime.UtcNow;
             return await GetReturnFBAOrderAsync(fromDate, toDate);
         }
+
+        public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate) =>
+            GetReturnFBAOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
         public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate)
         {
             var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate);
@@ -97,6 +102,8 @@ namespace FikaAmazonAPI.ReportGeneration
             DateTime toDate = DateTime.UtcNow;
             return await GetReturnMFNOrderAsync(fromDate, toDate);
         }
+        public List<ReturnFBMOrderRow> GetReturnMFNOrder(DateTime fromDate, DateTime toDate) =>
+            GetReturnMFNOrderAsync(fromDate, toDate).GetAwaiter().GetResult();
         public async Task<List<ReturnFBMOrderRow>> GetReturnMFNOrderAsync(DateTime fromDate, DateTime toDate)
         {
             List<ReturnFBMOrderRow> list = new List<ReturnFBMOrderRow>();
@@ -110,7 +117,7 @@ namespace FikaAmazonAPI.ReportGeneration
             }
             return list;
         }
-        public async Task<string> GetReturnMFNOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private async Task<string> GetReturnMFNOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE, fromDate, toDate);
         }
@@ -223,6 +230,8 @@ namespace FikaAmazonAPI.ReportGeneration
             DateTime toDate = DateTime.UtcNow;
             return await GetOrdersByOrderDateAsync(fromDate, toDate);
         }
+        public List<OrdersRow> GetOrdersByOrderDate(DateTime fromDate, DateTime toDate) =>
+            GetOrdersByOrderDateAsync(fromDate, toDate).GetAwaiter().GetResult();
         public async Task<List<OrdersRow>> GetOrdersByOrderDateAsync(DateTime fromDate, DateTime toDate)
         {
             List<OrdersRow> list = new List<OrdersRow>();

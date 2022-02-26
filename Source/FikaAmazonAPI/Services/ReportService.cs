@@ -6,7 +6,6 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -258,7 +257,7 @@ namespace FikaAmazonAPI.Services
                 {
                     return null;
                 }
-                else Thread.Sleep(500);
+                else Task.Delay(500).Wait();
             }
             return filePath;
         }
