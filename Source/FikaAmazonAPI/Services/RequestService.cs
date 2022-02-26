@@ -55,6 +55,14 @@ namespace FikaAmazonAPI.Services
             RequestClient = new RestClient(ApiBaseUrl);
             Request = new RestRequest(url, method);
         }
+        protected async Task CreateUnAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null)
+        {
+            CreateRequest(url, method);
+            if (postJsonObj != null)
+                AddJsonBody(postJsonObj);
+            if (queryParameters != null)
+                AddQueryParameters(queryParameters);
+        }
 
         protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
         {
@@ -185,16 +193,17 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        /// <summary>
-        /// Executes the request 
-        /// </summary>
-        /// <typeparam name="T">Type to parse response to</typeparam>
-        /// <returns>Returns raw response</returns>
-        protected IRestResponse ExecuteRequest()
+
+        protected async Task<T> ExecuteUnAuthorizedRequest<T>() where T : new()
         {
-            var response = RequestClient.Execute(Request);
+            var response = await RequestClient.ExecuteAsync<T>(Request);
             ParseResponse(response);
-            return response;
+
+            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
+            {
+                response.Data = JsonConvert.DeserializeObject<T>(response.Content);
+            }
+            return response.Data;
         }
 
         protected void ParseResponse(IRestResponse response)

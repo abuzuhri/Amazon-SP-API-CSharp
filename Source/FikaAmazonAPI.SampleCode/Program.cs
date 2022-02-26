@@ -19,6 +19,7 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
@@ -31,6 +32,17 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            var sss = amazonConnection.Authorization.GetAuthorizationCode(new Parameter.Authorization.ParameterAuthorizationCode()
+            {
+                developerId = "673740111638",
+                mwsAuthToken = "amzn.mws.f0b83c90-ac85-07fc-f35b-9b9021fcbcf3",
+                sellingPartnerId = "A3J37AJU4O9RHK"
+            });
+
+            ReportManager reportManager2 = new ReportManager(amazonConnection);
+            var products2 = await reportManager2.GetProductsAsync(); //GET_MERCHANT_LISTINGS_ALL_DATA
+
+
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddDays(-100);
 
@@ -38,7 +50,7 @@ namespace FikaAmazonAPI.SampleCode
             serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
 
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = await amazonConnection.Orders.GetOrdersAsync(serachOrderList);
 
 
             //var parameterOrderList = new ParameterOrderList

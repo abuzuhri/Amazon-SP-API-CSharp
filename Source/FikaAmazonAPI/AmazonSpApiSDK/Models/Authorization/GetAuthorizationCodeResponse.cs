@@ -28,6 +28,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization
         /// </summary>
         /// <param name="Payload">Payload.</param>
         /// <param name="Errors">Errors.</param>
+        public GetAuthorizationCodeResponse()
+        {
+            this.Payload = default(AuthorizationCode);
+            this.Errors = default(ErrorList);
+        }
         public GetAuthorizationCodeResponse(AuthorizationCode Payload = default(AuthorizationCode), ErrorList Errors = default(ErrorList))
         {
             this.Payload = Payload;

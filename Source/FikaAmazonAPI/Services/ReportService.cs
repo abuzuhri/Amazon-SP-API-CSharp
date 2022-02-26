@@ -237,7 +237,7 @@ namespace FikaAmazonAPI.Services
             if (dataEndTime.HasValue)
                 parameters.dataEndTime = dataEndTime;
 
-            var reportId = CreateReport(parameters);
+            var reportId = await CreateReportAsync(parameters);
             var filePath = string.Empty;
             string ReportDocumentId = string.Empty;
 
@@ -246,7 +246,7 @@ namespace FikaAmazonAPI.Services
                 var reportData = await GetReportAsync(reportId);
                 if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
                 {
-                    filePath = GetReportFile(reportData.ReportDocumentId);
+                    filePath = await GetReportFileAsync(reportData.ReportDocumentId);
                     break;
                 }
                 if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.FATAL)
