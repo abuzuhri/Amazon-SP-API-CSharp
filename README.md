@@ -1,4 +1,4 @@
-# Amazon Selling Partner API C# 🚀 [![.NET](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
+# ☕Amazon Selling Partner API C# 🚀 [![.NET](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
 
 
 This is an API Binding in .Net C# for the new Amazon Selling Partner API.
@@ -17,16 +17,13 @@ The purpose of this package is to have an easy way of getting started with the A
 - [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
 - [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
 
----
-### Useful links
-##### [Selling Partner API](https://developer-docs.amazon.com/sp-api)
-##### [Amazon MWS to SP-API Migration Guide](https://developer-docs.amazon.com/sp-api/docs/amazon-mws-to-sp-api-migration-guide#mapping-apis-from-amazon-mws-to-the-selling-partner-api)
-##### [SP-API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
-##### [Using Postman for Selling Partner API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
-##### [Test Project with pure C# code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Others/PureCodeSampleForTest)
-##### [Sample Code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Source/FikaAmazonAPI.SampleCode)
-##### [Creating And Configuring AWS](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
 
+---
+## Installation [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/)
+
+```powershell
+Install-Package CSharpAmazonSpAPI
+```
 
 ---
 ### Tasks
@@ -72,36 +69,23 @@ The purpose of this package is to have an easy way of getting started with the A
 
 
 ---
-## Installation [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/)
-
-```powershell
-Install-Package CSharpAmazonSpAPI
-```
-
----
-## Contributing
-
-1. Fork it (https://github.com/abuzuhri/Amazon-SP-API-CSharp/fork)
-2. Clone it (`git clone https://github.com/{YOUR_USERNAME}/Amazon-SP-API-CSharp`)
-3. Create your feature branch (`git checkout -b your_branch_name`)
-4. Commit your changes (`git commit -m 'Description of a commit'`)
-5. Push to the branch (`git push origin your_branch_name`)
-6. Create a new Pull Request
-
----
 ## Keys
+To get all keys needed you need to follow this step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) and then you need to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application) then [Authorizing Selling Partner API applications
+](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
+> :warning: **Use role ARN created in step 5 when you register your application**: and dont use IAM user
+
 | Name | Description |
 | --- | --- |
 | AccessKey | AWS USER ACCESS KEY |
 | SecretKey | AWS USER SECRET KEY |
 | RoleArn | AWS IAM Role ARN (needs permission to “Assume Role” STS) |
-| Region | Marketplace region |
+| Region | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
 | RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
 
 
-For more information about keys please check [Amazon Selling Partner API developer guide](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
+For more information about keys please check [New Amazon doc for create keys Developer ](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
 
 ---
 ## Usage
@@ -116,7 +100,7 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG")
+     MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG") 
 });
 
 ```
@@ -410,6 +394,26 @@ If you have questions, please ask in GitHub discussions
 ## ToDo
 
 - Improve documentation
+
+---
+### Useful links
+##### [Selling Partner API](https://developer-docs.amazon.com/sp-api)
+##### [Amazon MWS to SP-API Migration Guide](https://developer-docs.amazon.com/sp-api/docs/amazon-mws-to-sp-api-migration-guide#mapping-apis-from-amazon-mws-to-the-selling-partner-api)
+##### [SP-API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+##### [Using Postman for Selling Partner API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+##### [Test Project with pure C# code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Others/PureCodeSampleForTest)
+##### [Sample Code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Source/FikaAmazonAPI.SampleCode)
+##### [Creating And Configuring AWS](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
+
+---
+## Contributing
+
+1. Fork it (https://github.com/abuzuhri/Amazon-SP-API-CSharp/fork)
+2. Clone it (`git clone https://github.com/{YOUR_USERNAME}/Amazon-SP-API-CSharp`)
+3. Create your feature branch (`git checkout -b your_branch_name`)
+4. Commit your changes (`git commit -m 'Description of a commit'`)
+5. Push to the branch (`git push origin your_branch_name`)
+6. Create a new Pull Request
 
 ---
 ## Notes
