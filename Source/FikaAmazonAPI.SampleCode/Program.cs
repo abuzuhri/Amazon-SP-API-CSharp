@@ -19,6 +19,7 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
@@ -30,6 +31,21 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
+
+
+
+            ReportManager reportManager2 = new ReportManager(amazonConnection);
+            var products2 = await reportManager2.GetProductsAsync(); //GET_MERCHANT_LISTINGS_ALL_DATA
+
+
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddDays(-100);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+
+
+            var orders = await amazonConnection.Orders.GetOrdersAsync(serachOrderList);
 
 
             //var parameterOrderList = new ParameterOrderList
@@ -93,14 +109,7 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
-
-
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
             var list3 = amazonConnection.Financial.ListFinancialEvents(new ParameterListFinancialEvents()
             {

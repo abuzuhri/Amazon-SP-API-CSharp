@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public List<Order> GetOrders(ParameterVendorDirectFulfillmentGetOrders serachOrderList) =>
-            GetOrdersAsync(serachOrderList).GetAwaiter().GetResult();
+            GetOrdersAsync(serachOrderList).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<Order>> GetOrdersAsync(ParameterVendorDirectFulfillmentGetOrders serachOrderList)
         {
             var orderList = new List<Order>();
@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Order GetOrder(string PurchaseOrderNumber) =>
-            GetOrderAsync(PurchaseOrderNumber).GetAwaiter().GetResult();
+            GetOrderAsync(PurchaseOrderNumber).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetOrderAsync(string PurchaseOrderNumber)
         {
             await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrder(PurchaseOrderNumber), RestSharp.Method.GET);
@@ -44,7 +44,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public TransactionId SubmitAcknowledgement(SubmitAcknowledgementRequest submitAcknowledgementRequest) =>
-            SubmitAcknowledgementAsync(submitAcknowledgementRequest).GetAwaiter().GetResult();
+            SubmitAcknowledgementAsync(submitAcknowledgementRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<TransactionId> SubmitAcknowledgementAsync(SubmitAcknowledgementRequest submitAcknowledgementRequest)
         {
             await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.SubmitAcknowledgement, RestSharp.Method.POST, postJsonObj: submitAcknowledgementRequest);

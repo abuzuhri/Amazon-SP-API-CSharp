@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
@@ -55,6 +54,14 @@ namespace FikaAmazonAPI.Services
         {
             RequestClient = new RestClient(ApiBaseUrl);
             Request = new RestRequest(url, method);
+        }
+        protected async Task CreateUnAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null)
+        {
+            CreateRequest(url, method);
+            if (postJsonObj != null)
+                AddJsonBody(postJsonObj);
+            if (queryParameters != null)
+                AddQueryParameters(queryParameters);
         }
 
         protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
@@ -120,7 +127,7 @@ namespace FikaAmazonAPI.Services
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         //{
-        //    return this.ExecuteRequestAsync<T>(rateLimitType).GetAwaiter().GetResult();
+        //    return this.ExecuteRequestAsync<T>(rateLimitType).ConfigureAwait(false).GetAwaiter().GetResult();
         //}
 
         public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -167,7 +174,7 @@ namespace FikaAmazonAPI.Services
                         if (rate > 0)
                         {
                             int sleepTime = (int)(1 / rate * 1000);
-                            Thread.Sleep(sleepTime);
+                            Task.Delay(sleepTime).Wait();
                         }
                     }
                     else
@@ -186,16 +193,17 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        /// <summary>
-        /// Executes the request 
-        /// </summary>
-        /// <typeparam name="T">Type to parse response to</typeparam>
-        /// <returns>Returns raw response</returns>
-        protected IRestResponse ExecuteRequest()
+
+        protected async Task<T> ExecuteUnAuthorizedRequest<T>() where T : new()
         {
-            var response = RequestClient.Execute(Request);
+            var response = await RequestClient.ExecuteAsync<T>(Request);
             ParseResponse(response);
-            return response;
+
+            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
+            {
+                response.Data = JsonConvert.DeserializeObject<T>(response.Content);
+            }
+            return response.Data;
         }
 
         protected void ParseResponse(IRestResponse response)
@@ -254,7 +262,7 @@ namespace FikaAmazonAPI.Services
             Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
         }
 
-        protected void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
+        protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)
@@ -277,7 +285,7 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = TokenGeneration.RefreshAccessToken(AmazonCredential, tokenDataType);
+                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType);
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);
@@ -322,7 +330,7 @@ namespace FikaAmazonAPI.Services
 
         public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            return CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest).GetAwaiter().GetResult();
+            return CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)

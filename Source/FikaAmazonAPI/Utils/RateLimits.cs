@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -57,7 +57,8 @@ namespace FikaAmazonAPI.Utils
             {
                 LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
                 while (LastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
-                    Thread.Sleep(100);
+                    Task.Delay(100).Wait();
+
             }
 
 
@@ -76,7 +77,7 @@ namespace FikaAmazonAPI.Utils
 
         internal void Delay()
         {
-            Thread.Sleep(GetRatePeriodMs());
+            Task.Delay(GetRatePeriodMs()).Wait();
         }
     }
 }

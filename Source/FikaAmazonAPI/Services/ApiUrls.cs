@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
@@ -230,6 +229,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetOrderMetrics
             {
                 get => $"{_resourceBaseUrl}/orderMetrics";
+            }
+        }
+        protected class AuthorizationsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/authorization/v1";
+            public static string GetAuthorizationCode
+            {
+                get => $"{_resourceBaseUrl}/authorizationCode";
             }
         }
         protected class SellersApiUrls

@@ -1,7 +1,5 @@
 ﻿using FikaAmazonAPI.Services;
-using FikaAmazonAPI.Utils;
 using System;
-using System.Collections.Generic;
 
 namespace FikaAmazonAPI
 {
@@ -40,7 +38,7 @@ namespace FikaAmazonAPI
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
 
 
-        
+
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
         private SolicitationService _Solicitations { get; set; }
@@ -75,7 +73,7 @@ namespace FikaAmazonAPI
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(AmazonCredential Credentials,string RefNumber=null)
+        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null)
         {
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
@@ -93,6 +91,7 @@ namespace FikaAmazonAPI
         {
             this.Credentials = Credentials;
 
+            this._Authorization = new AuthorizationService(this.Credentials);
             this._Orders = new OrderService(this.Credentials);
             this._Reports = new ReportService(this.Credentials);
             this._Solicitations = new SolicitationService(this.Credentials);
@@ -109,18 +108,18 @@ namespace FikaAmazonAPI
             this._Feed = new FeedService(this.Credentials);
             this._ListingsItem = new ListingsItemService(this.Credentials);
             this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);
-            this._Messaging= new MessagingService(this.Credentials);
-            this._Notification= new NotificationService(this.Credentials);
-            this._ProductFee= new ProductFeeService(this.Credentials);
-            this._Sales= new SalesService(this.Credentials);
-            this._Seller= new SellerService(this.Credentials);
-            this._Services= new ServicesService(this.Credentials);
-            this._ShipmentInvoicing= new ShipmentInvoicingService(this.Credentials);
-            this._Shipping= new ShippingService(this.Credentials);
-            this._Upload= new UploadService(this.Credentials);
-            this._Tokens= new TokenService(this.Credentials);
-            this._FulFillmentInbound= new FulFillmentInboundService(this.Credentials);
-            this._FulFillmentOutbound= new FulFillmentOutboundService(this.Credentials);
+            this._Messaging = new MessagingService(this.Credentials);
+            this._Notification = new NotificationService(this.Credentials);
+            this._ProductFee = new ProductFeeService(this.Credentials);
+            this._Sales = new SalesService(this.Credentials);
+            this._Seller = new SellerService(this.Credentials);
+            this._Services = new ServicesService(this.Credentials);
+            this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials);
+            this._Shipping = new ShippingService(this.Credentials);
+            this._Upload = new UploadService(this.Credentials);
+            this._Tokens = new TokenService(this.Credentials);
+            this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials);
+            this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
         }
     }

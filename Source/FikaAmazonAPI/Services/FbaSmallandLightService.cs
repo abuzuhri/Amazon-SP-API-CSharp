@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public SmallAndLightEnrollment GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
-            GetSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).GetAwaiter().GetResult();
+            GetSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<SmallAndLightEnrollment> GetSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
         {
@@ -31,7 +31,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public SmallAndLightEnrollment PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
-            PutSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).GetAwaiter().GetResult();
+            PutSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<SmallAndLightEnrollment> PutSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
         {
@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
-            DeleteSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).GetAwaiter().GetResult();
+            DeleteSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<bool> DeleteSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
         {
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public SmallAndLightEligibility GetSmallAndLightEligibilityBySellerSKU(string sellerSKU) =>
-            GetSmallAndLightEligibilityBySellerSKUAsync(sellerSKU).GetAwaiter().GetResult();
+            GetSmallAndLightEligibilityBySellerSKUAsync(sellerSKU).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<SmallAndLightEligibility> GetSmallAndLightEligibilityBySellerSKUAsync(string sellerSKU)
         {
@@ -83,7 +83,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public List<FeePreview> GetSmallAndLightFeePreview(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest) =>
-            GetSmallAndLightFeePreviewAsync(smallAndLightFeePreviewRequest).GetAwaiter().GetResult();
+            GetSmallAndLightFeePreviewAsync(smallAndLightFeePreviewRequest).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<List<FeePreview>> GetSmallAndLightFeePreviewAsync(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest)
         {

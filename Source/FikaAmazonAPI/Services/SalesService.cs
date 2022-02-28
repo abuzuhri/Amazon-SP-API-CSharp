@@ -1,6 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
 using FikaAmazonAPI.Parameter.Sales;
-using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,13 +13,13 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public List<OrderMetricsInterval> GetOrderMetricsAsync(ParameterGetOrderMetrics parameterGetOrderMetrics) =>
-            GetOrderMetrics(parameterGetOrderMetrics).GetAwaiter().GetResult();
-        public async Task<List<OrderMetricsInterval>> GetOrderMetrics(ParameterGetOrderMetrics parameterGetOrderMetrics)
+        public List<OrderMetricsInterval> GetOrderMetrics(ParameterGetOrderMetrics parameterGetOrderMetrics) =>
+            GetOrderMetricsAsync(parameterGetOrderMetrics).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<OrderMetricsInterval>> GetOrderMetricsAsync(ParameterGetOrderMetrics parameterGetOrderMetrics)
         {
             var param = parameterGetOrderMetrics.getParameters();
             await CreateAuthorizedRequestAsync(SalesApiUrls.GetOrderMetrics, RestSharp.Method.GET, param);
-            var response = await ExecuteRequestAsync<GetOrderMetricsResponse>(RateLimitType.Sales_GetOrderMetrics);
+            var response = await ExecuteUnAuthorizedRequest<GetOrderMetricsResponse>();
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

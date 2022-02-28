@@ -15,12 +15,6 @@ namespace FikaAmazonAPI.Services
     public static class TokenGeneration
     {
 
-
-        public static TokenResponse RefreshAccessToken(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
-        {
-            return RefreshAccessTokenAsync(credentials, tokenDataType).GetAwaiter().GetResult();
-        }
-
         public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
         {
             var lwaCredentials = new LWAAuthorizationCredentials()

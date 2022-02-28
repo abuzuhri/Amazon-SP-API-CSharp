@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ShipmentDetail GetShipmentDetails(string shipmentId, ParameterBasedPII parameterBasedPII) =>
-            GetShipmentDetailsAsync(shipmentId, parameterBasedPII).GetAwaiter().GetResult();
+            GetShipmentDetailsAsync(shipmentId, parameterBasedPII).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ShipmentDetail> GetShipmentDetailsAsync(string shipmentId, ParameterBasedPII parameterBasedPII)
         {
             await CreateAuthorizedRequestAsync(ShipmentInvoicingApiUrls.GetShipmentDetails(shipmentId), RestSharp.Method.GET, parameter: parameterBasedPII);
@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool SubmitInvoice(string shipmentId, SubmitInvoiceRequest submitInvoiceRequest) =>
-            SubmitInvoiceAsync(shipmentId, submitInvoiceRequest).GetAwaiter().GetResult();
+            SubmitInvoiceAsync(shipmentId, submitInvoiceRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> SubmitInvoiceAsync(string shipmentId, SubmitInvoiceRequest submitInvoiceRequest)
         {
             await CreateAuthorizedRequestAsync(ShipmentInvoicingApiUrls.SubmitInvoice(shipmentId), RestSharp.Method.POST, postJsonObj: submitInvoiceRequest);
@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ShipmentInvoiceStatusInfo GetInvoiceStatus(string shipmentId) =>
-            GetInvoiceStatusAsync(shipmentId).GetAwaiter().GetResult();
+            GetInvoiceStatusAsync(shipmentId).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ShipmentInvoiceStatusInfo> GetInvoiceStatusAsync(string shipmentId)
         {
             await CreateAuthorizedRequestAsync(ShipmentInvoicingApiUrls.GetInvoiceStatus(shipmentId), RestSharp.Method.GET);

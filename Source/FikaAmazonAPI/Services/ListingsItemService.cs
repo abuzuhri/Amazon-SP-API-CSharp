@@ -12,7 +12,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public Item GetListingsItem(ParameterGetListingsItem listingsItemParameters) =>
-            GetListingsItemAsync(listingsItemParameters).GetAwaiter().GetResult();
+            GetListingsItemAsync(listingsItemParameters).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Item> GetListingsItemAsync(ParameterGetListingsItem listingsItemParameters)
         {
             listingsItemParameters.Check();
@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem) =>
-            PutListingsItemAsync(parameterPutListingItem).GetAwaiter().GetResult();
+            PutListingsItemAsync(parameterPutListingItem).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListingsItemSubmissionResponse> PutListingsItemAsync(ParameterPutListingItem parameterPutListingItem)
         {
             parameterPutListingItem.Check();
@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListingsItemSubmissionResponse DeleteListingsItem(ParameterDeleteListingItem parameterDeleteListingItem) =>
-            DeleteListingsItemAsync(parameterDeleteListingItem).GetAwaiter().GetResult();
+            DeleteListingsItemAsync(parameterDeleteListingItem).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListingsItemSubmissionResponse> DeleteListingsItemAsync(ParameterDeleteListingItem parameterDeleteListingItem)
         {
             parameterDeleteListingItem.Check();
@@ -44,7 +44,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListingsItemSubmissionResponse PatchListingsItem(ParameterPatchListingItem parameterPatchListingItem) =>
-            PatchListingsItemAsync(parameterPatchListingItem).GetAwaiter().GetResult();
+            PatchListingsItemAsync(parameterPatchListingItem).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListingsItemSubmissionResponse> PatchListingsItemAsync(ParameterPatchListingItem parameterPatchListingItem)
         {
             parameterPatchListingItem.Check();

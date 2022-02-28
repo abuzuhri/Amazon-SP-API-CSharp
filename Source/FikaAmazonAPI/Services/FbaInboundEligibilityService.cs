@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ItemEligibilityPreview GetItemEligibilityPreview(ParameterGetItemEligibilityPreview parameterGetItemEligibilityPreview) =>
-            GetItemEligibilityPreviewAsync(parameterGetItemEligibilityPreview).GetAwaiter().GetResult();
+            GetItemEligibilityPreviewAsync(parameterGetItemEligibilityPreview).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<ItemEligibilityPreview> GetItemEligibilityPreviewAsync(ParameterGetItemEligibilityPreview parameterGetItemEligibilityPreview)
         {

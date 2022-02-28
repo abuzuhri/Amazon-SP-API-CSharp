@@ -14,7 +14,7 @@ namespace FikaAmazonAPI.Services
 
         }
         public GetFulfillmentPreviewResult GetFulfillmentPreview(GetFulfillmentPreviewRequest getFulfillmentPreviewRequest) =>
-             GetFulfillmentPreviewAsync(getFulfillmentPreviewRequest).GetAwaiter().GetResult();
+             GetFulfillmentPreviewAsync(getFulfillmentPreviewRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetFulfillmentPreviewResult> GetFulfillmentPreviewAsync(GetFulfillmentPreviewRequest getFulfillmentPreviewRequest)
         {
             await CreateAuthorizedRequestAsync(FulFillmentOutboundApiUrls.GetFulfillmentPreview, RestSharp.Method.POST, postJsonObj: getFulfillmentPreviewRequest);
@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListAllFulfillmentOrdersResult ListAllFulfillmentOrders(ParameterListAllFulfillmentOrders parameterListAllFulfillmentOrders) =>
-            ListAllFulfillmentOrdersAsync(parameterListAllFulfillmentOrders).GetAwaiter().GetResult();
+            ListAllFulfillmentOrdersAsync(parameterListAllFulfillmentOrders).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListAllFulfillmentOrdersResult> ListAllFulfillmentOrdersAsync(ParameterListAllFulfillmentOrders parameterListAllFulfillmentOrders)
         {
             var parameter = parameterListAllFulfillmentOrders.getParameters();
@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateFulfillmentOrder(CreateFulfillmentOrderRequest createFulfillmentOrderRequest) =>
-            CreateFulfillmentOrderAsync(createFulfillmentOrderRequest).GetAwaiter().GetResult();
+            CreateFulfillmentOrderAsync(createFulfillmentOrderRequest).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<bool> CreateFulfillmentOrderAsync(CreateFulfillmentOrderRequest createFulfillmentOrderRequest)
         {
@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public PackageTrackingDetails GetPackageTrackingDetails(int packageNumber) =>
-            GetPackageTrackingDetailsAsync(packageNumber).GetAwaiter().GetResult();
+            GetPackageTrackingDetailsAsync(packageNumber).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<PackageTrackingDetails> GetPackageTrackingDetailsAsync(int packageNumber)
         {
@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListReturnReasonCodesResult ListReturnReasonCodes(ParameterListReturnReasonCodes parameterListReturnReasonCodes) =>
-            ListReturnReasonCodesAsync(parameterListReturnReasonCodes).GetAwaiter().GetResult();
+            ListReturnReasonCodesAsync(parameterListReturnReasonCodes).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<ListReturnReasonCodesResult> ListReturnReasonCodesAsync(ParameterListReturnReasonCodes parameterListReturnReasonCodes)
         {
@@ -83,7 +83,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public CreateFulfillmentReturnResult ListReturnReasonCodes(string sellerFulfillmentOrderId, CreateFulfillmentReturnRequest createFulfillmentReturnRequest) =>
-            ListReturnReasonCodesAsync(sellerFulfillmentOrderId, createFulfillmentReturnRequest).GetAwaiter().GetResult();
+            ListReturnReasonCodesAsync(sellerFulfillmentOrderId, createFulfillmentReturnRequest).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CreateFulfillmentReturnResult> ListReturnReasonCodesAsync(string sellerFulfillmentOrderId, CreateFulfillmentReturnRequest createFulfillmentReturnRequest)
         {
@@ -96,7 +96,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetFulfillmentOrderResult GetFulfillmentOrder(string sellerFulfillmentOrderId) =>
-            GetFulfillmentOrderAsync(sellerFulfillmentOrderId).GetAwaiter().GetResult();
+            GetFulfillmentOrderAsync(sellerFulfillmentOrderId).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<GetFulfillmentOrderResult> GetFulfillmentOrderAsync(string sellerFulfillmentOrderId)
         {
@@ -109,7 +109,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool UpdateFulfillmentOrder(string sellerFulfillmentOrderId, UpdateFulfillmentOrderRequest updateFulfillmentOrderRequest) =>
-            UpdateFulfillmentOrderAsync(sellerFulfillmentOrderId, updateFulfillmentOrderRequest).GetAwaiter().GetResult();
+            UpdateFulfillmentOrderAsync(sellerFulfillmentOrderId, updateFulfillmentOrderRequest).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> UpdateFulfillmentOrderAsync(string sellerFulfillmentOrderId, UpdateFulfillmentOrderRequest updateFulfillmentOrderRequest)
         {
             await CreateAuthorizedRequestAsync(FulFillmentOutboundApiUrls.UpdateFulfillmentOrder(sellerFulfillmentOrderId), RestSharp.Method.PUT, postJsonObj: updateFulfillmentOrderRequest);
@@ -121,7 +121,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool UpdateFulfillmentOrder(string sellerFulfillmentOrderId) =>
-            UpdateFulfillmentOrderAsync(sellerFulfillmentOrderId).GetAwaiter().GetResult();
+            UpdateFulfillmentOrderAsync(sellerFulfillmentOrderId).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> UpdateFulfillmentOrderAsync(string sellerFulfillmentOrderId)
         {
             await CreateAuthorizedRequestAsync(FulFillmentOutboundApiUrls.CancelFulfillmentOrder(sellerFulfillmentOrderId), RestSharp.Method.PUT);
@@ -132,7 +132,7 @@ namespace FikaAmazonAPI.Services
             return true;
         }
 
-        public GetFeaturesResult GetFeatures() => GetFeaturesAsync().GetAwaiter().GetResult();
+        public GetFeaturesResult GetFeatures() => GetFeaturesAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetFeaturesResult> GetFeaturesAsync()
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -147,7 +147,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetFeatureInventoryResult GetFeatureInventory(string featureName, string nextToken) =>
-            GetFeatureInventoryAsync(featureName, nextToken).GetAwaiter().GetResult();
+            GetFeatureInventoryAsync(featureName, nextToken).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetFeatureInventoryResult> GetFeatureInventoryAsync(string featureName, string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -166,7 +166,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetFeatureSkuResult GetFeatureSKU(string featureName, string sellerSku, string nextToken) =>
-            GetFeatureSKUAsync(featureName, sellerSku, nextToken).GetAwaiter().GetResult();
+            GetFeatureSKUAsync(featureName, sellerSku, nextToken).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetFeatureSkuResult> GetFeatureSKUAsync(string featureName, string sellerSku, string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
