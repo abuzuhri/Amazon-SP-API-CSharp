@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
 
 
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
-            ListCatalogItemsAsync(parameterListCatalogItems).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Services
 
         //[Obsolete("This method is will be deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.")]
         public Item GetCatalogItem(string asin) =>
-            GetCatalogItemAsync(asin).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<Item> GetCatalogItemAsync(string asin)
         {
@@ -88,7 +88,7 @@ namespace FikaAmazonAPI.Services
         //}
 
         public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null) =>
-                    ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID).ConfigureAwait(false).GetAwaiter().GetResult();
+                    Task.Run(() => ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<Categories>> ListCatalogCategoriesAsync(string ASIN, string SellerSKU = null, string MarketPlaceID = null)
         {

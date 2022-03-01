@@ -14,7 +14,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetMessagingActionsForOrderResponse GetMessagingActionsForOrder(string amazonOrderId) =>
-            GetMessagingActionsForOrderAsync(amazonOrderId).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetMessagingActionsForOrderAsync(amazonOrderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetMessagingActionsForOrderResponse> GetMessagingActionsForOrderAsync(string amazonOrderId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool ConfirmCustomizationDetails(string amazonOrderId, CreateConfirmCustomizationDetailsRequest createConfirmCustomizationDetailsRequest) =>
-            ConfirmCustomizationDetailsAsync(amazonOrderId, createConfirmCustomizationDetailsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ConfirmCustomizationDetailsAsync(amazonOrderId, createConfirmCustomizationDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> ConfirmCustomizationDetailsAsync(string amazonOrderId, CreateConfirmCustomizationDetailsRequest createConfirmCustomizationDetailsRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateConfirmDeliveryDetails(string amazonOrderId, CreateConfirmCustomizationDetailsRequest createConfirmCustomizationDetailsRequest) =>
-            CreateConfirmDeliveryDetailsAsync(amazonOrderId, createConfirmCustomizationDetailsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateConfirmDeliveryDetailsAsync(amazonOrderId, createConfirmCustomizationDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateConfirmDeliveryDetailsAsync(string amazonOrderId, CreateConfirmCustomizationDetailsRequest createConfirmCustomizationDetailsRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateLegalDisclosure(string amazonOrderId, CreateLegalDisclosureRequest createLegalDisclosureRequest) =>
-            CreateLegalDisclosureAsync(amazonOrderId, createLegalDisclosureRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateLegalDisclosureAsync(amazonOrderId, createLegalDisclosureRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateLegalDisclosureAsync(string amazonOrderId, CreateLegalDisclosureRequest createLegalDisclosureRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -77,7 +77,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateNegativeFeedbackRemoval(string amazonOrderId) =>
-            CreateNegativeFeedbackRemovalAsync(amazonOrderId).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateNegativeFeedbackRemovalAsync(amazonOrderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateNegativeFeedbackRemovalAsync(string amazonOrderId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -93,7 +93,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateConfirmOrderDetails(string amazonOrderId, CreateConfirmOrderDetailsRequest createConfirmOrderDetailsRequest) =>
-            CreateConfirmOrderDetailsAsync(amazonOrderId, createConfirmOrderDetailsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateConfirmOrderDetailsAsync(amazonOrderId, createConfirmOrderDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateConfirmOrderDetailsAsync(string amazonOrderId, CreateConfirmOrderDetailsRequest createConfirmOrderDetailsRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -108,7 +108,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateConfirmServiceDetails(string amazonOrderId, CreateConfirmServiceDetailsRequest createConfirmServiceDetailsRequest) =>
-            CreateConfirmServiceDetailsAsync(amazonOrderId, createConfirmServiceDetailsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateConfirmServiceDetailsAsync(amazonOrderId, createConfirmServiceDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateConfirmServiceDetailsAsync(string amazonOrderId, CreateConfirmServiceDetailsRequest createConfirmServiceDetailsRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -124,7 +124,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateAmazonMotors(string amazonOrderId, CreateAmazonMotorsRequest createAmazonMotorsRequest) =>
-            CreateAmazonMotorsAsync(amazonOrderId, createAmazonMotorsRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateAmazonMotorsAsync(amazonOrderId, createAmazonMotorsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateAmazonMotorsAsync(string amazonOrderId, CreateAmazonMotorsRequest createAmazonMotorsRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -138,7 +138,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateWarranty(string amazonOrderId, CreateWarrantyRequest createWarrantyRequest) =>
-            CreateWarrantyAsync(amazonOrderId, createWarrantyRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateWarrantyAsync(amazonOrderId, createWarrantyRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateWarrantyAsync(string amazonOrderId, CreateWarrantyRequest createWarrantyRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -152,7 +152,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetAttributesResponse GetAttributes(string amazonOrderId) =>
-            GetAttributesAsync(amazonOrderId).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetAttributesAsync(amazonOrderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetAttributesResponse> GetAttributesAsync(string amazonOrderId)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -166,7 +166,7 @@ namespace FikaAmazonAPI.Services
 
         }
         public bool CreateDigitalAccessKey(string amazonOrderId, CreateDigitalAccessKeyRequest createDigitalAccessKeyRequest) =>
-            CreateDigitalAccessKeyAsync(amazonOrderId, createDigitalAccessKeyRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateDigitalAccessKeyAsync(amazonOrderId, createDigitalAccessKeyRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateDigitalAccessKeyAsync(string amazonOrderId, CreateDigitalAccessKeyRequest createDigitalAccessKeyRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -180,7 +180,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool CreateUnexpectedProblem(string amazonOrderId, CreateUnexpectedProblemRequest createUnexpectedProblemRequest) =>
-            CreateUnexpectedProblemAsync(amazonOrderId, createUnexpectedProblemRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateUnexpectedProblemAsync(amazonOrderId, createUnexpectedProblemRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CreateUnexpectedProblemAsync(string amazonOrderId, CreateUnexpectedProblemRequest createUnexpectedProblemRequest)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();

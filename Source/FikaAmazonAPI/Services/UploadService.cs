@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public UploadDestination CreateUploadDestinationForResource(ParametercreateUploadDestinationForResource parameterObj) =>
-            CreateUploadDestinationForResourceAsync(parameterObj).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateUploadDestinationForResourceAsync(parameterObj)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<UploadDestination> CreateUploadDestinationForResourceAsync(ParametercreateUploadDestinationForResource parameterObj)
         {
 

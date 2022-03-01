@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.Services
 
 
         public IList<FinancialEventGroup> ListFinancialEventGroups(ParameterListFinancialEventGroup parameterListFinancialEventGroup) =>
-            ListFinancialEventGroupsAsync(parameterListFinancialEventGroup).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ListFinancialEventGroupsAsync(parameterListFinancialEventGroup)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<FinancialEventGroup>> ListFinancialEventGroupsAsync(ParameterListFinancialEventGroup parameterListFinancialEventGroup)
         {
@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ListFinancialEventGroupsPayload GetFinancialEventGroupListByNextToken(string nextToken) =>
-            GetFinancialEventGroupListByNextTokenAsync(nextToken).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetFinancialEventGroupListByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListFinancialEventGroupsPayload> GetFinancialEventGroupListByNextTokenAsync(string nextToken)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
@@ -54,7 +54,7 @@ namespace FikaAmazonAPI.Services
 
 
         public FinancialEvents ListFinancialEventsByGroupId(string eventGroupId) =>
-                ListFinancialEventsByGroupIdAsync(eventGroupId).ConfigureAwait(false).GetAwaiter().GetResult();
+                Task.Run(() => ListFinancialEventsByGroupIdAsync(eventGroupId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<FinancialEvents> ListFinancialEventsByGroupIdAsync(string eventGroupId)
         {
             await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET);
@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public FinancialEvents ListFinancialEventsByOrderId(string orderId) =>
-            ListFinancialEventsByOrderIdAsync(orderId).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ListFinancialEventsByOrderIdAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<FinancialEvents> ListFinancialEventsByOrderIdAsync(string orderId)
         {
@@ -73,7 +73,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public FinancialEvents ListFinancialEvents() =>
-            ListFinancialEventsAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ListFinancialEventsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<FinancialEvents> ListFinancialEventsAsync()
         {
@@ -83,7 +83,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public IList<FinancialEvents> ListFinancialEvents(ParameterListFinancialEvents parameterListFinancials) =>
-            ListFinancialEventsAsync(parameterListFinancials).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => ListFinancialEventsAsync(parameterListFinancials)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<FinancialEvents>> ListFinancialEventsAsync(ParameterListFinancialEvents parameterListFinancials)
         {
@@ -108,7 +108,7 @@ namespace FikaAmazonAPI.Services
         }
 
         private ListFinancialEventsPayload GetFinancialEventsByNextToken(string nextToken) =>
-            GetFinancialEventsByNextTokenAsync(nextToken).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetFinancialEventsByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         private async Task<ListFinancialEventsPayload> GetFinancialEventsByNextTokenAsync(string nextToken)
         {

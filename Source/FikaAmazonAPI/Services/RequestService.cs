@@ -127,7 +127,7 @@ namespace FikaAmazonAPI.Services
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
         //{
-        //    return this.ExecuteRequestAsync<T>(rateLimitType).ConfigureAwait(false).GetAwaiter().GetResult();
+        //    return this.ExecuteRequestAsync<T>(rateLimitType)).ConfigureAwait(false).GetAwaiter().GetResult();
         //}
 
         public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -330,7 +330,7 @@ namespace FikaAmazonAPI.Services
 
         public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            return CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)

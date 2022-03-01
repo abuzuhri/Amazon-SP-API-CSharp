@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
         }
         #region GetReport
         public List<Report> GetReports(ParameterReportList parameterReportList) =>
-            GetReportsAsync(parameterReportList).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetReportsAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<Report>> GetReportsAsync(ParameterReportList parameterReportList)
         {
             if (parameterReportList.createdSince.HasValue)
@@ -46,7 +46,8 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        public Report GetReport(string reportId) => GetReportAsync(reportId).ConfigureAwait(false).GetAwaiter().GetResult();
+        public Report GetReport(string reportId) =>
+            Task.Run(() => GetReportAsync(reportId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Report> GetReportAsync(string reportId)
         {
 
@@ -57,7 +58,8 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public bool CancelReport(string reportId) => CancelReportAsync(reportId).ConfigureAwait(false).GetAwaiter().GetResult();
+        public bool CancelReport(string reportId) =>
+            Task.Run(() => CancelReportAsync(reportId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CancelReportAsync(string reportId)
         {
 
@@ -69,7 +71,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ReportScheduleList GetReportSchedules(ParameterReportSchedules parametersSchedules) =>
-            GetReportSchedulesAsync(parametersSchedules).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetReportSchedulesAsync(parametersSchedules)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ReportScheduleList> GetReportSchedulesAsync(ParameterReportSchedules parametersSchedules)
         {
             var parameters = parametersSchedules.getParameters();
@@ -81,7 +83,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetReportsResponseV00 GetReportsByNextToken(ParameterReportList parameterReportList) =>
-            GetReportsByNextTokenAsync(parameterReportList).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetReportsByNextTokenAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetReportsResponseV00> GetReportsByNextTokenAsync(ParameterReportList parameterReportList)
         {
             var parameterReportListNew = new ParameterReportList();
@@ -94,7 +96,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public string CreateReport(ParameterCreateReportSpecification createReportSpecification) =>
-            CreateReportAsync(createReportSpecification).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateReportAsync(createReportSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportAsync(ParameterCreateReportSpecification createReportSpecification)
         {
             await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReport, RestSharp.Method.POST, null, createReportSpecification);
@@ -108,7 +110,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public string CreateReportSchedule(ParameterCreateReportScheduleSpecification createReportScheduleSpecification) =>
-            CreateReportScheduleAsync(createReportScheduleSpecification).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateReportScheduleAsync(createReportScheduleSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportScheduleAsync(ParameterCreateReportScheduleSpecification createReportScheduleSpecification)
         {
             await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReportSchedule, RestSharp.Method.POST, null, createReportScheduleSpecification);
@@ -121,7 +123,8 @@ namespace FikaAmazonAPI.Services
             return response.ReportScheduleId;
         }
 
-        public ReportSchedule GetReportSchedule(string reportScheduleId) => GetReportScheduleAsync(reportScheduleId).ConfigureAwait(false).GetAwaiter().GetResult();
+        public ReportSchedule GetReportSchedule(string reportScheduleId) =>
+            Task.Run(() => GetReportScheduleAsync(reportScheduleId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ReportSchedule> GetReportScheduleAsync(string reportScheduleId)
         {
             await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportSchedule(reportScheduleId), RestSharp.Method.GET);
@@ -132,7 +135,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII parameterBasedPII = null) =>
-            GetReportDocumentAsync(reportDocumentId, parameterBasedPII).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetReportDocumentAsync(reportDocumentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, IParameterBasedPII parameterBasedPII = null)
         {
             await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET, parameter: parameterBasedPII);
@@ -141,14 +144,16 @@ namespace FikaAmazonAPI.Services
                 return response;
             return null;
         }
-        public string GetReportFile(string reportDocumentId) => GetReportFileAsync(reportDocumentId).ConfigureAwait(false).GetAwaiter().GetResult();
+        public string GetReportFile(string reportDocumentId) =>
+            Task.Run(() => GetReportFileAsync(reportDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> GetReportFileAsync(string reportDocumentId)
         {
             var reportDocument = await GetReportDocumentAsync(reportDocumentId);
             return GetFile(reportDocument);
         }
 
-        private string GetFile(ReportDocument reportDocument) => GetFileAsync(reportDocument).ConfigureAwait(false).GetAwaiter().GetResult();
+        private string GetFile(ReportDocument reportDocument) =>
+            Task.Run(() => GetFileAsync(reportDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
         private async Task<string> GetFileAsync(ReportDocument reportDocument)
         {
             bool isCompressionFile = false;
@@ -206,7 +211,7 @@ namespace FikaAmazonAPI.Services
             }
         }
         public bool CancelReportSchedule(string reportScheduleId) =>
-            CancelReportScheduleAsync(reportScheduleId).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CancelReportScheduleAsync(reportScheduleId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CancelReportScheduleAsync(string reportScheduleId)
         {
             await CreateAuthorizedRequestAsync(ReportApiUrls.CancelReportSchedule(reportScheduleId), RestSharp.Method.DELETE);
@@ -219,7 +224,7 @@ namespace FikaAmazonAPI.Services
 
 
         public string CreateReportAndDownloadFile(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null) =>
-            CreateReportAndDownloadFileAsync(reportTypes, dataStartTime, dataEndTime, reportOptions).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateReportAndDownloadFileAsync(reportTypes, dataStartTime, dataEndTime, reportOptions)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
         {
             var parameters = new ParameterCreateReportSpecification();
@@ -264,7 +269,7 @@ namespace FikaAmazonAPI.Services
 
 
         public IList<string> DownloadExistingReportAndDownloadFile(ReportTypes reportTypes, DateTime? createdSince = null, DateTime? createdUntil = null) =>
-            DownloadExistingReportAndDownloadFileAsync(reportTypes, createdSince, createdUntil).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => DownloadExistingReportAndDownloadFileAsync(reportTypes, createdSince, createdUntil)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<string>> DownloadExistingReportAndDownloadFileAsync(ReportTypes reportTypes, DateTime? createdSince = null, DateTime? createdUntil = null)
         {
             var parameters = new ParameterReportList();

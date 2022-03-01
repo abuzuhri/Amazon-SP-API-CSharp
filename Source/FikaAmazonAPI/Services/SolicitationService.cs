@@ -14,7 +14,7 @@ namespace FikaAmazonAPI.Services
 
 
         public GetSolicitationActionsForOrderResponseEmbedded GetSolicitationActionsForOrder(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
-            GetSolicitationActionsForOrderAsync(orderId, queryParameters).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => GetSolicitationActionsForOrderAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetSolicitationActionsForOrderResponseEmbedded> GetSolicitationActionsForOrderAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
             await CreateAuthorizedRequestAsync(SolicitationsApiUrls.GetSolicitationActionsForOrder(orderId), RestSharp.Method.GET, queryParameters);
@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public GetSolicitationActionsForOrderResponseEmbedded CreateProductReviewAndSellerFeedbackSolicitation(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
-            CreateProductReviewAndSellerFeedbackSolicitationAsync(orderId, queryParameters).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => CreateProductReviewAndSellerFeedbackSolicitationAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetSolicitationActionsForOrderResponseEmbedded> CreateProductReviewAndSellerFeedbackSolicitationAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
             await CreateAuthorizedRequestAsync(SolicitationsApiUrls.CreateProductReviewAndSellerFeedbackSolicitation(orderId), RestSharp.Method.POST, queryParameters);
