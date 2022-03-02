@@ -31,6 +31,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string FulfillmentCenterId { get; set; }
         public string DetailedDisposition { get; set; }
         public string Reason { get; set; }
+        public string Status { get; set; }
         public string LicensePlateNumber { get; set; }
         public string CustomerComments { get; set; }
         public string refNumber { get; set; }
@@ -50,8 +51,9 @@ namespace FikaAmazonAPI.ReportGeneration
             row.FulfillmentCenterId = values[7];
             row.DetailedDisposition = values[8];
             row.Reason = values[9];
-            row.LicensePlateNumber = values[10];
-            row.CustomerComments = values[11];
+            row.Status = values[10];
+            row.LicensePlateNumber = values[11];
+            row.CustomerComments = values[12];
             row.refNumber = refNumber;
 
             return row;
