@@ -32,10 +32,8 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
-
-
             ReportManager reportManager2 = new ReportManager(amazonConnection);
-            var products2 = await reportManager2.GetProductsAsync(); //GET_MERCHANT_LISTINGS_ALL_DATA
+            var products2 = await reportManager2.GetReturnFBAOrderAsync(3); //GET_MERCHANT_LISTINGS_ALL_DATA
 
 
             ParameterOrderList serachOrderList = new ParameterOrderList();

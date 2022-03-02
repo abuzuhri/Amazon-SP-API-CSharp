@@ -1,21 +1,24 @@
-﻿using System;
+﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReturnFBAOrderReport
     {
-        public List<ReturnFBAOrderRow> Data { get; set; }=new List<ReturnFBAOrderRow>();
+        public List<ReturnFBAOrderRow> Data { get; set; } = new List<ReturnFBAOrderRow>();
         public ReturnFBAOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            List<ReturnFBAOrderRow> values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => ReturnFBAOrderRow.FromCsv(v, refNumber))
-                                           .ToList();
+
+            var table = Table.ConvertFromCSV(path);
+
+            List<ReturnFBAOrderRow> values = new List<ReturnFBAOrderRow>();
+            foreach (var row in table.Rows)
+            {
+                values.Add(ReturnFBAOrderRow.FromRow(row, refNumber));
+            }
             Data = values;
         }
     }
@@ -31,27 +34,28 @@ namespace FikaAmazonAPI.ReportGeneration
         public string FulfillmentCenterId { get; set; }
         public string DetailedDisposition { get; set; }
         public string Reason { get; set; }
+        public string Status { get; set; }
         public string LicensePlateNumber { get; set; }
         public string CustomerComments { get; set; }
         public string refNumber { get; set; }
 
 
-        public static ReturnFBAOrderRow FromCsv(string csvLine, string refNumber)
+        public static ReturnFBAOrderRow FromRow(TableRow rowData, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
             var row = new ReturnFBAOrderRow();
-            row.ReturnDate = DataConverter.GetDate(values[0], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
-            row.OrderId = values[1];
-            row.SKU = values[2];
-            row.ASIN = values[3];
-            row.FNSKU = values[4];
-            row.ProductName = values[5];
-            row.Quantity = Convert.ToInt32(values[6]);
-            row.FulfillmentCenterId = values[7];
-            row.DetailedDisposition = values[8];
-            row.Reason = values[9];
-            row.LicensePlateNumber = values[10];
-            row.CustomerComments = values[11];
+            row.ReturnDate = DataConverter.GetDate(rowData.GetString("return-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.OrderId = rowData.GetString("order-id");
+            row.SKU = rowData.GetString("sku");
+            row.ASIN = rowData.GetString("asin");
+            row.FNSKU = rowData.GetString("fnsku");
+            row.ProductName = rowData.GetString("product-name");
+            row.Quantity = rowData.GetInt32("quantity");
+            row.FulfillmentCenterId = rowData.GetString("fulfillment-center-id");
+            row.DetailedDisposition = rowData.GetString("detailed-disposition");
+            row.Reason = rowData.GetString("reason");
+            row.Status = rowData.GetString("status");
+            row.LicensePlateNumber = rowData.GetString("license-plate-number");
+            row.CustomerComments = rowData.GetString("customer-comments");
             row.refNumber = refNumber;
 
             return row;
