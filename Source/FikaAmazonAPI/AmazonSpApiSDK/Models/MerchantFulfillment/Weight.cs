@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// </summary>
         /// <param name="Value">Value (required).</param>
         /// <param name="Unit">Unit (required).</param>
-        public Weight(double? Value = default(double), UnitOfWeight Unit = default(UnitOfWeight))
+        public Weight(int? Value = default(int), UnitOfWeight Unit = default(UnitOfWeight))
         {
             // to ensure "Value" is required (not null)
             if (Value == null)
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "Value", EmitDefaultValue = false)]
-        public double? Value { get; set; }
+        public int? Value { get; set; }
 
 
         /// <summary>
