@@ -384,6 +384,62 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 ```
 
 ---
+
+## Sample for create shipment operation from MerchantFulfillment
+
+```CSharp
+ShipmentRequestDetails shipmentRequestDetails = new ShipmentRequestDetails()
+{
+    AmazonOrderId = "999-9999-999999",
+    ItemList = new ItemList()
+    {
+        new FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment.Item()
+        {
+		OrderItemId = "52986411826454",
+            Quantity = 1
+        }
+
+    },
+    ShipFromAddress = new Address()
+    {
+        AddressLine1 = "300 St",
+        City = "City",
+        PostalCode = "48123",
+        Email = "[mail@yahoo.com](mailto:mail@yahoo.com)",
+        Phone = "999999999",
+        StateOrProvinceCode = "MI",
+        CountryCode = "US",
+        Name = "FirstName LastName"
+    },
+    PackageDimensions = new PackageDimensions()
+    {
+        Height = 10,
+        Width = 10,
+        Length = 10,
+        Unit = UnitOfLength.Inches
+    },
+    Weight = new Weight()
+    {
+        Value = 10,
+        Unit = UnitOfWeight.Oz
+    },
+    ShippingServiceOptions = new ShippingServiceOptions()
+    {
+        DeliveryExperience = DeliveryExperienceType.NoTracking,
+        CarrierWillPickUp = false,
+        CarrierWillPickUpOption = CarrierWillPickUpOption.ShipperWillDropOff
+    }
+};
+
+var shipmentRequest = new CreateShipmentRequest(
+			shipmentRequestDetails, 
+			shippingServiceId: "UPS_PTP_2ND_DAY_AIR", 
+			shippingServiceOfferId: "WHgxtyn6qjGGaC");
+
+ var shipmentResponse = amazonConnection.MerchantFulfillment.CreateShipment(shipmentRequest);
+```
+
+---
 ## Q & A
 
 If you have questions, please ask in GitHub discussions 
