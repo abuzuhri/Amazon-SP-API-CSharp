@@ -34,22 +34,22 @@ namespace FikaAmazonAPI.Services
             orderList = response.Payload.Orders;
             while (!string.IsNullOrEmpty(nextToken))
             {
-                var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList.MarketplaceIds);
+                var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
                 orderList.AddRange(orderPayload.Orders);
                 nextToken = orderPayload.NextToken;
             }
             return orderList;
         }
 
-        public OrdersList GetGetOrdersByNextToken(string nextToken, IList<string> marketplaceIds) =>
-            Task.Run(() => GetGetOrdersByNextTokenAsync(nextToken, marketplaceIds)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, IList<string> marketplaceIds)
+        public OrdersList GetGetOrdersByNextToken(string nextToken, ParameterOrderList searchOrderList) =>
+            Task.Run(() => GetGetOrdersByNextTokenAsync(nextToken, searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", marketplaceIds)));
+            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", searchOrderList.MarketplaceIds)));
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             return response.Payload;
         }
