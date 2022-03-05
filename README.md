@@ -385,7 +385,7 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ---
 
-## Sample for create shipment operation from MerchantFulfillment
+## Create shipment operation from MerchantFulfillment
 
 ```CSharp
 ShipmentRequestDetails shipmentRequestDetails = new ShipmentRequestDetails()
