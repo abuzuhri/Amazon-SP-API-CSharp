@@ -43,7 +43,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// Enum UOSS for value: UOSS
             /// </summary>
             [EnumMember(Value = "UOSS")]
-            UOSS = 2
+            UOSS = 2,
+
+            /// <summary>
+            /// Enum NO_VOEC for value: NO_VOEC
+            /// </summary>
+            [EnumMember(Value = "NO_VOEC")]
+            NO_VOEC = 3
         }
 
         /// <summary>
