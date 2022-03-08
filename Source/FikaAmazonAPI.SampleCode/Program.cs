@@ -1,6 +1,8 @@
 ﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Finance;
+using FikaAmazonAPI.Parameter.ListingItem;
+using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.ReportGeneration;
 using FikaAmazonAPI.Utils;
@@ -31,6 +33,44 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
+            var SKU = "693749790020";
+            var sellerId = "A3J37AJU4O9RHK";
+
+            ParameterPutListingItem myListing = new ParameterPutListingItem()
+            {
+                sellerId = sellerId,
+                marketplaceIds = new string[] { MarketPlace.UnitedArabEmirates.ID },
+                sku = SKU,
+                listingsItemPutRequest = new ListingsItemPutRequest()
+                {
+                    productType = "LUGGAGE",
+                    requirements = Requirements.LISTING,
+
+                    //Example from https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2020-09-01-use-case-guide
+                    attributes = new ParameterAttributes()
+                    {
+                        condition_type = new List<ParameterAttributeItem>() {
+                                new ParameterAttributeItem()
+                                {
+                                    value = "new_new",
+                                    marketplace_id = MarketPlace.UnitedArabEmirates.ID
+                                }
+                            },
+                        item_name = new List<ParameterAttributeItem>()
+                            {
+                                new ParameterAttributeItem()
+                                {
+                                    value = "Thorne Research - Diabenil - Support for Maintaining Healthy Blood Sugar Levels - with Chromium, ALA, and Quercetin Phytosome - 90 Capsules - ",
+                                    language_tag = "en_US",
+                                    marketplace_id = MarketPlace.UnitedArabEmirates.ID
+                                }
+                            }
+                    }
+                }
+            };
+
+            var response = amazonConnection.ListingsItem.PutListingsItem(myListing);
+
 
             ReportManager reportManager2 = new ReportManager(amazonConnection);
             var products2 = await reportManager2.GetReturnFBAOrderAsync(3); //GET_MERCHANT_LISTINGS_ALL_DATA
