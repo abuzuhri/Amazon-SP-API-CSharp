@@ -33,6 +33,13 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
+
+            var result = amazonConnection.Restrictions.GetListingsRestrictions(new Parameter.Restrictions.ParameterGetListingsRestrictions
+            {
+                asin = "B07GY3J99B",
+                sellerId = "A3J37AJU4O9RHK"
+            });
+
             var SKU = "693749790020";
             var sellerId = "A3J37AJU4O9RHK";
 

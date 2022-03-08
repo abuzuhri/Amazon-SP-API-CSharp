@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.Services
         {
             var param = parameterGetOrderMetrics.getParameters();
             await CreateAuthorizedRequestAsync(SalesApiUrls.GetOrderMetrics, RestSharp.Method.GET, param);
-            var response = await ExecuteUnAuthorizedRequest<GetOrderMetricsResponse>();
+            var response = await ExecuteRequestAsync<GetOrderMetricsResponse>(Utils.RateLimitType.Sales_GetOrderMetrics);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

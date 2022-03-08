@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -30,7 +28,7 @@ namespace FikaAmazonAPI.Utils
             { RateLimitType.Financial_ListFinancialEventsByGroupId,     new RateLimits(0.5M, 30) },
             { RateLimitType.Financial_ListFinancialEventsByOrderId,     new RateLimits(0.5M, 30) },
             { RateLimitType.Financial_ListFinancialEvents,              new RateLimits(0.5M, 30) },
-            
+
             { RateLimitType.Feed_GetFeeds,                              new RateLimits(0.0222M, 10) },
             { RateLimitType.Feed_CreateFeed,                            new RateLimits(0.0083M, 15) },
             { RateLimitType.Feed_GetFeed,                               new RateLimits(2.0M, 15) },
@@ -72,6 +70,11 @@ namespace FikaAmazonAPI.Utils
             { RateLimitType.FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU,      new RateLimits(2.0M, 5) },
             { RateLimitType.FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU,        new RateLimits(2.0M, 10) },
             { RateLimitType.FbaSmallandLight_GetSmallAndLightFeePreview,                    new RateLimits(1.0M, 3) },
+
+            { RateLimitType.Restrictions_GetListingsRestrictions,                new RateLimits(5.0M, 10) },
+
+            { RateLimitType.ProductTypes_GetDefinitionsProductType,                new RateLimits(5.0M, 10) },
+            { RateLimitType.ProductTypes_SearchDefinitionsProductTypes,                new RateLimits(5.0M, 10) },
 
             { RateLimitType.FBAInboundEligibility_GetItemEligibilityPreview,                new RateLimits(1.0M, 1) },
 

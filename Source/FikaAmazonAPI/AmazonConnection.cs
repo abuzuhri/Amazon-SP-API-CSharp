@@ -22,6 +22,7 @@ namespace FikaAmazonAPI
         public FbaSmallandLightService FbaSmallandLight => this._FbaSmallandLight ?? throw _NoCredentials;
         public FeedService Feed => this._Feed ?? throw _NoCredentials;
         public ListingsItemService ListingsItem => this._ListingsItem ?? throw _NoCredentials;
+        public RestrictionService Restrictions => this._Restrictions ?? throw _NoCredentials;
         public MerchantFulfillmentService MerchantFulfillment => this._MerchantFulfillment ?? throw _NoCredentials;
         public MessagingService Messaging => this._Messaging ?? throw _NoCredentials;
         public NotificationService Notification => this._Notification ?? throw _NoCredentials;
@@ -54,6 +55,7 @@ namespace FikaAmazonAPI
         private FbaSmallandLightService _FbaSmallandLight { get; set; }
         private FeedService _Feed { get; set; }
         private ListingsItemService _ListingsItem { get; set; }
+        private RestrictionService _Restrictions { get; set; }
         private MerchantFulfillmentService _MerchantFulfillment { get; set; }
         private MessagingService _Messaging { get; set; }
         private NotificationService _Notification { get; set; }
@@ -107,6 +109,7 @@ namespace FikaAmazonAPI
             this._AplusContent = new AplusContentService(this.Credentials);
             this._Feed = new FeedService(this.Credentials);
             this._ListingsItem = new ListingsItemService(this.Credentials);
+            this._Restrictions = new RestrictionService(this.Credentials);
             this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);
             this._Messaging = new MessagingService(this.Credentials);
             this._Notification = new NotificationService(this.Credentials);

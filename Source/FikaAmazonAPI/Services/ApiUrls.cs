@@ -231,6 +231,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/orderMetrics";
             }
         }
+        protected class RestrictionsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
+            public static string GetListingsRestrictions
+            {
+                get => $"{_resourceBaseUrl}/restrictions";
+            }
+        }
         protected class AuthorizationsApiUrls
         {
             private readonly static string _resourceBaseUrl = "/authorization/v1";

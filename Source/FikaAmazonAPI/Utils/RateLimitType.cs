@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FikaAmazonAPI.Utils
+﻿namespace FikaAmazonAPI.Utils
 {
     public enum RateLimitType
     {
@@ -66,6 +62,11 @@ namespace FikaAmazonAPI.Utils
         CatalogItems20201201_SearchCatalogItems,
 
         FbaInventory_GetInventorySummaries,
+
+        ProductTypes_SearchDefinitionsProductTypes,
+        ProductTypes_GetDefinitionsProductType,
+
+        Restrictions_GetListingsRestrictions,
 
         FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU,
         FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU,
