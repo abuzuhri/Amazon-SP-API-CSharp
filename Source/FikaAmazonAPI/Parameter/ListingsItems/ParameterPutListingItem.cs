@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 {
     public class ParameterPutListingItem : ParameterBased
     {
-        public bool Check() 
+        public bool Check()
         {
             if (TestCase == Constants.TestCase400)
                 sku = "BadSKU";
@@ -27,15 +27,15 @@ namespace FikaAmazonAPI.Parameter.ListingItem
             {
                 throw new InvalidDataException("MarketplaceIds is a required property for ParameterPutListingItem and cannot be null");
             }
-            if (listingsItemPutRequest == null) 
+            if (listingsItemPutRequest == null)
             {
                 throw new InvalidDataException("ListingsItemPutRequest is a required property for ParameterPutListingItem and cannot be null");
             }
-            if (string.IsNullOrWhiteSpace(this.listingsItemPutRequest.productType)) 
+            if (string.IsNullOrWhiteSpace(this.listingsItemPutRequest.productType))
             {
                 throw new InvalidDataException("ProductType is a required property for ListingsItemPutRequest and cannot be null");
             }
-            if (this.listingsItemPutRequest.attributes==null)
+            if (this.listingsItemPutRequest.attributes == null)
             {
                 throw new InvalidDataException("Attributes is a required property for ListingsItemPutRequest and cannot be null");
             }
