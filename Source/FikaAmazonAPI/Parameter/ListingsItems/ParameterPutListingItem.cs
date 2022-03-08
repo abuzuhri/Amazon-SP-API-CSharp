@@ -1,5 +1,7 @@
-﻿using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,13 +55,14 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 
     public class ListingsItemPutRequest
     {
-        public string ProductType { get; set; }
+        public string productType { get; set; }
 
-        public Requirements Requirements { get; set; }
+        public Requirements requirements { get; set; }
 
-        public Object Attributes { get; set; }
+        public Object attributes { get; set; }
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Requirements
     {
         LISTING,
