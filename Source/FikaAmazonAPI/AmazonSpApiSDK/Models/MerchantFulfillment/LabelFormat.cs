@@ -61,14 +61,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <summary>
         /// Enum ShippingServiceDefault for value: ShippingServiceDefault
         /// </summary>
-        [EnumMember(Value = "ShippingServiceDefault")]
+        [EnumMember(Value = "ShippingServiceDefault")]      
+        ShippingServiceDefault = 5,
 
         /// <summary>
         /// Enum ZPL for value: ZPL
         /// </summary>
-        ShippingServiceDefault = 5,
         [EnumMember(Value = "ZPL")]
-        ZPL = 4,
+        ZPL = 6,
     }
 
 }
