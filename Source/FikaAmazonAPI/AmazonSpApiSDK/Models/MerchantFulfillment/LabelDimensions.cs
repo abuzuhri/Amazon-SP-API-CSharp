@@ -21,25 +21,26 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
 {
     /// <summary>
     /// Dimensions for printing a shipping label.
     /// </summary>
     [DataContract]
-    public partial class LabelDimensions : IEquatable<LabelDimensions>, IValidatableObject
+    public partial class LabelDimensions :  IEquatable<LabelDimensions>, IValidatableObject
     {
         /// <summary>
         /// The unit of measurement.
         /// </summary>
         /// <value>The unit of measurement.</value>
-        [DataMember(Name = "Unit", EmitDefaultValue = false)]
+        [DataMember(Name="Unit", EmitDefaultValue=false)]
         public UnitOfLength Unit { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelDimensions" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LabelDimensions() { }
+        public LabelDimensions() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelDimensions" /> class.
         /// </summary>
@@ -76,19 +77,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
                 this.Unit = unit;
             }
         }
-
+        
         /// <summary>
         /// The length dimension.
         /// </summary>
         /// <value>The length dimension.</value>
-        [DataMember(Name = "Length", EmitDefaultValue = false)]
+        [DataMember(Name="Length", EmitDefaultValue=false)]
         public decimal? Length { get; set; }
 
         /// <summary>
         /// The width dimension.
         /// </summary>
         /// <value>The width dimension.</value>
-        [DataMember(Name = "Width", EmitDefaultValue = false)]
+        [DataMember(Name="Width", EmitDefaultValue=false)]
         public decimal? Width { get; set; }
 
 
@@ -106,7 +107,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             sb.Append("}\n");
             return sb.ToString();
         }
-
+  
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -136,17 +137,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             if (input == null)
                 return false;
 
-            return
+            return 
                 (
                     this.Length == input.Length ||
                     (this.Length != null &&
                     this.Length.Equals(input.Length))
-                ) &&
+                ) && 
                 (
                     this.Width == input.Width ||
                     (this.Width != null &&
                     this.Width.Equals(input.Width))
-                ) &&
+                ) && 
                 (
                     this.Unit == input.Unit ||
                     (this.Unit != null &&

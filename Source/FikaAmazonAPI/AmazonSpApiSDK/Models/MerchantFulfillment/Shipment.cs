@@ -21,25 +21,26 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
 {
     /// <summary>
     /// The details of a shipment, including the shipment status.
     /// </summary>
     [DataContract]
-    public partial class Shipment : IEquatable<Shipment>, IValidatableObject
+    public partial class Shipment :  IEquatable<Shipment>, IValidatableObject
     {
         /// <summary>
         /// The shipment status.
         /// </summary>
         /// <value>The shipment status.</value>
-        [DataMember(Name = "Status", EmitDefaultValue = false)]
+        [DataMember(Name="Status", EmitDefaultValue=false)]
         public ShipmentStatus Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Shipment" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Shipment() { }
+        public Shipment() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Shipment" /> class.
         /// </summary>
@@ -172,97 +173,97 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             this.TrackingId = trackingId;
             this.LastUpdatedDate = lastUpdatedDate;
         }
-
+        
         /// <summary>
         /// Gets or Sets ShipmentId
         /// </summary>
-        [DataMember(Name = "ShipmentId", EmitDefaultValue = false)]
+        [DataMember(Name="ShipmentId", EmitDefaultValue=false)]
         public string ShipmentId { get; set; }
 
         /// <summary>
         /// Gets or Sets AmazonOrderId
         /// </summary>
-        [DataMember(Name = "AmazonOrderId", EmitDefaultValue = false)]
+        [DataMember(Name="AmazonOrderId", EmitDefaultValue=false)]
         public string AmazonOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets SellerOrderId
         /// </summary>
-        [DataMember(Name = "SellerOrderId", EmitDefaultValue = false)]
+        [DataMember(Name="SellerOrderId", EmitDefaultValue=false)]
         public string SellerOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets ItemList
         /// </summary>
-        [DataMember(Name = "ItemList", EmitDefaultValue = false)]
+        [DataMember(Name="ItemList", EmitDefaultValue=false)]
         public ItemList ItemList { get; set; }
 
         /// <summary>
         /// The address of the sender.
         /// </summary>
         /// <value>The address of the sender.</value>
-        [DataMember(Name = "ShipFromAddress", EmitDefaultValue = false)]
+        [DataMember(Name="ShipFromAddress", EmitDefaultValue=false)]
         public Address ShipFromAddress { get; set; }
 
         /// <summary>
         /// The destination address for the shipment.
         /// </summary>
         /// <value>The destination address for the shipment.</value>
-        [DataMember(Name = "ShipToAddress", EmitDefaultValue = false)]
+        [DataMember(Name="ShipToAddress", EmitDefaultValue=false)]
         public Address ShipToAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets PackageDimensions
         /// </summary>
-        [DataMember(Name = "PackageDimensions", EmitDefaultValue = false)]
+        [DataMember(Name="PackageDimensions", EmitDefaultValue=false)]
         public PackageDimensions PackageDimensions { get; set; }
 
         /// <summary>
         /// The package weight.
         /// </summary>
         /// <value>The package weight.</value>
-        [DataMember(Name = "Weight", EmitDefaultValue = false)]
+        [DataMember(Name="Weight", EmitDefaultValue=false)]
         public Weight Weight { get; set; }
 
         /// <summary>
         /// If DeclaredValue was specified in a previous call to the createShipment operation, then Insurance indicates the amount that the carrier will use to insure the shipment. If DeclaredValue was not specified with a previous call to the createShipment operation, then the shipment will be insured for the carrier&#39;s minimum insurance amount, or the combined sale prices that the items are listed for in the shipment, whichever is less.
         /// </summary>
         /// <value>If DeclaredValue was specified in a previous call to the createShipment operation, then Insurance indicates the amount that the carrier will use to insure the shipment. If DeclaredValue was not specified with a previous call to the createShipment operation, then the shipment will be insured for the carrier&#39;s minimum insurance amount, or the combined sale prices that the items are listed for in the shipment, whichever is less.</value>
-        [DataMember(Name = "Insurance", EmitDefaultValue = false)]
+        [DataMember(Name="Insurance", EmitDefaultValue=false)]
         public CurrencyAmount Insurance { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingService
         /// </summary>
-        [DataMember(Name = "ShippingService", EmitDefaultValue = false)]
+        [DataMember(Name="ShippingService", EmitDefaultValue=false)]
         public ShippingService ShippingService { get; set; }
 
         /// <summary>
         /// Data for creating a shipping label and dimensions for printing the label. If the shipment is canceled, an empty Label is returned.
         /// </summary>
         /// <value>Data for creating a shipping label and dimensions for printing the label. If the shipment is canceled, an empty Label is returned.</value>
-        [DataMember(Name = "Label", EmitDefaultValue = false)]
+        [DataMember(Name="Label", EmitDefaultValue=false)]
         public Label Label { get; set; }
 
 
         /// <summary>
         /// Gets or Sets TrackingId
         /// </summary>
-        [DataMember(Name = "TrackingId", EmitDefaultValue = false)]
+        [DataMember(Name="TrackingId", EmitDefaultValue=false)]
         public string TrackingId { get; set; }
 
         /// <summary>
         /// The date and time the shipment was created.
         /// </summary>
         /// <value>The date and time the shipment was created.</value>
-        [DataMember(Name = "CreatedDate", EmitDefaultValue = false)]
+        [DataMember(Name="CreatedDate", EmitDefaultValue=false)]
         public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// The date and time of the last update.
         /// </summary>
         /// <value>The date and time of the last update.</value>
-        [DataMember(Name = "LastUpdatedDate", EmitDefaultValue = false)]
+        [DataMember(Name="LastUpdatedDate", EmitDefaultValue=false)]
         public DateTime? LastUpdatedDate { get; set; }
 
         /// <summary>
@@ -291,7 +292,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             sb.Append("}\n");
             return sb.ToString();
         }
-
+  
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -321,77 +322,77 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             if (input == null)
                 return false;
 
-            return
+            return 
                 (
                     this.ShipmentId == input.ShipmentId ||
                     (this.ShipmentId != null &&
                     this.ShipmentId.Equals(input.ShipmentId))
-                ) &&
+                ) && 
                 (
                     this.AmazonOrderId == input.AmazonOrderId ||
                     (this.AmazonOrderId != null &&
                     this.AmazonOrderId.Equals(input.AmazonOrderId))
-                ) &&
+                ) && 
                 (
                     this.SellerOrderId == input.SellerOrderId ||
                     (this.SellerOrderId != null &&
                     this.SellerOrderId.Equals(input.SellerOrderId))
-                ) &&
+                ) && 
                 (
                     this.ItemList == input.ItemList ||
                     (this.ItemList != null &&
                     this.ItemList.Equals(input.ItemList))
-                ) &&
+                ) && 
                 (
                     this.ShipFromAddress == input.ShipFromAddress ||
                     (this.ShipFromAddress != null &&
                     this.ShipFromAddress.Equals(input.ShipFromAddress))
-                ) &&
+                ) && 
                 (
                     this.ShipToAddress == input.ShipToAddress ||
                     (this.ShipToAddress != null &&
                     this.ShipToAddress.Equals(input.ShipToAddress))
-                ) &&
+                ) && 
                 (
                     this.PackageDimensions == input.PackageDimensions ||
                     (this.PackageDimensions != null &&
                     this.PackageDimensions.Equals(input.PackageDimensions))
-                ) &&
+                ) && 
                 (
                     this.Weight == input.Weight ||
                     (this.Weight != null &&
                     this.Weight.Equals(input.Weight))
-                ) &&
+                ) && 
                 (
                     this.Insurance == input.Insurance ||
                     (this.Insurance != null &&
                     this.Insurance.Equals(input.Insurance))
-                ) &&
+                ) && 
                 (
                     this.ShippingService == input.ShippingService ||
                     (this.ShippingService != null &&
                     this.ShippingService.Equals(input.ShippingService))
-                ) &&
+                ) && 
                 (
                     this.Label == input.Label ||
                     (this.Label != null &&
                     this.Label.Equals(input.Label))
-                ) &&
+                ) && 
                 (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
-                ) &&
+                ) && 
                 (
                     this.TrackingId == input.TrackingId ||
                     (this.TrackingId != null &&
                     this.TrackingId.Equals(input.TrackingId))
-                ) &&
+                ) && 
                 (
                     this.CreatedDate == input.CreatedDate ||
                     (this.CreatedDate != null &&
                     this.CreatedDate.Equals(input.CreatedDate))
-                ) &&
+                ) && 
                 (
                     this.LastUpdatedDate == input.LastUpdatedDate ||
                     (this.LastUpdatedDate != null &&

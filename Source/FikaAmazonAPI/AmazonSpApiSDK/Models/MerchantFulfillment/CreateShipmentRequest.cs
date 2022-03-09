@@ -21,25 +21,26 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
 {
     /// <summary>
     /// Request schema.
     /// </summary>
     [DataContract]
-    public partial class CreateShipmentRequest : IEquatable<CreateShipmentRequest>, IValidatableObject
+    public partial class CreateShipmentRequest :  IEquatable<CreateShipmentRequest>, IValidatableObject
     {
         /// <summary>
         /// Hazardous materials options for a package. Consult the terms and conditions for each carrier for more information about hazardous materials.
         /// </summary>
         /// <value>Hazardous materials options for a package. Consult the terms and conditions for each carrier for more information about hazardous materials.</value>
-        [DataMember(Name = "HazmatType", EmitDefaultValue = false)]
+        [DataMember(Name="HazmatType", EmitDefaultValue=false)]
         public HazmatType? HazmatType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateShipmentRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateShipmentRequest() { }
+        public CreateShipmentRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateShipmentRequest" /> class.
         /// </summary>
@@ -74,39 +75,39 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             this.LabelFormatOption = labelFormatOption;
             this.ShipmentLevelSellerInputsList = shipmentLevelSellerInputsList;
         }
-
+        
         /// <summary>
         /// Shipment information required for creating a shipment.
         /// </summary>
         /// <value>Shipment information required for creating a shipment.</value>
-        [DataMember(Name = "ShipmentRequestDetails", EmitDefaultValue = false)]
+        [DataMember(Name="ShipmentRequestDetails", EmitDefaultValue=false)]
         public ShipmentRequestDetails ShipmentRequestDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingServiceId
         /// </summary>
-        [DataMember(Name = "ShippingServiceId", EmitDefaultValue = false)]
+        [DataMember(Name="ShippingServiceId", EmitDefaultValue=false)]
         public string ShippingServiceId { get; set; }
 
         /// <summary>
         /// Identifies a shipping service order made by a carrier.
         /// </summary>
         /// <value>Identifies a shipping service order made by a carrier.</value>
-        [DataMember(Name = "ShippingServiceOfferId", EmitDefaultValue = false)]
+        [DataMember(Name="ShippingServiceOfferId", EmitDefaultValue=false)]
         public string ShippingServiceOfferId { get; set; }
 
 
         /// <summary>
         /// Gets or Sets LabelFormatOption
         /// </summary>
-        [DataMember(Name = "LabelFormatOption", EmitDefaultValue = false)]
+        [DataMember(Name="LabelFormatOption", EmitDefaultValue=false)]
         public LabelFormatOptionRequest LabelFormatOption { get; set; }
 
         /// <summary>
         /// A list of additional seller inputs required to ship this shipment.
         /// </summary>
         /// <value>A list of additional seller inputs required to ship this shipment.</value>
-        [DataMember(Name = "ShipmentLevelSellerInputsList", EmitDefaultValue = false)]
+        [DataMember(Name="ShipmentLevelSellerInputsList", EmitDefaultValue=false)]
         public AdditionalSellerInputsList ShipmentLevelSellerInputsList { get; set; }
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             sb.Append("}\n");
             return sb.ToString();
         }
-
+  
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -156,32 +157,32 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             if (input == null)
                 return false;
 
-            return
+            return 
                 (
                     this.ShipmentRequestDetails == input.ShipmentRequestDetails ||
                     (this.ShipmentRequestDetails != null &&
                     this.ShipmentRequestDetails.Equals(input.ShipmentRequestDetails))
-                ) &&
+                ) && 
                 (
                     this.ShippingServiceId == input.ShippingServiceId ||
                     (this.ShippingServiceId != null &&
                     this.ShippingServiceId.Equals(input.ShippingServiceId))
-                ) &&
+                ) && 
                 (
                     this.ShippingServiceOfferId == input.ShippingServiceOfferId ||
                     (this.ShippingServiceOfferId != null &&
                     this.ShippingServiceOfferId.Equals(input.ShippingServiceOfferId))
-                ) &&
+                ) && 
                 (
                     this.HazmatType == input.HazmatType ||
                     (this.HazmatType != null &&
                     this.HazmatType.Equals(input.HazmatType))
-                ) &&
+                ) && 
                 (
                     this.LabelFormatOption == input.LabelFormatOption ||
                     (this.LabelFormatOption != null &&
                     this.LabelFormatOption.Equals(input.LabelFormatOption))
-                ) &&
+                ) && 
                 (
                     this.ShipmentLevelSellerInputsList == input.ShipmentLevelSellerInputsList ||
                     (this.ShipmentLevelSellerInputsList != null &&
