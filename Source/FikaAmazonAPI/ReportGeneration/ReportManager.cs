@@ -155,14 +155,15 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region GetInventoryQty
-        public void GetInventoryQty()
+        public async Task<List<ProductAFNInventoryRow>> GetAFNInventoryQtyAsync()
         {
-            //var path = GetInventoryQty(_amazonConnections);
-            throw new Exception("Report not finished");
+            var path = await GetAFNInventoryQtyAsync(_amazonConnection);
+            ProductAFNInventoryReport report = new ProductAFNInventoryReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
-        private string GetInventoryQty(AmazonConnection amazonConnection)
+        private async Task<string> GetAFNInventoryQtyAsync(AmazonConnection amazonConnection)
         {
-            return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_AFN_INVENTORY_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_AFN_INVENTORY_DATA);
         }
         #endregion
 
