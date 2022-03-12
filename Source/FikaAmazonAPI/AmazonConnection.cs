@@ -27,6 +27,7 @@ namespace FikaAmazonAPI
         public MessagingService Messaging => this._Messaging ?? throw _NoCredentials;
         public NotificationService Notification => this._Notification ?? throw _NoCredentials;
         public ProductFeeService ProductFee => this._ProductFee ?? throw _NoCredentials;
+        public ProductTypeService ProductType => this._ProductType ?? throw _NoCredentials;
         public SalesService Sales => this._Sales ?? throw _NoCredentials;
         public SellerService Seller => this._Seller ?? throw _NoCredentials;
         public ServicesService Services => this._Services ?? throw _NoCredentials;
@@ -60,6 +61,7 @@ namespace FikaAmazonAPI
         private MessagingService _Messaging { get; set; }
         private NotificationService _Notification { get; set; }
         private ProductFeeService _ProductFee { get; set; }
+        private ProductTypeService _ProductType { get; set; }
         private SalesService _Sales { get; set; }
         private SellerService _Seller { get; set; }
         private ServicesService _Services { get; set; }
@@ -114,6 +116,7 @@ namespace FikaAmazonAPI
             this._Messaging = new MessagingService(this.Credentials);
             this._Notification = new NotificationService(this.Credentials);
             this._ProductFee = new ProductFeeService(this.Credentials);
+            this._ProductType = new ProductTypeService(this.Credentials);
             this._Sales = new SalesService(this.Credentials);
             this._Seller = new SellerService(this.Credentials);
             this._Services = new ServicesService(this.Credentials);

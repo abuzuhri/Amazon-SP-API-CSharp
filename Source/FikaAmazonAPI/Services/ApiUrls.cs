@@ -271,6 +271,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
 
         }
+        protected class ProductTypeApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/definitions/2020-09-01";
+            public static string SearchDefinitionsProductTypes
+            {
+                get => $"{_resourceBaseUrl}/productTypes";
+            }
+
+            public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/productTypes/{productType}";
+        }
 
         protected class ReportApiUrls
         {

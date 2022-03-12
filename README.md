@@ -35,7 +35,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [Feeds](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feeds_2021-06-30.md) for [feedType](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) for step to call feed read [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md)
 - [x] [ListingsItems](https://github.com/amzn/selling-partner-api-docs/blob/main/references/listings-items-api/listingsItems_2021-08-01.md)
 - [x] [Restrictions](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-reference)
-- [ ] [ProductTypes](https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference)
+- [x] [ProductTypes](https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference)
 - [x] [Uploads](https://github.com/amzn/selling-partner-api-docs/blob/main/references/uploads-api/uploads_2020-11-01.md)
 - [x] [shipmentInvoicingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipment-invoicing-api/shipmentInvoicingV0.md)
 - [x] [Shippings](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipping-api/shipping.md)
@@ -452,6 +452,27 @@ var shipmentRequest = new CreateShipmentRequest(
  var shipmentResponse = amazonConnection.MerchantFulfillment.CreateShipment(shipmentRequest);
 ```
 
+## ProductTypes SearchDefinitions
+
+```CSharp
+var list = amazonConnection.ProductType.SearchDefinitionsProductTypes(
+  new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter()
+   {
+    keywords = new List<string> { String.Empty },
+   });
+```
+
+## ProductTypes GetDefinitions
+
+```CSharp
+var def = amazonConnection.ProductType.GetDefinitionsProductType(
+   new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
+    {
+     productType = "PRODUCT",
+     requirements = RequirementsEnum.LISTING,
+     locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
+     });
+```
 ---
 ## Q & A
 
