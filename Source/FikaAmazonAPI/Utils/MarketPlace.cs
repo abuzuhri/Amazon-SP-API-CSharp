@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Utils
             return list.FirstOrDefault(a => a.Country.Code == countryCode);
         }
 
-        //https://docs.developer.amazonservices.com/en_UK/dev_guide/DG_Endpoints.html
+        //https://developer-docs.amazon.com/sp-api/docs/marketplace-ids
 
         //NorthAmerica
         public static MarketPlace US { get { return new MarketPlace("ATVPDKIKX0DER", Region.NorthAmerica, Country.US); } }
