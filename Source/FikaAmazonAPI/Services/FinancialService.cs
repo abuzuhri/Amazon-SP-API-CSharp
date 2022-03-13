@@ -53,13 +53,38 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public FinancialEvents ListFinancialEventsByGroupId(string eventGroupId) =>
+        public List<FinancialEvents> ListFinancialEventsByGroupId(string eventGroupId) =>
                 Task.Run(() => ListFinancialEventsByGroupIdAsync(eventGroupId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<FinancialEvents> ListFinancialEventsByGroupIdAsync(string eventGroupId)
+        public async Task<List<FinancialEvents>> ListFinancialEventsByGroupIdAsync(string eventGroupId)
         {
             await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET);
             var response = await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByGroupId);
-            return response.Payload.FinancialEvents;
+
+            var nextToken = response.Payload.NextToken;
+
+            var list = new List<FinancialEvents>();
+            list.Add(response.Payload.FinancialEvents);
+
+            while (!string.IsNullOrEmpty(nextToken))
+            {
+                var data = await ListFinancialEventsByGroupIdByNextTokenAsync(eventGroupId, nextToken);
+                if (data.Payload != null && data.Payload.FinancialEvents != null)
+                {
+                    list.Add(data.Payload.FinancialEvents);
+                }
+                nextToken = data.Payload.NextToken;
+            }
+
+            return list;
+        }
+        private async Task<ListFinancialEventsResponse> ListFinancialEventsByGroupIdByNextTokenAsync(string eventGroupId, string nextToken)
+        {
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+
+
+            await CreateAuthorizedRequestAsync(FinanceApiUrls.ListFinancialEventsByGroupId(eventGroupId), RestSharp.Method.GET, queryParameters);
+            return await ExecuteRequestAsync<ListFinancialEventsResponse>(RateLimitType.Financial_ListFinancialEventsByGroupId);
         }
 
         public FinancialEvents ListFinancialEventsByOrderId(string orderId) =>
