@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization;
 using FikaAmazonAPI.Parameter.Authorization;
 using System.Threading.Tasks;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 
 namespace FikaAmazonAPI.Services
 {
@@ -15,8 +16,9 @@ namespace FikaAmazonAPI.Services
         public async Task<string> GetAuthorizationCodeAsync(ParameterAuthorizationCode parameter)
         {
             var param = parameter.getParameters();
-            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.GET, param);
-            var response = await ExecuteRequestAsync<GetAuthorizationCodeResponse>();
+            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.GET, param, tokenDataType: TokenDataType.MigrationOnly);
+
+            var response = await ExecuteRequestAsync<GetAuthorizationCodeResponse>(Utils.RateLimitType.Authorization_GetAuthorizationCode);
             if (response != null && response.Payload != null)
                 return response.Payload._AuthorizationCode;
             return null;

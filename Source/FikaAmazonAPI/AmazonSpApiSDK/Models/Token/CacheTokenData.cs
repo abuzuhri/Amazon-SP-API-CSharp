@@ -7,6 +7,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         protected TokenResponse NormalAccessToken { get; set; }
         protected TokenResponse PIIAccessToken { get; set; }
         protected TokenResponse GrantlessAccessToken { get; set; }
+        protected TokenResponse MigrationAccessToken { get; set; }
         protected AWSAuthenticationTokenData AWSAuthenticationTokenData { get; set; }
 
         public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
@@ -21,7 +22,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         }
         public TokenResponse GetToken(TokenDataType tokenDataType)
         {
-            TokenResponse token = null; 
+            TokenResponse token = null;
             if (tokenDataType == TokenDataType.Normal)
             {
                 token = NormalAccessToken;
@@ -33,6 +34,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             else if (tokenDataType == TokenDataType.Grantless)
             {
                 token = GrantlessAccessToken;
+            }
+            else if (tokenDataType == TokenDataType.MigrationOnly)
+            {
+                token = MigrationAccessToken;
             }
             if (token == null)
                 return null;
@@ -47,10 +52,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 
         public void SetToken(TokenDataType tokenDataType, TokenResponse token)
         {
-            
+
             if (tokenDataType == TokenDataType.Normal)
             {
-                NormalAccessToken=token;
+                NormalAccessToken = token;
             }
             else if (tokenDataType == TokenDataType.PII)
             {
@@ -59,7 +64,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             }
             else if (tokenDataType == TokenDataType.Grantless)
             {
-                GrantlessAccessToken=token;
+                GrantlessAccessToken = token;
+            }
+            else if (tokenDataType == TokenDataType.MigrationOnly)
+            {
+                MigrationAccessToken = token;
             }
         }
 
@@ -68,6 +77,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             Normal,
             PII,
             Grantless,
+            MigrationOnly
         }
 
 
@@ -76,9 +86,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             if (dateCreated == null)
                 return false;
             else
-                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn-60); //Add Margent to a void expaired token
+                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn - 60); //Add Margent to a void expaired token
         }
     }
 
-    
+
 }

@@ -63,6 +63,8 @@
 
         FbaInventory_GetInventorySummaries,
 
+        Authorization_GetAuthorizationCode,
+
         ProductTypes_SearchDefinitionsProductTypes,
         ProductTypes_GetDefinitionsProductType,
 

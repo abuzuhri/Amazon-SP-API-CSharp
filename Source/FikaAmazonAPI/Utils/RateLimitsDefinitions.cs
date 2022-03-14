@@ -65,6 +65,8 @@ namespace FikaAmazonAPI.Utils
 
             { RateLimitType.FbaInventory_GetInventorySummaries,         new RateLimits(2.0M, 2) },
 
+            { RateLimitType.Authorization_GetAuthorizationCode,         new RateLimits(1.0M, 5) },
+
             { RateLimitType.FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU,         new RateLimits(2.0M, 10) },
             { RateLimitType.FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU,         new RateLimits(2.0M, 5) },
             { RateLimitType.FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU,      new RateLimits(2.0M, 5) },
