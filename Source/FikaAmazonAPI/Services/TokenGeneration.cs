@@ -3,9 +3,13 @@ using Amazon.SecurityToken.Model;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.Utils;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
@@ -17,33 +21,54 @@ namespace FikaAmazonAPI.Services
 
         public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
         {
-            var lwaCredentials = new LWAAuthorizationCredentials()
+            if (tokenDataType == TokenDataType.MigrationOnly)
             {
-                ClientId = credentials.ClientId,
-                ClientSecret = credentials.ClientSecret,
-                Endpoint = new Uri(Constants.AmazonToeknEndPoint),
-                RefreshToken = credentials.RefreshToken,
-                Scopes = null
-            };
-            if (tokenDataType == TokenDataType.Grantless)
-                lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
-            else if (tokenDataType == TokenDataType.MigrationOnly)
+                var accessToken = await GetAccessTokenForSPAPIMigration(credentials.ClientId, credentials.ClientSecret);
+                return accessToken;
+            }
+            else
             {
-                lwaCredentials = new LWAAuthorizationCredentials()
+                var lwaCredentials = new LWAAuthorizationCredentials()
                 {
                     ClientId = credentials.ClientId,
                     ClientSecret = credentials.ClientSecret,
                     Endpoint = new Uri(Constants.AmazonToeknEndPoint),
-                    Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI }
+                    RefreshToken = credentials.RefreshToken,
+                    Scopes = null
                 };
+                if (tokenDataType == TokenDataType.Grantless)
+                    lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
+
+                var Client = new LWAClient(lwaCredentials);
+                var accessToken = await Client.GetAccessTokenAsync();
+
+                return accessToken;
             }
-
-            var Client = new LWAClient(lwaCredentials);
-            var accessToken = await Client.GetAccessTokenAsync();
-
-            return accessToken;
         }
 
+        public static async Task<TokenResponse> GetAccessTokenForSPAPIMigration(string ClientId, string ClientSecret)
+        {
+            string data = string.Empty;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://api.amazon.com");
+                var byteArray = Encoding.ASCII.GetBytes($"{ClientId}:{ClientSecret}");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+
+                Dictionary<string, string> items = new Dictionary<string, string>();
+                items.Add("grant_type", "client_credentials");
+                items.Add("scope", "sellingpartnerapi::migration");
+                items.Add("client_id", ClientId);
+                items.Add("client_secret", ClientSecret);
+
+                FormUrlEncodedContent formUrlEncodedContent = new FormUrlEncodedContent(items);
+                var rs = client.PostAsync("/auth/o2/token", formUrlEncodedContent).Result;
+                data = await rs.Content.ReadAsStringAsync();
+            }
+
+            return JsonConvert.DeserializeObject<TokenResponse>(data);
+        }
 
         public static async Task<IRestRequest> SignWithSTSKeysAndSecurityTokenAsync(IRestRequest restRequest, string host, AmazonCredential amazonCredential, bool isMigration = false)
         {

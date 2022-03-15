@@ -35,7 +35,21 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
-
+            AmazonConnection codeAmazonConnection = new AmazonConnection(new AmazonCredential()
+            {
+                AccessKey = config.GetSection("MWSAmazonAPI:AccessKey").Value,
+                SecretKey = config.GetSection("MWSAmazonAPI:SecretKey").Value,
+                ClientId = config.GetSection("MWSAmazonAPI:ClientId").Value,
+                ClientSecret = config.GetSection("MWSAmazonAPI:ClientSecret").Value,
+                MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
+                IsActiveLimitRate = true
+            });
+            var code = codeAmazonConnection.Authorization.GetAuthorizationCode(new Parameter.Authorization.ParameterAuthorizationCode()
+            {
+                developerId = "673740111638",
+                mwsAuthToken = "amzn.mws.f0b83c90-ac85-07fc-f35b-9b9021fcbcf3",
+                sellingPartnerId = "A3J37AJU4O9RHK"
+            });
 
             var aha = amazonConnection.ProductType.SearchDefinitionsProductTypes(new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter()
             {
