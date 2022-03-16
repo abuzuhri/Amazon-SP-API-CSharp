@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Parameter.Order
 {
-    public class ParameterOrderList :  ParameterBased, IParameterBasedPII
+    public class ParameterOrderList : ParameterBased, IParameterBasedPII
     {
         public ParameterOrderList()
         {
@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.Parameter.Order
         /// A list of payment method values. Used to select orders paid using the specified payment methods. Possible values: COD (Cash on delivery); CVS (Convenience store payment); Other (Any payment method other than COD or CVS).
         /// </summary>
         public IList<Constants.PaymentMethods> PaymentMethods { get; set; }
-        
+
         [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
         public IList<Constants.EasyShipShipmentStatuses> EasyShipShipmentStatuses { get; set; }
         /// <summary>
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.Parameter.Order
         /// A string token returned in the response of your previous request.
         /// </summary>
         public string NextToken { get; set; }
-        public int? MaxResultsPerPage { get; set; }=100;
+        public int? MaxResultsPerPage { get; set; } = 100;
         /// <summary>
         /// Denotes the recommended sourceId where the order should be fulfilled from.	
         /// </summary>
@@ -81,6 +81,7 @@ namespace FikaAmazonAPI.Parameter.Order
         /// When true, this order is marked to be picked up from a store rather than delivered.	
         /// </summary>
         public bool? IsISPU { get; set; }
+        public int? MaxNumberOfPages { get; set; }
         /// <summary>
         /// The store chain store identifier. Linked to a specific store in a store chain.	
         /// </summary>

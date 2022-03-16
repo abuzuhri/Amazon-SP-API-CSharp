@@ -32,11 +32,19 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
+            int PageCount = 1;
             while (!string.IsNullOrEmpty(nextToken))
             {
                 var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
                 orderList.AddRange(orderPayload.Orders);
                 nextToken = orderPayload.NextToken;
+
+                if (searchOrderList.MaxNumberOfPages.HasValue)
+                {
+                    PageCount++;
+                    if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
+                        break;
+                }
             }
             return orderList;
         }
