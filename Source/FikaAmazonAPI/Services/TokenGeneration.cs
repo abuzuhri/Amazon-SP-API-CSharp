@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.Services
             return accessToken;
         }
 
-        public static async Task<TokenResponse> GetAccessTokenForSPAPIMigration(string ClientId, string ClientSecret)
+        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri)
         {
             string data = string.Empty;
 
@@ -50,9 +50,11 @@ namespace FikaAmazonAPI.Services
 
                 Dictionary<string, string> items = new Dictionary<string, string>();
                 items.Add("grant_type", "client_credentials");
-                items.Add("scope", "sellingpartnerapi::migration");
+                items.Add("scope", ScopeConstants.ScopeMigrationAPI);
                 items.Add("client_id", ClientId);
                 items.Add("client_secret", ClientSecret);
+                items.Add("code", code);
+                items.Add("redirect_uri", appRedirectUri);
 
                 FormUrlEncodedContent formUrlEncodedContent = new FormUrlEncodedContent(items);
                 var rs = client.PostAsync("/auth/o2/token", formUrlEncodedContent).Result;

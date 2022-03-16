@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter.Authorization;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
@@ -22,6 +23,15 @@ namespace FikaAmazonAPI.Services
             if (response != null && response.Payload != null)
                 return response.Payload._AuthorizationCode;
             return null;
+        }
+
+        public async Task<TokenResponse> GetAccessTokenFromCodeAsync(string code, string appRedirectUri)
+        {
+            return await TokenGeneration.GetAccessTokenFromCodeAsync(AmazonCredential.ClientId, AmazonCredential.ClientSecret, code, appRedirectUri);
+        }
+        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string clientId, string clientSecret, string code, string appRedirectUri)
+        {
+            return await TokenGeneration.GetAccessTokenFromCodeAsync(clientId, clientSecret, code, appRedirectUri);
         }
     }
 }
