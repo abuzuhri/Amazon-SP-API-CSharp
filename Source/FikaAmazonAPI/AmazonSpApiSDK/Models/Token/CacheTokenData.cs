@@ -7,7 +7,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         protected TokenResponse NormalAccessToken { get; set; }
         protected TokenResponse PIIAccessToken { get; set; }
         protected TokenResponse GrantlessAccessToken { get; set; }
-        protected TokenResponse MigrationAccessToken { get; set; }
         protected AWSAuthenticationTokenData AWSAuthenticationTokenData { get; set; }
 
         public AWSAuthenticationTokenData GetAWSAuthenticationTokenData()
@@ -34,10 +33,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             else if (tokenDataType == TokenDataType.Grantless)
             {
                 token = GrantlessAccessToken;
-            }
-            else if (tokenDataType == TokenDataType.MigrationOnly)
-            {
-                token = MigrationAccessToken;
             }
             if (token == null)
                 return null;
@@ -66,18 +61,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             {
                 GrantlessAccessToken = token;
             }
-            else if (tokenDataType == TokenDataType.MigrationOnly)
-            {
-                MigrationAccessToken = token;
-            }
         }
 
         public enum TokenDataType
         {
             Normal,
             PII,
-            Grantless,
-            MigrationOnly
+            Grantless
         }
 
 

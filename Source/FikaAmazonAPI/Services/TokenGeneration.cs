@@ -21,29 +21,21 @@ namespace FikaAmazonAPI.Services
 
         public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
         {
-            if (tokenDataType == TokenDataType.MigrationOnly)
+            var lwaCredentials = new LWAAuthorizationCredentials()
             {
-                var accessToken = await GetAccessTokenForSPAPIMigration(credentials.ClientId, credentials.ClientSecret);
-                return accessToken;
-            }
-            else
-            {
-                var lwaCredentials = new LWAAuthorizationCredentials()
-                {
-                    ClientId = credentials.ClientId,
-                    ClientSecret = credentials.ClientSecret,
-                    Endpoint = new Uri(Constants.AmazonToeknEndPoint),
-                    RefreshToken = credentials.RefreshToken,
-                    Scopes = null
-                };
-                if (tokenDataType == TokenDataType.Grantless)
-                    lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
+                ClientId = credentials.ClientId,
+                ClientSecret = credentials.ClientSecret,
+                Endpoint = new Uri(Constants.AmazonToeknEndPoint),
+                RefreshToken = credentials.RefreshToken,
+                Scopes = null
+            };
+            if (tokenDataType == TokenDataType.Grantless)
+                lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
-                var Client = new LWAClient(lwaCredentials);
-                var accessToken = await Client.GetAccessTokenAsync();
+            var Client = new LWAClient(lwaCredentials);
+            var accessToken = await Client.GetAccessTokenAsync();
 
-                return accessToken;
-            }
+            return accessToken;
         }
 
         public static async Task<TokenResponse> GetAccessTokenForSPAPIMigration(string ClientId, string ClientSecret)
@@ -70,60 +62,47 @@ namespace FikaAmazonAPI.Services
             return JsonConvert.DeserializeObject<TokenResponse>(data);
         }
 
-        public static async Task<IRestRequest> SignWithSTSKeysAndSecurityTokenAsync(IRestRequest restRequest, string host, AmazonCredential amazonCredential, bool isMigration = false)
+        public static async Task<IRestRequest> SignWithSTSKeysAndSecurityTokenAsync(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
         {
-            if (isMigration)
+            var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
+            if (dataToken == null)
             {
-                var awsAuthenticationCredentials = new AWSAuthenticationCredentials
+                AssumeRoleResponse response1 = null;
+                using (var STSClient = new AmazonSecurityTokenServiceClient(amazonCredential.AccessKey, amazonCredential.SecretKey))
                 {
-                    AccessKeyId = amazonCredential.AccessKey,
-                    SecretKey = amazonCredential.SecretKey,
-                    Region = amazonCredential.MarketPlace.Region.RegionName
-                };
-                return new AWSSigV4Signer(awsAuthenticationCredentials)
-                                .Sign(restRequest, host);
-            }
-            else
-            {
-                var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
-                if (dataToken == null)
-                {
-                    AssumeRoleResponse response1 = null;
-                    using (var STSClient = new AmazonSecurityTokenServiceClient(amazonCredential.AccessKey, amazonCredential.SecretKey))
+                    var req = new AssumeRoleRequest()
                     {
-                        var req = new AssumeRoleRequest()
-                        {
-                            RoleArn = amazonCredential.RoleArn,
-                            DurationSeconds = 3600,
-                            RoleSessionName = Guid.NewGuid().ToString()
-                        };
-
-                        response1 = await STSClient.AssumeRoleAsync(req, new CancellationToken());
-                    }
-
-                    //auth step 3
-                    var awsAuthenticationCredentials = new AWSAuthenticationCredentials
-                    {
-                        AccessKeyId = response1.Credentials.AccessKeyId,
-                        SecretKey = response1.Credentials.SecretAccessKey,
-                        Region = amazonCredential.MarketPlace.Region.RegionName
+                        RoleArn = amazonCredential.RoleArn,
+                        DurationSeconds = 3600,
+                        RoleSessionName = Guid.NewGuid().ToString()
                     };
 
-                    amazonCredential.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
-                    {
-                        AWSAuthenticationCredential = awsAuthenticationCredentials,
-                        SessionToken = response1.Credentials.SessionToken,
-                        Expiration = response1.Credentials.Expiration
-                    });
-                    dataToken = amazonCredential.GetAWSAuthenticationTokenData();
+                    response1 = await STSClient.AssumeRoleAsync(req, new CancellationToken());
                 }
 
+                //auth step 3
+                var awsAuthenticationCredentials = new AWSAuthenticationCredentials
+                {
+                    AccessKeyId = response1.Credentials.AccessKeyId,
+                    SecretKey = response1.Credentials.SecretAccessKey,
+                    Region = amazonCredential.MarketPlace.Region.RegionName
+                };
 
-                restRequest.AddOrUpdateHeader(RequestService.SecurityTokenHeaderName, dataToken.SessionToken);
-
-                return new AWSSigV4Signer(dataToken.AWSAuthenticationCredential)
-                                .Sign(restRequest, host);
+                amazonCredential.SetAWSAuthenticationTokenData(new AWSAuthenticationTokenData()
+                {
+                    AWSAuthenticationCredential = awsAuthenticationCredentials,
+                    SessionToken = response1.Credentials.SessionToken,
+                    Expiration = response1.Credentials.Expiration
+                });
+                dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             }
+
+
+            restRequest.AddOrUpdateHeader(RequestService.SecurityTokenHeaderName, dataToken.SessionToken);
+
+            return new AWSSigV4Signer(dataToken.AWSAuthenticationCredential)
+                            .Sign(restRequest, host);
+
         }
     }
 }

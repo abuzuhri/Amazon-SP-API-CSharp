@@ -39,9 +39,10 @@ namespace FikaAmazonAPI.SampleCode
             {
                 AccessKey = config.GetSection("MWSAmazonAPI:AccessKey").Value,
                 SecretKey = config.GetSection("MWSAmazonAPI:SecretKey").Value,
+                RoleArn = config.GetSection("MWSAmazonAPI:RoleArn").Value,
                 ClientId = config.GetSection("MWSAmazonAPI:ClientId").Value,
                 ClientSecret = config.GetSection("MWSAmazonAPI:ClientSecret").Value,
-                MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
+                MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("MWSAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
             var code = codeAmazonConnection.Authorization.GetAuthorizationCode(new Parameter.Authorization.ParameterAuthorizationCode()
