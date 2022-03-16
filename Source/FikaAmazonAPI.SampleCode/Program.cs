@@ -45,12 +45,8 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("MWSAmazonAPI:MarketPlaceID").Value),
                 IsActiveLimitRate = true
             });
-            var code = codeAmazonConnection.Authorization.GetAuthorizationCode(new Parameter.Authorization.ParameterAuthorizationCode()
-            {
-                developerId = "673740111638",
-                mwsAuthToken = "amzn.mws.f0b83c90-ac85-07fc-f35b-9b9021fcbcf3",
-                sellingPartnerId = "A3J37AJU4O9RHK"
-            });
+
+
 
             var aha = amazonConnection.ProductType.SearchDefinitionsProductTypes(new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter()
             {
