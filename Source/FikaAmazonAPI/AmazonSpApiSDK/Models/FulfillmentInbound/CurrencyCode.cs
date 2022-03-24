@@ -34,7 +34,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum GBP for value: GBP
         /// </summary>
         [EnumMember(Value = "GBP")]
-        GBP = 2
+
+        GBP = 2,
+        /// <summary>
+        /// Enum EUR for value: EUR
+        /// </summary>
+        [EnumMember(Value = "EUR")]
+        EUR = 3
     }
 
 }
