@@ -1,20 +1,23 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using System.Collections.Generic;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class ProductsReport
     {
-        public List<ProductsRow> Data { get; set; }=new List<ProductsRow>();
+        public List<ProductsRow> Data { get; set; } = new List<ProductsRow>();
         public ProductsReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => ProductsRow.FromCsv(v, refNumber))
-                                           .ToList();
+
+            var table = Table.ConvertFromCSV(path);
+
+            List<ProductsRow> values = new List<ProductsRow>();
+            foreach (var row in table.Rows)
+            {
+                values.Add(ProductsRow.FromRow(row, refNumber));
+            }
             Data = values;
         }
 
@@ -53,6 +56,41 @@ namespace FikaAmazonAPI.ReportGeneration
         public string Status { get; set; }
         public string refNumber { get; set; }
 
+        public static ProductsRow FromRow(TableRow rowData, string refNumber)
+        {
+            var row = new ProductsRow();
+            row.ItemName = rowData.GetString("item-name");
+            row.ItemDescription = rowData.GetString("item-description");
+            row.ListingId = rowData.GetString("listing-id");
+            row.SellerSku = rowData.GetString("seller-sku");
+            row.Price = DataConverter.GetDecimal(rowData.GetString("price"));
+            row.Quantity = rowData.GetInt32("quantity");
+            row.OpenDate = rowData.GetString("open-date");
+            row.ImageUrl = rowData.GetString("image-url");
+            row.ItemIsMarketplace = rowData.GetString("item-is-marketplace") == "y";
+            row.ProductIdType = rowData.GetInt32("product-id-type");
+            row.ZshopShippingFee = rowData.GetString("zshop-shipping-fee");
+            row.ItemNote = rowData.GetString("item-note");
+            row.ItemCondition = rowData.GetInt32("zshop-category1");
+            row.ZshopCategory1 = rowData.GetString("zshop-category1");
+            row.ZshopBrowsePath = rowData.GetString("zshop-browse-path");
+            row.ZshopStorefrontFeature = rowData.GetString("zshop-storefront-feature");
+            row.ASIN1 = rowData.GetString("asin1");
+            row.ASIN2 = rowData.GetString("asin2");
+            row.ASIN3 = rowData.GetString("asin3");
+            row.WillShipInternationally = rowData.GetString("will-ship-internationally");
+            row.ExpeditedShipping = rowData.GetString("expedited-shipping");
+            row.ZshopBoldface = rowData.GetString("zshop-boldface");
+            row.ProductId = rowData.GetString("product-id");
+            row.BidForFeaturedPlacement = rowData.GetString("bid-for-featured-placement");
+            row.AddDelete = rowData.GetString("add-delete");
+            row.PendingQuantity = rowData.GetInt32("pending-quantity");
+            row.FulfillmentChannel = rowData.GetString("fulfillment-channel");
+            row.OptionalPaymentTypeExclusion = rowData.GetString("optional-payment-type-exclusion");
+            row.Status = rowData.GetString("status");
+
+            return row;
+        }
         public static ProductsRow FromCsv(string csvLine, string refNumber)
         {
             string[] values = csvLine.Split('\t');
