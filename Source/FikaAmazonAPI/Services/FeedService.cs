@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.Services
 
 
 
-        public async Task<IList<Feed>> GetFeeds(ParameterGetFeed parameterGetFeed) =>
+        public IList<Feed> GetFeeds(ParameterGetFeed parameterGetFeed) =>
             Task.Run(() => GetFeedsAsync(parameterGetFeed)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<IList<Feed>> GetFeedsAsync(ParameterGetFeed parameterGetFeed)
