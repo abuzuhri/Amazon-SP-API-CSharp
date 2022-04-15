@@ -35,6 +35,15 @@ namespace FikaAmazonAPI.SampleCode
                 IsActiveLimitRate = true
             });
 
+            FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems plci = new FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems();
+            plci.UPC = "079325772114";
+            plci.MarketplaceId = FikaAmazonAPI.Utils.MarketPlace.UnitedArabEmirates.ID;
+
+            amazonConnection.CatalogItem.ListCatalogItems(plci);
+
+
+            var dataShipment = amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15D7NR6M9");
+
             AmazonConnection codeAmazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = config.GetSection("MWSAmazonAPI:AccessKey").Value,
