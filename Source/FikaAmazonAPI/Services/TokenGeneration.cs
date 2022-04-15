@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.Services
             return accessToken;
         }
 
-        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri)
+        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri, string grant_type = "client_credentials")
         {
             string data = string.Empty;
 
@@ -49,7 +49,7 @@ namespace FikaAmazonAPI.Services
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
                 Dictionary<string, string> items = new Dictionary<string, string>();
-                items.Add("grant_type", "client_credentials");
+                items.Add("grant_type", grant_type);
                 items.Add("scope", ScopeConstants.ScopeMigrationAPI);
                 items.Add("client_id", ClientId);
                 items.Add("client_secret", ClientSecret);
