@@ -10,14 +10,15 @@ namespace FikaAmazonAPI.Utils
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
         public readonly static string TestCase200 = "TEST_CASE_200";
         public readonly static string TestCase400 = "TEST_CASE_400";
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Environments
         {
             Sandbox, Production
         }
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum GranularityEnum {
+        public enum GranularityEnum
+        {
             Hour,
             Day,
             Week,
@@ -142,7 +143,7 @@ namespace FikaAmazonAPI.Utils
             Monday,
             Sunday
         }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of NotificationType
@@ -541,6 +542,14 @@ namespace FikaAmazonAPI.Utils
             Offers,
             FulfillmentAvailability,
             Procurement
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OptionalFulfillmentProgram
+        {
+            FBA_CORE,
+            FBA_SNL,
+            FBA_EFN
         }
 
 

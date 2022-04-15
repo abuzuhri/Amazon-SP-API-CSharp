@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
 {
@@ -92,6 +93,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         /// <value>A unique identifier provided by the caller to track this request.</value>
         [DataMember(Name = "SellerInputIdentifier", EmitDefaultValue = false)]
         public string SellerInputIdentifier { get; set; }
+
+
+        /// <summary>
+        /// An optional enrollment program to return the estimated fees when the offer is fulfilled by Amazon (IsAmazonFulfilled is set to true).
+        /// </summary>
+        [DataMember(Name = "OptionalFulfillmentProgram", EmitDefaultValue = false)]
+        public OptionalFulfillmentProgram? OptionalFulfillmentProgram { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
