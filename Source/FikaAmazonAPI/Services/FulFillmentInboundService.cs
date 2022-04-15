@@ -244,14 +244,14 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
-        public GetShipmentsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems) =>
+        public GetShipmentItemsResult GetShipmentItems(ParameterListReturnReasonCodes parameterShipmentItems) =>
             Task.Run(() => GetShipmentItemsAsync(parameterShipmentItems)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<GetShipmentsResult> GetShipmentItemsAsync(ParameterListReturnReasonCodes parameterShipmentItems)
+        public async Task<GetShipmentItemsResult> GetShipmentItemsAsync(ParameterListReturnReasonCodes parameterShipmentItems)
         {
             var parameter = parameterShipmentItems.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipmentItems, RestSharp.Method.GET, parameter);
 
-            var response = await ExecuteRequestAsync<GetShipmentsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItems);
+            var response = await ExecuteRequestAsync<GetShipmentItemsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItems);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;
