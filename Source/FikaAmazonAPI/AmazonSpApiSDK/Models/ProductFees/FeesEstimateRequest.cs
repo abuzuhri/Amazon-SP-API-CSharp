@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         /// <param name="IsAmazonFulfilled">When true, the offer is fulfilled by Amazon..</param>
         /// <param name="PriceToEstimateFees">The product price that the fee estimate is based on. (required).</param>
         /// <param name="Identifier">The product price on which the fee estimate is based. (required).</param>
-        public FeesEstimateRequest(string MarketplaceId, bool? IsAmazonFulfilled = default(bool?), PriceToEstimateFees PriceToEstimateFees = default(PriceToEstimateFees), string Identifier = default(string))
+        public FeesEstimateRequest(string MarketplaceId, bool? IsAmazonFulfilled = default(bool?), PriceToEstimateFees PriceToEstimateFees = default(PriceToEstimateFees), string Identifier = default(string), OptionalFulfillmentProgramEnum optionalFulfillmentProgram = default(OptionalFulfillmentProgramEnum))
         {
             // to ensure "MarketplaceId" is required (not null)
             if (MarketplaceId == null)
@@ -66,12 +66,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
                 this.Identifier = Identifier;
             }
             this.IsAmazonFulfilled = IsAmazonFulfilled;
+            this.OptionalFulfillmentProgram = optionalFulfillmentProgram;
         }
-            /// <summary>
-            /// A marketplace identifier.
-            /// </summary>
-            /// <value>A marketplace identifier.</value>
-            [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
+        /// <summary>
+        /// A marketplace identifier.
+        /// </summary>
+        /// <value>A marketplace identifier.</value>
+        [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
         /// <summary>
@@ -96,6 +97,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
         public string Identifier { get; set; }
 
         /// <summary>
+        /// An optional enrollment program to return the estimated fees when the offer is fulfilled by Amazon (IsAmazonFulfilled is set to true).
+        /// </summary>
+        [DataMember(Name = "OptionalFulfillmentProgram", EmitDefaultValue = false)]
+        public OptionalFulfillmentProgramEnum? OptionalFulfillmentProgram { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -107,6 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
             sb.Append("  IsAmazonFulfilled: ").Append(IsAmazonFulfilled).Append("\n");
             sb.Append("  PriceToEstimateFees: ").Append(PriceToEstimateFees).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  OptionalFulfillmentProgram: ").Append(OptionalFulfillmentProgram).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -160,6 +168,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
                     this.Identifier == input.Identifier ||
                     (this.Identifier != null &&
                     this.Identifier.Equals(input.Identifier))
+                ) &&
+                (
+                    this.OptionalFulfillmentProgram == input.OptionalFulfillmentProgram ||
+                    (this.OptionalFulfillmentProgram != null &&
+                    this.OptionalFulfillmentProgram.Equals(input.OptionalFulfillmentProgram))
                 );
         }
 
@@ -180,6 +193,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
                     hashCode = hashCode * 59 + this.PriceToEstimateFees.GetHashCode();
                 if (this.Identifier != null)
                     hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.OptionalFulfillmentProgram != null)
+                    hashCode = hashCode * 59 + this.OptionalFulfillmentProgram.GetHashCode();
                 return hashCode;
             }
         }
