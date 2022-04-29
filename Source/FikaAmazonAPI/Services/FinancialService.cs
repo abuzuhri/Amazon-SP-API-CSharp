@@ -121,12 +121,15 @@ namespace FikaAmazonAPI.Services
 
             list.Add(response.Payload.FinancialEvents);
             var nextToken = response.Payload.NextToken;
-
-            while (!string.IsNullOrEmpty(nextToken))
+            int countPages = 1;
+            while (!string.IsNullOrEmpty(nextToken) &&
+                        ((!parameterListFinancials.MaxNumberOfPages.HasValue)
+                            || (parameterListFinancials.MaxNumberOfPages.HasValue && parameterListFinancials.MaxNumberOfPages <= countPages)))
             {
                 var data = GetFinancialEventsByNextToken(nextToken);
                 list.Add(data.FinancialEvents);
                 nextToken = data.NextToken;
+                countPages++;
             }
 
             return list;
