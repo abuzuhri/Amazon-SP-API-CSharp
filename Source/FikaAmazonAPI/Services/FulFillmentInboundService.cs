@@ -187,15 +187,15 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public GetPrepInstructionsResult GetLabels(ParameterGetLabels parameterGetLabels) =>
+        public LabelDownloadURL GetLabels(ParameterGetLabels parameterGetLabels) =>
             Task.Run(() => GetLabelsAsync(parameterGetLabels)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<GetPrepInstructionsResult> GetLabelsAsync(ParameterGetLabels parameterGetLabels)
+        public async Task<LabelDownloadURL> GetLabelsAsync(ParameterGetLabels parameterGetLabels)
         {
             var parameter = parameterGetLabels.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.GET, parameter);
 
-            var response = await ExecuteRequestAsync<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetLabels);
+            var response = await ExecuteRequestAsync<GetLabelsResponse>(RateLimitType.FulFillmentInbound_GetLabels);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

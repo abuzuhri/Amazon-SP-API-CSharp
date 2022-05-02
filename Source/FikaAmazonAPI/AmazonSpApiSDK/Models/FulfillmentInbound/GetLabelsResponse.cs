@@ -34,6 +34,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Errors = Errors;
         }
 
+        public GetLabelsResponse()
+        {
+            this.Payload = default(LabelDownloadURL);
+            this.Errors = default(ErrorList);
+        }
         /// <summary>
         /// The payload for the getLabels operation.
         /// </summary>
