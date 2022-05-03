@@ -37,10 +37,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// <param name="LowestPrices">A list of the lowest prices for the item..</param>
         /// <param name="BuyBoxPrices">A list of item prices..</param>
         /// <param name="ListPrice">The list price of the item as suggested by the manufacturer..</param>
+        /// <param name="CompetitivePriceThreshold">This price is based on competitive prices from other retailers (excluding other Amazon sellers). The offer may be ineligible for the Buy Box if the seller&#39;s price + shipping (minus Amazon Points) is greater than this competitive price..</param>
         /// <param name="SuggestedLowerPricePlusShipping">The suggested lower price of the item, including shipping and Amazon Points. The suggested lower price is based on a range of factors, including historical selling prices, recent Buy Box-eligible prices, and input from customers for your products..</param>
         /// <param name="BuyBoxEligibleOffers">A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels..</param>
         /// <param name="OffersAvailableTime">When the status is ActiveButTooSoonForProcessing, this is the time when the offers will be available for processing..</param>
-        public Summary(int? TotalOfferCount = default(int?), NumberOfOffers NumberOfOffers = default(NumberOfOffers), LowestPrices LowestPrices = default(LowestPrices), BuyBoxPrices BuyBoxPrices = default(BuyBoxPrices), MoneyType ListPrice = default(MoneyType), MoneyType SuggestedLowerPricePlusShipping = default(MoneyType), BuyBoxEligibleOffers BuyBoxEligibleOffers = default(BuyBoxEligibleOffers), DateTime? OffersAvailableTime = default(DateTime?))
+        public Summary(int? TotalOfferCount = default(int?), NumberOfOffers NumberOfOffers = default(NumberOfOffers), LowestPrices LowestPrices = default(LowestPrices), BuyBoxPrices BuyBoxPrices = default(BuyBoxPrices), MoneyType ListPrice = default(MoneyType), MoneyType CompetitivePriceThreshold = null, MoneyType SuggestedLowerPricePlusShipping = default(MoneyType), BuyBoxEligibleOffers BuyBoxEligibleOffers = default(BuyBoxEligibleOffers), DateTime? OffersAvailableTime = default(DateTime?))
         {
             // to ensure "TotalOfferCount" is required (not null)
             if (TotalOfferCount == null)
@@ -55,6 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
             this.LowestPrices = LowestPrices;
             this.BuyBoxPrices = BuyBoxPrices;
             this.ListPrice = ListPrice;
+            this.CompetitivePriceThreshold = CompetitivePriceThreshold;
             this.SuggestedLowerPricePlusShipping = SuggestedLowerPricePlusShipping;
             this.BuyBoxEligibleOffers = BuyBoxEligibleOffers;
             this.OffersAvailableTime = OffersAvailableTime;
@@ -96,6 +98,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         public MoneyType ListPrice { get; set; }
 
         /// <summary>
+        /// This price is based on competitive prices from other retailers (excluding other Amazon sellers). The offer may be ineligible for the Buy Box if the seller&#39;s price + shipping (minus Amazon Points) is greater than this competitive price.
+        /// </summary>
+        /// <value>This price is based on competitive prices from other retailers (excluding other Amazon sellers). The offer may be ineligible for the Buy Box if the seller&#39;s price + shipping (minus Amazon Points) is greater than this competitive price.</value>
+        [DataMember(Name = "CompetitivePriceThreshold", EmitDefaultValue = false)]
+        public MoneyType CompetitivePriceThreshold { get; set; }
+
+        /// <summary>
         /// The suggested lower price of the item, including shipping and Amazon Points. The suggested lower price is based on a range of factors, including historical selling prices, recent Buy Box-eligible prices, and input from customers for your products.
         /// </summary>
         /// <value>The suggested lower price of the item, including shipping and Amazon Points. The suggested lower price is based on a range of factors, including historical selling prices, recent Buy Box-eligible prices, and input from customers for your products.</value>
@@ -129,6 +138,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
             sb.Append("  LowestPrices: ").Append(LowestPrices).Append("\n");
             sb.Append("  BuyBoxPrices: ").Append(BuyBoxPrices).Append("\n");
             sb.Append("  ListPrice: ").Append(ListPrice).Append("\n");
+            sb.Append("  CompetitivePriceThreshold: ").Append(CompetitivePriceThreshold).Append("\n");
             sb.Append("  SuggestedLowerPricePlusShipping: ").Append(SuggestedLowerPricePlusShipping).Append("\n");
             sb.Append("  BuyBoxEligibleOffers: ").Append(BuyBoxEligibleOffers).Append("\n");
             sb.Append("  OffersAvailableTime: ").Append(OffersAvailableTime).Append("\n");
@@ -192,6 +202,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                     this.ListPrice.Equals(input.ListPrice))
                 ) &&
                 (
+                    this.CompetitivePriceThreshold == input.CompetitivePriceThreshold ||
+                    this.CompetitivePriceThreshold != null &&
+                    this.CompetitivePriceThreshold.Equals(input.CompetitivePriceThreshold)
+                ) &&
+                (
                     this.SuggestedLowerPricePlusShipping == input.SuggestedLowerPricePlusShipping ||
                     (this.SuggestedLowerPricePlusShipping != null &&
                     this.SuggestedLowerPricePlusShipping.Equals(input.SuggestedLowerPricePlusShipping))
@@ -227,6 +242,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                     hashCode = hashCode * 59 + this.BuyBoxPrices.GetHashCode();
                 if (this.ListPrice != null)
                     hashCode = hashCode * 59 + this.ListPrice.GetHashCode();
+                if (this.CompetitivePriceThreshold != null)
+                    hashCode = hashCode * 59 + this.CompetitivePriceThreshold.GetHashCode();
                 if (this.SuggestedLowerPricePlusShipping != null)
                     hashCode = hashCode * 59 + this.SuggestedLowerPricePlusShipping.GetHashCode();
                 if (this.BuyBoxEligibleOffers != null)
