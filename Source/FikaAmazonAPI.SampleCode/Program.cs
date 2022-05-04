@@ -32,8 +32,16 @@ namespace FikaAmazonAPI.SampleCode
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
-                IsActiveLimitRate = true
+                IsActiveLimitRate = false
             });
+
+
+            var fbaSmallAndLightSample = new FbaSmallAndLightSample(amazonConnection);
+
+            //await fbaSmallAndLightSample.GetSmallAndLightEnrollmentBySellerSKUAsync();
+            //await fbaSmallAndLightSample.GetSmallAndLightEligibilityBySellerSKUAsync();
+            await fbaSmallAndLightSample.GetSmallAndLightFeePreviewAsync();
+            return;
 
             FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems plci = new FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems();
             plci.UPC = "079325772114";
