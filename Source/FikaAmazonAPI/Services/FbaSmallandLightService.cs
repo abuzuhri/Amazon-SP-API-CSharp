@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.GET, queryParameters: queryParameters);
 
             var response = await ExecuteRequestAsync<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU);
 
@@ -87,9 +87,6 @@ namespace FikaAmazonAPI.Services
 
         public async Task<List<FeePreview>> GetSmallAndLightFeePreviewAsync(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest)
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
-
             await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightFeePreview, RestSharp.Method.POST, postJsonObj: smallAndLightFeePreviewRequest);
 
             var response = await ExecuteRequestAsync<SmallAndLightFeePreviews>(RateLimitType.FbaSmallandLight_GetSmallAndLightFeePreview);

@@ -166,10 +166,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         {
             private readonly static string _resourceBaseUrl = "/fba/smallAndLight/v1";
 
-            public static string GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{sellerSKU}";
-            public static string PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{sellerSKU}";
-            public static string DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{sellerSKU}";
-            public static string GetSmallAndLightEligibilityBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/eligibilities/{sellerSKU}";
+            public static string GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            public static string PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            public static string DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            public static string GetSmallAndLightEligibilityBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/eligibilities/{Uri.EscapeDataString(sellerSKU)}";
             public static string GetSmallAndLightFeePreview
             {
                 get => $"{_resourceBaseUrl}/feePreviews";

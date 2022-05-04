@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// </summary>
         /// <param name="MarketplaceId">MarketplaceId (required).</param>
         /// <param name="Items">A list of items for which to retrieve fee estimates (limit: 25). (required).</param>
-        public SmallAndLightFeePreviewRequest(MarketplaceId MarketplaceId = default(MarketplaceId), List<Item> Items = default(List<Item>))
+        public SmallAndLightFeePreviewRequest(String MarketplaceId = default(String), List<Item> Items = default(List<Item>))
         {
             // to ensure "MarketplaceId" is required (not null)
             if (MarketplaceId == null)
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// Gets or Sets MarketplaceId
         /// </summary>
         [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
-        public MarketplaceId MarketplaceId { get; set; }
+        public String MarketplaceId { get; set; }
 
         /// <summary>
         /// A list of items for which to retrieve fee estimates (limit: 25).
