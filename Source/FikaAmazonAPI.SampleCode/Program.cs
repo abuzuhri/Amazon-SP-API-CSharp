@@ -32,22 +32,28 @@ namespace FikaAmazonAPI.SampleCode
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
-                IsActiveLimitRate = false
             });
+
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                var plci = new FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems();
+                plci.UPC = "079325772114";
+                plci.MarketplaceId = FikaAmazonAPI.Utils.MarketPlace.UnitedArabEmirates.ID;
+
+                var response22 = amazonConnection.CatalogItem.ListCatalogItems(plci);
+            }
+
 
 
             var fbaSmallAndLightSample = new FbaSmallAndLightSample(amazonConnection);
 
-            //await fbaSmallAndLightSample.GetSmallAndLightEnrollmentBySellerSKUAsync();
-            //await fbaSmallAndLightSample.GetSmallAndLightEligibilityBySellerSKUAsync();
-            await fbaSmallAndLightSample.GetSmallAndLightFeePreviewAsync();
-            return;
+            ////await fbaSmallAndLightSample.GetSmallAndLightEnrollmentBySellerSKUAsync();
+            ////await fbaSmallAndLightSample.GetSmallAndLightEligibilityBySellerSKUAsync();
+            //await fbaSmallAndLightSample.GetSmallAndLightFeePreviewAsync();
+            //return;
 
-            FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems plci = new FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems();
-            plci.UPC = "079325772114";
-            plci.MarketplaceId = FikaAmazonAPI.Utils.MarketPlace.UnitedArabEmirates.ID;
-
-            amazonConnection.CatalogItem.ListCatalogItems(plci);
 
 
             var dataShipment = amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15D7NR6M9");
