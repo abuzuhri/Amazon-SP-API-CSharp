@@ -50,6 +50,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// </summary>
             [EnumMember(Value = "NO_VOEC")]
             NO_VOEC = 3
+            
+            /// <summary>
+            /// Enum GB_VOEC for value: GB_VOEC
+            /// </summary>
+            [EnumMember(Value = "GB_VOEC")]
+            GB_VOEC = 4
         }
 
         /// <summary>
