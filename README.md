@@ -366,6 +366,26 @@ var reportOutpit = outPut.Url;
 var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
 
 ```
+
+#### Feed Submit for change ProdcutImage
+```CSharp
+public void SubmitFeedProductImage()
+{
+    ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+    var list = new List<ProductImageMessage>();
+    list.Add(new ProductImageMessage()
+    {
+	SKU = "8201031206122...",
+	ImageLocation = "http://xxxx.com/1.jpeg",
+	ImageType = ImageType.Main
+    }) ;
+    createDocument.AddProductImageMessage(list);
+    var xml = createDocument.GetXML();
+
+    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_IMAGE_DATA);
+
+}
+```
  
 ---
 ## Usage Plans and Rate Limits in the Selling Partner API
