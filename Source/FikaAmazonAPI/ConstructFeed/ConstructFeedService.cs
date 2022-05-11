@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.ConstructFeed
     {
 
         private FeedAmazonEnvelope envelope = new FeedAmazonEnvelope();
-        public ConstructFeedService(string sellerId,string documentVersion,bool? purgeAndReplace=null) 
+        public ConstructFeedService(string sellerId, string documentVersion, bool? purgeAndReplace = null)
         {
             envelope.Header = new FeedHeader()
             {
@@ -25,18 +25,19 @@ namespace FikaAmazonAPI.ConstructFeed
         {
             var msgs = new List<BaseMessage>();
             int index = 1;
-            foreach(var itm in messages)
+            foreach (var itm in messages)
             {
-                msgs.Add(new BaseMessage() {
+                msgs.Add(new BaseMessage()
+                {
                     MessageID = index++,
-                    Price= itm,
-                    OperationType=Utils.Constants.OperationType.Update
+                    Price = itm,
+                    OperationType = Utils.Constants.OperationType.Update
                 });
             }
             envelope.Message = msgs;
             envelope.MessageType = Utils.Constants.FeedMessageType.Price;
         }
-        public void AddOfferMessage(IList<OfferMessage> messages, Constants.OperationType operationType= Constants.OperationType.Update)
+        public void AddOfferMessage(IList<OfferMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
         {
             var msgs = new List<BaseMessage>();
             int index = 1;
@@ -71,7 +72,7 @@ namespace FikaAmazonAPI.ConstructFeed
             envelope.MessageType = Utils.Constants.FeedMessageType.Inventory;
 
         }
-        
+
         public void AddProductMessage(IList<ProductMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
         {
             var msgs = new List<BaseMessage>();
@@ -104,6 +105,23 @@ namespace FikaAmazonAPI.ConstructFeed
             }
             envelope.Message = msgs;
             envelope.MessageType = Utils.Constants.FeedMessageType.OrderFulfillment;
+        }
+
+        public void AddProductImageMessage(IList<ProductImageMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
+        {
+            var msgs = new List<BaseMessage>();
+            int index = 1;
+            foreach (var itm in messages)
+            {
+                msgs.Add(new BaseMessage()
+                {
+                    MessageID = index++,
+                    ProductImage = itm,
+                    OperationType = operationType
+                });
+            }
+            envelope.Message = msgs;
+            envelope.MessageType = Utils.Constants.FeedMessageType.ProductImage;
         }
 
         public string GetXML()
