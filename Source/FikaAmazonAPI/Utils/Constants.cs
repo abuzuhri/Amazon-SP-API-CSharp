@@ -463,7 +463,7 @@ namespace FikaAmazonAPI.Utils
             GET_BRAND_ANALYTICS_REPEAT_PURCHASE_REPORT,
             GET_BRAND_ANALYTICS_ALTERNATE_PURCHASE_REPORT,
             GET_BRAND_ANALYTICS_ITEM_COMPARISON_REPORT,
-
+            GET_SALES_AND_TRAFFIC_REPORT,
 
         }
         [JsonConverter(typeof(StringEnumConverter))]

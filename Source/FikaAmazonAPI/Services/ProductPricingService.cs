@@ -1,7 +1,9 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing;
 using FikaAmazonAPI.Parameter.ProductPricing;
 using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
@@ -31,6 +33,11 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetCompetitivePricingAsync(parameterGetCompetitivePricing)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<Price>> GetCompetitivePricingAsync(ParameterGetCompetitivePricing parameterGetCompetitivePricing)
         {
+            if (parameterGetCompetitivePricing.Skus != null && parameterGetCompetitivePricing.Skus.Count > 0)
+            {
+                parameterGetCompetitivePricing.Skus = parameterGetCompetitivePricing.Skus.Select(a => Uri.EscapeDataString(a)).ToList();
+            }
+
             var param = parameterGetCompetitivePricing.getParameters();
 
             await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.GET, param);
