@@ -34,11 +34,8 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
-            var data33 = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
-            {
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Skus = new string[] { "033984 020511" },
-            });
+
+
 
 
             for (int i = 0; i < 100; i++)
