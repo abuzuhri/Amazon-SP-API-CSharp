@@ -205,6 +205,19 @@ parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
 var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
+### Get Report with PII
+
+```Csharp
+
+//use this method automatically know if the report are RDT or not
+var data2 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_EASYSHIP_DOCUMENTS, startDate, null, null);
+
+// OR USE this method to get the document and pass parameter isRestrictedReport = true in case the report will return  PII data
+
+var data = amazonConnection.Reports.GetReportDocument("50039018869997",true);
+```
+
+
 ### Report Manager 🚀🧑‍🚀✨
 Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
 ```CSharp
