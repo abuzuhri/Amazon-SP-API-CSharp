@@ -28,38 +28,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Initializes a new instance of the <see cref="Summary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public Summary() { }
+        protected Summary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Summary" /> class.
         /// </summary>
-        /// <param name="TotalOfferCount">The number of unique offers contained in NumberOfOffers. (required).</param>
-        /// <param name="NumberOfOffers">A list that contains the total number of offers for the item for the given conditions and fulfillment channels..</param>
-        /// <param name="LowestPrices">A list of the lowest prices for the item..</param>
-        /// <param name="BuyBoxPrices">A list of item prices..</param>
-        /// <param name="ListPrice">The list price of the item as suggested by the manufacturer..</param>
-        /// <param name="CompetitivePriceThreshold">This price is based on competitive prices from other retailers (excluding other Amazon sellers). The offer may be ineligible for the Buy Box if the seller&#39;s price + shipping (minus Amazon Points) is greater than this competitive price..</param>
-        /// <param name="SuggestedLowerPricePlusShipping">The suggested lower price of the item, including shipping and Amazon Points. The suggested lower price is based on a range of factors, including historical selling prices, recent Buy Box-eligible prices, and input from customers for your products..</param>
-        /// <param name="BuyBoxEligibleOffers">A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels..</param>
-        /// <param name="OffersAvailableTime">When the status is ActiveButTooSoonForProcessing, this is the time when the offers will be available for processing..</param>
-        public Summary(int? TotalOfferCount = default(int?), NumberOfOffers NumberOfOffers = default(NumberOfOffers), LowestPrices LowestPrices = default(LowestPrices), BuyBoxPrices BuyBoxPrices = default(BuyBoxPrices), MoneyType ListPrice = default(MoneyType), MoneyType CompetitivePriceThreshold = null, MoneyType SuggestedLowerPricePlusShipping = default(MoneyType), BuyBoxEligibleOffers BuyBoxEligibleOffers = default(BuyBoxEligibleOffers), DateTime? OffersAvailableTime = default(DateTime?))
+        /// <param name="totalOfferCount">The number of unique offers contained in NumberOfOffers. (required).</param>
+        /// <param name="numberOfOffers">A list that contains the total number of offers for the item for the given conditions and fulfillment channels..</param>
+        /// <param name="lowestPrices">A list of the lowest prices for the item..</param>
+        /// <param name="buyBoxPrices">A list of item prices..</param>
+        /// <param name="listPrice">The list price of the item as suggested by the manufacturer..</param>
+        /// <param name="competitivePriceThreshold">This price is based on competitive prices from other retailers (excluding other Amazon sellers). The offer may be ineligible for the Buy Box if the seller&#39;s price + shipping (minus Amazon Points) is greater than this competitive price..</param>
+        /// <param name="suggestedLowerPricePlusShipping">The suggested lower price of the item, including shipping and Amazon Points. The suggested lower price is based on a range of factors, including historical selling prices, recent Buy Box-eligible prices, and input from customers for your products..</param>
+        /// <param name="salesRankings">A list that contains the sales rank of the item in the given product categories..</param>
+        /// <param name="buyBoxEligibleOffers">A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels..</param>
+        /// <param name="offersAvailableTime">When the status is ActiveButTooSoonForProcessing, this is the time when the offers will be available for processing..</param>
+        public Summary(int? totalOfferCount = default(int?), NumberOfOffers numberOfOffers = default(NumberOfOffers), LowestPrices lowestPrices = default(LowestPrices), BuyBoxPrices buyBoxPrices = default(BuyBoxPrices), MoneyType listPrice = default(MoneyType), MoneyType competitivePriceThreshold = default(MoneyType), MoneyType suggestedLowerPricePlusShipping = default(MoneyType), SalesRankList salesRankings = default(SalesRankList), BuyBoxEligibleOffers buyBoxEligibleOffers = default(BuyBoxEligibleOffers), DateTime? offersAvailableTime = default(DateTime?))
         {
-            // to ensure "TotalOfferCount" is required (not null)
-            if (TotalOfferCount == null)
+            // to ensure "totalOfferCount" is required (not null)
+            if (totalOfferCount == null)
             {
-                throw new InvalidDataException("TotalOfferCount is a required property for Summary and cannot be null");
+                throw new InvalidDataException("totalOfferCount is a required property for Summary and cannot be null");
             }
             else
             {
-                this.TotalOfferCount = TotalOfferCount;
+                this.TotalOfferCount = totalOfferCount;
             }
-            this.NumberOfOffers = NumberOfOffers;
-            this.LowestPrices = LowestPrices;
-            this.BuyBoxPrices = BuyBoxPrices;
-            this.ListPrice = ListPrice;
-            this.CompetitivePriceThreshold = CompetitivePriceThreshold;
-            this.SuggestedLowerPricePlusShipping = SuggestedLowerPricePlusShipping;
-            this.BuyBoxEligibleOffers = BuyBoxEligibleOffers;
-            this.OffersAvailableTime = OffersAvailableTime;
+            this.NumberOfOffers = numberOfOffers;
+            this.LowestPrices = lowestPrices;
+            this.BuyBoxPrices = buyBoxPrices;
+            this.ListPrice = listPrice;
+            this.CompetitivePriceThreshold = competitivePriceThreshold;
+            this.SuggestedLowerPricePlusShipping = suggestedLowerPricePlusShipping;
+            this.SalesRankings = salesRankings;
+            this.BuyBoxEligibleOffers = buyBoxEligibleOffers;
+            this.OffersAvailableTime = offersAvailableTime;
         }
 
         /// <summary>
@@ -112,6 +114,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         public MoneyType SuggestedLowerPricePlusShipping { get; set; }
 
         /// <summary>
+        /// A list that contains the sales rank of the item in the given product categories.
+        /// </summary>
+        /// <value>A list that contains the sales rank of the item in the given product categories.</value>
+        [DataMember(Name = "SalesRankings", EmitDefaultValue = false)]
+        public SalesRankList SalesRankings { get; set; }
+
+        /// <summary>
         /// A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels.
         /// </summary>
         /// <value>A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels.</value>
@@ -140,6 +149,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
             sb.Append("  ListPrice: ").Append(ListPrice).Append("\n");
             sb.Append("  CompetitivePriceThreshold: ").Append(CompetitivePriceThreshold).Append("\n");
             sb.Append("  SuggestedLowerPricePlusShipping: ").Append(SuggestedLowerPricePlusShipping).Append("\n");
+            sb.Append("  SalesRankings: ").Append(SalesRankings).Append("\n");
             sb.Append("  BuyBoxEligibleOffers: ").Append(BuyBoxEligibleOffers).Append("\n");
             sb.Append("  OffersAvailableTime: ").Append(OffersAvailableTime).Append("\n");
             sb.Append("}\n");
@@ -150,7 +160,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -203,13 +213,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                 ) &&
                 (
                     this.CompetitivePriceThreshold == input.CompetitivePriceThreshold ||
-                    this.CompetitivePriceThreshold != null &&
-                    this.CompetitivePriceThreshold.Equals(input.CompetitivePriceThreshold)
+                    (this.CompetitivePriceThreshold != null &&
+                    this.CompetitivePriceThreshold.Equals(input.CompetitivePriceThreshold))
                 ) &&
                 (
                     this.SuggestedLowerPricePlusShipping == input.SuggestedLowerPricePlusShipping ||
                     (this.SuggestedLowerPricePlusShipping != null &&
                     this.SuggestedLowerPricePlusShipping.Equals(input.SuggestedLowerPricePlusShipping))
+                ) &&
+                (
+                    this.SalesRankings == input.SalesRankings ||
+                    (this.SalesRankings != null &&
+                    this.SalesRankings.Equals(input.SalesRankings))
                 ) &&
                 (
                     this.BuyBoxEligibleOffers == input.BuyBoxEligibleOffers ||
@@ -246,6 +261,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                     hashCode = hashCode * 59 + this.CompetitivePriceThreshold.GetHashCode();
                 if (this.SuggestedLowerPricePlusShipping != null)
                     hashCode = hashCode * 59 + this.SuggestedLowerPricePlusShipping.GetHashCode();
+                if (this.SalesRankings != null)
+                    hashCode = hashCode * 59 + this.SalesRankings.GetHashCode();
                 if (this.BuyBoxEligibleOffers != null)
                     hashCode = hashCode * 59 + this.BuyBoxEligibleOffers.GetHashCode();
                 if (this.OffersAvailableTime != null)
