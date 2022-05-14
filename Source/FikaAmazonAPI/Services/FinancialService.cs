@@ -124,7 +124,7 @@ namespace FikaAmazonAPI.Services
             int countPages = 1;
             while (!string.IsNullOrEmpty(nextToken) &&
                         ((!parameterListFinancials.MaxNumberOfPages.HasValue)
-                            || (parameterListFinancials.MaxNumberOfPages.HasValue && parameterListFinancials.MaxNumberOfPages <= countPages)))
+                            || (parameterListFinancials.MaxNumberOfPages.HasValue && parameterListFinancials.MaxNumberOfPages > countPages)))
             {
                 var data = GetFinancialEventsByNextToken(nextToken);
                 list.Add(data.FinancialEvents);

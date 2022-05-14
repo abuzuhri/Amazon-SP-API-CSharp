@@ -34,6 +34,12 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            var result = amazonConnection.Financial.ListFinancialEventsAsync(new ParameterListFinancialEvents()
+            {
+                MaxNumberOfPages = 4,
+                PostedAfter = new DateTime(2021, 1, 1),
+                PostedBefore = new DateTime(2021, 5, 13)
+            });
             DateTime startDate = new DateTime(2021, 10, 03);
             var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
 
@@ -93,7 +99,7 @@ namespace FikaAmazonAPI.SampleCode
                 locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
             });
 
-            var result = amazonConnection.Restrictions.GetListingsRestrictions(new Parameter.Restrictions.ParameterGetListingsRestrictions
+            var result33 = amazonConnection.Restrictions.GetListingsRestrictions(new Parameter.Restrictions.ParameterGetListingsRestrictions
             {
                 asin = "B07GY3J99B",
                 sellerId = "A3J37AJU4O9RHK"
