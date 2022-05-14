@@ -282,7 +282,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/productTypes/{productType}";
         }
 
-        protected class ReportApiUrls
+        public class ReportApiUrls
         {
             private readonly static string _resourceBaseUrl = "/reports/2021-06-30";
             public static string CreateReport
