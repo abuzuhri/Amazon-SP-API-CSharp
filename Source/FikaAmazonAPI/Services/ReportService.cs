@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.Services
 
             while (!string.IsNullOrEmpty(parameterReportList.nextToken))
             {
-                var nextTokenResponse = GetReportsByNextToken(parameterReportList);
+                var nextTokenResponse = await GetReportsByNextTokenAsync(parameterReportList);
                 list.AddRange(nextTokenResponse.Reports);
                 parameterReportList.nextToken = nextTokenResponse.NextToken;
             }
