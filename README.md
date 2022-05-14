@@ -132,6 +132,33 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 ```
 
+
+### Order List with parameter including PII data
+```CSharp
+var parameterOrderList = new ParameterOrderList
+        {
+            CreatedAfter = DateTime.UtcNow.AddHours(-24),
+            OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
+            MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
+            IsNeedRestrictedDataToken = true,
+            RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
+            {
+                restrictedResources = new List<RestrictedResource>
+                {
+                    new RestrictedResource
+                    {
+                        method = Method.GET.ToString(),
+                        path = ApiUrls.OrdersApiUrls.Orders,
+                        dataElements = new List<string> { "buyerInfo", "shippingAddress" }
+                    }
+                }
+            }
+        };
+
+var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
+
+```
+
 ### Order List data from Sandbox
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
