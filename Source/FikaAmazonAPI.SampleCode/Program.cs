@@ -34,6 +34,12 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            DateTime startDate = new DateTime(2021, 10, 03);
+            var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
+
+
+            //DateTime startDate = new DateTime(2021, 10, 03);
+            var data2 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_EASYSHIP_DOCUMENTS, startDate, null, null);
 
 
 
@@ -189,15 +195,7 @@ namespace FikaAmazonAPI.SampleCode
             var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_REIMBURSEMENTS_DATA
             var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 
-            while (true)
-            {
-                var data = amazonConnection.ProductPricing.GetItemOffers(new FikaAmazonAPI.Parameter.ProductPricing.ParameterGetItemOffers()
-                {
-                    ItemCondition = ItemCondition.New,
-                    MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                    Asin = "B0010WW4XS"
-                });
-            }
+
 
 
 

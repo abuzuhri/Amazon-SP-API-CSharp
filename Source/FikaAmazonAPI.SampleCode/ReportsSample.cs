@@ -1,12 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -20,7 +14,7 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
-        
+
         public void GetReports()
         {
             var parameters = new ParameterReportList();
@@ -40,7 +34,7 @@ namespace FikaAmazonAPI.SampleCode
             parameters.reportTypes.Add(ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE);
             parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
-            var reports=amazonConnection.Reports.GetReports(parameters);
+            var reports = amazonConnection.Reports.GetReports(parameters);
         }
 
         public void CreateReport()
@@ -59,21 +53,21 @@ namespace FikaAmazonAPI.SampleCode
             var reportId = amazonConnection.Reports.CreateReport(parameters);
         }
 
-        
+
         public void GetReport()
         {
 
             amazonConnection.Reports.GetReport("192841018867");
         }
 
-        
+
         public void CancelReport()
         {
 
             amazonConnection.Reports.CancelReport("192841018867");
         }
 
-        
+
         public void GetReportSchedules()
         {
 
@@ -182,7 +176,7 @@ namespace FikaAmazonAPI.SampleCode
                     filePath = amazonConnection.Reports.GetReportFile(reportData.ReportDocumentId);
                     break;
                 }
-                if(reportData.ProcessingStatus== AmazonSpApiSDK.Models.Reports.Report.ProcessingStatusEnum.FATAL)
+                if (reportData.ProcessingStatus == AmazonSpApiSDK.Models.Reports.Report.ProcessingStatusEnum.FATAL)
                 {
                     throw new Exception("Error with Generate report");
                 }
@@ -193,9 +187,9 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
-        public string CreateReportAndDawnload(ReportTypes reportTypes,DateTime? dataStartTime=null,DateTime? dataEndTime=null, ReportOptions reportOptions=null)
+        public string CreateReportAndDawnload(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
         {
-          return  amazonConnection.Reports.CreateReportAndDownloadFile(reportTypes, dataStartTime, dataEndTime, reportOptions);
+            return amazonConnection.Reports.CreateReportAndDownloadFile(reportTypes, dataStartTime, dataEndTime, reportOptions);
         }
 
         public void DownloadExistingReportAndDownloadFile()
@@ -220,6 +214,14 @@ namespace FikaAmazonAPI.SampleCode
             DateTime startDate = new DateTime(2021, 10, 03);
             var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, startDate, null, null);
         }
+
+        public void GetReportGET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING()
+        {
+            DateTime startDate = new DateTime(2021, 10, 03);
+            var data = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING, startDate, null, null, true);
+        }
+
+
         public void GetReportFile()
         {
 

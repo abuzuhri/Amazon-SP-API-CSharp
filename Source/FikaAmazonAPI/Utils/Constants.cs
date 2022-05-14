@@ -361,6 +361,26 @@ namespace FikaAmazonAPI.Utils
             B2C,
             B2B
         }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum RestrictedReportTypes
+        {
+            GET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING,
+            GET_AMAZON_FULFILLED_SHIPMENTS_DATA_TAX,
+            GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_SHIPPING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_TAX,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_TAX,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_INVOICING,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_SHIPPING,
+            GET_ORDER_REPORT_DATA_INVOICING,
+            GET_ORDER_REPORT_DATA_TAX,
+            GET_ORDER_REPORT_DATA_SHIPPING,
+            GET_EASYSHIP_DOCUMENTS,
+            GET_GST_MTR_B2B_CUSTOM,
+            GET_VAT_TRANSACTION_DATA,
+            SC_VAT_TAX_REPORT
+        }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ReportTypes

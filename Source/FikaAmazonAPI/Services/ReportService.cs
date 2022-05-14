@@ -1,7 +1,8 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Report;
-using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
@@ -134,21 +135,42 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => GetReportDocumentAsync(reportDocumentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, IParameterBasedPII parameterBasedPII = null)
+        public ReportDocument GetReportDocument(string reportDocumentId, bool isRestrictedReport = false) =>
+            Task.Run(() => GetReportDocumentAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, bool isRestrictedReport = false)
         {
+            ParameterBasedPII parameterBasedPII = null;
+
+            if (isRestrictedReport)
+            {
+                parameterBasedPII = new ParameterBasedPII()
+                {
+                    IsNeedRestrictedDataToken = true,
+                    RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
+                    {
+                        restrictedResources = new List<RestrictedResource>
+                        {
+                            new RestrictedResource
+                            {
+                                method = Method.GET.ToString(),
+                                path = ReportApiUrls.GetReportDocument(reportDocumentId)
+                            }
+                        }
+                    }
+                };
+            }
+
             await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET, parameter: parameterBasedPII);
             var response = await ExecuteRequestAsync<ReportDocument>(RateLimitType.Report_GetReportDocument);
             if (response != null)
                 return response;
             return null;
         }
-        public string GetReportFile(string reportDocumentId) =>
-            Task.Run(() => GetReportFileAsync(reportDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> GetReportFileAsync(string reportDocumentId)
+        public string GetReportFile(string reportDocumentId, bool isRestrictedReport = false) =>
+            Task.Run(() => GetReportFileAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<string> GetReportFileAsync(string reportDocumentId, bool isRestrictedReport = false)
         {
-            var reportDocument = await GetReportDocumentAsync(reportDocumentId);
+            var reportDocument = await GetReportDocumentAsync(reportDocumentId, isRestrictedReport);
             return GetFile(reportDocument);
         }
 
@@ -223,12 +245,17 @@ namespace FikaAmazonAPI.Services
         #endregion
 
 
-        public string CreateReportAndDownloadFile(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null) =>
-            Task.Run(() => CreateReportAndDownloadFileAsync(reportTypes, dataStartTime, dataEndTime, reportOptions)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
+        public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false) =>
+            Task.Run(() => CreateReportAndDownloadFileAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false)
         {
+            if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
+            {
+                isRestrictedReport = true;
+            }
+
             var parameters = new ParameterCreateReportSpecification();
-            parameters.reportType = reportTypes;
+            parameters.reportType = reportType;
 
             parameters.marketplaceIds = new MarketplaceIds();
 
@@ -251,7 +278,7 @@ namespace FikaAmazonAPI.Services
                 var reportData = await GetReportAsync(reportId);
                 if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
                 {
-                    filePath = await GetReportFileAsync(reportData.ReportDocumentId);
+                    filePath = await GetReportFileAsync(reportData.ReportDocumentId, isRestrictedReport);
                     break;
                 }
                 if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.FATAL)
