@@ -1,11 +1,12 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report
 {
-    public class ParameterReportList : ParameterBasedPII
+    public class ParameterReportList : ParameterBased
     {
         public ParameterReportList()
         {
