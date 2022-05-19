@@ -413,6 +413,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             private readonly static string _resourceBaseUrl = "/products/fees/v0";
             public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/feesEstimate";
             public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
+
+            public static string GetMyFeesEstimate => $"{_resourceBaseUrl}/feesEstimate";
         }
         protected class TokenApiUrls
         {
@@ -472,8 +474,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class CategoryApiUrls
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
-
+    
             private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01";
+
+            private readonly static string _202204resourceBaseUrl = "/catalog/2022-04-01";
+
+
             public static string ListCatalogItems
             {
                 get => $"{_resourceBaseUrl}/items";
@@ -486,6 +492,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetCatalogItem202012(string asin) => $"{_202012resourceBaseUrl}/items/{asin}";
 
             public static string SearchCatalogItems => $"{_202012resourceBaseUrl}/items";
+
+            public static string SearchCatalogItems202204 => $"{_202204resourceBaseUrl}/items";
+            public static string GetCatalogItem202204(string asin) => $"{_202204resourceBaseUrl}/items/{asin}";
         }
 
         protected class ListingsItemsApiUrls
