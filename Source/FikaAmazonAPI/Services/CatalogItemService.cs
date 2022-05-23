@@ -113,31 +113,31 @@ namespace FikaAmazonAPI.Services
 
         #region 2022-04-01
 
-        /// <summary>
-        /// Retrieves details for an item in the Amazon catalog.
-        /// </summary>
-        /// <param name="ASIN"></param>
-        /// <param name="SellerSKU"></param>
-        /// <param name="MarketPlaceID"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidDataException"></exception>
-        public async Task<Item> GetCatalogItem202204Async(ParameterGetCatalogItem parameterGetCatalogItem)
-        {
-            if (string.IsNullOrEmpty(parameterGetCatalogItem.ASIN))
-                throw new InvalidDataException("asin is a required property and cannot be null");
+        ///// <summary>
+        ///// Retrieves details for an item in the Amazon catalog.
+        ///// </summary>
+        ///// <param name="ASIN"></param>
+        ///// <param name="SellerSKU"></param>
+        ///// <param name="MarketPlaceID"></param>
+        ///// <returns></returns>
+        ///// <exception cref="InvalidDataException"></exception>
+        //public async Task<Item> GetCatalogItem202204Async(ParameterGetCatalogItem parameterGetCatalogItem)
+        //{
+        //    if (string.IsNullOrEmpty(parameterGetCatalogItem.ASIN))
+        //        throw new InvalidDataException("asin is a required property and cannot be null");
 
-            if (parameterGetCatalogItem == null || parameterGetCatalogItem.marketplaceIds == null || parameterGetCatalogItem.marketplaceIds.Count == 0)
-            {
-                parameterGetCatalogItem.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
-            }
+        //    if (parameterGetCatalogItem == null || parameterGetCatalogItem.marketplaceIds == null || parameterGetCatalogItem.marketplaceIds.Count == 0)
+        //    {
+        //        parameterGetCatalogItem.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+        //    }
 
-            var param = parameterGetCatalogItem.getParameters();
+        //    var param = parameterGetCatalogItem.getParameters();
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202204(parameterGetCatalogItem.ASIN), RestSharp.Method.GET, param);
-            var response = await ExecuteRequestAsync<Item>();
+        //    await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202204(parameterGetCatalogItem.ASIN), RestSharp.Method.GET, param);
+        //    var response = await ExecuteRequestAsync<Item>();
 
-            return response;
-        }
+        //    return response;
+        //}
         #endregion
     }
 }

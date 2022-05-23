@@ -80,7 +80,7 @@ namespace FikaAmazonAPI.Services
             /*
              "requests": [
                 {
-                    "uri": "/products/pricing/v0/items/B000P6Q7MY/offers",
+                    "uri": "/products/pricing/v0/items/{ASIN}/offers",
                     "method": "GET",
                     "queryParams": {
                         "MarketplaceId": "ATVPDKIKX0DER",
