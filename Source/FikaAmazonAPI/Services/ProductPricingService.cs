@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.Services
         {
             var param = parameterGetListingOffers.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffers(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffersBySellerSku(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
             var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetListingOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -70,6 +70,52 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
+            return null;
+        }
+
+        public GetBatchOffersResponse GetItemOffersBatch(ParameterGetItemOffersBatchRequest parameterGetItemOffersBatchRequest) =>
+    Task.Run(() => GetItemOffersBatchAsync(parameterGetItemOffersBatchRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetBatchOffersResponse> GetItemOffersBatchAsync(ParameterGetItemOffersBatchRequest parameterGetItemOffersBatchRequest)
+        {
+            /*
+             "requests": [
+                {
+                    "uri": "/products/pricing/v0/items/B000P6Q7MY/offers",
+                    "method": "GET",
+                    "queryParams": {
+                        "MarketplaceId": "ATVPDKIKX0DER",
+                        "ItemCondition": "New",
+                        "CustomerType": "Consumer"
+                    }
+                }
+            ]
+             */
+
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchItemOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
+            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+        }
+
+
+        public GetBatchOffersResponse GetListingOffersBatch(ParameterGetListingOffersBatchRequest parameterGetItemOffersBatchRequest) =>
+Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetBatchOffersResponse> GetListingOffersBatchAsync(ParameterGetListingOffersBatchRequest parameterGetItemOffersBatchRequest)
+        {
+            /*
+             "requests": [
+                {
+                    "uri": "/products/pricing/v0/listings/{SellerSKU}/offers",
+                    "method": "GET",
+                    "queryParams": {
+                        "MarketplaceId": "ATVPDKIKX0DER",
+                        "ItemCondition": "New",
+                        "CustomerType": "Consumer"
+                    }
+                }
+            ]
+             */
+
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchListingOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
+            var response = await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
             return null;
         }
 

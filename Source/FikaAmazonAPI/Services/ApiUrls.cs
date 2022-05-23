@@ -255,7 +255,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/marketplaceParticipations";
             }
         }
-        protected class ProductPricingApiUrls
+        internal class ProductPricingApiUrls
         {
             private readonly static string _resourceBaseUrl = "/products/pricing/v0";
             public static string GetPricing
@@ -267,8 +267,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/competitivePrice";
             }
 
-            public static string GetListingOffers(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/offers";
+            public static string GetListingOffersBySellerSku(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/offers";
             public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
+            public static string GetListingOffers(string sellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(sellerSKU)}/offers";
+
+            public static string GetBatchItemOffers => $"/batches{_resourceBaseUrl}/itemOffers";
+
+            public static string GetBatchListingOffers => $"/batches{_resourceBaseUrl}/listingOffers";
 
         }
         protected class ProductTypeApiUrls
@@ -474,7 +479,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         protected class CategoryApiUrls
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
-    
+
             private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01";
 
             private readonly static string _202204resourceBaseUrl = "/catalog/2022-04-01";
