@@ -34,6 +34,11 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            var test = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+            {
+                Asin = "B000RTDUOW"
+            });
+
             var result = amazonConnection.Financial.ListFinancialEventsAsync(new ParameterListFinancialEvents()
             {
                 MaxNumberOfPages = 4,
