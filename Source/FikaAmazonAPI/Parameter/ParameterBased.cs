@@ -12,6 +12,7 @@ namespace FikaAmazonAPI.Search
     public class ParameterBased
     {
         [IgnoreToAddParameter]
+        [JsonIgnore]
         public string TestCase { get; set; }
 
         [IgnoreToAddParameter]
