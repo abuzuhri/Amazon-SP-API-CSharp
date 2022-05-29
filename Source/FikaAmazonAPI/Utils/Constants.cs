@@ -51,12 +51,14 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum IncludedData
         {
+            attributes,
+            dimensions,
             identifiers,
             images,
             productTypes,
+            relationships,
             salesRanks,
             summaries,
-            variations,
             vendorDetails
         }
 
@@ -312,6 +314,19 @@ namespace FikaAmazonAPI.Utils
         {
             Asin,
             Sku
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum IdentifiersType
+        {
+            ASIN,
+            EAN,
+            GTIN,
+            ISBN,
+            JAN,
+            MINSAN,
+            SKU,
+            UPC
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

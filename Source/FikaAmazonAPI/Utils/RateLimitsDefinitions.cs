@@ -60,8 +60,8 @@ namespace FikaAmazonAPI.Utils
             { RateLimitType.CatalogItems_ListCatalogItems,              new RateLimits(6.0M, 40) },
             { RateLimitType.CatalogItems_GetCatalogItem,                new RateLimits(2.0M, 20) },
             { RateLimitType.CatalogItems_ListCatalogCategories,         new RateLimits(1.0M, 40) },
-            { RateLimitType.CatalogItems20201201_GetCatalogItem,        new RateLimits(5.0M, 5) },
-            { RateLimitType.CatalogItems20201201_SearchCatalogItems,    new RateLimits(5.0M, 5) },
+            { RateLimitType.CatalogItems20220401_GetCatalogItem,        new RateLimits(5.0M, 5) },
+            { RateLimitType.CatalogItems20220401_SearchCatalogItems,    new RateLimits(5.0M, 5) },
 
             { RateLimitType.FbaInventory_GetInventorySummaries,         new RateLimits(2.0M, 2) },
 
