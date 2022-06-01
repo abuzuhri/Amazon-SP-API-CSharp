@@ -34,6 +34,26 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            var GetCatalogItem202204 = await amazonConnection.CatalogItem.GetCatalogItem202204Async(new Parameter.CatalogItems.ParameterGetCatalogItem
+            {
+                ASIN = "B00JK2YANC",
+                includedData = new[] { IncludedData.attributes, IncludedData.salesRanks, IncludedData.summaries, IncludedData.productTypes, IncludedData.relationships, IncludedData.dimensions, IncludedData.identifiers, IncludedData.images }
+            });
+
+            var lissting = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(new Parameter.CatalogItems.ParameterSearchCatalogItems202204
+            {
+                keywords = new[] { "vitamin c" },
+                includedData = new[] { IncludedData.attributes, IncludedData.salesRanks, IncludedData.summaries, IncludedData.productTypes, IncludedData.relationships, IncludedData.dimensions, IncludedData.identifiers, IncludedData.images }
+            });
+
+            //IncludedData.images, IncludedData.identifiers, IncludedData.productTypes, IncludedData.salesRanks, IncludedData.summaries, IncludedData.variations, IncludedData.vendorDetails
+
+
+            var test = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
+            {
+                Asin = "B000RTDUOW"
+            });
+
             var result = amazonConnection.Financial.ListFinancialEventsAsync(new ParameterListFinancialEvents()
             {
                 MaxNumberOfPages = 4,

@@ -58,8 +58,8 @@
         CatalogItems_ListCatalogItems,
         CatalogItems_GetCatalogItem,
         CatalogItems_ListCatalogCategories,
-        CatalogItems20201201_GetCatalogItem,
-        CatalogItems20201201_SearchCatalogItems,
+        CatalogItems20220401_GetCatalogItem,
+        CatalogItems20220401_SearchCatalogItems,
 
         FbaInventory_GetInventorySummaries,
 

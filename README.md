@@ -40,7 +40,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [shipmentInvoicingV0](https://developer-docs.amazon.com/sp-api/docs/shipment-invoicing-api-v0-reference)
 - [x] [Shippings](https://developer-docs.amazon.com/sp-api/docs/shipping-api-v1-reference)
 - [x] [CatalogItemsV0](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v0-reference)
-- [ ] [CatalogItemsV20201201](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2020-12-01-reference)
+- [x] [CatalogItemsV20220401](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference)
 - [x] [FBAInventory](https://developer-docs.amazon.com/sp-api/docs/fbainventory-api-v1-reference)
 - [x] [FBASmallAndLight](https://developer-docs.amazon.com/sp-api/docs/fbasmallandlight-api-v1-reference)
 - [x] [FBAInboundEligibility](https://developer-docs.amazon.com/sp-api/docs/fbainboundeligibility-api-v1-reference)
@@ -261,6 +261,42 @@ while (string.IsNullOrEmpty(ReportDocumentId))
 
 //filePath for report
 ```
+
+### Product GetCatalogItem Version 2022-04-01
+```CSharp
+var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
+    new Parameter.CatalogItems.ParameterGetCatalogItem
+            {
+                ASIN = "B00JK2YANC",
+                includedData = new[] { IncludedData.attributes, 
+                                       IncludedData.salesRanks,
+                                       IncludedData.summaries, 
+                                       IncludedData.productTypes, 
+                                       IncludedData.relationships, 
+                                       IncludedData.dimensions, 
+                                       IncludedData.identifiers, 
+                                       IncludedData.images }
+            });
+```
+
+### Product SearchCatalogItems Version 2022-04-01
+```CSharp
+var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
+    new Parameter.CatalogItems.ParameterSearchCatalogItems202204
+            {
+                keywords = new[] { "vitamin c" },
+                includedData = new[] { IncludedData.attributes, 
+                                       IncludedData.salesRanks,
+                                       IncludedData.summaries, 
+                                       IncludedData.productTypes, 
+                                       IncludedData.relationships, 
+                                       IncludedData.dimensions, 
+                                       IncludedData.identifiers, 
+                                       IncludedData.images }
+            });
+```
+
+
 
 ### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
