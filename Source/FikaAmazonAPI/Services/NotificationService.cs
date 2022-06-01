@@ -123,46 +123,43 @@ namespace FikaAmazonAPI.Services
             var SQS_URL = param.SQS_URL;
             var Region = param.RegionEndpoint;
 
-            var amazonSQSClient = new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, Region);
-
-            ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
-            receiveMessageRequest.MaxNumberOfMessages = 10;
-
-
-            while (true)
+            using (var amazonSQSClient = new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, Region))
             {
-                try
+                ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
+                receiveMessageRequest.MaxNumberOfMessages = 10;
+
+                while (true)
                 {
-                    var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest);
-                    var Messages = result.Messages;
-                    if (Messages.Count > 0)
+                    try
                     {
-                        foreach (var msg in Messages)
+                        var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest);
+                        var Messages = result.Messages;
+                        if (Messages.Count > 0)
                         {
-                            try
+                            foreach (var msg in Messages)
                             {
-                                var data = DeserializeNotification(msg);
+                                try
+                                {
+                                    var data = DeserializeNotification(msg);
 
-                                messageReceiver.NewMessageRevicedTriger(data);
-                                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
-                            }
-                            catch (Exception ex)
-                            {
-                                messageReceiver.ErrorCatch(ex);
-                                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
-                            }
+                                    messageReceiver.NewMessageRevicedTriger(data);
+                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
+                                }
+                                catch (Exception ex)
+                                {
+                                    messageReceiver.ErrorCatch(ex);
+                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
+                                }
 
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    messageReceiver.ErrorCatch(ex);
+                    catch (Exception ex)
+                    {
+                        messageReceiver.ErrorCatch(ex);
+                    }
                 }
             }
-
-
-
         }
         private async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle)
         {
