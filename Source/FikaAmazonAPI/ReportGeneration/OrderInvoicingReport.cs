@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,10 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => OrderInvoicingReportRow.FromCsv(v, refNumber))
-                                           .ToList();
+
+            var table = Table.ConvertFromCSV(path);
+
+            List<OrderInvoicingReportRow> values = new List<OrderInvoicingReportRow>();
+            foreach (var row in table.Rows)
+            {
+                values.Add(OrderInvoicingReportRow.FromRow(row, refNumber));
+            }
             Data = values;
         }
     }
@@ -61,60 +66,57 @@ namespace FikaAmazonAPI.ReportGeneration
         public string BuyerCompany { get; set; }
         public string BuyerTaxRegistationId { get; set; }
         public string BuyerTaxRegistationCountry { get; set; }
+        public string refNumber { get; set; }
 
         public OrderInvoicingReportRow()
         {
 
         }
 
-        public static OrderInvoicingReportRow FromCsv(string csvLine, string refNumber)
+        public static OrderInvoicingReportRow FromRow(TableRow rowData, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
             var row = new OrderInvoicingReportRow();
-            row.AmazonOrderId = values[0];
-            row.OrderItemId = values[1];
-            row.PurchaseDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
-            row.PaymentDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
-            row.BuyerEmail = values[4];
-            row.BuyerName = values[5];
-            row.PaymentMethodeDetails = values[6];
-            row.BuyerPhoneNumber = values[7];
-            row.SKU = values[8];
-            row.ProductName = values[9];
-            row.Quantity = DataConverter.GetInt(values[10]);
-            row.Currency = values[11];
-            row.ItemPrice = DataConverter.GetDecimal(values[12]);
-            row.ItemTax = DataConverter.GetDecimal(values[13]);
-            row.ShippingPrice = DataConverter.GetDecimal(values[14]);
-            row.ShippingTax = DataConverter.GetDecimal(values[15]);
-            row.ShipServiceLevel = values[16];
-            row.RecipientName = values[17];
-            row.ShipAddress1 = values[18];
-            row.ShipAddress2 = values[19];
-            row.ShipAddress3 = values[20];
-            row.ShipCity = values[21];
-            row.ShipState = values[22];
-            row.ShipPostalCode = values[23];
-            row.ShipCountry = values[24];
-            row.ShipPhoneNumber = values[25];
-            row.BillAddress1 = values[26];
-            row.BillAddress2 = values[27];
-            row.BillAddress3 = values[28];
-            row.BillCity = values[29];
-            row.BillState = values[30];
-            row.BillPostalCode = values[31];
-            row.BillCountry = values[32];
-            row.DeliveryIndustructions = values[36];
-            row.SalesChannel = values[37];
-            row.BuyerCompany = values[50];
-            row.BuyerTaxRegistationId = values[53];
-            row.BuyerTaxRegistationCountry = values[54];
+            row.AmazonOrderId = rowData.GetString("order-id");
+            row.OrderItemId = rowData.GetString("order-item-id");
+            row.PurchaseDate = DataConverter.GetDate(rowData.GetString("purchase-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.PaymentDate = DataConverter.GetDate(rowData.GetString("payments-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.BuyerEmail = rowData.GetString("buyer-email");
+            row.BuyerName = rowData.GetString("buyer-name");
+            row.PaymentMethodeDetails = rowData.GetString("payment-method-details");
+            row.BuyerPhoneNumber = rowData.GetString("buyer-phone-number");
+            row.SKU = rowData.GetString("sku");
+            row.ProductName = rowData.GetString("product-name");
+            row.Quantity = rowData.GetDecimal("quantity-purchased");
+            row.Currency = rowData.GetString("currency");
+            row.ItemPrice = rowData.GetDecimal("item-price");
+            row.ItemTax = rowData.GetDecimal("item-tax");
+            row.ShippingPrice = rowData.GetDecimal("shipping-price");
+            row.ShippingTax = rowData.GetDecimal("shipping-tax");
+            row.ShipServiceLevel = rowData.GetString("ship-service-level");
+            row.RecipientName = rowData.GetString("recipient-name");
+            row.ShipAddress1 = rowData.GetString("ship-address-1");
+            row.ShipAddress2 = rowData.GetString("ship-address-2");
+            row.ShipAddress3 = rowData.GetString("ship-address-3");
+            row.ShipCity = rowData.GetString("ship-city");
+            row.ShipState = rowData.GetString("ship-state");
+            row.ShipPostalCode = rowData.GetString("ship-postal-code");
+            row.ShipCountry = rowData.GetString("ship-country");
+            row.ShipPhoneNumber = rowData.GetString("ship-phone-number");
+            row.BillAddress1 = rowData.GetString("bill-address-1");
+            row.BillAddress2 = rowData.GetString("bill-address-2");
+            row.BillAddress3 = rowData.GetString("bill-address-3");
+            row.BillCity = rowData.GetString("bill-city");
+            row.BillState = rowData.GetString("bill-state");
+            row.BillPostalCode = rowData.GetString("bill-postal-code");
+            row.BillCountry = rowData.GetString("bill-country");
+            row.DeliveryIndustructions = rowData.GetString("delivery-Instructions");
+            row.SalesChannel = rowData.GetString("sales-channel");
+            row.BuyerCompany = rowData.GetString("buyer-company-name");
+            row.BuyerTaxRegistationId = rowData.GetString("buyer-tax-registration-id");
+            row.BuyerTaxRegistationCountry = rowData.GetString("buyer-tax-registration-country");
+            row.refNumber = refNumber;
+
             return row;
         }
     }
-
-
-
-    
-
 }
