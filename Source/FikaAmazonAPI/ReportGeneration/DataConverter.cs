@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -27,7 +28,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public static decimal? GetDecimal(string str)
         {
-            if (decimal.TryParse(str, out decimal value))
+            if (decimal.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal value))
             {
                 return value;
             }
@@ -35,7 +36,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public static int? GetInt(string str)
         {
-            if (int.TryParse(str, out int value))
+            if (int.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
             {
                 return value;
             }
