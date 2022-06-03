@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -164,7 +165,7 @@ namespace FikaAmazonAPI.Services
                 if (limitHeader != null)
                 {
                     var RateLimitValue = limitHeader.Value.ToString();
-                    decimal.TryParse(RateLimitValue, out rate);
+                    decimal.TryParse(RateLimitValue, NumberStyles.Any, CultureInfo.InvariantCulture, out rate);
                 }
 
                 if (AmazonCredential.IsActiveLimitRate)
