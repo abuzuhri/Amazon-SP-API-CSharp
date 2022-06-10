@@ -21,6 +21,9 @@ namespace FikaAmazonAPI.NotificationMessages
         public FbaOutboundShipmentStatusNotification FbaOutboundShipmentStatusNotification { get; set; }
         public FulfillmentOrderStatusNotification FulfillmentOrderStatusNotification { get; set; }
 
+
+        [JsonProperty("reportProcessingFinishedNotification")]
+        public ReportProcessingFinishedNotification ReportProcessingFinishedNotification { get; set; }
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
