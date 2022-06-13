@@ -24,6 +24,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
     public partial class MoneyType : IEquatable<MoneyType>, IValidatableObject
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="OfferDetail" /> class.
+        /// </summary>
+        [JsonConstructorAttribute]
+        public MoneyType() { }
+    
+        /// <summary>
         /// Initializes a new instance of the <see cref="MoneyType" /> class.
         /// </summary>
         /// <param name="CurrencyCode">The currency code in ISO 4217 format..</param>
