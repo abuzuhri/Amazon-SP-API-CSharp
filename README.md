@@ -462,6 +462,44 @@ public void SubmitFeedProductImage()
 
 }
 ```
+
+#### Feed Submit for change Order Adjustments
+```CSharp
+public void SubmitFeedOrderAdjustment()
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.Seller.ToString(), "1.02");
+            var list = new List<OrderAdjustmentMessage>();
+            list.Add(new OrderAdjustmentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                ActionType = AdjustmentActionType.Refund,
+                AdjustedItem = new List<AdjustedItem>() {
+                   new AdjustedItem() {
+                       AmazonOrderItemCode = "52986411826454",
+                       AdjustmentReason = AdjustmentReason.CustomerCancel,
+                       DirectPaymentAdjustments = new List<DirectPaymentAdjustments>()
+                           {
+                               new DirectPaymentAdjustments()
+                               {
+                                   Component = new List<DirectPaymentAdjustmentsComponent>()
+                                   {
+                                       new DirectPaymentAdjustmentsComponent() {
+                                            DirectPaymentType = "Credit Card Refund",
+                                            Amount = new CurrencyAmount() {
+                                                Value = 10.50M,
+                                                currency = BaseCurrencyCode.GBP
+                                            }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                }
+            });
+            createDocument.AddOrderAdjustmentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
+```
  
 ---
 ## Usage Plans and Rate Limits in the Selling Partner API
