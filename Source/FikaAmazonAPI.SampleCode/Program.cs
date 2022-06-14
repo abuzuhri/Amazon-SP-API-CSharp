@@ -34,6 +34,12 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+
+
+
+
+
+
             var GetCatalogItem202204 = await amazonConnection.CatalogItem.GetCatalogItem202204Async(new Parameter.CatalogItems.ParameterGetCatalogItem
             {
                 ASIN = "B00JK2YANC",

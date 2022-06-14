@@ -12,12 +12,16 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        public UploadDestination CreateUploadDestinationForResource(ParametercreateUploadDestinationForResource parameterObj) =>
+        public UploadDestination CreateUploadDestinationForResource(ParameterCreateUploadDestinationForResource parameterObj) =>
             Task.Run(() => CreateUploadDestinationForResourceAsync(parameterObj)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<UploadDestination> CreateUploadDestinationForResourceAsync(ParametercreateUploadDestinationForResource parameterObj)
+        public async Task<UploadDestination> CreateUploadDestinationForResourceAsync(ParameterCreateUploadDestinationForResource parameterObj)
         {
+            if (parameterObj.marketplaceIds == null || parameterObj.marketplaceIds.Count == 0)
+                parameterObj.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
 
-            await CreateAuthorizedRequestAsync(UploadApiUrls.CreateUploadDestinationForResource(parameterObj.resource), RestSharp.Method.POST, postJsonObj: parameterObj);
+            var parameter = parameterObj.getParameters();
+
+            await CreateAuthorizedRequestAsync(UploadApiUrls.CreateUploadDestinationForResource(parameterObj.resource), RestSharp.Method.POST, parameter);
             var response = await ExecuteRequestAsync<CreateUploadDestinationResponse>(RateLimitType.Upload_CreateUploadDestinationForResource);
             return response.Payload;
         }

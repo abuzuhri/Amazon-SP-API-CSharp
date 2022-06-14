@@ -1,46 +1,37 @@
 ﻿using System;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace FikaAmazonAPI.Utils
 {
     public class EasyMD5
     {
-        private static string GetMd5Hash(byte[] data)
+        public static string GetMD5HashFromFile(string filepath)
         {
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-                sBuilder.Append(data[i].ToString("x2"));
-            return sBuilder.ToString();
+            if (filepath == null)
+                throw new ArgumentNullException("filepath");
+            if (File.Exists(filepath) == false)
+                throw new InvalidOperationException("file '" + filepath + "' doesn't exist");
+
+            FileStream file = new FileStream(filepath, FileMode.Open);
+            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] bytes = md5.ComputeHash(file);
+            file.Close();
+
+            return GetMD5HashFromBytes(bytes);
         }
 
-        private static bool VerifyMd5Hash(byte[] data, string hash)
+        public static string GetMD5HashFromBytes(byte[] bytes)
         {
-            return 0 == StringComparer.OrdinalIgnoreCase.Compare(GetMd5Hash(data), hash);
-        }
+            if (bytes == null)
+                throw new ArgumentNullException("bytes");
 
-        public static string Hash(string data)
-        {
-            using (var md5 = MD5.Create())
-                return GetMd5Hash(md5.ComputeHash(Encoding.UTF8.GetBytes(data)));
-        }
-        public static string Hash(FileStream data)
-        {
-            using (var md5 = MD5.Create())
-                return GetMd5Hash(md5.ComputeHash(data));
-        }
-
-        public static bool Verify(string data, string hash)
-        {
-            using (var md5 = MD5.Create())
-                return VerifyMd5Hash(md5.ComputeHash(Encoding.UTF8.GetBytes(data)), hash);
-        }
-
-        public static bool Verify(FileStream data, string hash)
-        {
-            using (var md5 = MD5.Create())
-                return VerifyMd5Hash(md5.ComputeHash(data), hash);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                sb.Append(bytes[i].ToString("x2"));
+            }
+            return sb.ToString();
         }
     }
 }
