@@ -265,6 +265,7 @@ namespace FikaAmazonAPI.ReportGeneration
             }
             return list;
         }
+
         private async Task<string> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
         {
             var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
