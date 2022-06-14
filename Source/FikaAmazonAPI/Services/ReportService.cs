@@ -7,6 +7,7 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -247,7 +248,7 @@ namespace FikaAmazonAPI.Services
 
         public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false) =>
             Task.Run(() => CreateReportAndDownloadFileAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false)
+        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null)
         {
             if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
             {
@@ -259,7 +260,14 @@ namespace FikaAmazonAPI.Services
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            if (marketplaces == null)
+            {
+                parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
+            else
+            {
+                parameters.marketplaceIds.AddRange(marketplaces.Select(x => x.ID).ToList());
+            }
 
             if (reportOptions != null)
                 parameters.reportOptions = reportOptions;
