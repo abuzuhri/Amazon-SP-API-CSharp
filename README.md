@@ -463,6 +463,32 @@ public void SubmitFeedProductImage()
 }
 ```
 
+#### Feed Submit for change FULFILLMENT DATA (add tracking number for shipment)
+```CSharp
+
+ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+
+var list = new List<OrderFulfillmentMessage>();
+list.Add(new OrderFulfillmentMessage()
+    {
+       AmazonOrderID = "{orderId}",
+       FulfillmentDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+       FulfillmentData = new FulfillmentData()
+          {
+              CarrierName = "Correos Express",
+              ShippingMethod = "ePaq",
+              ShipperTrackingNumber = "{trackingNumber}"
+           }
+    });
+    createDocument.AddOrderFulfillmentMessage(list);
+
+    var xml = createDocument.GetXML();
+
+    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_ORDER_FULFILLMENT_DATA);
+
+```
+
+
 #### Feed Submit for change Order Adjustments
 ```CSharp
 public void SubmitFeedOrderAdjustment()
