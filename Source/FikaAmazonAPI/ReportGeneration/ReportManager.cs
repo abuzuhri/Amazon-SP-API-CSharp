@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
@@ -250,25 +251,25 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
         
-        public List<OrderInvoicingReportRow> GetOrderInvoicingData(DateTime fromDate, DateTime toDate) =>
-            Task.Run(() => GetOrderInvoicingDataAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<OrderInvoicingReportRow>> GetOrderInvoicingDataAsync(DateTime fromDate, DateTime toDate)
+        public List<OrderInvoicingReportRow> GetOrderInvoicingData(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null) =>
+            Task.Run(() => GetOrderInvoicingDataAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<OrderInvoicingReportRow>> GetOrderInvoicingDataAsync(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
         {
             List<OrderInvoicingReportRow> list = new List<OrderInvoicingReportRow>();
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
             foreach (var range in dateList)
             {
-                var path = await GetOrderInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate);
+                var path = await GetOrderInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate, marketplaces);
                 OrderInvoicingReport report = new OrderInvoicingReport(path, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
             return list;
         }
-        private async Task<string> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private async Task<string> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
         {
             var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
             options.Add("ShowSalesChannel", "true");
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
         }
         #endregion
 
