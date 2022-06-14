@@ -466,6 +466,7 @@ public void SubmitFeedProductImage()
 #### Feed Submit for change Order Adjustments
 ```CSharp
 public void SubmitFeedOrderAdjustment()
+{
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
             var list = new List<OrderAdjustmentMessage>();
             list.Add(new OrderAdjustmentMessage()
@@ -499,6 +500,7 @@ public void SubmitFeedOrderAdjustment()
             var xml = createDocument.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
+}
 ```
  
 ---

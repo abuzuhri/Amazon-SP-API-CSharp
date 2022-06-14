@@ -1,11 +1,6 @@
 ﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -84,7 +79,7 @@ namespace FikaAmazonAPI.SampleCode
         //public void SubmitFeedMaxOrderQuantity()
         //{
         //    ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
-            
+
         //    var list = new List<ProductMessage>();
         //    list.Add(new ProductMessage()
         //    {
@@ -164,6 +159,43 @@ namespace FikaAmazonAPI.SampleCode
             var feedOutput = amazonConnection.Feed.GetFeed(feedID);
             var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
             var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
+        }
+
+        public void SubmitFeedOrderAdjustment()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+            var list = new List<OrderAdjustmentMessage>();
+            list.Add(new OrderAdjustmentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                ActionType = AdjustmentActionType.Refund,
+                AdjustedItem = new List<AdjustedItem>() {
+                   new AdjustedItem() {
+                       AmazonOrderItemCode = "52986411826454",
+                       AdjustmentReason = AdjustmentReason.CustomerCancel,
+                       DirectPaymentAdjustments = new List<DirectPaymentAdjustments>()
+                           {
+                               new DirectPaymentAdjustments()
+                               {
+                                   Component = new List<DirectPaymentAdjustmentsComponent>()
+                                   {
+                                       new DirectPaymentAdjustmentsComponent() {
+                                            DirectPaymentType = "Credit Card Refund",
+                                            Amount = new CurrencyAmount() {
+                                                Value = 10.50M,
+                                                currency = BaseCurrencyCode.GBP
+                                            }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                }
+            });
+            createDocument.AddOrderAdjustmentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
         }
     }
 }
