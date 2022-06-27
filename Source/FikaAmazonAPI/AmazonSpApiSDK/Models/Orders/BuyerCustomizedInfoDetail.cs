@@ -31,6 +31,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         {
             this.CustomizedURL = CustomizedURL;
         }
+        public BuyerCustomizedInfoDetail()
+        {
+            this.CustomizedURL = default(string);
+        }
 
         /// <summary>
         /// The location of a zip file containing Amazon Custom data.

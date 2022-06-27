@@ -29,6 +29,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.BuyerTaxInfo = buyerTaxInfo;
             this.PurchaseOrderNumber = purchaseOrderNumber;
         }
+        public BuyerInfo()
+        {
+            this.BuyerEmail = default(string);
+            this.BuyerName = default(string);
+            this.BuyerCounty = default(string);
+            this.BuyerTaxInfo = default(BuyerTaxInfo);
+            this.PurchaseOrderNumber = default(string);
+        }
 
         /// <summary>
         /// The anonymized email address of the buyer.
