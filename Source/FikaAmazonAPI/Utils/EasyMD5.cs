@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace FikaAmazonAPI.Utils
@@ -21,17 +23,18 @@ namespace FikaAmazonAPI.Utils
             return GetMD5HashFromBytes(bytes);
         }
 
-        public static string GetMD5HashFromBytes(byte[] bytes)
+        private static string GetMD5HashFromBytes(byte[] bytes)
         {
-            if (bytes == null)
-                throw new ArgumentNullException("bytes");
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
+            using var md5 = MD5.Create();
+            var hash = md5.ComputeHash(bytes);
+            var hashString = new StringBuilder();
+            foreach (var t in hash)
             {
-                sb.Append(bytes[i].ToString("x2"));
+                hashString.Append(t.ToString("x2", CultureInfo.InvariantCulture));
             }
-            return sb.ToString();
+
+            return hashString.ToString();
         }
     }
 }
