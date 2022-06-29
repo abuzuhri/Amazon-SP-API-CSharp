@@ -37,6 +37,16 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
+            //use this method automatically know if the report are RDT or not
+            var data2222 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING, DateTime.UtcNow.AddDays(-2), DateTime.UtcNow, null);
+
+            // OR USE this method to get the document and pass parameter isRestrictedReport = true in case the report will return  PII data
+
+            var data11111 = amazonConnection.Reports.GetReportDocument("50039018869997", true);
+
+
+
+
 
 
 

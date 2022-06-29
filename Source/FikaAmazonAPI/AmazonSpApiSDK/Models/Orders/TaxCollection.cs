@@ -40,7 +40,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// Enum MarketplaceFacilitator for value: MarketplaceFacilitator
             /// </summary>
             [EnumMember(Value = "MarketplaceFacilitator")]
-            MarketplaceFacilitator = 1
+            MarketplaceFacilitator = 1,
+
+            /// <summary>
+            /// Enum LowValueGoods for value: LowValueGoods
+            /// </summary>
+            [EnumMember(Value = "LowValueGoods")]
+            LowValueGoods = 2,
         }
 
         /// <summary>
