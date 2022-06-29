@@ -254,7 +254,6 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddJsonBody(object jsonData)
         {
-            //Request.JsonSerializer = new JsonNetSerializer();
             var json = JsonConvert.SerializeObject(jsonData);
             Request.AddJsonBody(json);
         }

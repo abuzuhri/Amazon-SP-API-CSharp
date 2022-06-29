@@ -127,6 +127,8 @@ namespace FikaAmazonAPI.Services
             {
                 ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
                 receiveMessageRequest.MaxNumberOfMessages = 10;
+                if (param.WaitTimeSeconds.HasValue)
+                    receiveMessageRequest.WaitTimeSeconds = param.WaitTimeSeconds.Value;
 
                 while (true)
                 {
