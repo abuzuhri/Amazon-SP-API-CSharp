@@ -42,7 +42,17 @@ namespace FikaAmazonAPI.NotificationMessages
         /// An explanation about the purpose of this instance.
         /// </summary>
         [JsonProperty("NumberOfBuyBoxEligibleOffers")]
-        public List<NumberOfBuyBoxEligibleOfferElement> NumberOfBuyBoxEligibleOffers { get; set; }
+        [System.Obsolete("NumberOfBuyBoxEligibleOffers is obsolete, use BuyBoxEligibleOffers", false)]
+        public List<BuyBoxEligibleOfferElement> NumberOfBuyBoxEligibleOffers { 
+            get { return BuyBoxEligibleOffers; } 
+            set { BuyBoxEligibleOffers = value; } 
+        }
+
+        /// <summary>
+        /// An explanation about the purpose of this instance.
+        /// </summary>
+        [JsonProperty("BuyBoxEligibleOffers")]
+        public List<BuyBoxEligibleOfferElement> BuyBoxEligibleOffers { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -67,7 +77,5 @@ namespace FikaAmazonAPI.NotificationMessages
         /// </summary>
         [JsonProperty("TotalBuyBoxEligibleOffers")]
         public long TotalBuyBoxEligibleOffers { get; set; }
-
-        public List<BuyBoxEligibleOfferElement> BuyBoxEligibleOffers { get; set; }
     }
 }
