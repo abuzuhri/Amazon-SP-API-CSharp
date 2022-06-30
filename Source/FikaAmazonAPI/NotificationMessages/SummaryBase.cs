@@ -25,5 +25,10 @@ namespace FikaAmazonAPI.NotificationMessages
         /// </summary>
         [JsonProperty("BuyBoxPrices")]
         public List<BuyBoxPrice> BuyBoxPrices { get; set; }
+
+        /// <summary>
+        /// Required. A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels.
+        /// </summary>
+        public abstract List<OfferCountElement> BuyBoxEligibleOffers { get; set; }
     }
 }

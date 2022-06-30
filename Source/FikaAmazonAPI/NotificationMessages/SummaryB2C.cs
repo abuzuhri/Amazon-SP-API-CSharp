@@ -27,7 +27,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// Required. A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels.
         /// </summary>
         [JsonProperty("NumberOfBuyBoxEligibleOffers")]
-        public List<OfferCountElement> NumberOfBuyBoxEligibleOffers { get; set; }
+        public override List<OfferCountElement> BuyBoxEligibleOffers { get; set; }
 
         /// <summary>
         /// Optional. This price is based on competitive prices from other retailers (excluding other Amazon sellers). Your offer may be ineligible for the Buy Box if your price + shipping is greater than this competitive price.
