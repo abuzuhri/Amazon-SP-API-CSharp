@@ -1,4 +1,6 @@
-﻿namespace FikaAmazonAPI.NotificationMessages
+﻿using Newtonsoft.Json;
+
+namespace FikaAmazonAPI.NotificationMessages
 {
 
     /// <summary>
