@@ -6,6 +6,18 @@ namespace FikaAmazonAPI.NotificationMessages
     public class SummaryB2C : SummaryBase
     {
         /// <summary>
+        /// Required. A list that contains the lowest prices of the item for the given conditions and fulfillment channels.
+        /// </summary>
+        [JsonProperty("LowestPrices")]
+        public List<LowestPriceB2C> LowestPrices { get; set; }
+
+        /// <summary>
+        /// Optional. A list that contains the Buy Box price of the item for the given conditions.
+        /// </summary>
+        [JsonProperty("BuyBoxPrices")]
+        public List<BuyBoxPriceB2C> BuyBoxPrices { get; set; }
+
+        /// <summary>
         /// Optional. The list price of the item as suggested by the manufacturer.
         /// </summary>
         [JsonProperty("ListPrice")]

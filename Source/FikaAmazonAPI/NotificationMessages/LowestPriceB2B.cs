@@ -2,11 +2,7 @@
 
 namespace FikaAmazonAPI.NotificationMessages
 {
-
-    /// <summary>
-    /// An explanation about the purpose of this instance.
-    /// </summary>
-    public partial class LowestPrice : BuyBoxPrice
+    public class LowestPriceB2B : PriceBaseB2B
     {
         /// <summary>
         /// Required. Indicates whether the item is fulfilled by Amazon or by the seller.

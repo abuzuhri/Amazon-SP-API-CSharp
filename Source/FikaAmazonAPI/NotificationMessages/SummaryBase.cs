@@ -15,18 +15,6 @@ namespace FikaAmazonAPI.NotificationMessages
         public List<OfferCountElement> NumberOfOffers { get; set; }
 
         /// <summary>
-        /// Required. A list that contains the lowest prices of the item for the given conditions and fulfillment channels.
-        /// </summary>
-        [JsonProperty("LowestPrices")]
-        public List<LowestPrice> LowestPrices { get; set; }
-
-        /// <summary>
-        /// Optional. A list that contains the Buy Box price of the item for the given conditions.
-        /// </summary>
-        [JsonProperty("BuyBoxPrices")]
-        public List<BuyBoxPrice> BuyBoxPrices { get; set; }
-
-        /// <summary>
         /// Required. A list that contains the total number of offers that are eligible for the Buy Box for the given conditions and fulfillment channels.
         /// </summary>
         public abstract List<OfferCountElement> BuyBoxEligibleOffers { get; set; }
