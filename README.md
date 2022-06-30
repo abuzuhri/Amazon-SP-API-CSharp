@@ -348,6 +348,19 @@ var dataSqs = amazonConnection.Notification.CreateDestination(
     });
 ```
 
+### Notifications Create Subscription, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+```CSharp
+
+//SQS
+var result = amazonConnection.Notification.CreateSubscription(
+    new ParameterCreateSubscription()
+    {
+        destinationId = "xxxxxxxxxxxxxxx", // take this from CreateDestination or GetDestinations response 
+        notificationType = NotificationType.ANY_OFFER_CHANGED, // or B2B_ANY_OFFER_CHANGED for B2B prices
+        payloadVersion = "1.0"
+    });
+```
+
 ### Notifications read messages
 ```CSharp
 

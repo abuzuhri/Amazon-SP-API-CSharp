@@ -8,15 +8,15 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class SellerFeedbackRating
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. The percentage of positive feedback for the seller in the past 365 days.
+        /// </summary>
+        [JsonProperty("SellerPositiveFeedbackRating")]
+        public double? SellerPositiveFeedbackRating { get; set; }
+
+        /// <summary>
+        /// Required. The count of feedback received about the seller.
         /// </summary>
         [JsonProperty("FeedbackCount")]
         public long FeedbackCount { get; set; }
-
-        /// <summary>
-        /// An explanation about the purpose of this instance.
-        /// </summary>
-        [JsonProperty("SellerPositiveFeedbackRating")]
-        public long SellerPositiveFeedbackRating { get; set; }
     }
 }

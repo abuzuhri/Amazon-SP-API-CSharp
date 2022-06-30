@@ -9,12 +9,13 @@ namespace FikaAmazonAPI.Parameter.Notification
         public string SQS_URL { get; set; }
         public int? WaitTimeSeconds { get; set; }
         public RegionEndpoint RegionEndpoint { get; set; }
-        public ParameterMessageReceiver(string awsAccessKeyId, string awsSecretAccessKey, string SQS_URL, RegionEndpoint RegionEndpoint)
+        public ParameterMessageReceiver(string awsAccessKeyId, string awsSecretAccessKey, string SQS_URL, RegionEndpoint RegionEndpoint, int? WaitTimeSeconds = null)
         {
             this.awsAccessKeyId = awsAccessKeyId;
             this.awsSecretAccessKey = awsSecretAccessKey;
             this.SQS_URL = SQS_URL;
             this.RegionEndpoint = RegionEndpoint;
+            this.WaitTimeSeconds = WaitTimeSeconds;
         }
 
     }

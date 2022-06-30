@@ -6,10 +6,10 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class BuyBoxPricePoints
+    public partial class Points
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The number of Amazon Points offered with the purchase of an item.
         /// </summary>
         [JsonProperty("PointsNumber")]
         public long PointsNumber { get; set; }
