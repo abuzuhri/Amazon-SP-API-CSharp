@@ -56,7 +56,19 @@ namespace FikaAmazonAPI.SampleCode
                     Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
                 }
             });
+        }
 
+
+        public void CreateSubscription()
+        {
+            //SQS
+            var result = amazonConnection.Notification.CreateSubscription(
+                new ParameterCreateSubscription()
+                {
+                    destinationId = "xxxxxxxxxxxxxxx", // take this from CreateDestination or GetDestinations response 
+                    notificationType = NotificationType.ANY_OFFER_CHANGED, // or B2B_ANY_OFFER_CHANGED for B2B prices
+                    payloadVersion = "1.0"
+                });
         }
 
 
