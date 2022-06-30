@@ -9,19 +9,19 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class Offer
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The seller identifier for the offer.
         /// </summary>
         [JsonProperty("SellerId")]
         public string SellerId { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The subcondition of the item. For example: New, Mint, Very Good, Good, Acceptable, Poor, Club, OEM, Warranty, Refurbished Warranty, Refurbished, Open Box, or Other.
         /// </summary>
         [JsonProperty("SubCondition")]
         public string SubCondition { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. Information about the seller's feedback, including the percentage of positive feedback, and the total count of feedback received.
         /// </summary>
         [JsonProperty("SellerFeedbackRating")]
         public SellerFeedbackRating SellerFeedbackRating { get; set; }
@@ -51,16 +51,16 @@ namespace FikaAmazonAPI.NotificationMessages
         public ShipsFrom ShipsFrom { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. Indicates whether the offer is fulfilled by Amazon.
         /// </summary>
         [JsonProperty("IsFulfilledByAmazon")]
         public bool IsFulfilledByAmazon { get; set; }
 
         /// <summary>
-        /// Indicates if the offer is buy box winner
+        /// Optional. Indicates whether the offer is currently in the Buy Box. There can be up to two Buy Box winners at any time per ASIN, one that is eligible for Prime and one that is not eligible for Prime.
         /// </summary>
         [JsonProperty("IsBuyBoxWinner")]
-        public bool IsBuyBoxWinner { get; set; }
+        public bool? IsBuyBoxWinner { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
@@ -75,9 +75,9 @@ namespace FikaAmazonAPI.NotificationMessages
         public PrimeInformation PrimeInformation { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. Indicates whether the seller of the item is eligible to win the Buy Box.
         /// </summary>
         [JsonProperty("IsFeaturedMerchant")]
-        public bool IsFeaturedMerchant { get; set; }
+        public bool? IsFeaturedMerchant { get; set; }
     }
 }

@@ -8,33 +8,39 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class OfferChangeTrigger
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
-        /// </summary>
-        [JsonProperty("ASIN")]
-        public string Asin { get; set; }
-
-        /// <summary>
-        /// An explanation about the purpose of this instance.
-        /// </summary>
-        [JsonProperty("ItemCondition")]
-        public string ItemCondition { get; set; }
-
-        /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The marketplace identifier of the item that had an offer change.
         /// </summary>
         [JsonProperty("MarketplaceId")]
         public string MarketplaceId { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The ASIN for the item that had an offer change.
         /// </summary>
-        [JsonProperty("OfferChangeType")]
-        public string OfferChangeType { get; set; }
+        [JsonProperty("ASIN")]
+        public string Asin { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The condition of the item that had an offer change. For example, if a used offer changes, the array of offers in the Offers object will be only used items. The Summary object provides a summary for the other conditions that can be used for repricing.
+        /// </summary>
+        [JsonProperty("ItemCondition")]
+        public string ItemCondition { get; set; }
+
+        /// <summary>
+        /// Required. The update time for the offer that caused this notification, in ISO 8601 format.
         /// </summary>
         [JsonProperty("TimeOfOfferChange")]
         public string TimeOfOfferChange { get; set; }
+
+        /// <summary>
+        /// Required. The type of offer that changed and triggered this notification.
+        /// </summary>
+        /// <remarks>
+        /// OfferChangeType values:
+        /// External - The CompetitivePriceThreshold in the Summary object has changed, triggered by a new offer from a non-Amazon seller.
+        /// Internal - The price of an offer on Amazon's retail website has changed.
+        /// Featured Offer - The BuyBox winner or BuyBox price has changed.
+        /// </remarks>
+        [JsonProperty("OfferChangeType")]
+        public string OfferChangeType { get; set; }
     }
 }

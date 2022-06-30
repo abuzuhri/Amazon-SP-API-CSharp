@@ -10,15 +10,15 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class ShipsFrom
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
-        /// </summary>
-        [JsonProperty("Country")]
-        public string Country { get; set; }
-
-        /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. The state from where the item is shipped.
         /// </summary>
         [JsonProperty("State")]
         public string State { get; set; }
+
+        /// <summary>
+        /// Optional. The country from where the item is shipped.
+        /// </summary>
+        [JsonProperty("Country")]
+        public string Country { get; set; }
     }
 }

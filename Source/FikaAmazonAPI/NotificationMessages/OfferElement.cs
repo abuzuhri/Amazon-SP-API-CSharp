@@ -9,21 +9,24 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class OfferElement : Offer
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. The number of Amazon Points offered with the purchase of an item.
         /// </summary>
+        /// <remarks>
+        /// Note: The Points object is only returned in Japan (JP).
+        /// </remarks>
         [JsonProperty("Points")]
-        public OfferPoints Points { get; set; }
+        public Points Points { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. Indicates whether expedited shipping is available.
         /// </summary>
         [JsonProperty("IsExpeditedShippingAvailable")]
-        public bool IsExpeditedShippingAvailable { get; set; }
+        public bool? IsExpeditedShippingAvailable { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Optional. Indicates whether the item ships domestically.
         /// </summary>
         [JsonProperty("ShipsDomestically")]
-        public bool ShipsDomestically { get; set; }
+        public bool? ShipsDomestically { get; set; }
     }
 }

@@ -6,16 +6,16 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class SalesRankingElement
+    public partial class SalesRank
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The product category identifier of the item.
         /// </summary>
         [JsonProperty("ProductCategoryId")]
         public string ProductCategoryId { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Required. The sales rank of the item in the given product category.
         /// </summary>
         [JsonProperty("Rank")]
         public long Rank { get; set; }
