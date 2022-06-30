@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class Offer
+    public abstract class OfferBase
     {
         /// <summary>
         /// Required. The seller identifier for the offer.

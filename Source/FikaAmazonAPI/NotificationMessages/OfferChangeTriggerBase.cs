@@ -5,7 +5,7 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class OfferChangeTrigger
+    public abstract class OfferChangeTriggerBase
     {
         /// <summary>
         /// Required. The marketplace identifier of the item that had an offer change.
@@ -30,17 +30,5 @@ namespace FikaAmazonAPI.NotificationMessages
         /// </summary>
         [JsonProperty("TimeOfOfferChange")]
         public string TimeOfOfferChange { get; set; }
-
-        /// <summary>
-        /// Required. The type of offer that changed and triggered this notification.
-        /// </summary>
-        /// <remarks>
-        /// OfferChangeType values:
-        /// External - The CompetitivePriceThreshold in the Summary object has changed, triggered by a new offer from a non-Amazon seller.
-        /// Internal - The price of an offer on Amazon's retail website has changed.
-        /// Featured Offer - The BuyBox winner or BuyBox price has changed.
-        /// </remarks>
-        [JsonProperty("OfferChangeType")]
-        public string OfferChangeType { get; set; }
     }
 }

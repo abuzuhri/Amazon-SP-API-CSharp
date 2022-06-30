@@ -15,19 +15,19 @@ namespace FikaAmazonAPI.NotificationMessages
         /// Required. The event that caused the notification to be sent.
         /// </summary>
         [JsonProperty("OfferChangeTrigger")]
-        public OfferChangeTrigger OfferChangeTrigger { get; set; }
+        public OfferChangeTriggerBase OfferChangeTrigger { get; set; }
 
         /// <summary>
         /// Required. Information about the product that had the offer change. The information in this summary applies to all conditions of the product.
         /// </summary>
         [JsonProperty("Summary")]
-        public Summary Summary { get; set; }
+        public SummaryBase Summary { get; set; }
 
         /// <summary>
         /// Required. The top 20 competitive B2B offers for the item and condition that triggered the notification.
         /// </summary>
         [JsonProperty("Offers")]
-        public List<Offer> Offers { get; set; }
+        public List<OfferB2B> Offers { get; set; }
     }
 
 }

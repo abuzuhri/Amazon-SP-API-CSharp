@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.NotificationMessages
     /// <summary>
     /// An explanation about the purpose of this instance.
     /// </summary>
-    public partial class OfferElement : Offer
+    public partial class OfferB2C : OfferBase
     {
         /// <summary>
         /// Optional. The number of Amazon Points offered with the purchase of an item.
