@@ -36,9 +36,6 @@ jobs:
       run: |
         dotnet pack ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj  --configuration Release
 
-    - name: PushNuget
-      run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
-
 
     - name: Add github package source
       run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.USERGIHUB_TOKEN }}
