@@ -35,18 +35,25 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            feedsSample.SubmitFeedOrderAcknowledgement();
 
-            var alllll = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
-            {
-                Asin = "B00DLWONF2",
-                ItemCondition = ItemCondition.New,
-            });
+            //use this method automatically know if the report are RDT or not
+            var data2222 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING, DateTime.UtcNow.AddDays(-2), DateTime.UtcNow, null);
+
+            // OR USE this method to get the document and pass parameter isRestrictedReport = true in case the report will return  PII data
+
+            var data11111 = amazonConnection.Reports.GetReportDocument("50039018869997", true);
+
+
+
+
 
 
 
             var GetCatalogItem202204 = await amazonConnection.CatalogItem.GetCatalogItem202204Async(new Parameter.CatalogItems.ParameterGetCatalogItem
             {
-                ASIN = "B00DLWONF2",
+                ASIN = "B00JK2YANC",
                 includedData = new[] { IncludedData.attributes, IncludedData.salesRanks, IncludedData.summaries, IncludedData.productTypes, IncludedData.relationships, IncludedData.dimensions, IncludedData.identifiers, IncludedData.images }
             });
 
