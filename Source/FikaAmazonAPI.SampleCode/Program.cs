@@ -36,7 +36,14 @@ namespace FikaAmazonAPI.SampleCode
 
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            feedsSample.SubmitFeedOrderAcknowledgement();
+            //feedsSample.SubmitFeedOrderAcknowledgement();
+
+            var alllll = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
+            {
+                Asin = "B00DLWONF2",
+                ItemCondition = ItemCondition.New,
+            });
+
 
             //use this method automatically know if the report are RDT or not
             var data2222 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING, DateTime.UtcNow.AddDays(-2), DateTime.UtcNow, null);
