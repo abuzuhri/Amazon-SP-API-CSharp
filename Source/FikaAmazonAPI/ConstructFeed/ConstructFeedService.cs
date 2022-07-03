@@ -107,6 +107,23 @@ namespace FikaAmazonAPI.ConstructFeed
             envelope.MessageType = Utils.Constants.FeedMessageType.OrderFulfillment;
         }
 
+        public void AddOrderAcknowledgementMessage(IList<OrderAcknowledgementMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
+        {
+            var msgs = new List<BaseMessage>();
+            int index = 1;
+            foreach (var itm in messages)
+            {
+                msgs.Add(new BaseMessage()
+                {
+                    MessageID = index++,
+                    OrderAcknowledgement = itm,
+                    OperationType = operationType
+                });
+            }
+            envelope.Message = msgs;
+            envelope.MessageType = Utils.Constants.FeedMessageType.OrderAcknowledgement;
+        }
+
         public void AddOrderAdjustmentMessage(IList<OrderAdjustmentMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
         {
             var msgs = new List<BaseMessage>();

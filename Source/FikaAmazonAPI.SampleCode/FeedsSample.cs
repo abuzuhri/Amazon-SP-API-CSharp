@@ -161,6 +161,28 @@ namespace FikaAmazonAPI.SampleCode
             var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
         }
 
+        public void SubmitFeedOrderAcknowledgement()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+            var list = new List<OrderAcknowledgementMessage>();
+            list.Add(new OrderAcknowledgementMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                MerchantOrderID = "12345678",
+                StatusCode = OrderAcknowledgementStatusCode.Success,
+                Item = new List<OrderAcknowledgementItem>() {
+                   new OrderAcknowledgementItem() {
+                       AmazonOrderItemCode = "52986411826454",
+                       MerchantOrderItemID = "1"
+                       }
+                }
+            });
+            createDocument.AddOrderAcknowledgementMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_ORDER_ACKNOWLEDGEMENT_DATA);
+        }
+
         public void SubmitFeedOrderAdjustment()
         {
             ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
