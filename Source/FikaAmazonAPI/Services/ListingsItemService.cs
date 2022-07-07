@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
         {
             listingsItemParameters.Check();
             var queryParameters = listingsItemParameters.getParameters();
-            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.GET, queryParameters, parameter: listingsItemParameters);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.GetListingItem(listingsItemParameters.sellerId, listingsItemParameters.sku), RestSharp.Method.Get, queryParameters, parameter: listingsItemParameters);
             return await ExecuteRequestAsync<Item>(RateLimitType.ListingsItem_GetListingsItem);
         }
 
@@ -27,7 +27,7 @@ namespace FikaAmazonAPI.Services
         {
             parameterPutListingItem.Check();
             var queryParameters = parameterPutListingItem.getParameters();
-            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.PUT, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.Put, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters);
             var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PutListingsItem);
             return response;
         }
@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.Services
         {
             parameterDeleteListingItem.Check();
             var queryParameters = parameterDeleteListingItem.getParameters();
-            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.DeleteListingItem(parameterDeleteListingItem.sellerId, parameterDeleteListingItem.sku), RestSharp.Method.DELETE, queryParameters: queryParameters);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.DeleteListingItem(parameterDeleteListingItem.sellerId, parameterDeleteListingItem.sku), RestSharp.Method.Delete, queryParameters: queryParameters);
             var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_DeleteListingsItem);
             return response;
         }
@@ -49,7 +49,7 @@ namespace FikaAmazonAPI.Services
         {
             parameterPatchListingItem.Check();
             var queryParameters = parameterPatchListingItem.getParameters();
-            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PatchListingItem(parameterPatchListingItem.sellerId, parameterPatchListingItem.sku), RestSharp.Method.PATCH, queryParameters: queryParameters, postJsonObj: parameterPatchListingItem.listingsItemPatchRequest);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PatchListingItem(parameterPatchListingItem.sellerId, parameterPatchListingItem.sku), RestSharp.Method.Patch, queryParameters: queryParameters, postJsonObj: parameterPatchListingItem.listingsItemPatchRequest);
             var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PatchListingsItem);
             return response;
         }

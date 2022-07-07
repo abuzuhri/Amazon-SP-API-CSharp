@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.Services
         public static readonly string SecurityTokenHeaderName = "x-amz-security-token";
         private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
         protected RestClient RequestClient { get; set; }
-        protected IRestRequest Request { get; set; }
+        protected RestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
         protected string AmazonSandboxUrl { get; set; }
         protected string AmazonProductionUrl { get; set; }
@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.Services
         {
             RestHeader();
             AddAccessToken();
-            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
+            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
@@ -116,14 +116,19 @@ namespace FikaAmazonAPI.Services
         }
         private void RestHeader()
         {
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AccessTokenHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == SecurityTokenHeaderName);
+            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+            //                                              && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
+            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+            //                                              && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
+            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+            //                                              && parameter.Name == AccessTokenHeaderName);
+            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+            //                                              && parameter.Name == SecurityTokenHeaderName);
+
+            Request.Parameters.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+            Request.Parameters.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+            Request.Parameters.RemoveParameter(AccessTokenHeaderName);
+            Request.Parameters.RemoveParameter(SecurityTokenHeaderName);
         }
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -156,7 +161,7 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private void SleepForRateLimit(IList<RestSharp.Parameter> headers, RateLimitType rateLimitType = RateLimitType.UNSET)
+        private void SleepForRateLimit(IReadOnlyCollection<RestSharp.Parameter> headers, RateLimitType rateLimitType = RateLimitType.UNSET)
         {
             try
             {
@@ -207,7 +212,7 @@ namespace FikaAmazonAPI.Services
             return response.Data;
         }
 
-        protected void ParseResponse(IRestResponse response)
+        protected void ParseResponse(RestResponse response)
         {
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
                 return;
@@ -335,7 +340,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.POST, postJsonObj: createRestrictedDataTokenRequest);
+            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest);
             var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>();
             return response;
         }
