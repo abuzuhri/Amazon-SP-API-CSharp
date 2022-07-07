@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Utils;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,29 @@ namespace FikaAmazonAPI.SampleCode
             this.amazonConnection = amazonConnection;
         }
 
+        public InboundShipmentList GetInboundShipments()
+        {
+            var shipments = new InboundShipmentList();
+            var param = new Parameter.FulFillmentInbound.ParameterGetShipments()
+            {
+                QueryType = Constants.QueryType.DATE_RANGE,
+                MarketplaceId = MarketPlace.US.ID,
+                ShipmentStatusList = (new List<ShipmentStatus> { ShipmentStatus.CLOSED, ShipmentStatus.DELIVERED, ShipmentStatus.RECEIVING }),
+                LastUpdatedAfter = DateTime.Now.AddDays(-60),
+                LastUpdatedBefore = DateTime.Now
+            };
+            GetShipmentsResult results = null;
+            do
+            {
+                results = amazonConnection.FulFillmentInbound.GetShipments(param);
+                shipments.AddRange(results.ShipmentData);
+                param.NextToken = results.NextToken;
+                Thread.Sleep(10000);
+            } while (String.IsNullOrEmpty(results.NextToken) != true);
+
+            return shipments;
+
+        }
         public void GetInboundGuidance()
         {
             var parm = new Parameter.FulFillmentInbound.ParameterGetInboundGuidance() {
