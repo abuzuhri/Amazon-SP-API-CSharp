@@ -107,6 +107,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
 
         _309,
+<<<<<<< HEAD
+=======
+
+        /// <summary>
+        /// Enum _320 for value: EVENT_320
+        /// </summary>
+
+        _320,
+>>>>>>> b07703d (_320 missing fix)
 
         /// <summary>
         /// Enum _401 for value: EVENT_401
