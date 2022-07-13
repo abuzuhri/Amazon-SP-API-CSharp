@@ -21,7 +21,8 @@ namespace FikaAmazonAPI.Services
             var orderList = new List<Order>();
 
             var queryParameters = searchOrderList.getParameters();
-            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
+            //await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
+            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrders);
             var nextToken = response.Payload?.Pagination?.NextToken;
             orderList.AddRange(response.Payload.Orders);
