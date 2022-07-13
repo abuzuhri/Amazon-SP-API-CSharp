@@ -10,8 +10,8 @@ namespace FikaAmazonAPI.Parameter.VendorDirectFulfillmentOrders
         public string ShipFromPartyId { get; set; }
         public OrderStatusEnum Status { get; set; }
         public long? Limit { get; set; }
-        public DateTime? CreatedAfter { get; set; }
-        public DateTime? CreatedBefore { get; set; }
+        public DateTime? createdAfter { get; set; }
+        public DateTime? createdBefore { get; set; }
         public SortOrderEnum SortOrder { get; set; }
         public string NextToken { get; set; }
         public bool? IncludeDetails { get; set; }

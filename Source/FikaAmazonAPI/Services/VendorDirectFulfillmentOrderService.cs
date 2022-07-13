@@ -14,21 +14,22 @@ namespace FikaAmazonAPI.Services
         }
 
 
-        public List<Order> GetOrders(ParameterVendorDirectFulfillmentGetOrders serachOrderList) =>
-            Task.Run(() => GetOrdersAsync(serachOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<Order>> GetOrdersAsync(ParameterVendorDirectFulfillmentGetOrders serachOrderList)
+        public List<Order> GetOrders(ParameterVendorDirectFulfillmentGetOrders searchOrderList) =>
+            Task.Run(() => GetOrdersAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<Order>> GetOrdersAsync(ParameterVendorDirectFulfillmentGetOrders searchOrderList)
         {
             var orderList = new List<Order>();
 
-            var queryParameters = serachOrderList.getParameters();
-            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
+            var queryParameters = searchOrderList.getParameters();
+            //await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, parameter: queryParameters);
+            await CreateAuthorizedRequestAsync(VendorDirectFulfillmentOrdersApiUrls.GetOrders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrders);
             var nextToken = response.Payload?.Pagination?.NextToken;
             orderList.AddRange(response.Payload.Orders);
             while (!string.IsNullOrEmpty(nextToken))
             {
-                serachOrderList.NextToken = nextToken;
-                var orderPayload = GetOrders(serachOrderList);
+                searchOrderList.NextToken = nextToken;
+                var orderPayload = GetOrders(searchOrderList);
                 orderList.AddRange(orderPayload);
             }
             return orderList;
