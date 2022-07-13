@@ -12,7 +12,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public const string AccessTokenKey = "access_token";
         public const string JsonMediaType = "application/json; charset=utf-8";
 
-        public IRestClient RestClient { get; set; }
+        public RestClient RestClient { get; set; }
         public LWAAccessTokenRequestMetaBuilder LWAAccessTokenRequestMetaBuilder { get; set; }
         public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; private set; }
 
@@ -34,15 +34,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public virtual async Task<TokenResponse> GetAccessTokenAsync()
         {
             LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
-            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, RestSharp.Method.POST);
+            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath);
 
             string jsonRequestBody = JsonConvert.SerializeObject(lwaAccessTokenRequestMeta);
 
-            accessTokenRequest.AddParameter(JsonMediaType, jsonRequestBody, ParameterType.RequestBody);
+            accessTokenRequest.AddJsonBody(lwaAccessTokenRequestMeta, JsonMediaType);//, jsonRequestBody, ParameterType.RequestBody);
 
             try
             {
-                var response = await RestClient.ExecuteAsync(accessTokenRequest).ConfigureAwait(false);
+                var response = await RestClient.ExecuteAsync(accessTokenRequest, RestSharp.Method.Post).ConfigureAwait(false);
 
                 if (!IsSuccessful(response))
                 {
@@ -60,7 +60,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             }
         }
 
-        private bool IsSuccessful(IRestResponse response)
+        private bool IsSuccessful(RestResponse response)
         {
             int statusCode = (int)response.StatusCode;
             return statusCode >= 200 && statusCode <= 299 && response.ResponseStatus == ResponseStatus.Completed;

@@ -602,7 +602,6 @@ namespace FikaAmazonAPI.Utils
             FBA_EFN
         }
 
-
         ///// <summary>
         ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.
         ///// </summary>
