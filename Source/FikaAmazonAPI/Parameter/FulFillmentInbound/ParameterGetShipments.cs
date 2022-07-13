@@ -1,13 +1,14 @@
-﻿using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
 using static FikaAmazonAPI.Utils.Constants;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
 
 namespace FikaAmazonAPI.Parameter.FulFillmentInbound
 {
     public class ParameterGetShipments : ParameterBased
     {
-        public IList<ShipmentStatusList> ShipmentStatusList { get; set; }
+        public IList<ShipmentStatus> ShipmentStatusList { get; set; }
         public IList<string> ShipmentIdList { get; set; }
         public DateTime? LastUpdatedAfter { get; set; }
         public DateTime? LastUpdatedBefore { get; set; }
