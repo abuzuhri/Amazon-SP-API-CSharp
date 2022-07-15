@@ -57,6 +57,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             [EnumMember(Value = "GB_VOEC")]
             GB_VOEC = 4,
 
+
+
             /// <summary>
             /// Enum CA_MPF for value: CA_MPF
             /// </summary>
