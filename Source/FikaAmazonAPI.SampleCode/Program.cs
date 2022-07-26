@@ -34,6 +34,23 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            var listSlot = amazonConnection.EasyShip20220323S.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
+            {
+                AmazonOrderId = "171-2704093-8575999",
+                PackageDimensions = new AmazonSpApiSDK.Models.EasyShip20220323.Dimensions
+                {
+                    Height = 20.0M,
+                    Width = 10.0M,
+                    Length = 12.0M,
+                    Unit = "Cm"
+                },
+                PackageWeight = new AmazonSpApiSDK.Models.EasyShip20220323.Weight
+                {
+                    Unit = "G",
+                    Value = 100.0M
+                }
+            });
+
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
             //feedsSample.SubmitFeedOrderAcknowledgement();

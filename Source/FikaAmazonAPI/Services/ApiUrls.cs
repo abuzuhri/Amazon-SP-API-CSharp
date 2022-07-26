@@ -162,6 +162,26 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
             public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
         }
+        protected class EasyShip20220323
+        {
+            private readonly static string _resourceBaseUrl = "/easyShip/2022-03-23";
+            public static string ListHandoverSlots
+            {
+                get => $"{_resourceBaseUrl}/timeSlot";
+            }
+            public static string GetScheduledPackage
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
+            public static string CreateScheduledPackage
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
+            public static string UpdateScheduledPackages
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
+        }
         protected class FBASmallAndLightApiUrls
         {
             private readonly static string _resourceBaseUrl = "/fba/smallAndLight/v1";
