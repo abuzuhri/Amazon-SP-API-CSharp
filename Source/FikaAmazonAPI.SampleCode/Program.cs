@@ -44,7 +44,7 @@ namespace FikaAmazonAPI.SampleCode
                 ItemCondition = ItemCondition.New,
             });
 
-            var obb = amazonConnection.ProductPricing.LastResponseHeader;
+            var Headers = amazonConnection.ProductPricing.LastResponseHeader;
 
             //use this method automatically know if the report are RDT or not
             var data2222 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING, DateTime.UtcNow.AddDays(-2), DateTime.UtcNow, null);
