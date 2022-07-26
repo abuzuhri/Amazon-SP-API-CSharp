@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
-            var listSlot = amazonConnection.EasyShip20220323S.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
+            var listSlot = amazonConnection.EasyShip20220323.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
             {
                 AmazonOrderId = "171-2704093-8575999",
                 PackageDimensions = new AmazonSpApiSDK.Models.EasyShip20220323.Dimensions

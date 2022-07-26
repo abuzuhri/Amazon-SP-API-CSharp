@@ -16,7 +16,7 @@ namespace FikaAmazonAPI
         public AuthorizationService Authorization => this._Authorization ?? throw _NoCredentials;
         public AplusContentService AplusContent => this._AplusContent ?? throw _NoCredentials;
         public FbaInboundEligibilityService FbaInboundEligibility => this._FbaInboundEligibility ?? throw _NoCredentials;
-        public EasyShip20220323Service EasyShip20220323S => this._EasyShip20220323 ?? throw _NoCredentials;
+        public EasyShip20220323Service EasyShip20220323 => this._EasyShip20220323 ?? throw _NoCredentials;
         public FbaInboundService FbaInbound => this._FbaInbound ?? throw _NoCredentials;
         public FbaInventoryService FbaInventory => this._FbaInventory ?? throw _NoCredentials;
         public FbaOutboundService FbaOutbound => this._FbaOutbound ?? throw _NoCredentials;
