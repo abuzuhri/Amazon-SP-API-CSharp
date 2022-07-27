@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.Services
             return await TokenGeneration.GetAccessTokenFromCodeAsync(AmazonCredential.ClientId, AmazonCredential.ClientSecret, code, appRedirectUri);
         }
 
-        public async Task<TokenResponse> GetRrefreshTokenFromCodeAsync(string code, string appRedirectUri)
+        public async Task<TokenResponse> GetRefreshTokenFromCodeAsync(string code, string appRedirectUri)
         {
             return await TokenGeneration.GetAccessTokenFromCodeAsync(AmazonCredential.ClientId, AmazonCredential.ClientSecret, code, appRedirectUri, grant_type: "authorization_code");
         }
