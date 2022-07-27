@@ -1,16 +1,12 @@
 ﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
-using FikaAmazonAPI.Parameter.Authorization;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.ReportGeneration;
-using FikaAmazonAPI.Services;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
-using System.Net.Http.Headers;
-using System.Text;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -45,49 +41,6 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-            var LWA_App_ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value;
-            var LWA_App_ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value;
-
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://api.amazon.com");
-                var byteArray = Encoding.ASCII.GetBytes($"{LWA_App_ClientId}:{LWA_App_ClientSecret}");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-
-                Dictionary<string, string> items = new Dictionary<string, string>();
-                items.Add("grant_type", "authorization_code");
-                items.Add("scope", "sellingpartnerapi::migration");
-                items.Add("client_id", LWA_App_ClientId);
-                items.Add("client_secret", LWA_App_ClientSecret);
-                items.Add("code", "amzn.mws.4ab28774-4f3d-a900-da2e-aa244977ea78");
-
-
-                FormUrlEncodedContent formUrlEncodedContent = new FormUrlEncodedContent(items);
-                var rs = client.PostAsync("/auth/o2/token", formUrlEncodedContent).Result;
-                var dddata = rs.Content.ReadAsStringAsync().Result;
-            }
-
-            var ttt = await amazonConnection.Authorization.GetRrefreshTokenFromCodeAsync("amzn1.sellerapps.app.085436e0-d1d6-4529-bd2e-fe1de0ae65cd", "");
-
-
-            var code1 = await amazonConnection.Authorization.GetAuthorizationCodeAsync(new ParameterAuthorizationCode
-            {
-                developerId = "899232662370",
-                mwsAuthToken = "amzn1.sellerapps.app.085436e0-d1d6-4529-bd2e-fe1de0ae65cd",
-                sellingPartnerId = "A14C3XC0Z1HEJG"
-            });
-
-
-
-
-
-            var code = await AuthorizationService.GetRefreshTokenFromCodeAsync("AKIA56G4FVALE4JSNYVM", "6LSmLxIyL8pDc7PwHaw7q6mKlQvOnbUywT6bBRmo", "amzn1.sellerapps.app.085436e0-d1d6-4529-bd2e-fe1de0ae65cd", "");
-
-            var allprice = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
-            {
-                Asin = "B000UYYGNI",//"B005KVGFRQ",
-                CustomerType = CustomerType.Business
-            });
 
             var listSlot = amazonConnection.EasyShip20220323.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
             {
