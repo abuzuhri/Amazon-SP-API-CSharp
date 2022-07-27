@@ -48,10 +48,10 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     public class AdjustmentBuyerPrice
     {
         [XmlElement(ElementName = "Type")]
-        AdjustmentBuyerTypePrice BuyerPriceType { get; set; }
+        public AdjustmentBuyerTypePrice BuyerPriceType { get; set; }
 
         [XmlElement(ElementName = "Amount")]
-        CurrencyAmount Amount { get; set; }
+        public CurrencyAmount Amount { get; set; }
     }
 
     public class PromotionAdjustments
