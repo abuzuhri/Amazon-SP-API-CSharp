@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.Services
         protected string AmazonSandboxUrl { get; set; }
         protected string AmazonProductionUrl { get; set; }
         protected string AccessToken { get; set; }
-
+        protected IList<KeyValuePair<string, string>> LastHeaders { get; set; }
         protected string ApiBaseUrl
         {
             get
@@ -105,6 +105,7 @@ namespace FikaAmazonAPI.Services
             AddAccessToken();
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
+            SaveLastRequestHeader(response.Headers);
             SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
 
@@ -113,6 +114,18 @@ namespace FikaAmazonAPI.Services
                 response.Data = JsonConvert.DeserializeObject<T>(response.Content);
             }
             return response.Data;
+        }
+        private void SaveLastRequestHeader(IList<RestSharp.Parameter> parameters)
+        {
+            LastHeaders = new List<KeyValuePair<string, string>>();
+            foreach (RestSharp.Parameter parameter in parameters)
+            {
+                if (parameter != null && parameter.Name != null && parameter.Value != null)
+                {
+                    LastHeaders.Add(new KeyValuePair<string, string>(parameter.Name.ToString(), parameter.Value.ToString()));
+                }
+            }
+
         }
         private void RestHeader()
         {
@@ -204,7 +217,7 @@ namespace FikaAmazonAPI.Services
         {
             var response = await RequestClient.ExecuteAsync<T>(Request);
             ParseResponse(response);
-
+            SaveLastRequestHeader(response.Headers);
             if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
             {
                 response.Data = JsonConvert.DeserializeObject<T>(response.Content);
@@ -332,6 +345,7 @@ namespace FikaAmazonAPI.Services
 
             AccessToken = token.access_token;
         }
+        public IList<KeyValuePair<string, string>> LastResponseHeader => LastHeaders;
 
         public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {

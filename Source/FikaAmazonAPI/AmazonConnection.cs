@@ -16,6 +16,7 @@ namespace FikaAmazonAPI
         public AuthorizationService Authorization => this._Authorization ?? throw _NoCredentials;
         public AplusContentService AplusContent => this._AplusContent ?? throw _NoCredentials;
         public FbaInboundEligibilityService FbaInboundEligibility => this._FbaInboundEligibility ?? throw _NoCredentials;
+        public EasyShip20220323Service EasyShip20220323 => this._EasyShip20220323 ?? throw _NoCredentials;
         public FbaInboundService FbaInbound => this._FbaInbound ?? throw _NoCredentials;
         public FbaInventoryService FbaInventory => this._FbaInventory ?? throw _NoCredentials;
         public FbaOutboundService FbaOutbound => this._FbaOutbound ?? throw _NoCredentials;
@@ -50,6 +51,7 @@ namespace FikaAmazonAPI
         private AuthorizationService _Authorization { get; set; }
         private AplusContentService _AplusContent { get; set; }
         private FbaInboundEligibilityService _FbaInboundEligibility { get; set; }
+        private EasyShip20220323Service _EasyShip20220323 { get; set; }
         private FbaInboundService _FbaInbound { get; set; }
         private FbaInventoryService _FbaInventory { get; set; }
         private FbaOutboundService _FbaOutbound { get; set; }
@@ -108,6 +110,7 @@ namespace FikaAmazonAPI
             this._FbaOutbound = new FbaOutboundService(this.Credentials);
             this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials);
             this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials);
+            this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials);
             this._AplusContent = new AplusContentService(this.Credentials);
             this._Feed = new FeedService(this.Credentials);
             this._ListingsItem = new ListingsItemService(this.Credentials);

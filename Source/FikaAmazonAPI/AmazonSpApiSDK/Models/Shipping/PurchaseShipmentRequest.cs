@@ -44,7 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="ServiceType">ServiceType (required).</param>
         /// <param name="Containers">Containers (required).</param>
         /// <param name="LabelSpecification">LabelSpecification (required).</param>
-        public PurchaseShipmentRequest(ClientReferenceId ClientReferenceId = default(ClientReferenceId), Address ShipTo = default(Address), Address ShipFrom = default(Address), DateTime? ShipDate = default(DateTime?), ServiceType ServiceType = default(ServiceType), ContainerList Containers = default(ContainerList), LabelSpecification LabelSpecification = default(LabelSpecification))
+        public PurchaseShipmentRequest(string ClientReferenceId = default(string), Address ShipTo = default(Address), Address ShipFrom = default(Address), DateTime? ShipDate = default(DateTime?), ServiceType ServiceType = default(ServiceType), ContainerList Containers = default(ContainerList), LabelSpecification LabelSpecification = default(LabelSpecification))
         {
             // to ensure "ClientReferenceId" is required (not null)
             if (ClientReferenceId == null)
@@ -107,7 +107,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Gets or Sets ClientReferenceId
         /// </summary>
         [DataMember(Name = "clientReferenceId", EmitDefaultValue = false)]
-        public ClientReferenceId ClientReferenceId { get; set; }
+        public string ClientReferenceId { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo

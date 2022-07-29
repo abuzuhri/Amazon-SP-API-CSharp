@@ -164,15 +164,17 @@ namespace FikaAmazonAPI.Services
             await CreateAuthorizedRequestAsync(CategoryApiUrls.SearchCatalogItems202204, RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<ItemSearchResults>(RateLimitType.CatalogItems20220401_SearchCatalogItems);
             list.AddRange(response.Items);
+            var totalPages = 1;
             if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
                 var nextToken = response.Pagination.NextToken;
-                while (!string.IsNullOrEmpty(nextToken))
+                while (!string.IsNullOrEmpty(nextToken) && (!parameter.maxPages.HasValue || totalPages < parameter.maxPages.Value))
                 {
                     parameter.pageToken = nextToken;
                     var getItemNextPage = await SearchCatalogItemsByNextToken202204Async(parameter);
                     list.AddRange(getItemNextPage.Items);
                     nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
                 }
             }
             return list;

@@ -3,11 +3,6 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Order;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -26,7 +21,7 @@ namespace FikaAmazonAPI.SampleCode
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
             serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
 
             serachOrderList.AmazonOrderIds = new List<string>();
             serachOrderList.AmazonOrderIds.Add("403-1710607-6240347");
@@ -76,13 +71,13 @@ namespace FikaAmazonAPI.SampleCode
             var BuyerInfo = amazonConnection.Orders.GetOrderBuyerInfo("402-0467973-4229120");
         }
 
-        
+
         public void GetOrderAddress()
         {
             var Address = amazonConnection.Orders.GetOrderAddress("402-0467973-4229120");
         }
 
-        
+
         public void GetOrderItems()
         {
             var Items = amazonConnection.Orders.GetOrderItems("402-0467973-4229120");
@@ -116,7 +111,7 @@ namespace FikaAmazonAPI.SampleCode
             {
                 CreatedAfter = DateTime.UtcNow.AddDays(-24),
                 //FulfillmentChannels = new List<FulfillmentChannels> { FulfillmentChannels.AFN },
-                OrderStatuses = new List<OrderStatuses> { OrderStatuses.Shipped}
+                OrderStatuses = new List<OrderStatuses> { OrderStatuses.Shipped }
             };
 
             var orders = amazonConnection.Orders.GetOrders(parameterOrderList);

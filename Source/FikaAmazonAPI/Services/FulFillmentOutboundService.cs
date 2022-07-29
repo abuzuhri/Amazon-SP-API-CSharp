@@ -120,9 +120,9 @@ namespace FikaAmazonAPI.Services
             return true;
         }
 
-        public bool UpdateFulfillmentOrder(string sellerFulfillmentOrderId) =>
-            Task.Run(() => UpdateFulfillmentOrderAsync(sellerFulfillmentOrderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<bool> UpdateFulfillmentOrderAsync(string sellerFulfillmentOrderId)
+        public bool CancelFulfillmentOrder(string sellerFulfillmentOrderId) =>
+            Task.Run(() => CancelFulfillmentOrderAsync(sellerFulfillmentOrderId)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> CancelFulfillmentOrderAsync(string sellerFulfillmentOrderId)
         {
             await CreateAuthorizedRequestAsync(FulFillmentOutboundApiUrls.CancelFulfillmentOrder(sellerFulfillmentOrderId), RestSharp.Method.Put);
 

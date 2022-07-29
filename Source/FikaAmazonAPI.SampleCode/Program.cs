@@ -23,6 +23,11 @@ namespace FikaAmazonAPI.SampleCode
             .Build();
 
 
+
+
+
+
+
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
                 AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
@@ -35,6 +40,26 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
+
+
+            var listSlot = amazonConnection.EasyShip20220323.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
+            {
+                AmazonOrderId = "171-2704093-8575999",
+                PackageDimensions = new AmazonSpApiSDK.Models.EasyShip20220323.Dimensions
+                {
+                    Height = 20.0M,
+                    Width = 10.0M,
+                    Length = 12.0M,
+                    Unit = "Cm"
+                },
+                PackageWeight = new AmazonSpApiSDK.Models.EasyShip20220323.Weight
+                {
+                    Unit = "G",
+                    Value = 100.0M
+                }
+            });
+
+
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
             //feedsSample.SubmitFeedOrderAcknowledgement();
 
@@ -44,6 +69,7 @@ namespace FikaAmazonAPI.SampleCode
                 ItemCondition = ItemCondition.New,
             });
 
+            var Headers = amazonConnection.ProductPricing.LastResponseHeader;
 
             //use this method automatically know if the report are RDT or not
             var data2222 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING, DateTime.UtcNow.AddDays(-2), DateTime.UtcNow, null);

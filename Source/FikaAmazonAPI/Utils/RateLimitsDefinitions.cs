@@ -80,6 +80,12 @@ namespace FikaAmazonAPI.Utils
 
             { RateLimitType.FBAInboundEligibility_GetItemEligibilityPreview,                new RateLimits(1.0M, 1) },
 
+
+            { RateLimitType.EasyShip_CreateScheduledPackage,                new RateLimits(1.0M, 5) },
+            { RateLimitType.EasyShip_GetScheduledPackage,                   new RateLimits(1.0M, 5) },
+            { RateLimitType.EasyShip_ListHandoverSlots,                     new RateLimits(1.0M, 5) },
+            { RateLimitType.EasyShip_UpdateScheduledPackages,               new RateLimits(1.0M, 5) },
+
             { RateLimitType.FulFillmentInbound_GetInboundGuidance,          new RateLimits(2.0M, 30) },
             { RateLimitType.FulFillmentInbound_CreateInboundShipmentPlan,   new RateLimits(2.0M, 30) },
             { RateLimitType.FulFillmentInbound_UpdateInboundShipment,       new RateLimits(2.0M, 30) },

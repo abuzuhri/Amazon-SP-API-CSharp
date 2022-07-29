@@ -151,6 +151,13 @@
 
         Sales_GetOrderMetrics,
 
+
+        EasyShip_ListHandoverSlots,
+        EasyShip_GetScheduledPackage,
+        EasyShip_CreateScheduledPackage,
+        EasyShip_UpdateScheduledPackages,
+
+
         Sellers_GetMarketplaceParticipations,
 
         Solicitations_GetSolicitationActionsForOrder,

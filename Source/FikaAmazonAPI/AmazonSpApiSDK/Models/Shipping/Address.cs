@@ -44,7 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="Email">The email address of the contact associated with the address..</param>
         /// <param name="CopyEmails">The email cc addresses of the contact associated with the address..</param>
         /// <param name="PhoneNumber">The phone number of the person, business or institution located at that address..</param>
-        public Address(string Name = default(string), string AddressLine1 = default(string), string AddressLine2 = default(string), string AddressLine3 = default(string), StateOrRegion StateOrRegion = default(StateOrRegion), City City = default(City), CountryCode CountryCode = default(CountryCode), PostalCode PostalCode = default(PostalCode), string Email = default(string), List<string> CopyEmails = default(List<string>), string PhoneNumber = default(string))
+        public Address(string Name = default(string), string AddressLine1 = default(string), string AddressLine2 = default(string), string AddressLine3 = default(string), string StateOrRegion = default(string), string City = default(string), string CountryCode = default(string), string PostalCode = default(string), string Email = default(string), List<string> CopyEmails = default(List<string>), string PhoneNumber = default(string))
         {
             // to ensure "Name" is required (not null)
             if (Name == null)
@@ -139,25 +139,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Gets or Sets StateOrRegion
         /// </summary>
         [DataMember(Name = "stateOrRegion", EmitDefaultValue = false)]
-        public StateOrRegion StateOrRegion { get; set; }
+        public string StateOrRegion { get; set; }
 
         /// <summary>
         /// Gets or Sets City
         /// </summary>
         [DataMember(Name = "city", EmitDefaultValue = false)]
-        public City City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
         [DataMember(Name = "countryCode", EmitDefaultValue = false)]
-        public CountryCode CountryCode { get; set; }
+        public string CountryCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
         [DataMember(Name = "postalCode", EmitDefaultValue = false)]
-        public PostalCode PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         /// <summary>
         /// The email address of the contact associated with the address.
