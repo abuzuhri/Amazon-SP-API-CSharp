@@ -142,8 +142,8 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FirstDayOfWeek
         {
-            Monday,
-            Sunday
+            monday,
+            sunday
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -170,7 +170,7 @@ namespace FikaAmazonAPI.Utils
             PRODUCT_TYPE_DEFINITIONS_CHANGE,
             ORDER_STATUS_CHANGE,
             PRICING_HEALTH
-            
+
         }
 
         /// <summary>
