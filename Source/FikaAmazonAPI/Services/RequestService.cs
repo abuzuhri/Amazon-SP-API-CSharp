@@ -115,7 +115,7 @@ namespace FikaAmazonAPI.Services
             }
             return response.Data;
         }
-        private void SaveLastRequestHeader(IList<RestSharp.Parameter> parameters)
+        private void SaveLastRequestHeader(IReadOnlyCollection<RestSharp.HeaderParameter> parameters)
         {
             LastHeaders = new List<KeyValuePair<string, string>>();
             foreach (RestSharp.Parameter parameter in parameters)

@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrEmpty(listHandoverSlotsRequest.MarketplaceId))
                 listHandoverSlotsRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
 
-            await CreateAuthorizedRequestAsync(EasyShip20220323.ListHandoverSlots, RestSharp.Method.POST, postJsonObj: listHandoverSlotsRequest);
+            await CreateAuthorizedRequestAsync(EasyShip20220323.ListHandoverSlots, RestSharp.Method.Post, postJsonObj: listHandoverSlotsRequest);
             var response = await ExecuteRequestAsync<ListHandoverSlotsResponse>(RateLimitType.EasyShip_ListHandoverSlots);
             return response;
         }
@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.Services
                 parameterGetScheduledPackage.marketplaceId = AmazonCredential.MarketPlace.ID;
 
             var parameter = parameterGetScheduledPackage.getParameters();
-            await CreateAuthorizedRequestAsync(EasyShip20220323.GetScheduledPackage, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(EasyShip20220323.GetScheduledPackage, RestSharp.Method.Get, parameter);
             var response = await ExecuteRequestAsync<Package>(RateLimitType.EasyShip_GetScheduledPackage);
             return response;
         }
@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrEmpty(createScheduledPackageRequest.MarketplaceId))
                 createScheduledPackageRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
 
-            await CreateAuthorizedRequestAsync(EasyShip20220323.ListHandoverSlots, RestSharp.Method.POST, postJsonObj: createScheduledPackageRequest);
+            await CreateAuthorizedRequestAsync(EasyShip20220323.ListHandoverSlots, RestSharp.Method.Post, postJsonObj: createScheduledPackageRequest);
             var response = await ExecuteRequestAsync<Package>(RateLimitType.EasyShip_CreateScheduledPackage);
             return response;
         }
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrEmpty(updateScheduledPackagesRequest.MarketplaceId))
                 updateScheduledPackagesRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
 
-            await CreateAuthorizedRequestAsync(EasyShip20220323.UpdateScheduledPackages, RestSharp.Method.PATCH, postJsonObj: updateScheduledPackagesRequest);
+            await CreateAuthorizedRequestAsync(EasyShip20220323.UpdateScheduledPackages, RestSharp.Method.Patch, postJsonObj: updateScheduledPackagesRequest);
             var response = await ExecuteRequestAsync<Packages>(RateLimitType.EasyShip_UpdateScheduledPackages);
             return response;
         }
