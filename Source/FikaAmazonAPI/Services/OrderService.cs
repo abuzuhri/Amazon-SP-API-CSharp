@@ -33,19 +33,27 @@ namespace FikaAmazonAPI.Services
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
             int PageCount = 1;
-            while (!string.IsNullOrEmpty(nextToken))
+            if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
             {
-                var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
-                orderList.AddRange(orderPayload.Orders);
-                nextToken = orderPayload.NextToken;
-
-                if (searchOrderList.MaxNumberOfPages.HasValue)
+                orderList.NextToken = nextToken;
+            }
+            else
+            {
+                while (!string.IsNullOrEmpty(nextToken))
                 {
-                    PageCount++;
-                    if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
-                        break;
+                    var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
+                    orderList.AddRange(orderPayload.Orders);
+                    nextToken = orderPayload.NextToken;
+
+                    if (searchOrderList.MaxNumberOfPages.HasValue)
+                    {
+                        PageCount++;
+                        if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
+                            break;
+                    }
                 }
             }
+
             return orderList;
         }
 
