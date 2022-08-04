@@ -10,8 +10,11 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
         public string MarketplaceId { get; set; }
         public IList<string> Asins { get; set; }
         public IList<string> Skus { get; set; }
-        public ItemType ItemType { get {
-                if (Asins != null && Asins.Count>0 && Skus != null && Skus.Count>0)
+        public ItemType ItemType
+        {
+            get
+            {
+                if (Asins != null && Asins.Count > 0 && Skus != null && Skus.Count > 0)
                     throw new ArgumentException("Only allowed to fill Asins or Skus you cant have both");
                 if (Asins != null && Asins.Count > 0)
                     return ItemType.Asin;
@@ -19,7 +22,8 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
                     return ItemType.Sku;
 
                 throw new ArgumentException("You cant request without fill Skus or Asins , you need to fill only of them only");
-            }  }
+            }
+        }
         public ItemCondition? ItemCondition { get; set; }
         public OfferTypeEnum? OfferType { get; set; } = OfferTypeEnum.B2C;
     }

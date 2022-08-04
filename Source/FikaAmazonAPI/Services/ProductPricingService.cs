@@ -20,6 +20,11 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetPricingAsync(parameterGetPricing)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<Price>> GetPricingAsync(ParameterGetPricing parameterGetPricing)
         {
+            if (string.IsNullOrEmpty(parameterGetPricing.MarketplaceId))
+            {
+                parameterGetPricing.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+
             var param = parameterGetPricing.getParameters();
 
             await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetPricing, RestSharp.Method.GET, param);
