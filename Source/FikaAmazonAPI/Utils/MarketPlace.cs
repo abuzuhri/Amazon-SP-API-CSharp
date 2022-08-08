@@ -62,6 +62,7 @@ namespace FikaAmazonAPI.Utils
         public static MarketPlace Spain { get { return new MarketPlace("A1RKKUPIHCS9HS", Region.Europe, Country.ES); } }
         public static MarketPlace UnitedKingdom { get { return new MarketPlace("A1F83G8C2ARO7P", Region.Europe, Country.GB); } }
         public static MarketPlace France { get { return new MarketPlace("A13V1IB3VIYZZH", Region.Europe, Country.FR); } }
+        public static MarketPlace Belgium { get { return new MarketPlace("AMEN7PMS3EDWL", Region.Europe, Country.BE); } }
         public static MarketPlace Netherlands { get { return new MarketPlace("A1805IZSGTT6HS", Region.Europe, Country.NL); } }
         public static MarketPlace Germany { get { return new MarketPlace("A1PA6795UKMFR9", Region.Europe, Country.DE); } }
         public static MarketPlace Italy { get { return new MarketPlace("APJ6JRA9NG5V4", Region.Europe, Country.IT); } }
