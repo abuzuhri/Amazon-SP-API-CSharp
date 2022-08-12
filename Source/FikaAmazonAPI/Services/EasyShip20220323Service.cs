@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrEmpty(createScheduledPackageRequest.MarketplaceId))
                 createScheduledPackageRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
 
-            await CreateAuthorizedRequestAsync(EasyShip20220323.ListHandoverSlots, RestSharp.Method.POST, postJsonObj: createScheduledPackageRequest);
+            await CreateAuthorizedRequestAsync(EasyShip20220323.CreateScheduledPackage, RestSharp.Method.POST, postJsonObj: createScheduledPackageRequest);
             var response = await ExecuteRequestAsync<Package>(RateLimitType.EasyShip_CreateScheduledPackage);
             return response;
         }
