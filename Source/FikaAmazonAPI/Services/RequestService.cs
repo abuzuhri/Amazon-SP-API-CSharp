@@ -129,14 +129,17 @@ namespace FikaAmazonAPI.Services
         }
         private void RestHeader()
         {
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == AccessTokenHeaderName);
-            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == SecurityTokenHeaderName);
+            lock (Request)
+            {
+                Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                                          && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
+                Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                              && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
+                Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                              && parameter.Name == AccessTokenHeaderName);
+                Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                              && parameter.Name == SecurityTokenHeaderName);
+            }
         }
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -272,7 +275,10 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddAccessToken()
         {
-            Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
+            lock (Request)
+            {
+                Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
+            }
         }
 
         protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
