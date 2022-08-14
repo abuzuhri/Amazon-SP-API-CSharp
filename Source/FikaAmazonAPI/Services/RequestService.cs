@@ -23,6 +23,7 @@ namespace FikaAmazonAPI.Services
         public static readonly string AccessTokenHeaderName = "x-amz-access-token";
         public static readonly string SecurityTokenHeaderName = "x-amz-security-token";
         private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
+        public static readonly string ShippingBusinessIdHeaderName = "x-amzn-shipping-business-id";
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
@@ -103,6 +104,7 @@ namespace FikaAmazonAPI.Services
         {
             RestHeader();
             AddAccessToken();
+            AddShippingBusinessId();
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SaveLastRequestHeader(response.Headers);
@@ -137,6 +139,8 @@ namespace FikaAmazonAPI.Services
                                                           && parameter.Name == AccessTokenHeaderName);
             Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
                                                           && parameter.Name == SecurityTokenHeaderName);
+            Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == ShippingBusinessIdHeaderName);            
         }
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -273,6 +277,12 @@ namespace FikaAmazonAPI.Services
         protected void AddAccessToken()
         {
             Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
+        }
+
+        protected void AddShippingBusinessId()
+        {
+            if (!string.IsNullOrWhiteSpace(AmazonCredential.ShippingBusinessId))
+                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusinessId);
         }
 
         protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)

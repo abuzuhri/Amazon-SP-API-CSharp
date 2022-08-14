@@ -60,6 +60,14 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Shipping_GetAccount,                        new RateLimits(5.0M, 15) },
               { RateLimitType.Shipping_GetTrackingInformation,            new RateLimits(1.0M, 1) },
 
+              { RateLimitType.ShippingV2_CancelShipment,                    new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_DirectPurchaseShipment,            new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_GetAdditionalInputs,               new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_GetRates,                          new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_GetShipmentDocument,               new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_GetTracking,                       new RateLimits(80.0M, 100) },
+              { RateLimitType.ShippingV2_PurchaseShipment,                  new RateLimits(80.0M, 100) },
+
               { RateLimitType.CatalogItems_ListCatalogItems,              new RateLimits(6.0M, 40) },
               { RateLimitType.CatalogItems_GetCatalogItem,                new RateLimits(2.0M, 20) },
               { RateLimitType.CatalogItems_ListCatalogCategories,         new RateLimits(1.0M, 40) },

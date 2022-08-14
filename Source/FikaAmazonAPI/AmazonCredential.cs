@@ -19,7 +19,7 @@ namespace FikaAmazonAPI
         public bool IsActiveLimitRate { get; set; } = true;
         public Environments Environment { get; set; } = Environments.Production;
         public int MaxThrottledRetryCount { get; set; } = 3;
-
+        public string ShippingBusinessId { get; set; }
 
         public AmazonCredential()
         {
