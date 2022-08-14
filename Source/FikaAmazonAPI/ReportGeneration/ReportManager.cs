@@ -198,6 +198,27 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
+        #region Categries
+
+        public List<CategoiesRow> GetCategries()
+        {
+            return Task.Run(() => GetCategriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<CategoiesRow>> GetCategriesAsync()
+        {
+            var path = await GetCategriesAsync(_amazonConnection);
+            CategoiesReport report = new CategoiesReport(path, _amazonConnection.RefNumber);
+            return report.Data.Node;
+        }
+
+        private async Task<string> GetCategriesAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA);
+        }
+
+        #endregion
+
         #region Orders
         public List<OrdersRow> GetOrdersByLastUpdate(int days) =>
             Task.Run(() => GetOrdersByLastUpdateAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -250,7 +271,7 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
-        
+
         public List<OrderInvoicingReportRow> GetOrderInvoicingData(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null) =>
             Task.Run(() => GetOrderInvoicingDataAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrderInvoicingReportRow>> GetOrderInvoicingDataAsync(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
@@ -273,11 +294,5 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
         }
         #endregion
-
-
-
-
     }
-
-
 }
