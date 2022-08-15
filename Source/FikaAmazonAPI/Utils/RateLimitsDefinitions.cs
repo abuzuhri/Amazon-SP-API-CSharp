@@ -159,6 +159,9 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.ProductPricing_GetListingOffers,                new RateLimits(5.0M, 10) },
               { RateLimitType.ProductPricing_GetItemOffers,                   new RateLimits(5.0M, 10) },
 
+              { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.5M, 1) },
+              { RateLimitType.ProductPricing_GetListingOffersBatch,                   new RateLimits(0.5M, 1) },
+
               { RateLimitType.Sales_GetOrderMetrics,                          new RateLimits(0.5M, 15) },
 
               { RateLimitType.Sellers_GetMarketplaceParticipations,           new RateLimits(0.016M, 15) },
