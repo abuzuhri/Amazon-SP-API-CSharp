@@ -37,6 +37,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         _2DBARCODE,
 
         /// <summary>
+        /// Enum 2D_BARCODE for value: 2D_BARCODE
+        /// </summary>
+
+        2D_BARCODE,
+
+        /// <summary>
         /// Enum INTERACTIVE for value: INTERACTIVE
         /// </summary>
 
