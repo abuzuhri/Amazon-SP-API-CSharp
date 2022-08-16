@@ -70,7 +70,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum INTRANSIT for value: IN_TRANSIT
         /// </summary>
         [EnumMember(Value = "IN_TRANSIT")]
-        INTRANSIT = 8,
+        IN_TRANSIT = 8,
 
         /// <summary>
         /// Enum DELIVERED for value: DELIVERED

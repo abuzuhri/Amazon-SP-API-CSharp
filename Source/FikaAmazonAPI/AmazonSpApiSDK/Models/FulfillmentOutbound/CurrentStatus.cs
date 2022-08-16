@@ -25,6 +25,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         INTRANSIT,
 
         /// <summary>
+        /// Enum INTRANSIT for value: IN_TRANSIT
+        /// </summary>
+
+        IN_TRANSIT,
+
+        /// <summary>
         /// Enum DELIVERED for value: DELIVERED
         /// </summary>
 
