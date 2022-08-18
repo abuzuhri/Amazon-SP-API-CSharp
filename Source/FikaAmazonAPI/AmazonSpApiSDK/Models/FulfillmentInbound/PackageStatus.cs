@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
 
         [EnumMember(Value = "IN_TRANSIT")]
-        INTRANSIT,
+        IN_TRANSIT,
 
         /// <summary>
         /// Enum DELIVERED for value: DELIVERED
@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum CHECKEDIN for value: CHECKED_IN
         /// </summary>
         [EnumMember(Value = "CHECKED_IN")]
-        CHECKEDIN,
+        CHECKED_IN,
 
         /// <summary>
         /// Enum RECEIVING for value: RECEIVING
