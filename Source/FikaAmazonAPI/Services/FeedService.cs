@@ -182,6 +182,10 @@ namespace FikaAmazonAPI.Services
             {
                 _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
             }
+            else if (contentType == ContentType.JSON)
+            {
+                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
+            }
             else if (contentType == ContentType.TXT)
             {
                 _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
