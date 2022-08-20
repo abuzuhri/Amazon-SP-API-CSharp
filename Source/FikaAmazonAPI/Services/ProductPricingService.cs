@@ -102,7 +102,7 @@ namespace FikaAmazonAPI.Services
              */
 
             await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchItemOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
-            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffersBatch);
         }
 
 
@@ -125,7 +125,7 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
              */
 
             await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchListingOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
-            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetListingOffersBatch);
         }
 
     }

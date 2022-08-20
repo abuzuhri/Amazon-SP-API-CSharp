@@ -148,6 +148,8 @@
         ProductPricing_GetCompetitivePricing,
         ProductPricing_GetListingOffers,
         ProductPricing_GetItemOffers,
+        ProductPricing_GetItemOffersBatch,
+        ProductPricing_GetListingOffersBatch,
 
         Sales_GetOrderMetrics,
 
