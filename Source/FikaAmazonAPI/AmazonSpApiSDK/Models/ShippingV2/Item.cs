@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>The number of units. This value is required.</value>
     [DataMember(Name="quantity", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "quantity")]
-    public int? Quantity { get; set; }
+    public int Quantity { get; set; }
 
     /// <summary>
     /// Gets or Sets Weight
@@ -50,13 +50,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     [JsonProperty(PropertyName = "weight")]
     public Weight Weight { get; set; }
 
-    /// <summary>
-    /// When true, the item qualifies as hazardous materials (hazmat). Defaults to false.
-    /// </summary>
-    /// <value>When true, the item qualifies as hazardous materials (hazmat). Defaults to false.</value>
-    [DataMember(Name="isHazmat", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "isHazmat")]
-    public bool? IsHazmat { get; set; }
+        /// <summary>
+        /// When true, the item qualifies as hazardous materials (hazmat). Defaults to false.
+        /// </summary>
+        /// <value>When true, the item qualifies as hazardous materials (hazmat). Defaults to false.</value>
+        [DataMember(Name = "isHazmat", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "isHazmat")]
+        public bool IsHazmat { get; set; } = false;
 
     /// <summary>
     /// The product type of the item.

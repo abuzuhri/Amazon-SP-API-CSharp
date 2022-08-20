@@ -17,21 +17,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="stateOrRegion", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "stateOrRegion")]
-    public StateOrRegion StateOrRegion { get; set; }
+    public string StateOrRegion { get; set; }
 
     /// <summary>
     /// Gets or Sets City
     /// </summary>
     [DataMember(Name="city", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "city")]
-    public City City { get; set; }
+    public string City { get; set; }
 
     /// <summary>
     /// Gets or Sets CountryCode
     /// </summary>
     [DataMember(Name="countryCode", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "countryCode")]
-    public CountryCode CountryCode { get; set; }
+    public string CountryCode { get; set; }
 
     /// <summary>
     /// Gets or Sets PostalCode

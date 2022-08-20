@@ -281,8 +281,8 @@ namespace FikaAmazonAPI.Services
 
         protected void AddShippingBusinessId()
         {
-            if (!string.IsNullOrWhiteSpace(AmazonCredential.ShippingBusinessId))
-                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusinessId);
+            if (AmazonCredential.ShippingBusiness.HasValue)
+                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusiness.Value.GetEnumMemberValue());
         }
 
         protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)

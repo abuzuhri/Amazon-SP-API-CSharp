@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="packageClientReferenceId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "packageClientReferenceId")]
-    public PackageClientReferenceId PackageClientReferenceId { get; set; }
+    public string PackageClientReferenceId { get; set; }
 
     /// <summary>
     /// Gets or Sets PackageDocuments

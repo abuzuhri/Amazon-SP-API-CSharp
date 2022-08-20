@@ -17,28 +17,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="serviceId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "serviceId")]
-    public ServiceId ServiceId { get; set; }
+    public string ServiceId { get; set; }
 
     /// <summary>
     /// Gets or Sets ServiceName
     /// </summary>
     [DataMember(Name="serviceName", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "serviceName")]
-    public ServiceName ServiceName { get; set; }
+    public string ServiceName { get; set; }
 
     /// <summary>
     /// Gets or Sets CarrierName
     /// </summary>
     [DataMember(Name="carrierName", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "carrierName")]
-    public CarrierName CarrierName { get; set; }
+    public string CarrierName { get; set; }
 
     /// <summary>
     /// Gets or Sets CarrierId
     /// </summary>
     [DataMember(Name="carrierId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "carrierId")]
-    public CarrierId CarrierId { get; set; }
+    public string CarrierId { get; set; }
 
     /// <summary>
     /// A list of reasons why a shipping service offering is ineligible.

@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="rateId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "rateId")]
-    public RateId RateId { get; set; }
+    public string RateId { get; set; }
 
     /// <summary>
     /// Gets or Sets RequestedDocumentSpecification
