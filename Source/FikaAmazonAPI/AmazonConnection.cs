@@ -34,6 +34,7 @@ namespace FikaAmazonAPI
         public ServicesService Services => this._Services ?? throw _NoCredentials;
         public ShipmentInvoicingService ShipmentInvoicing => this._ShipmentInvoicing ?? throw _NoCredentials;
         public ShippingService Shipping => this._Shipping ?? throw _NoCredentials;
+        public ShippingServiceV2 ShippingV2 => this._ShippingV2 ?? throw _NoCredentials;
         public UploadService Upload => this._Upload ?? throw _NoCredentials;
         public TokenService Tokens => this._Tokens ?? throw _NoCredentials;
         public FulFillmentInboundService FulFillmentInbound => this._FulFillmentInbound ?? throw _NoCredentials;
@@ -69,6 +70,7 @@ namespace FikaAmazonAPI
         private ServicesService _Services { get; set; }
         private ShipmentInvoicingService _ShipmentInvoicing { get; set; }
         private ShippingService _Shipping { get; set; }
+        private ShippingServiceV2 _ShippingV2 { get; set; }
         private UploadService _Upload { get; set; }
 
         private TokenService _Tokens { get; set; }
@@ -125,6 +127,7 @@ namespace FikaAmazonAPI
             this._Services = new ServicesService(this.Credentials);
             this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials);
             this._Shipping = new ShippingService(this.Credentials);
+            this._ShippingV2 = new ShippingServiceV2(this.Credentials);
             this._Upload = new UploadService(this.Credentials);
             this._Tokens = new TokenService(this.Credentials);
             this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials);

@@ -23,6 +23,7 @@ namespace FikaAmazonAPI.Services
         public static readonly string AccessTokenHeaderName = "x-amz-access-token";
         public static readonly string SecurityTokenHeaderName = "x-amz-security-token";
         private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
+        public static readonly string ShippingBusinessIdHeaderName = "x-amzn-shipping-business-id";
         protected RestClient RequestClient { get; set; }
         protected IRestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
@@ -103,6 +104,7 @@ namespace FikaAmazonAPI.Services
         {
             RestHeader();
             AddAccessToken();
+            AddShippingBusinessId();
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
 
             RequestClient.Timeout = 60 * 1000;
@@ -142,6 +144,8 @@ namespace FikaAmazonAPI.Services
                                                               && parameter.Name == AccessTokenHeaderName);
                 Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
                                                               && parameter.Name == SecurityTokenHeaderName);
+                Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
+                                                          && parameter.Name == ShippingBusinessIdHeaderName);
             }
         }
 
@@ -282,6 +286,12 @@ namespace FikaAmazonAPI.Services
             {
                 Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
             }
+        }
+
+        protected void AddShippingBusinessId()
+        {
+            if (AmazonCredential.ShippingBusiness.HasValue)
+                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusiness.Value.GetEnumMemberValue());
         }
 
         protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
