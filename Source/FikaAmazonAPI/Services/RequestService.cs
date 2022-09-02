@@ -104,6 +104,9 @@ namespace FikaAmazonAPI.Services
             RestHeader();
             AddAccessToken();
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.BaseUrl.Host, AmazonCredential);
+
+            RequestClient.Timeout = 60 * 1000;
+            RequestClient.ThrowOnAnyError = true;
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SaveLastRequestHeader(response.Headers);
             SleepForRateLimit(response.Headers, rateLimitType);
