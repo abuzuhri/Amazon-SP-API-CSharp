@@ -55,6 +55,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string OptionalPaymentTypeExclusion { get; set; }
         public string Status { get; set; }
         public string refNumber { get; set; }
+        public string MerchantShippingGroup { get; set; }
 
         public static ProductsRow FromRow(TableRow rowData, string refNumber)
         {
@@ -88,45 +89,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.FulfillmentChannel = rowData.GetString("fulfillment-channel");
             row.OptionalPaymentTypeExclusion = rowData.GetString("optional-payment-type-exclusion");
             row.Status = rowData.GetString("status");
-
-            return row;
-        }
-        public static ProductsRow FromCsv(string csvLine, string refNumber)
-        {
-            string[] values = csvLine.Split('\t');
-            var row = new ProductsRow();
-            row.ItemName = values[0];
-            row.ItemDescription = values[1];
-            row.ListingId = values[2];
-            row.SellerSku = values[3];
-            row.Price = DataConverter.GetDecimal(values[4]);
-            row.Quantity = DataConverter.GetInt(values[5]);
-            row.OpenDate = values[6];
-            row.ImageUrl = values[7];
-            row.ItemIsMarketplace = values[8] == "y";
-            row.ProductIdType = DataConverter.GetInt(values[9]);
-            row.ZshopShippingFee = values[10];
-            row.ItemNote = values[11];
-            row.ItemCondition = DataConverter.GetInt(values[12]);
-            row.ZshopCategory1 = values[13];
-            row.ZshopBrowsePath = values[14];
-            row.ZshopStorefrontFeature = values[15];
-            row.ASIN1 = values[16];
-            row.ASIN2 = values[17];
-            row.ASIN3 = values[18];
-            row.WillShipInternationally = values[19];
-            row.ExpeditedShipping = values[20];
-            row.ZshopBoldface = values[21];
-            row.ProductId = values[22];
-            row.BidForFeaturedPlacement = values[23];
-            row.AddDelete = values[24];
-            row.PendingQuantity = DataConverter.GetInt(values[25]);
-            row.FulfillmentChannel = values[26];
-            row.OptionalPaymentTypeExclusion = values[27];
-            row.Status = values[28];
-
-            row.refNumber = refNumber;
-
+            row.MerchantShippingGroup = rowData.GetString("merchant-shipping-group");
 
             return row;
         }
