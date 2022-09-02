@@ -1,36 +1,25 @@
-using System;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
-
-  /// <summary>
-  /// Reasons that make a shipment service offering ineligible.
-  /// </summary>
-  [DataContract]
-  public class IneligibilityReasonCode {
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
+{
 
     /// <summary>
-    /// Get the string presentation of the object
-    /// </summary>
-    /// <returns>String presentation of the object</returns>
-    public override string ToString()  {
-      var sb = new StringBuilder();
-      sb.Append("class IneligibilityReasonCode {\n");
-      sb.Append("}\n");
-      return sb.ToString();
-    }
+    /// Reasons that make a shipment service offering ineligible.
 
-    /// <summary>
-    /// Get the JSON string presentation of the object
     /// </summary>
-    /// <returns>JSON string presentation of the object</returns>
-    public string ToJson() {
-      return JsonConvert.SerializeObject(this, Formatting.Indented);
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum IneligibilityReasonCode
+    {
+        NO_COVERAGE,
+        PICKUP_SLOT_RESTRICTION,
+        UNSUPPORTED_VAS,
+        VAS_COMBINATION_RESTRICTION,
+        SIZE_RESTRICTIONS,
+        WEIGHT_RESTRICTIONS,
+        LATE_DELIVERY,
+        PROGRAM_CONSTRAINTS,
+        TERMS_AND_CONDITIONS_NOT_ACCEPTED,
+        UNKNOWN
     }
-
-}
 }
