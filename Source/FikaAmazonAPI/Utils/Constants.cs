@@ -586,6 +586,7 @@ namespace FikaAmazonAPI.Utils
             Store,
             StoreStockMovement,
             WebstoreItem,
+            CartonContentsRequest
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

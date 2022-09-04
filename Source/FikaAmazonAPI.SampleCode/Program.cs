@@ -39,6 +39,40 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
+            ConstructFeedService createDocument2 = new ConstructFeedService("{SellerID}", "1.02");
+
+            var list22 = new List<CartonContentsRequest>();
+            list22.Add(new CartonContentsRequest()
+            {
+                ShipmentId = "FBA123456",
+                Carton = new List<Carton> {
+                    new Carton() {
+                    CartonId="1",
+                    Item=new List<CartonItem>(){
+                        new CartonItem() {
+                            QuantityInCase=1,
+                        QuantityShipped=1,
+                        SKU="7004"
+                        }
+                    }
+                    },
+                    new Carton() {
+                    CartonId="2",
+                    Item=new List<CartonItem>(){
+                        new CartonItem() {
+                            QuantityInCase=12,
+                        QuantityShipped=12,
+                        SKU="4051"
+                        }
+                    }
+                    }
+                }
+            });
+
+            createDocument2.AddCartonContentsRequest(list22);
+
+            var xml222 = createDocument2.GetXML();
+
             var data22 = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
                 new Parameter.CatalogItems.ParameterSearchCatalogItems202204
                 {

@@ -90,6 +90,21 @@ namespace FikaAmazonAPI.ConstructFeed
             envelope.MessageType = Utils.Constants.FeedMessageType.Product;
         }
 
+        public void AddCartonContentsRequest(IList<CartonContentsRequest> shipments)
+        {
+            var msgs = new List<BaseMessage>();
+            int index = 1;
+            foreach (var itm in shipments)
+            {
+                msgs.Add(new BaseMessage()
+                {
+                    MessageID = index++,
+                    CartonContentsRequest = itm
+                });
+            }
+            envelope.Message = msgs;
+            envelope.MessageType = Utils.Constants.FeedMessageType.CartonContentsRequest;
+        }
         public void AddOrderFulfillmentMessage(IList<OrderFulfillmentMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
         {
             var msgs = new List<BaseMessage>();
