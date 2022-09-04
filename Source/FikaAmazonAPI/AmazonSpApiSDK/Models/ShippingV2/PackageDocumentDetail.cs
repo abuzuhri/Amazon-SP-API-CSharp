@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="trackingId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "trackingId")]
-    public TrackingId TrackingId { get; set; }
+    public string TrackingId { get; set; }
 
 
     /// <summary>

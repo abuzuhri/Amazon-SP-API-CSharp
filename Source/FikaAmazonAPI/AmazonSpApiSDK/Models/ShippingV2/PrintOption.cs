@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>A list of the supported DPI options for a document.</value>
     [DataMember(Name="supportedDPIs", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "supportedDPIs")]
-    public List<Dpi> SupportedDPIs { get; set; }
+    public List<long> SupportedDPIs { get; set; }
 
     /// <summary>
     /// A list of the supported page layout options for a document.
@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>A list of the supported page layout options for a document.</value>
     [DataMember(Name="supportedPageLayouts", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "supportedPageLayouts")]
-    public List<PageLayout> SupportedPageLayouts { get; set; }
+    public List<string> SupportedPageLayouts { get; set; }
 
     /// <summary>
     /// A list of the supported needFileJoining boolean values for a document.
@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>A list of the supported needFileJoining boolean values for a document.</value>
     [DataMember(Name="supportedFileJoiningOptions", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "supportedFileJoiningOptions")]
-    public List<NeedFileJoining> SupportedFileJoiningOptions { get; set; }
+    public List<bool> SupportedFileJoiningOptions { get; set; }
 
     /// <summary>
     /// A list of the supported documented details.

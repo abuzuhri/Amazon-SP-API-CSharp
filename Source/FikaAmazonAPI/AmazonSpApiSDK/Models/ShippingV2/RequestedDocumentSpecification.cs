@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="format", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "format")]
-    public DocumentFormat Format { get; set; }
+    public string Format { get; set; }
 
     /// <summary>
     /// Gets or Sets Size
@@ -31,21 +31,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="dpi", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "dpi")]
-    public Dpi Dpi { get; set; }
+    public long Dpi { get; set; }
 
     /// <summary>
     /// Gets or Sets PageLayout
     /// </summary>
     [DataMember(Name="pageLayout", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "pageLayout")]
-    public PageLayout PageLayout { get; set; }
+    public string PageLayout { get; set; }
 
     /// <summary>
     /// Gets or Sets NeedFileJoining
     /// </summary>
     [DataMember(Name="needFileJoining", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "needFileJoining")]
-    public NeedFileJoining NeedFileJoining { get; set; }
+    public bool NeedFileJoining { get; set; }
 
     /// <summary>
     /// A list of the document types requested.
@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>A list of the document types requested.</value>
     [DataMember(Name="requestedDocumentTypes", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "requestedDocumentTypes")]
-    public List<DocumentType> RequestedDocumentTypes { get; set; }
+    public List<string> RequestedDocumentTypes { get; set; }
 
 
     /// <summary>

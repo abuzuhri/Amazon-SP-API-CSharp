@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="name", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "name")]
-    public DocumentType Name { get; set; }
+    public string Name { get; set; }
 
     /// <summary>
     /// When true, the supported document type is required.

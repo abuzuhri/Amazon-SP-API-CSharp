@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>The ship date and time (the requested pickup). This defaults to the current date and time.</value>
     [DataMember(Name="shipDate", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "shipDate")]
-    public DateTime? ShipDate { get; set; }
+    public string ShipDate { get; set; }
 
     /// <summary>
     /// Gets or Sets Packages

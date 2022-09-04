@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="format", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "format")]
-    public DocumentFormat Format { get; set; }
+    public string Format { get; set; }
 
     /// <summary>
     /// Gets or Sets Size

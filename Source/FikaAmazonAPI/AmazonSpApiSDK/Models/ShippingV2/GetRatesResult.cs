@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="requestToken", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "requestToken")]
-    public RequestToken RequestToken { get; set; }
+    public string RequestToken { get; set; }
 
     /// <summary>
     /// Gets or Sets Rates

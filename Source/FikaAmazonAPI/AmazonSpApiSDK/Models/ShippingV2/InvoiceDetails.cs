@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// <value>The invoice date of the item in ISO 8061 format.</value>
     [DataMember(Name="invoiceDate", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "invoiceDate")]
-    public DateTime? InvoiceDate { get; set; }
+    public string InvoiceDate { get; set; }
 
 
     /// <summary>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="shipmentId", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "shipmentId")]
-    public ShipmentId ShipmentId { get; set; }
+    public string ShipmentId { get; set; }
 
     /// <summary>
     /// Gets or Sets PackageDocumentDetails

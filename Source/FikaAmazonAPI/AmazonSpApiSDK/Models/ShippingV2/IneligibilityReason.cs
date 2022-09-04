@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="code", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "code")]
-    public IneligibilityReasonCode Code { get; set; }
+    public string Code { get; set; }
 
     /// <summary>
     /// The ineligibility reason.

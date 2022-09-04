@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="taxType", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "taxType")]
-    public TaxType TaxType { get; set; }
+    public string TaxType { get; set; }
 
     /// <summary>
     /// The shipper's tax registration number associated with the shipment for customs compliance purposes in certain regions.

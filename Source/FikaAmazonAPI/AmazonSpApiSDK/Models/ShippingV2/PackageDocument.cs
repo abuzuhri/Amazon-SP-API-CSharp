@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,21 +17,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     [DataMember(Name="type", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "type")]
-    public DocumentType Type { get; set; }
+    public string Type { get; set; }
 
     /// <summary>
     /// Gets or Sets Format
     /// </summary>
     [DataMember(Name="format", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "format")]
-    public DocumentFormat Format { get; set; }
+    public string Format { get; set; }
 
     /// <summary>
     /// Gets or Sets Contents
     /// </summary>
     [DataMember(Name="contents", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "contents")]
-    public Contents Contents { get; set; }
+    public string Contents { get; set; }
 
 
     /// <summary>
