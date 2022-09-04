@@ -1,7 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
 using FikaAmazonAPI.Parameter.ProductFee;
 using FikaAmazonAPI.Utils;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
@@ -47,7 +46,7 @@ namespace FikaAmazonAPI.Services
         public async Task<GetMyFeesEstimatesResponse> GetMyFeesEstimateAsync(FeesEstimateByIdRequest[] feesEstimateRequest)
         {
             await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimate, RestSharp.Method.POST, postJsonObj: feesEstimateRequest);
-            var response = await ExecuteRequestAsync<GetMyFeesEstimatesResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForASIN);
+            var response = await ExecuteRequestAsync<GetMyFeesEstimatesResponse>(RateLimitType.ProductFees_GetMyFeesEstimate);
             return response;
         }
     }

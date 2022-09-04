@@ -143,6 +143,7 @@
 
         ProductFees_GetMyFeesEstimateForSKU,
         ProductFees_GetMyFeesEstimateForASIN,
+        ProductFees_GetMyFeesEstimate,
 
         ProductPricing_GetPricing,
         ProductPricing_GetCompetitivePricing,

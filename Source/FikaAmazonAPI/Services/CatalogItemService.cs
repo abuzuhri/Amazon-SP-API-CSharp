@@ -2,6 +2,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401;
 using FikaAmazonAPI.Parameter.CatalogItems;
 using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,10 +17,11 @@ namespace FikaAmazonAPI.Services
 
         }
 
-
+        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", true)]
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
             Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204Async instead.", true)]
         public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
@@ -48,10 +50,10 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        //[Obsolete("This method is will be deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.")]
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
         public Item GetCatalogItem(string asin) =>
             Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
-
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
         public async Task<Item> GetCatalogItemAsync(string asin)
         {
 
@@ -70,24 +72,6 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        //public Item GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem)
-        //{
-
-        //    if (string.IsNullOrEmpty(parameterListCatalogItem.ASIN))
-        //        throw new InvalidDataException("asin is a required property and cannot be null");
-
-        //    if (parameterListCatalogItem == null || parameterListCatalogItem.MarketplaceIds == null || parameterListCatalogItem.MarketplaceIds.Count == 0)
-        //    {
-        //        parameterListCatalogItem.MarketplaceIds.Add(MarketPlace.ID);
-        //    }
-
-        //    var param = parameterListCatalogItem.getParameters();
-
-        //    await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202012(parameterListCatalogItem.ASIN), RestSharp.Method.GET, param);
-        //    var response = await ExecuteRequestAsync<Item>();
-
-        //    return response;
-        //}
 
         public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null) =>
                     Task.Run(() => ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID)).ConfigureAwait(false).GetAwaiter().GetResult();

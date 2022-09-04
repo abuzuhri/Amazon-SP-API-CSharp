@@ -71,8 +71,8 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.CatalogItems_ListCatalogItems,              new RateLimits(6.0M, 40) },
               { RateLimitType.CatalogItems_GetCatalogItem,                new RateLimits(2.0M, 20) },
               { RateLimitType.CatalogItems_ListCatalogCategories,         new RateLimits(1.0M, 40) },
-              { RateLimitType.CatalogItems20220401_GetCatalogItem,        new RateLimits(5.0M, 5) },
-              { RateLimitType.CatalogItems20220401_SearchCatalogItems,    new RateLimits(5.0M, 5) },
+              { RateLimitType.CatalogItems20220401_GetCatalogItem,        new RateLimits(2.0M, 2) },
+              { RateLimitType.CatalogItems20220401_SearchCatalogItems,    new RateLimits(2.0M, 2) },
 
               { RateLimitType.FbaInventory_GetInventorySummaries,         new RateLimits(2.0M, 2) },
 
@@ -159,13 +159,14 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Notifications_GetDestination,                   new RateLimits(1.0M, 5) },
               { RateLimitType.Notifications_DeleteDestination,                new RateLimits(1.0M, 5) },
 
-              { RateLimitType.ProductFees_GetMyFeesEstimateForSKU,            new RateLimits(10.0M, 20) },
-              { RateLimitType.ProductFees_GetMyFeesEstimateForASIN,           new RateLimits(10.0M, 20) },
+              { RateLimitType.ProductFees_GetMyFeesEstimateForSKU,            new RateLimits(1M, 2) },
+              { RateLimitType.ProductFees_GetMyFeesEstimateForASIN,           new RateLimits(1M, 2) },
+              { RateLimitType.ProductFees_GetMyFeesEstimate,                  new RateLimits(0.5M, 1) },
 
-              { RateLimitType.ProductPricing_GetPricing,                      new RateLimits(10.0M, 20) },
-              { RateLimitType.ProductPricing_GetCompetitivePricing,           new RateLimits(10.0M, 20) },
-              { RateLimitType.ProductPricing_GetListingOffers,                new RateLimits(5.0M, 10) },
-              { RateLimitType.ProductPricing_GetItemOffers,                   new RateLimits(5.0M, 10) },
+              { RateLimitType.ProductPricing_GetPricing,                      new RateLimits(0.5M, 1) },
+              { RateLimitType.ProductPricing_GetCompetitivePricing,           new RateLimits(0.5M, 1) },
+              { RateLimitType.ProductPricing_GetListingOffers,                new RateLimits(1M, 2) },
+              { RateLimitType.ProductPricing_GetItemOffers,                   new RateLimits(0.5M, 1) },
 
               { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.5M, 1) },
               { RateLimitType.ProductPricing_GetListingOffersBatch,                   new RateLimits(0.5M, 1) },
