@@ -28,18 +28,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The shipping method for the fulfillment order.
         /// </summary>
         /// <value>The shipping method for the fulfillment order.</value>
-        [DataMember(Name = "ShippingSpeedCategory", EmitDefaultValue = false)]
-        public ShippingSpeedCategory ShippingSpeedCategory { get; set; }
+        [DataMember(Name = "shippingSpeedCategory", EmitDefaultValue = false)]
+        public ShippingSpeedCategory shippingSpeedCategory { get; set; }
         /// <summary>
         /// Gets or Sets FulfillmentAction
         /// </summary>
-        [DataMember(Name = "FulfillmentAction", EmitDefaultValue = false)]
-        public FulfillmentAction? FulfillmentAction { get; set; }
+        [DataMember(Name = "fulfillmentAction", EmitDefaultValue = false)]
+        public FulfillmentAction? fulfillmentAction { get; set; }
         /// <summary>
         /// Gets or Sets FulfillmentPolicy
         /// </summary>
-        [DataMember(Name = "FulfillmentPolicy", EmitDefaultValue = false)]
-        public FulfillmentPolicy? FulfillmentPolicy { get; set; }
+        [DataMember(Name = "fulfillmentPolicy", EmitDefaultValue = false)]
+        public FulfillmentPolicy? fulfillmentPolicy { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateFulfillmentOrderRequest" /> class.
         /// </summary>
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.SellerFulfillmentOrderId = SellerFulfillmentOrderId;
+                this.sellerFulfillmentOrderId = SellerFulfillmentOrderId;
             }
             // to ensure "DisplayableOrderId" is required (not null)
             if (DisplayableOrderId == null)
@@ -81,7 +81,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.DisplayableOrderId = DisplayableOrderId;
+                this.displayableOrderId = DisplayableOrderId;
             }
             // to ensure "DisplayableOrderDate" is required (not null)
             if (DisplayableOrderDate == null)
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.DisplayableOrderDate = DisplayableOrderDate;
+                this.displayableOrderDate = DisplayableOrderDate;
             }
             // to ensure "DisplayableOrderComment" is required (not null)
             if (DisplayableOrderComment == null)
@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.DisplayableOrderComment = DisplayableOrderComment;
+                this.displayableOrderComment = DisplayableOrderComment;
             }
             // to ensure "ShippingSpeedCategory" is required (not null)
             if (ShippingSpeedCategory == null)
@@ -108,7 +108,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.ShippingSpeedCategory = ShippingSpeedCategory;
+                this.shippingSpeedCategory = ShippingSpeedCategory;
             }
             // to ensure "DestinationAddress" is required (not null)
             if (DestinationAddress == null)
@@ -117,7 +117,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.DestinationAddress = DestinationAddress;
+                this.destinationAddress = DestinationAddress;
             }
             // to ensure "Items" is required (not null)
             if (Items == null)
@@ -126,66 +126,66 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.Items = Items;
+                this.items = Items;
             }
-            this.MarketplaceId = MarketplaceId;
-            this.DeliveryWindow = DeliveryWindow;
-            this.FulfillmentAction = FulfillmentAction;
-            this.FulfillmentPolicy = FulfillmentPolicy;
-            this.FulfillmentMethod = FulfillmentMethod;
-            this.CODSettings = CODSettings;
-            this.ShipFromCountryCode = ShipFromCountryCode;
-            this.NotificationEmailList = NotificationEmailList;
+            this.marketplaceId = MarketplaceId;
+            this.deliveryWindow = DeliveryWindow;
+            this.fulfillmentAction = FulfillmentAction;
+            this.fulfillmentPolicy = FulfillmentPolicy;
+            this.fulfillmentMethod = FulfillmentMethod;
+            this.codSettings = CODSettings;
+            this.shipFromCountryCode = ShipFromCountryCode;
+            this.notificationEmails = NotificationEmailList;
         }
 
         /// <summary>
         /// The marketplace the fulfillment order is placed against.
         /// </summary>
         /// <value>The marketplace the fulfillment order is placed against.</value>
-        [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
-        public string MarketplaceId { get; set; }
+        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
+        public string marketplaceId { get; set; }
 
         /// <summary>
         /// A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.
         /// </summary>
         /// <value>A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.</value>
-        [DataMember(Name = "SellerFulfillmentOrderId", EmitDefaultValue = false)]
-        public string SellerFulfillmentOrderId { get; set; }
+        [DataMember(Name = "sellerFulfillmentOrderId", EmitDefaultValue = false)]
+        public string sellerFulfillmentOrderId { get; set; }
 
         /// <summary>
         /// A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.
         /// </summary>
         /// <value>A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.</value>
-        [DataMember(Name = "DisplayableOrderId", EmitDefaultValue = false)]
-        public string DisplayableOrderId { get; set; }
+        [DataMember(Name = "displayableOrderId", EmitDefaultValue = false)]
+        public string displayableOrderId { get; set; }
 
         /// <summary>
         /// The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.
         /// </summary>
         /// <value>The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "DisplayableOrderDate", EmitDefaultValue = false)]
-        public DateTime DisplayableOrderDate { get; set; }
+        [DataMember(Name = "displayableOrderDate", EmitDefaultValue = false)]
+        public DateTime displayableOrderDate { get; set; }
 
         /// <summary>
         /// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
         /// </summary>
         /// <value>Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "DisplayableOrderComment", EmitDefaultValue = false)]
-        public string DisplayableOrderComment { get; set; }
+        [DataMember(Name = "displayableOrderComment", EmitDefaultValue = false)]
+        public string displayableOrderComment { get; set; }
 
 
         /// <summary>
         /// Gets or Sets DeliveryWindow
         /// </summary>
-        [DataMember(Name = "DeliveryWindow", EmitDefaultValue = false)]
-        public DeliveryWindow DeliveryWindow { get; set; }
+        [DataMember(Name = "deliveryWindow", EmitDefaultValue = false)]
+        public DeliveryWindow deliveryWindow { get; set; }
 
         /// <summary>
         /// The destination address for the fulfillment order.
         /// </summary>
         /// <value>The destination address for the fulfillment order.</value>
-        [DataMember(Name = "DestinationAddress", EmitDefaultValue = false)]
-        public Address DestinationAddress { get; set; }
+        [DataMember(Name = "destinationAddress", EmitDefaultValue = false)]
+        public Address destinationAddress { get; set; }
 
 
 
@@ -194,33 +194,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>Indicates the intended recipient channel for the order.</value>
         [DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
-        public string FulfillmentMethod { get; set; }
+        public string fulfillmentMethod { get; set; }
 
         /// <summary>
         /// Gets or Sets CODSettings
         /// </summary>
-        [DataMember(Name = "CODSettings", EmitDefaultValue = false)]
-        public CODSettings CODSettings { get; set; }
+        [DataMember(Name = "codSettings", EmitDefaultValue = false)]
+        public CODSettings codSettings { get; set; }
 
         /// <summary>
         /// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
         /// </summary>
         /// <value>The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.</value>
-        [DataMember(Name = "ShipFromCountryCode", EmitDefaultValue = false)]
-        public string ShipFromCountryCode { get; set; }
+        [DataMember(Name = "shipFromCountryCode", EmitDefaultValue = false)]
+        public string shipFromCountryCode { get; set; }
 
         /// <summary>
         /// Gets or Sets NotificationEmailList
         /// </summary>
-        [DataMember(Name = "NotificationEmailList", EmitDefaultValue = false)]
-        public NotificationEmailList NotificationEmailList { get; set; }
+        [DataMember(Name = "notificationEmails", EmitDefaultValue = false)]
+        public NotificationEmailList notificationEmails { get; set; }
+
+
+        /// <summary>
+        /// Gets or Sets NotificationEmailList
+        /// </summary>
+        [DataMember(Name = "featureConstraints", EmitDefaultValue = false)]
+        public IList<FeatureSettings> featureConstraints { get; set; }
 
         /// <summary>
         /// A list of items to include in the fulfillment order preview, including quantity.
         /// </summary>
         /// <value>A list of items to include in the fulfillment order preview, including quantity.</value>
-        [DataMember(Name = "Items", EmitDefaultValue = false)]
-        public CreateFulfillmentOrderItemList Items { get; set; }
+        [DataMember(Name = "items", EmitDefaultValue = false)]
+        public CreateFulfillmentOrderItemList items { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -230,21 +237,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         {
             var sb = new StringBuilder();
             sb.Append("class CreateFulfillmentOrderRequest {\n");
-            sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
-            sb.Append("  SellerFulfillmentOrderId: ").Append(SellerFulfillmentOrderId).Append("\n");
-            sb.Append("  DisplayableOrderId: ").Append(DisplayableOrderId).Append("\n");
-            sb.Append("  DisplayableOrderDate: ").Append(DisplayableOrderDate).Append("\n");
-            sb.Append("  DisplayableOrderComment: ").Append(DisplayableOrderComment).Append("\n");
-            sb.Append("  ShippingSpeedCategory: ").Append(ShippingSpeedCategory).Append("\n");
-            sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
-            sb.Append("  DestinationAddress: ").Append(DestinationAddress).Append("\n");
-            sb.Append("  FulfillmentAction: ").Append(FulfillmentAction).Append("\n");
-            sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
-            sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
-            sb.Append("  CODSettings: ").Append(CODSettings).Append("\n");
-            sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
-            sb.Append("  NotificationEmailList: ").Append(NotificationEmailList).Append("\n");
-            sb.Append("  Items: ").Append(Items).Append("\n");
+            sb.Append("  MarketplaceId: ").Append(marketplaceId).Append("\n");
+            sb.Append("  SellerFulfillmentOrderId: ").Append(sellerFulfillmentOrderId).Append("\n");
+            sb.Append("  DisplayableOrderId: ").Append(displayableOrderId).Append("\n");
+            sb.Append("  DisplayableOrderDate: ").Append(displayableOrderDate).Append("\n");
+            sb.Append("  DisplayableOrderComment: ").Append(displayableOrderComment).Append("\n");
+            sb.Append("  ShippingSpeedCategory: ").Append(shippingSpeedCategory).Append("\n");
+            sb.Append("  DeliveryWindow: ").Append(deliveryWindow).Append("\n");
+            sb.Append("  DestinationAddress: ").Append(destinationAddress).Append("\n");
+            sb.Append("  FulfillmentAction: ").Append(fulfillmentAction).Append("\n");
+            sb.Append("  FulfillmentPolicy: ").Append(fulfillmentPolicy).Append("\n");
+            sb.Append("  FulfillmentMethod: ").Append(fulfillmentMethod).Append("\n");
+            sb.Append("  CODSettings: ").Append(codSettings).Append("\n");
+            sb.Append("  ShipFromCountryCode: ").Append(shipFromCountryCode).Append("\n");
+            sb.Append("  NotificationEmailList: ").Append(notificationEmails).Append("\n");
+            sb.Append("  Items: ").Append(items).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -280,79 +287,79 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 
             return
                 (
-                    this.MarketplaceId == input.MarketplaceId ||
-                    (this.MarketplaceId != null &&
-                    this.MarketplaceId.Equals(input.MarketplaceId))
+                    this.marketplaceId == input.marketplaceId ||
+                    (this.marketplaceId != null &&
+                    this.marketplaceId.Equals(input.marketplaceId))
                 ) &&
                 (
-                    this.SellerFulfillmentOrderId == input.SellerFulfillmentOrderId ||
-                    (this.SellerFulfillmentOrderId != null &&
-                    this.SellerFulfillmentOrderId.Equals(input.SellerFulfillmentOrderId))
+                    this.sellerFulfillmentOrderId == input.sellerFulfillmentOrderId ||
+                    (this.sellerFulfillmentOrderId != null &&
+                    this.sellerFulfillmentOrderId.Equals(input.sellerFulfillmentOrderId))
                 ) &&
                 (
-                    this.DisplayableOrderId == input.DisplayableOrderId ||
-                    (this.DisplayableOrderId != null &&
-                    this.DisplayableOrderId.Equals(input.DisplayableOrderId))
+                    this.displayableOrderId == input.displayableOrderId ||
+                    (this.displayableOrderId != null &&
+                    this.displayableOrderId.Equals(input.displayableOrderId))
                 ) &&
                 (
-                    this.DisplayableOrderDate == input.DisplayableOrderDate ||
-                    (this.DisplayableOrderDate != null &&
-                    this.DisplayableOrderDate.Equals(input.DisplayableOrderDate))
+                    this.displayableOrderDate == input.displayableOrderDate ||
+                    (this.displayableOrderDate != null &&
+                    this.displayableOrderDate.Equals(input.displayableOrderDate))
                 ) &&
                 (
-                    this.DisplayableOrderComment == input.DisplayableOrderComment ||
-                    (this.DisplayableOrderComment != null &&
-                    this.DisplayableOrderComment.Equals(input.DisplayableOrderComment))
+                    this.displayableOrderComment == input.displayableOrderComment ||
+                    (this.displayableOrderComment != null &&
+                    this.displayableOrderComment.Equals(input.displayableOrderComment))
                 ) &&
                 (
-                    this.ShippingSpeedCategory == input.ShippingSpeedCategory ||
-                    (this.ShippingSpeedCategory != null &&
-                    this.ShippingSpeedCategory.Equals(input.ShippingSpeedCategory))
+                    this.shippingSpeedCategory == input.shippingSpeedCategory ||
+                    (this.shippingSpeedCategory != null &&
+                    this.shippingSpeedCategory.Equals(input.shippingSpeedCategory))
                 ) &&
                 (
-                    this.DeliveryWindow == input.DeliveryWindow ||
-                    (this.DeliveryWindow != null &&
-                    this.DeliveryWindow.Equals(input.DeliveryWindow))
+                    this.deliveryWindow == input.deliveryWindow ||
+                    (this.deliveryWindow != null &&
+                    this.deliveryWindow.Equals(input.deliveryWindow))
                 ) &&
                 (
-                    this.DestinationAddress == input.DestinationAddress ||
-                    (this.DestinationAddress != null &&
-                    this.DestinationAddress.Equals(input.DestinationAddress))
+                    this.destinationAddress == input.destinationAddress ||
+                    (this.destinationAddress != null &&
+                    this.destinationAddress.Equals(input.destinationAddress))
                 ) &&
                 (
-                    this.FulfillmentAction == input.FulfillmentAction ||
-                    (this.FulfillmentAction != null &&
-                    this.FulfillmentAction.Equals(input.FulfillmentAction))
+                    this.fulfillmentAction == input.fulfillmentAction ||
+                    (this.fulfillmentAction != null &&
+                    this.fulfillmentAction.Equals(input.fulfillmentAction))
                 ) &&
                 (
-                    this.FulfillmentPolicy == input.FulfillmentPolicy ||
-                    (this.FulfillmentPolicy != null &&
-                    this.FulfillmentPolicy.Equals(input.FulfillmentPolicy))
+                    this.fulfillmentPolicy == input.fulfillmentPolicy ||
+                    (this.fulfillmentPolicy != null &&
+                    this.fulfillmentPolicy.Equals(input.fulfillmentPolicy))
                 ) &&
                 (
-                    this.FulfillmentMethod == input.FulfillmentMethod ||
-                    (this.FulfillmentMethod != null &&
-                    this.FulfillmentMethod.Equals(input.FulfillmentMethod))
+                    this.fulfillmentMethod == input.fulfillmentMethod ||
+                    (this.fulfillmentMethod != null &&
+                    this.fulfillmentMethod.Equals(input.fulfillmentMethod))
                 ) &&
                 (
-                    this.CODSettings == input.CODSettings ||
-                    (this.CODSettings != null &&
-                    this.CODSettings.Equals(input.CODSettings))
+                    this.codSettings == input.codSettings ||
+                    (this.codSettings != null &&
+                    this.codSettings.Equals(input.codSettings))
                 ) &&
                 (
-                    this.ShipFromCountryCode == input.ShipFromCountryCode ||
-                    (this.ShipFromCountryCode != null &&
-                    this.ShipFromCountryCode.Equals(input.ShipFromCountryCode))
+                    this.shipFromCountryCode == input.shipFromCountryCode ||
+                    (this.shipFromCountryCode != null &&
+                    this.shipFromCountryCode.Equals(input.shipFromCountryCode))
                 ) &&
                 (
-                    this.NotificationEmailList == input.NotificationEmailList ||
-                    (this.NotificationEmailList != null &&
-                    this.NotificationEmailList.Equals(input.NotificationEmailList))
+                    this.notificationEmails == input.notificationEmails ||
+                    (this.notificationEmails != null &&
+                    this.notificationEmails.Equals(input.notificationEmails))
                 ) &&
                 (
-                    this.Items == input.Items ||
-                    (this.Items != null &&
-                    this.Items.Equals(input.Items))
+                    this.items == input.items ||
+                    (this.items != null &&
+                    this.items.Equals(input.items))
                 );
         }
 
@@ -365,36 +372,36 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.MarketplaceId != null)
-                    hashCode = hashCode * 59 + this.MarketplaceId.GetHashCode();
-                if (this.SellerFulfillmentOrderId != null)
-                    hashCode = hashCode * 59 + this.SellerFulfillmentOrderId.GetHashCode();
-                if (this.DisplayableOrderId != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderId.GetHashCode();
-                if (this.DisplayableOrderDate != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderDate.GetHashCode();
-                if (this.DisplayableOrderComment != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderComment.GetHashCode();
-                if (this.ShippingSpeedCategory != null)
-                    hashCode = hashCode * 59 + this.ShippingSpeedCategory.GetHashCode();
-                if (this.DeliveryWindow != null)
-                    hashCode = hashCode * 59 + this.DeliveryWindow.GetHashCode();
-                if (this.DestinationAddress != null)
-                    hashCode = hashCode * 59 + this.DestinationAddress.GetHashCode();
-                if (this.FulfillmentAction != null)
-                    hashCode = hashCode * 59 + this.FulfillmentAction.GetHashCode();
-                if (this.FulfillmentPolicy != null)
-                    hashCode = hashCode * 59 + this.FulfillmentPolicy.GetHashCode();
-                if (this.FulfillmentMethod != null)
-                    hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
-                if (this.CODSettings != null)
-                    hashCode = hashCode * 59 + this.CODSettings.GetHashCode();
-                if (this.ShipFromCountryCode != null)
-                    hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
-                if (this.NotificationEmailList != null)
-                    hashCode = hashCode * 59 + this.NotificationEmailList.GetHashCode();
-                if (this.Items != null)
-                    hashCode = hashCode * 59 + this.Items.GetHashCode();
+                if (this.marketplaceId != null)
+                    hashCode = hashCode * 59 + this.marketplaceId.GetHashCode();
+                if (this.sellerFulfillmentOrderId != null)
+                    hashCode = hashCode * 59 + this.sellerFulfillmentOrderId.GetHashCode();
+                if (this.displayableOrderId != null)
+                    hashCode = hashCode * 59 + this.displayableOrderId.GetHashCode();
+                if (this.displayableOrderDate != null)
+                    hashCode = hashCode * 59 + this.displayableOrderDate.GetHashCode();
+                if (this.displayableOrderComment != null)
+                    hashCode = hashCode * 59 + this.displayableOrderComment.GetHashCode();
+                if (this.shippingSpeedCategory != null)
+                    hashCode = hashCode * 59 + this.shippingSpeedCategory.GetHashCode();
+                if (this.deliveryWindow != null)
+                    hashCode = hashCode * 59 + this.deliveryWindow.GetHashCode();
+                if (this.destinationAddress != null)
+                    hashCode = hashCode * 59 + this.destinationAddress.GetHashCode();
+                if (this.fulfillmentAction != null)
+                    hashCode = hashCode * 59 + this.fulfillmentAction.GetHashCode();
+                if (this.fulfillmentPolicy != null)
+                    hashCode = hashCode * 59 + this.fulfillmentPolicy.GetHashCode();
+                if (this.fulfillmentMethod != null)
+                    hashCode = hashCode * 59 + this.fulfillmentMethod.GetHashCode();
+                if (this.codSettings != null)
+                    hashCode = hashCode * 59 + this.codSettings.GetHashCode();
+                if (this.shipFromCountryCode != null)
+                    hashCode = hashCode * 59 + this.shipFromCountryCode.GetHashCode();
+                if (this.notificationEmails != null)
+                    hashCode = hashCode * 59 + this.notificationEmails.GetHashCode();
+                if (this.items != null)
+                    hashCode = hashCode * 59 + this.items.GetHashCode();
                 return hashCode;
             }
         }
@@ -407,19 +414,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // SellerFulfillmentOrderId (string) maxLength
-            if (this.SellerFulfillmentOrderId != null && this.SellerFulfillmentOrderId.Length > 40)
+            if (this.sellerFulfillmentOrderId != null && this.sellerFulfillmentOrderId.Length > 40)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SellerFulfillmentOrderId, length must be less than 40.", new[] { "SellerFulfillmentOrderId" });
             }
 
             // DisplayableOrderId (string) maxLength
-            if (this.DisplayableOrderId != null && this.DisplayableOrderId.Length > 40)
+            if (this.displayableOrderId != null && this.displayableOrderId.Length > 40)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderId, length must be less than 40.", new[] { "DisplayableOrderId" });
             }
 
             // DisplayableOrderComment (string) maxLength
-            if (this.DisplayableOrderComment != null && this.DisplayableOrderComment.Length > 1000)
+            if (this.displayableOrderComment != null && this.displayableOrderComment.Length > 1000)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderComment, length must be less than 1000.", new[] { "DisplayableOrderComment" });
             }
