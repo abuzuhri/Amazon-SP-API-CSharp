@@ -89,6 +89,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The tracking number for the package.
         /// </summary>
         /// <value>The tracking number for the package.</value>
+        [DataMember(Name = "CustomerTrackingLink", EmitDefaultValue = false)]
+        public string CustomerTrackingLink { get; set; }
+
+        /// <summary>
+        /// The tracking number for the package.
+        /// </summary>
+        /// <value>The tracking number for the package.</value>
+        [DataMember(Name = "CurrentStatusDescription", EmitDefaultValue = false)]
+        public string CurrentStatusDescription { get; set; }
+
+        /// <summary>
+        /// The tracking number for the package.
+        /// </summary>
+        /// <value>The tracking number for the package.</value>
         [DataMember(Name = "TrackingNumber", EmitDefaultValue = false)]
         public string TrackingNumber { get; set; }
 
