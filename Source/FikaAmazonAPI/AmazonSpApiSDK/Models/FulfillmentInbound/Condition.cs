@@ -20,12 +20,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Condition
     {
-
         /// <summary>
         /// Enum NewItem for value: NewItem
         /// </summary>
-
-        NewItem,
+        NewItem = 1,
 
         /// <summary>
         /// Enum NewWithWarranty for value: NewWithWarranty
