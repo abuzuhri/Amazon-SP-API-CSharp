@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
     public class LWAClient
     {
         public const string AccessTokenKey = "access_token";
-        public const string JsonMediaType = "application/json; charset=utf-8";
+        public const string JsonMediaType = "application/json";
 
         public RestClient RestClient { get; set; }
         public LWAAccessTokenRequestMetaBuilder LWAAccessTokenRequestMetaBuilder { get; set; }
@@ -38,7 +38,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             string jsonRequestBody = JsonConvert.SerializeObject(lwaAccessTokenRequestMeta);
 
-            accessTokenRequest.AddParameter(JsonMediaType, jsonRequestBody, ParameterType.RequestBody);
+            //accessTokenRequest.AddParameter(JsonMediaType, jsonRequestBody, ParameterType.RequestBody);
+            accessTokenRequest.AddJsonBody(jsonRequestBody);
 
             try
             {

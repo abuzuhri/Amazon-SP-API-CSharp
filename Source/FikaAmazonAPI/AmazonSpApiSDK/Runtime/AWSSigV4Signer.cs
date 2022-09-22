@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         {
             var canonicalizedRequest = new StringBuilder();
             //Request Method
-            canonicalizedRequest.AppendFormat("{0}\n", restRequest.Method);
+            canonicalizedRequest.AppendFormat("{0}\n", restRequest.Method.ToString().ToUpperInvariant());
 
             //CanonicalURI
             canonicalizedRequest.AppendFormat("{0}\n", AwsSignerHelper.ExtractCanonicalURIParameters(restRequest.Resource));
