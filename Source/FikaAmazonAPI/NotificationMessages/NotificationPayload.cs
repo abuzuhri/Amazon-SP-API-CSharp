@@ -24,6 +24,9 @@ namespace FikaAmazonAPI.NotificationMessages
 
         [JsonProperty("reportProcessingFinishedNotification")]
         public ReportProcessingFinishedNotification ReportProcessingFinishedNotification { get; set; }
+
+        [JsonProperty("feedProcessingFinishedNotification")]
+        public FeedProcessingFinishedNotification FeedProcessingFinishedNotification { get; set; }
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>

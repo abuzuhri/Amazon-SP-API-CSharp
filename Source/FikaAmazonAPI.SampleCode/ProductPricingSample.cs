@@ -1,10 +1,5 @@
 ﻿using FikaAmazonAPI.Parameter.ProductPricing;
 using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -88,7 +83,7 @@ namespace FikaAmazonAPI.SampleCode
             });
 
             ;
-            
+
         }
 
 

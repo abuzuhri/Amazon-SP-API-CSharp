@@ -26,13 +26,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum SP for value: SP
         /// </summary>
         [EnumMember(Value = "SP")]
-        SP,
+        SP = 1,
 
         /// <summary>
         /// Enum LTL for value: LTL
         /// </summary>
         [EnumMember(Value = "LTL")]
-        LTL
+        LTL = 2
     }
 
 }

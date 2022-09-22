@@ -76,32 +76,32 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// UnderTest
         /// </summary>
-        //public void SubmitFeedMaxOrderQuantity()
-        //{
-        //    ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+        public void SubmitFeedAddProductMessage()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
 
-        //    var list = new List<ProductMessage>();
-        //    list.Add(new ProductMessage()
-        //    {
-        //        SKU = "8201031206122...",
-        //        StandardProductID = new ConstructFeed.Messages.StandardProductID()
-        //        {
-        //            Type = "ASIN",
-        //            Value= "B08CDYB2DC"
-        //        },
-        //        DescriptionData = new DescriptionData()
-        //        {
-        //            MaxOrderQuantity=2,
-        //            Title= "REBUNE RE-2061-1Hot Air Styler Hair Styler 1000 Watts 3 In 1"
-        //        }
-        //    });
-        //    createDocument.AddProductMessage(list,OperationType.Update);
-        //    var xml = createDocument.GetXML();
+            var list = new List<ProductMessage>();
+            list.Add(new ProductMessage()
+            {
+                SKU = "8201031206122...",
+                StandardProductID = new ConstructFeed.Messages.StandardProductID()
+                {
+                    Type = "ASIN",
+                    Value = "B08CDYB2DC"
+                },
+                //DescriptionData = new DescriptionData()
+                //{
+                //    MaxOrderQuantity = 2,
+                //    Title = "REBUNE RE-2061-1Hot Air Styler Hair Styler 1000 Watts 3 In 1"
+                //}
+            });
+            createDocument.AddProductMessage(list, OperationType.Update);
+            var xml = createDocument.GetXML();
 
-        //    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
 
-        //}
-        public void SubmitFeedPRICING()
+        }
+        public async void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
@@ -109,27 +109,46 @@ namespace FikaAmazonAPI.SampleCode
             var list = new List<PriceMessage>();
             list.Add(new PriceMessage()
             {
-                SKU = "8201031206122...",
+                SKU = SKU,
                 StandardPrice = new StandardPrice()
                 {
                     currency = BaseCurrencyCode.AED.ToString(),
-                    Value = (201.0522M).ToString("0.00")
+                    Value = (PRICE).ToString("0.00")
                 }
             });
             createDocument.AddPriceMessage(list);
 
             var xml = createDocument.GetXML();
 
-            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
-            var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+            string ResultFeedDocumentId = string.Empty;
+            while (string.IsNullOrEmpty(ResultFeedDocumentId))
+            {
+                var feedOutput = await amazonConnection.Feed.GetFeedAsync(feedID);
+                if (feedOutput.ProcessingStatus == AmazonSpApiSDK.Models.Feeds.Feed.ProcessingStatusEnum.DONE)
+                {
+                    var outPut = await amazonConnection.Feed.GetFeedDocumentAsync(feedOutput.ResultFeedDocumentId);
 
-            var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+                    var reportOutput = outPut.Url;
 
-            var reportOutput = outPut.Url;
+                    var processingReport = await amazonConnection.Feed.GetFeedDocumentProcessingReportAsync(reportOutput);
+
+                    Console.WriteLine("MessagesProcessed=" + processingReport.ProcessingSummary.MessagesProcessed);
+                    Console.WriteLine("MessagesSuccessful= " + processingReport.ProcessingSummary.MessagesSuccessful);
+                    Console.WriteLine("MessagesWithError=" + processingReport.ProcessingSummary.MessagesWithError);
+                    Console.WriteLine("MessagesWithWarning=" + processingReport.ProcessingSummary.MessagesWithWarning);
+                    Console.WriteLine("ResultDescription=" + processingReport.Result.FirstOrDefault()?.ResultDescription);
+                }
+
+                if (!(feedOutput.ProcessingStatus == AmazonSpApiSDK.Models.Feeds.Feed.ProcessingStatusEnum.INPROGRESS ||
+                    feedOutput.ProcessingStatus == AmazonSpApiSDK.Models.Feeds.Feed.ProcessingStatusEnum.INQUEUE))
+                    break;
+                else Thread.Sleep(10000);
+            }
 
 
-            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutput);
+
         }
 
         public void FeebPostOrderFullfillment()
@@ -218,6 +237,45 @@ namespace FikaAmazonAPI.SampleCode
             var xml = createDocument.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
+        }
+
+        public void CartonContentsRequestFeed()
+        {
+            ConstructFeedService createDocument2 = new ConstructFeedService("{SellerID}", "1.02");
+
+            var list22 = new List<CartonContentsRequest>();
+            list22.Add(new CartonContentsRequest()
+            {
+                ShipmentId = "FBA123456",
+                Carton = new List<Carton> {
+                    new Carton() {
+                    CartonId="1",
+                    Item=new List<CartonItem>(){
+                        new CartonItem() {
+                            QuantityInCase=1,
+                        QuantityShipped=1,
+                        SKU="7004"
+                        }
+                    }
+                    },
+                    new Carton() {
+                    CartonId="2",
+                    Item=new List<CartonItem>(){
+                        new CartonItem() {
+                            QuantityInCase=12,
+                        QuantityShipped=12,
+                        SKU="4051"
+                        }
+                    }
+                    }
+                }
+            });
+
+            createDocument2.AddCartonContentsRequest(list22);
+
+            var xml222 = createDocument2.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml222, FeedType.POST_FBA_INBOUND_CARTON_CONTENTS);
         }
     }
 }

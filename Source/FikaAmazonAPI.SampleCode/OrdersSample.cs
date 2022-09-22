@@ -15,6 +15,27 @@ namespace FikaAmazonAPI.SampleCode
             this.amazonConnection = amazonConnection;
         }
 
+
+        public void GetOrdersOnePageWithNextPageToken()
+        {
+            // ONLY USE THIS SAMPLE IF YOU NEED TO GET ONE PAGE EACH TIME other wise remove parameter 'MaxNumberOfPages' and libaray will fetch all orders to you
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            serachOrderList.MaxNumberOfPages = 1;
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+
+            serachOrderList.AmazonOrderIds = new List<string>();
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var nextPageToken = orders.NextToken;
+            while (!string.IsNullOrEmpty(nextPageToken))
+            {
+                var moreOrders = amazonConnection.Orders.GetGetOrdersByNextToken(nextPageToken, serachOrderList);
+                nextPageToken = moreOrders.NextToken;
+            }
+
+        }
         public void GetOrders()
         {
             ParameterOrderList serachOrderList = new ParameterOrderList();

@@ -23,6 +23,7 @@ namespace FikaAmazonAPI.Services
         public static readonly string AccessTokenHeaderName = "x-amz-access-token";
         public static readonly string SecurityTokenHeaderName = "x-amz-security-token";
         private readonly string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
+        public static readonly string ShippingBusinessIdHeaderName = "x-amzn-shipping-business-id";
         protected RestClient RequestClient { get; set; }
         protected RestRequest Request { get; set; }
         protected AmazonCredential AmazonCredential { get; set; }
@@ -103,7 +104,9 @@ namespace FikaAmazonAPI.Services
         {
             RestHeader();
             AddAccessToken();
+            AddShippingBusinessId();
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
+
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SaveLastRequestHeader(response.Headers);
             SleepForRateLimit(response.Headers, rateLimitType);
@@ -129,19 +132,15 @@ namespace FikaAmazonAPI.Services
         }
         private void RestHeader()
         {
-            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == AWSSignerHelper.XAmzDateHeaderName);
-            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == AWSSignerHelper.AuthorizationHeaderName);
-            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == AccessTokenHeaderName);
-            //Request.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == SecurityTokenHeaderName);
+            lock (Request)
+            {
+                Request.Parameters.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                Request.Parameters.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                Request.Parameters.RemoveParameter(AccessTokenHeaderName);
+                Request.Parameters.RemoveParameter(SecurityTokenHeaderName);
+                Request.Parameters.RemoveParameter(ShippingBusinessIdHeaderName);
 
-            Request.Parameters.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-            Request.Parameters.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
-            Request.Parameters.RemoveParameter(AccessTokenHeaderName);
-            Request.Parameters.RemoveParameter(SecurityTokenHeaderName);
+            }
         }
 
         //public T ExecuteRequest<T>(RateLimitType rateLimitType = RateLimitType.UNSET) where T : new()
@@ -277,7 +276,16 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddAccessToken()
         {
-            Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
+            lock (Request)
+            {
+                Request.AddOrUpdateHeader(AccessTokenHeaderName, AccessToken);
+            }
+        }
+
+        protected void AddShippingBusinessId()
+        {
+            if (AmazonCredential.ShippingBusiness.HasValue)
+                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusiness.Value.GetEnumMemberValue());
         }
 
         protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)

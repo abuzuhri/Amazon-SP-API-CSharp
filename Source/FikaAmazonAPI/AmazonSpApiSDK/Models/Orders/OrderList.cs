@@ -31,6 +31,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         {
         }
 
+        public string NextToken { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

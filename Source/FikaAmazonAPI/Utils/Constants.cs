@@ -142,8 +142,8 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FirstDayOfWeek
         {
-            Monday,
-            Sunday
+            monday,
+            sunday
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -170,7 +170,7 @@ namespace FikaAmazonAPI.Utils
             PRODUCT_TYPE_DEFINITIONS_CHANGE,
             ORDER_STATUS_CHANGE,
             PRICING_HEALTH
-            
+
         }
 
         /// <summary>
@@ -586,6 +586,7 @@ namespace FikaAmazonAPI.Utils
             Store,
             StoreStockMovement,
             WebstoreItem,
+            CartonContentsRequest
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -607,6 +608,33 @@ namespace FikaAmazonAPI.Utils
             FBA_EFN
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShippingBusiness
+        {
+            [EnumMember(Value = "AmazonShipping_US")]
+            AmazonShipping_US,
+            [EnumMember(Value = "AmazonShipping_IN")]
+            AmazonShipping_IN,
+            [EnumMember(Value = "AmazonShipping_UK")]
+            AmazonShipping_UK,
+            [EnumMember(Value = "AmazonShipping_UAE")]
+            AmazonShipping_UAE,
+            [EnumMember(Value = "AmazonShipping_SA")]
+            AmazonShipping_SA,
+            [EnumMember(Value = "AmazonShipping_EG")]
+            AmazonShipping_EG,
+            [EnumMember(Value = "AmazonShipping_IT")]
+            AmazonShipping_IT
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShippingChannelType
+        {
+            [EnumMember(Value = "AMAZON")]
+            AMAZON,
+            [EnumMember(Value = "EXTERNAL")]
+            EXTERNAL
+        }
 
         ///// <summary>
         ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.

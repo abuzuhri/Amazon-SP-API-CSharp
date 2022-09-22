@@ -653,6 +653,22 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
      locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
      });
 ```
+
+---
+## Sales Performance Sample
+
+```CSharp
+     DateTime queryStart = DateTime.UtcNow.AddDays(-11).Date;
+     DateTime queryEnd = DateTime.UtcNow;
+     var parameters = new ParameterGetOrderMetrics();
+     parameters.marketplaceIds = new MarketplaceIds();
+     parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+     parameters.interval = queryStart.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "Z--" + queryEnd.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "Z";
+     parameters.granularity = Constants.GranularityEnum.Day;
+     parameters.firstDayOfWeek = Constants.FirstDayOfWeek.monday;
+
+     var sales = amazonConnection.Sales.GetOrderMetrics(parameters);
+```
 ---
 ## Q & A
 

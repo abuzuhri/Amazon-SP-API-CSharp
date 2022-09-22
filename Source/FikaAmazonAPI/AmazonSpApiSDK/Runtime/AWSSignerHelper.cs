@@ -177,19 +177,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// <returns>Date and time used for x-amz-date, in UTC</returns>
         public virtual DateTime InitializeHeaders(RestRequest restRequest, string host)
         {
-            //restRequest.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == XAmzDateHeaderName);
-            //restRequest.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-            //                                              && parameter.Name == HostHeaderName);
-            
-            restRequest.Parameters.RemoveParameter(XAmzDateHeaderName);
-            restRequest.Parameters.RemoveParameter(HostHeaderName);
-            DateTime signingDate = DateHelper.GetUtcNow();
+            lock (restRequest)
+            {
+                restRequest.Parameters.RemoveParameter(XAmzDateHeaderName);
+                restRequest.Parameters.RemoveParameter(HostHeaderName);
+                DateTime signingDate = DateHelper.GetUtcNow();
 
-            restRequest.AddOrUpdateHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
-            restRequest.AddOrUpdateHeader(HostHeaderName, host);
+                restRequest.AddOrUpdateHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
+                restRequest.AddOrUpdateHeader(HostHeaderName, host);
 
-            return signingDate;
+                return signingDate;
+            }
         }
 
         /// <summary>
@@ -232,14 +230,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                                          string region,
                                          DateTime signingDate)
         {
-            string scope = BuildScope(signingDate, region);
-            StringBuilder authorizationHeaderValueBuilder = new StringBuilder();
-            authorizationHeaderValueBuilder.AppendFormat("{0}-{1}", Scheme, Algorithm);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1}/{2},", CredentialSubHeaderName, accessKeyId, scope);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1},", SignedHeadersSubHeaderName, signedHeaders);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1}", SignatureSubHeaderName, signature);
+            lock (restRequest)
+            {
+                string scope = BuildScope(signingDate, region);
+                StringBuilder authorizationHeaderValueBuilder = new StringBuilder();
+                authorizationHeaderValueBuilder.AppendFormat("{0}-{1}", Scheme, Algorithm);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1}/{2},", CredentialSubHeaderName, accessKeyId, scope);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1},", SignedHeadersSubHeaderName, signedHeaders);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1}", SignatureSubHeaderName, signature);
 
-            restRequest.AddOrUpdateHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
+                restRequest.AddOrUpdateHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
+            }
+
         }
 
         private static string BuildScope(DateTime signingDate, string region)

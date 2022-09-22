@@ -1,12 +1,13 @@
-﻿using FikaAmazonAPI.ConstructFeed;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Parameter.ListingsItems;
-using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.ReportGeneration;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -39,29 +40,45 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            ReportManager reportManageree = new ReportManager(amazonConnection);
+            var allll = reportManageree.GetInventoryAging();
+
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.CollectibleLikeNew }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.UsedGood }));
 
 
 
-            var listSlot = amazonConnection.EasyShip20220323.ListHandoverSlots(new AmazonSpApiSDK.Models.EasyShip20220323.ListHandoverSlotsRequest
+            var offfers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {
-                AmazonOrderId = "171-2704093-8575999",
-                PackageDimensions = new AmazonSpApiSDK.Models.EasyShip20220323.Dimensions
-                {
-                    Height = 20.0M,
-                    Width = 10.0M,
-                    Length = 12.0M,
-                    Unit = "Cm"
-                },
-                PackageWeight = new AmazonSpApiSDK.Models.EasyShip20220323.Weight
-                {
-                    Unit = "G",
-                    Value = 100.0M
-                }
+                Asin = "B000GGFYZE"
             });
 
 
+
+            var productsttt = reportManageree.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
+
+            Thread.Sleep(1000 * 60 * 15);
+
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            //feedsSample.SubmitFeedOrderAcknowledgement();
+            double priceNow = 62;
+            double minPrice = 0.12;
+            while (true)
+            {
+
+                //Thread MapBarcodeToASIN = new Thread(() => feedsSample.SubmitFeedPRICING(priceNow, "843076000518"));
+                //MapBarcodeToASIN.Start();
+
+                Thread MapBarcodeToASIN2 = new Thread(() => feedsSample.SubmitFeedPRICING(priceNow, "074312026102..."));
+                MapBarcodeToASIN2.Start();
+
+                priceNow = priceNow - minPrice;
+                Thread.Sleep(1000 * 60 * 3);
+
+                if (priceNow < 54)
+                    priceNow = 62;
+            }
 
             var alllll = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {
@@ -120,14 +137,7 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-            for (int i = 0; i < 100; i++)
-            {
-                var plci = new FikaAmazonAPI.Parameter.CatalogItems.ParameterListCatalogItems();
-                plci.UPC = "079325772114";
-                plci.MarketplaceId = FikaAmazonAPI.Utils.MarketPlace.UnitedArabEmirates.ID;
 
-                var response22 = amazonConnection.CatalogItem.ListCatalogItems(plci);
-            }
 
 
 
@@ -218,14 +228,6 @@ namespace FikaAmazonAPI.SampleCode
             var products2 = await reportManager2.GetReturnFBAOrderAsync(3); //GET_MERCHANT_LISTINGS_ALL_DATA
 
 
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddDays(-100);
-
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
-
-
-            var orders = await amazonConnection.Orders.GetOrdersAsync(serachOrderList);
 
 
             //var parameterOrderList = new ParameterOrderList
@@ -289,7 +291,7 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
-            var item = amazonConnection.CatalogItem.GetCatalogItem("B00CZC5F0G");
+
 
 
 

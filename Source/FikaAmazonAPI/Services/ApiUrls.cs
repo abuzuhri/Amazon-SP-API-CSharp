@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         }
         protected class FulFillmentOutboundApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/ba/outbound/2020-07-01";
+            private readonly static string _resourceBaseUrl = "/fba/outbound/2020-07-01";
             public static string GetFulfillmentPreview
             {
                 get => $"{_resourceBaseUrl}/fulfillmentOrders/preview";
@@ -144,6 +144,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string PurchaseLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/purchaseLabels";
             public static string RetrieveShippingLabel(string shipmentId, string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
             public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
+        }
+
+        protected class ShippingApiV2Urls
+        {
+            private readonly static string _resourceBaseUrl = "/shipping/v2";
+            public static string GetRates
+            {
+                get => $"{_resourceBaseUrl}/shipments/rates";
+            }
+            public static string PurchaseShipment
+            {
+                get => $"{_resourceBaseUrl}/shipments";
+            }
+            public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
+            public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
+            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
         }
         protected class MessaginApiUrls
         {
