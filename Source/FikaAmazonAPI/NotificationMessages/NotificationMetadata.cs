@@ -10,25 +10,25 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("ApplicationId")]
+        [JsonProperty("applicationId")]
         public string ApplicationId { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("NotificationId")]
+        [JsonProperty("notificationId")]
         public string NotificationId { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("PublishTime")]
+        [JsonProperty("publishTime")]
         public string PublishTime { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("SubscriptionId")]
+        [JsonProperty("subscriptionId")]
         public string SubscriptionId { get; set; }
     }
 }

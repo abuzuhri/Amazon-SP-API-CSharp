@@ -7,37 +7,37 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("EventTime")]
+        [JsonProperty("eventTime")]
         public string EventTime { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("NotificationMetadata")]
+        [JsonProperty("notificationMetadata")]
         public NotificationMetadata NotificationMetadata { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("NotificationType")]
+        [JsonProperty("notificationType")]
         public string NotificationType { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("NotificationVersion")]
+        [JsonProperty("notificationVersion")]
         public string NotificationVersion { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("Payload")]
+        [JsonProperty("payload")]
         public NotificationPayload Payload { get; set; }
 
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("PayloadVersion")]
+        [JsonProperty("payloadVersion")]
         public string PayloadVersion { get; set; }
     }
 }
