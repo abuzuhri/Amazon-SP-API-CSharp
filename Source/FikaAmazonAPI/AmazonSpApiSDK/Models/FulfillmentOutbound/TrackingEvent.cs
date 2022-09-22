@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The event code for the delivery event.</value>
         [DataMember(Name = "EventCode", EmitDefaultValue = false)]
-        public EventCode EventCode { get; set; }
+        public string EventCode { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingEvent" /> class.
         /// </summary>
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="EventDate">The date and time that the delivery event took place, in ISO 8601 date time format. (required).</param>
         /// <param name="EventAddress">The city where the delivery event took place. (required).</param>
         /// <param name="EventCode">The event code for the delivery event. (required).</param>
-        public TrackingEvent(Timestamp EventDate = default(Timestamp), TrackingAddress EventAddress = default(TrackingAddress), EventCode EventCode = default(EventCode))
+        public TrackingEvent(DateTime EventDate = default(DateTime), TrackingAddress EventAddress = default(TrackingAddress), string EventCode = null)
         {
             // to ensure "EventDate" is required (not null)
             if (EventDate == null)
@@ -77,7 +77,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The date and time that the delivery event took place, in ISO 8601 date time format.</value>
         [DataMember(Name = "EventDate", EmitDefaultValue = false)]
-        public Timestamp EventDate { get; set; }
+        public DateTime EventDate { get; set; }
 
         /// <summary>
         /// The city where the delivery event took place.
