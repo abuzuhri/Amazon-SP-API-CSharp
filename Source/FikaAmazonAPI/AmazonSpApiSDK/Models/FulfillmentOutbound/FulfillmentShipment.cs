@@ -79,7 +79,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="EstimatedArrivalDateTime">The estimated arrival date and time of the shipment, in ISO 8601 date time format. Note that this value can change over time. If a shipment includes more than one package, EstimatedArrivalDateTime applies to all of the packages in the shipment. If the shipment has been cancelled, EstimatedArrivalDateTime is not returned..</param>
         /// <param name="FulfillmentShipmentItem">FulfillmentShipmentItem (required).</param>
         /// <param name="FulfillmentShipmentPackage">FulfillmentShipmentPackage.</param>
-        public FulfillmentShipment(string AmazonShipmentId = default(string), string FulfillmentCenterId = default(string), FulfillmentShipmentStatusEnum FulfillmentShipmentStatus = default(FulfillmentShipmentStatusEnum), Timestamp ShippingDateTime = default(Timestamp), Timestamp EstimatedArrivalDateTime = default(Timestamp), FulfillmentShipmentItemList FulfillmentShipmentItem = default(FulfillmentShipmentItemList), FulfillmentShipmentPackageList FulfillmentShipmentPackage = default(FulfillmentShipmentPackageList))
+        public FulfillmentShipment(string AmazonShipmentId = default(string), string FulfillmentCenterId = default(string), FulfillmentShipmentStatusEnum FulfillmentShipmentStatus = default(FulfillmentShipmentStatusEnum), DateTime? ShippingDate = null, DateTime? EstimatedArrivalDate = null, FulfillmentShipmentItemList FulfillmentShipmentItem = default(FulfillmentShipmentItemList), FulfillmentShipmentPackageList FulfillmentShipmentPackage = default(FulfillmentShipmentPackageList))
         {
             // to ensure "AmazonShipmentId" is required (not null)
             if (AmazonShipmentId == null)
@@ -117,8 +117,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             {
                 this.FulfillmentShipmentItem = FulfillmentShipmentItem;
             }
-            this.ShippingDateTime = ShippingDateTime;
-            this.EstimatedArrivalDateTime = EstimatedArrivalDateTime;
+            this.ShippingDate = ShippingDate;
+            this.EstimatedArrivalDate = EstimatedArrivalDate;
             this.FulfillmentShipmentPackage = FulfillmentShipmentPackage;
         }
 
@@ -140,16 +140,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <summary>
         /// The meaning of the ShippingDateTime value depends on the current status of the shipment. If the current value of FulfillmentShipmentStatus is:  * Pending - ShippingDateTime represents the estimated time that the shipment will leave the Amazon fulfillment center.  * Shipped - ShippingDateTime represents the date that the shipment left the Amazon fulfillment center. If a shipment includes more than one package, ShippingDateTime applies to all of the packages in the shipment. If the value of FulfillmentShipmentStatus is CancelledByFulfiller or CancelledBySeller, ShippingDateTime is not returned. The value must be in ISO 8601 date time format.
         /// </summary>
-        /// <value>The meaning of the ShippingDateTime value depends on the current status of the shipment. If the current value of FulfillmentShipmentStatus is:  * Pending - ShippingDateTime represents the estimated time that the shipment will leave the Amazon fulfillment center.  * Shipped - ShippingDateTime represents the date that the shipment left the Amazon fulfillment center. If a shipment includes more than one package, ShippingDateTime applies to all of the packages in the shipment. If the value of FulfillmentShipmentStatus is CancelledByFulfiller or CancelledBySeller, ShippingDateTime is not returned. The value must be in ISO 8601 date time format.</value>
-        [DataMember(Name = "ShippingDateTime", EmitDefaultValue = false)]
-        public Timestamp ShippingDateTime { get; set; }
+        /// <value>The meaning of the ShippingDate value depends on the current status of the shipment. If the current value of FulfillmentShipmentStatus is:  * Pending - ShippingDateTime represents the estimated time that the shipment will leave the Amazon fulfillment center.  * Shipped - ShippingDateTime represents the date that the shipment left the Amazon fulfillment center. If a shipment includes more than one package, ShippingDateTime applies to all of the packages in the shipment. If the value of FulfillmentShipmentStatus is CancelledByFulfiller or CancelledBySeller, ShippingDateTime is not returned. The value must be in ISO 8601 date time format.</value>
+        [DataMember(Name = "ShippingDate", EmitDefaultValue = false)]
+        public DateTime? ShippingDate { get; set; }
 
         /// <summary>
         /// The estimated arrival date and time of the shipment, in ISO 8601 date time format. Note that this value can change over time. If a shipment includes more than one package, EstimatedArrivalDateTime applies to all of the packages in the shipment. If the shipment has been cancelled, EstimatedArrivalDateTime is not returned.
         /// </summary>
         /// <value>The estimated arrival date and time of the shipment, in ISO 8601 date time format. Note that this value can change over time. If a shipment includes more than one package, EstimatedArrivalDateTime applies to all of the packages in the shipment. If the shipment has been cancelled, EstimatedArrivalDateTime is not returned.</value>
-        [DataMember(Name = "EstimatedArrivalDateTime", EmitDefaultValue = false)]
-        public Timestamp EstimatedArrivalDateTime { get; set; }
+        [DataMember(Name = "EstimatedArrivalDate", EmitDefaultValue = false)]
+        public DateTime? EstimatedArrivalDate { get; set; }
 
         /// <summary>
         /// Gets or Sets FulfillmentShipmentItem
@@ -174,8 +174,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  AmazonShipmentId: ").Append(AmazonShipmentId).Append("\n");
             sb.Append("  FulfillmentCenterId: ").Append(FulfillmentCenterId).Append("\n");
             sb.Append("  FulfillmentShipmentStatus: ").Append(FulfillmentShipmentStatus).Append("\n");
-            sb.Append("  ShippingDateTime: ").Append(ShippingDateTime).Append("\n");
-            sb.Append("  EstimatedArrivalDateTime: ").Append(EstimatedArrivalDateTime).Append("\n");
+            sb.Append("  ShippingDate: ").Append(ShippingDate).Append("\n");
+            sb.Append("  EstimatedArrivalDate: ").Append(EstimatedArrivalDate).Append("\n");
             sb.Append("  FulfillmentShipmentItem: ").Append(FulfillmentShipmentItem).Append("\n");
             sb.Append("  FulfillmentShipmentPackage: ").Append(FulfillmentShipmentPackage).Append("\n");
             sb.Append("}\n");
@@ -228,14 +228,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.FulfillmentShipmentStatus.Equals(input.FulfillmentShipmentStatus))
                 ) &&
                 (
-                    this.ShippingDateTime == input.ShippingDateTime ||
-                    (this.ShippingDateTime != null &&
-                    this.ShippingDateTime.Equals(input.ShippingDateTime))
+                    this.ShippingDate == input.ShippingDate ||
+                    (this.ShippingDate != null &&
+                    this.ShippingDate.Equals(input.ShippingDate))
                 ) &&
                 (
-                    this.EstimatedArrivalDateTime == input.EstimatedArrivalDateTime ||
-                    (this.EstimatedArrivalDateTime != null &&
-                    this.EstimatedArrivalDateTime.Equals(input.EstimatedArrivalDateTime))
+                    this.EstimatedArrivalDate == input.EstimatedArrivalDate ||
+                    (this.EstimatedArrivalDate != null &&
+                    this.EstimatedArrivalDate.Equals(input.EstimatedArrivalDate))
                 ) &&
                 (
                     this.FulfillmentShipmentItem == input.FulfillmentShipmentItem ||
@@ -264,10 +264,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentCenterId.GetHashCode();
                 if (this.FulfillmentShipmentStatus != null)
                     hashCode = hashCode * 59 + this.FulfillmentShipmentStatus.GetHashCode();
-                if (this.ShippingDateTime != null)
-                    hashCode = hashCode * 59 + this.ShippingDateTime.GetHashCode();
-                if (this.EstimatedArrivalDateTime != null)
-                    hashCode = hashCode * 59 + this.EstimatedArrivalDateTime.GetHashCode();
+                if (this.ShippingDate != null)
+                    hashCode = hashCode * 59 + this.ShippingDate.GetHashCode();
+                if (this.EstimatedArrivalDate != null)
+                    hashCode = hashCode * 59 + this.EstimatedArrivalDate.GetHashCode();
                 if (this.FulfillmentShipmentItem != null)
                     hashCode = hashCode * 59 + this.FulfillmentShipmentItem.GetHashCode();
                 if (this.FulfillmentShipmentPackage != null)

@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
     {
 
         /// <summary>
-        /// Enum INTRANSIT for value: IN_TRANSIT
+        /// Enum IN_TRANSIT for value: IN_TRANSIT
         /// </summary>
 
         IN_TRANSIT,
@@ -55,16 +55,76 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         DELAYED,
 
         /// <summary>
-        /// Enum AVAILABLEFORPICKUP for value: AVAILABLE_FOR_PICKUP
+        /// Enum AVAILABLE_FOR_PICKUP for value: AVAILABLE_FOR_PICKUP
         /// </summary>
 
-        AVAILABLEFORPICKUP,
+        AVAILABLE_FOR_PICKUP,
 
         /// <summary>
-        /// Enum CUSTOMERACTION for value: CUSTOMER_ACTION
+        /// Enum CUSTOMER_ACTION for value: CUSTOMER_ACTION
         /// </summary>
 
-        CUSTOMERACTION
+        CUSTOMER_ACTION,
+
+        /// <summary>
+        /// Enum UNKNOWN for value: UNKNOWN
+        /// </summary>
+
+        UNKNOWN,
+
+        /// <summary>
+        /// Enum OUT_FOR_DELIVERY for value: OUT_FOR_DELIVERY
+        /// </summary>
+
+        OUT_FOR_DELIVERY,
+
+        /// <summary>
+        /// Enum DELIVERY_ATTEMPTED for value: DELIVERY_ATTEMPTED
+        /// </summary>
+
+        DELIVERY_ATTEMPTED,
+
+        /// <summary>
+        /// Enum PICKUP_SUCCESSFUL for value: PICKUP_SUCCESSFUL
+        /// </summary>
+
+        PICKUP_SUCCESSFUL,
+
+        /// <summary>
+        /// Enum PICKUP_CANCELLED for value: PICKUP_CANCELLED
+        /// </summary>
+
+        PICKUP_CANCELLED,
+
+        /// <summary>
+        /// Enum PICKUP_ATTEMPTED for value: PICKUP_ATTEMPTED
+        /// </summary>
+
+        PICKUP_ATTEMPTED,
+
+        /// <summary>
+        /// Enum PICKUP_SCHEDULED for value: PICKUP_SCHEDULED
+        /// </summary>
+
+        PICKUP_SCHEDULED,
+
+        /// <summary>
+        /// Enum RETURN_REQUEST_ACCEPTED for value: RETURN_REQUEST_ACCEPTED
+        /// </summary>
+
+        RETURN_REQUEST_ACCEPTED,
+
+        /// <summary>
+        /// Enum REFUND_ISSUED for value: REFUND_ISSUED
+        /// </summary>
+
+        REFUND_ISSUED,
+
+        /// <summary>
+        /// Enum RETURN_RECEIVED_IN_FC for value: RETURN_RECEIVED_IN_FC
+        /// </summary>
+
+        RETURN_RECEIVED_IN_FC
     }
 
 }
