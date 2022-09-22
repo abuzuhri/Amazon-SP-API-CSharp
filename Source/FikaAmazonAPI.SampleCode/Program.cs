@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.ConstructFeed;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Parameter.ListingItem;
@@ -6,6 +7,7 @@ using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.ReportGeneration;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -38,59 +40,23 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            ReportManager reportManageree = new ReportManager(amazonConnection);
+            var allll = reportManageree.GetInventoryAging();
 
-            ConstructFeedService createDocument2 = new ConstructFeedService("{SellerID}", "1.02");
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.CollectibleLikeNew }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
+            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.UsedGood }));
 
-            var list22 = new List<CartonContentsRequest>();
-            list22.Add(new CartonContentsRequest()
+
+
+            var offfers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {
-                ShipmentId = "FBA123456",
-                Carton = new List<Carton> {
-                    new Carton() {
-                    CartonId="1",
-                    Item=new List<CartonItem>(){
-                        new CartonItem() {
-                            QuantityInCase=1,
-                        QuantityShipped=1,
-                        SKU="7004"
-                        }
-                    }
-                    },
-                    new Carton() {
-                    CartonId="2",
-                    Item=new List<CartonItem>(){
-                        new CartonItem() {
-                            QuantityInCase=12,
-                        QuantityShipped=12,
-                        SKU="4051"
-                        }
-                    }
-                    }
-                }
+                Asin = "B000GGFYZE"
             });
 
-            createDocument2.AddCartonContentsRequest(list22);
-
-            var xml222 = createDocument2.GetXML();
-
-            var data22 = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
-                new Parameter.CatalogItems.ParameterSearchCatalogItems202204
-                {
-                    keywords = new[] { "vitamin c" },
-
-                    includedData = new[] { IncludedData.attributes,
-                                       IncludedData.salesRanks,
-                                       IncludedData.summaries,
-                                       IncludedData.productTypes,
-                                       IncludedData.relationships,
-                                       IncludedData.dimensions,
-                                       IncludedData.identifiers,
-                                       IncludedData.images }
-                });
 
 
-
-            ReportManager reportManageree = new ReportManager(amazonConnection);
             var productsttt = reportManageree.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
 
             Thread.Sleep(1000 * 60 * 15);
