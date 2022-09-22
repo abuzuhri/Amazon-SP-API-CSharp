@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
-        [JsonProperty("AnyOfferChangedNotification")]
+        [JsonProperty("anyOfferChangedNotification")]
         public AnyOfferChangedNotification AnyOfferChangedNotification { get; set; }
 
         [JsonProperty("b2bAnyOfferChangedNotification")]
@@ -16,11 +16,12 @@ namespace FikaAmazonAPI.NotificationMessages
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
+        [JsonProperty("feePromotionNotification")]
         public FeePromotionNotification FeePromotionNotification { get; set; }
-
+        [JsonProperty("fbaOutboundShipmentStatusNotification")]
         public FbaOutboundShipmentStatusNotification FbaOutboundShipmentStatusNotification { get; set; }
+        [JsonProperty("fulfillmentOrderStatusNotification")]
         public FulfillmentOrderStatusNotification FulfillmentOrderStatusNotification { get; set; }
-
 
         [JsonProperty("reportProcessingFinishedNotification")]
         public ReportProcessingFinishedNotification ReportProcessingFinishedNotification { get; set; }
