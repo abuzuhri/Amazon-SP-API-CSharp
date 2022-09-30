@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.Services
         public RequestService(AmazonCredential amazonCredential)
         {
             AmazonCredential = amazonCredential;
-            AmazonSandboxUrl = amazonCredential.MarketPlace.Region.AmazonSandboxUrl;
+            AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
         }
 
