@@ -114,7 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             foreach (string headerName in sortedHeaders.Keys)
             {
                 headerString.AppendFormat("{0}:{1}\n",
-                    headerName,
+                    headerName.ToLower(),
                     CompressWhitespaceRegex.Replace(sortedHeaders[headerName].Trim(), " "));
             }
 
