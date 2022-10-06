@@ -24,10 +24,10 @@ namespace FikaAmazonAPI.Utils
             //NorthAmerica
             list.Add(US); list.Add(Canada); list.Add(Mexico); list.Add(Brazil);
             //Europe
-            list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Netherlands);
-            list.Add(Germany); list.Add(Italy); list.Add(Sweden); list.Add(Egypt);
-            list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates); list.Add(India);
-            list.Add(SaudiArabia);
+            list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Belgium);
+            list.Add(Netherlands); list.Add(Germany); list.Add(Italy); list.Add(Sweden);
+            list.Add(Egypt); list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates);
+            list.Add(India); list.Add(SaudiArabia);
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
 
@@ -40,13 +40,12 @@ namespace FikaAmazonAPI.Utils
             //NorthAmerica
             list.Add(US); list.Add(Canada); list.Add(Mexico); list.Add(Brazil);
             //Europe
-            list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Netherlands);
-            list.Add(Germany); list.Add(Italy); list.Add(Sweden); list.Add(Egypt);
-            list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates); list.Add(India);
-            list.Add(SaudiArabia);
+            list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Belgium);
+            list.Add(Netherlands);list.Add(Germany); list.Add(Italy); list.Add(Sweden); 
+            list.Add(Egypt);list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates); 
+            list.Add(India); list.Add(SaudiArabia);
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
-
             return list.FirstOrDefault(a => a.Country.Code == countryCode);
         }
 
