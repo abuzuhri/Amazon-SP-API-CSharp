@@ -1,5 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
-using FikaAmazonAPI.ConstructFeed;
+﻿using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Parameter.ListingItem;
@@ -7,7 +6,6 @@ using FikaAmazonAPI.Parameter.ListingsItems;
 using FikaAmazonAPI.ReportGeneration;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -42,11 +40,6 @@ namespace FikaAmazonAPI.SampleCode
 
             ReportManager reportManageree = new ReportManager(amazonConnection);
             var allll = reportManageree.GetInventoryAging();
-
-            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
-            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.CollectibleLikeNew }));
-            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem }));
-            Console.WriteLine(JsonConvert.SerializeObject(new InboundShipmentPlanRequestItem() { Condition = AmazonSpApiSDK.Models.FulfillmentInbound.Condition.UsedGood }));
 
 
 
@@ -295,27 +288,7 @@ namespace FikaAmazonAPI.SampleCode
 
 
 
-            string text = System.IO.File.ReadAllText(@"C:\Users\tareq\Downloads\Beispiel_Upload.txt");
 
-            var feedresultTXT = amazonConnection.Feed.SubmitFeed(text
-                                                    , FeedType.POST_FLAT_FILE_INVLOADER_DATA
-                                                    , new List<string>() { MarketPlace.UnitedArabEmirates.ID }
-                                                    , null
-                                                    , ContentType.TXT);
-
-
-            string pathURL = string.Empty;
-            while (pathURL == string.Empty)
-            {
-                Thread.Sleep(1000 * 30);
-                var feedOutput = amazonConnection.Feed.GetFeed(feedresultTXT);
-                if (feedOutput.ProcessingStatus == AmazonSpApiSDK.Models.Feeds.Feed.ProcessingStatusEnum.DONE)
-                {
-                    var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
-
-                    pathURL = outPut.Url;
-                }
-            }
 
 
 

@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="CarrierCode">Identifies the carrier who will deliver the shipment to the recipient. (required).</param>
         /// <param name="TrackingNumber">The tracking number, if provided, can be used to obtain tracking and delivery information..</param>
         /// <param name="EstimatedArrivalDateTime">The estimated arrival date and time of the package, in ISO 8601 date time format..</param>
-        public FulfillmentShipmentPackage(int? PackageNumber = default(int?), string CarrierCode = default(string), string TrackingNumber = default(string), Timestamp EstimatedArrivalDateTime = default(Timestamp))
+        public FulfillmentShipmentPackage(int? PackageNumber = default(int?), string CarrierCode = default(string), string TrackingNumber = default(string), DateTime? EstimatedArrivalDate = null)
         {
             // to ensure "PackageNumber" is required (not null)
             if (PackageNumber == null)
@@ -57,7 +57,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.CarrierCode = CarrierCode;
             }
             this.TrackingNumber = TrackingNumber;
-            this.EstimatedArrivalDateTime = EstimatedArrivalDateTime;
+            this.EstimatedArrivalDate = EstimatedArrivalDate;
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The estimated arrival date and time of the package, in ISO 8601 date time format.
         /// </summary>
         /// <value>The estimated arrival date and time of the package, in ISO 8601 date time format.</value>
-        [DataMember(Name = "EstimatedArrivalDateTime", EmitDefaultValue = false)]
-        public Timestamp EstimatedArrivalDateTime { get; set; }
+        [DataMember(Name = "EstimatedArrivalDate", EmitDefaultValue = false)]
+        public DateTime? EstimatedArrivalDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  PackageNumber: ").Append(PackageNumber).Append("\n");
             sb.Append("  CarrierCode: ").Append(CarrierCode).Append("\n");
             sb.Append("  TrackingNumber: ").Append(TrackingNumber).Append("\n");
-            sb.Append("  EstimatedArrivalDateTime: ").Append(EstimatedArrivalDateTime).Append("\n");
+            sb.Append("  EstimatedArrivalDate: ").Append(EstimatedArrivalDate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -150,9 +150,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.TrackingNumber.Equals(input.TrackingNumber))
                 ) &&
                 (
-                    this.EstimatedArrivalDateTime == input.EstimatedArrivalDateTime ||
-                    (this.EstimatedArrivalDateTime != null &&
-                    this.EstimatedArrivalDateTime.Equals(input.EstimatedArrivalDateTime))
+                    this.EstimatedArrivalDate == input.EstimatedArrivalDate ||
+                    (this.EstimatedArrivalDate != null &&
+                    this.EstimatedArrivalDate.Equals(input.EstimatedArrivalDate))
                 );
         }
 
@@ -171,8 +171,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.CarrierCode.GetHashCode();
                 if (this.TrackingNumber != null)
                     hashCode = hashCode * 59 + this.TrackingNumber.GetHashCode();
-                if (this.EstimatedArrivalDateTime != null)
-                    hashCode = hashCode * 59 + this.EstimatedArrivalDateTime.GetHashCode();
+                if (this.EstimatedArrivalDate != null)
+                    hashCode = hashCode * 59 + this.EstimatedArrivalDate.GetHashCode();
                 return hashCode;
             }
         }

@@ -241,7 +241,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="sellerDisplayName">The seller’s friendly name registered in the marketplace..</param>
         /// <param name="shippingAddress">shippingAddress.</param>
         /// <param name="buyerInfo">buyerInfo.</param>
-        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum orderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
+        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum orderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
         {
             // to ensure "amazonOrderId" is required (not null)
             if (amazonOrderId == null)
@@ -308,6 +308,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.PromiseResponseDueDate = promiseResponseDueDate;
             this.IsEstimatedShipDateSet = isEstimatedShipDateSet;
             this.IsSoldByAB = isSoldByAB;
+            this.IsIBA = isIBA;
             this.DefaultShipFromLocationAddress = defaultShipFromLocationAddress;
             this.FulfillmentInstruction = fulfillmentInstruction;
             this.IsISPU = isISPU;
@@ -525,6 +526,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public bool? IsSoldByAB { get; set; }
 
         /// <summary>
+        /// When true, the item within this order was bought and re-sold by Amazon Business EU SARL (ABEU). By buying and instantly re-selling your items, ABEU becomes the seller of record, making your inventory available for sale to customers who would not otherwise purchase from a third-party seller.
+        /// </summary>
+        /// <value>When true, the item within this order was bought and re-sold by Amazon Business EU SARL (ABEU). By buying and instantly re-selling your items, ABEU becomes the seller of record, making your inventory available for sale to customers who would not otherwise purchase from a third-party seller.</value>
+        [DataMember(Name = "IsIBA", EmitDefaultValue = false)]
+        public bool? IsIBA { get; set; }
+
+        /// <summary>
         /// The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location.
         /// </summary>
         /// <value>The recommended location for the seller to ship the items from. It is calculated at checkout. The seller may or may not choose to ship from this location.</value>
@@ -612,6 +620,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  PromiseResponseDueDate: ").Append(PromiseResponseDueDate).Append("\n");
             sb.Append("  IsEstimatedShipDateSet: ").Append(IsEstimatedShipDateSet).Append("\n");
             sb.Append("  IsSoldByAB: ").Append(IsSoldByAB).Append("\n");
+            sb.Append("  IsIBA: ").Append(IsIBA).Append("\n");
             sb.Append("  DefaultShipFromLocationAddress: ").Append(DefaultShipFromLocationAddress).Append("\n");
             sb.Append("  FulfillmentInstruction: ").Append(FulfillmentInstruction).Append("\n");
             sb.Append("  IsISPU: ").Append(IsISPU).Append("\n");
@@ -819,6 +828,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.IsSoldByAB.Equals(input.IsSoldByAB))
                 ) &&
                 (
+                    this.IsIBA == input.IsIBA ||
+                    (this.IsIBA != null &&
+                    this.IsIBA.Equals(input.IsIBA))
+                ) &&
+                (
                     this.DefaultShipFromLocationAddress == input.DefaultShipFromLocationAddress ||
                     (this.DefaultShipFromLocationAddress != null &&
                     this.DefaultShipFromLocationAddress.Equals(input.DefaultShipFromLocationAddress))
@@ -930,6 +944,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.IsEstimatedShipDateSet.GetHashCode();
                 if (this.IsSoldByAB != null)
                     hashCode = hashCode * 59 + this.IsSoldByAB.GetHashCode();
+                if (this.IsIBA != null)
+                    hashCode = hashCode * 59 + this.IsIBA.GetHashCode();
                 if (this.DefaultShipFromLocationAddress != null)
                     hashCode = hashCode * 59 + this.DefaultShipFromLocationAddress.GetHashCode();
                 if (this.FulfillmentInstruction != null)
