@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
         public async Task<string> GetAuthorizationCodeAsync(ParameterAuthorizationCode parameter)
         {
             var param = parameter.getParameters();
-            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.GET, param, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.Get, param, tokenDataType: TokenDataType.Grantless);
 
             var response = await ExecuteRequestAsync<GetAuthorizationCodeResponse>(Utils.RateLimitType.Authorization_GetAuthorizationCode);
             if (response != null && response.Payload != null)

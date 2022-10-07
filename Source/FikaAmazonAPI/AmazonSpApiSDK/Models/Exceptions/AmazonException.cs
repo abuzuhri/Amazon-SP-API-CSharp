@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
     {
         public ExceptionResponse Response { get; set; }
 
-        public AmazonException(string msg, IRestResponse response = null) : base(msg)
+        public AmazonException(string msg, RestResponse response = null) : base(msg)
         {
             if (response != null)
             {
@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     public class AmazonNotFoundException : AmazonException
     {
-        public AmazonNotFoundException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonNotFoundException(string msg, RestResponse response = null) : base(msg, response)
         {
 
         }
@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     public class AmazonUnauthorizedException : AmazonException
     {
-        public AmazonUnauthorizedException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonUnauthorizedException(string msg, RestResponse response = null) : base(msg, response)
         {
 
         }
@@ -38,14 +38,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     public class AmazonInvalidInputException : AmazonException
     {
-        public AmazonInvalidInputException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonInvalidInputException(string msg, RestResponse response = null) : base(msg, response)
         {
 
         }
     }
     public class AmazonQuotaExceededException : AmazonException
     {
-        public AmazonQuotaExceededException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonQuotaExceededException(string msg, RestResponse response = null) : base(msg, response)
         {
 
         }
@@ -53,7 +53,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     public class AmazonInvalidSignatureException : AmazonException
     {
-        public AmazonInvalidSignatureException(string msg, IRestResponse response = null) : base(msg, response)
+        public AmazonInvalidSignatureException(string msg, RestResponse response = null) : base(msg, response)
         {
 
         }
@@ -62,7 +62,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
     public class AmazonProcessingReportDeserializeException : AmazonException
     {
         public string ReportContent { get; set; }
-        public AmazonProcessingReportDeserializeException(string msg, string reportContent, IRestResponse response = null) : base(msg, response)
+        public AmazonProcessingReportDeserializeException(string msg, string reportContent, RestResponse response = null) : base(msg, response)
         {
             ReportContent = reportContent;
         }
