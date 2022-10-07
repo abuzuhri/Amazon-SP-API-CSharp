@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CancelShipmentAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CancelShipmentAsync(string shipmentId)
         {
-            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.CancelShipment(shipmentId), RestSharp.Method.POST);
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.CancelShipment(shipmentId), RestSharp.Method.Post);
             var response = await ExecuteRequestAsync<CancelShipmentResponse>(RateLimitType.ShippingV2_CancelShipment);
             if (response != null)
                 return true;
@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => PurchaseShipmentAsync(purchaseShipmentRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<PurchaseShipmentResult> PurchaseShipmentAsync(PurchaseShipmentRequest purchaseShipmentRequest)
         {
-            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.PurchaseShipment, RestSharp.Method.POST, postJsonObj: purchaseShipmentRequest);
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.PurchaseShipment, RestSharp.Method.Post, postJsonObj: purchaseShipmentRequest);
             var response = await ExecuteRequestAsync<PurchaseShipmentResponse>(RateLimitType.ShippingV2_PurchaseShipment);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -39,7 +39,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetRatesAsync(getRatesRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetRatesResult> GetRatesAsync(GetRatesRequest getRatesRequest)
         {
-            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetRates, RestSharp.Method.POST, postJsonObj: getRatesRequest);
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetRates, RestSharp.Method.Post, postJsonObj: getRatesRequest);
             var response = await ExecuteRequestAsync<GetRatesResponse>(RateLimitType.ShippingV2_GetRates);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetTrackingAsync(carrierId, trackingId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetTrackingResult> GetTrackingAsync(string carrierId, string trackingId)
         {
-            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetTracking(carrierId, trackingId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetTracking(carrierId, trackingId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetTrackingResponse>(RateLimitType.ShippingV2_GetTracking);
             if (response != null && response.Payload != null)
                 return response.Payload;
