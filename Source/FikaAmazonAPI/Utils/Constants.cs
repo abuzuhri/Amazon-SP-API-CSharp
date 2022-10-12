@@ -715,5 +715,19 @@ namespace FikaAmazonAPI.Utils
         //    P1M
         //}
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PoItemState
+        {
+            Cancelled
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PurchaseOrderState
+        {
+            New,
+            Acknowledged,
+            Closed
+        }
+
     }
 }

@@ -179,5 +179,10 @@
         ShippingV2_DirectPurchaseShipment,
         ShippingV2_GetTracking,
         ShippingV2_GetAdditionalInputs,
+
+        VendorOrdersV1_GetPurchaseOrders,
+        VendorOrdersV1_GetPurchaseOrder,
+        VendorOrdersV1_SubmitAcknowledgement
+
     }
 }
