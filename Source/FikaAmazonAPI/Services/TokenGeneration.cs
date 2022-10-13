@@ -64,7 +64,7 @@ namespace FikaAmazonAPI.Services
             return JsonConvert.DeserializeObject<TokenResponse>(data);
         }
 
-        public static async Task<IRestRequest> SignWithSTSKeysAndSecurityTokenAsync(IRestRequest restRequest, string host, AmazonCredential amazonCredential)
+        public static async Task<RestRequest> SignWithSTSKeysAndSecurityTokenAsync(RestRequest restRequest, string host, AmazonCredential amazonCredential)
         {
             var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             if (dataToken == null)

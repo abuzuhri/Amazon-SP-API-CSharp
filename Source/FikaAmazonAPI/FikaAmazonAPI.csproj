@@ -7,9 +7,9 @@
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.4.32</Version>
-    <AssemblyVersion>1.4.32</AssemblyVersion>
-    <FileVersion>1.4.32</FileVersion>
+    <Version>1.5.0-alpha1</Version>
+    <AssemblyVersion>1.5.0</AssemblyVersion>
+    <FileVersion>1.5.0</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -39,7 +39,7 @@
     <PackageReference Include="AWSSDK.SQS" Version="3.7.2.86" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="RestSharp" Version="106.12.0" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
