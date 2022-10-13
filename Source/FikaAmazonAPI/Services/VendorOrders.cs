@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.Services
             do
             {
                 var queryParameters = searchOrderList.getParameters();
-                await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetPurchaseOrders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
+                await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetPurchaseOrders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
                 GetPurchaseOrdersResponse response = await ExecuteRequestAsync<GetPurchaseOrdersResponse>(RateLimitType.VendorOrdersV1_GetPurchaseOrders);
                 nextToken = response.Payload?.Pagination?.NextToken;
                 searchOrderList.nextToken = nextToken;
@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetPurchaseOrderAsync(PurchaseOrderNumber)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetPurchaseOrderAsync(string PurchaseOrderNumber)
         {
-            await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetPurchaseOrder(PurchaseOrderNumber), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetPurchaseOrder(PurchaseOrderNumber), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetPurchaseOrderResponse>(RateLimitType.VendorOrdersV1_GetPurchaseOrder);
             return response.Payload;
         }
@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => SubmitAcknowledgementAsync(submitAcknowledgementRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<TransactionId> SubmitAcknowledgementAsync(SubmitAcknowledgementRequest submitAcknowledgementRequest)
         {
-            await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.SubmitAcknowledgement, RestSharp.Method.POST, postJsonObj: submitAcknowledgementRequest);
+            await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.SubmitAcknowledgement, RestSharp.Method.Post, postJsonObj: submitAcknowledgementRequest);
             var response = await ExecuteRequestAsync<SubmitAcknowledgementResponse>(RateLimitType.VendorOrdersV1_SubmitAcknowledgement);
             if (response != null && response.Payload != null)
                 return response.Payload;
