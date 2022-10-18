@@ -184,9 +184,10 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.VendorDirectFulfillmentOrdersV1_GetOrder,       new RateLimits(10.0M, 10) },
               { RateLimitType.VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement, new RateLimits(10.0M, 10) },
 
-              { RateLimitType.VendorOrdersV1_GetPurchaseOrders,     new RateLimits(10.0M, 10) },
-              { RateLimitType.VendorOrdersV1_GetPurchaseOrder,      new RateLimits(10.0M, 10) },
-              { RateLimitType.VendorOrdersV1_SubmitAcknowledgement, new RateLimits(10.0M, 10) },
+              { RateLimitType.VendorOrdersV1_GetPurchaseOrders,         new RateLimits(10.0M, 10) },
+              { RateLimitType.VendorOrdersV1_GetPurchaseOrder,          new RateLimits(10.0M, 10) },
+              { RateLimitType.VendorOrdersV1_SubmitAcknowledgement,     new RateLimits(10.0M, 10) },
+              { RateLimitType.VendorOrdersV1_GetPurchaseOrdersStatus,   new RateLimits(10.0M, 10) },
             };
         }
     }

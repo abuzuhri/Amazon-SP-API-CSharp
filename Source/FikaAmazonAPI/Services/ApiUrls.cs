@@ -374,6 +374,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/acknowledgements";
             }
+            public static string GetPurchaseOrdersStatus
+            {
+                get => $"{_resourceBaseUrl}/purchaseOrdersStatus";
+            }
         }
         protected class UploadApiUrls
         {

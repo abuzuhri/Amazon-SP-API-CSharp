@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.Search;
 using System;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders.Constants;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.VendorOrders

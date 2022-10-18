@@ -32,6 +32,24 @@ namespace FikaAmazonAPI.Services
             return orderList;
         }
 
+        public List<OrderStatus> GetPurchaseOrdersStatus(ParameterVendorOrdersGetPurchaseOrdersStatus searchOrderList) =>
+            Task.Run(() => GetPurchaseOrdersStatusAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<OrderStatus>> GetPurchaseOrdersStatusAsync(ParameterVendorOrdersGetPurchaseOrdersStatus searchOrderList)
+        {
+            var orderStatusList = new List<OrderStatus>();
+            string nextToken;
+            do
+            {
+                var queryParameters = searchOrderList.getParameters();
+                await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetPurchaseOrdersStatus, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
+                GetPurchaseOrdersStatusResponse response = await ExecuteRequestAsync<GetPurchaseOrdersStatusResponse>(RateLimitType.VendorOrdersV1_GetPurchaseOrdersStatus);
+                nextToken = response.Payload?.Pagination?.NextToken;
+                searchOrderList.nextToken = nextToken;
+                orderStatusList.AddRange(response.Payload.OrdersStatus);
+            } while (!string.IsNullOrEmpty(nextToken));
+            return orderStatusList;
+        }
+
         public Order GetPurchaseOrder(string PurchaseOrderNumber) =>
             Task.Run(() => GetPurchaseOrderAsync(PurchaseOrderNumber)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetPurchaseOrderAsync(string PurchaseOrderNumber)
