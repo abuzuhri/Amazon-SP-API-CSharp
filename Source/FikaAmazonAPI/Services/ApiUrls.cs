@@ -362,6 +362,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             }
             public static string GetOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
         }
+        protected class VendorOrdersApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/vendor/orders/v1";
+            public static string GetPurchaseOrders
+            {
+                get => $"{_resourceBaseUrl}/purchaseOrders";
+            }
+            public static string GetPurchaseOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
+            public static string SubmitAcknowledgement
+            {
+                get => $"{_resourceBaseUrl}/acknowledgements";
+            }
+        }
         protected class UploadApiUrls
         {
             private readonly static string _resourceBaseUrl = "/uploads/2020-11-01";

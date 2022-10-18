@@ -40,7 +40,7 @@ namespace FikaAmazonAPI
         public FulFillmentInboundService FulFillmentInbound => this._FulFillmentInbound ?? throw _NoCredentials;
         public FulFillmentOutboundService FulFillmentOutbound => this._FulFillmentOutbound ?? throw _NoCredentials;
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
-
+        public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
 
 
         private OrderService _Orders { get; set; }
@@ -77,6 +77,7 @@ namespace FikaAmazonAPI
         private FulFillmentInboundService _FulFillmentInbound { get; set; }
         private FulFillmentOutboundService _FulFillmentOutbound { get; set; }
         private VendorDirectFulfillmentOrderService _VendorDirectFulfillmentOrders { get; set; }
+        private VendorOrderService _VendorOrders { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
@@ -133,6 +134,7 @@ namespace FikaAmazonAPI
             this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials);
             this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
+            this._VendorOrders = new VendorOrderService(this.Credentials);
         }
     }
 }
