@@ -49,6 +49,8 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
+            var headers = amazonConnection.ProductPricing.LastResponseHeader;
+
 
             var productsttt = reportManageree.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
 
