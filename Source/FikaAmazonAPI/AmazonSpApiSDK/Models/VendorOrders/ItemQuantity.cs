@@ -8,9 +8,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
-    /// <summary>
-    /// Details of quantity ordered.
-    /// </summary>
     [DataContract]
     public partial class ItemQuantity : IEquatable<ItemQuantity>, IValidatableObject
     {
@@ -40,6 +37,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <param name="amount">Acknowledged quantity. This value should not be zero..</param>
         /// <param name="unitOfMeasure">Unit of measure for the acknowledged quantity..</param>
+        [JsonConstructorAttribute]
+        public ItemQuantity() { }
         public ItemQuantity(int? amount = default(int?), UnitOfMeasureEnum? unitOfMeasure = default(UnitOfMeasureEnum?), int? unitSize = default(int?))
         {
             this.Amount = amount;
