@@ -38,6 +38,14 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
             });
 
+            var urlNew = "https://tortuga-prod-eu.s3-eu-west-1.amazonaws.com/%2FNinetyDays/amzn1.tortuga.4.eu.dc22ade9-9019-4a81-abf8-a8bdb149cc40.T1GGA0FP21DYTU?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221022T062953Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=AKIAX2ZVOZFBEDHGMMEW%2F20221022%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Signature=d449493eeeb8a758de9173752af16255638f3ad8b178bdfe89bf50a898672a28";
+            var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(urlNew);
+
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            feedsSample.SubmitFeedAddProductMessage();
+            feedsSample.SubmitFeedInventory();
+            feedsSample.SubmitFeedPRICING(50, "8432225129778...");
+
             ReportManager reportManageree = new ReportManager(amazonConnection);
             var allll = reportManageree.GetInventoryAging();
 
@@ -56,7 +64,7 @@ namespace FikaAmazonAPI.SampleCode
 
             Thread.Sleep(1000 * 60 * 15);
 
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+
             double priceNow = 62;
             double minPrice = 0.12;
             while (true)

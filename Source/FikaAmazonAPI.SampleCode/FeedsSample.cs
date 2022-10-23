@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.ConstructFeed;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
+using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
@@ -85,9 +86,9 @@ namespace FikaAmazonAPI.SampleCode
             var list = new List<InventoryMessage>();
             list.Add(new InventoryMessage()
             {
-                SKU = "8201031206122...",
-                Quantity = 2,
-                FulfillmentLatency = "11",
+                SKU = "8432225129778...",
+                Quantity = 0,
+                FulfillmentLatency = "2",
             });
             createDocument.AddInventoryMessage(list);
             var xml = createDocument.GetXML();
@@ -106,23 +107,53 @@ namespace FikaAmazonAPI.SampleCode
             var list = new List<ProductMessage>();
             list.Add(new ProductMessage()
             {
-                SKU = "8201031206122...",
+                SKU = "8432225129778...",
                 StandardProductID = new ConstructFeed.Messages.StandardProductID()
                 {
                     Type = "ASIN",
-                    Value = "B08CDYB2DC"
-                },
-                //DescriptionData = new DescriptionData()
-                //{
-                //    MaxOrderQuantity = 2,
-                //    Title = "REBUNE RE-2061-1Hot Air Styler Hair Styler 1000 Watts 3 In 1"
-                //}
+                    Value = "B00M9B66BU"
+                }
             });
             createDocument.AddProductMessage(list, OperationType.Update);
             var xml = createDocument.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
 
+
+            string ResultFeedDocumentId = string.Empty;
+            while (string.IsNullOrEmpty(ResultFeedDocumentId))
+            {
+                var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+                if (feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.DONE)
+                {
+                    var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+                    var reportOutput = outPut.Url;
+
+                    var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(reportOutput);
+
+                    Console.WriteLine("Amazon KSA Change Price");
+                    Console.WriteLine("MessagesProcessed=" + processingReport.ProcessingSummary.MessagesProcessed);
+                    Console.WriteLine("MessagesSuccessful= " + processingReport.ProcessingSummary.MessagesSuccessful);
+                    Console.WriteLine("MessagesWithError=" + processingReport.ProcessingSummary.MessagesWithError);
+                    Console.WriteLine("MessagesWithWarning=" + processingReport.ProcessingSummary.MessagesWithWarning);
+
+                    if (processingReport.Result != null && processingReport.Result.Count > 0)
+                    {
+                        foreach (var itm in processingReport.Result)
+                        {
+                            Console.WriteLine("ResultDescription=" + itm.AdditionalInfo?.SKU ?? string.Empty + " > " + itm.ResultDescription);
+                        }
+                    }
+
+                    break;
+                }
+
+                if (!(feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.INPROGRESS ||
+                    feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.INQUEUE))
+                    break;
+                else Thread.Sleep(10000);
+            }
         }
         public async void SubmitFeedPRICING(double PRICE, string SKU)
         {
