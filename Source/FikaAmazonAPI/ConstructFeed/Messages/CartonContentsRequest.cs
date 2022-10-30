@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace FikaAmazonAPI.ConstructFeed.Messages
@@ -8,8 +9,15 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     {
         [XmlElement(ElementName = "ShipmentId")]
         public string ShipmentId { get; set; }
+
         [XmlElement(ElementName = "NumCartons")]
-        public int NumCartons { get { return Carton.Count; } }
+        public int NumCartons
+        {
+            get { return Carton.Count; }
+            [Obsolete("Only used for xml serialization", error: true)]
+            set { throw new NotSupportedException(); }
+        }
+
         [XmlElement(ElementName = "Carton")]
         public List<Carton> Carton { get; set; } = new List<Carton>();
     }
