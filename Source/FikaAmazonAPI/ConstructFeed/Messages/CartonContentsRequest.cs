@@ -40,5 +40,11 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         public int QuantityShipped { get; set; }
         [XmlElement(ElementName = "QuantityInCase")]
         public int QuantityInCase { get; set; }
+        [XmlElement(ElementName = "ExpirationDate")]
+        public Nullable<DateTime> ExpirationDate { get; set; }
+
+        [XmlIgnore]
+        public bool ExpirationDateSpecified { get { return ExpirationDate != null; } }
+
     }
 }
