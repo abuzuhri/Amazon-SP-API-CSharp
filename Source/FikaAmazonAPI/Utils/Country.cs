@@ -32,6 +32,7 @@
         public static Country IT { get { return new Country("IT", "Italy", "it", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.it"); } }
         public static Country SE { get { return new Country("SE", "Sweden", "se", "https://sellercentral.amazon.se", "https://vendorcentral.amazon.se"); } }
         public static Country PL { get { return new Country("PL", "Poland", "pl", "https://sellercentral.amazon.pl", "https://vendorcentral.amazon.pl"); } }
+        public static Country BE { get { return new Country("BE", "Belgium", "be", "https://sellercentral.amazon.com.be", "https://vendorcentral.amazon.com.be"); } }
         public static Country EG { get { return new Country("EG", "Egypt", "eg", "https://sellercentral.amazon.eg", "https://vendorcentral.amazon.me"); } }
         public static Country TR { get { return new Country("TR", "Turkey", "com.tr", "https://sellercentral.amazon.com.tr", "https://vendorcentral.amazon.com.tr"); } }
         public static Country AE { get { return new Country("AE", "United Arab Emirates", "ae", "https://sellercentral.amazon.ae", "https://vendorcentral.amazon.me"); } }

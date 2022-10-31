@@ -26,7 +26,8 @@ namespace FikaAmazonAPI.Utils
             //Europe
             list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Netherlands); 
             list.Add(Germany); list.Add(Italy); list.Add(Sweden); list.Add(Egypt);
-            list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates); list.Add(India);
+            list.Add(Poland); list.Add(Belgium); list.Add(Turkey); list.Add(UnitedArabEmirates); 
+            list.Add(India);
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
 
@@ -51,6 +52,7 @@ namespace FikaAmazonAPI.Utils
         public static MarketPlace Sweden { get { return new MarketPlace("A2NODRKZP88ZB9", Region.Europe, Country.SE); } }
         public static MarketPlace Egypt { get { return new MarketPlace("ARBP9OOSHTCHU", Region.Europe, Country.EG); } }
         public static MarketPlace Poland { get { return new MarketPlace("A1C3SOZRARQ6R3", Region.Europe, Country.PL); } }
+        public static MarketPlace Belgium { get { return new MarketPlace("AMEN7PMS3EDWL", Region.Europe, Country.BE); } }
         public static MarketPlace Turkey { get { return new MarketPlace("A33AVAJ2PDY3EV", Region.Europe, Country.TR); } }
         public static MarketPlace UnitedArabEmirates { get { return new MarketPlace("A2VIGQ35RCS4UG", Region.Europe, Country.AE); } }
         public static MarketPlace India { get { return new MarketPlace("A21TJRUUN4KGV", Region.Europe, Country.IN); } }
