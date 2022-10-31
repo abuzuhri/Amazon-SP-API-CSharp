@@ -32,27 +32,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <summary>
         /// Initializes a new instance of the <see cref="DeliveryWindow" /> class.
         /// </summary>
-        /// <param name="StartDateTime">The date and time of the start of the Scheduled Delivery window, in ISO 8601 date time format. (required).</param>
-        /// <param name="EndDateTime">The date and time of the end of the Scheduled Delivery window, in ISO 8601 date time format. (required).</param>
-        public DeliveryWindow(Timestamp StartDateTime = default(Timestamp), Timestamp EndDateTime = default(Timestamp))
+        /// <param name="StartDate">The date and time of the start of the Scheduled Delivery window, in ISO 8601 date time format. (required).</param>
+        /// <param name="EndDate">The date and time of the end of the Scheduled Delivery window, in ISO 8601 date time format. (required).</param>
+        public DeliveryWindow(DateTime? StartDate = null, DateTime? EndDate = null)
         {
             // to ensure "StartDateTime" is required (not null)
-            if (StartDateTime == null)
+            if (StartDate == null)
             {
                 throw new InvalidDataException("StartDateTime is a required property for DeliveryWindow and cannot be null");
             }
             else
             {
-                this.StartDateTime = StartDateTime;
+                this.StartDate = StartDate;
             }
             // to ensure "EndDateTime" is required (not null)
-            if (EndDateTime == null)
+            if (EndDate == null)
             {
                 throw new InvalidDataException("EndDateTime is a required property for DeliveryWindow and cannot be null");
             }
             else
             {
-                this.EndDateTime = EndDateTime;
+                this.EndDate = EndDate;
             }
         }
 
@@ -60,15 +60,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The date and time of the start of the Scheduled Delivery window, in ISO 8601 date time format.
         /// </summary>
         /// <value>The date and time of the start of the Scheduled Delivery window, in ISO 8601 date time format.</value>
-        [DataMember(Name = "StartDateTime", EmitDefaultValue = false)]
-        public Timestamp StartDateTime { get; set; }
+        [DataMember(Name = "StartDate", EmitDefaultValue = false)]
+        public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// The date and time of the end of the Scheduled Delivery window, in ISO 8601 date time format.
         /// </summary>
         /// <value>The date and time of the end of the Scheduled Delivery window, in ISO 8601 date time format.</value>
-        [DataMember(Name = "EndDateTime", EmitDefaultValue = false)]
-        public Timestamp EndDateTime { get; set; }
+        [DataMember(Name = "EndDate", EmitDefaultValue = false)]
+        public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,8 +78,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         {
             var sb = new StringBuilder();
             sb.Append("class DeliveryWindow {\n");
-            sb.Append("  StartDateTime: ").Append(StartDateTime).Append("\n");
-            sb.Append("  EndDateTime: ").Append(EndDateTime).Append("\n");
+            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
+            sb.Append("  EndDate: ").Append(EndDate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,14 +115,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 
             return
                 (
-                    this.StartDateTime == input.StartDateTime ||
-                    (this.StartDateTime != null &&
-                    this.StartDateTime.Equals(input.StartDateTime))
+                    this.StartDate == input.StartDate ||
+                    (this.StartDate != null &&
+                    this.StartDate.Equals(input.StartDate))
                 ) &&
                 (
-                    this.EndDateTime == input.EndDateTime ||
-                    (this.EndDateTime != null &&
-                    this.EndDateTime.Equals(input.EndDateTime))
+                    this.EndDate == input.EndDate ||
+                    (this.EndDate != null &&
+                    this.EndDate.Equals(input.EndDate))
                 );
         }
 
@@ -135,10 +135,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.StartDateTime != null)
-                    hashCode = hashCode * 59 + this.StartDateTime.GetHashCode();
-                if (this.EndDateTime != null)
-                    hashCode = hashCode * 59 + this.EndDateTime.GetHashCode();
+                if (this.StartDate != null)
+                    hashCode = hashCode * 59 + this.StartDate.GetHashCode();
+                if (this.EndDate != null)
+                    hashCode = hashCode * 59 + this.EndDate.GetHashCode();
                 return hashCode;
             }
         }

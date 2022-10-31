@@ -10,27 +10,30 @@ namespace FikaAmazonAPI.ReportGeneration
         public ReportDateRange(DateTime startDate, DateTime endDate) { StartDate = startDate; EndDate = endDate;}
 
 
-        public static IList<ReportDateRange> GetDateRange(DateTime startDate,DateTime endDate,int MaxDays)
-        {
-            List<ReportDateRange> list=new List<ReportDateRange>();
+		public static IList<ReportDateRange> GetDateRange(DateTime startDate, DateTime endDate, int MaxDays)
+		{
+			List<ReportDateRange> list = new List<ReportDateRange>();
+			DateTime tempEnd = startDate;
+			DateTime start = startDate;
 
-            double totalDays = (endDate - startDate).TotalDays;
-            int range = (int)(totalDays / MaxDays);
-            int remind = (int)(totalDays % MaxDays);
-            if (remind > 0)
-                range++;
+			while (true)
+			{
+				tempEnd = tempEnd.AddDays(MaxDays);
+				if (tempEnd > endDate)
+				{
+					tempEnd = endDate;
+					list.Add(new ReportDateRange(start, tempEnd));
+					break;
+				}
+				else
+				{
+					list.Add(new ReportDateRange(start, tempEnd));
+					start = tempEnd.AddSeconds(1);
+				}
 
-            for (int i = 0; i < range; i++)
-            {
-                var newStartDate = startDate.AddDays(i * MaxDays);
-                var newEndDate = newStartDate.AddDays(MaxDays);
-                if (i == range - 1)
-                    newEndDate = endDate;
+			}
 
-                list.Add(new ReportDateRange(newStartDate, newEndDate));
-            }
-
-            return list;
+			return list;
         }
     }
 }

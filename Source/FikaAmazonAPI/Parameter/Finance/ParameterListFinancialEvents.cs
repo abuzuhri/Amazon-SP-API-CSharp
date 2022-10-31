@@ -9,5 +9,6 @@ namespace FikaAmazonAPI.Parameter.Finance
         public DateTime? PostedAfter { get; set; }
         public DateTime? PostedBefore { get; set; }
         public string NextToken { get; set; }
+        public int? MaxNumberOfPages { get; set; }
     }
 }

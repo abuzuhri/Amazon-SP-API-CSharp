@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
         public async Task<ItemEligibilityPreview> GetItemEligibilityPreviewAsync(ParameterGetItemEligibilityPreview parameterGetItemEligibilityPreview)
         {
             var parameter = parameterGetItemEligibilityPreview.getParameters();
-            await CreateAuthorizedRequestAsync(FBAInboundEligibiltyApiUrls.GetItemEligibilityPreview, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FBAInboundEligibiltyApiUrls.GetItemEligibilityPreview, RestSharp.Method.Get, parameter);
             var response = await ExecuteRequestAsync<GetItemEligibilityPreviewResponse>(RateLimitType.FBAInboundEligibility_GetItemEligibilityPreview);
             if (response != null && response.Payload != null)
                 return response.Payload;

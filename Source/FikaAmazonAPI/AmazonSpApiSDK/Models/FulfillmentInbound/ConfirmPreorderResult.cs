@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <param name="ConfirmedNeedByDate">Date passed in with the NeedByDate parameter. The confirmed shipment must arrive at the Amazon fulfillment center by this date to avoid delivery promise breaks for pre-ordered items. In YYYY-MM-DD format..</param>
         /// <param name="ConfirmedFulfillableDate">Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format..</param>
-        public ConfirmPreorderResult(DateStringType ConfirmedNeedByDate = default(DateStringType), DateStringType ConfirmedFulfillableDate = default(DateStringType))
+        public ConfirmPreorderResult(string ConfirmedNeedByDate = default(string), string ConfirmedFulfillableDate = default(string))
         {
             this.ConfirmedNeedByDate = ConfirmedNeedByDate;
             this.ConfirmedFulfillableDate = ConfirmedFulfillableDate;
@@ -39,14 +39,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>Date passed in with the NeedByDate parameter. The confirmed shipment must arrive at the Amazon fulfillment center by this date to avoid delivery promise breaks for pre-ordered items. In YYYY-MM-DD format.</value>
         [DataMember(Name = "ConfirmedNeedByDate", EmitDefaultValue = false)]
-        public DateStringType ConfirmedNeedByDate { get; set; }
+        public string ConfirmedNeedByDate { get; set; }
 
         /// <summary>
         /// Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format.
         /// </summary>
         /// <value>Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format.</value>
         [DataMember(Name = "ConfirmedFulfillableDate", EmitDefaultValue = false)]
-        public DateStringType ConfirmedFulfillableDate { get; set; }
+        public string ConfirmedFulfillableDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

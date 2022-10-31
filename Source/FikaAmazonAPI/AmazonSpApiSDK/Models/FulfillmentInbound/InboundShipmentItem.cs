@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="QuantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
         /// <param name="ReleaseDate">The date that a pre-order item will be available for sale..</param>
         /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentItem(string ShipmentId = default(string), string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int QuantityShipped = default(int), int QuantityReceived = default(int), int QuantityInCase = default(int), DateStringType ReleaseDate = default(DateStringType), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        public InboundShipmentItem(string ShipmentId = default(string), string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int QuantityShipped = default(int), int QuantityReceived = default(int), int QuantityInCase = default(int), string ReleaseDate = default(string), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -115,7 +115,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date that a pre-order item will be available for sale.</value>
         [DataMember(Name = "ReleaseDate", EmitDefaultValue = false)]
-        public DateStringType ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PrepDetailsList

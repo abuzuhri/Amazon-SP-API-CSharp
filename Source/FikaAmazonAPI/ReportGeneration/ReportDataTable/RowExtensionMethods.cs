@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
@@ -27,7 +28,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         public static decimal GetDecimal(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToDecimal(row[id])
+                       ? Convert.ToDecimal(row[id], CultureInfo.InvariantCulture)
                        : decimal.MinValue;
         }
         public static DateTime GetDateTime(this TableRow row, string id)
@@ -145,7 +146,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         public static double GetDouble(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToDouble(row[id])
+                       ? Convert.ToDouble(row[id], CultureInfo.InvariantCulture)
                        : double.MinValue;
         }
         private static bool AValueWithThisIdExists(IEnumerable<KeyValuePair<string, string>> row, string id)

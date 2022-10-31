@@ -1,9 +1,5 @@
-﻿using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FikaAmazonAPI.Parameter.ProductPricing;
+using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -25,7 +21,7 @@ namespace FikaAmazonAPI.SampleCode
             });
         }
 
-        
+
         public void GetCompetitivePricing()
         {
             var data = amazonConnection.ProductPricing.GetCompetitivePricing(new Parameter.ProductPricing.ParameterGetCompetitivePricing()
@@ -36,7 +32,7 @@ namespace FikaAmazonAPI.SampleCode
             });
         }
 
-        
+
         public void GetListingOffers()
         {
             var data = amazonConnection.ProductPricing.GetListingOffers(new Parameter.ProductPricing.ParameterGetListingOffers()
@@ -48,15 +44,78 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
-        
+
         public void GetItemOffers()
         {
             var data = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers()
             {
                 ItemCondition = ItemCondition.New,
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Asin = "B07K13XL4Y"
+                MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                Asin = "B00CZC5F0G"
             });
+        }
+
+        public async Task GetItemOffersBatch()
+        {
+            var data = await amazonConnection.ProductPricing.GetItemOffersBatchAsync(new Parameter.ProductPricing.ParameterGetItemOffersBatchRequest
+            {
+                ParameterGetItemOffers = new List<Parameter.ProductPricing.ItemOffersRequest>
+                {
+                    new ItemOffersRequest{
+                        HttpMethod = HttpMethodEnum.GET,
+                        QueryParams = new ParameterGetItemOffers{
+                            Asin  = "XXXXXX",
+                            CustomerType = CustomerType.Consumer,
+                            ItemCondition = ItemCondition.New,
+                            MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                        }
+                    },
+                    new ItemOffersRequest{
+                        HttpMethod = HttpMethodEnum.GET,
+                        QueryParams = new ParameterGetItemOffers{
+                            Asin  = "XXXXXXX",
+                            CustomerType = CustomerType.Consumer,
+                            ItemCondition = ItemCondition.New,
+                            MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                        }
+                    }
+                }
+            });
+
+            ;
+
+        }
+
+
+        public async Task GetListingOffersBatch()
+        {
+            var data = await amazonConnection.ProductPricing.GetListingOffersBatchAsync(new Parameter.ProductPricing.ParameterGetListingOffersBatchRequest
+            {
+                ParameterGetListingOffers = new List<Parameter.ProductPricing.ListingOffersRequest>
+                {
+                    new ListingOffersRequest{
+                        HttpMethod = HttpMethodEnum.GET,
+                        QueryParams = new ParameterGetListingOffers{
+                            SellerSKU  = "SellerSKU_01",
+                            CustomerType = CustomerType.Consumer,
+                            ItemCondition = ItemCondition.New,
+                            MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                        }
+                    },
+                    new ListingOffersRequest{
+                        HttpMethod = HttpMethodEnum.GET,
+                        QueryParams = new ParameterGetListingOffers{
+                            SellerSKU  = "SellerSKU_02",
+                            CustomerType = CustomerType.Consumer,
+                            ItemCondition = ItemCondition.New,
+                            MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                        }
+                    }
+                }
+            });
+
+            ;
+
         }
     }
 }

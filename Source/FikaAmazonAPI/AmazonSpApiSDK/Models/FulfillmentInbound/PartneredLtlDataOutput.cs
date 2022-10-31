@@ -58,7 +58,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="IsBillOfLadingAvailable">Indicates whether the bill of lading for the shipment is available. (required).</param>
         /// <param name="PartneredEstimate">The estimated shipping cost using an Amazon-partnered carrier..</param>
         /// <param name="CarrierName">The carrier for the inbound shipment. (required).</param>
-        public PartneredLtlDataOutput(Contact Contact = default(Contact), UnsignedIntType BoxCount = default(UnsignedIntType), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), DateStringType FreightReadyDate = default(DateStringType), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount), Amount AmazonCalculatedValue = default(Amount), DateStringType PreviewPickupDate = default(DateStringType), DateStringType PreviewDeliveryDate = default(DateStringType), SellerFreightClass PreviewFreightClass = default(SellerFreightClass), string AmazonReferenceId = default(string), bool? IsBillOfLadingAvailable = default(bool?), PartneredEstimate PartneredEstimate = default(PartneredEstimate), string CarrierName = default(string))
+        public PartneredLtlDataOutput(Contact Contact = default(Contact), UnsignedIntType BoxCount = default(UnsignedIntType), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), string FreightReadyDate = default(string), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount), Amount AmazonCalculatedValue = default(Amount), string PreviewPickupDate = default(string), string PreviewDeliveryDate = default(string), SellerFreightClass PreviewFreightClass = default(SellerFreightClass), string AmazonReferenceId = default(string), bool? IsBillOfLadingAvailable = default(bool?), PartneredEstimate PartneredEstimate = default(PartneredEstimate), string CarrierName = default(string))
         {
             // to ensure "Contact" is required (not null)
             if (Contact == null)
@@ -185,7 +185,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date that the shipment will be ready to be picked up by the carrier. Must be in YYYY-MM-DD format.</value>
         [DataMember(Name = "FreightReadyDate", EmitDefaultValue = false)]
-        public DateStringType FreightReadyDate { get; set; }
+        public string FreightReadyDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PalletList
@@ -219,14 +219,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The estimated date that the shipment will be picked up by the carrier, in YYYY-MM-DD format.</value>
         [DataMember(Name = "PreviewPickupDate", EmitDefaultValue = false)]
-        public DateStringType PreviewPickupDate { get; set; }
+        public string PreviewPickupDate { get; set; }
 
         /// <summary>
         /// The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format.
         /// </summary>
         /// <value>The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format.</value>
         [DataMember(Name = "PreviewDeliveryDate", EmitDefaultValue = false)]
-        public DateStringType PreviewDeliveryDate { get; set; }
+        public string PreviewDeliveryDate { get; set; }
 
 
         /// <summary>

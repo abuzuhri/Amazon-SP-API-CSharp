@@ -1,25 +1,26 @@
-﻿using System;
+﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class InventoryAgingReport
     {
-        public List<InventoryAgingRow> Data { get; set; }=new List<InventoryAgingRow>();
+        public List<InventoryAgingRow> Data { get; set; } = new List<InventoryAgingRow>();
         public InventoryAgingReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => InventoryAgingRow.FromCsv(v, refNumber))
-                                           .ToList();
+
+            var table = Table.ConvertFromCSV(path);
+
+            List<InventoryAgingRow> values = new List<InventoryAgingRow>();
+            foreach (var row in table.Rows)
+            {
+                values.Add(InventoryAgingRow.FromRow(row, refNumber));
+            }
             Data = values;
         }
-
-
     }
     public class InventoryAgingRow
     {
@@ -51,39 +52,36 @@ namespace FikaAmazonAPI.ReportGeneration
         public string RecommendedAction { get; set; }
         public string refNumber { get; set; }
 
-        public static InventoryAgingRow FromCsv(string csvLine, string refNumber)
+        public static InventoryAgingRow FromRow(TableRow rowData, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
             var row = new InventoryAgingRow();
-            row.SnapshotDate = DataConverter.GetDate(values[0], DataConverter.DateTimeFormate.DATE_AGING_FORMAT);
-            row.SKU = values[1];
-            row.FNSKU = values[2];
-            row.ASIN = values[3];
-            row.ProductName = values[4];
-            row.Condition = values[5];
-            row.AvaliableQuantitySellable = DataConverter.GetInt(values[6]);
-            row.QtyWithRemovalsInProgress = DataConverter.GetInt(values[7]);
-            row.InvAge0To90Days = DataConverter.GetInt(values[8]);
-            row.InvAge91To180Days = DataConverter.GetInt(values[9]);
-            row.InvAge181To270Days = DataConverter.GetInt(values[10]);
-            row.InvAge271To365Days = DataConverter.GetInt(values[11]);
-            row.InvAge365PlusDays = DataConverter.GetInt(values[12]);
-            row.Currency = values[13];
-            row.QtyToBeChargedLtsf12Mo = DataConverter.GetInt(values[14]);
-            row.ProjectedLtsf12Mo = DataConverter.GetInt(values[15]);
-            row.UnitsShippedLast7Days = DataConverter.GetInt(values[16]);
-            row.UnitsShippedLast30Days = DataConverter.GetInt(values[17]);
-            row.UnitsShippedLast60Days = DataConverter.GetInt(values[18]);
-            row.UnitsShippedLast90Days = DataConverter.GetInt(values[19]);
-            row.Alert = values[20];
-            row.YourPrice = DataConverter.GetDecimal(values[21]);
-            row.SalesPrice = DataConverter.GetDecimal(values[22]);
-            row.LowestPriceNew = DataConverter.GetDecimal(values[23]);
-            row.LowestPriceUsed = DataConverter.GetDecimal(values[24]);
-            row.RecommendedAction = values[25];
-
+            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"), DataConverter.DateTimeFormate.DATE_AGING_FORMAT);
+            row.SKU = rowData.GetString("sku");
+            row.FNSKU = rowData.GetString("fnsku");
+            row.ASIN = rowData.GetString("asin");
+            row.ProductName = rowData.GetString("product-name");
+            row.Condition = rowData.GetString("condition");
+            row.AvaliableQuantitySellable = DataConverter.GetInt(rowData.GetString("avaliable-quantity(sellable)"));
+            row.QtyWithRemovalsInProgress = DataConverter.GetInt(rowData.GetString("qty-with-removals-in-progress"));
+            row.InvAge0To90Days = DataConverter.GetInt(rowData.GetString("inv-age-0-to-90-days"));
+            row.InvAge91To180Days = DataConverter.GetInt(rowData.GetString("inv-age-91-to-180-days"));
+            row.InvAge181To270Days = DataConverter.GetInt(rowData.GetString("inv-age-181-to-270-days"));
+            row.InvAge271To365Days = DataConverter.GetInt(rowData.GetString("inv-age-271-to-365-days"));
+            row.InvAge365PlusDays = DataConverter.GetInt(rowData.GetString("inv-age-365-plus-days"));
+            row.Currency = rowData.GetString("currency");
+            row.QtyToBeChargedLtsf12Mo = DataConverter.GetInt(rowData.GetString("qty-to-be-charged-ltsf-12-mo"));
+            row.ProjectedLtsf12Mo = DataConverter.GetInt(rowData.GetString("projected-ltsf-12-mo"));
+            row.UnitsShippedLast7Days = DataConverter.GetInt(rowData.GetString("units-shipped-last-7-days"));
+            row.UnitsShippedLast30Days = DataConverter.GetInt(rowData.GetString("units-shipped-last-30-days"));
+            row.UnitsShippedLast60Days = DataConverter.GetInt(rowData.GetString("units-shipped-last-60-days"));
+            row.UnitsShippedLast90Days = DataConverter.GetInt(rowData.GetString("units-shipped-last-90-days"));
+            row.Alert = rowData.GetString("alert");
+            row.YourPrice = DataConverter.GetDecimal(rowData.GetString("your-price"));
+            row.SalesPrice = DataConverter.GetDecimal(rowData.GetString("sales_price"));
+            row.LowestPriceNew = DataConverter.GetDecimal(rowData.GetString("lowest_price_new"));
+            row.LowestPriceUsed = DataConverter.GetDecimal(rowData.GetString("lowest_price_used"));
+            row.RecommendedAction = rowData.GetString("Recommended action");
             row.refNumber = refNumber;
-
 
             return row;
         }

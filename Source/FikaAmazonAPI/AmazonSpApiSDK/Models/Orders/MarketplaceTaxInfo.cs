@@ -14,6 +14,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
     [DataContract]
     public partial class MarketplaceTaxInfo : IEquatable<MarketplaceTaxInfo>, IValidatableObject
     {
+        public MarketplaceTaxInfo()
+        {
+            this.TaxClassifications = default(List<TaxClassification>);
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="MarketplaceTaxInfo" /> class.
         /// </summary>

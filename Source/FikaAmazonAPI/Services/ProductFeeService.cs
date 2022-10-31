@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
+using FikaAmazonAPI.Parameter.ProductFee;
 using FikaAmazonAPI.Utils;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace FikaAmazonAPI.Services
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
 
-            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.POST, postJsonObj: Payload);
+            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForSKU(SKU), RestSharp.Method.Post, postJsonObj: Payload);
             var response = await ExecuteRequestAsync<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForSKU);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
@@ -31,11 +32,22 @@ namespace FikaAmazonAPI.Services
         {
             var Payload = new { FeesEstimateRequest = feesEstimateRequest };
 
-            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.POST, postJsonObj: Payload);
+            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimateForASIN(ASIN), RestSharp.Method.Post, postJsonObj: Payload);
             var response = await ExecuteRequestAsync<GetMyFeesEstimateResponse>(RateLimitType.ProductFees_GetMyFeesEstimateForASIN);
             if (response != null && response.Payload != null)
                 return response.Payload.FeesEstimateResult;
             return null;
+        }
+
+
+        public GetMyFeesEstimatesResponse GetMyFeesEstimate(FeesEstimateByIdRequest[] feesEstimateRequest) =>
+    Task.Run(() => GetMyFeesEstimateAsync(feesEstimateRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GetMyFeesEstimatesResponse> GetMyFeesEstimateAsync(FeesEstimateByIdRequest[] feesEstimateRequest)
+        {
+            await CreateAuthorizedRequestAsync(ProductFeeApiUrls.GetMyFeesEstimate, RestSharp.Method.Post, postJsonObj: feesEstimateRequest);
+            var response = await ExecuteRequestAsync<GetMyFeesEstimatesResponse>(RateLimitType.ProductFees_GetMyFeesEstimate);
+            return response;
         }
     }
 }

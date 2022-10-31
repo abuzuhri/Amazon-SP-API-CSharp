@@ -7,6 +7,8 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     {
         [XmlElement(ElementName = "AmazonOrderID")]
         public string AmazonOrderID { get; set; }
+        [XmlElement(ElementName = "MerchantOrderID")]
+        public string MerchantOrderID { get; set; }
         [XmlElement(ElementName = "MerchantFulfillmentID")]
         public string MerchantFulfillmentID { get; set; }
         [XmlElement(ElementName = "FulfillmentDate")]
@@ -38,6 +40,8 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     [XmlRoot(ElementName = "Item")]
     public class Item
     {
+        [XmlElement(ElementName = "AmazonOrderItemCode")]
+        public string AmazonOrderItemCode { get; set; }
         [XmlElement(ElementName = "MerchantOrderItemID")]
         public string MerchantOrderItemID { get; set; }
         [XmlElement(ElementName = "MerchantFulfillmentItemID")]
@@ -46,8 +50,6 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         public int Quantity { get; set; }
         [XmlElement(ElementName = "TransparencyCode")]
         public List<string> TransparencyCode { get; set; }
-        [XmlElement(ElementName = "AmazonOrderItemCode")]
-        public string AmazonOrderItemCode { get; set; }
     }
 
     [XmlRoot(ElementName = "ShipFromAddress")]

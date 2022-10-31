@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="PerUnitPrice">The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
         /// <param name="PerUnitTax">The tax on the amount to be collected from the recipient for this item in a COD (Cash On Delivery) order..</param>
         /// <param name="PerUnitDeclaredValue">The monetary value assigned by the seller to this item..</param>
-        public FulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), int Quantity = default(int), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), int CancelledQuantity = default(int), int UnfulfillableQuantity = default(int), Timestamp EstimatedShipDateTime = default(Timestamp), Timestamp EstimatedArrivalDateTime = default(Timestamp), Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency), Currency PerUnitDeclaredValue = default(Currency))
+        public FulfillmentOrderItem(string SellerSKU = default(string), string SellerFulfillmentOrderItemId = default(string), int Quantity = default(int), string GiftMessage = default(string), string DisplayableComment = default(string), string FulfillmentNetworkSKU = default(string), string OrderItemDisposition = default(string), int CancelledQuantity = default(int), int UnfulfillableQuantity = default(int), DateTime? EstimatedShipDate = null, DateTime? EstimatedArrivalDate = null, Currency PerUnitPrice = default(Currency), Currency PerUnitTax = default(Currency), Currency PerUnitDeclaredValue = default(Currency))
         {
             // to ensure "SellerSKU" is required (not null)
             if (SellerSKU == null)
@@ -97,8 +97,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.DisplayableComment = DisplayableComment;
             this.FulfillmentNetworkSKU = FulfillmentNetworkSKU;
             this.OrderItemDisposition = OrderItemDisposition;
-            this.EstimatedShipDateTime = EstimatedShipDateTime;
-            this.EstimatedArrivalDateTime = EstimatedArrivalDateTime;
+            this.EstimatedShipDate = EstimatedShipDate;
+            this.EstimatedArrivalDate = EstimatedArrivalDate;
             this.PerUnitPrice = PerUnitPrice;
             this.PerUnitTax = PerUnitTax;
             this.PerUnitDeclaredValue = PerUnitDeclaredValue;
@@ -170,15 +170,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The estimated date and time that the item quantity is scheduled to ship from the fulfillment center. Note that this value can change over time. If the shipment that contains the item quantity has been cancelled, EstimatedShipDateTime is not returned.
         /// </summary>
         /// <value>The estimated date and time that the item quantity is scheduled to ship from the fulfillment center. Note that this value can change over time. If the shipment that contains the item quantity has been cancelled, EstimatedShipDateTime is not returned.</value>
-        [DataMember(Name = "EstimatedShipDateTime", EmitDefaultValue = false)]
-        public Timestamp EstimatedShipDateTime { get; set; }
+        [DataMember(Name = "EstimatedShipDate", EmitDefaultValue = false)]
+        public DateTime? EstimatedShipDate { get; set; }
 
         /// <summary>
         /// The estimated arrival date and time of the item quantity. Note that this value can change over time. If the shipment that contains the item quantity has been cancelled, EstimatedArrivalDateTime is not returned.
         /// </summary>
         /// <value>The estimated arrival date and time of the item quantity. Note that this value can change over time. If the shipment that contains the item quantity has been cancelled, EstimatedArrivalDateTime is not returned.</value>
-        [DataMember(Name = "EstimatedArrivalDateTime", EmitDefaultValue = false)]
-        public Timestamp EstimatedArrivalDateTime { get; set; }
+        [DataMember(Name = "EstimatedArrivalDate", EmitDefaultValue = false)]
+        public DateTime? EstimatedArrivalDate { get; set; }
 
         /// <summary>
         /// The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order.
@@ -218,8 +218,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  OrderItemDisposition: ").Append(OrderItemDisposition).Append("\n");
             sb.Append("  CancelledQuantity: ").Append(CancelledQuantity).Append("\n");
             sb.Append("  UnfulfillableQuantity: ").Append(UnfulfillableQuantity).Append("\n");
-            sb.Append("  EstimatedShipDateTime: ").Append(EstimatedShipDateTime).Append("\n");
-            sb.Append("  EstimatedArrivalDateTime: ").Append(EstimatedArrivalDateTime).Append("\n");
+            sb.Append("  EstimatedShipDate: ").Append(EstimatedShipDate).Append("\n");
+            sb.Append("  EstimatedArrivalDate: ").Append(EstimatedArrivalDate).Append("\n");
             sb.Append("  PerUnitPrice: ").Append(PerUnitPrice).Append("\n");
             sb.Append("  PerUnitTax: ").Append(PerUnitTax).Append("\n");
             sb.Append("  PerUnitDeclaredValue: ").Append(PerUnitDeclaredValue).Append("\n");
@@ -288,14 +288,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.OrderItemDisposition.Equals(input.OrderItemDisposition))
                 ) &&
                 (
-                    this.EstimatedShipDateTime == input.EstimatedShipDateTime ||
-                    (this.EstimatedShipDateTime != null &&
-                    this.EstimatedShipDateTime.Equals(input.EstimatedShipDateTime))
+                    this.EstimatedShipDate == input.EstimatedShipDate ||
+                    (this.EstimatedShipDate != null &&
+                    this.EstimatedShipDate.Equals(input.EstimatedShipDate))
                 ) &&
                 (
-                    this.EstimatedArrivalDateTime == input.EstimatedArrivalDateTime ||
-                    (this.EstimatedArrivalDateTime != null &&
-                    this.EstimatedArrivalDateTime.Equals(input.EstimatedArrivalDateTime))
+                    this.EstimatedArrivalDate == input.EstimatedArrivalDate ||
+                    (this.EstimatedArrivalDate != null &&
+                    this.EstimatedArrivalDate.Equals(input.EstimatedArrivalDate))
                 ) &&
                 (
                     this.PerUnitPrice == input.PerUnitPrice ||
@@ -335,10 +335,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentNetworkSKU.GetHashCode();
                 if (this.OrderItemDisposition != null)
                     hashCode = hashCode * 59 + this.OrderItemDisposition.GetHashCode();
-                if (this.EstimatedShipDateTime != null)
-                    hashCode = hashCode * 59 + this.EstimatedShipDateTime.GetHashCode();
-                if (this.EstimatedArrivalDateTime != null)
-                    hashCode = hashCode * 59 + this.EstimatedArrivalDateTime.GetHashCode();
+                if (this.EstimatedShipDate != null)
+                    hashCode = hashCode * 59 + this.EstimatedShipDate.GetHashCode();
+                if (this.EstimatedArrivalDate != null)
+                    hashCode = hashCode * 59 + this.EstimatedArrivalDate.GetHashCode();
                 if (this.PerUnitPrice != null)
                     hashCode = hashCode * 59 + this.PerUnitPrice.GetHashCode();
                 if (this.PerUnitTax != null)

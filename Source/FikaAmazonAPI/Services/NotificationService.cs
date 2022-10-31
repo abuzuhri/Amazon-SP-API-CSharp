@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetSubscriptionAsync(notificationType)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> GetSubscriptionAsync(NotificationType notificationType)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscription(notificationType.ToString()), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscription(notificationType.ToString()), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetSubscriptionResponse>(RateLimitType.Notifications_GetSubscription);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateDestinationAsync(request)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Destination> CreateDestinationAsync(CreateDestinationRequest request)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateDestination, RestSharp.Method.POST, postJsonObj: request, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateDestination, RestSharp.Method.Post, postJsonObj: request, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<CreateDestinationResponse>(RateLimitType.Notifications_CreateDestination);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetDestinationsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<Destination>> GetDestinationsAsync()
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestinations, RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestinations, RestSharp.Method.Get, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<GetDestinationsResponse>(RateLimitType.Notifications_GetDestinations);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetDestinationAsync(destinationId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Destination> GetDestinationAsync(string destinationId)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestination(destinationId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetDestination(destinationId), RestSharp.Method.Get, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<GetDestinationResponse>(RateLimitType.Notifications_GetDestination);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => DeleteDestinationAsync(destinationId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> DeleteDestinationAsync(string destinationId)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteDestination(destinationId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteDestination(destinationId), RestSharp.Method.Delete, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<DeleteDestinationResponse>(RateLimitType.Notifications_DeleteDestination);
             if (response != null && response.Errors != null)
                 return false;
@@ -84,7 +84,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateSubscriptionAsync(param)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> CreateSubscriptionAsync(ParameterCreateSubscription param)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateSubscription(param.notificationType.ToString()), RestSharp.Method.POST, postJsonObj: param);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.CreateSubscription(param.notificationType.ToString()), RestSharp.Method.Post, postJsonObj: param);
             var response = await ExecuteRequestAsync<CreateSubscriptionResponse>(RateLimitType.Notifications_CreateSubscription);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -95,7 +95,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetSubscriptionByIdAsync(notificationType, subscriptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Subscription> GetSubscriptionByIdAsync(NotificationType notificationType, string subscriptionId)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.GET, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.GetSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.Get, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<GetSubscriptionByIdResponse>(RateLimitType.Notifications_GetSubscriptionById);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -106,7 +106,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => DeleteSubscriptionByIdAsync(notificationType, subscriptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> DeleteSubscriptionByIdAsync(NotificationType notificationType, string subscriptionId)
         {
-            await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.DELETE, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(NotificationApiUrls.DeleteSubscriptionById(notificationType.ToString(), subscriptionId), RestSharp.Method.Delete, tokenDataType: TokenDataType.Grantless);
             var response = await ExecuteRequestAsync<DeleteSubscriptionByIdResponse>(RateLimitType.Notifications_DeleteSubscriptionById);
             if (response != null && response.Errors != null)
                 return false;
@@ -123,46 +123,45 @@ namespace FikaAmazonAPI.Services
             var SQS_URL = param.SQS_URL;
             var Region = param.RegionEndpoint;
 
-            var amazonSQSClient = new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, Region);
-
-            ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
-            receiveMessageRequest.MaxNumberOfMessages = 10;
-
-
-            while (true)
+            using (var amazonSQSClient = new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, Region))
             {
-                try
+                ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(SQS_URL);
+                receiveMessageRequest.MaxNumberOfMessages = 10;
+                if (param.WaitTimeSeconds.HasValue)
+                    receiveMessageRequest.WaitTimeSeconds = param.WaitTimeSeconds.Value;
+
+                while (true)
                 {
-                    var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest);
-                    var Messages = result.Messages;
-                    if (Messages.Count > 0)
+                    try
                     {
-                        foreach (var msg in Messages)
+                        var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest);
+                        var Messages = result.Messages;
+                        if (Messages.Count > 0)
                         {
-                            try
+                            foreach (var msg in Messages)
                             {
-                                var data = DeserializeNotification(msg);
+                                try
+                                {
+                                    var data = DeserializeNotification(msg);
 
-                                messageReceiver.NewMessageRevicedTriger(data);
-                                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
-                            }
-                            catch (Exception ex)
-                            {
-                                messageReceiver.ErrorCatch(ex);
-                                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
-                            }
+                                    messageReceiver.NewMessageRevicedTriger(data);
+                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
+                                }
+                                catch (Exception ex)
+                                {
+                                    messageReceiver.ErrorCatch(ex);
+                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle);
+                                }
 
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    messageReceiver.ErrorCatch(ex);
+                    catch (Exception ex)
+                    {
+                        messageReceiver.ErrorCatch(ex);
+                    }
                 }
             }
-
-
-
         }
         private async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle)
         {

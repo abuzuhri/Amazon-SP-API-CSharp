@@ -1,11 +1,13 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Report;
-using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -32,14 +34,14 @@ namespace FikaAmazonAPI.Services
             }
             var parameters = parameterReportList.getParameters();
 
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.Get, parameters);
             var response = await ExecuteRequestAsync<GetReportsResponseV00>(RateLimitType.Report_GetReports);
             parameterReportList.nextToken = response.NextToken;
             var list = response.Reports;
 
             while (!string.IsNullOrEmpty(parameterReportList.nextToken))
             {
-                var nextTokenResponse = GetReportsByNextToken(parameterReportList);
+                var nextTokenResponse = await GetReportsByNextTokenAsync(parameterReportList);
                 list.AddRange(nextTokenResponse.Reports);
                 parameterReportList.nextToken = nextTokenResponse.NextToken;
             }
@@ -51,7 +53,7 @@ namespace FikaAmazonAPI.Services
         public async Task<Report> GetReportAsync(string reportId)
         {
 
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReport(reportId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReport(reportId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<Report>(RateLimitType.Report_GetReport);
             if (response != null)
                 return response;
@@ -63,7 +65,7 @@ namespace FikaAmazonAPI.Services
         public async Task<bool> CancelReportAsync(string reportId)
         {
 
-            await CreateAuthorizedRequestAsync(ReportApiUrls.CancelReport(reportId), RestSharp.Method.DELETE);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.CancelReport(reportId), RestSharp.Method.Delete);
             var response = await ExecuteRequestAsync<CancelReportResponse>(RateLimitType.Report_CancelReport);
             if (response != null && response.Errors != null)
                 return false;
@@ -75,7 +77,7 @@ namespace FikaAmazonAPI.Services
         public async Task<ReportScheduleList> GetReportSchedulesAsync(ParameterReportSchedules parametersSchedules)
         {
             var parameters = parametersSchedules.getParameters();
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportSchedules, RestSharp.Method.GET, parameters);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportSchedules, RestSharp.Method.Get, parameters);
             var response = await ExecuteRequestAsync<GetReportSchedulesResponseV00>(RateLimitType.Report_GetReportSchedules);
             if (response != null && response.ReportSchedules != null)
                 return response.ReportSchedules;
@@ -90,7 +92,7 @@ namespace FikaAmazonAPI.Services
             parameterReportListNew.nextToken = parameterReportList.nextToken;
             var parameters = parameterReportListNew.getParameters();
 
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.GET, parameters);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.Get, parameters);
             var response = await ExecuteRequestAsync<GetReportsResponseV00>(RateLimitType.Report_GetReports);
             return response;
         }
@@ -99,7 +101,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateReportAsync(createReportSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportAsync(ParameterCreateReportSpecification createReportSpecification)
         {
-            await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReport, RestSharp.Method.POST, null, createReportSpecification);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReport, RestSharp.Method.Post, null, createReportSpecification);
             var response = await ExecuteRequestAsync<AmazonSpApiSDK.Models.Reports.CreateReportResult>(RateLimitType.Report_CreateReport);
 
             if (response == null)
@@ -113,7 +115,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateReportScheduleAsync(createReportScheduleSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportScheduleAsync(ParameterCreateReportScheduleSpecification createReportScheduleSpecification)
         {
-            await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReportSchedule, RestSharp.Method.POST, null, createReportScheduleSpecification);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReportSchedule, RestSharp.Method.Post, null, createReportScheduleSpecification);
             var response = await ExecuteRequestAsync<CreateReportScheduleResult>(RateLimitType.Report_CreateReportSchedule);
 
             if (response == null)
@@ -127,28 +129,49 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetReportScheduleAsync(reportScheduleId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ReportSchedule> GetReportScheduleAsync(string reportScheduleId)
         {
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportSchedule(reportScheduleId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportSchedule(reportScheduleId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<ReportSchedule>(RateLimitType.Report_GetReportSchedules);
             if (response != null)
                 return response;
             return null;
         }
 
-        public ReportDocument GetReportDocument(string reportDocumentId, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => GetReportDocumentAsync(reportDocumentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, IParameterBasedPII parameterBasedPII = null)
+        public ReportDocument GetReportDocument(string reportDocumentId, bool isRestrictedReport = false) =>
+            Task.Run(() => GetReportDocumentAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, bool isRestrictedReport = false)
         {
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.GET, parameter: parameterBasedPII);
+            ParameterBasedPII parameterBasedPII = null;
+
+            if (isRestrictedReport)
+            {
+                parameterBasedPII = new ParameterBasedPII()
+                {
+                    IsNeedRestrictedDataToken = true,
+                    RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
+                    {
+                        restrictedResources = new List<RestrictedResource>
+                        {
+                            new RestrictedResource
+                            {
+                                method = Method.GET.ToString(),
+                                path = ReportApiUrls.GetReportDocument(reportDocumentId)
+                            }
+                        }
+                    }
+                };
+            }
+
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.Get, parameter: parameterBasedPII);
             var response = await ExecuteRequestAsync<ReportDocument>(RateLimitType.Report_GetReportDocument);
             if (response != null)
                 return response;
             return null;
         }
-        public string GetReportFile(string reportDocumentId) =>
-            Task.Run(() => GetReportFileAsync(reportDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> GetReportFileAsync(string reportDocumentId)
+        public string GetReportFile(string reportDocumentId, bool isRestrictedReport = false) =>
+            Task.Run(() => GetReportFileAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<string> GetReportFileAsync(string reportDocumentId, bool isRestrictedReport = false)
         {
-            var reportDocument = await GetReportDocumentAsync(reportDocumentId);
+            var reportDocument = await GetReportDocumentAsync(reportDocumentId, isRestrictedReport);
             return GetFile(reportDocument);
         }
 
@@ -214,7 +237,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CancelReportScheduleAsync(reportScheduleId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CancelReportScheduleAsync(string reportScheduleId)
         {
-            await CreateAuthorizedRequestAsync(ReportApiUrls.CancelReportSchedule(reportScheduleId), RestSharp.Method.DELETE);
+            await CreateAuthorizedRequestAsync(ReportApiUrls.CancelReportSchedule(reportScheduleId), RestSharp.Method.Delete);
             var response = await ExecuteRequestAsync<CancelReportScheduleResponse>(RateLimitType.Report_CancelReportSchedule);
             if (response != null && response.Errors != null)
                 return false;
@@ -223,16 +246,28 @@ namespace FikaAmazonAPI.Services
         #endregion
 
 
-        public string CreateReportAndDownloadFile(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null) =>
-            Task.Run(() => CreateReportAndDownloadFileAsync(reportTypes, dataStartTime, dataEndTime, reportOptions)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportTypes, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null)
+        public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false) =>
+            Task.Run(() => CreateReportAndDownloadFileAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null)
         {
+            if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
+            {
+                isRestrictedReport = true;
+            }
+
             var parameters = new ParameterCreateReportSpecification();
-            parameters.reportType = reportTypes;
+            parameters.reportType = reportType;
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            if (marketplaces == null)
+            {
+                parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
+            else
+            {
+                parameters.marketplaceIds.AddRange(marketplaces.Select(x => x.ID).ToList());
+            }
 
             if (reportOptions != null)
                 parameters.reportOptions = reportOptions;
@@ -251,7 +286,7 @@ namespace FikaAmazonAPI.Services
                 var reportData = await GetReportAsync(reportId);
                 if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
                 {
-                    filePath = await GetReportFileAsync(reportData.ReportDocumentId);
+                    filePath = await GetReportFileAsync(reportData.ReportDocumentId, isRestrictedReport);
                     break;
                 }
                 if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.FATAL)

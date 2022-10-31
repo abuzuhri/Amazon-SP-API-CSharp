@@ -10,14 +10,15 @@ namespace FikaAmazonAPI.Utils
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
         public readonly static string TestCase200 = "TEST_CASE_200";
         public readonly static string TestCase400 = "TEST_CASE_400";
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Environments
         {
             Sandbox, Production
         }
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum GranularityEnum {
+        public enum GranularityEnum
+        {
             Hour,
             Day,
             Week,
@@ -50,12 +51,14 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum IncludedData
         {
+            attributes,
+            dimensions,
             identifiers,
             images,
             productTypes,
+            relationships,
             salesRanks,
             summaries,
-            variations,
             vendorDetails
         }
 
@@ -139,10 +142,10 @@ namespace FikaAmazonAPI.Utils
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FirstDayOfWeek
         {
-            Monday,
-            Sunday
+            monday,
+            sunday
         }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         /// <summary>
         /// A list of NotificationType
@@ -162,7 +165,12 @@ namespace FikaAmazonAPI.Utils
             MFN_ORDER_STATUS_CHANGE,
             B2B_ANY_OFFER_CHANGED,
             ACCOUNT_STATUS_CHANGED,
-            EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE
+            EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE,
+            //Missing Notification types
+            PRODUCT_TYPE_DEFINITIONS_CHANGE,
+            ORDER_STATUS_CHANGE,
+            PRICING_HEALTH
+
         }
 
         /// <summary>
@@ -314,6 +322,19 @@ namespace FikaAmazonAPI.Utils
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
+        public enum IdentifiersType
+        {
+            ASIN,
+            EAN,
+            GTIN,
+            ISBN,
+            JAN,
+            MINSAN,
+            SKU,
+            UPC
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerType
         {
             Consumer,
@@ -360,13 +381,43 @@ namespace FikaAmazonAPI.Utils
             B2C,
             B2B
         }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum RestrictedReportTypes
+        {
+            GET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING,
+            GET_AMAZON_FULFILLED_SHIPMENTS_DATA_TAX,
+            GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_SHIPPING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_SHIPPING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING,
+            GET_FLAT_FILE_ORDER_REPORT_DATA_TAX,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_TAX,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_INVOICING,
+            GET_FLAT_FILE_ORDERS_RECONCILIATION_DATA_SHIPPING,
+            GET_ORDER_REPORT_DATA_INVOICING,
+            GET_ORDER_REPORT_DATA_TAX,
+            GET_ORDER_REPORT_DATA_SHIPPING,
+            GET_EASYSHIP_DOCUMENTS,
+            GET_GST_MTR_B2B_CUSTOM,
+            GET_VAT_TRANSACTION_DATA,
+            SC_VAT_TAX_REPORT
+        }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ReportTypes
         {
             GET_VENDOR_SALES_DIAGNOSTIC_REPORT,
+            GET_VENDOR_SALES_REPORT,
+            GET_VENDOR_TRAFFIC_REPORT,
+            GET_VENDOR_FORECASTING_REPORT,
             GET_VENDOR_INVENTORY_HEALTH_AND_PLANNING_REPORT,
             GET_VENDOR_DEMAND_FORECAST_REPORT,
+            GET_VENDOR_INVENTORY_REPORT,
+            GET_VENDOR_NET_PURE_PRODUCT_MARGIN_REPORT,
+            GET_PROMOTION_PERFORMANCE_REPORT,
+            GET_MERCHANTS_LISTINGS_FYP_REPORT,
+            GET_FBA_SNS_FORECAST_DATA,
+            GET_FBA_SNS_PERFORMANCE_DATA,
+            GET_COUPON_PERFORMANCE_REPORT,
             GET_FLAT_FILE_OPEN_LISTINGS_DATA,
             GET_MERCHANT_LISTINGS_ALL_DATA,
             GET_MERCHANT_LISTINGS_DATA,
@@ -462,7 +513,12 @@ namespace FikaAmazonAPI.Utils
             GET_BRAND_ANALYTICS_REPEAT_PURCHASE_REPORT,
             GET_BRAND_ANALYTICS_ALTERNATE_PURCHASE_REPORT,
             GET_BRAND_ANALYTICS_ITEM_COMPARISON_REPORT,
-
+            GET_SALES_AND_TRAFFIC_REPORT,
+            GET_GST_STR_ADHOC,
+            GET_FLAT_FILE_VAT_INVOICE_DATA_REPORT,
+            GET_XML_VAT_INVOICE_DATA_REPORT,
+            GET_FLAT_FILE_GEO_OPPORTUNITIES,
+            GET_DATE_RANGE_FINANCIAL_TRANSACTION_DATA
 
         }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -530,6 +586,7 @@ namespace FikaAmazonAPI.Utils
             Store,
             StoreStockMovement,
             WebstoreItem,
+            CartonContentsRequest
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -543,6 +600,41 @@ namespace FikaAmazonAPI.Utils
             Procurement
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OptionalFulfillmentProgram
+        {
+            FBA_CORE,
+            FBA_SNL,
+            FBA_EFN
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShippingBusiness
+        {
+            [EnumMember(Value = "AmazonShipping_US")]
+            AmazonShipping_US,
+            [EnumMember(Value = "AmazonShipping_IN")]
+            AmazonShipping_IN,
+            [EnumMember(Value = "AmazonShipping_UK")]
+            AmazonShipping_UK,
+            [EnumMember(Value = "AmazonShipping_UAE")]
+            AmazonShipping_UAE,
+            [EnumMember(Value = "AmazonShipping_SA")]
+            AmazonShipping_SA,
+            [EnumMember(Value = "AmazonShipping_EG")]
+            AmazonShipping_EG,
+            [EnumMember(Value = "AmazonShipping_IT")]
+            AmazonShipping_IT
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShippingChannelType
+        {
+            [EnumMember(Value = "AMAZON")]
+            AMAZON,
+            [EnumMember(Value = "EXTERNAL")]
+            EXTERNAL
+        }
 
         ///// <summary>
         ///// One of a set of predefined ISO 8601 periods that specifies how often a report should be created.

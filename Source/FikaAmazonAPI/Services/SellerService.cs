@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<List<MarketplaceParticipation>> GetMarketplaceParticipationsAsync()
         {
-            await CreateAuthorizedRequestAsync(SellersApiUrls.GetMarketplaceParticipations, RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(SellersApiUrls.GetMarketplaceParticipations, RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetMarketplaceParticipationsResponse>(RateLimitType.Sellers_GetMarketplaceParticipations);
             if (response != null && response.Payload != null)
                 return response.Payload;

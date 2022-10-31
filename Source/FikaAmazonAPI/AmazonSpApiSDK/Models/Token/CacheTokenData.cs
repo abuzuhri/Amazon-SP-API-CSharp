@@ -21,7 +21,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         }
         public TokenResponse GetToken(TokenDataType tokenDataType)
         {
-            TokenResponse token = null; 
+            TokenResponse token = null;
             if (tokenDataType == TokenDataType.Normal)
             {
                 token = NormalAccessToken;
@@ -47,10 +47,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 
         public void SetToken(TokenDataType tokenDataType, TokenResponse token)
         {
-            
+
             if (tokenDataType == TokenDataType.Normal)
             {
-                NormalAccessToken=token;
+                NormalAccessToken = token;
             }
             else if (tokenDataType == TokenDataType.PII)
             {
@@ -59,7 +59,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             }
             else if (tokenDataType == TokenDataType.Grantless)
             {
-                GrantlessAccessToken=token;
+                GrantlessAccessToken = token;
             }
         }
 
@@ -67,7 +67,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         {
             Normal,
             PII,
-            Grantless,
+            Grantless
         }
 
 
@@ -76,9 +76,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
             if (dateCreated == null)
                 return false;
             else
-                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn-60); //Add Margent to a void expaired token
+                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn - 60); //Add Margent to a void expaired token
         }
     }
 
-    
+
 }

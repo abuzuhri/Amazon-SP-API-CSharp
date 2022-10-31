@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// <param name="MarketplaceId">MarketplaceId (required).</param>
         /// <param name="SellerSKU">SellerSKU (required).</param>
         /// <param name="Status">Status (required).</param>
-        public SmallAndLightEnrollment(MarketplaceId MarketplaceId = default(MarketplaceId), SellerSKU SellerSKU = default(SellerSKU), SmallAndLightEnrollmentStatus Status = default(SmallAndLightEnrollmentStatus))
+        public SmallAndLightEnrollment(String MarketplaceId = default(String), String SellerSKU = default(String), SmallAndLightEnrollmentStatus Status = default(SmallAndLightEnrollmentStatus))
         {
             // to ensure "MarketplaceId" is required (not null)
             if (MarketplaceId == null)
@@ -75,13 +75,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// Gets or Sets MarketplaceId
         /// </summary>
         [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
-        public MarketplaceId MarketplaceId { get; set; }
+        public String MarketplaceId { get; set; }
 
         /// <summary>
         /// Gets or Sets SellerSKU
         /// </summary>
         [DataMember(Name = "sellerSKU", EmitDefaultValue = false)]
-        public SellerSKU SellerSKU { get; set; }
+        public String SellerSKU { get; set; }
 
 
         /// <summary>

@@ -8,13 +8,13 @@ namespace FikaAmazonAPI.NotificationMessages
     public partial class MoneyType
     {
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// The currency amount.
         /// </summary>
         [JsonProperty("Amount")]
         public double Amount { get; set; }
 
         /// <summary>
-        /// An explanation about the purpose of this instance.
+        /// Three-digit currency code. In ISO 4217 format .
         /// </summary>
         [JsonProperty("CurrencyCode")]
         public string CurrencyCode { get; set; }

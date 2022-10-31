@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="FulfillmentShipment">FulfillmentShipment.</param>
         /// <param name="ReturnItemList">ReturnItemList (required).</param>
         /// <param name="ReturnAuthorizationList">ReturnAuthorizationList (required).</param>
-        public GetFulfillmentOrderResult(FulfillmentOrder FulfillmentOrder = default(FulfillmentOrder), FulfillmentOrderItemList FulfillmentOrderItem = default(FulfillmentOrderItemList), FulfillmentShipmentList FulfillmentShipment = default(FulfillmentShipmentList), ReturnItemList ReturnItemList = default(ReturnItemList), ReturnAuthorizationList ReturnAuthorizationList = default(ReturnAuthorizationList))
+        public GetFulfillmentOrderResult(FulfillmentOrder FulfillmentOrder = default(FulfillmentOrder), FulfillmentOrderItemList FulfillmentOrderItems = default(FulfillmentOrderItemList), FulfillmentShipmentList FulfillmentShipments = default(FulfillmentShipmentList), ReturnItemList ReturnItems = default(ReturnItemList), ReturnAuthorizationList ReturnAuthorizations = default(ReturnAuthorizationList))
         {
             // to ensure "FulfillmentOrder" is required (not null)
             if (FulfillmentOrder == null)
@@ -49,33 +49,33 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.FulfillmentOrder = FulfillmentOrder;
             }
             // to ensure "FulfillmentOrderItem" is required (not null)
-            if (FulfillmentOrderItem == null)
+            if (FulfillmentOrderItems == null)
             {
-                throw new InvalidDataException("FulfillmentOrderItem is a required property for GetFulfillmentOrderResult and cannot be null");
+                throw new InvalidDataException("FulfillmentOrderItems is a required property for GetFulfillmentOrderResult and cannot be null");
             }
             else
             {
-                this.FulfillmentOrderItem = FulfillmentOrderItem;
+                this.FulfillmentOrderItems = FulfillmentOrderItems;
             }
             // to ensure "ReturnItemList" is required (not null)
-            if (ReturnItemList == null)
+            if (ReturnItems == null)
             {
-                throw new InvalidDataException("ReturnItemList is a required property for GetFulfillmentOrderResult and cannot be null");
+                throw new InvalidDataException("ReturnItems is a required property for GetFulfillmentOrderResult and cannot be null");
             }
             else
             {
-                this.ReturnItemList = ReturnItemList;
+                this.ReturnItems = ReturnItems;
             }
             // to ensure "ReturnAuthorizationList" is required (not null)
-            if (ReturnAuthorizationList == null)
+            if (ReturnAuthorizations == null)
             {
-                throw new InvalidDataException("ReturnAuthorizationList is a required property for GetFulfillmentOrderResult and cannot be null");
+                throw new InvalidDataException("ReturnAuthorizations is a required property for GetFulfillmentOrderResult and cannot be null");
             }
             else
             {
-                this.ReturnAuthorizationList = ReturnAuthorizationList;
+                this.ReturnAuthorizations = ReturnAuthorizations;
             }
-            this.FulfillmentShipment = FulfillmentShipment;
+            this.FulfillmentShipments = FulfillmentShipments;
         }
 
         /// <summary>
@@ -85,28 +85,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         public FulfillmentOrder FulfillmentOrder { get; set; }
 
         /// <summary>
-        /// Gets or Sets FulfillmentOrderItem
+        /// Gets or Sets FulfillmentOrderItems
         /// </summary>
-        [DataMember(Name = "FulfillmentOrderItem", EmitDefaultValue = false)]
-        public FulfillmentOrderItemList FulfillmentOrderItem { get; set; }
+        [DataMember(Name = "FulfillmentOrderItems", EmitDefaultValue = false)]
+        public FulfillmentOrderItemList FulfillmentOrderItems { get; set; }
 
         /// <summary>
-        /// Gets or Sets FulfillmentShipment
+        /// Gets or Sets FulfillmentShipments
         /// </summary>
-        [DataMember(Name = "FulfillmentShipment", EmitDefaultValue = false)]
-        public FulfillmentShipmentList FulfillmentShipment { get; set; }
+        [DataMember(Name = "FulfillmentShipments", EmitDefaultValue = false)]
+        public FulfillmentShipmentList FulfillmentShipments { get; set; }
 
         /// <summary>
-        /// Gets or Sets ReturnItemList
+        /// Gets or Sets ReturnItems
         /// </summary>
-        [DataMember(Name = "ReturnItemList", EmitDefaultValue = false)]
-        public ReturnItemList ReturnItemList { get; set; }
+        [DataMember(Name = "ReturnItems", EmitDefaultValue = false)]
+        public ReturnItemList ReturnItems { get; set; }
 
         /// <summary>
-        /// Gets or Sets ReturnAuthorizationList
+        /// Gets or Sets ReturnAuthorizations
         /// </summary>
-        [DataMember(Name = "ReturnAuthorizationList", EmitDefaultValue = false)]
-        public ReturnAuthorizationList ReturnAuthorizationList { get; set; }
+        [DataMember(Name = "ReturnAuthorizations", EmitDefaultValue = false)]
+        public ReturnAuthorizationList ReturnAuthorizations { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -117,10 +117,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             var sb = new StringBuilder();
             sb.Append("class GetFulfillmentOrderResult {\n");
             sb.Append("  FulfillmentOrder: ").Append(FulfillmentOrder).Append("\n");
-            sb.Append("  FulfillmentOrderItem: ").Append(FulfillmentOrderItem).Append("\n");
-            sb.Append("  FulfillmentShipment: ").Append(FulfillmentShipment).Append("\n");
-            sb.Append("  ReturnItemList: ").Append(ReturnItemList).Append("\n");
-            sb.Append("  ReturnAuthorizationList: ").Append(ReturnAuthorizationList).Append("\n");
+            sb.Append("  FulfillmentOrderItems: ").Append(FulfillmentOrderItems).Append("\n");
+            sb.Append("  FulfillmentShipments: ").Append(FulfillmentShipments).Append("\n");
+            sb.Append("  ReturnItems: ").Append(ReturnItems).Append("\n");
+            sb.Append("  ReturnAuthorizations: ").Append(ReturnAuthorizations).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -161,24 +161,24 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.FulfillmentOrder.Equals(input.FulfillmentOrder))
                 ) &&
                 (
-                    this.FulfillmentOrderItem == input.FulfillmentOrderItem ||
-                    (this.FulfillmentOrderItem != null &&
-                    this.FulfillmentOrderItem.Equals(input.FulfillmentOrderItem))
+                    this.FulfillmentOrderItems == input.FulfillmentOrderItems ||
+                    (this.FulfillmentOrderItems != null &&
+                    this.FulfillmentOrderItems.Equals(input.FulfillmentOrderItems))
                 ) &&
                 (
-                    this.FulfillmentShipment == input.FulfillmentShipment ||
-                    (this.FulfillmentShipment != null &&
-                    this.FulfillmentShipment.Equals(input.FulfillmentShipment))
+                    this.FulfillmentShipments == input.FulfillmentShipments ||
+                    (this.FulfillmentShipments != null &&
+                    this.FulfillmentShipments.Equals(input.FulfillmentShipments))
                 ) &&
                 (
-                    this.ReturnItemList == input.ReturnItemList ||
-                    (this.ReturnItemList != null &&
-                    this.ReturnItemList.Equals(input.ReturnItemList))
+                    this.ReturnItems == input.ReturnItems ||
+                    (this.ReturnItems != null &&
+                    this.ReturnItems.Equals(input.ReturnItems))
                 ) &&
                 (
-                    this.ReturnAuthorizationList == input.ReturnAuthorizationList ||
-                    (this.ReturnAuthorizationList != null &&
-                    this.ReturnAuthorizationList.Equals(input.ReturnAuthorizationList))
+                    this.ReturnAuthorizations == input.ReturnAuthorizations ||
+                    (this.ReturnAuthorizations != null &&
+                    this.ReturnAuthorizations.Equals(input.ReturnAuthorizations))
                 );
         }
 
@@ -193,14 +193,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 int hashCode = 41;
                 if (this.FulfillmentOrder != null)
                     hashCode = hashCode * 59 + this.FulfillmentOrder.GetHashCode();
-                if (this.FulfillmentOrderItem != null)
-                    hashCode = hashCode * 59 + this.FulfillmentOrderItem.GetHashCode();
-                if (this.FulfillmentShipment != null)
-                    hashCode = hashCode * 59 + this.FulfillmentShipment.GetHashCode();
-                if (this.ReturnItemList != null)
-                    hashCode = hashCode * 59 + this.ReturnItemList.GetHashCode();
-                if (this.ReturnAuthorizationList != null)
-                    hashCode = hashCode * 59 + this.ReturnAuthorizationList.GetHashCode();
+                if (this.FulfillmentOrderItems != null)
+                    hashCode = hashCode * 59 + this.FulfillmentOrderItems.GetHashCode();
+                if (this.FulfillmentShipments != null)
+                    hashCode = hashCode * 59 + this.FulfillmentShipments.GetHashCode();
+                if (this.ReturnItems != null)
+                    hashCode = hashCode * 59 + this.ReturnItems.GetHashCode();
+                if (this.ReturnAuthorizations != null)
+                    hashCode = hashCode * 59 + this.ReturnAuthorizations.GetHashCode();
                 return hashCode;
             }
         }

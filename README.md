@@ -29,42 +29,49 @@ Install-Package CSharpAmazonSpAPI
 ### Tasks
 #### Seller
 
-- [x] [OrdersV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/orders-api/ordersV0.md)
-- [x] [Reports](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reports_2020-09-04.md)
-- [x] [FinancesV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/finances-api/financesV0.md)
-- [x] [Feeds](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feeds_2021-06-30.md) for [feedType](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) for step to call feed read [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md)
-- [x] [ListingsItems](https://github.com/amzn/selling-partner-api-docs/blob/main/references/listings-items-api/listingsItems_2021-08-01.md)
-- [x] [Uploads](https://github.com/amzn/selling-partner-api-docs/blob/main/references/uploads-api/uploads_2020-11-01.md)
-- [x] [shipmentInvoicingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipment-invoicing-api/shipmentInvoicingV0.md)
-- [x] [Shippings](https://github.com/amzn/selling-partner-api-docs/blob/main/references/shipping-api/shipping.md)
-- [x] [CatalogItemsV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/catalog-items-api/catalogItemsV0.md) (deprecated  soon)
-- [ ] [CatalogItemsV20201201](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2020-12-01-reference)
-- [x] [FBAInventory](https://github.com/amzn/selling-partner-api-docs/tree/main/references/fba-inventory-api)
-- [x] [FBASmallAndLight](https://github.com/amzn/selling-partner-api-docs/blob/main/references/fba-small-and-light-api/fbaSmallandLight.md)
-- [x] [FBAInboundEligibility](https://github.com/amzn/selling-partner-api-docs/blob/main/references/fba-inbound-eligibility-api/fbaInbound.md)
-- [x] [FulFillmentInbound](https://github.com/amzn/selling-partner-api-docs/blob/main/references/fulfillment-inbound-api/fulfillmentInboundV0.md)
-- [x] [FulFillmentOutbound](https://github.com/amzn/selling-partner-api-docs/tree/main/references/fulfillment-outbound-api)
-- [x] [MerchantFulFillment](https://github.com/amzn/selling-partner-api-docs/blob/main/references/merchant-fulfillment-api/merchantFulfillmentV0.md)
-- [x] [Messaging](https://github.com/amzn/selling-partner-api-docs/blob/main/references/messaging-api/messaging.md)
-- [x] [Notifications](https://github.com/amzn/selling-partner-api-docs/blob/main/references/notifications-api/notifications.md) for configuration read [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/notifications-api-use-case-guide/notifications-use-case-guide-v1.md)
-- [x] [ProductFeesV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-fees-api/productFeesV0.md)
-- [x] [ProductPricingV0](https://github.com/amzn/selling-partner-api-docs/blob/main/references/product-pricing-api/productPricingV0.md)
-- [x] [Sales](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sales-api/sales.md)
-- [x] [Sellers](https://github.com/amzn/selling-partner-api-docs/blob/main/references/sellers-api/sellers.md)
-- [ ] [Services](https://github.com/amzn/selling-partner-api-docs/blob/main/references/services-api/services.md)
-- [x] [Solicitations](https://github.com/amzn/selling-partner-api-docs/blob/main/references/solicitations-api/solicitations.md)
-- [x] [Token](https://github.com/amzn/selling-partner-api-docs/blob/main/references/tokens-api/tokens_2021-03-01.md) for [doc PII](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/tokens-api-use-case-guide/tokens-API-use-case-guide-2021-03-01.md)
+- [x] [OrdersV0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference)
+- [x] [Reports](https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-reference)
+- [x] [FinancesV0](https://developer-docs.amazon.com/sp-api/docs/finances-api-reference)
+- [x] [Feeds](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-reference) [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-use-case-guide) [feedType](https://developer-docs.amazon.com/sp-api/docs/feed-type-values)
+- [x] [ListingsItems](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide)
+- [x] [Restrictions](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-restrictions-api-v2021-08-01-use-case-guide)
+- [x] [ProductTypes](https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/product-type-api-use-case-guide)
+- [x] [Uploads](https://developer-docs.amazon.com/sp-api/docs/uploads-api-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/uploads-api-use-case-guide)
+- [x] [shipmentInvoicingV0](https://developer-docs.amazon.com/sp-api/docs/shipment-invoicing-api-v0-reference)
+- [x] [Shippings](https://developer-docs.amazon.com/sp-api/docs/shipping-api-v1-reference)
+- [x] [CatalogItemsV0](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v0-reference)
+- [x] [CatalogItemsV20220401](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference)
+- [x] [FBAInventory](https://developer-docs.amazon.com/sp-api/docs/fbainventory-api-v1-reference)
+- [x] [FBASmallAndLight](https://developer-docs.amazon.com/sp-api/docs/fbasmallandlight-api-v1-reference)
+- [x] [FBAInboundEligibility](https://developer-docs.amazon.com/sp-api/docs/fbainboundeligibility-api-v1-reference)
+- [x] [FulFillmentInbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-inbound-api-v0-reference)
+- [x] [FulFillmentOutbound](https://developer-docs.amazon.com/sp-api/docs/fulfillment-outbound-api-v2020-07-01-reference)
+- [x] [MerchantFulFillment](https://developer-docs.amazon.com/sp-api/docs/merchant-fulfillment-api-v0-reference)
+- [x] [Messaging](https://developer-docs.amazon.com/sp-api/docs/messaging-api-v1-reference)
+- [x] [Notifications](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-use-case-guide)
+- [x] [ProductFeesV0](https://developer-docs.amazon.com/sp-api/docs/product-fees-api-v0-reference)
+- [x] [ProductPricingV0](https://developer-docs.amazon.com/sp-api/docs/product-pricing-api-v0-reference)
+- [x] [Sales](https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference)
+- [x] [Sellers](https://developer-docs.amazon.com/sp-api/docs/sellers-api-v1-reference)
+- [ ] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference)
+- [x] [Solicitations](https://developer-docs.amazon.com/sp-api/docs/solicitations-api-v1-reference)
+- [x] [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide)
+- [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
+- [x] [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference)
+- [ ] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
+
 
 #### Vendor 
-- [ ] [VendorOrders](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-orders-api/vendorOrders.md)
-- [ ] [VendorDirectFulfillmentInventoryV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-inventory-api/vendorDirectFulfillmentInventoryV1.md)
-- [x] [VendorDirectFulfillmentOrdersV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-orders-api/vendorDirectFulfillmentOrdersV1.md)
-- [ ] [VendorDirectFulfillmentPaymentsV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-payments-api/vendorDirectFulfillmentPaymentsV1.md)
-- [ ] [VendorDirectFulfillmentShippingV1](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-direct-fulfillment-shipping-api/vendorDirectFulfillmentShippingV1.md)
-- [ ] [VendorDirectFulfillmentTransactionsV1](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-direct-fulfillment-transactions-api)
-- [ ] [vendorInvoices](https://github.com/amzn/selling-partner-api-docs/blob/main/references/vendor-invoices-api/vendorInvoices.md)
-- [ ] [VendorShipments](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-shipments-api)
-- [ ] [VendorTransactionStatus](https://github.com/amzn/selling-partner-api-docs/tree/main/references/vendor-transaction-status-api)
+
+- [ ] [VendorDirectFulfillmentInventoryV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-inventory-api-v1-reference)
+- [x] [VendorDirectFulfillmentOrdersV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-orders-api-v1-reference)
+- [ ] [VendorDirectFulfillmentPaymentsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-payments-api-v1-reference)
+- [ ] [VendorDirectFulfillmentShippingV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-shipping-api-v1-reference)
+- [ ] [VendorDirectFulfillmentTransactionsV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-transactions-api-v1-reference)
+- [x] [VendorOrders](https://developer-docs.amazon.com/sp-api/docs/vendor-orders-api-v1-reference)
+- [ ] [vendorInvoices](https://developer-docs.amazon.com/sp-api/docs/vendor-invoices-api-v1-reference)
+- [ ] [VendorShipments](https://developer-docs.amazon.com/sp-api/docs/vendor-shipments-api-v1-reference)
+- [ ] [VendorTransactionStatus](https://developer-docs.amazon.com/sp-api/docs/vendor-transaction-status-api-v1-reference)
 
 
 
@@ -128,6 +135,33 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 ```
 
+
+### Order List with parameter including PII data
+```CSharp
+var parameterOrderList = new ParameterOrderList
+        {
+            CreatedAfter = DateTime.UtcNow.AddHours(-24),
+            OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
+            MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
+            IsNeedRestrictedDataToken = true,
+            RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
+            {
+                restrictedResources = new List<RestrictedResource>
+                {
+                    new RestrictedResource
+                    {
+                        method = Method.GET.ToString(),
+                        path = ApiUrls.OrdersApiUrls.Orders,
+                        dataElements = new List<string> { "buyerInfo", "shippingAddress" }
+                    }
+                }
+            }
+        };
+
+var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
+
+```
+
 ### Order List data from Sandbox
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
@@ -174,6 +208,19 @@ parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
 var report= amazonConnection.Reports.CreateReport(parameters);
 ```
 
+### Get Report with PII
+
+```Csharp
+
+//use this method automatically know if the report are RDT or not
+var data2 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_EASYSHIP_DOCUMENTS, startDate, null, null);
+
+// OR USE this method to get the document and pass parameter isRestrictedReport = true in case the report will return  PII data
+
+var data = amazonConnection.Reports.GetReportDocument("50039018869997",true);
+```
+
+
 ### Report Manager 🚀🧑‍🚀✨
 Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
 ```CSharp
@@ -217,6 +264,42 @@ while (string.IsNullOrEmpty(ReportDocumentId))
 
 //filePath for report
 ```
+
+### Product GetCatalogItem Version 2022-04-01
+```CSharp
+var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
+    new Parameter.CatalogItems.ParameterGetCatalogItem
+            {
+                ASIN = "B00JK2YANC",
+                includedData = new[] { IncludedData.attributes, 
+                                       IncludedData.salesRanks,
+                                       IncludedData.summaries, 
+                                       IncludedData.productTypes, 
+                                       IncludedData.relationships, 
+                                       IncludedData.dimensions, 
+                                       IncludedData.identifiers, 
+                                       IncludedData.images }
+            });
+```
+
+### Product SearchCatalogItems Version 2022-04-01
+```CSharp
+var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
+    new Parameter.CatalogItems.ParameterSearchCatalogItems202204
+            {
+                keywords = new[] { "vitamin c" },
+                includedData = new[] { IncludedData.attributes, 
+                                       IncludedData.salesRanks,
+                                       IncludedData.summaries, 
+                                       IncludedData.productTypes, 
+                                       IncludedData.relationships, 
+                                       IncludedData.dimensions, 
+                                       IncludedData.identifiers, 
+                                       IncludedData.images }
+            });
+```
+
+
 
 ### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/ProductPricing.cs).
 ```CSharp
@@ -265,6 +348,19 @@ var dataSqs = amazonConnection.Notification.CreateDestination(
         {
             Sqs = new Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
         }
+    });
+```
+
+### Notifications Create Subscription, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.Test/Notifications.cs).
+```CSharp
+
+//SQS
+var result = amazonConnection.Notification.CreateSubscription(
+    new ParameterCreateSubscription()
+    {
+        destinationId = "xxxxxxxxxxxxxxx", // take this from CreateDestination or GetDestinations response 
+        notificationType = NotificationType.ANY_OFFER_CHANGED, // or B2B_ANY_OFFER_CHANGED for B2B prices
+        payloadVersion = "1.0"
     });
 ```
 
@@ -362,6 +458,92 @@ var reportOutpit = outPut.Url;
 var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(outPut.Url);
 
 ```
+
+#### Feed Submit for change ProdcutImage
+```CSharp
+public void SubmitFeedProductImage()
+{
+    ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+    var list = new List<ProductImageMessage>();
+    list.Add(new ProductImageMessage()
+    {
+	SKU = "8201031206122...",
+	ImageLocation = "http://xxxx.com/1.jpeg",
+	ImageType = ImageType.Main
+    }) ;
+    createDocument.AddProductImageMessage(list);
+    var xml = createDocument.GetXML();
+
+    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_IMAGE_DATA);
+
+}
+```
+
+#### Feed Submit for change FULFILLMENT DATA (add tracking number for shipment)
+```CSharp
+
+ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+
+var list = new List<OrderFulfillmentMessage>();
+list.Add(new OrderFulfillmentMessage()
+    {
+       AmazonOrderID = "{orderId}",
+       FulfillmentDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+       FulfillmentData = new FulfillmentData()
+          {
+              CarrierName = "Correos Express",
+              ShippingMethod = "ePaq",
+              ShipperTrackingNumber = "{trackingNumber}"
+           }
+    });
+    createDocument.AddOrderFulfillmentMessage(list);
+
+    var xml = createDocument.GetXML();
+
+    var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_ORDER_FULFILLMENT_DATA);
+
+```
+
+
+#### Feed Submit for change Order Adjustments
+```CSharp
+public void SubmitFeedOrderAdjustment()
+{
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            var list = new List<OrderAdjustmentMessage>();
+            list.Add(new OrderAdjustmentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                ActionType = AdjustmentActionType.Refund,
+                AdjustedItem = new List<AdjustedItem>() {
+                   new AdjustedItem() {
+                       AmazonOrderItemCode = "52986411826454",
+                       AdjustmentReason = AdjustmentReason.CustomerCancel,
+                       DirectPaymentAdjustments = new List<DirectPaymentAdjustments>()
+                           {
+                               new DirectPaymentAdjustments()
+                               {
+                                   Component = new List<DirectPaymentAdjustmentsComponent>()
+                                   {
+                                       new DirectPaymentAdjustmentsComponent() {
+                                            DirectPaymentType = "Credit Card Refund",
+                                            Amount = new CurrencyAmount() {
+                                                Value = 10.50M,
+                                                currency = BaseCurrencyCode.GBP
+                                            }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                }
+            });
+            createDocument.AddOrderAdjustmentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
+}
+```
  
 ---
 ## Usage Plans and Rate Limits in the Selling Partner API
@@ -385,6 +567,17 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ---
 
+## Get restrictions before try to add new lists
+
+```CSharp
+var result = amazonConnection.Restrictions.GetListingsRestrictions(
+    new Parameter.Restrictions.ParameterGetListingsRestrictions
+            {
+                asin = "AAAAAAAAAA",
+                sellerId = "AXXXXXXXXXXXX"
+            });
+```
+---
 ## Create shipment operation from MerchantFulfillment
 
 ```CSharp
@@ -439,6 +632,43 @@ var shipmentRequest = new CreateShipmentRequest(
  var shipmentResponse = amazonConnection.MerchantFulfillment.CreateShipment(shipmentRequest);
 ```
 
+## ProductTypes SearchDefinitions
+
+```CSharp
+var list = amazonConnection.ProductType.SearchDefinitionsProductTypes(
+  new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter()
+   {
+    keywords = new List<string> { String.Empty },
+   });
+```
+
+## ProductTypes GetDefinitions
+
+```CSharp
+var def = amazonConnection.ProductType.GetDefinitionsProductType(
+   new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
+    {
+     productType = "PRODUCT",
+     requirements = RequirementsEnum.LISTING,
+     locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
+     });
+```
+
+---
+## Sales Performance Sample
+
+```CSharp
+     DateTime queryStart = DateTime.UtcNow.AddDays(-11).Date;
+     DateTime queryEnd = DateTime.UtcNow;
+     var parameters = new ParameterGetOrderMetrics();
+     parameters.marketplaceIds = new MarketplaceIds();
+     parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
+     parameters.interval = queryStart.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "Z--" + queryEnd.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture) + "Z";
+     parameters.granularity = Constants.GranularityEnum.Day;
+     parameters.firstDayOfWeek = Constants.FirstDayOfWeek.monday;
+
+     var sales = amazonConnection.Sales.GetOrderMetrics(parameters);
+```
 ---
 ## Q & A
 

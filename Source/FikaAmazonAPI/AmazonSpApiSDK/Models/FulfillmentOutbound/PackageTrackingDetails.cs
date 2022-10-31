@@ -30,10 +30,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         [DataMember(Name = "CurrentStatus", EmitDefaultValue = false)]
         public CurrentStatus? CurrentStatus { get; set; }
         /// <summary>
+        /// Gets or Sets CurrentStatusDescription
+        /// </summary>
+        [DataMember(Name = "CurrentStatusDescription", EmitDefaultValue = false)]
+        public string CurrentStatusDescription { get; set; }
+        /// <summary>
         /// Gets or Sets AdditionalLocationInfo
         /// </summary>
         [DataMember(Name = "AdditionalLocationInfo", EmitDefaultValue = false)]
-        public AdditionalLocationInfo? AdditionalLocationInfo { get; set; }
+        public string AdditionalLocationInfo { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="PackageTrackingDetails" /> class.
         /// </summary>
@@ -44,6 +49,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <param name="PackageNumber">The package identifier. (required).</param>
         /// <param name="TrackingNumber">The tracking number for the package..</param>
+        /// <param name="CustomerTrackingLink">The tracking number for the package..</param>
         /// <param name="CarrierCode">The name of the carrier..</param>
         /// <param name="CarrierPhoneNumber">The phone number of the carrier..</param>
         /// <param name="CarrierURL">The URL of the carrier’s website..</param>
@@ -51,10 +57,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="EstimatedArrivalDate">The estimated arrival date..</param>
         /// <param name="ShipToAddress">The destination city for the package..</param>
         /// <param name="CurrentStatus">CurrentStatus.</param>
+        /// <param name="CurrentStatusDescription">CurrentStatusDescription.</param>
         /// <param name="SignedForBy">The name of the person who signed for the package..</param>
         /// <param name="AdditionalLocationInfo">AdditionalLocationInfo.</param>
         /// <param name="TrackingEvents">TrackingEvents.</param>
-        public PackageTrackingDetails(int? PackageNumber = default(int?), string TrackingNumber = default(string), string CarrierCode = default(string), string CarrierPhoneNumber = default(string), string CarrierURL = default(string), Timestamp ShipDate = default(Timestamp), Timestamp EstimatedArrivalDate = default(Timestamp), TrackingAddress ShipToAddress = default(TrackingAddress), CurrentStatus? CurrentStatus = default(CurrentStatus?), string SignedForBy = default(string), AdditionalLocationInfo? AdditionalLocationInfo = default(AdditionalLocationInfo?), TrackingEventList TrackingEvents = default(TrackingEventList))
+        public PackageTrackingDetails(int? PackageNumber = default(int?), string TrackingNumber = default(string), string CustomerTrackingLink = default(string), string CarrierCode = default(string), string CarrierPhoneNumber = default(string), string CarrierURL = default(string), DateTime? ShipDate = null, DateTime? EstimatedArrivalDate = null, TrackingAddress ShipToAddress = default(TrackingAddress), CurrentStatus? CurrentStatus = default(CurrentStatus?), string CurrentStatusDescription = default(string), string SignedForBy = default(string), string AdditionalLocationInfo = null, TrackingEventList TrackingEvents = default(TrackingEventList))
         {
             // to ensure "PackageNumber" is required (not null)
             if (PackageNumber == null)
@@ -66,6 +73,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.PackageNumber = PackageNumber;
             }
             this.TrackingNumber = TrackingNumber;
+            this.CustomerTrackingLink = CustomerTrackingLink;
             this.CarrierCode = CarrierCode;
             this.CarrierPhoneNumber = CarrierPhoneNumber;
             this.CarrierURL = CarrierURL;
@@ -73,6 +81,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.EstimatedArrivalDate = EstimatedArrivalDate;
             this.ShipToAddress = ShipToAddress;
             this.CurrentStatus = CurrentStatus;
+            this.CurrentStatusDescription = CurrentStatusDescription;
             this.SignedForBy = SignedForBy;
             this.AdditionalLocationInfo = AdditionalLocationInfo;
             this.TrackingEvents = TrackingEvents;
@@ -91,6 +100,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <value>The tracking number for the package.</value>
         [DataMember(Name = "TrackingNumber", EmitDefaultValue = false)]
         public string TrackingNumber { get; set; }
+
+        /// <summary>
+        /// Link on swiship.com that allows customers to track the package.
+        /// </summary>
+        /// <value>.</value>
+        [DataMember(Name = "CustomerTrackingLink", EmitDefaultValue = false)]
+        public string CustomerTrackingLink { get; set; }
 
         /// <summary>
         /// The name of the carrier.
@@ -118,14 +134,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The shipping date for the package.</value>
         [DataMember(Name = "ShipDate", EmitDefaultValue = false)]
-        public Timestamp ShipDate { get; set; }
+        public DateTime? ShipDate { get; set; }
 
         /// <summary>
         /// The estimated arrival date.
         /// </summary>
         /// <value>The estimated arrival date.</value>
         [DataMember(Name = "EstimatedArrivalDate", EmitDefaultValue = false)]
-        public Timestamp EstimatedArrivalDate { get; set; }
+        public DateTime? EstimatedArrivalDate { get; set; }
 
         /// <summary>
         /// The destination city for the package.
@@ -159,6 +175,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("class PackageTrackingDetails {\n");
             sb.Append("  PackageNumber: ").Append(PackageNumber).Append("\n");
             sb.Append("  TrackingNumber: ").Append(TrackingNumber).Append("\n");
+            sb.Append("  CustomerTrackingLink: ").Append(CustomerTrackingLink).Append("\n");
             sb.Append("  CarrierCode: ").Append(CarrierCode).Append("\n");
             sb.Append("  CarrierPhoneNumber: ").Append(CarrierPhoneNumber).Append("\n");
             sb.Append("  CarrierURL: ").Append(CarrierURL).Append("\n");
@@ -166,6 +183,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  EstimatedArrivalDate: ").Append(EstimatedArrivalDate).Append("\n");
             sb.Append("  ShipToAddress: ").Append(ShipToAddress).Append("\n");
             sb.Append("  CurrentStatus: ").Append(CurrentStatus).Append("\n");
+            sb.Append("  CurrentStatusDescription: ").Append(CurrentStatusDescription).Append("\n");
             sb.Append("  SignedForBy: ").Append(SignedForBy).Append("\n");
             sb.Append("  AdditionalLocationInfo: ").Append(AdditionalLocationInfo).Append("\n");
             sb.Append("  TrackingEvents: ").Append(TrackingEvents).Append("\n");
@@ -214,6 +232,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.TrackingNumber.Equals(input.TrackingNumber))
                 ) &&
                 (
+                    this.CustomerTrackingLink == input.CustomerTrackingLink ||
+                    (this.CustomerTrackingLink != null &&
+                    this.CustomerTrackingLink.Equals(input.CustomerTrackingLink))
+                ) &&
+                (
                     this.CarrierCode == input.CarrierCode ||
                     (this.CarrierCode != null &&
                     this.CarrierCode.Equals(input.CarrierCode))
@@ -249,6 +272,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.CurrentStatus.Equals(input.CurrentStatus))
                 ) &&
                 (
+                    this.CurrentStatusDescription == input.CurrentStatusDescription ||
+                    (this.CurrentStatusDescription != null &&
+                    this.CurrentStatusDescription.Equals(input.CurrentStatusDescription))
+                ) &&
+                (
                     this.SignedForBy == input.SignedForBy ||
                     (this.SignedForBy != null &&
                     this.SignedForBy.Equals(input.SignedForBy))
@@ -278,6 +306,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.PackageNumber.GetHashCode();
                 if (this.TrackingNumber != null)
                     hashCode = hashCode * 59 + this.TrackingNumber.GetHashCode();
+                if (this.CustomerTrackingLink != null)
+                    hashCode = hashCode * 59 + this.CustomerTrackingLink.GetHashCode();
                 if (this.CarrierCode != null)
                     hashCode = hashCode * 59 + this.CarrierCode.GetHashCode();
                 if (this.CarrierPhoneNumber != null)
@@ -292,6 +322,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.ShipToAddress.GetHashCode();
                 if (this.CurrentStatus != null)
                     hashCode = hashCode * 59 + this.CurrentStatus.GetHashCode();
+                if (this.CurrentStatusDescription != null)
+                    hashCode = hashCode * 59 + this.CurrentStatusDescription.GetHashCode();
                 if (this.SignedForBy != null)
                     hashCode = hashCode * 59 + this.SignedForBy.GetHashCode();
                 if (this.AdditionalLocationInfo != null)

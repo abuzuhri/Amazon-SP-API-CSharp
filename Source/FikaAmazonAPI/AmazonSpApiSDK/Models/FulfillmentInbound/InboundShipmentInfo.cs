@@ -57,7 +57,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="ConfirmedNeedByDate">Date by which the shipment must arrive at the Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items..</param>
         /// <param name="BoxContentsSource">BoxContentsSource.</param>
         /// <param name="EstimatedBoxContentsFee">An estimate of the manual processing fee charged by Amazon for boxes without box content information. This is only returned when BoxContentsSource is NONE..</param>
-        public InboundShipmentInfo(string ShipmentId = default(string), string ShipmentName = default(string), Address ShipFromAddress = default(Address), string DestinationFulfillmentCenterId = default(string), ShipmentStatus? ShipmentStatus = default(ShipmentStatus?), LabelPrepType? LabelPrepType = default(LabelPrepType?), bool? AreCasesRequired = default(bool?), DateStringType ConfirmedNeedByDate = default(DateStringType), BoxContentsSource? BoxContentsSource = default(BoxContentsSource?), BoxContentsFeeDetails EstimatedBoxContentsFee = default(BoxContentsFeeDetails))
+        public InboundShipmentInfo(string ShipmentId = default(string), string ShipmentName = default(string), Address ShipFromAddress = default(Address), string DestinationFulfillmentCenterId = default(string), ShipmentStatus? ShipmentStatus = default(ShipmentStatus?), LabelPrepType? LabelPrepType = default(LabelPrepType?), bool? AreCasesRequired = default(bool?), string ConfirmedNeedByDate = default(string), BoxContentsSource? BoxContentsSource = default(BoxContentsSource?), BoxContentsFeeDetails EstimatedBoxContentsFee = default(BoxContentsFeeDetails))
         {
             // to ensure "ShipFromAddress" is required (not null)
             if (ShipFromAddress == null)
@@ -129,7 +129,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>Date by which the shipment must arrive at the Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items.</value>
         [DataMember(Name = "ConfirmedNeedByDate", EmitDefaultValue = false)]
-        public DateStringType ConfirmedNeedByDate { get; set; }
+        public string ConfirmedNeedByDate { get; set; }
 
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
@@ -155,14 +156,15 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region GetInventoryQty
-        public void GetInventoryQty()
+        public async Task<List<ProductAFNInventoryRow>> GetAFNInventoryQtyAsync()
         {
-            //var path = GetInventoryQty(_amazonConnections);
-            throw new Exception("Report not finished");
+            var path = await GetAFNInventoryQtyAsync(_amazonConnection);
+            ProductAFNInventoryReport report = new ProductAFNInventoryReport(path, _amazonConnection.RefNumber);
+            return report.Data;
         }
-        private string GetInventoryQty(AmazonConnection amazonConnection)
+        private async Task<string> GetAFNInventoryQtyAsync(AmazonConnection amazonConnection)
         {
-            return amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET_AFN_INVENTORY_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_AFN_INVENTORY_DATA);
         }
         #endregion
 
@@ -194,6 +196,27 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
         }
+        #endregion
+
+        #region Categries
+
+        public List<CategoiesRow> GetCategries()
+        {
+            return Task.Run(() => GetCategriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<CategoiesRow>> GetCategriesAsync()
+        {
+            var path = await GetCategriesAsync(_amazonConnection);
+            CategoiesReport report = new CategoiesReport(path, _amazonConnection.RefNumber);
+            return report.Data.Node;
+        }
+
+        private async Task<string> GetCategriesAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA);
+        }
+
         #endregion
 
         #region Orders
@@ -248,12 +271,28 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
+
+        public List<OrderInvoicingReportRow> GetOrderInvoicingData(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null) =>
+            Task.Run(() => GetOrderInvoicingDataAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<OrderInvoicingReportRow>> GetOrderInvoicingDataAsync(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
+        {
+            List<OrderInvoicingReportRow> list = new List<OrderInvoicingReportRow>();
+            var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
+            foreach (var range in dateList)
+            {
+                var path = await GetOrderInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate, marketplaces);
+                OrderInvoicingReport report = new OrderInvoicingReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
+            }
+            return list;
+        }
+
+        private async Task<string> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
+        {
+            var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
+            options.Add("ShowSalesChannel", "true");
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
+        }
         #endregion
-
-
-
-
     }
-
-
 }

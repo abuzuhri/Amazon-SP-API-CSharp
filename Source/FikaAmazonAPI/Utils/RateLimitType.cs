@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FikaAmazonAPI.Utils
+﻿namespace FikaAmazonAPI.Utils
 {
     public enum RateLimitType
     {
@@ -62,10 +58,17 @@ namespace FikaAmazonAPI.Utils
         CatalogItems_ListCatalogItems,
         CatalogItems_GetCatalogItem,
         CatalogItems_ListCatalogCategories,
-        CatalogItems20201201_GetCatalogItem,
-        CatalogItems20201201_SearchCatalogItems,
+        CatalogItems20220401_GetCatalogItem,
+        CatalogItems20220401_SearchCatalogItems,
 
         FbaInventory_GetInventorySummaries,
+
+        Authorization_GetAuthorizationCode,
+
+        ProductTypes_SearchDefinitionsProductTypes,
+        ProductTypes_GetDefinitionsProductType,
+
+        Restrictions_GetListingsRestrictions,
 
         FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU,
         FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU,
@@ -140,13 +143,23 @@ namespace FikaAmazonAPI.Utils
 
         ProductFees_GetMyFeesEstimateForSKU,
         ProductFees_GetMyFeesEstimateForASIN,
+        ProductFees_GetMyFeesEstimate,
 
         ProductPricing_GetPricing,
         ProductPricing_GetCompetitivePricing,
         ProductPricing_GetListingOffers,
         ProductPricing_GetItemOffers,
+        ProductPricing_GetItemOffersBatch,
+        ProductPricing_GetListingOffersBatch,
 
         Sales_GetOrderMetrics,
+
+
+        EasyShip_ListHandoverSlots,
+        EasyShip_GetScheduledPackage,
+        EasyShip_CreateScheduledPackage,
+        EasyShip_UpdateScheduledPackages,
+
 
         Sellers_GetMarketplaceParticipations,
 
@@ -158,5 +171,19 @@ namespace FikaAmazonAPI.Utils
         VendorDirectFulfillmentOrdersV1_GetOrders,
         VendorDirectFulfillmentOrdersV1_GetOrder,
         VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement,
+
+        ShippingV2_GetShipmentDocument,
+        ShippingV2_CancelShipment,
+        ShippingV2_PurchaseShipment,
+        ShippingV2_GetRates,
+        ShippingV2_DirectPurchaseShipment,
+        ShippingV2_GetTracking,
+        ShippingV2_GetAdditionalInputs,
+
+        VendorOrdersV1_GetPurchaseOrders,
+        VendorOrdersV1_GetPurchaseOrder,
+        VendorOrdersV1_SubmitAcknowledgement,
+        VendorOrdersV1_GetPurchaseOrdersStatus,
+
     }
 }

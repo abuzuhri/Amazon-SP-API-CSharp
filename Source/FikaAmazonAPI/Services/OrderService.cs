@@ -28,16 +28,32 @@ namespace FikaAmazonAPI.Services
             }
             var queryParameters = searchOrderList.getParameters();
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
-            while (!string.IsNullOrEmpty(nextToken))
+            int PageCount = 1;
+            if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
             {
-                var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
-                orderList.AddRange(orderPayload.Orders);
-                nextToken = orderPayload.NextToken;
+                orderList.NextToken = nextToken;
             }
+            else
+            {
+                while (!string.IsNullOrEmpty(nextToken))
+                {
+                    var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
+                    orderList.AddRange(orderPayload.Orders);
+                    nextToken = orderPayload.NextToken;
+
+                    if (searchOrderList.MaxNumberOfPages.HasValue)
+                    {
+                        PageCount++;
+                        if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
+                            break;
+                    }
+                }
+            }
+
             return orderList;
         }
 
@@ -49,7 +65,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
             queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", searchOrderList.MarketplaceIds)));
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.GET, queryParameters, parameter: searchOrderList);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             return response.Payload;
         }
@@ -60,7 +76,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrderAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetOrderAsync(ParameterGetOrder parameter)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.GET, parameter: parameter);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.Get, parameter: parameter);
             var response = await ExecuteRequestAsync<GetOrderResponse>(Utils.RateLimitType.Order_GetOrder);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -73,7 +89,7 @@ namespace FikaAmazonAPI.Services
         public async Task<OrderItemList> GetOrderItemsAsync(string orderId, IParameterBasedPII ParameterBasedPII = null)
         {
             var orderItemList = new OrderItemList();
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET, parameter: ParameterBasedPII);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.Get, parameter: ParameterBasedPII);
             var response = await ExecuteRequestAsync<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems);
             var nextToken = response.Payload.NextToken;
             orderItemList.AddRange(response.Payload.OrderItems);
@@ -94,7 +110,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
 
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.Get, queryParameters);
             var response = await ExecuteRequestAsync<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems);
             return response.Payload;
         }
@@ -103,7 +119,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrderBuyerInfoAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderBuyerInfo> GetOrderBuyerInfoAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.Get, queryParameters);
             var response = await ExecuteRequestAsync<GetOrderBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderBuyerInfo);
             return response.Payload;
         }
@@ -112,7 +128,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrderItemsBuyerInfoAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderItemsBuyerInfoList> GetOrderItemsBuyerInfoAsync(string orderId)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetOrderItemsBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderItemsBuyerInfo);
             return response.Payload;
         }
@@ -121,7 +137,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrderAddressAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Address> GetOrderAddressAsync(string orderId)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress);
             return response.Payload.ShippingAddress;
         }

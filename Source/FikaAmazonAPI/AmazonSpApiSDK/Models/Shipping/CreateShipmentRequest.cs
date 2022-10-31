@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="ShipTo">ShipTo (required).</param>
         /// <param name="ShipFrom">ShipFrom (required).</param>
         /// <param name="Containers">Containers (required).</param>
-        public CreateShipmentRequest(ClientReferenceId ClientReferenceId = default(ClientReferenceId), Address ShipTo = default(Address), Address ShipFrom = default(Address), ContainerList Containers = default(ContainerList))
+        public CreateShipmentRequest(string ClientReferenceId = default(string), Address ShipTo = default(Address), Address ShipFrom = default(Address), ContainerList Containers = default(ContainerList))
         {
             // to ensure "ClientReferenceId" is required (not null)
             if (ClientReferenceId == null)
@@ -80,7 +80,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Gets or Sets ClientReferenceId
         /// </summary>
         [DataMember(Name = "clientReferenceId", EmitDefaultValue = false)]
-        public ClientReferenceId ClientReferenceId { get; set; }
+        public string ClientReferenceId { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
