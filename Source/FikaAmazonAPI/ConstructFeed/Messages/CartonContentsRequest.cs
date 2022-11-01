@@ -17,7 +17,6 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
             [Obsolete("Only used for xml serialization", error: true)]
             set { throw new NotSupportedException(); }
         }
-
         [XmlElement(ElementName = "Carton")]
         public List<Carton> Carton { get; set; } = new List<Carton>();
     }
@@ -40,11 +39,18 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         public int QuantityShipped { get; set; }
         [XmlElement(ElementName = "QuantityInCase")]
         public int QuantityInCase { get; set; }
-        [XmlElement(ElementName = "ExpirationDate")]
+
+        [XmlIgnore]
         public Nullable<DateTime> ExpirationDate { get; set; }
+
+        [XmlElement(ElementName = "ExpirationDate")]
+        public string ExpirationDateFormatted
+        {
+            get { return this.ExpirationDate.Value.ToString("yyyy-MM-dd"); }
+            set { this.ExpirationDate = DateTime.Parse(value); }
+        }
 
         [XmlIgnore]
         public bool ExpirationDateSpecified { get { return ExpirationDate != null; } }
-
     }
 }
