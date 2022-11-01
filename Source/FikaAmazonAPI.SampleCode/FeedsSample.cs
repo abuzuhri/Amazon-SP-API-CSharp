@@ -318,7 +318,8 @@ namespace FikaAmazonAPI.SampleCode
                         new CartonItem() {
                             QuantityInCase=12,
                         QuantityShipped=12,
-                        SKU="4051"
+                        SKU="4051",
+                        ExpirationDate=DateTime.Now,
                         }
                     }
                     }

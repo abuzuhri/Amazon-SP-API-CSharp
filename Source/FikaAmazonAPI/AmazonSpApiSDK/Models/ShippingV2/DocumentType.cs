@@ -4,33 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
 
-  /// <summary>
-  /// The type of shipping document.
-  /// </summary>
-  [DataContract]
-  public class DocumentType {
-
     /// <summary>
-    /// Get the string presentation of the object
+    /// The type of shipping document.
     /// </summary>
-    /// <returns>String presentation of the object</returns>
-    public override string ToString()  {
-      var sb = new StringBuilder();
-      sb.Append("class DocumentType {\n");
-      sb.Append("}\n");
-      return sb.ToString();
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum DocumentType
+    {
+        [EnumMember(Value = "PACKSLIP")]
+        PACKSLIP,
+        [EnumMember(Value = "LABEL")]
+        LABEL,
+        [EnumMember(Value = "RECEIPT")]
+        RECEIPT,
+        [EnumMember(Value = "CUSTOM_FORM")]
+        CUSTOM_FORM    
     }
-
-    /// <summary>
-    /// Get the JSON string presentation of the object
-    /// </summary>
-    /// <returns>JSON string presentation of the object</returns>
-    public string ToJson() {
-      return JsonConvert.SerializeObject(this, Formatting.Indented);
-    }
-
-}
 }
