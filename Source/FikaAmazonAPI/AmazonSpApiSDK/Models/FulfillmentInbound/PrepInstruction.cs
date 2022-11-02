@@ -58,7 +58,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum HangGarment for value: HangGarment
         /// </summary>
         [EnumMember(Value = "HangGarment")]
-        HangGarment = 6
+        HangGarment = 6,
+
+        /// <summary>
+        /// Enum SuffocationStickering for value: SuffocationStickering
+        /// </summary>
+        [EnumMember(Value= "SuffocationStickering")]
+        SuffocationStickering = 7
     }
 
 }
