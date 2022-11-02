@@ -13,6 +13,8 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using RestSharp.Serializers.NewtonsoftJson;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -55,6 +57,7 @@ namespace FikaAmazonAPI.Services
         private void CreateRequest(string url, RestSharp.Method method)
         {
             RequestClient = new RestClient(ApiBaseUrl);
+            RequestClient.UseNewtonsoftJson();
             Request = new RestRequest(url, method);
         }
         protected async Task CreateUnAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null)
@@ -105,8 +108,8 @@ namespace FikaAmazonAPI.Services
             RestHeader();
             AddAccessToken();
             AddShippingBusinessId();
+            
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
-
             var response = await RequestClient.ExecuteAsync<T>(Request);
             SaveLastRequestHeader(response.Headers);
             SleepForRateLimit(response.Headers, rateLimitType);
