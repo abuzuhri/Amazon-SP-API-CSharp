@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="Dimensions">The length, width, height, and weight of the container. (required).</param>
         /// <param name="Items">A list of the items in the container. (required).</param>
         /// <param name="Weight">The weight of the container. (required).</param>
-        public Container(ContainerTypeEnum? ContainerType = default(ContainerTypeEnum?), ContainerReferenceId ContainerReferenceId = default(ContainerReferenceId), Currency Value = default(Currency), Dimensions Dimensions = default(Dimensions), List<ContainerItem> Items = default(List<ContainerItem>), Weight Weight = default(Weight))
+        public Container(ContainerTypeEnum? ContainerType = default(ContainerTypeEnum?), string ContainerReferenceId = null, Currency Value = default(Currency), Dimensions Dimensions = default(Dimensions), List<ContainerItem> Items = default(List<ContainerItem>), Weight Weight = default(Weight))
         {
             // to ensure "ContainerReferenceId" is required (not null)
             if (ContainerReferenceId == null)
@@ -113,10 +113,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
 
 
         /// <summary>
-        /// Gets or Sets ContainerReferenceId
+        /// An identifier for the container. This must be unique within all the containers in the same shipment.
         /// </summary>
         [DataMember(Name = "containerReferenceId", EmitDefaultValue = false)]
-        public ContainerReferenceId ContainerReferenceId { get; set; }
+        public string ContainerReferenceId { get; set; }
 
         /// <summary>
         /// The total value of all items in the container.
