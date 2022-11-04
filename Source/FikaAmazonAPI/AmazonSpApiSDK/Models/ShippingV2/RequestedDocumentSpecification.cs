@@ -27,11 +27,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         public DocumentSize Size { get; set; }
 
         /// <summary>
-        /// Gets or Sets Dpi
+        /// The document specifications requested. For calls to the purchaseShipment operation, the shipment purchase fails if the specified document specifications are not among those returned in the response to the getRates operation.
         /// </summary>
         [DataMember(Name = "dpi", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "dpi")]
-        public Dpi Dpi { get; set; }
+        public int Dpi { get; set; }
 
         /// <summary>
         /// Gets or Sets PageLayout
