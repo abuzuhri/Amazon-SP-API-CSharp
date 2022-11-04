@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.Services
         public async Task<GetPrepInstructionsResult> GetPrepInstructionsAsync(ParameterGetPrepInstructions parameterGetPrepInstructions)
         {
             var parameter = parameterGetPrepInstructions.getParameters();
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundGuidance, RestSharp.Method.Get, parameter);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetPrepInstructions, RestSharp.Method.Get, parameter);
 
             var response = await ExecuteRequestAsync<GetPrepInstructionsResponse>(RateLimitType.FulFillmentInbound_GetPrepInstructions);
             if (response != null && response.Payload != null)
