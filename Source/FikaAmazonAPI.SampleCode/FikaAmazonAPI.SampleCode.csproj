@@ -19,14 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.182" />
-    <PackageReference Include="AWSSDK.SQS" Version="3.7.2.86" />
+    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.100.9" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.9" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
