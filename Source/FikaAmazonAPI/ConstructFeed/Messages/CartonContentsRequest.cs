@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         [XmlElement(ElementName = "ExpirationDate")]
         public string ExpirationDateFormatted
         {
-            get { return this.ExpirationDate.Value.ToString("yyyy-MM-dd"); }
+            get { return this.ExpirationDate.HasValue ? this.ExpirationDate.Value.ToString("yyyy-MM-dd") : null; }
             set { this.ExpirationDate = DateTime.Parse(value); }
         }
 
