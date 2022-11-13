@@ -198,21 +198,21 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
-        #region Categries
+        #region Categories
 
-        public List<CategoiesRow> GetCategries()
+        public List<CategoriesRow> GetCategories()
         {
-            return Task.Run(() => GetCategriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => GetCategoriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        public async Task<List<CategoiesRow>> GetCategriesAsync()
+        public async Task<List<CategoriesRow>> GetCategoriesAsync()
         {
-            var path = await GetCategriesAsync(_amazonConnection);
-            CategoiesReport report = new CategoiesReport(path, _amazonConnection.RefNumber);
+            var path = await GetCategoriesAsync(_amazonConnection);
+            CategoriesReport report = new CategoriesReport(path, _amazonConnection.RefNumber);
             return report.Data.Node;
         }
 
-        private async Task<string> GetCategriesAsync(AmazonConnection amazonConnection)
+        private async Task<string> GetCategoriesAsync(AmazonConnection amazonConnection)
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA);
         }
