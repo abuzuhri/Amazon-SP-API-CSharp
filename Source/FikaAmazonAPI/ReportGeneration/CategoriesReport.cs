@@ -4,23 +4,23 @@ using System.Xml.Serialization;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
-    public class CategoiesReport
+    public class CategoriesReport
     {
-        public CategoiesData Data { get; set; } = new CategoiesData();
+        public CategoriesData Data { get; set; } = new CategoriesData();
 
-        public CategoiesReport(string path, string refNumber)
+        public CategoriesReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
 
             var xml = File.ReadAllText(path);
-            var serializer = new XmlSerializer(typeof(CategoiesData));
+            var serializer = new XmlSerializer(typeof(CategoriesData));
 
             try
             {
                 using (StringReader reader = new StringReader(xml))
                 {
-                    Data = (CategoiesData)serializer.Deserialize(reader);
+                    Data = (CategoriesData)serializer.Deserialize(reader);
                 }
             }
             catch (System.Exception e)
@@ -78,7 +78,7 @@ namespace FikaAmazonAPI.ReportGeneration
     }
 
     [XmlRoot(ElementName = "Node")]
-    public class CategoiesRow
+    public class CategoriesRow
     {
 
         [XmlElement(ElementName = "browseNodeId")]
@@ -113,10 +113,10 @@ namespace FikaAmazonAPI.ReportGeneration
     }
 
     [XmlRoot(ElementName = "Result")]
-    public class CategoiesData
+    public class CategoriesData
     {
 
         [XmlElement(ElementName = "Node")]
-        public List<CategoiesRow> Node { get; set; }
+        public List<CategoriesRow> Node { get; set; }
     }
 }
