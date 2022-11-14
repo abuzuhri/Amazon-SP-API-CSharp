@@ -138,11 +138,7 @@ namespace FikaAmazonAPI.Services
             }
             catch (AmazonProcessingReportDeserializeException ex)
             {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-
+                throw;
             }
             return processingReport;
         }
@@ -171,30 +167,14 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public async Task<string> SubmitFeedAsync(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML)
+        public async Task<string> SubmitFeedAsync(string feedContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML)
         {
-
             //We are creating Feed Document
             var feedCreate = CreateFeedDocument(contentType);
 
             //Uploading encoded invoice file
-            if (contentType == ContentType.PDF)
-            {
-                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
-            }
-            else if (contentType == ContentType.JSON)
-            {
-                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
-            }
-            else if (contentType == ContentType.TXT)
-            {
-                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
-            }
-            else
-            {
-                _ = await PostXMLDataAsync(feedCreate.Url, XmlContentOrFilePath);
-            }
-
+            _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType);
+  
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
             {
                 FeedType = feedType.ToString(),
@@ -220,45 +200,29 @@ namespace FikaAmazonAPI.Services
             return new MemoryStream(imageData);
         }
 
-        private async Task<string> PostXMLDataAsync(string destinationUrl, string requestXml, ContentType contentType = ContentType.XML)
+        private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
-            byte[] bytes;
-            bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
-            request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
-            request.ContentLength = bytes.Length;
-            request.Method = "PUT";
-            Stream requestStream = await request.GetRequestStreamAsync();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
-            HttpWebResponse response;
-            response = (HttpWebResponse)await request.GetResponseAsync();
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                Stream responseStream = response.GetResponseStream();
-                string responseStr = new StreamReader(responseStream).ReadToEnd();
-                return responseStr;
-            }
-            return null;
-        }
 
-        private async Task<string> PostFileDataAsync(string destinationUrl, string pathFile, ContentType contentType = ContentType.XML)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
-            byte[] bytes = File.ReadAllBytes(pathFile);
-            //bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
+            byte[] bytes;
+            if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
+                bytes = File.ReadAllBytes(contentOrFilePath);
+            else
+                bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
             request.Method = "PUT";
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
-            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
-            if (response.StatusCode == HttpStatusCode.OK)
+            using (Stream requestStream = request.GetRequestStream())
             {
-                Stream responseStream = response.GetResponseStream();
-                string responseStr = new StreamReader(responseStream).ReadToEnd();
-                return responseStr;
+                requestStream.Write(bytes, 0, bytes.Length);
+                requestStream.Close();
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream responseStream = response.GetResponseStream();
+                    string responseStr = await new StreamReader(responseStream).ReadToEndAsync();
+                    return responseStr;
+                }
             }
             return null;
         }
