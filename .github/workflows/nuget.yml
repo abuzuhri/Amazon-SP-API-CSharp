@@ -41,7 +41,7 @@ jobs:
 
 
     - name: Add github package source
-      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.USERGIHUB_TOKEN }}
+      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
       
 
     - name: Push to GitHub Packages
