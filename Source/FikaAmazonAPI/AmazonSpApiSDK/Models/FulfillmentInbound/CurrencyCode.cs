@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         [EnumMember(Value = "CAD")]
         CAD = 4,
 
-        [EnumMember(Value = "CAD")]
+        [EnumMember(Value = "JPY")]
         JPY,
         [EnumMember(Value = "CNY")]
         CNY,
