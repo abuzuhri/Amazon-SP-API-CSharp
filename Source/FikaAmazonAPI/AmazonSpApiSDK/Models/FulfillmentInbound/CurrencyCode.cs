@@ -10,7 +10,6 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
@@ -43,8 +42,35 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         [EnumMember(Value = "EUR")]
         EUR = 3,
 
-        [EnumMember(Value = "EUR")]
-        CAD = 4
+        [EnumMember(Value = "CAD")]
+        CAD = 4,
+
+        [EnumMember(Value = "CAD")]
+        JPY,
+        [EnumMember(Value = "CNY")]
+        CNY,
+        [EnumMember(Value = "INR")]
+        INR,
+        [EnumMember(Value = "MXN")]
+        MXN,
+        [EnumMember(Value = "BRL")]
+        BRL,
+        [EnumMember(Value = "AUD")]
+        AUD,
+        [EnumMember(Value = "TRY")]
+        TRY,
+        [EnumMember(Value = "SGD")]
+        SGD,
+        [EnumMember(Value = "SEK")]
+        SEK,
+        [EnumMember(Value = "PLN")]
+        PLN,
+        [EnumMember(Value = "AED")]
+        AED,
+        [EnumMember(Value = "SAR")]
+        SAR,
+        [EnumMember(Value = "EGP")]
+        EGP,
     }
 
 }
