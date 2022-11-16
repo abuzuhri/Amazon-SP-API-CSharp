@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.ReportGeneration
@@ -198,23 +199,27 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
-        #region Categries
+        #region Categories
 
-        public List<CategoiesRow> GetCategries()
+        public List<CategoriesRow> GetCategories()
         {
-            return Task.Run(() => GetCategriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => GetCategoriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        public async Task<List<CategoiesRow>> GetCategriesAsync()
+        public async Task<List<CategoriesRow>> GetCategoriesAsync(bool rootNodesOnly = false)
         {
-            var path = await GetCategriesAsync(_amazonConnection);
-            CategoiesReport report = new CategoiesReport(path, _amazonConnection.RefNumber);
+            var path = await GetCategoriesAsync(_amazonConnection, rootNodesOnly);
+            CategoriesReport report = new CategoriesReport(path, _amazonConnection.RefNumber);
             return report.Data.Node;
         }
 
-        private async Task<string> GetCategriesAsync(AmazonConnection amazonConnection)
+        private async Task<string> GetCategoriesAsync(AmazonConnection amazonConnection, bool rootNodesOnly)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA,
+                reportOptions: new ReportOptions
+            {
+                { "RootNodesOnly", rootNodesOnly.ToString() }
+            });
         }
 
         #endregion

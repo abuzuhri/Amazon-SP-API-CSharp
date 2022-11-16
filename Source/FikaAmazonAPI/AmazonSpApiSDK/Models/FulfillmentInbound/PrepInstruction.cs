@@ -76,6 +76,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum SetCreation for value: SetCreation
         /// </summary>
         [EnumMember(Value = "SetCreation")]
-        SetCreation = 9
+        SetCreation = 9,
+
+        /// <summary>
+        /// Enum SetCreation for value: SetCreation
+        /// </summary>
+        [EnumMember(Value = "SetStickering")]
+        SetStickering = 10,
+
+        /// <summary>
+        /// Enum SetCreation for value: SetCreation
+        /// </summary>
+        [EnumMember(Value = "CapSealing")]
+        CapSealing = 11,
     }
 }

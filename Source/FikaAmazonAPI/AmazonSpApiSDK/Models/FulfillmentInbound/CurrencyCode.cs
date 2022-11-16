@@ -10,6 +10,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
@@ -40,7 +41,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum EUR for value: EUR
         /// </summary>
         [EnumMember(Value = "EUR")]
-        EUR = 3
+        EUR = 3,
+
+        [EnumMember(Value = "EUR")]
+        CAD = 4
     }
 
 }

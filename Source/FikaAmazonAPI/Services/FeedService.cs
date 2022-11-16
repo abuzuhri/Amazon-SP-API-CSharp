@@ -109,9 +109,11 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
         public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
         public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
             ProcessingReportMessage processingReport = null;
@@ -143,6 +145,42 @@ namespace FikaAmazonAPI.Services
             catch (Exception ex)
             {
 
+            }
+            return processingReport;
+        }
+        
+        public ProcessingReportMessage GetFeedDocumentProcessingReport(FeedDocument feedDocument) =>
+            Task.Run(() => GetFeedDocumentProcessingReportAsync(feedDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(FeedDocument feedDocument)
+        {
+            ProcessingReportMessage processingReport = null;
+            string responseContent;
+            try
+            {
+                var stream = await GetStreamFromUrlAsync(feedDocument.Url);
+                if (feedDocument.CompressionAlgorithm.HasValue && (feedDocument.CompressionAlgorithm.Value == FeedDocument.CompressionAlgorithmEnum.GZIP))
+                  stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
+                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
+                FeedAmazonEnvelope response = null;
+
+                try
+                {
+                    response = (FeedAmazonEnvelope)xmlSerializer.Deserialize(stream);
+                }
+                catch (Exception e)
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    responseContent = reader.ReadToEnd();
+                    throw new AmazonProcessingReportDeserializeException("Something went wrong on deserialize report stream", responseContent);
+                }
+
+                processingReport = response.Message[0].ProcessingReport;
+
+            }
+            catch (AmazonProcessingReportDeserializeException ex)
+            {
+                throw;
             }
             return processingReport;
         }
