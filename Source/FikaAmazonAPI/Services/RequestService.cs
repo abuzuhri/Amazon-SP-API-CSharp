@@ -7,13 +7,13 @@ using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
 using RestSharp;
+using RestSharp.Serializers.NewtonsoftJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using RestSharp.Serializers.NewtonsoftJson;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -59,14 +59,6 @@ namespace FikaAmazonAPI.Services
             RequestClient.UseNewtonsoftJson();
             Request = new RestRequest(url, method);
         }
-        protected async Task CreateUnAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null)
-        {
-            CreateRequest(url, method);
-            if (postJsonObj != null)
-                AddJsonBody(postJsonObj);
-            if (queryParameters != null)
-                AddQueryParameters(queryParameters);
-        }
 
         protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null)
         {
@@ -107,7 +99,7 @@ namespace FikaAmazonAPI.Services
             RestHeader();
             AddAccessToken();
             AddShippingBusinessId();
-            
+
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
             LogRequest(Request, response);
@@ -133,7 +125,7 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private void LogRequest(RestRequest request,RestResponse response)
+        private void LogRequest(RestRequest request, RestResponse response)
         {
             if (AmazonCredential.IsDebugMode)
             {
@@ -162,7 +154,7 @@ namespace FikaAmazonAPI.Services
                     errorMessage = response.ErrorMessage,
                 };
 
-                Console.WriteLine(string.Format("Request completed, Request: {1}, Response: {2}",
+                Console.WriteLine(string.Format("Request completed, Request: {0}, Response: {1}",
                         JsonConvert.SerializeObject(requestToLog),
                         JsonConvert.SerializeObject(responseToLog)));
             }
@@ -198,7 +190,7 @@ namespace FikaAmazonAPI.Services
                 {
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
-                        if(AmazonCredential.IsDebugMode)
+                        if (AmazonCredential.IsDebugMode)
                             Console.WriteLine("Throttle max try count reached");
 
                         throw;
