@@ -13,7 +13,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Serialization;
 using RestSharp.Serializers.NewtonsoftJson;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
@@ -111,6 +110,7 @@ namespace FikaAmazonAPI.Services
             
             Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential);
             var response = await RequestClient.ExecuteAsync<T>(Request);
+            LogRequest(Request, response);
             SaveLastRequestHeader(response.Headers);
             SleepForRateLimit(response.Headers, rateLimitType);
             ParseResponse(response);
@@ -131,7 +131,41 @@ namespace FikaAmazonAPI.Services
                     LastHeaders.Add(new KeyValuePair<string, string>(parameter.Name.ToString(), parameter.Value.ToString()));
                 }
             }
+        }
 
+        private void LogRequest(RestRequest request,RestResponse response)
+        {
+            if (AmazonCredential.IsDebugMode)
+            {
+                var requestToLog = new
+                {
+                    resource = request.Resource,
+                    parameters = request.Parameters.Select(parameter => new
+                    {
+                        name = parameter.Name,
+                        value = parameter.Value,
+                        type = parameter.Type.ToString()
+                    }),
+                    // ToString() here to have the method as a nice string otherwise it will just show the enum value
+                    method = request.Method.ToString(),
+                    // This will generate the actual Uri used in the request
+                    //uri = request. _restClient.BuildUri(request),
+                };
+
+                var responseToLog = new
+                {
+                    statusCode = response.StatusCode,
+                    content = response.Content,
+                    headers = response.Headers,
+                    // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
+                    responseUri = response.ResponseUri,
+                    errorMessage = response.ErrorMessage,
+                };
+
+                Console.WriteLine(string.Format("Request completed, Request: {1}, Response: {2}",
+                        JsonConvert.SerializeObject(requestToLog),
+                        JsonConvert.SerializeObject(responseToLog)));
+            }
         }
         private void RestHeader()
         {
@@ -164,9 +198,9 @@ namespace FikaAmazonAPI.Services
                 {
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
-#if DEBUG
-                        Console.WriteLine("Throttle max try count reached");
-#endif
+                        if(AmazonCredential.IsDebugMode)
+                            Console.WriteLine("Throttle max try count reached");
+
                         throw;
                     }
 
@@ -214,19 +248,6 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-
-        protected async Task<T> ExecuteUnAuthorizedRequest<T>() where T : new()
-        {
-            var response = await RequestClient.ExecuteAsync<T>(Request);
-            ParseResponse(response);
-            SaveLastRequestHeader(response.Headers);
-            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
-            {
-                response.Data = JsonConvert.DeserializeObject<T>(response.Content);
-            }
-            return response.Data;
-        }
-
         protected void ParseResponse(RestResponse response)
         {
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
@@ -237,7 +258,8 @@ namespace FikaAmazonAPI.Services
             }
             else
             {
-                Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
+                if (AmazonCredential.IsDebugMode)
+                    Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
 
                 var errorResponse = response.Content.ConvertToErrorResponse();
                 if (errorResponse != null)
