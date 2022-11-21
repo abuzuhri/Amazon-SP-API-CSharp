@@ -56,6 +56,9 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetListingOffersAsync(parameterGetListingOffers)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetOffersResult> GetListingOffersAsync(ParameterGetListingOffers parameterGetListingOffers)
         {
+            if (string.IsNullOrEmpty(parameterGetListingOffers.MarketplaceId))
+                parameterGetListingOffers.MarketplaceId = AmazonCredential.MarketPlace.ID;
+
             var param = parameterGetListingOffers.getParameters();
 
             await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffersBySellerSku(parameterGetListingOffers.SellerSKU), RestSharp.Method.Get, param);
