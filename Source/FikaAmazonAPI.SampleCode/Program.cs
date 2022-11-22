@@ -42,7 +42,9 @@ namespace FikaAmazonAPI.SampleCode
 
             var offfers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {
-                Asin = "B07WYJF6KJ"
+                Asin = "B0000512CU",
+                CustomerType=CustomerType.Business,
+                ItemCondition = ItemCondition.New,
             });
 
 
