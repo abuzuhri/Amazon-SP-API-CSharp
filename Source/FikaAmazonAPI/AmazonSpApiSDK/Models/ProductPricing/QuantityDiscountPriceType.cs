@@ -16,7 +16,6 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using static FikaAmazonAPI.Utils.Constants;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
