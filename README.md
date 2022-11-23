@@ -136,7 +136,21 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 ```
 
 
-### Order List with parameter including PII data
+### Order List with parameter including PII data Simple
+```CSharp
+var parameterOrderList = new ParameterOrderList
+        {
+            CreatedAfter = DateTime.UtcNow.AddHours(-24),
+            OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
+            MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
+            IsNeedRestrictedDataToken = true
+        };
+
+var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
+
+```
+
+### Order List with parameter including PII data Advance (if you want to get specific data Elements object only)
 ```CSharp
 var parameterOrderList = new ParameterOrderList
         {
