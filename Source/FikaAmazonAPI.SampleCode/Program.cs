@@ -36,8 +36,12 @@ namespace FikaAmazonAPI.SampleCode
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
                 MarketPlace = MarketPlace.GetMarketPlaceByID(config.GetSection("FikaAmazonAPI:MarketPlaceID").Value),
-                IsDebugMode=true
+                IsDebugMode = true
             });
+
+            OrdersSample ordersSample1 = new OrdersSample(amazonConnection);
+            ordersSample1.GetOrdersPIIAdvance();
+            ordersSample1.GetOrdersPIISimple();
 
 
             var offfers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
@@ -51,8 +55,7 @@ namespace FikaAmazonAPI.SampleCode
             var dddd = amazonConnection.Seller.GetMarketplaceParticipations();
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            OrdersSample ordersSample1 = new OrdersSample(amazonConnection);
-            ordersSample1.GetOrdersPII();
+
 
 
             ReportManager reportManageree = new ReportManager(amazonConnection);

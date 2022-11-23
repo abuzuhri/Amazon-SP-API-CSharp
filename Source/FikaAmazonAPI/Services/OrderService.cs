@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrdersAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderList> GetOrdersAsync(ParameterOrderList searchOrderList)
         {
+
             var orderList = new OrderList();
 
             if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
@@ -26,6 +28,22 @@ namespace FikaAmazonAPI.Services
                 searchOrderList.MarketplaceIds = new List<string>();
                 searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
+
+            if (searchOrderList.IsNeedRestrictedDataToken && searchOrderList.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.GET.ToString();
+                restrictedResource.path = OrdersApiUrls.Orders;
+                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
+
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                searchOrderList.RestrictedDataTokenRequest = createRDT;
+            }
+
             var queryParameters = searchOrderList.getParameters();
 
             await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
@@ -76,19 +94,47 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetOrderAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetOrderAsync(ParameterGetOrder parameter)
         {
+            if (parameter.IsNeedRestrictedDataToken && parameter.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.GET.ToString();
+                restrictedResource.path = OrdersApiUrls.Order(parameter.OrderId);
+                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
+
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                parameter.RestrictedDataTokenRequest = createRDT;
+            }
+
             await CreateAuthorizedRequestAsync(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.Get, parameter: parameter);
             var response = await ExecuteRequestAsync<GetOrderResponse>(Utils.RateLimitType.Order_GetOrder);
             if (response != null && response.Payload != null)
                 return response.Payload;
             else return null;
         }
-
-
         public OrderItemList GetOrderItems(string orderId, IParameterBasedPII parameterBasedPII = null) =>
             Task.Run(() => GetOrderItemsAsync(orderId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderItemList> GetOrderItemsAsync(string orderId, IParameterBasedPII ParameterBasedPII = null)
         {
             var orderItemList = new OrderItemList();
+
+            if (ParameterBasedPII != null && ParameterBasedPII.IsNeedRestrictedDataToken && ParameterBasedPII.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.GET.ToString();
+                restrictedResource.path = OrdersApiUrls.OrderItems(orderId);
+                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                ParameterBasedPII.RestrictedDataTokenRequest = createRDT;
+            }
+
             await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.Get, parameter: ParameterBasedPII);
             var response = await ExecuteRequestAsync<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems);
             var nextToken = response.Payload.NextToken;

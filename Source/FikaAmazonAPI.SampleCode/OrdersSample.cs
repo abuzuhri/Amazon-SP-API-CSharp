@@ -56,16 +56,26 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// You must have valid PII developer to be able to call this method
         /// </summary>
-        public void GetOrdersPII()
+        public void GetOrdersPIISimple()
         {
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
             serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Pending);
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
-            serachOrderList.AmazonOrderIds = new List<string>();
-            serachOrderList.AmazonOrderIds.Add("405-0426616-1636335");
+            //You must have valid PII developer to be able to call this 
+            serachOrderList.IsNeedRestrictedDataToken = true;
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+        }
+        public void GetOrdersPIIAdvance()
+        {
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
             //You must have valid PII developer to be able to call this 
             var restrictedResource = new RestrictedResource();
@@ -100,6 +110,18 @@ namespace FikaAmazonAPI.SampleCode
         {
             var Items = amazonConnection.Orders.GetOrderItems("402-0467973-4229120");
         }
+
+        /// <summary>
+        /// You must have valid PII developer to be able to call this method
+        /// </summary>
+        public void GetOrderItemsPIISimple()
+        {
+            ParameterBasedPII parameterBasedPII = new ParameterBasedPII();
+            parameterBasedPII.IsNeedRestrictedDataToken = true;
+
+            var order = amazonConnection.Orders.GetOrderItems("405-0426616-1636335", parameterBasedPII);
+        }
+
         /// <summary>
         /// You must have valid PII developer to be able to call this method
         /// </summary>

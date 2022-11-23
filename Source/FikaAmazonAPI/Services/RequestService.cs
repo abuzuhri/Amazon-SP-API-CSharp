@@ -153,8 +153,8 @@ namespace FikaAmazonAPI.Services
                     responseUri = response.ResponseUri,
                     errorMessage = response.ErrorMessage,
                 };
-
-                Console.WriteLine(string.Format("Request completed, Request: {0}, Response: {1}",
+                Console.WriteLine("\n\n");
+                Console.WriteLine(string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}",
                         JsonConvert.SerializeObject(requestToLog),
                         JsonConvert.SerializeObject(responseToLog)));
             }

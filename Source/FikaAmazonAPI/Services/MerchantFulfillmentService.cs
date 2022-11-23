@@ -1,6 +1,8 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
@@ -43,6 +45,19 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetShipmentAsync(shipmentId, ParameterBasedPII = null)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> GetShipmentAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
         {
+            if (ParameterBasedPII != null && ParameterBasedPII.IsNeedRestrictedDataToken && ParameterBasedPII.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.GET.ToString();
+                restrictedResource.path = MerchantFulfillmentApiUrls.GetShipment(shipmentId);
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                ParameterBasedPII.RestrictedDataTokenRequest = createRDT;
+            }
+
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.Get, parameter: ParameterBasedPII);
 
             var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_GetShipment);
@@ -54,6 +69,19 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CancelShipmentAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> CancelShipmentAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null)
         {
+            if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.DELETE.ToString();
+                restrictedResource.path = MerchantFulfillmentApiUrls.GetShipment(shipmentId);
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                parameterBasedPII.RestrictedDataTokenRequest = createRDT;
+            }
+
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.GetShipment(shipmentId), RestSharp.Method.Delete, parameter: parameterBasedPII);
 
             var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipment);
@@ -64,9 +92,22 @@ namespace FikaAmazonAPI.Services
 
         public Shipment CancelShipmentOld(string shipmentId, IParameterBasedPII parameterBasedPII = null) =>
             Task.Run(() => CancelShipmentOldAsync(shipmentId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII ParameterBasedPII = null)
+        public async Task<Shipment> CancelShipmentOldAsync(string shipmentId, IParameterBasedPII parameterBasedPII = null)
         {
-            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.Put, parameter: ParameterBasedPII);
+            if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.PUT.ToString();
+                restrictedResource.path = MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId);
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                parameterBasedPII.RestrictedDataTokenRequest = createRDT;
+            }
+
+            await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CancelShipmentOld(shipmentId), RestSharp.Method.Put, parameter: parameterBasedPII);
 
             var response = await ExecuteRequestAsync<GetShipmentResponse>(RateLimitType.MerchantFulFillment_CancelShipmentOld);
             if (response != null && response.Payload != null)
@@ -78,6 +119,19 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateShipmentAsync(createShipmentRequest, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Shipment> CreateShipmentAsync(CreateShipmentRequest createShipmentRequest, IParameterBasedPII parameterBasedPII = null)
         {
+            if (parameterBasedPII != null && parameterBasedPII.IsNeedRestrictedDataToken && parameterBasedPII.RestrictedDataTokenRequest == null)
+            {
+                var restrictedResource = new RestrictedResource();
+                restrictedResource.method = Method.POST.ToString();
+                restrictedResource.path = MerchantFulfillmentApiUrls.CreateShipment;
+
+                var createRDT = new CreateRestrictedDataTokenRequest()
+                {
+                    restrictedResources = new List<RestrictedResource> { restrictedResource }
+                };
+                parameterBasedPII.RestrictedDataTokenRequest = createRDT;
+            }
+
             await CreateAuthorizedRequestAsync(MerchantFulfillmentApiUrls.CreateShipment, RestSharp.Method.Post, postJsonObj: createShipmentRequest, parameter: parameterBasedPII);
 
             var response = await ExecuteRequestAsync<CreateShipmentResponse>(RateLimitType.MerchantFulFillment_CreateShipment);
