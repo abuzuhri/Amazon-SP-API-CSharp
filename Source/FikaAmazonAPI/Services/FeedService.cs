@@ -80,7 +80,7 @@ namespace FikaAmazonAPI.Services
         public async Task<Feed> GetFeedAsync(string feedId)
         {
             await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.Get);
-            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CreateFeed);
+            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_GetFeed);
             if (response != null)
                 return response;
             return null;
@@ -144,7 +144,7 @@ namespace FikaAmazonAPI.Services
             }
             return processingReport;
         }
-        
+
         public ProcessingReportMessage GetFeedDocumentProcessingReport(FeedDocument feedDocument) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(feedDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
 
@@ -156,7 +156,7 @@ namespace FikaAmazonAPI.Services
             {
                 var stream = await GetStreamFromUrlAsync(feedDocument.Url);
                 if (feedDocument.CompressionAlgorithm.HasValue && (feedDocument.CompressionAlgorithm.Value == FeedDocument.CompressionAlgorithmEnum.GZIP))
-                  stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
+                    stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
                 var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
                 FeedAmazonEnvelope response = null;
 
@@ -212,7 +212,7 @@ namespace FikaAmazonAPI.Services
 
             //Uploading encoded invoice file
             _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType);
-  
+
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
             {
                 FeedType = feedType.ToString(),
