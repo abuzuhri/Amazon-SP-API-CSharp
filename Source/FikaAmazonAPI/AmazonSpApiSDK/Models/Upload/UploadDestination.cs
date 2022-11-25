@@ -26,16 +26,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadDestination" /> class.
         /// </summary>
-        /// <param name="_uploadDestinationId">A Login with Amazon (LWA) authorization code that can be exchanged for a refresh token and access token that authorize you to make calls to a Selling Partner API..</param>
+        /// <param name="UploadDestinationId">A Login with Amazon (LWA) authorization code that can be exchanged for a refresh token and access token that authorize you to make calls to a Selling Partner API..</param>
         public UploadDestination()
         {
         }
 
 
-        [DataMember(Name = "_uploadDestinationId", EmitDefaultValue = false)]
-        public string _uploadDestinationId { get; set; }
-        public string url { get; set; }
-        public object headers { get; set; }
+        [DataMember(Name = "uploadDestinationId", EmitDefaultValue = false)]
+        public string UploadDestinationId { get; set; }
+        [DataMember(Name = "url", EmitDefaultValue = false)]
+        public string Url { get; set; }
+        [DataMember(Name = "headers", EmitDefaultValue = false)]
+        public object Headers { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -45,7 +47,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
         {
             var sb = new StringBuilder();
             sb.Append("class UploadDestination {\n");
-            sb.Append("  _uploadDestinationId: ").Append(_uploadDestinationId).Append("\n");
+            sb.Append("  uploadDestinationId: ").Append(UploadDestinationId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -81,9 +83,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
 
             return
                 (
-                    this._uploadDestinationId == input._uploadDestinationId ||
-                    (this._uploadDestinationId != null &&
-                    this._uploadDestinationId.Equals(input._uploadDestinationId))
+                    this.UploadDestinationId == input.UploadDestinationId ||
+                    (this.UploadDestinationId != null &&
+                    this.UploadDestinationId.Equals(input.UploadDestinationId))
                 );
         }
 
@@ -96,8 +98,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Upload
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._uploadDestinationId != null)
-                    hashCode = hashCode * 59 + this._uploadDestinationId.GetHashCode();
+                if (this.UploadDestinationId != null)
+                    hashCode = hashCode * 59 + this.UploadDestinationId.GetHashCode();
                 return hashCode;
             }
         }
