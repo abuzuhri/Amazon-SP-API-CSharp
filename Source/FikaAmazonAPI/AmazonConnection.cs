@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Services;
+using FikaAmazonAPI.Utils;
 using System;
 
 namespace FikaAmazonAPI
@@ -88,7 +89,7 @@ namespace FikaAmazonAPI
             this.RefNumber = RefNumber;
         }
 
-        public void Authenticate(AmazonCredential Credentials)
+        private void Authenticate(AmazonCredential Credentials)
         {
             if (this.Credentials == default(AmazonCredential))
                 Init(Credentials);
@@ -136,5 +137,7 @@ namespace FikaAmazonAPI
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
             this._VendorOrders = new VendorOrderService(this.Credentials);
         }
+
+        public MarketPlace GetCurrentMarketplace { get { return Credentials.MarketPlace; } }
     }
 }
