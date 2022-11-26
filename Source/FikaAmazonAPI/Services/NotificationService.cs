@@ -34,7 +34,6 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
-        //createSubscription
 
         public Destination CreateDestination(CreateDestinationRequest request) =>
             Task.Run(() => CreateDestinationAsync(request)).ConfigureAwait(false).GetAwaiter().GetResult();
