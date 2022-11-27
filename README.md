@@ -420,7 +420,7 @@ list.Add(new PriceMessage()
     SKU = "8201031206122...",
     StandardPrice = new StandardPrice()
     {
-        currency = BaseCurrencyCode.AED.ToString(),
+        currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
         Value = (201.0522M).ToString("0.00")
     }
 });
@@ -543,7 +543,7 @@ public void SubmitFeedOrderAdjustment()
                                             DirectPaymentType = "Credit Card Refund",
                                             Amount = new CurrencyAmount() {
                                                 Value = 10.50M,
-                                                currency = BaseCurrencyCode.GBP
+                                                currency = amazonConnection.GetCurrentMarketplace.CurrencyCode
                                             }
                                        }
                                    }
@@ -576,6 +576,19 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
       .
       .
       IsActiveLimitRate=false
+});
+```
+
+---
+
+## Enable debug mode
+You can also enable log for all http request and response you can set IsDebugMode=true in AmazonCredential
+```CSharp
+var amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+      .
+      .
+      IsDebugMode = true
 });
 ```
 

@@ -120,7 +120,7 @@ namespace FikaAmazonAPI.SampleCode
 
             GetFeedDetails(feedID);
         }
-        
+
         public async void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
@@ -132,7 +132,7 @@ namespace FikaAmazonAPI.SampleCode
                 SKU = SKU,
                 StandardPrice = new StandardPrice()
                 {
-                    currency = BaseCurrencyCode.AED.ToString(),
+                    currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
                     Value = (PRICE).ToString("0.00")
                 }
             });
@@ -218,7 +218,7 @@ namespace FikaAmazonAPI.SampleCode
                                             DirectPaymentType = "Credit Card Refund",
                                             Amount = new CurrencyAmount() {
                                                 Value = 10.50M,
-                                                currency = BaseCurrencyCode.GBP
+                                                currency = amazonConnection.GetCurrentMarketplace.CurrencyCode
                                             }
                                        }
                                    }
