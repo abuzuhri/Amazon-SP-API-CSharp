@@ -166,11 +166,10 @@ namespace FikaAmazonAPI.Utils
             B2B_ANY_OFFER_CHANGED,
             ACCOUNT_STATUS_CHANGED,
             EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE,
-            //Missing Notification types
             PRODUCT_TYPE_DEFINITIONS_CHANGE,
             ORDER_STATUS_CHANGE,
-            PRICING_HEALTH
-
+            PRICING_HEALTH,
+            FBA_INVENTORY_AVAILABILITY_CHANGES
         }
 
         /// <summary>
