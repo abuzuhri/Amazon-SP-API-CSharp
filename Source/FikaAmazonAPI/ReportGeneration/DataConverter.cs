@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.ReportGeneration
     public class DataConverter
     {
 
-        public static class DateTimeFormate
+        public static class DateTimeFormat
         {
             public const string DATE_FORMAT_DOT = "dd.MM.yyyy";
             public const string DATETIME_FORMAT_UTC_DOT = "dd.MM.yyyy HH:mm:ss UTC";
@@ -15,9 +15,9 @@ namespace FikaAmazonAPI.ReportGeneration
             public const string DATE_MMM_FORMAT = "dd-MMM-yyyy";
             public const string DATE_AGING_FORMAT = "yyyy-MM-dd";
         }
-        public static DateTime? GetDate(string str, string FORMATE)
+        public static DateTime? GetDate(string str, string format)
         {
-            if (DateTime.TryParseExact(str, FORMATE,
+            if (DateTime.TryParseExact(str, format,
                            System.Globalization.CultureInfo.InvariantCulture,
                            System.Globalization.DateTimeStyles.None,
                            out DateTime value))
