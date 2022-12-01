@@ -18,6 +18,7 @@ namespace FikaAmazonAPI.Utils
             ID = id;
             Region = region;
             Country = country;
+            CurrencyCode = currencyCode;
         }
 
         public static MarketPlace GetMarketPlaceByID(string id)
