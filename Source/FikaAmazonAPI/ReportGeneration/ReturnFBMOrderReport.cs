@@ -64,8 +64,8 @@ namespace FikaAmazonAPI.ReportGeneration
             string[] values = csvLine.Split('\t');
             ReturnFBMOrderRow row = new ReturnFBMOrderRow();
             row.OrderID = values[0];
-            row.OrderDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormate.DATE_MMM_FORMAT);
-            row.ReturnRequestDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormate.DATE_MMM_FORMAT);
+            row.OrderDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormat.DATE_MMM_FORMAT);
+            row.ReturnRequestDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormat.DATE_MMM_FORMAT);
             row.ReturnRequestStatus = values[3];
             row.AmazonRMAID = values[4];
             row.MerchantRMAID = values[5];
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.ReturnType = values[20];
             row.Resolution = values[21];
             row.InvoiceNumber = values[22];
-            row.ReturnDeliveryDate = DataConverter.GetDate(values[23], DataConverter.DateTimeFormate.DATE_MMM_FORMAT);
+            row.ReturnDeliveryDate = DataConverter.GetDate(values[23], DataConverter.DateTimeFormat.DATE_MMM_FORMAT);
             row.OrderAmount = DataConverter.GetDecimal(values[24]);
             row.OrderQuantity = DataConverter.GetInt(values[25]);
             row.SafeTActionReason = values[26];

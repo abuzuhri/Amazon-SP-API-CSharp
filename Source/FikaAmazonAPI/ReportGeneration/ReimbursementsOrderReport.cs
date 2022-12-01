@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             string[] values = csvLine.Split('\t');
             var row = new ReimbursementsOrderRow();
-            row.ApprovalDate = DataConverter.GetDate(values[0], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.ApprovalDate = DataConverter.GetDate(values[0], DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.ReimbursementId = values[1];
             row.CaseId = values[2];
             row.AmazonOrderId = values[3];

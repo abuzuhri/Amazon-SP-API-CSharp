@@ -54,9 +54,9 @@ namespace FikaAmazonAPI.ReportGeneration
             string[] values = csvLine.Split('\t');
             var row = new SettlementOrderRow();
             row.SettlementId = values[0];
-            row.SettlementStartDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormate.DATETIME_FORMAT_UTC_DOT);
-            row.SettlementEndDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormate.DATETIME_FORMAT_UTC_DOT);
-            row.DepositDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormate.DATETIME_FORMAT_UTC_DOT);
+            row.SettlementStartDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.SettlementEndDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.DepositDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
             row.TotalAmount = DataConverter.GetDecimal(values[4]);
             row.Currency = values[5];
             row.TransactionType = values[6];
@@ -69,8 +69,8 @@ namespace FikaAmazonAPI.ReportGeneration
             row.AmountDescription = values[13];
             row.Amount = DataConverter.GetDecimal(values[14]);
             row.FulfillmentId = values[15];
-            row.PostedDate = DataConverter.GetDate(values[16], DataConverter.DateTimeFormate.DATE_FORMAT_DOT);
-            row.PostedDateTime = DataConverter.GetDate(values[17], DataConverter.DateTimeFormate.DATETIME_FORMAT_UTC_DOT);
+            row.PostedDate = DataConverter.GetDate(values[16], DataConverter.DateTimeFormat.DATE_FORMAT_DOT);
+            row.PostedDateTime = DataConverter.GetDate(values[17], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
             row.OrderItemCode = values[18];
             row.MerchantOrderItemId = values[19];
             row.MerchantAdjustmentItemId = values[20];

@@ -35,7 +35,7 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             string[] values = csvLine.Split('\t');
             FeedbackOrderRow row = new FeedbackOrderRow();
-            row.Date = DataConverter.GetDate(values[0], DataConverter.DateTimeFormate.DATE_BACKSLASH_FORMAT);
+            row.Date = DataConverter.GetDate(values[0], DataConverter.DateTimeFormat.DATE_BACKSLASH_FORMAT);
             row.Rating = Convert.ToInt32(values[1]);
             row.Comments = values[2];
             row.Response = values[3];

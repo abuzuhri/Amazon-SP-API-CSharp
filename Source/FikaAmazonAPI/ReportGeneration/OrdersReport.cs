@@ -59,8 +59,8 @@ namespace FikaAmazonAPI.ReportGeneration
             var row = new OrdersRow();
             row.AmazonOrderId = values[0];
             row.MerchantOrderId = values[1];
-            row.PurchaseDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
-            row.LastUpdatedDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.PurchaseDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
+            row.LastUpdatedDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.OrderStatus = values[4];
             row.FulfillmentChannel = values[5];
             row.SalesChannel = values[6];
