@@ -7,8 +7,8 @@ namespace FikaAmazonAPI.Parameter.CatalogItems
     public class ParameterGetCatalogItem : ParameterBased
     {
         public string ASIN { get; set; }
-        public IList<string> marketplaceIds { get; set; } = new List<string>();
-        public IList<IncludedData> includedData { get; set; }
+        public ICollection<string> marketplaceIds { get; set; } = new List<string>();
+        public ICollection<IncludedData> includedData { get; set; }
         public string locale { get; set; }
     }
 }

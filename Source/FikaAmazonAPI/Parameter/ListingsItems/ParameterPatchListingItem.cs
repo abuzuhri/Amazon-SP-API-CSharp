@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 
         public string sku { get; set; }
 
-        public IList<string> marketplaceIds { get; set; }
+        public ICollection<string> marketplaceIds { get; set; }
 
         public string issueLocale { get; set; }
 
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
     {
         public string productType { get; set; }
 
-        public IList<PatchOperation> patches { get; set; }
+        public ICollection<PatchOperation> patches { get; set; }
     }
 
     public class PatchOperation
@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
         public Op op { get; set; }
        public string path { get; set; }
 
-        public IList<object> value { get; set; }
+        public ICollection<object> value { get; set; }
     }
 
     public enum Op

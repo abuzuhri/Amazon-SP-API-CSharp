@@ -8,8 +8,8 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
     public class ParameterGetPricing : ParameterBased
     {
         public string MarketplaceId { get; set; }
-        public IList<string> Asins { get; set; }
-        public IList<string> Skus { get; set; }
+        public ICollection<string> Asins { get; set; }
+        public ICollection<string> Skus { get; set; }
         public ItemType ItemType
         {
             get

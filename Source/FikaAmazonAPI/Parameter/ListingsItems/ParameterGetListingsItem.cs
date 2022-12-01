@@ -48,7 +48,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
         /// <summary>
         /// A list of MarketplaceId values. Used to select orders that were placed in the specified marketplaces. Max count : 50
         /// </summary>
-        public IList<string> marketplaceIds { get; set; }
+        public ICollection<string> marketplaceIds { get; set; }
 
         /// <summary>
         /// A locale for localization of issues. When not provided, the default language code of the first marketplace is used. Examples: "en_US", "fr_CA", "fr_FR". Localized messages default to "en_US" when a localization is not available in the specified locale.
@@ -59,6 +59,6 @@ namespace FikaAmazonAPI.Parameter.ListingItem
         /// <summary>
         /// A comma-delimited list of data sets to include in the response. Default: summaries.
         /// </summary>
-        public IList<Constants.ListingsIncludedData> includedData { get; set; }
+        public ICollection<Constants.ListingsIncludedData> includedData { get; set; }
     }
 }
