@@ -15,15 +15,15 @@ namespace FikaAmazonAPI.Parameter.Report
         /// <summary>
         /// A list of report types used to filter reports. When reportTypes is provided, the other filter parameters (processingStatuses, marketplaceIds, createdSince, createdUntil) and pageSize may also be provided. Either reportTypes or nextToken is required.         Min count : 1 Max count : 10
         /// </summary>
-        public IList<ReportTypes> reportTypes { get; set; } = new List<ReportTypes>();
+        public ICollection<ReportTypes> reportTypes { get; set; } = new List<ReportTypes>();
         /// <summary>
         /// A list of processing statuses used to filter reports.
         /// </summary>
-        public IList<ProcessingStatuses> processingStatuses { get; set; }
+        public ICollection<ProcessingStatuses> processingStatuses { get; set; }
         /// <summary>
         /// A list of marketplace identifiers used to filter reports. The reports returned will match at least one of the marketplaces that you specify. Minimum : 1 Maximum : 10
         /// </summary>
-        public IList<string> marketplaceIds { get; set; } = new List<string>();
+        public ICollection<string> marketplaceIds { get; set; } = new List<string>();
         /// <summary>
         /// The maximum number of reports to return in a single call. Minimum : 1 Maximum : 100	
         /// </summary>

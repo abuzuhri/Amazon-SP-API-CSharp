@@ -8,8 +8,8 @@ namespace FikaAmazonAPI.Parameter.FulFillmentInbound
 {
     public class ParameterGetShipments : ParameterBased
     {
-        public IList<ShipmentStatus> ShipmentStatusList { get; set; }
-        public IList<string> ShipmentIdList { get; set; }
+        public ICollection<ShipmentStatus> ShipmentStatusList { get; set; }
+        public ICollection<string> ShipmentIdList { get; set; }
         public DateTime? LastUpdatedAfter { get; set; }
         public DateTime? LastUpdatedBefore { get; set; }
         public QueryType QueryType { get; set; }

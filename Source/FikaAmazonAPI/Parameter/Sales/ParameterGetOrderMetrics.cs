@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.Parameter.Sales
 {
     public class ParameterGetOrderMetrics : ParameterBased
     {
-        public IList<string> marketplaceIds { get; set; }
+        public ICollection<string> marketplaceIds { get; set; }
         public string interval { get; set; }
         public string granularityTimeZone { get; set; }
         public GranularityEnum granularity { get; set; }

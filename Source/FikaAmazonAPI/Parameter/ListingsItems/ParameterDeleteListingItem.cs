@@ -31,7 +31,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 
         public string sku { get; set; }
 
-        public IList<string> marketplaceIds { get; set; }
+        public ICollection<string> marketplaceIds { get; set; }
 
         public string issueLocale { get; set; }
     }

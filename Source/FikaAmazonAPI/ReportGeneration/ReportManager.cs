@@ -198,7 +198,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
         }
         #endregion
-
+    
         #region Categories
 
         public List<CategoriesRow> GetCategories()
