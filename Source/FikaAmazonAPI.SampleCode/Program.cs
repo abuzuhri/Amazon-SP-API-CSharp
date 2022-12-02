@@ -39,6 +39,14 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             });
 
+
+            var all = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
+            {
+                Asin = "B07NVTGRVZ",
+                ItemCondition = ItemCondition.New,
+                CustomerType = CustomerType.Consumer
+            });
+
             OrdersSample ordersSample1 = new OrdersSample(amazonConnection);
             ordersSample1.GetOrdersPIIAdvance();
             ordersSample1.GetOrdersPIISimple();
@@ -47,7 +55,7 @@ namespace FikaAmazonAPI.SampleCode
             var offfers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {
                 Asin = "B0000512CU",
-                CustomerType=CustomerType.Business,
+                CustomerType = CustomerType.Business,
                 ItemCondition = ItemCondition.New,
             });
 
