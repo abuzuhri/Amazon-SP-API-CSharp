@@ -23,6 +23,11 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetReportsAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<Report>> GetReportsAsync(ParameterReportList parameterReportList)
         {
+            if (parameterReportList.marketplaceIds == null || parameterReportList.marketplaceIds.Count == 0)
+            {
+                parameterReportList.marketplaceIds = new List<string>();
+                parameterReportList.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
             if (parameterReportList.createdSince.HasValue)
             {
                 var totalDays = (parameterReportList.createdSince.Value - DateTime.UtcNow).TotalDays;
@@ -101,6 +106,11 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CreateReportAsync(createReportSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<string> CreateReportAsync(ParameterCreateReportSpecification createReportSpecification)
         {
+            if (createReportSpecification.marketplaceIds == null || createReportSpecification.marketplaceIds.Count == 0)
+            {
+                createReportSpecification.marketplaceIds = new MarketplaceIds();
+                createReportSpecification.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
             await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReport, RestSharp.Method.Post, null, createReportSpecification);
             var response = await ExecuteRequestAsync<AmazonSpApiSDK.Models.Reports.CreateReportResult>(RateLimitType.Report_CreateReport);
 
@@ -248,7 +258,7 @@ namespace FikaAmazonAPI.Services
 
         public string CreateReportAndDownloadFile(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500) =>
             Task.Run(() => CreateReportAndDownloadFileAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport, marketplaces, millisecondsDelay)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null,int millisecondsDelay=500)
+        public async Task<string> CreateReportAndDownloadFileAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500)
         {
             if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
             {
