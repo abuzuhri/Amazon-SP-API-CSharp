@@ -245,8 +245,11 @@ namespace FikaAmazonAPI.Services
             byte[] bytes;
             if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
                 bytes = File.ReadAllBytes(contentOrFilePath);
+            else if (new Uri(contentOrFilePath).IsFile)
+                bytes = File.ReadAllBytes(new Uri(contentOrFilePath).LocalPath);
             else
                 bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
             request.Method = "PUT";
