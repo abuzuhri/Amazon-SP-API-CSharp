@@ -90,7 +90,8 @@ namespace FikaAmazonAPI.Utils
         {
             BARCODE_2D,
             UNIQUE,
-            PALLET
+            PALLET,
+            SELLER_LABEL
         }
         /// <summary>
         /// List of all FeedType https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md
