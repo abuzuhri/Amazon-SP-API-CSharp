@@ -146,6 +146,41 @@ namespace FikaAmazonAPI.SampleCode
 
         }
 
+        public void SubmitFeedSale(double PRICE, string SKU)
+        {
+
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<PriceMessage>();
+            list.Add(new PriceMessage()
+            {
+                SKU = SKU,
+                StandardPrice = new StandardPrice()
+                {
+                    currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
+                    Value = (PRICE).ToString("0.00")
+                },
+                Sale =new Sale()
+                {
+                    StartDate=DateTime.UtcNow.AddDays(+1).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                    EndDate=DateTime.UtcNow.AddDays(+2).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                    SalePrice = new StandardPrice()
+                    {
+                        currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
+                        Value = (PRICE-10).ToString("0.00")
+                    }
+                }
+            });
+            createDocument.AddPriceMessage(list);
+
+            var xml = createDocument.GetXML();
+
+            var feedID =  amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+
+            GetFeedDetails(feedID);
+
+        }
+
         public void FeebPostOrderFullfillment()
         {
             ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
@@ -311,7 +346,7 @@ namespace FikaAmazonAPI.SampleCode
             {
                 foreach (var itm in processingReport.Result)
                 {
-                    Console.WriteLine("ResultDescription=" + itm.AdditionalInfo?.SKU ?? string.Empty + " > " + itm.ResultDescription);
+                    Console.WriteLine("ResultDescription=" + (itm.AdditionalInfo?.SKU ?? string.Empty) + " > " + itm.ResultDescription);
                 }
             }
         }
