@@ -146,6 +146,42 @@ namespace FikaAmazonAPI.SampleCode
 
         }
 
+        public async void SubmitFeedPricingWithSalePrice(string sku, decimal price, decimal salePrice, DateTime startDate, DateTime endDate)
+        {
+            var currencyCode = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString();
+
+            var createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<PriceMessage>();
+            list.Add(new PriceMessage
+            {
+                SKU = sku,
+                StandardPrice = new StandardPrice
+                {
+                    currency = currencyCode,
+                    Value = price.ToString("0.00")
+                },
+                Sale = new Sale
+                {
+                    SalePrice = new StandardPrice
+                    {
+                        currency = currencyCode,
+                        Value = salePrice.ToString("0.00")
+                    },
+                    StartDate = startDate.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                    EndDate = endDate.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffK")
+                }
+            });
+            createDocument.AddPriceMessage(list);
+
+            var xml = createDocument.GetXML();
+
+            var feedId = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+
+            GetFeedDetails(feedId);
+        }
+
+
         public void SubmitFeedSale(double PRICE, string SKU)
         {
 
