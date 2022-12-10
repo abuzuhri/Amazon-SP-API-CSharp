@@ -225,7 +225,13 @@ namespace FikaAmazonAPI.Services
                 }
             }
 
-            return isCompressionFile ? FileTransform.Decompress(tempFilePath) : tempFilePath;
+            if (isCompressionFile)
+            {
+                var compressionFile = tempFilePath;
+                tempFilePath = FileTransform.Decompress(tempFilePath);
+                File.Delete(compressionFile);
+            }
+            return tempFilePath;
         }
 
         public async void SaveStreamToFileAsync(string fileFullPath, Stream stream)
