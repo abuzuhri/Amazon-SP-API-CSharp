@@ -34,5 +34,35 @@ namespace FikaAmazonAPI.SampleCode
             amazonConnection.FulFillmentInbound.GetPrepInstructions(parm);
         }
 
+        public void CreateShipmentPlan()
+        {
+            FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.CreateInboundShipmentPlanRequest oCreateInboundShipmentPlanRequest = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.CreateInboundShipmentPlanRequest();
+
+            oCreateInboundShipmentPlanRequest.ShipToCountryCode = "AE";
+            oCreateInboundShipmentPlanRequest.LabelPrepPreference = FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.LabelPrepPreference.SELLERLABEL;
+
+
+            oCreateInboundShipmentPlanRequest.ShipFromAddress = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.Address();
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.AddressLine1 = "Add";
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.AddressLine2 = "ADD2";
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.City = "City";
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.CountryCode = "AE";
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.PostalCode = "0000";
+            oCreateInboundShipmentPlanRequest.ShipFromAddress.Name = "Name";
+
+
+
+            oCreateInboundShipmentPlanRequest.InboundShipmentPlanRequestItems = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.InboundShipmentPlanRequestItemList();
+            FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.InboundShipmentPlanRequestItem oInboundShipmentPlanRequestItem = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.InboundShipmentPlanRequestItem();
+            oInboundShipmentPlanRequestItem.SellerSKU = "16118";
+            oInboundShipmentPlanRequestItem.ASIN = "B08BXH6234";
+            oInboundShipmentPlanRequestItem.Quantity = 1;
+            oInboundShipmentPlanRequestItem.Condition = FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound.Condition.NewItem;
+
+            oCreateInboundShipmentPlanRequest.InboundShipmentPlanRequestItems.Add(oInboundShipmentPlanRequestItem);
+            var oResult = amazonConnection.FulFillmentInbound.CreateInboundShipmentPlan(oCreateInboundShipmentPlanRequest);
+
+        }
+
     }
 }
