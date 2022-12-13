@@ -1,9 +1,15 @@
-﻿using FikaAmazonAPI.Utils;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping;
+using FikaAmazonAPI.Parameter.FulFillmentInbound;
+using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -61,6 +67,20 @@ namespace FikaAmazonAPI.SampleCode
 
             oCreateInboundShipmentPlanRequest.InboundShipmentPlanRequestItems.Add(oInboundShipmentPlanRequestItem);
             var oResult = amazonConnection.FulFillmentInbound.CreateInboundShipmentPlan(oCreateInboundShipmentPlanRequest);
+
+        }
+
+        public void GetFulFillmentInboundLabelsFromWebCreationSample(string shipmentId,int boxCount)
+        {
+            var labelParams = new ParameterGetLabels()
+            {
+                PageType = PageType.PackageLabel_Letter_6,
+                shipmentId = shipmentId,
+                LabelType = LabelType.SELLER_LABEL,
+                PageSize = boxCount
+            };
+
+            var labels = amazonConnection.FulFillmentInbound.GetLabels(labelParams);
 
         }
 
