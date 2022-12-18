@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 {
@@ -10,31 +11,37 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         public static string GetString(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id)
-                       ? row[id]
+                       ? TheValue(TheValue(row[id]))
                        : null;
         }
         public static int GetInt32(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToInt32(row[id])
+                       ? Convert.ToInt32(TheValue(row[id]))
                        : int.MinValue;
+        }
+        public static int? GetInt32Nullable(this TableRow row, string id)
+        {
+            if (AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id))
+                return Convert.ToInt32(TheValue(row[id]));
+            else return null;
         }
         public static long GetInt64(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToInt64(row[id])
+                       ? Convert.ToInt64(TheValue(row[id]))
                        : long.MinValue;
         }
         public static decimal GetDecimal(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToDecimal(row[id], CultureInfo.InvariantCulture)
+                       ? Convert.ToDecimal(TheValue(row[id]), CultureInfo.InvariantCulture)
                        : decimal.MinValue;
         }
         public static DateTime GetDateTime(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToDateTime(row[id])
+                       ? Convert.ToDateTime(TheValue(row[id]))
                        : DateTime.MinValue;
         }
         public static bool GetBoolean(this TableRow row, string id)
@@ -44,7 +51,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
             AssertThatTheRequestIsValid(row, id);
 
-            return string.Equals(row[id], "true", StringComparison.OrdinalIgnoreCase);
+            return string.Equals(TheValue(row[id]), "true", StringComparison.OrdinalIgnoreCase);
         }
         private static void AssertThatTheRequestIsValid(TableRow row, string id)
         {
@@ -54,7 +61,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         private static void AssertThatThisIsAnAcceptableBoolValue(TableRow row, string id)
         {
             var acceptedValues = new[] { "true", "false" };
-            if (acceptedValues.Contains(row[id], StringComparer.OrdinalIgnoreCase) == false)
+            if (acceptedValues.Contains(TheValue(row[id]), StringComparer.OrdinalIgnoreCase) == false)
                 throw new InvalidCastException($"You must use 'true' or 'false' when setting bools for {id}");
         }
 
@@ -65,22 +72,22 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         }
         private static bool TheBooleanValueIsEmpty(TableRow row, string id)
         {
-            return AValueWithThisIdExists(row, id) && string.IsNullOrEmpty(row[id]);
+            return AValueWithThisIdExists(row, id) && string.IsNullOrEmpty(TheValue(row[id]));
         }
 
         public static float GetSingle(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                ? Convert.ToSingle(row[id])
+                ? Convert.ToSingle(TheValue(row[id]))
                 : float.MinValue;
         }
         public static char GetChar(this TableRow row, string id)
         {
-            return Convert.ToChar(row[id]);
+            return Convert.ToChar(TheValue(row[id]));
         }
         public static T GetDiscreteEnum<T>(this TableRow row, string id) where T : struct, IConvertible
         {
-            var value = row[id].Replace(" ", string.Empty);
+            var value = TheValue(row[id]).Replace(" ", string.Empty);
             T @enum;
             if (Enum.TryParse(value, true, out @enum))
                 return @enum;
@@ -89,17 +96,17 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         }
         public static T GetDiscreteEnum<T>(this TableRow row, string id, T defaultValue) where T : struct, IConvertible
         {
-            var value = row[id].Replace(" ", string.Empty);
+            var value = TheValue(row[id]).Replace(" ", string.Empty);
             T @enum;
             return Enum.TryParse(value, true, out @enum) ? @enum : defaultValue;
         }
         public static TEnum GetEnumValue<TEnum>(this TableRow row, string id)
         {
-            return (TEnum)Enum.Parse(typeof(TEnum), row[id]);
+            return (TEnum)Enum.Parse(typeof(TEnum), TheValue(row[id]));
         }
         public static Enum GetEnum<T>(this TableRow row, string id) where T : class
         {
-            return GetTheEnumValue<T>(row[id], id);
+            return GetTheEnumValue<T>(TheValue(row[id]), id);
         }
         private static Enum GetTheEnumValue<T>(string rowValue, string propertyName) where T : class
         {
@@ -140,13 +147,13 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         public static Guid GetGuid(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? new Guid(row[id])
+                       ? new Guid(TheValue(row[id]))
                        : new Guid();
         }
         public static double GetDouble(this TableRow row, string id)
         {
             return AValueWithThisIdExists(row, id) && TheValueIsNotEmpty(row, id)
-                       ? Convert.ToDouble(row[id], CultureInfo.InvariantCulture)
+                       ? Convert.ToDouble(TheValue(row[id]), CultureInfo.InvariantCulture)
                        : double.MinValue;
         }
         private static bool AValueWithThisIdExists(IEnumerable<KeyValuePair<string, string>> row, string id)
@@ -155,7 +162,11 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         }
         private static bool TheValueIsNotEmpty(TableRow row, string id)
         {
-            return string.IsNullOrEmpty(row[id]) == false;
+            return string.IsNullOrEmpty(TheValue(row[id])) == false;
+        }
+        private static string TheValue(string txt)
+        {
+            return Regex.Replace(txt, "^\"|\"$", "");
         }
     }
 }

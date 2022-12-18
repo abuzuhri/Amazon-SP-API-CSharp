@@ -5,5 +5,7 @@
         public string SKU { get; set; }
 
         public StandardPrice StandardPrice { get; set; }
+
+        public Sale Sale { get; set; }
     }
 }

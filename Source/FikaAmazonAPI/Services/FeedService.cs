@@ -243,10 +243,47 @@ namespace FikaAmazonAPI.Services
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
 
             byte[] bytes;
-            if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
-                bytes = File.ReadAllBytes(contentOrFilePath);
+            if (System.IO.Path.IsPathRooted(contentOrFilePath))
+            {
+                // The string looks like a file path, so try to read the file
+                if (System.IO.File.Exists(contentOrFilePath))
+                {
+                    bytes = System.IO.File.ReadAllBytes(contentOrFilePath);
+                }
+                else
+                {
+                    // The file does not exist, so treat the string as content
+                    bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+                }
+            }
+            else if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
+            {
+                // The string looks like a URI, so try to parse it as a file URI
+                var uri = new Uri(contentOrFilePath);
+                if (uri.IsFile)
+                {
+                    if (System.IO.File.Exists(uri.LocalPath))
+                    {
+                        bytes = System.IO.File.ReadAllBytes(uri.LocalPath);
+                    }
+                    else
+                    {
+                        // The file does not exist, so treat the string as content
+                        bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+                    }
+                }
+                else
+                {
+                    // The URI is not a file URI, so treat the string as content
+                    bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+                }
+            }
             else
+            {
+                // The string is not a file path or a URI, so treat it as content
                 bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+            }
+
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
             request.Method = "PUT";

@@ -225,7 +225,13 @@ namespace FikaAmazonAPI.Services
                 }
             }
 
-            return isCompressionFile ? FileTransform.Decompress(tempFilePath) : tempFilePath;
+            if (isCompressionFile)
+            {
+                var compressionFile = tempFilePath;
+                tempFilePath = FileTransform.Decompress(tempFilePath);
+                File.Delete(compressionFile);
+            }
+            return tempFilePath;
         }
 
         public async void SaveStreamToFileAsync(string fileFullPath, Stream stream)
@@ -334,14 +340,16 @@ namespace FikaAmazonAPI.Services
 
             var reportsPath = new List<string>();
 
-
-            foreach (var reportData in reports)
+            if (reports != null)
             {
-                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                foreach (var reportData in reports)
                 {
-                    var filePath = GetReportFile(reportData.ReportDocumentId);
-                    reportsPath.Add(filePath);
+                    if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                    {
+                        var filePath = GetReportFile(reportData.ReportDocumentId);
+                        reportsPath.Add(filePath);
 
+                    }
                 }
             }
 
