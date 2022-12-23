@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using System.Collections.Generic;
 using System.Linq;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 
@@ -34,7 +35,11 @@ namespace FikaAmazonAPI.Utils
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
 
-            return list.FirstOrDefault(a => a.ID == id);
+            var marketpalce = list.FirstOrDefault(a => a.ID == id);
+            if (marketpalce == null)
+                throw new AmazonInvalidInputException($"InvalidInput, MarketPlace or MarketPlaceID cannot be null for both!");
+
+            return marketpalce;
         }
 
         public static MarketPlace GetMarketplaceByCountryCode(string countryCode)

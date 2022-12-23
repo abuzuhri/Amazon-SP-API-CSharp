@@ -157,8 +157,19 @@ namespace FikaAmazonAPI
             else if (string.IsNullOrEmpty(Credentials.RefreshToken))
                 throw new AmazonInvalidInputException($"InvalidInput, RefreshToken cannot be empty!");
             else if (Credentials.MarketPlace == null)
-                throw new AmazonInvalidInputException($"InvalidInput, MarketPlace cannot be null!");
+            {
+                if (string.IsNullOrEmpty(Credentials.MarketPlaceID))
+                {
+                    throw new AmazonInvalidInputException($"InvalidInput, MarketPlace or MarketPlaceID cannot be null for both!");
+                }
+                else
+                {
+                    Credentials.MarketPlace = MarketPlace.GetMarketPlaceByID(Credentials.MarketPlaceID);
+                }
+            }
+
         }
         public MarketPlace GetCurrentMarketplace { get { return Credentials.MarketPlace; } }
+        public string GetCurrentSellerID { get { return Credentials.SellerID; } }
     }
 }
