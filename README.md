@@ -110,6 +110,19 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
      MarketPlace = MarketPlace.UnitedArabEmirates, //MarketPlace.GetMarketPlaceByID("A2VIGQ35RCS4UG") 
 });
 
+or 
+
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     AccessKey = "AKIAXXXXXXXXXXXXXXX",
+     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     MarketPlaceID = "A2VIGQ35RCS4UG"
+});
+
 ```
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
