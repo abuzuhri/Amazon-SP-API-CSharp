@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// Indicates the type of quantity discount this price applies to.
         /// </summary>
         /// <value>Indicates the type of quantity discount this price applies to.</value>
-        [DataMember(Name = "quantityDiscountType", EmitDefaultValue = false)]
+        [DataMember(Name = "discountType", EmitDefaultValue = false)]//Amazon Documentation says "quantityDiscountType" but in the API Response Content, it is "discountType"
         public QuantityDiscountType QuantityDiscountType { get; set; }
 
         /// <summary>
