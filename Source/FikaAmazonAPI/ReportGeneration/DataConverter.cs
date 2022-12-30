@@ -43,5 +43,13 @@ namespace FikaAmazonAPI.ReportGeneration
             }
             return null;
         }
+        public static double? GetDouble(string str)
+        {
+            if (double.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out double value))
+            {
+                return value;
+            }
+            return null;
+        }
     }
 }
