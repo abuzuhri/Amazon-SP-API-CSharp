@@ -134,7 +134,7 @@ namespace FikaAmazonAPI.SampleCode
             createDocument.AddProductMessage(list, OperationType.Delete);
             var xml = createDocument.GetXML();
 
-            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA, null, null, ContentType.);
+            var feedID = amazonConnection.Feed.SubmitFeedContent(xml, FeedType.POST_PRODUCT_DATA);
 
             GetFeedDetails(feedID);
         }
