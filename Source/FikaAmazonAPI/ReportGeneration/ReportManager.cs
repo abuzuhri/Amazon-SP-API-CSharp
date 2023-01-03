@@ -327,5 +327,20 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
         }
         #endregion
+
+        #region InventoryPlanningData
+        public List<InventoryPlanningDataRow> GetInventoryPlanningData() =>
+            Task.Run(() => GetInventoryPlanningDataAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<InventoryPlanningDataRow>> GetInventoryPlanningDataAsync()
+        {
+            var path = await GetInventoryPlanningDataAsync(_amazonConnection);
+            InventoryPlanningDataReport report = new InventoryPlanningDataReport(path, _amazonConnection.RefNumber);
+            return report.Data;
+        }
+        private async Task<string> GetInventoryPlanningDataAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_INVENTORY_PLANNING_DATA);
+        }
+        #endregion
     }
 }
