@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.ReportGeneration;
+﻿using FikaAmazonAPI.Parameter.ProductPricing;
+using FikaAmazonAPI.ReportGeneration;
 using Microsoft.Extensions.Configuration;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -26,7 +27,26 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
                 IsDebugMode = true
             });
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            feedsSample.SubmitFeedDeleteAddProductMessage();
 
+            IList<string> scopes = new List<string> { "jgjhgh" };
+            var listww = scopes.Select(s => new ItemOffersRequest
+            {
+                HttpMethod = HttpMethodEnum.GET,
+                QueryParams = new ParameterGetItemOffers
+                {
+                    Asin = s,
+                    CustomerType = CustomerType.Consumer,
+                    ItemCondition = ItemCondition.New,
+                    MarketplaceId = amazonConnection.GetCurrentMarketplace.ID
+                }
+            }).ToList();
+
+            var restultt = amazonConnection.ProductPricing.GetItemOffersBatch(new Parameter.ProductPricing.ParameterGetItemOffersBatchRequest
+            {
+                ParameterGetItemOffers = listww,
+            });
 
             var offers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
             {

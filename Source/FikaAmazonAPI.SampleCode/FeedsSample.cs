@@ -107,6 +107,7 @@ namespace FikaAmazonAPI.SampleCode
             list.Add(new ProductMessage()
             {
                 SKU = "8432225129778...",
+
                 StandardProductID = new ConstructFeed.Messages.StandardProductID()
                 {
                     Type = "ASIN",
@@ -114,6 +115,39 @@ namespace FikaAmazonAPI.SampleCode
                 }
             });
             createDocument.AddProductMessage(list, OperationType.Update);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
+
+            GetFeedDetails(feedID);
+        }
+
+        public void SubmitFeedDeleteAddProductMessage()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<ProductMessage>();
+            list.Add(new ProductMessage()
+            {
+                SKU = "8432225129778...."
+            });
+            createDocument.AddProductMessage(list, OperationType.Delete);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA, null, null, ContentType.);
+
+            GetFeedDetails(feedID);
+        }
+        public void AddOfferMessageMessage()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+
+            var list = new List<OfferMessage>();
+            list.Add(new OfferMessage()
+            {
+                SKU = "4049639414402_b"
+            });
+            createDocument.AddOfferMessage(list, OperationType.Delete);
             var xml = createDocument.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_DATA);
@@ -196,14 +230,14 @@ namespace FikaAmazonAPI.SampleCode
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
                     Value = (PRICE).ToString("0.00")
                 },
-                Sale =new Sale()
+                Sale = new Sale()
                 {
-                    StartDate=DateTime.UtcNow.AddDays(+1).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
-                    EndDate=DateTime.UtcNow.AddDays(+2).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                    StartDate = DateTime.UtcNow.AddDays(+1).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
+                    EndDate = DateTime.UtcNow.AddDays(+2).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
                     SalePrice = new StandardPrice()
                     {
                         currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                        Value = (PRICE-10).ToString("0.00")
+                        Value = (PRICE - 10).ToString("0.00")
                     }
                 }
             });
@@ -211,7 +245,7 @@ namespace FikaAmazonAPI.SampleCode
 
             var xml = createDocument.GetXML();
 
-            var feedID =  amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
 
