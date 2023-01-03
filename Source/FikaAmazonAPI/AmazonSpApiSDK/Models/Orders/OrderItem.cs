@@ -70,6 +70,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// </summary>
             [EnumMember(Value = "AU_VOEC")]
             AU_VOEC = 6,
+
+            /// <summary>
+            /// Enum SG_VOEC for value: SG_VOEC
+            /// </summary>
+            [EnumMember(Value = "SG_VOEC")]
+            SG_VOEC = 6,
         }
 
         /// <summary>
