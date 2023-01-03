@@ -196,8 +196,20 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
-            Task.Run(() => SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public string SubmitFeedFile(string FilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
+            Task.Run(() => SubmitFeedAsync(FilePath, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.File)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<string> SubmitFeedFileAsync(string FilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
+            await SubmitFeedAsync(FilePath, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.File);
+
+        public string SubmitFeedContent(string Content, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
+            Task.Run(() => SubmitFeedAsync(Content, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.Text)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<string> SubmitFeedContentAsync(string Content, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
+            await SubmitFeedAsync(Content, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.Text);
+
+        public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect) =>
+            Task.Run(() => SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType, contentFormate)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         /// <summary>
         /// read full step  https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md
@@ -205,13 +217,13 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public async Task<string> SubmitFeedAsync(string feedContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML)
+        public async Task<string> SubmitFeedAsync(string feedContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect)
         {
             //We are creating Feed Document
             var feedCreate = CreateFeedDocument(contentType);
 
             //Uploading encoded invoice file
-            _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType);
+            _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType, contentFormate);
 
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
             {
@@ -238,33 +250,27 @@ namespace FikaAmazonAPI.Services
             return new MemoryStream(imageData);
         }
 
-        private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML)
+        private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
 
-            byte[] bytes;
-            if (System.IO.Path.IsPathRooted(contentOrFilePath))
+            byte[] bytes = null;
+            if (contentFormate == ContentFormate.File)
             {
-                // The string looks like a file path, so try to read the file
-                if (System.IO.File.Exists(contentOrFilePath))
-                {
-                    bytes = System.IO.File.ReadAllBytes(contentOrFilePath);
-                }
-                else
-                {
-                    // The file does not exist, so treat the string as content
-                    bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
-                }
+                bytes = System.IO.File.ReadAllBytes(contentOrFilePath);
             }
-            else if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
+            else if (contentFormate == ContentFormate.Text)
             {
-                // The string looks like a URI, so try to parse it as a file URI
-                var uri = new Uri(contentOrFilePath);
-                if (uri.IsFile)
+                bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+            }
+            else if (contentFormate == ContentFormate.AutoDetect)
+            {
+                if (System.IO.Path.IsPathRooted(contentOrFilePath))
                 {
-                    if (System.IO.File.Exists(uri.LocalPath))
+                    // The string looks like a file path, so try to read the file
+                    if (System.IO.File.Exists(contentOrFilePath))
                     {
-                        bytes = System.IO.File.ReadAllBytes(uri.LocalPath);
+                        bytes = System.IO.File.ReadAllBytes(contentOrFilePath);
                     }
                     else
                     {
@@ -272,17 +278,35 @@ namespace FikaAmazonAPI.Services
                         bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
                     }
                 }
+                else if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
+                {
+                    // The string looks like a URI, so try to parse it as a file URI
+                    var uri = new Uri(contentOrFilePath);
+                    if (uri.IsFile)
+                    {
+                        if (System.IO.File.Exists(uri.LocalPath))
+                        {
+                            bytes = System.IO.File.ReadAllBytes(uri.LocalPath);
+                        }
+                        else
+                        {
+                            // The file does not exist, so treat the string as content
+                            bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+                        }
+                    }
+                    else
+                    {
+                        // The URI is not a file URI, so treat the string as content
+                        bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
+                    }
+                }
                 else
                 {
-                    // The URI is not a file URI, so treat the string as content
+                    // The string is not a file path or a URI, so treat it as content
                     bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
                 }
             }
-            else
-            {
-                // The string is not a file path or a URI, so treat it as content
-                bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
-            }
+
 
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;

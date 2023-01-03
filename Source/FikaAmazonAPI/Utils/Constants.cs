@@ -542,6 +542,13 @@ namespace FikaAmazonAPI.Utils
             TXT,
         }
 
+        public enum ContentFormate
+        {
+            AutoDetect,
+            File,
+            Text
+        }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum FeedMessageType
         {
