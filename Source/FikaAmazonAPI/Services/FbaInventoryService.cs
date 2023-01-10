@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken))
                 {
-                    var getInventorySummaries = GetInventorySummariesByNextToken(nextToken, parameter);
+                    var getInventorySummaries = await GetInventorySummariesByNextTokenAsync(nextToken, parameter);
                     list.Add(getInventorySummaries.Payload.InventorySummaries);
                     nextToken = getInventorySummaries.Pagination?.NextToken;
                 }
