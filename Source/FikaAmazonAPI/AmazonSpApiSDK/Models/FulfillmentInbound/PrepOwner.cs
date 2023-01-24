@@ -40,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum NONE for value: NONE
         /// </summary>
         [EnumMember(Value = "NONE")]
-        NONE = 2
+        NONE = 3
     }
 
 }
