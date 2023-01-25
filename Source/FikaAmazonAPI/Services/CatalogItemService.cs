@@ -89,8 +89,8 @@ namespace FikaAmazonAPI.Services
             if (!string.IsNullOrEmpty(SellerSKU))
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.Get, param);
-            var response = await ExecuteRequestAsync<ListCatalogCategoriesResponse>(RateLimitType.CatalogItems_ListCatalogCategories);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.Get, param, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<ListCatalogCategoriesResponse>(RateLimitType.CatalogItems_ListCatalogCategories, cancellationToken);
 
             if (response != null && response.Payload != null)
                 return response.Payload;
