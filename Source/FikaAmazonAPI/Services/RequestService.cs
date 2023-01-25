@@ -65,10 +65,9 @@ namespace FikaAmazonAPI.Services
         {
             var PiiObject = parameter as IParameterBasedPII;
             if (PiiObject != null && PiiObject.IsNeedRestrictedDataToken)
-            {
                 await RefreshTokenAsync(TokenDataType.PII, PiiObject.RestrictedDataTokenRequest, cancellationToken);
-            }
-            else await RefreshTokenAsync(tokenDataType, cancellationToken: cancellationToken);
+            else
+                await RefreshTokenAsync(tokenDataType, cancellationToken: cancellationToken);
             CreateRequest(url, method);
             if (postJsonObj != null)
                 AddJsonBody(postJsonObj);
@@ -364,7 +363,7 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType);
+                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType, cancellationToken);
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);

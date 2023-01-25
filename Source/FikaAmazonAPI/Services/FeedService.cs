@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -26,21 +27,21 @@ namespace FikaAmazonAPI.Services
         public IList<Feed> GetFeeds(ParameterGetFeed parameterGetFeed) =>
             Task.Run(() => GetFeedsAsync(parameterGetFeed)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<IList<Feed>> GetFeedsAsync(ParameterGetFeed parameterGetFeed)
+        public async Task<IList<Feed>> GetFeedsAsync(ParameterGetFeed parameterGetFeed, CancellationToken cancellationToken = default)
         {
             List<Feed> list = new List<Feed>();
 
             var parameter = parameterGetFeed.getParameters();
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, parameter);
-            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds, cancellationToken);
 
             list.AddRange(response.Feeds);
             var nextToken = response.NextToken;
 
             while (!string.IsNullOrEmpty(nextToken))
             {
-                var data = GetFeedsByNextToken(nextToken);
+                var data = await GetFeedsByNextTokenAsync(nextToken, cancellationToken);
                 list.AddRange(data.Feeds);
                 nextToken = data.NextToken;
             }
@@ -52,14 +53,14 @@ namespace FikaAmazonAPI.Services
         public GetFeedsResponseV00 GetFeedsByNextToken(string nextToken) =>
             Task.Run(() => GetFeedsByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<GetFeedsResponseV00> GetFeedsByNextTokenAsync(string nextToken)
+        public async Task<GetFeedsResponseV00> GetFeedsByNextTokenAsync(string nextToken, CancellationToken cancellationToken = default)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("nextToken", nextToken));
 
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, queryParameters);
-            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds, cancellationToken);
             return response;
         }
 
@@ -67,20 +68,20 @@ namespace FikaAmazonAPI.Services
         public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification) =>
             Task.Run(() => CreateFeedAsync(createFeedSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<CreateFeedResult> CreateFeedAsync(CreateFeedSpecification createFeedSpecification)
+        public async Task<CreateFeedResult> CreateFeedAsync(CreateFeedSpecification createFeedSpecification, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeed, RestSharp.Method.Post, postJsonObj: createFeedSpecification);
-            var response = await ExecuteRequestAsync<CreateFeedResult>(RateLimitType.Feed_CreateFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeed, RestSharp.Method.Post, postJsonObj: createFeedSpecification, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateFeedResult>(RateLimitType.Feed_CreateFeed, cancellationToken);
 
             return response;
         }
         public Feed GetFeed(string feedId) =>
             Task.Run(() => GetFeedAsync(feedId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<Feed> GetFeedAsync(string feedId)
+        public async Task<Feed> GetFeedAsync(string feedId, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.Get);
-            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_GetFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_GetFeed, cancellationToken);
             if (response != null)
                 return response;
             return null;
@@ -88,10 +89,10 @@ namespace FikaAmazonAPI.Services
         public Feed CancelFeed(string feedId) =>
             Task.Run(() => CancelFeedAsync(feedId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<Feed> CancelFeedAsync(string feedId)
+        public async Task<Feed> CancelFeedAsync(string feedId, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.Delete);
-            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CancelFeed);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.Delete, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CancelFeed, cancellationToken);
             if (response != null)
                 return response;
             return null;
@@ -100,10 +101,10 @@ namespace FikaAmazonAPI.Services
         public FeedDocument GetFeedDocument(string feedDocumentId) =>
             Task.Run(() => GetFeedDocumentAsync(feedDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId)
+        public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.Get);
-            var response = await ExecuteRequestAsync<FeedDocument>(RateLimitType.Feed_GetFeedDocument);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<FeedDocument>(RateLimitType.Feed_GetFeedDocument, cancellationToken);
             if (response != null)
                 return response;
             return null;
@@ -148,13 +149,13 @@ namespace FikaAmazonAPI.Services
         public ProcessingReportMessage GetFeedDocumentProcessingReport(FeedDocument feedDocument) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(feedDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(FeedDocument feedDocument)
+        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(FeedDocument feedDocument, CancellationToken cancellationToken = default)
         {
             ProcessingReportMessage processingReport = null;
             string responseContent;
             try
             {
-                var stream = await GetStreamFromUrlAsync(feedDocument.Url);
+                var stream = await GetStreamFromUrlAsync(feedDocument.Url, cancellationToken);
                 if (feedDocument.CompressionAlgorithm.HasValue && (feedDocument.CompressionAlgorithm.Value == FeedDocument.CompressionAlgorithmEnum.GZIP))
                     stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
                 var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
@@ -167,7 +168,7 @@ namespace FikaAmazonAPI.Services
                 catch (Exception e)
                 {
                     StreamReader reader = new StreamReader(stream);
-                    responseContent = reader.ReadToEnd();
+                    responseContent = await reader.ReadToEndAsync();
                     throw new AmazonProcessingReportDeserializeException("Something went wrong on deserialize report stream", responseContent);
                 }
 
@@ -184,13 +185,13 @@ namespace FikaAmazonAPI.Services
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType) =>
             Task.Run(() => CreateFeedDocumentAsync(contentType)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<CreateFeedDocumentResult> CreateFeedDocumentAsync(ContentType contentType)
+        public async Task<CreateFeedDocumentResult> CreateFeedDocumentAsync(ContentType contentType, CancellationToken cancellationToken = default)
         {
             var contxt = LinqHelper.GetEnumMemberValue(contentType);
             var createFeedDocumentSpecification = new AmazonSpApiSDK.Models.Feeds.CreateFeedDocumentSpecification(contxt);
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.Post, postJsonObj: createFeedDocumentSpecification);
-            var response = await ExecuteRequestAsync<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.Post, postJsonObj: createFeedDocumentSpecification, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument, cancellationToken);
             if (response != null)
                 return response;
             return null;
@@ -199,14 +200,14 @@ namespace FikaAmazonAPI.Services
         public string SubmitFeedFile(string FilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
             Task.Run(() => SubmitFeedAsync(FilePath, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.File)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<string> SubmitFeedFileAsync(string FilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
-            await SubmitFeedAsync(FilePath, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.File);
+        public async Task<string> SubmitFeedFileAsync(string FilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, CancellationToken cancellationToken = default) =>
+            await SubmitFeedAsync(FilePath, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.File, cancellationToken);
 
         public string SubmitFeedContent(string Content, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
             Task.Run(() => SubmitFeedAsync(Content, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.Text)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<string> SubmitFeedContentAsync(string Content, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML) =>
-            await SubmitFeedAsync(Content, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.Text);
+        public async Task<string> SubmitFeedContentAsync(string Content, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, CancellationToken cancellationToken = default) =>
+            await SubmitFeedAsync(Content, feedType, marketPlaceIds, feedOptions, contentType, ContentFormate.Text, cancellationToken);
 
         public string SubmitFeed(string XmlContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect) =>
             Task.Run(() => SubmitFeedAsync(XmlContentOrFilePath, feedType, marketPlaceIds, feedOptions, contentType, contentFormate)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -217,13 +218,13 @@ namespace FikaAmazonAPI.Services
         /// <param name="xml"></param>
         /// <param name="feedType"></param>
         /// <returns></returns>
-        public async Task<string> SubmitFeedAsync(string feedContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect)
+        public async Task<string> SubmitFeedAsync(string feedContentOrFilePath, FeedType feedType, List<string> marketPlaceIds = null, FeedOptions feedOptions = null, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect, CancellationToken cancellationToken = default)
         {
             //We are creating Feed Document
-            var feedCreate = CreateFeedDocument(contentType);
+            var feedCreate = await CreateFeedDocumentAsync(contentType, cancellationToken);
 
             //Uploading encoded invoice file
-            _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType, contentFormate);
+            _ = await PostFileDataAsync(feedCreate.Url, feedContentOrFilePath, contentType, contentFormate, cancellationToken);
 
             CreateFeedSpecification createFeedSpecification = new CreateFeedSpecification()
             {
@@ -234,13 +235,13 @@ namespace FikaAmazonAPI.Services
             };
 
             //Submit XML
-            var feed = await CreateFeedAsync(createFeedSpecification);
+            var feed = await CreateFeedAsync(createFeedSpecification, cancellationToken);
 
             return feed.FeedId;
         }
 
 
-        private static async Task<Stream> GetStreamFromUrlAsync(string url)
+        private static async Task<Stream> GetStreamFromUrlAsync(string url, CancellationToken cancellationToken = default)
         {
             byte[] imageData = null;
 
@@ -250,7 +251,7 @@ namespace FikaAmazonAPI.Services
             return new MemoryStream(imageData);
         }
 
-        private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect)
+        private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect, CancellationToken cancellationToken = default)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
 

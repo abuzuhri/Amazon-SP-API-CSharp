@@ -10,6 +10,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -344,7 +345,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
         public DateTime PurchaseDateTime {
             get => DateTime.Parse(PurchaseDate);
-            set => PurchaseDate = value.ToString("o");
+            set => PurchaseDate = value.ToString(DateFormat.ISO_8601);
         }
 #pragma warning restore 0618
 
@@ -358,7 +359,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime LastUpdateDateTime {
 			get => DateTime.Parse(LastUpdateDate);
-			set => LastUpdateDate = value.ToString("o");
+			set => LastUpdateDate = value.ToString(DateFormat.ISO_8601);
 		}
 #pragma warning restore 0618
 
@@ -460,7 +461,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime? EarliestShipDateTime {
 			get => !string.IsNullOrEmpty(EarliestShipDate) ? (DateTime?)DateTime.Parse(EarliestShipDate) : null;
-			set => EarliestShipDate = value != null ? value.Value.ToString("o") : null;
+			set => EarliestShipDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
 		}
 #pragma warning restore 0618
 
@@ -474,7 +475,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime? LatestShipDateTime {
 			get => !string.IsNullOrEmpty(LatestShipDate) ? (DateTime?)DateTime.Parse(LatestShipDate) : null;
-			set => LatestShipDate = value != null ? value.Value.ToString("o") : null;
+			set => LatestShipDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
 		}
 #pragma warning restore 0618
 
@@ -488,7 +489,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime? EarliestDeliveryDateTime {
 			get => !string.IsNullOrEmpty(EarliestDeliveryDate) ? (DateTime?)DateTime.Parse(EarliestDeliveryDate) : null;
-			set => EarliestDeliveryDate = value != null ? value.Value.ToString("o") : null;
+			set => EarliestDeliveryDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
 		}
 #pragma warning restore 0618
 
@@ -502,7 +503,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime? LatestDeliveryDateTime {
 			get => !string.IsNullOrEmpty(LatestDeliveryDate) ? (DateTime?)DateTime.Parse(LatestDeliveryDate) : null;
-			set => LatestDeliveryDate = value != null ? value.Value.ToString("o") : null;
+			set => LatestDeliveryDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
 		}
 #pragma warning restore 0618
 
@@ -558,7 +559,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 #pragma warning disable 0618
 		public DateTime? PromiseResponseDueDateTime {
 			get => !string.IsNullOrEmpty(PromiseResponseDueDate) ? (DateTime?)DateTime.Parse(PromiseResponseDueDate) : null;
-			set => PromiseResponseDueDate = value != null ? value.Value.ToString("o") : null;
+			set => PromiseResponseDueDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
 		}
 #pragma warning restore 0618
 
