@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.Services
     public static class TokenGeneration
     {
 
-        public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal)
+        public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials, TokenDataType tokenDataType = TokenDataType.Normal, CancellationToken cancellationToken = default)
         {
             var lwaCredentials = new LWAAuthorizationCredentials()
             {
@@ -33,12 +33,12 @@ namespace FikaAmazonAPI.Services
                 lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
             var Client = new LWAClient(lwaCredentials);
-            var accessToken = await Client.GetAccessTokenAsync();
+            var accessToken = await Client.GetAccessTokenAsync(cancellationToken);
 
             return accessToken;
         }
 
-        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri, string grant_type = "client_credentials")
+        public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri, string grant_type = "client_credentials", CancellationToken cancellationToken = default)
         {
             string data = string.Empty;
 
@@ -57,14 +57,14 @@ namespace FikaAmazonAPI.Services
                 items.Add("redirect_uri", appRedirectUri);
 
                 FormUrlEncodedContent formUrlEncodedContent = new FormUrlEncodedContent(items);
-                var rs = client.PostAsync("/auth/o2/token", formUrlEncodedContent).Result;
+                var rs = await client.PostAsync("/auth/o2/token", formUrlEncodedContent, cancellationToken);
                 data = await rs.Content.ReadAsStringAsync();
             }
 
             return JsonConvert.DeserializeObject<TokenResponse>(data);
         }
 
-        public static async Task<RestRequest> SignWithSTSKeysAndSecurityTokenAsync(RestRequest restRequest, string host, AmazonCredential amazonCredential)
+        public static async Task<RestRequest> SignWithSTSKeysAndSecurityTokenAsync(RestRequest restRequest, string host, AmazonCredential amazonCredential, CancellationToken cancellationToken = default)
         {
             var dataToken = amazonCredential.GetAWSAuthenticationTokenData();
             if (dataToken == null)
@@ -79,7 +79,7 @@ namespace FikaAmazonAPI.Services
                         RoleSessionName = Guid.NewGuid().ToString()
                     };
 
-                    response1 = await STSClient.AssumeRoleAsync(req, new CancellationToken());
+                    response1 = await STSClient.AssumeRoleAsync(req, cancellationToken);
                 }
 
                 //auth step 3
