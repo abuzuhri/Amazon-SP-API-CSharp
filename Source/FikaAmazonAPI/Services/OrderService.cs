@@ -60,11 +60,9 @@ namespace FikaAmazonAPI.Services
             {
                 while (!string.IsNullOrEmpty(nextToken))
                 {
-                    var orderPayload = await GetGetOrdersByNextTokenAsync(nextToken, searchOrderList, cancellationToken);
+					var orderPayload = await GetGetOrdersByNextTokenAsync(nextToken, searchOrderList, cancellationToken);
                     orderList.AddRange(orderPayload.Orders);
                     nextToken = orderPayload.NextToken;
-
-                    cancellationToken.ThrowIfCancellationRequested();
 
                     if (searchOrderList.MaxNumberOfPages.HasValue)
                     {
