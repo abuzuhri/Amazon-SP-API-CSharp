@@ -79,10 +79,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         DELIVERED = 9,
 
         /// <summary>
-        /// Enum CHECKEDIN for value: CHECKED_IN
+        /// Enum CHECKED_IN for value: CHECKED_IN
         /// </summary>
         [EnumMember(Value = "CHECKED_IN")]
-        CHECKEDIN = 10
+        CHECKEDIN = 10,
+        
+        /// <summary>
+        /// Enum READY_TO_SHIP for value: READY_TO_SHIP
+        /// </summary>
+        [EnumMember(Value = "READY_TO_SHIP")]
+        READYTOSHIP = 11
     }
 
 }

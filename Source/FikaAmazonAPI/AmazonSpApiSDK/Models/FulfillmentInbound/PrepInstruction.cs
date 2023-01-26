@@ -71,8 +71,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum SetCreation for value: SetCreation
         /// </summary>
         [EnumMember(Value = "SetCreation")]
-        SetCreation = 8
+        SetCreation = 8,
 
+            /// <summary>
+            /// Enum NoPrep for value: NoPrep
+            /// </summary>
+            [EnumMember(Value = "NoPrep")]
+            NoPrep = 9
             
     }
 
