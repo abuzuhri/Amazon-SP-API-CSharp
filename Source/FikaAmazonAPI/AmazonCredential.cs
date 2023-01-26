@@ -20,12 +20,15 @@ namespace FikaAmazonAPI
         public Environments Environment { get; set; } = Environments.Production;
         public int MaxThrottledRetryCount { get; set; } = 3;
         public ShippingBusiness? ShippingBusiness { get; set; }
+        public bool IsDebugMode { get; set; }
+        public string MarketPlaceID { get; set; }
+        public string SellerID { get; set; }
 
         public AmazonCredential()
         {
             CacheTokenData = new CacheTokenData();
         }
-        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret,string RefreshToken)
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;

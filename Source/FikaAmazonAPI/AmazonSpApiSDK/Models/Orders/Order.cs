@@ -10,6 +10,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -241,10 +242,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="sellerDisplayName">The seller’s friendly name registered in the marketplace..</param>
         /// <param name="shippingAddress">shippingAddress.</param>
         /// <param name="buyerInfo">buyerInfo.</param>
-        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum orderStatus = default(OrderStatusEnum), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
+        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum? orderStatus = default(OrderStatusEnum?), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
         {
-            // to ensure "amazonOrderId" is required (not null)
-            if (amazonOrderId == null)
+#pragma warning disable 0618
+			// to ensure "amazonOrderId" is required (not null)
+			if (amazonOrderId == null)
             {
                 throw new InvalidDataException("amazonOrderId is a required property for Order and cannot be null");
             }
@@ -277,7 +279,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             }
             else
             {
-                this.OrderStatus = orderStatus;
+                this.OrderStatus = orderStatus.Value;
             }
             this.SellerOrderId = sellerOrderId;
             this.FulfillmentChannel = fulfillmentChannel;
@@ -316,13 +318,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.SellerDisplayName = sellerDisplayName;
             this.ShippingAddress = shippingAddress;
             this.BuyerInfo = buyerInfo;
-        }
+#pragma warning restore 0618
+		}
 
-        /// <summary>
-        /// An Amazon-defined order identifier, in 3-7-7 format.
-        /// </summary>
-        /// <value>An Amazon-defined order identifier, in 3-7-7 format.</value>
-        [DataMember(Name = "AmazonOrderId", EmitDefaultValue = false)]
+		/// <summary>
+		/// An Amazon-defined order identifier, in 3-7-7 format.
+		/// </summary>
+		/// <value>An Amazon-defined order identifier, in 3-7-7 format.</value>
+		[DataMember(Name = "AmazonOrderId", EmitDefaultValue = false)]
         public string AmazonOrderId { get; set; }
 
         /// <summary>
@@ -337,22 +340,36 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <value>The date when the order was created.</value>
         [DataMember(Name = "PurchaseDate", EmitDefaultValue = false)]
+        [Obsolete("Use PurchaseDateTime instead")]
         public string PurchaseDate { get; set; }
+#pragma warning disable 0618
+        public DateTime PurchaseDateTime {
+            get => DateTime.Parse(PurchaseDate);
+            set => PurchaseDate = value.ToString(DateFormat.ISO_8601);
+        }
+#pragma warning restore 0618
 
         /// <summary>
         /// The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01.
         /// </summary>
         /// <value>The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01.</value>
         [DataMember(Name = "LastUpdateDate", EmitDefaultValue = false)]
-        public string LastUpdateDate { get; set; }
+		[Obsolete("Use LastUpdateDateTime instead")]
+		public string LastUpdateDate { get; set; }
+#pragma warning disable 0618
+		public DateTime LastUpdateDateTime {
+			get => DateTime.Parse(LastUpdateDate);
+			set => LastUpdateDate = value.ToString(DateFormat.ISO_8601);
+		}
+#pragma warning restore 0618
 
 
 
-        /// <summary>
-        /// The sales channel of the first item in the order.
-        /// </summary>
-        /// <value>The sales channel of the first item in the order.</value>
-        [DataMember(Name = "SalesChannel", EmitDefaultValue = false)]
+		/// <summary>
+		/// The sales channel of the first item in the order.
+		/// </summary>
+		/// <value>The sales channel of the first item in the order.</value>
+		[DataMember(Name = "SalesChannel", EmitDefaultValue = false)]
         public string SalesChannel { get; set; }
 
         /// <summary>
@@ -439,34 +456,62 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <value>The start of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: EarliestShipDate might not be returned for orders placed before February 1, 2013.</value>
         [DataMember(Name = "EarliestShipDate", EmitDefaultValue = false)]
+        [Obsolete("Use EarliestShipDateTime instead")]
         public string EarliestShipDate { get; set; }
+#pragma warning disable 0618
+		public DateTime? EarliestShipDateTime {
+			get => !string.IsNullOrEmpty(EarliestShipDate) ? (DateTime?)DateTime.Parse(EarliestShipDate) : null;
+			set => EarliestShipDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
+		}
+#pragma warning restore 0618
 
-        /// <summary>
-        /// The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.
-        /// </summary>
-        /// <value>The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.</value>
-        [DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
-        public string LatestShipDate { get; set; }
+		/// <summary>
+		/// The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.
+		/// </summary>
+		/// <value>The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.</value>
+		[DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
+		[Obsolete("Use LatestShipDateTime instead")]
+		public string LatestShipDate { get; set; }
+#pragma warning disable 0618
+		public DateTime? LatestShipDateTime {
+			get => !string.IsNullOrEmpty(LatestShipDate) ? (DateTime?)DateTime.Parse(LatestShipDate) : null;
+			set => LatestShipDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
+		}
+#pragma warning restore 0618
 
-        /// <summary>
-        /// The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.
-        /// </summary>
-        /// <value>The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.</value>
-        [DataMember(Name = "EarliestDeliveryDate", EmitDefaultValue = false)]
-        public string EarliestDeliveryDate { get; set; }
+		/// <summary>
+		/// The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.
+		/// </summary>
+		/// <value>The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.</value>
+		[DataMember(Name = "EarliestDeliveryDate", EmitDefaultValue = false)]
+		[Obsolete("Use EarliestDeliveryDateTime instead")]
+		public string EarliestDeliveryDate { get; set; }
+#pragma warning disable 0618
+		public DateTime? EarliestDeliveryDateTime {
+			get => !string.IsNullOrEmpty(EarliestDeliveryDate) ? (DateTime?)DateTime.Parse(EarliestDeliveryDate) : null;
+			set => EarliestDeliveryDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
+		}
+#pragma warning restore 0618
 
-        /// <summary>
-        /// The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.
-        /// </summary>
-        /// <value>The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.</value>
-        [DataMember(Name = "LatestDeliveryDate", EmitDefaultValue = false)]
-        public string LatestDeliveryDate { get; set; }
+		/// <summary>
+		/// The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.
+		/// </summary>
+		/// <value>The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.</value>
+		[DataMember(Name = "LatestDeliveryDate", EmitDefaultValue = false)]
+		[Obsolete("Use LatestDeliveryDateTime instead")]
+		public string LatestDeliveryDate { get; set; }
+#pragma warning disable 0618
+		public DateTime? LatestDeliveryDateTime {
+			get => !string.IsNullOrEmpty(LatestDeliveryDate) ? (DateTime?)DateTime.Parse(LatestDeliveryDate) : null;
+			set => LatestDeliveryDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
+		}
+#pragma warning restore 0618
 
-        /// <summary>
-        /// When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer.
-        /// </summary>
-        /// <value>When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer.</value>
-        [DataMember(Name = "IsBusinessOrder", EmitDefaultValue = false)]
+		/// <summary>
+		/// When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer.
+		/// </summary>
+		/// <value>When true, the order is an Amazon Business order. An Amazon Business order is an order where the buyer is a Verified Business Buyer.</value>
+		[DataMember(Name = "IsBusinessOrder", EmitDefaultValue = false)]
         public bool? IsBusinessOrder { get; set; }
 
         /// <summary>
@@ -509,13 +554,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// </summary>
         /// <value>Indicates the date by which the seller must respond to the buyer with an estimated ship date. Returned only for Sourcing on Demand orders.</value>
         [DataMember(Name = "PromiseResponseDueDate", EmitDefaultValue = false)]
+        [Obsolete("Use PromiseResponseDueDateTime instead")]
         public string PromiseResponseDueDate { get; set; }
+#pragma warning disable 0618
+		public DateTime? PromiseResponseDueDateTime {
+			get => !string.IsNullOrEmpty(PromiseResponseDueDate) ? (DateTime?)DateTime.Parse(PromiseResponseDueDate) : null;
+			set => PromiseResponseDueDate = value != null ? value.Value.ToString(DateFormat.ISO_8601) : null;
+		}
+#pragma warning restore 0618
 
-        /// <summary>
-        /// When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders.
-        /// </summary>
-        /// <value>When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders.</value>
-        [DataMember(Name = "IsEstimatedShipDateSet", EmitDefaultValue = false)]
+		/// <summary>
+		/// When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders.
+		/// </summary>
+		/// <value>When true, the estimated ship date is set for the order. Returned only for Sourcing on Demand orders.</value>
+		[DataMember(Name = "IsEstimatedShipDateSet", EmitDefaultValue = false)]
         public bool? IsEstimatedShipDateSet { get; set; }
 
         /// <summary>
@@ -585,7 +637,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
+#pragma warning disable 0618
+			var sb = new StringBuilder();
             sb.Append("class Order {\n");
             sb.Append("  AmazonOrderId: ").Append(AmazonOrderId).Append("\n");
             sb.Append("  SellerOrderId: ").Append(SellerOrderId).Append("\n");
@@ -630,13 +683,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  BuyerInfo: ").Append(BuyerInfo).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
-        }
+#pragma warning restore 0618
+		}
 
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+		/// <summary>
+		/// Returns the JSON string presentation of the object
+		/// </summary>
+		/// <returns>JSON string presentation of the object</returns>
+		public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -658,7 +712,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <returns>Boolean</returns>
         public bool Equals(Order input)
         {
-            if (input == null)
+#pragma warning disable 0618
+			if (input == null)
                 return false;
 
             return
@@ -684,8 +739,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                 ) &&
                 (
                     this.OrderStatus == input.OrderStatus ||
-                    (this.OrderStatus != null &&
-                    this.OrderStatus.Equals(input.OrderStatus))
+                    this.OrderStatus.Equals(input.OrderStatus)
                 ) &&
                 (
                     this.FulfillmentChannel == input.FulfillmentChannel ||
@@ -867,16 +921,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     (this.BuyerInfo != null &&
                     this.BuyerInfo.Equals(input.BuyerInfo))
                 );
-        }
+#pragma warning restore 0618
+		}
 
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
+		/// <summary>
+		/// Gets the hash code
+		/// </summary>
+		/// <returns>Hash code</returns>
+		public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
+#pragma warning disable 0618
+			unchecked // Overflow is fine, just wrap
+			{
                 int hashCode = 41;
                 if (this.AmazonOrderId != null)
                     hashCode = hashCode * 59 + this.AmazonOrderId.GetHashCode();
@@ -886,8 +942,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.PurchaseDate.GetHashCode();
                 if (this.LastUpdateDate != null)
                     hashCode = hashCode * 59 + this.LastUpdateDate.GetHashCode();
-                if (this.OrderStatus != null)
-                    hashCode = hashCode * 59 + this.OrderStatus.GetHashCode();
+                hashCode = hashCode * 59 + this.OrderStatus.GetHashCode();
                 if (this.FulfillmentChannel != null)
                     hashCode = hashCode * 59 + this.FulfillmentChannel.GetHashCode();
                 if (this.SalesChannel != null)
@@ -962,14 +1017,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.BuyerInfo.GetHashCode();
                 return hashCode;
             }
-        }
+#pragma warning restore 0618
+		}
 
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+		/// <summary>
+		/// To validate all properties of the instance
+		/// </summary>
+		/// <param name="validationContext">Validation context</param>
+		/// <returns>Validation Result</returns>
+		IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

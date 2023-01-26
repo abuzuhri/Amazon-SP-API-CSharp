@@ -5,7 +5,7 @@ namespace FikaAmazonAPI.Parameter.ProductTypes
 {
     public class SearchDefinitionsProductTypesParameter : ParameterBased
     {
-        public IList<string> keywords { get; set; }
-        public IList<string> marketplaceIds { get; set; } = new List<string>();
+        public ICollection<string> keywords { get; set; }
+        public ICollection<string> marketplaceIds { get; set; } = new List<string>();
     }
 }

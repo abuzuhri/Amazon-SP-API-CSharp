@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// <param name="quantityTier">Indicates at what quantity this price becomes active. (required).</param>
         /// <param name="quantityDiscountType">Indicates the type of quantity discount this price applies to. (required).</param>
         /// <param name="listingPrice">The price at this quantity tier. (required).</param>
-        public QuantityDiscountPriceType(int? quantityTier = default(int?), QuantityDiscountType quantityDiscountType = default(QuantityDiscountType), MoneyType listingPrice = default(MoneyType))
+        public QuantityDiscountPriceType(int? quantityTier = default(int?), QuantityDiscountType quantityDiscountType = default(QuantityDiscountType), MoneyType price = default(MoneyType))
         {
             // to ensure "quantityTier" is required (not null)
             if (quantityTier == null)
@@ -63,13 +63,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                 this.QuantityDiscountType = quantityDiscountType;
             }
             // to ensure "listingPrice" is required (not null)
-            if (listingPrice == null)
+            if (price == null)
             {
                 throw new InvalidDataException("listingPrice is a required property for QuantityDiscountPriceType and cannot be null");
             }
             else
             {
-                this.ListingPrice = listingPrice;
+                this.Price = price;
             }
         }
         
@@ -85,8 +85,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// The price at this quantity tier.
         /// </summary>
         /// <value>The price at this quantity tier.</value>
-        [DataMember(Name="listingPrice", EmitDefaultValue=false)]
-        public MoneyType ListingPrice { get; set; }
+        [DataMember(Name= "price", EmitDefaultValue=false)]
+        public MoneyType Price { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -98,7 +98,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
             sb.Append("class QuantityDiscountPriceType {\n");
             sb.Append("  QuantityTier: ").Append(QuantityTier).Append("\n");
             sb.Append("  QuantityDiscountType: ").Append(QuantityDiscountType).Append("\n");
-            sb.Append("  ListingPrice: ").Append(ListingPrice).Append("\n");
+            sb.Append("  ListingPrice: ").Append(Price).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,9 +144,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                     this.QuantityDiscountType.Equals(input.QuantityDiscountType))
                 ) && 
                 (
-                    this.ListingPrice == input.ListingPrice ||
-                    (this.ListingPrice != null &&
-                    this.ListingPrice.Equals(input.ListingPrice))
+                    this.Price == input.Price ||
+                    (this.Price != null &&
+                    this.Price.Equals(input.Price))
                 );
         }
 
@@ -163,8 +163,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
                     hashCode = hashCode * 59 + this.QuantityTier.GetHashCode();
                 if (this.QuantityDiscountType != null)
                     hashCode = hashCode * 59 + this.QuantityDiscountType.GetHashCode();
-                if (this.ListingPrice != null)
-                    hashCode = hashCode * 59 + this.ListingPrice.GetHashCode();
+                if (this.Price != null)
+                    hashCode = hashCode * 59 + this.Price.GetHashCode();
                 return hashCode;
             }
         }

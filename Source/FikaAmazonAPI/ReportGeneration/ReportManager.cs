@@ -198,7 +198,7 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
         }
         #endregion
-
+    
         #region Categories
 
         public List<CategoriesRow> GetCategories()
@@ -297,6 +297,49 @@ namespace FikaAmazonAPI.ReportGeneration
             var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
             options.Add("ShowSalesChannel", "true");
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
+        }
+        #endregion
+
+        #region Settlement
+        public List<LedgerDetailReportRow> GetLedgerDetail(int days) =>
+            Task.Run(() => GetLedgerDetailAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(int days)
+        {
+            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
+            DateTime toDate = DateTime.UtcNow;
+            return await GetLedgerDetailAsync(fromDate, toDate);
+        }
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(DateTime fromDate, DateTime toDate)
+        {
+            List<LedgerDetailReportRow> list = new List<LedgerDetailReportRow>();
+            var totalDays = (DateTime.UtcNow - fromDate).TotalDays;
+            if (totalDays > 90)
+                fromDate = DateTime.UtcNow.AddDays(-90);
+
+            var path = await GetLedgerDetailAsync(_amazonConnection, fromDate, toDate);
+            LedgerDetailReport report = new LedgerDetailReport(path, _amazonConnection.RefNumber);
+            list.AddRange(report.Data);
+
+            return list;
+        }
+        private async Task<string> GetLedgerDetailAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
+        }
+        #endregion
+
+        #region InventoryPlanningData
+        public List<InventoryPlanningDataRow> GetInventoryPlanningData() =>
+            Task.Run(() => GetInventoryPlanningDataAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<InventoryPlanningDataRow>> GetInventoryPlanningDataAsync()
+        {
+            var path = await GetInventoryPlanningDataAsync(_amazonConnection);
+            InventoryPlanningDataReport report = new InventoryPlanningDataReport(path, _amazonConnection.RefNumber);
+            return report.Data;
+        }
+        private async Task<string> GetInventoryPlanningDataAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_INVENTORY_PLANNING_DATA);
         }
         #endregion
     }

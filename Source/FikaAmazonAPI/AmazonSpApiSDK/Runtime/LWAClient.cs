@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
@@ -31,7 +32,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="lwaAccessTokenRequestMeta">LWA AccessTokenRequest metadata</param>
         /// <returns>LWA Access Token</returns>
-        public virtual async Task<TokenResponse> GetAccessTokenAsync()
+        public virtual async Task<TokenResponse> GetAccessTokenAsync(CancellationToken cancellationToken = default)
         {
             LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
             var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, RestSharp.Method.Post);
@@ -43,7 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             try
             {
-                var response = await RestClient.ExecuteAsync(accessTokenRequest).ConfigureAwait(false);
+                var response = await RestClient.ExecuteAsync(accessTokenRequest, cancellationToken).ConfigureAwait(false);
 
                 if (!IsSuccessful(response))
                 {

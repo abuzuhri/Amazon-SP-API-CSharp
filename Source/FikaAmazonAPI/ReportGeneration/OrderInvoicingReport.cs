@@ -78,8 +78,8 @@ namespace FikaAmazonAPI.ReportGeneration
             var row = new OrderInvoicingReportRow();
             row.AmazonOrderId = rowData.GetString("order-id");
             row.OrderItemId = rowData.GetString("order-item-id");
-            row.PurchaseDate = DataConverter.GetDate(rowData.GetString("purchase-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
-            row.PaymentDate = DataConverter.GetDate(rowData.GetString("payments-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.PurchaseDate = DataConverter.GetDate(rowData.GetString("purchase-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
+            row.PaymentDate = DataConverter.GetDate(rowData.GetString("payments-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.BuyerEmail = rowData.GetString("buyer-email");
             row.BuyerName = rowData.GetString("buyer-name");
             row.PaymentMethodeDetails = rowData.GetString("payment-method-details");

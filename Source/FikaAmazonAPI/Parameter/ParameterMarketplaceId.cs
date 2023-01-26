@@ -13,6 +13,6 @@ namespace FikaAmazonAPI.Search
             marketplaceIds = new List<string>();
             marketplaceIds.Add(marketplaceId);
         }
-        public IList<string> marketplaceIds { get; set; }
+        public ICollection<string> marketplaceIds { get; set; }
     }
 }

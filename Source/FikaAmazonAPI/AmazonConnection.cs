@@ -1,4 +1,6 @@
-﻿using FikaAmazonAPI.Services;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.Services;
+using FikaAmazonAPI.Utils;
 using System;
 
 namespace FikaAmazonAPI
@@ -88,7 +90,7 @@ namespace FikaAmazonAPI
             this.RefNumber = RefNumber;
         }
 
-        public void Authenticate(AmazonCredential Credentials)
+        private void Authenticate(AmazonCredential Credentials)
         {
             if (this.Credentials == default(AmazonCredential))
                 Init(Credentials);
@@ -98,6 +100,8 @@ namespace FikaAmazonAPI
 
         private void Init(AmazonCredential Credentials)
         {
+            ValidateCredentials(Credentials);
+
             this.Credentials = Credentials;
 
             this._Authorization = new AuthorizationService(this.Credentials);
@@ -136,5 +140,36 @@ namespace FikaAmazonAPI
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
             this._VendorOrders = new VendorOrderService(this.Credentials);
         }
+        private void ValidateCredentials(AmazonCredential Credentials)
+        {
+            if (Credentials == null)
+                throw new AmazonUnauthorizedException($"Error, you cannot make calls to Amazon without credentials!");
+            else if (string.IsNullOrEmpty(Credentials.AccessKey))
+                throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.SecretKey))
+                throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.RoleArn))
+                throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.ClientId))
+                throw new AmazonInvalidInputException($"InvalidInput, ClientId cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.ClientSecret))
+                throw new AmazonInvalidInputException($"InvalidInput, ClientSecret  cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.RefreshToken))
+                throw new AmazonInvalidInputException($"InvalidInput, RefreshToken cannot be empty!");
+            else if (Credentials.MarketPlace == null)
+            {
+                if (string.IsNullOrEmpty(Credentials.MarketPlaceID))
+                {
+                    throw new AmazonInvalidInputException($"InvalidInput, MarketPlace or MarketPlaceID cannot be null for both!");
+                }
+                else
+                {
+                    Credentials.MarketPlace = MarketPlace.GetMarketPlaceByID(Credentials.MarketPlaceID);
+                }
+            }
+
+        }
+        public MarketPlace GetCurrentMarketplace { get { return Credentials.MarketPlace; } }
+        public string GetCurrentSellerID { get { return Credentials.SellerID; } }
     }
 }
