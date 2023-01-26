@@ -2,6 +2,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401;
 using FikaAmazonAPI.Parameter.CatalogItems;
 using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,10 +17,11 @@ namespace FikaAmazonAPI.Services
 
         }
 
-
+        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", false)]
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
             Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204Async instead.", false)]
         public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
@@ -39,7 +41,7 @@ namespace FikaAmazonAPI.Services
 
             var parameter = parameterListCatalogItems.getParameters();
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogItems, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogItems, RestSharp.Method.Get, parameter);
             var response = await ExecuteRequestAsync<ListCatalogItemsResponse>(RateLimitType.CatalogItems_ListCatalogItems);
 
             if (response != null && response.Payload != null && response.Payload.Items != null && response.Payload.Items.Count > 0)
@@ -48,10 +50,10 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        //[Obsolete("This method is will be deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.")]
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
         public Item GetCatalogItem(string asin) =>
             Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
-
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
         public async Task<Item> GetCatalogItemAsync(string asin)
         {
 
@@ -61,7 +63,7 @@ namespace FikaAmazonAPI.Services
             var param = new List<KeyValuePair<string, string>>();
             param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetCatalogItemResponse>(RateLimitType.CatalogItems_GetCatalogItem);
 
             if (response != null && response.Payload != null)
@@ -70,24 +72,6 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        //public Item GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem)
-        //{
-
-        //    if (string.IsNullOrEmpty(parameterListCatalogItem.ASIN))
-        //        throw new InvalidDataException("asin is a required property and cannot be null");
-
-        //    if (parameterListCatalogItem == null || parameterListCatalogItem.MarketplaceIds == null || parameterListCatalogItem.MarketplaceIds.Count == 0)
-        //    {
-        //        parameterListCatalogItem.MarketplaceIds.Add(MarketPlace.ID);
-        //    }
-
-        //    var param = parameterListCatalogItem.getParameters();
-
-        //    await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202012(parameterListCatalogItem.ASIN), RestSharp.Method.GET, param);
-        //    var response = await ExecuteRequestAsync<Item>();
-
-        //    return response;
-        //}
 
         public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null) =>
                     Task.Run(() => ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -104,7 +88,7 @@ namespace FikaAmazonAPI.Services
             if (!string.IsNullOrEmpty(SellerSKU))
                 param.Add(new KeyValuePair<string, string>("SellerSKU", SellerSKU));
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.ListCatalogCategories, RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<ListCatalogCategoriesResponse>(RateLimitType.CatalogItems_ListCatalogCategories);
 
             if (response != null && response.Payload != null)
@@ -134,7 +118,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameterGetCatalogItem.getParameters();
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202204(parameterGetCatalogItem.ASIN), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem202204(parameterGetCatalogItem.ASIN), RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<AmazonSpApiSDK.Models.CatalogItems.V20220401.Item>(RateLimitType.CatalogItems20220401_GetCatalogItem);
 
             return response;
@@ -161,18 +145,20 @@ namespace FikaAmazonAPI.Services
 
             var param = parameter.getParameters();
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.SearchCatalogItems202204, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.SearchCatalogItems202204, RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<ItemSearchResults>(RateLimitType.CatalogItems20220401_SearchCatalogItems);
             list.AddRange(response.Items);
+            var totalPages = 1;
             if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
             {
                 var nextToken = response.Pagination.NextToken;
-                while (!string.IsNullOrEmpty(nextToken))
+                while (!string.IsNullOrEmpty(nextToken) && (!parameter.maxPages.HasValue || totalPages < parameter.maxPages.Value))
                 {
                     parameter.pageToken = nextToken;
                     var getItemNextPage = await SearchCatalogItemsByNextToken202204Async(parameter);
                     list.AddRange(getItemNextPage.Items);
                     nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
                 }
             }
             return list;
@@ -185,7 +171,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameter.getParameters();
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.SearchCatalogItems202204, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.SearchCatalogItems202204, RestSharp.Method.Get, param);
             return await ExecuteRequestAsync<ItemSearchResults>(RateLimitType.CatalogItems20220401_SearchCatalogItems);
         }
         #endregion

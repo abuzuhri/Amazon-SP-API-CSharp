@@ -20,9 +20,14 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetPricingAsync(parameterGetPricing)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<IList<Price>> GetPricingAsync(ParameterGetPricing parameterGetPricing)
         {
+            if (string.IsNullOrEmpty(parameterGetPricing.MarketplaceId))
+            {
+                parameterGetPricing.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+
             var param = parameterGetPricing.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetPricing, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetPricing, RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetPricingResponse>(RateLimitType.ProductPricing_GetPricing);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -40,7 +45,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameterGetCompetitivePricing.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetCompetitivePricing, RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetPricingResponse>(RateLimitType.ProductPricing_GetCompetitivePricing);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -53,7 +58,7 @@ namespace FikaAmazonAPI.Services
         {
             var param = parameterGetListingOffers.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffersBySellerSku(parameterGetListingOffers.SellerSKU), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetListingOffersBySellerSku(parameterGetListingOffers.SellerSKU), RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetListingOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -71,7 +76,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameterGetItemOffers.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetItemOffers(parameterGetItemOffers.Asin), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetItemOffers(parameterGetItemOffers.Asin), RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
             if (response != null && response.Payload != null)
                 return response.Payload;
@@ -96,8 +101,8 @@ namespace FikaAmazonAPI.Services
             ]
              */
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchItemOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
-            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchItemOffers, RestSharp.Method.Post, postJsonObj: parameterGetItemOffersBatchRequest);
+            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffersBatch);
         }
 
 
@@ -119,8 +124,8 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
             ]
              */
 
-            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchListingOffers, RestSharp.Method.POST, postJsonObj: parameterGetItemOffersBatchRequest);
-            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetItemOffers);
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetBatchListingOffers, RestSharp.Method.Post, postJsonObj: parameterGetItemOffersBatchRequest);
+            return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetListingOffersBatch);
         }
 
     }

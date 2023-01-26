@@ -28,7 +28,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum InvalidASIN for value: InvalidASIN
         /// </summary>
 
-        InvalidASIN
+        InvalidASIN,
+        InvalidSKU
     }
 
 }

@@ -32,7 +32,7 @@ namespace FikaAmazonAPI.Services
 
             var parameter = parameterGetFeed.getParameters();
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, parameter);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, parameter);
             var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
 
             list.AddRange(response.Feeds);
@@ -58,7 +58,7 @@ namespace FikaAmazonAPI.Services
             queryParameters.Add(new KeyValuePair<string, string>("nextToken", nextToken));
 
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.GET, queryParameters);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeeds, RestSharp.Method.Get, queryParameters);
             var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds);
             return response;
         }
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<CreateFeedResult> CreateFeedAsync(CreateFeedSpecification createFeedSpecification)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeed, RestSharp.Method.POST, postJsonObj: createFeedSpecification);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeed, RestSharp.Method.Post, postJsonObj: createFeedSpecification);
             var response = await ExecuteRequestAsync<CreateFeedResult>(RateLimitType.Feed_CreateFeed);
 
             return response;
@@ -79,7 +79,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<Feed> GetFeedAsync(string feedId)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeed(feedId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CreateFeed);
             if (response != null)
                 return response;
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<Feed> CancelFeedAsync(string feedId)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.DELETE);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CancelFeed(feedId), RestSharp.Method.Delete);
             var response = await ExecuteRequestAsync<Feed>(RateLimitType.Feed_CancelFeed);
             if (response != null)
                 return response;
@@ -102,16 +102,18 @@ namespace FikaAmazonAPI.Services
 
         public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.GET);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.Get);
             var response = await ExecuteRequestAsync<FeedDocument>(RateLimitType.Feed_GetFeedDocument);
             if (response != null)
                 return response;
             return null;
         }
 
+        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
         public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
         public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
             ProcessingReportMessage processingReport = null;
@@ -146,6 +148,42 @@ namespace FikaAmazonAPI.Services
             }
             return processingReport;
         }
+        
+        public ProcessingReportMessage GetFeedDocumentProcessingReport(FeedDocument feedDocument) =>
+            Task.Run(() => GetFeedDocumentProcessingReportAsync(feedDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(FeedDocument feedDocument)
+        {
+            ProcessingReportMessage processingReport = null;
+            string responseContent;
+            try
+            {
+                var stream = await GetStreamFromUrlAsync(feedDocument.Url);
+                if (feedDocument.CompressionAlgorithm.HasValue && (feedDocument.CompressionAlgorithm.Value == FeedDocument.CompressionAlgorithmEnum.GZIP))
+                  stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
+                var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(FeedAmazonEnvelope));
+                FeedAmazonEnvelope response = null;
+
+                try
+                {
+                    response = (FeedAmazonEnvelope)xmlSerializer.Deserialize(stream);
+                }
+                catch (Exception e)
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    responseContent = reader.ReadToEnd();
+                    throw new AmazonProcessingReportDeserializeException("Something went wrong on deserialize report stream", responseContent);
+                }
+
+                processingReport = response.Message[0].ProcessingReport;
+
+            }
+            catch (AmazonProcessingReportDeserializeException ex)
+            {
+                throw;
+            }
+            return processingReport;
+        }
 
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType) =>
             Task.Run(() => CreateFeedDocumentAsync(contentType)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -155,7 +193,7 @@ namespace FikaAmazonAPI.Services
             var contxt = LinqHelper.GetEnumMemberValue(contentType);
             var createFeedDocumentSpecification = new AmazonSpApiSDK.Models.Feeds.CreateFeedDocumentSpecification(contxt);
 
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.POST, postJsonObj: createFeedDocumentSpecification);
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.CreateFeedDocument, RestSharp.Method.Post, postJsonObj: createFeedDocumentSpecification);
             var response = await ExecuteRequestAsync<CreateFeedDocumentResult>(RateLimitType.Feed_CreateFeedDocument);
             if (response != null)
                 return response;
@@ -179,6 +217,10 @@ namespace FikaAmazonAPI.Services
 
             //Uploading encoded invoice file
             if (contentType == ContentType.PDF)
+            {
+                _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
+            }
+            else if (contentType == ContentType.JSON)
             {
                 _ = await PostFileDataAsync(feedCreate.Url, XmlContentOrFilePath, contentType);
             }

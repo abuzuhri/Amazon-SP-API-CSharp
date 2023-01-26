@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <param name="CarrierName">The carrier that you are using for the inbound shipment. (required).</param>
         /// <param name="ProNumber">ProNumber (required).</param>
-        public NonPartneredLtlDataOutput(string CarrierName = default(string), ProNumber ProNumber = default(ProNumber))
+        public NonPartneredLtlDataOutput(string CarrierName = default(string), string ProNumber = default(string))
         {
             // to ensure "CarrierName" is required (not null)
             if (CarrierName == null)
@@ -67,7 +67,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets ProNumber
         /// </summary>
         [DataMember(Name = "ProNumber", EmitDefaultValue = false)]
-        public ProNumber ProNumber { get; set; }
+        public string ProNumber { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

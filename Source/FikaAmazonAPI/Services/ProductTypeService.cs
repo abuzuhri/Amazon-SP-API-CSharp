@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameter.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductTypeApiUrls.SearchDefinitionsProductTypes, RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductTypeApiUrls.SearchDefinitionsProductTypes, RestSharp.Method.Get, param);
             return await ExecuteRequestAsync<ProductTypeList>(RateLimitType.ProductTypes_SearchDefinitionsProductTypes);
         }
 
@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.Services
 
             var param = parameter.getParameters();
 
-            await CreateAuthorizedRequestAsync(ProductTypeApiUrls.GetDefinitionsProductType(parameter.productType), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(ProductTypeApiUrls.GetDefinitionsProductType(parameter.productType), RestSharp.Method.Get, param);
             return await ExecuteRequestAsync<ProductTypeDefinition>(RateLimitType.ProductTypes_GetDefinitionsProductType);
         }
     }

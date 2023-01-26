@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// <param name="City">City.</param>
         /// <param name="CountryCode">CountryCode.</param>
         /// <param name="PostalCode">PostalCode.</param>
-        public Location(StateOrRegion StateOrRegion = default(StateOrRegion), City City = default(City), CountryCode CountryCode = default(CountryCode), PostalCode PostalCode = default(PostalCode))
+        public Location(string StateOrRegion = default(string), string City = default(string), string CountryCode = default(string), string PostalCode = default(string))
         {
             this.StateOrRegion = StateOrRegion;
             this.City = City;
@@ -42,25 +42,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping
         /// Gets or Sets StateOrRegion
         /// </summary>
         [DataMember(Name = "stateOrRegion", EmitDefaultValue = false)]
-        public StateOrRegion StateOrRegion { get; set; }
+        public string StateOrRegion { get; set; }
 
         /// <summary>
         /// Gets or Sets City
         /// </summary>
         [DataMember(Name = "city", EmitDefaultValue = false)]
-        public City City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
         [DataMember(Name = "countryCode", EmitDefaultValue = false)]
-        public CountryCode CountryCode { get; set; }
+        public string CountryCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
         [DataMember(Name = "postalCode", EmitDefaultValue = false)]
-        public PostalCode PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

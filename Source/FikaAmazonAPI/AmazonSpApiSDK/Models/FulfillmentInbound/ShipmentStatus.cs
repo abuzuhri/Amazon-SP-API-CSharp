@@ -10,85 +10,86 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
+  /// <summary>
+  /// Indicates the status of the inbound shipment. When used with the createInboundShipment operation, WORKING is the only valid value. When used with the updateInboundShipment operation, possible values are WORKING, SHIPPED or CANCELLED.
+  /// </summary>
+  /// <value>Indicates the status of the inbound shipment. When used with the createInboundShipment operation, WORKING is the only valid value. When used with the updateInboundShipment operation, possible values are WORKING, SHIPPED or CANCELLED.</value>
+
+  [JsonConverter(typeof(StringEnumConverter))]
+
+  public enum ShipmentStatus
+  {
+
     /// <summary>
-    /// Indicates the status of the inbound shipment. When used with the createInboundShipment operation, WORKING is the only valid value. When used with the updateInboundShipment operation, possible values are WORKING, SHIPPED or CANCELLED.
+    /// Enum WORKING for value: WORKING
     /// </summary>
-    /// <value>Indicates the status of the inbound shipment. When used with the createInboundShipment operation, WORKING is the only valid value. When used with the updateInboundShipment operation, possible values are WORKING, SHIPPED or CANCELLED.</value>
+    [EnumMember(Value = "WORKING")]
+    WORKING = 1,
 
-    [JsonConverter(typeof(StringEnumConverter))]
+    /// <summary>
+    /// Enum SHIPPED for value: SHIPPED
+    /// </summary>
+    [EnumMember(Value = "SHIPPED")]
+    SHIPPED = 2,
 
-    public enum ShipmentStatus
-    {
+    /// <summary>
+    /// Enum RECEIVING for value: RECEIVING
+    /// </summary>
+    [EnumMember(Value = "RECEIVING")]
+    RECEIVING = 3,
 
-        /// <summary>
-        /// Enum WORKING for value: WORKING
-        /// </summary>
-        [EnumMember(Value = "WORKING")]
-        WORKING = 1,
+    /// <summary>
+    /// Enum CANCELLED for value: CANCELLED
+    /// </summary>
+    [EnumMember(Value = "CANCELLED")]
+    CANCELLED = 4,
 
-        /// <summary>
-        /// Enum SHIPPED for value: SHIPPED
-        /// </summary>
-        [EnumMember(Value = "SHIPPED")]
-        SHIPPED = 2,
+    /// <summary>
+    /// Enum DELETED for value: DELETED
+    /// </summary>
+    [EnumMember(Value = "DELETED")]
+    DELETED = 5,
 
-        /// <summary>
-        /// Enum RECEIVING for value: RECEIVING
-        /// </summary>
-        [EnumMember(Value = "RECEIVING")]
-        RECEIVING = 3,
+    /// <summary>
+    /// Enum CLOSED for value: CLOSED
+    /// </summary>
+    [EnumMember(Value = "CLOSED")]
+    CLOSED = 6,
 
-        /// <summary>
-        /// Enum CANCELLED for value: CANCELLED
-        /// </summary>
-        [EnumMember(Value = "CANCELLED")]
-        CANCELLED = 4,
+    /// <summary>
+    /// Enum ERROR for value: ERROR
+    /// </summary>
+    [EnumMember(Value = "ERROR")]
+    ERROR = 7,
 
-        /// <summary>
-        /// Enum DELETED for value: DELETED
-        /// </summary>
-        [EnumMember(Value = "DELETED")]
-        DELETED = 5,
+    /// <summary>
+    /// Enum INTRANSIT for value: IN_TRANSIT
+    /// </summary>
+    [EnumMember(Value = "IN_TRANSIT")]
+    IN_TRANSIT = 8,
 
-        /// <summary>
-        /// Enum CLOSED for value: CLOSED
-        /// </summary>
-        [EnumMember(Value = "CLOSED")]
-        CLOSED = 6,
+    /// <summary>
+    /// Enum DELIVERED for value: DELIVERED
+    /// </summary>
+    [EnumMember(Value = "DELIVERED")]
+    DELIVERED = 9,
 
-        /// <summary>
-        /// Enum ERROR for value: ERROR
-        /// </summary>
-        [EnumMember(Value = "ERROR")]
-        ERROR = 7,
+    /// <summary>
+    /// Enum CHECKED_IN for value: CHECKED_IN
+    /// </summary>
+    [EnumMember(Value = "CHECKED_IN")]
+    CHECKED_IN = 10,
 
-        /// <summary>
-        /// Enum INTRANSIT for value: IN_TRANSIT
-        /// </summary>
-        [EnumMember(Value = "IN_TRANSIT")]
-        INTRANSIT = 8,
-
-        /// <summary>
-        /// Enum DELIVERED for value: DELIVERED
-        /// </summary>
-        [EnumMember(Value = "DELIVERED")]
-        DELIVERED = 9,
-
-        /// <summary>
-        /// Enum CHECKED_IN for value: CHECKED_IN
-        /// </summary>
-        [EnumMember(Value = "CHECKED_IN")]
-        CHECKEDIN = 10,
-        
-        /// <summary>
-        /// Enum READY_TO_SHIP for value: READY_TO_SHIP
-        /// </summary>
-        [EnumMember(Value = "READY_TO_SHIP")]
-        READYTOSHIP = 11
-    }
+    /// <summary>
+    /// Enum READY_TO_SHIP for value: READY_TO_SHIP
+    /// </summary>
+    [EnumMember(Value = "READY_TO_SHIP")]
+    READY_TO_SHIP = 11
+  }
 
 }

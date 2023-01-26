@@ -54,7 +54,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="ReturnAuthorizationId">Identifies the return authorization used to return this item. See ReturnAuthorization..</param>
         /// <param name="ReturnReceivedCondition">ReturnReceivedCondition.</param>
         /// <param name="FulfillmentCenterId">The identifier for the Amazon fulfillment center that processed the return item..</param>
-        public ReturnItem(string SellerReturnItemId = default(string), string SellerFulfillmentOrderItemId = default(string), string AmazonShipmentId = default(string), string SellerReturnReasonCode = default(string), string ReturnComment = default(string), string AmazonReturnReasonCode = default(string), FulfillmentReturnItemStatus Status = default(FulfillmentReturnItemStatus), Timestamp StatusChangedDate = default(Timestamp), string ReturnAuthorizationId = default(string), ReturnItemDisposition? ReturnReceivedCondition = default(ReturnItemDisposition?), string FulfillmentCenterId = default(string))
+        public ReturnItem(string SellerReturnItemId = default(string), string SellerFulfillmentOrderItemId = default(string), string AmazonShipmentId = default(string), string SellerReturnReasonCode = default(string), string ReturnComment = default(string), string AmazonReturnReasonCode = default(string), FulfillmentReturnItemStatus Status = default(FulfillmentReturnItemStatus), DateTime StatusChangedDate = default(DateTime), string ReturnAuthorizationId = default(string), ReturnItemDisposition? ReturnReceivedCondition = default(ReturnItemDisposition?), string FulfillmentCenterId = default(string))
         {
             // to ensure "SellerReturnItemId" is required (not null)
             if (SellerReturnItemId == null)
@@ -165,7 +165,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>Indicates when the status last changed.</value>
         [DataMember(Name = "StatusChangedDate", EmitDefaultValue = false)]
-        public Timestamp StatusChangedDate { get; set; }
+        public DateTime StatusChangedDate { get; set; }
 
         /// <summary>
         /// Identifies the return authorization used to return this item. See ReturnAuthorization.

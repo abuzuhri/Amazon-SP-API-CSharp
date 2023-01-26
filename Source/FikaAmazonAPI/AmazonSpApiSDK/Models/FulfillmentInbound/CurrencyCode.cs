@@ -40,7 +40,37 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum EUR for value: EUR
         /// </summary>
         [EnumMember(Value = "EUR")]
-        EUR = 3
+        EUR = 3,
+
+        [EnumMember(Value = "CAD")]
+        CAD = 4,
+
+        [EnumMember(Value = "JPY")]
+        JPY,
+        [EnumMember(Value = "CNY")]
+        CNY,
+        [EnumMember(Value = "INR")]
+        INR,
+        [EnumMember(Value = "MXN")]
+        MXN,
+        [EnumMember(Value = "BRL")]
+        BRL,
+        [EnumMember(Value = "AUD")]
+        AUD,
+        [EnumMember(Value = "TRY")]
+        TRY,
+        [EnumMember(Value = "SGD")]
+        SGD,
+        [EnumMember(Value = "SEK")]
+        SEK,
+        [EnumMember(Value = "PLN")]
+        PLN,
+        [EnumMember(Value = "AED")]
+        AED,
+        [EnumMember(Value = "SAR")]
+        SAR,
+        [EnumMember(Value = "EGP")]
+        EGP,
     }
 
 }

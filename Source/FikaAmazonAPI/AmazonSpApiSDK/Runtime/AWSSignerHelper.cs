@@ -73,7 +73,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="request">RestRequest</param>
         /// <returns>Query parameters in canonical order with URL encoding</returns>
-        public virtual string ExtractCanonicalQueryString(IRestRequest request)
+        public virtual string ExtractCanonicalQueryString(RestRequest request)
         {
             IDictionary<string, string> queryParameters = request.Parameters
                 .Where(parameter => ParameterType.QueryString.Equals(parameter.Type))
@@ -101,7 +101,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="request">RestRequest</param>
         /// <returns>Returns Http headers in canonical order</returns>
-        public virtual string ExtractCanonicalHeaders(IRestRequest request)
+        public virtual string ExtractCanonicalHeaders(RestRequest request)
         {
             IDictionary<string, string> headers = request.Parameters
                 .Where(parameter => ParameterType.HttpHeader.Equals(parameter.Type))
@@ -114,7 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             foreach (string headerName in sortedHeaders.Keys)
             {
                 headerString.AppendFormat("{0}:{1}\n",
-                    headerName,
+                    headerName.ToLower(),
                     CompressWhitespaceRegex.Replace(sortedHeaders[headerName].Trim(), " "));
             }
 
@@ -126,7 +126,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="request">RestRequest</param>
         /// <returns>List of Http headers in canonical order</returns>
-        public virtual string ExtractSignedHeaders(IRestRequest request)
+        public virtual string ExtractSignedHeaders(RestRequest request)
         {
             List<string> rawHeaders = request.Parameters.Where(parameter => ParameterType.HttpHeader.Equals(parameter.Type))
                                                         .Select(header => header.Name.Trim().ToLowerInvariant())
@@ -141,7 +141,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// </summary>
         /// <param name="request">RestRequest</param>
         /// <returns>Hexadecimal hashed value of payload in the body of request</returns>
-        public virtual string HashRequestBody(IRestRequest request)
+        public virtual string HashRequestBody(RestRequest request)
         {
             RestSharp.Parameter body = request.Parameters.FirstOrDefault(parameter => ParameterType.RequestBody.Equals(parameter.Type));
             string value = body != null ? body.Value.ToString() : string.Empty;
@@ -175,19 +175,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// <param name="restRequest">RestRequest</param>
         /// <param name="host">Request endpoint</param>
         /// <returns>Date and time used for x-amz-date, in UTC</returns>
-        public virtual DateTime InitializeHeaders(IRestRequest restRequest, string host)
+        public virtual DateTime InitializeHeaders(RestRequest restRequest, string host)
         {
-            restRequest.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == XAmzDateHeaderName);
-            restRequest.Parameters.RemoveAll(parameter => ParameterType.HttpHeader.Equals(parameter.Type)
-                                                          && parameter.Name == HostHeaderName);
+            lock (restRequest)
+            {
+                restRequest.Parameters.RemoveParameter(XAmzDateHeaderName);
+                restRequest.Parameters.RemoveParameter(HostHeaderName);
+                DateTime signingDate = DateHelper.GetUtcNow();
 
-            DateTime signingDate = DateHelper.GetUtcNow();
+                restRequest.AddOrUpdateHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
+                restRequest.AddOrUpdateHeader(HostHeaderName, host);
 
-            restRequest.AddOrUpdateHeader(XAmzDateHeaderName, signingDate.ToString(ISO8601BasicDateTimeFormat, CultureInfo.InvariantCulture));
-            restRequest.AddOrUpdateHeader(HostHeaderName, host);
-
-            return signingDate;
+                return signingDate;
+            }
         }
 
         /// <summary>
@@ -223,21 +223,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// <param name="signature">The signature to add</param>
         /// <param name="region">AWS region for the request</param>
         /// <param name="signingDate">Signature date</param>
-        public virtual void AddSignature(IRestRequest restRequest,
+        public virtual void AddSignature(RestRequest restRequest,
                                          string accessKeyId,
                                          string signedHeaders,
                                          string signature,
                                          string region,
                                          DateTime signingDate)
         {
-            string scope = BuildScope(signingDate, region);
-            StringBuilder authorizationHeaderValueBuilder = new StringBuilder();
-            authorizationHeaderValueBuilder.AppendFormat("{0}-{1}", Scheme, Algorithm);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1}/{2},", CredentialSubHeaderName, accessKeyId, scope);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1},", SignedHeadersSubHeaderName, signedHeaders);
-            authorizationHeaderValueBuilder.AppendFormat(" {0}={1}", SignatureSubHeaderName, signature);
+            lock (restRequest)
+            {
+                string scope = BuildScope(signingDate, region);
+                StringBuilder authorizationHeaderValueBuilder = new StringBuilder();
+                authorizationHeaderValueBuilder.AppendFormat("{0}-{1}", Scheme, Algorithm);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1}/{2},", CredentialSubHeaderName, accessKeyId, scope);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1},", SignedHeadersSubHeaderName, signedHeaders);
+                authorizationHeaderValueBuilder.AppendFormat(" {0}={1}", SignatureSubHeaderName, signature);
 
-            restRequest.AddOrUpdateHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
+                restRequest.AddOrUpdateHeader(AuthorizationHeaderName, authorizationHeaderValueBuilder.ToString());
+            }
+
         }
 
         private static string BuildScope(DateTime signingDate, string region)

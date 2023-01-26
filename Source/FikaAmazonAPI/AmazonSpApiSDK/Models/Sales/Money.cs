@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
         /// </summary>
         /// <param name="CurrencyCode">Three-digit currency code. In ISO 4217 format. (required).</param>
         /// <param name="Amount">The currency amount. (required).</param>
-        public Money(string CurrencyCode = default(string), ModelDecimal Amount = default(ModelDecimal))
+        public Money(string CurrencyCode = default(string), decimal Amount = default(decimal))
         {
             // to ensure "CurrencyCode" is required (not null)
             if (CurrencyCode == null)
@@ -44,15 +44,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
             else
             {
                 this.CurrencyCode = CurrencyCode;
-            }
-            // to ensure "Amount" is required (not null)
-            if (Amount == null)
-            {
-                throw new InvalidDataException("Amount is a required property for Money and cannot be null");
-            }
-            else
-            {
-                this.Amount = Amount;
             }
         }
 
@@ -68,7 +59,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sales
         /// </summary>
         /// <value>The currency amount.</value>
         [DataMember(Name = "amount", EmitDefaultValue = false)]
-        public ModelDecimal Amount { get; set; }
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

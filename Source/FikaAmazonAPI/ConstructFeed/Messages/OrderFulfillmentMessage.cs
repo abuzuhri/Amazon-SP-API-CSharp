@@ -7,6 +7,8 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     {
         [XmlElement(ElementName = "AmazonOrderID")]
         public string AmazonOrderID { get; set; }
+        [XmlElement(ElementName = "MerchantOrderID")]
+        public string MerchantOrderID { get; set; }
         [XmlElement(ElementName = "MerchantFulfillmentID")]
         public string MerchantFulfillmentID { get; set; }
         [XmlElement(ElementName = "FulfillmentDate")]

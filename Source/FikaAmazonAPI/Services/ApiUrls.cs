@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         }
         protected class FulFillmentOutboundApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/ba/outbound/2020-07-01";
+            private readonly static string _resourceBaseUrl = "/fba/outbound/2020-07-01";
             public static string GetFulfillmentPreview
             {
                 get => $"{_resourceBaseUrl}/fulfillmentOrders/preview";
@@ -145,11 +145,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string RetrieveShippingLabel(string shipmentId, string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
             public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
         }
+
+        protected class ShippingApiV2Urls
+        {
+            private readonly static string _resourceBaseUrl = "/shipping/v2";
+            public static string GetRates
+            {
+                get => $"{_resourceBaseUrl}/shipments/rates";
+            }
+            public static string PurchaseShipment
+            {
+                get => $"{_resourceBaseUrl}/shipments";
+            }
+            public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
+            public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
+            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
+        }
         protected class MessaginApiUrls
         {
             private readonly static string _resourceBaseUrl = "/messaging/v1";
 
-            public static string GetMessagingActionsForOrder(string amazonOrderId, string marketplaceIds) => $"{_resourceBaseUrl}/orders/{amazonOrderId}?marketplaceIds={marketplaceIds}";
+            public static string GetMessagingActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
             public static string ConfirmCustomizationDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmCustomizationDetails";
             public static string CreateConfirmDeliveryDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmDeliveryDetails";
             public static string CreateLegalDisclosure(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/legalDisclosure";
@@ -161,6 +177,26 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetAttributes(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
             public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
             public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
+        }
+        protected class EasyShip20220323
+        {
+            private readonly static string _resourceBaseUrl = "/easyShip/2022-03-23";
+            public static string ListHandoverSlots
+            {
+                get => $"{_resourceBaseUrl}/timeSlot";
+            }
+            public static string GetScheduledPackage
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
+            public static string CreateScheduledPackage
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
+            public static string UpdateScheduledPackages
+            {
+                get => $"{_resourceBaseUrl}/package";
+            }
         }
         protected class FBASmallAndLightApiUrls
         {
@@ -325,6 +361,23 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/acknowledgements";
             }
             public static string GetOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
+        }
+        protected class VendorOrdersApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/vendor/orders/v1";
+            public static string GetPurchaseOrders
+            {
+                get => $"{_resourceBaseUrl}/purchaseOrders";
+            }
+            public static string GetPurchaseOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
+            public static string SubmitAcknowledgement
+            {
+                get => $"{_resourceBaseUrl}/acknowledgements";
+            }
+            public static string GetPurchaseOrdersStatus
+            {
+                get => $"{_resourceBaseUrl}/purchaseOrdersStatus";
+            }
         }
         protected class UploadApiUrls
         {

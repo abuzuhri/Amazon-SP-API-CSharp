@@ -85,7 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="size">Name of the size associated with an Amazon catalog item..</param>
         /// <param name="style">Name of the style associated with an Amazon catalog item..</param>
         /// <param name="websiteDisplayGroup">Name of the website display group associated with an Amazon catalog item..</param>
-        public ItemSummaryByMarketplace(string marketplaceId = default(string), string brand = default(string), ItemBrowseClassification browseClassification = default(ItemBrowseClassification), string color = default(string), ItemClassificationEnum? itemClassification = default(ItemClassificationEnum?), string itemName = default(string), string manufacturer = default(string), string modelNumber = default(string), int? packageQuantity = default(int?), string partNumber = default(string), string size = default(string), string style = default(string), string websiteDisplayGroup = default(string))
+        public ItemSummaryByMarketplace(string marketplaceId = default(string), string brand = default(string), ItemBrowseClassification browseClassification = default(ItemBrowseClassification), string color = default(string), ItemClassificationEnum? itemClassification = default(ItemClassificationEnum?), string itemName = default(string), string manufacturer = default(string), string modelNumber = default(string), int? packageQuantity = default(int?), string partNumber = default(string), string size = default(string), string style = default(string), string websiteDisplayGroup = default(string), string websiteDisplayGroupName = default(string))
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
@@ -108,6 +108,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             this.Size = size;
             this.Style = style;
             this.WebsiteDisplayGroup = websiteDisplayGroup;
+            this.WebsiteDisplayGroupName = websiteDisplayGroupName;
         }
 
         /// <summary>
@@ -194,6 +195,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <value>Name of the website display group associated with an Amazon catalog item.</value>
         [DataMember(Name = "websiteDisplayGroup", EmitDefaultValue = false)]
         public string WebsiteDisplayGroup { get; set; }
+
+        /// <summary>
+        /// Name of the website display group associated with an Amazon catalog item.
+        /// </summary>
+        /// <value>Name of the website display group associated with an Amazon catalog item.</value>
+        [DataMember(Name = "websiteDisplayGroupName", EmitDefaultValue = false)]
+        public string WebsiteDisplayGroupName { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

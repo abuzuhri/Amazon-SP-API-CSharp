@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="FulfillmentOrderStatus">FulfillmentOrderStatus (required).</param>
         /// <param name="StatusUpdatedDateTime">The date and time that the status of the fulfillment order last changed, in ISO 8601 date time format. (required).</param>
         /// <param name="NotificationEmailList">NotificationEmailList.</param>
-        public FulfillmentOrder(string SellerFulfillmentOrderId = default(string), string MarketplaceId = default(string), string DisplayableOrderId = default(string), Timestamp DisplayableOrderDateTime = default(Timestamp), string DisplayableOrderComment = default(string), ShippingSpeedCategory ShippingSpeedCategory = default(ShippingSpeedCategory), DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), Timestamp ReceivedDateTime = default(Timestamp), FulfillmentOrderStatus FulfillmentOrderStatus = default(FulfillmentOrderStatus), Timestamp StatusUpdatedDateTime = default(Timestamp), NotificationEmailList NotificationEmailList = default(NotificationEmailList))
+        public FulfillmentOrder(string SellerFulfillmentOrderId = default(string), string MarketplaceId = default(string), string DisplayableOrderId = default(string), DateTime DisplayableOrderDate = default(DateTime), string DisplayableOrderComment = default(string), ShippingSpeedCategory ShippingSpeedCategory = default(ShippingSpeedCategory), DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), DateTime ReceivedDate = default(DateTime), FulfillmentOrderStatus FulfillmentOrderStatus = default(FulfillmentOrderStatus), DateTime? StatusUpdatedDate = null, NotificationEmailList NotificationEmails = default(NotificationEmailList))
         {
             // to ensure "SellerFulfillmentOrderId" is required (not null)
             if (SellerFulfillmentOrderId == null)
@@ -98,13 +98,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.DisplayableOrderId = DisplayableOrderId;
             }
             // to ensure "DisplayableOrderDateTime" is required (not null)
-            if (DisplayableOrderDateTime == null)
+            if (DisplayableOrderDate == null)
             {
-                throw new InvalidDataException("DisplayableOrderDateTime is a required property for FulfillmentOrder and cannot be null");
+                throw new InvalidDataException("DisplayableOrderDate is a required property for FulfillmentOrder and cannot be null");
             }
             else
             {
-                this.DisplayableOrderDateTime = DisplayableOrderDateTime;
+                this.DisplayableOrderDate = DisplayableOrderDate;
             }
             // to ensure "DisplayableOrderComment" is required (not null)
             if (DisplayableOrderComment == null)
@@ -134,13 +134,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.DestinationAddress = DestinationAddress;
             }
             // to ensure "ReceivedDateTime" is required (not null)
-            if (ReceivedDateTime == null)
+            if (ReceivedDate == null)
             {
-                throw new InvalidDataException("ReceivedDateTime is a required property for FulfillmentOrder and cannot be null");
+                throw new InvalidDataException("ReceivedDate is a required property for FulfillmentOrder and cannot be null");
             }
             else
             {
-                this.ReceivedDateTime = ReceivedDateTime;
+                this.ReceivedDate = ReceivedDate;
             }
             // to ensure "FulfillmentOrderStatus" is required (not null)
             if (FulfillmentOrderStatus == null)
@@ -152,20 +152,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.FulfillmentOrderStatus = FulfillmentOrderStatus;
             }
             // to ensure "StatusUpdatedDateTime" is required (not null)
-            if (StatusUpdatedDateTime == null)
+            if (StatusUpdatedDate == null)
             {
-                throw new InvalidDataException("StatusUpdatedDateTime is a required property for FulfillmentOrder and cannot be null");
+                throw new InvalidDataException("StatusUpdatedDate is a required property for FulfillmentOrder and cannot be null");
             }
             else
             {
-                this.StatusUpdatedDateTime = StatusUpdatedDateTime;
+                this.StatusUpdatedDate = StatusUpdatedDate;
             }
             this.DeliveryWindow = DeliveryWindow;
             this.FulfillmentAction = FulfillmentAction;
             this.FulfillmentPolicy = FulfillmentPolicy;
             this.FulfillmentMethod = FulfillmentMethod;
             this.CODSettings = CODSettings;
-            this.NotificationEmailList = NotificationEmailList;
+            this.NotificationEmails = NotificationEmails;
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// A date and time submitted with the createFulfillmentOrder operation. Displays as the order date in recipient-facing materials such as the packing slip.
         /// </summary>
         /// <value>A date and time submitted with the createFulfillmentOrder operation. Displays as the order date in recipient-facing materials such as the packing slip.</value>
-        [DataMember(Name = "DisplayableOrderDateTime", EmitDefaultValue = false)]
-        public Timestamp DisplayableOrderDateTime { get; set; }
+        [DataMember(Name = "DisplayableOrderDate", EmitDefaultValue = false)]
+        public DateTime DisplayableOrderDate { get; set; }
 
         /// <summary>
         /// A text block submitted with the createFulfillmentOrder operation. Displays in recipient-facing materials such as the packing slip.
@@ -236,22 +236,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The date and time that the fulfillment order was received by an Amazon fulfillment center.
         /// </summary>
         /// <value>The date and time that the fulfillment order was received by an Amazon fulfillment center.</value>
-        [DataMember(Name = "ReceivedDateTime", EmitDefaultValue = false)]
-        public Timestamp ReceivedDateTime { get; set; }
+        [DataMember(Name = "ReceivedDate", EmitDefaultValue = false)]
+        public DateTime ReceivedDate { get; set; }
 
 
         /// <summary>
         /// The date and time that the status of the fulfillment order last changed, in ISO 8601 date time format.
         /// </summary>
         /// <value>The date and time that the status of the fulfillment order last changed, in ISO 8601 date time format.</value>
-        [DataMember(Name = "StatusUpdatedDateTime", EmitDefaultValue = false)]
-        public Timestamp StatusUpdatedDateTime { get; set; }
+        [DataMember(Name = "StatusUpdatedDate", EmitDefaultValue = false)]
+        public DateTime? StatusUpdatedDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets NotificationEmailList
+        /// Gets or Sets NotificationEmails
         /// </summary>
-        [DataMember(Name = "NotificationEmailList", EmitDefaultValue = false)]
-        public NotificationEmailList NotificationEmailList { get; set; }
+        [DataMember(Name = "NotificationEmails", EmitDefaultValue = false)]
+        public NotificationEmailList NotificationEmails { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -264,7 +264,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  SellerFulfillmentOrderId: ").Append(SellerFulfillmentOrderId).Append("\n");
             sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
             sb.Append("  DisplayableOrderId: ").Append(DisplayableOrderId).Append("\n");
-            sb.Append("  DisplayableOrderDateTime: ").Append(DisplayableOrderDateTime).Append("\n");
+            sb.Append("  DisplayableOrderDate: ").Append(DisplayableOrderDate).Append("\n");
             sb.Append("  DisplayableOrderComment: ").Append(DisplayableOrderComment).Append("\n");
             sb.Append("  ShippingSpeedCategory: ").Append(ShippingSpeedCategory).Append("\n");
             sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
@@ -273,10 +273,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
             sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
             sb.Append("  CODSettings: ").Append(CODSettings).Append("\n");
-            sb.Append("  ReceivedDateTime: ").Append(ReceivedDateTime).Append("\n");
+            sb.Append("  ReceivedDate: ").Append(ReceivedDate).Append("\n");
             sb.Append("  FulfillmentOrderStatus: ").Append(FulfillmentOrderStatus).Append("\n");
-            sb.Append("  StatusUpdatedDateTime: ").Append(StatusUpdatedDateTime).Append("\n");
-            sb.Append("  NotificationEmailList: ").Append(NotificationEmailList).Append("\n");
+            sb.Append("  StatusUpdatedDate: ").Append(StatusUpdatedDate).Append("\n");
+            sb.Append("  NotificationEmails: ").Append(NotificationEmails).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -327,9 +327,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.DisplayableOrderId.Equals(input.DisplayableOrderId))
                 ) &&
                 (
-                    this.DisplayableOrderDateTime == input.DisplayableOrderDateTime ||
-                    (this.DisplayableOrderDateTime != null &&
-                    this.DisplayableOrderDateTime.Equals(input.DisplayableOrderDateTime))
+                    this.DisplayableOrderDate == input.DisplayableOrderDate ||
+                    (this.DisplayableOrderDate != null &&
+                    this.DisplayableOrderDate.Equals(input.DisplayableOrderDate))
                 ) &&
                 (
                     this.DisplayableOrderComment == input.DisplayableOrderComment ||
@@ -372,9 +372,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.CODSettings.Equals(input.CODSettings))
                 ) &&
                 (
-                    this.ReceivedDateTime == input.ReceivedDateTime ||
-                    (this.ReceivedDateTime != null &&
-                    this.ReceivedDateTime.Equals(input.ReceivedDateTime))
+                    this.ReceivedDate == input.ReceivedDate ||
+                    (this.ReceivedDate != null &&
+                    this.ReceivedDate.Equals(input.ReceivedDate))
                 ) &&
                 (
                     this.FulfillmentOrderStatus == input.FulfillmentOrderStatus ||
@@ -382,14 +382,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.FulfillmentOrderStatus.Equals(input.FulfillmentOrderStatus))
                 ) &&
                 (
-                    this.StatusUpdatedDateTime == input.StatusUpdatedDateTime ||
-                    (this.StatusUpdatedDateTime != null &&
-                    this.StatusUpdatedDateTime.Equals(input.StatusUpdatedDateTime))
+                    this.StatusUpdatedDate == input.StatusUpdatedDate ||
+                    (this.StatusUpdatedDate != null &&
+                    this.StatusUpdatedDate.Equals(input.StatusUpdatedDate))
                 ) &&
                 (
-                    this.NotificationEmailList == input.NotificationEmailList ||
-                    (this.NotificationEmailList != null &&
-                    this.NotificationEmailList.Equals(input.NotificationEmailList))
+                    this.NotificationEmails == input.NotificationEmails ||
+                    (this.NotificationEmails != null &&
+                    this.NotificationEmails.Equals(input.NotificationEmails))
                 );
         }
 
@@ -408,8 +408,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.MarketplaceId.GetHashCode();
                 if (this.DisplayableOrderId != null)
                     hashCode = hashCode * 59 + this.DisplayableOrderId.GetHashCode();
-                if (this.DisplayableOrderDateTime != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderDateTime.GetHashCode();
+                if (this.DisplayableOrderDate != null)
+                    hashCode = hashCode * 59 + this.DisplayableOrderDate.GetHashCode();
                 if (this.DisplayableOrderComment != null)
                     hashCode = hashCode * 59 + this.DisplayableOrderComment.GetHashCode();
                 if (this.ShippingSpeedCategory != null)
@@ -426,14 +426,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
                 if (this.CODSettings != null)
                     hashCode = hashCode * 59 + this.CODSettings.GetHashCode();
-                if (this.ReceivedDateTime != null)
-                    hashCode = hashCode * 59 + this.ReceivedDateTime.GetHashCode();
+                if (this.ReceivedDate != null)
+                    hashCode = hashCode * 59 + this.ReceivedDate.GetHashCode();
                 if (this.FulfillmentOrderStatus != null)
                     hashCode = hashCode * 59 + this.FulfillmentOrderStatus.GetHashCode();
-                if (this.StatusUpdatedDateTime != null)
-                    hashCode = hashCode * 59 + this.StatusUpdatedDateTime.GetHashCode();
-                if (this.NotificationEmailList != null)
-                    hashCode = hashCode * 59 + this.NotificationEmailList.GetHashCode();
+                if (this.StatusUpdatedDate != null)
+                    hashCode = hashCode * 59 + this.StatusUpdatedDate.GetHashCode();
+                if (this.NotificationEmails != null)
+                    hashCode = hashCode * 59 + this.NotificationEmails.GetHashCode();
                 return hashCode;
             }
         }

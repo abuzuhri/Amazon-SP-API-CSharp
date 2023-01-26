@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.ReportGeneration
@@ -198,6 +199,31 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
+        #region Categories
+
+        public List<CategoriesRow> GetCategories()
+        {
+            return Task.Run(() => GetCategoriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<CategoriesRow>> GetCategoriesAsync(bool rootNodesOnly = false)
+        {
+            var path = await GetCategoriesAsync(_amazonConnection, rootNodesOnly);
+            CategoriesReport report = new CategoriesReport(path, _amazonConnection.RefNumber);
+            return report.Data.Node;
+        }
+
+        private async Task<string> GetCategoriesAsync(AmazonConnection amazonConnection, bool rootNodesOnly)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA,
+                reportOptions: new ReportOptions
+            {
+                { "RootNodesOnly", rootNodesOnly.ToString() }
+            });
+        }
+
+        #endregion
+
         #region Orders
         public List<OrdersRow> GetOrdersByLastUpdate(int days) =>
             Task.Run(() => GetOrdersByLastUpdateAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -250,7 +276,7 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
-        
+
         public List<OrderInvoicingReportRow> GetOrderInvoicingData(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null) =>
             Task.Run(() => GetOrderInvoicingDataAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<List<OrderInvoicingReportRow>> GetOrderInvoicingDataAsync(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null)
@@ -273,11 +299,5 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
         }
         #endregion
-
-
-
-
     }
-
-
 }

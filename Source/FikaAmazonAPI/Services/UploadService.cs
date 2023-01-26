@@ -21,7 +21,7 @@ namespace FikaAmazonAPI.Services
 
             var parameter = parameterObj.getParameters();
 
-            await CreateAuthorizedRequestAsync(UploadApiUrls.CreateUploadDestinationForResource(parameterObj.resource), RestSharp.Method.POST, parameter);
+            await CreateAuthorizedRequestAsync(UploadApiUrls.CreateUploadDestinationForResource(parameterObj.resource), RestSharp.Method.Post, parameter);
             var response = await ExecuteRequestAsync<CreateUploadDestinationResponse>(RateLimitType.Upload_CreateUploadDestinationForResource);
             return response.Payload;
         }

@@ -9,9 +9,6 @@
  */
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -21,24 +18,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
     /// The request schema for the createSubscription operation.
     /// </summary>
     [DataContract]
-    public partial class CreateSubscriptionRequest : IEquatable<CreateSubscriptionRequest>, IValidatableObject
+    public partial class CreateSubscriptionRequest
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CreateSubscriptionRequest" /> class.
-        /// </summary>
-        /// <param name="PayloadVersion">The version of the payload object to be used in the notification..</param>
-        /// <param name="DestinationId">The identifier for the destination where notifications will be delivered..</param>
-        public CreateSubscriptionRequest(string PayloadVersion = default(string), string DestinationId = default(string))
-        {
-            this.PayloadVersion = PayloadVersion;
-            this.DestinationId = DestinationId;
-        }
-
         /// <summary>
         /// The version of the payload object to be used in the notification.
         /// </summary>
         /// <value>The version of the payload object to be used in the notification.</value>
         [DataMember(Name = "payloadVersion", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "payloadVersion")]
         public string PayloadVersion { get; set; }
 
         /// <summary>
@@ -46,10 +33,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// </summary>
         /// <value>The identifier for the destination where notifications will be delivered.</value>
         [DataMember(Name = "destinationId", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "destinationId")]
         public string DestinationId { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Gets or Sets ProcessingDirective
+        /// </summary>
+        [DataMember(Name = "processingDirective", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "processingDirective")]
+        public ProcessingDirective ProcessingDirective { get; set; }
+
+
+        /// <summary>
+        /// Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -58,77 +54,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
             sb.Append("class CreateSubscriptionRequest {\n");
             sb.Append("  PayloadVersion: ").Append(PayloadVersion).Append("\n");
             sb.Append("  DestinationId: ").Append(DestinationId).Append("\n");
+            sb.Append("  ProcessingDirective: ").Append(ProcessingDirective).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        /// Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CreateSubscriptionRequest);
-        }
-
-        /// <summary>
-        /// Returns true if CreateSubscriptionRequest instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CreateSubscriptionRequest to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CreateSubscriptionRequest input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.PayloadVersion == input.PayloadVersion ||
-                    (this.PayloadVersion != null &&
-                    this.PayloadVersion.Equals(input.PayloadVersion))
-                ) &&
-                (
-                    this.DestinationId == input.DestinationId ||
-                    (this.DestinationId != null &&
-                    this.DestinationId.Equals(input.DestinationId))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.PayloadVersion != null)
-                    hashCode = hashCode * 59 + this.PayloadVersion.GetHashCode();
-                if (this.DestinationId != null)
-                    hashCode = hashCode * 59 + this.DestinationId.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 

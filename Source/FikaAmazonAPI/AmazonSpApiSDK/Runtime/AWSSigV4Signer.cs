@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         /// <param name="request">RestRequest which needs to be signed</param>
         /// <param name="host">Request endpoint</param>
         /// <returns>RestRequest with AWS Signature</returns>
-        public IRestRequest Sign(IRestRequest request, string host)
+        public RestRequest Sign(RestRequest request, string host)
         {
             DateTime signingDate = AwsSignerHelper.InitializeHeaders(request, host);
             string signedHeaders = AwsSignerHelper.ExtractSignedHeaders(request);
@@ -52,11 +52,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             return request;
         }
 
-        private string CreateCanonicalRequest(IRestRequest restRequest, string signedHeaders)
+        private string CreateCanonicalRequest(RestRequest restRequest, string signedHeaders)
         {
             var canonicalizedRequest = new StringBuilder();
             //Request Method
-            canonicalizedRequest.AppendFormat("{0}\n", restRequest.Method);
+            canonicalizedRequest.AppendFormat("{0}\n", restRequest.Method.ToString().ToUpperInvariant());
 
             //CanonicalURI
             canonicalizedRequest.AppendFormat("{0}\n", AwsSignerHelper.ExtractCanonicalURIParameters(restRequest.Resource));

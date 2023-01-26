@@ -4,7 +4,7 @@ using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.CatalogItems
 {
-    public class ParameterSearchCatalogItems202204 : ParameterBased
+    public class ParameterSearchCatalogItems202204 : PaginationParameter
     {
         public IList<string> identifiers { get; set; }
         public IList<string> marketplaceIds { get; set; } = new List<string>();
@@ -16,7 +16,6 @@ namespace FikaAmazonAPI.Parameter.CatalogItems
         public IList<string> brandNames { get; set; } = new List<string>();
         public IList<string> classificationIds { get; set; } = new List<string>();
         public string pageToken { get; set; }
-        public string keywordsLocale { get; set; }
-        public int? pageSize { get; set; } = 20;
+        public string keywordsLocale { get; set; }        
     }
 }

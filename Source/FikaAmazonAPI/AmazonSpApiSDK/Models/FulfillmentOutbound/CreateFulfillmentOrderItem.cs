@@ -82,62 +82,62 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The seller SKU of the item.
         /// </summary>
         /// <value>The seller SKU of the item.</value>
-        [DataMember(Name = "SellerSKU", EmitDefaultValue = false)]
+        [DataMember(Name = "sellerSku", EmitDefaultValue = false)]
         public string SellerSKU { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier that the seller creates to track fulfillment order items. Used to disambiguate multiple fulfillment items that have the same seller SKU. For example, the seller might assign different SellerFulfillmentOrderItemId values to two items in a fulfillment order that share the same seller SKU but have different GiftMessage values.
         /// </summary>
         /// <value>A fulfillment order item identifier that the seller creates to track fulfillment order items. Used to disambiguate multiple fulfillment items that have the same seller SKU. For example, the seller might assign different SellerFulfillmentOrderItemId values to two items in a fulfillment order that share the same seller SKU but have different GiftMessage values.</value>
-        [DataMember(Name = "SellerFulfillmentOrderItemId", EmitDefaultValue = false)]
+        [DataMember(Name = "sellerFulfillmentOrderItemId", EmitDefaultValue = false)]
         public string SellerFulfillmentOrderItemId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
-        [DataMember(Name = "Quantity", EmitDefaultValue = false)]
+        [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int Quantity { get; set; }
 
         /// <summary>
         /// A message to the gift recipient, if applicable.
         /// </summary>
         /// <value>A message to the gift recipient, if applicable.</value>
-        [DataMember(Name = "GiftMessage", EmitDefaultValue = false)]
+        [DataMember(Name = "giftMessage", EmitDefaultValue = false)]
         public string GiftMessage { get; set; }
 
         /// <summary>
         /// Item-specific text that displays in recipient-facing materials such as the outbound shipment packing slip.
         /// </summary>
         /// <value>Item-specific text that displays in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "DisplayableComment", EmitDefaultValue = false)]
+        [DataMember(Name = "displayableComment", EmitDefaultValue = false)]
         public string DisplayableComment { get; set; }
 
         /// <summary>
         /// Amazon&#39;s fulfillment network SKU of the item.
         /// </summary>
         /// <value>Amazon&#39;s fulfillment network SKU of the item.</value>
-        [DataMember(Name = "FulfillmentNetworkSKU", EmitDefaultValue = false)]
+        [DataMember(Name = "fulfillmentNetworkSKU", EmitDefaultValue = false)]
         public string FulfillmentNetworkSKU { get; set; }
 
         /// <summary>
         /// The monetary value assigned by the seller to this item.
         /// </summary>
         /// <value>The monetary value assigned by the seller to this item.</value>
-        [DataMember(Name = "PerUnitDeclaredValue", EmitDefaultValue = false)]
+        [DataMember(Name = "perUnitDeclaredValue", EmitDefaultValue = false)]
         public Currency PerUnitDeclaredValue { get; set; }
 
         /// <summary>
         /// The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order.
         /// </summary>
         /// <value>The amount to be collected from the recipient for this item in a COD (Cash On Delivery) order.</value>
-        [DataMember(Name = "PerUnitPrice", EmitDefaultValue = false)]
+        [DataMember(Name = "perUnitPrice", EmitDefaultValue = false)]
         public Currency PerUnitPrice { get; set; }
 
         /// <summary>
         /// The tax on the amount to be collected from the recipient for this item in a COD (Cash On Delivery) order.
         /// </summary>
         /// <value>The tax on the amount to be collected from the recipient for this item in a COD (Cash On Delivery) order.</value>
-        [DataMember(Name = "PerUnitTax", EmitDefaultValue = false)]
+        [DataMember(Name = "perUnitTax", EmitDefaultValue = false)]
         public Currency PerUnitTax { get; set; }
 
         /// <summary>

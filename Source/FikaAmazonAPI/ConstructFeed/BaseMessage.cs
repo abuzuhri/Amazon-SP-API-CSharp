@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.ConstructFeed
         public OperationType OperationType { get; set; }
 
         public PriceMessage Price { get; set; }
-        
+
         public InventoryMessage Inventory { get; set; }
         public ProductMessage Product { get; set; }
 
@@ -28,6 +28,7 @@ namespace FikaAmazonAPI.ConstructFeed
         public FulfillmentCenterMessage FulfillmentCenter { get; set; }
         public FulfillmentOrderRequestMessage FulfillmentOrderRequest { get; set; }
         public FulfillmentOrderCancellationRequestMessage FulfillmentOrderCancellationRequest { get; set; }
+        public CartonContentsRequest CartonContentsRequest { get; set; }
         public ImageMessage Image { get; set; }
         public LocalMessage Local { get; set; }
         public InvoiceConfirmationMessage InvoiceConfirmation { get; set; }
@@ -67,8 +68,8 @@ namespace FikaAmazonAPI.ConstructFeed
         [XmlIgnore]
         public bool InventorySpecified { get { return Inventory != null; } }
         [XmlIgnore]
-        public bool PriceSpecified{ get { return Price != null; }}
-        
+        public bool PriceSpecified { get { return Price != null; } }
+
         [XmlIgnore] public bool AmazonAppSpecified { get { return AmazonApp != null; } }
         [XmlIgnore] public bool CatPILSpecified { get { return CatPIL != null; } }
         [XmlIgnore] public bool AutoPartsItemSpecified { get { return AutoPartsItem != null; } }
@@ -81,6 +82,7 @@ namespace FikaAmazonAPI.ConstructFeed
         [XmlIgnore] public bool FulfillmentCenterSpecified { get { return FulfillmentCenter != null; } }
         [XmlIgnore] public bool FulfillmentOrderRequestSpecified { get { return FulfillmentOrderRequest != null; } }
         [XmlIgnore] public bool FulfillmentOrderCancellationRequestSpecified { get { return FulfillmentOrderCancellationRequest != null; } }
+        [XmlIgnore] public bool CartonContentsRequestSpecified { get { return CartonContentsRequest != null; } }
         [XmlIgnore] public bool ImageSpecified { get { return Image != null; } }
         [XmlIgnore] public bool LocalSpecified { get { return Local != null; } }
         [XmlIgnore] public bool InvoiceConfirmationSpecified { get { return InvoiceConfirmation != null; } }

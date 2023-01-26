@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
         public async Task<string> GetAuthorizationCodeAsync(ParameterAuthorizationCode parameter)
         {
             var param = parameter.getParameters();
-            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.GET, param, tokenDataType: TokenDataType.Grantless);
+            await CreateAuthorizedRequestAsync(AuthorizationsApiUrls.GetAuthorizationCode, RestSharp.Method.Get, param, tokenDataType: TokenDataType.Grantless);
 
             var response = await ExecuteRequestAsync<GetAuthorizationCodeResponse>(Utils.RateLimitType.Authorization_GetAuthorizationCode);
             if (response != null && response.Payload != null)
@@ -29,9 +29,20 @@ namespace FikaAmazonAPI.Services
         {
             return await TokenGeneration.GetAccessTokenFromCodeAsync(AmazonCredential.ClientId, AmazonCredential.ClientSecret, code, appRedirectUri);
         }
+
+        public async Task<TokenResponse> GetRefreshTokenFromCodeAsync(string code, string appRedirectUri)
+        {
+            return await TokenGeneration.GetAccessTokenFromCodeAsync(AmazonCredential.ClientId, AmazonCredential.ClientSecret, code, appRedirectUri, grant_type: "authorization_code");
+        }
+
         public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string clientId, string clientSecret, string code, string appRedirectUri)
         {
             return await TokenGeneration.GetAccessTokenFromCodeAsync(clientId, clientSecret, code, appRedirectUri);
+        }
+
+        public static async Task<TokenResponse> GetRefreshTokenFromCodeAsync(string clientId, string clientSecret, string code, string appRedirectUri)
+        {
+            return await TokenGeneration.GetAccessTokenFromCodeAsync(clientId, clientSecret, code, appRedirectUri, grant_type: "authorization_code");
         }
     }
 }

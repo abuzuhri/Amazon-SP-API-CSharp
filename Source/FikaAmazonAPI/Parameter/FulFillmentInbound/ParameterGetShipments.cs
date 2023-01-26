@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.Search;
+using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
 using static FikaAmazonAPI.Utils.Constants;

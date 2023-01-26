@@ -143,13 +143,23 @@
 
         ProductFees_GetMyFeesEstimateForSKU,
         ProductFees_GetMyFeesEstimateForASIN,
+        ProductFees_GetMyFeesEstimate,
 
         ProductPricing_GetPricing,
         ProductPricing_GetCompetitivePricing,
         ProductPricing_GetListingOffers,
         ProductPricing_GetItemOffers,
+        ProductPricing_GetItemOffersBatch,
+        ProductPricing_GetListingOffersBatch,
 
         Sales_GetOrderMetrics,
+
+
+        EasyShip_ListHandoverSlots,
+        EasyShip_GetScheduledPackage,
+        EasyShip_CreateScheduledPackage,
+        EasyShip_UpdateScheduledPackages,
+
 
         Sellers_GetMarketplaceParticipations,
 
@@ -161,5 +171,19 @@
         VendorDirectFulfillmentOrdersV1_GetOrders,
         VendorDirectFulfillmentOrdersV1_GetOrder,
         VendorDirectFulfillmentOrdersV1_SubmitAcknowledgement,
+
+        ShippingV2_GetShipmentDocument,
+        ShippingV2_CancelShipment,
+        ShippingV2_PurchaseShipment,
+        ShippingV2_GetRates,
+        ShippingV2_DirectPurchaseShipment,
+        ShippingV2_GetTracking,
+        ShippingV2_GetAdditionalInputs,
+
+        VendorOrdersV1_GetPurchaseOrders,
+        VendorOrdersV1_GetPurchaseOrder,
+        VendorOrdersV1_SubmitAcknowledgement,
+        VendorOrdersV1_GetPurchaseOrdersStatus,
+
     }
 }
