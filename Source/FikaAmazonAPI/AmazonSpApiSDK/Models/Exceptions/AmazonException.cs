@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using System;
+using System.Linq;
 using System.Net;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
@@ -15,6 +16,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
                 Response = new ExceptionResponse();
                 Response.Content = response.Content;
                 Response.ResponseCode = response.StatusCode;
+                Response.X_Amzn_RequestId = (string)response.Headers.Where(x => x.Name == "x-amzn-RequestId").Select(x => x.Value).FirstOrDefault();
             }
         }
 
@@ -72,5 +74,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
     {
         public string Content { get; set; }
         public HttpStatusCode? ResponseCode { get; set; }
+        public string X_Amzn_RequestId { get; set; }
     }
 }
