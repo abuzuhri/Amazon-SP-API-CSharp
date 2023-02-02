@@ -6,6 +6,7 @@ using FikaAmazonAPI.Parameter.Feed;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -111,11 +112,13 @@ namespace FikaAmazonAPI.Services
         }
 
         [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
-        public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
-        public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
             ProcessingReportMessage processingReport = null;
             string responseContent;

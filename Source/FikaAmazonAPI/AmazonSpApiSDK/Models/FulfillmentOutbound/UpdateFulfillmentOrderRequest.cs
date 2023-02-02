@@ -53,17 +53,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
         /// <param name="NotificationEmailList">NotificationEmailList.</param>
         /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity..</param>
-        public UpdateFulfillmentOrderRequest(string MarketplaceId = default(string), string DisplayableOrderId = default(string), Timestamp DisplayableOrderDateTime = default(Timestamp), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmailList = default(NotificationEmailList), UpdateFulfillmentOrderItemList Items = default(UpdateFulfillmentOrderItemList))
+        public UpdateFulfillmentOrderRequest(string MarketplaceId = default(string), string DisplayableOrderId = default(string), DateTime? DisplayableOrderDateTime = default(DateTime?), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmailList = default(NotificationEmailList), UpdateFulfillmentOrderItemList Items = default(UpdateFulfillmentOrderItemList))
         {
             this.MarketplaceId = MarketplaceId;
             this.DisplayableOrderId = DisplayableOrderId;
-            this.DisplayableOrderDateTime = DisplayableOrderDateTime;
+            this.DisplayableOrderDateTime = DisplayableOrderDateTime.Value;
             this.DisplayableOrderComment = DisplayableOrderComment;
             this.ShippingSpeedCategory = ShippingSpeedCategory;
             this.DestinationAddress = DestinationAddress;
             this.FulfillmentAction = FulfillmentAction;
             this.FulfillmentPolicy = FulfillmentPolicy;
-            this.FulfillmentMethod = FulfillmentMethod;
             this.ShipFromCountryCode = ShipFromCountryCode;
             this.NotificationEmailList = NotificationEmailList;
             this.Items = Items;
@@ -88,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The date of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.</value>
         [DataMember(Name = "DisplayableOrderDateTime", EmitDefaultValue = false)]
-        public Timestamp DisplayableOrderDateTime { get; set; }
+        public DateTime DisplayableOrderDateTime { get; set; }
 
         /// <summary>
         /// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
@@ -106,13 +105,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         public Address DestinationAddress { get; set; }
 
 
-
-        /// <summary>
-        /// Indicates the intended recipient channel for the order.
-        /// </summary>
-        /// <value>Indicates the intended recipient channel for the order.</value>
-        [DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
-        public string FulfillmentMethod { get; set; }
 
         /// <summary>
         /// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
@@ -150,7 +142,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  DestinationAddress: ").Append(DestinationAddress).Append("\n");
             sb.Append("  FulfillmentAction: ").Append(FulfillmentAction).Append("\n");
             sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
-            sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
             sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
             sb.Append("  NotificationEmailList: ").Append(NotificationEmailList).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
@@ -229,11 +220,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.FulfillmentPolicy.Equals(input.FulfillmentPolicy))
                 ) &&
                 (
-                    this.FulfillmentMethod == input.FulfillmentMethod ||
-                    (this.FulfillmentMethod != null &&
-                    this.FulfillmentMethod.Equals(input.FulfillmentMethod))
-                ) &&
-                (
                     this.ShipFromCountryCode == input.ShipFromCountryCode ||
                     (this.ShipFromCountryCode != null &&
                     this.ShipFromCountryCode.Equals(input.ShipFromCountryCode))
@@ -275,8 +261,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentAction.GetHashCode();
                 if (this.FulfillmentPolicy != null)
                     hashCode = hashCode * 59 + this.FulfillmentPolicy.GetHashCode();
-                if (this.FulfillmentMethod != null)
-                    hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
                 if (this.ShipFromCountryCode != null)
                     hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
                 if (this.NotificationEmailList != null)

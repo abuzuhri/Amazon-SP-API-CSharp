@@ -13,6 +13,7 @@ using Newtonsoft.Json.Converters;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
@@ -341,6 +342,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The date when the order was created.</value>
         [DataMember(Name = "PurchaseDate", EmitDefaultValue = false)]
         [Obsolete("Use PurchaseDateTime instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public string PurchaseDate { get; set; }
 #pragma warning disable 0618
         public DateTime PurchaseDateTime {
@@ -355,6 +357,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01.</value>
         [DataMember(Name = "LastUpdateDate", EmitDefaultValue = false)]
 		[Obsolete("Use LastUpdateDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LastUpdateDate { get; set; }
 #pragma warning disable 0618
 		public DateTime LastUpdateDateTime {
@@ -457,7 +460,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The start of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: EarliestShipDate might not be returned for orders placed before February 1, 2013.</value>
         [DataMember(Name = "EarliestShipDate", EmitDefaultValue = false)]
         [Obsolete("Use EarliestShipDateTime instead")]
-        public string EarliestShipDate { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string EarliestShipDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? EarliestShipDateTime {
 			get => !string.IsNullOrEmpty(EarliestShipDate) ? (DateTime?)DateTime.Parse(EarliestShipDate) : null;
@@ -471,6 +475,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.</value>
 		[DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
 		[Obsolete("Use LatestShipDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LatestShipDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? LatestShipDateTime {
@@ -485,6 +490,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.</value>
 		[DataMember(Name = "EarliestDeliveryDate", EmitDefaultValue = false)]
 		[Obsolete("Use EarliestDeliveryDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string EarliestDeliveryDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? EarliestDeliveryDateTime {
@@ -499,6 +505,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.</value>
 		[DataMember(Name = "LatestDeliveryDate", EmitDefaultValue = false)]
 		[Obsolete("Use LatestDeliveryDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LatestDeliveryDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? LatestDeliveryDateTime {
@@ -555,7 +562,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>Indicates the date by which the seller must respond to the buyer with an estimated ship date. Returned only for Sourcing on Demand orders.</value>
         [DataMember(Name = "PromiseResponseDueDate", EmitDefaultValue = false)]
         [Obsolete("Use PromiseResponseDueDateTime instead")]
-        public string PromiseResponseDueDate { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string PromiseResponseDueDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? PromiseResponseDueDateTime {
 			get => !string.IsNullOrEmpty(PromiseResponseDueDate) ? (DateTime?)DateTime.Parse(PromiseResponseDueDate) : null;
