@@ -72,7 +72,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
         /// <param name="NotificationEmailList">NotificationEmailList.</param>
         /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity. (required).</param>
-        public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime? DisplayableOrderDate = default(DateTime?), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
+        [Obsolete("FulfillmentMethod no longer used and ShippingSpeedCategory is deprecated, use the other constructor instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime? DisplayableOrderDate = default(DateTime?), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
         {
             // to ensure "SellerFulfillmentOrderId" is required (not null)
             if (SellerFulfillmentOrderId == null)
@@ -147,6 +149,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.ShipFromCountryCode = ShipFromCountryCode;
             this.NotificationEmails = NotificationEmails;
         }
+#pragma warning disable 0618
+        public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime? DisplayableOrderDate = default(DateTime?), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
+            : this(MarketplaceId, SellerFulfillmentOrderId, DisplayableOrderId, DisplayableOrderDate, DisplayableOrderComment, ShippingSpeedCategory?.ToString(), DeliveryWindow, DestinationAddress, FulfillmentAction, FulfillmentPolicy, null, CODSettings, ShipFromCountryCode, NotificationEmails, Items) { }
+#pragma warning restore 0618
 
         /// <summary>
         /// The marketplace the fulfillment order is placed against.
@@ -199,10 +205,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 
 
 
-        /// <summary>
-        /// Gets or Sets CODSettings
-        /// </summary>
-        [DataMember(Name = "codSettings", EmitDefaultValue = false)]
+		/// <summary>
+		/// Indicates the intended recipient channel for the order.
+		/// </summary>
+		/// <value>Indicates the intended recipient channel for the order.</value>
+		[DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
+		[Obsolete("Property no longer used")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string FulfillmentMethod { get; set; }
+
+		/// <summary>
+		/// Gets or Sets CODSettings
+		/// </summary>
+		[DataMember(Name = "codSettings", EmitDefaultValue = false)]
         public CODSettings CODSettings { get; set; }
 
         /// <summary>
