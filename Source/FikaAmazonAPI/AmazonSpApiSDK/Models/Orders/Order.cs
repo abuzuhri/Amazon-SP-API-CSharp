@@ -262,7 +262,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             }
             else
             {
-                this.PurchaseDate = purchaseDate;
+                this.PurchaseDateTime = purchaseDate.Value;
             }
             // to ensure "lastUpdateDate" is required (not null)
             if (lastUpdateDate == null)
@@ -271,7 +271,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             }
             else
             {
-                this.LastUpdateDate = lastUpdateDate;
+                this.LastUpdateDateTime = lastUpdateDate.Value;
             }
             // to ensure "orderStatus" is required (not null)
             if (orderStatus == null)
@@ -298,17 +298,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.EasyShipShipmentStatus = easyShipShipmentStatus;
             this.CbaDisplayableShippingLabel = cbaDisplayableShippingLabel;
             this.OrderType = orderType;
-            this.EarliestShipDate = earliestShipDate;
-            this.LatestShipDate = latestShipDate;
-            this.EarliestDeliveryDate = earliestDeliveryDate;
-            this.LatestDeliveryDate = latestDeliveryDate;
+            this.EarliestShipDateTime = earliestShipDate;
+            this.LatestShipDateTime = latestShipDate;
+            this.EarliestDeliveryDateTime = earliestDeliveryDate;
+            this.LatestDeliveryDateTime = latestDeliveryDate;
             this.IsBusinessOrder = isBusinessOrder;
             this.IsPrime = isPrime;
             this.IsPremiumOrder = isPremiumOrder;
             this.IsGlobalExpressEnabled = isGlobalExpressEnabled;
             this.ReplacedOrderId = replacedOrderId;
             this.IsReplacementOrder = isReplacementOrder;
-            this.PromiseResponseDueDate = promiseResponseDueDate;
+            this.PromiseResponseDueDateTime = promiseResponseDueDate;
             this.IsEstimatedShipDateSet = isEstimatedShipDateSet;
             this.IsSoldByAB = isSoldByAB;
             this.IsIBA = isIBA;
