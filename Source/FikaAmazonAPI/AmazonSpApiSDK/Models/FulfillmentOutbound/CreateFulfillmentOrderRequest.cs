@@ -62,8 +62,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="CODSettings">CODSettings.</param>
         /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
         /// <param name="NotificationEmailList">NotificationEmailList.</param>
+        /// <param name="FeatureConstraints">FeatureSettingsList</param>
         /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity. (required).</param>
-        public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime DisplayableOrderDate = default(DateTime), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
+        public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime DisplayableOrderDate = default(DateTime), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), FeatureConstraintsList FeatureConstraints = default(FeatureConstraintsList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
         {
             // to ensure "SellerFulfillmentOrderId" is required (not null)
             if (SellerFulfillmentOrderId == null)
@@ -136,6 +137,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             this.CODSettings = CODSettings;
             this.ShipFromCountryCode = ShipFromCountryCode;
             this.NotificationEmails = NotificationEmails;
+            this.FeatureConstraints = FeatureConstraints;
         }
 
         /// <summary>
@@ -216,6 +218,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         public NotificationEmailList NotificationEmails { get; set; }
 
         /// <summary>
+        /// Gets or Sets FeatureConstraints
+        /// </summary>
+        [DataMember(Name = "featureConstraints", EmitDefaultValue = false)]
+        public FeatureConstraintsList FeatureConstraints { get; set; }
+
+        /// <summary>
         /// A list of items to include in the fulfillment order preview, including quantity.
         /// </summary>
         /// <value>A list of items to include in the fulfillment order preview, including quantity.</value>
@@ -244,6 +252,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  CODSettings: ").Append(CODSettings).Append("\n");
             sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
             sb.Append("  NotificationEmails: ").Append(NotificationEmails).Append("\n");
+            sb.Append("  FeatureConstraints: ").Append(FeatureConstraints).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -350,6 +359,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.NotificationEmails.Equals(input.NotificationEmails))
                 ) &&
                 (
+                    this.FeatureConstraints == input.FeatureConstraints ||
+                    (this.FeatureConstraints != null &&
+                    this.FeatureConstraints.Equals(input.FeatureConstraints))
+                ) &&
+                (
                     this.Items == input.Items ||
                     (this.Items != null &&
                     this.Items.Equals(input.Items))
@@ -393,6 +407,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
                 if (this.NotificationEmails != null)
                     hashCode = hashCode * 59 + this.NotificationEmails.GetHashCode();
+                if (this.FeatureConstraints != null)
+                    hashCode = hashCode * 59 + this.FeatureConstraints.GetHashCode();
                 if (this.Items != null)
                     hashCode = hashCode * 59 + this.Items.GetHashCode();
                 return hashCode;
