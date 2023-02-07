@@ -125,7 +125,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="DeemedResellerCategory">The category of deemed reseller. This applies to selling partners that are not based in the EU and is used to help them meet the VAT Deemed Reseller tax laws in the EU and UK..</param>
         /// <param name="BuyerInfo">The Buyer Info .</param>
 
-        public OrderItem(string ASIN = default(string), string SellerSKU = default(string), string OrderItemId = default(string), string Title = default(string), int? QuantityOrdered = default(int?), int? QuantityShipped = default(int?), ProductInfoDetail ProductInfo = default(ProductInfoDetail), PointsGrantedDetail PointsGranted = default(PointsGrantedDetail), Money ItemPrice = default(Money), Money ShippingPrice = default(Money), Money ItemTax = default(Money), Money ShippingTax = default(Money), Money ShippingDiscount = default(Money), Money ShippingDiscountTax = default(Money), Money PromotionDiscount = default(Money), Money PromotionDiscountTax = default(Money), PromotionIdList PromotionIds = default(PromotionIdList), Money CODFee = default(Money), Money CODFeeDiscount = default(Money), bool? IsGift = default(bool?), string ConditionNote = default(string), string ConditionId = default(string), string ConditionSubtypeId = default(string), string ScheduledDeliveryStartDate = default(string), string ScheduledDeliveryEndDate = default(string), string PriceDesignation = default(string), TaxCollection TaxCollection = default(TaxCollection), bool? SerialNumberRequired = default(bool?), bool? IsTransparency = default(bool?), string IossNumber = default(string), DeemedResellerCategoryEnum? DeemedResellerCategory = default(DeemedResellerCategoryEnum?), OrderItemBuyerInfo BuyerInfo = default(OrderItemBuyerInfo))
+        public OrderItem(string ASIN = default(string), string SellerSKU = default(string), string OrderItemId = default(string), string Title = default(string), int? QuantityOrdered = default(int?), int? QuantityShipped = default(int?), ProductInfoDetail ProductInfo = default(ProductInfoDetail), PointsGrantedDetail PointsGranted = default(PointsGrantedDetail), Money ItemPrice = default(Money), Money ShippingPrice = default(Money), Money ItemTax = default(Money), Money ShippingTax = default(Money), Money ShippingDiscount = default(Money), Money ShippingDiscountTax = default(Money), Money PromotionDiscount = default(Money), Money PromotionDiscountTax = default(Money), PromotionIdList PromotionIds = default(PromotionIdList), Money CODFee = default(Money), Money CODFeeDiscount = default(Money), bool? IsGift = default(bool?), string ConditionNote = default(string), string ConditionId = default(string), string ConditionSubtypeId = default(string), string ScheduledDeliveryStartDate = default(string), string ScheduledDeliveryEndDate = default(string), string PriceDesignation = default(string), TaxCollection TaxCollection = default(TaxCollection), bool? SerialNumberRequired = default(bool?), bool? IsTransparency = default(bool?), string IossNumber = default(string), DeemedResellerCategoryEnum? DeemedResellerCategory = default(DeemedResellerCategoryEnum?), OrderItemBuyerInfo BuyerInfo = default(OrderItemBuyerInfo), IEnumerable<string> SerialNumbers = null)
         {
             // to ensure "ASIN" is required (not null)
             if (ASIN == null)
@@ -183,6 +183,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.IossNumber = IossNumber;
             this.DeemedResellerCategory = DeemedResellerCategory;
             this.BuyerInfo = BuyerInfo;
+            this.SerialNumbers = SerialNumbers;
         }
 
         /// <summary>
@@ -401,12 +402,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
         public OrderItemBuyerInfo BuyerInfo { get; set; }
 
+		/// <summary>
+		/// A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.
+		/// </summary>
+		/// <value>A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.</value>
+		[DataMember(Name = "SerialNumbers", EmitDefaultValue = false)]
+        public IEnumerable<string> SerialNumbers { get; set; }
 
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
+
+		/// <summary>
+		/// Returns the string presentation of the object
+		/// </summary>
+		/// <returns>String presentation of the object</returns>
+		public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append("class OrderItem {\n");
@@ -442,6 +450,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  IossNumber: ").Append(IossNumber).Append("\n");
             sb.Append("  DeemedResellerCategory: ").Append(DeemedResellerCategory).Append("\n");
             sb.Append("  BuyerInfo: ").Append(BuyerInfo).Append("\n");
+            sb.Append("  SerialNumbers: ").Append(SerialNumbers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -635,7 +644,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.BuyerInfo == input.BuyerInfo ||
                     (this.BuyerInfo != null &&
                     this.BuyerInfo.Equals(input.BuyerInfo))
-                );
+                ) &&
+                (
+					this.SerialNumbers == input.SerialNumbers ||
+                    (this.SerialNumbers != null &&
+                    this.SerialNumbers.Equals(input.SerialNumbers))
+				);
         }
 
         /// <summary>
@@ -711,7 +725,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.DeemedResellerCategory.GetHashCode();
                 if (this.BuyerInfo != null)
                     hashCode = hashCode * 59 + this.BuyerInfo.GetHashCode();
-                return hashCode;
+				if (this.SerialNumbers != null)
+					hashCode = hashCode * 59 + this.SerialNumbers.GetHashCode();
+				return hashCode;
             }
         }
 
