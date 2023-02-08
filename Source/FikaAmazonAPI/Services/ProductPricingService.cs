@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.v2022_05_01;
+using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
+using Price = FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.Price;
 
 namespace FikaAmazonAPI.Services
 {
@@ -132,5 +135,44 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
             return await ExecuteRequestAsync<GetBatchOffersResponse>(RateLimitType.ProductPricing_GetListingOffersBatch, cancellationToken);
         }
 
+        #region v2022-05-01
+
+        /// <summary>
+        /// Returns the set of responses that correspond to the batched list of up to 40 requests defined in the request body. The response for each successful (HTTP status code 200) request in the set includes the computed listing price at or below which a seller can expect to become the featured offer (before applicable promotions). This is called the featured offer expected price (FOEP). Featured offer is not guaranteed, because competing offers may change, and different offers may be featured based on other factors, including fulfillment capabilities to a specific customer. The response to an unsuccessful request includes the available error text.
+        /// </summary>
+        /// <param name="getFeaturedOfferExpectedPriceBatchRequest"></param>
+        /// <returns></returns>
+        public GetFeaturedOfferExpectedPriceBatchResponse GetFeaturedOfferExpectedPriceBatch(
+            GetFeaturedOfferExpectedPriceBatchRequest getFeaturedOfferExpectedPriceBatchRequest)
+        {
+           return Task.Run(() => GetFeaturedOfferExpectedPriceBatchAsync(getFeaturedOfferExpectedPriceBatchRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Returns the set of responses that correspond to the batched list of up to 40 requests defined in the request body. The response for each successful (HTTP status code 200) request in the set includes the computed listing price at or below which a seller can expect to become the featured offer (before applicable promotions). This is called the featured offer expected price (FOEP). Featured offer is not guaranteed, because competing offers may change, and different offers may be featured based on other factors, including fulfillment capabilities to a specific customer. The response to an unsuccessful request includes the available error text.
+        /// </summary>
+        /// <param name="getFeaturedOfferExpectedPriceBatchRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<GetFeaturedOfferExpectedPriceBatchResponse> GetFeaturedOfferExpectedPriceBatchAsync(GetFeaturedOfferExpectedPriceBatchRequest getFeaturedOfferExpectedPriceBatchRequest, CancellationToken cancellationToken = default)
+        {
+            /*
+             "requests": [
+                {
+                  "marketplaceId": "A1PA6795UKMFR9",
+                  "sku": "MY_SKU",
+                  "method": "GET",
+                  "uri": "/products/pricing/2022-05-01/offer/featuredOfferExpectedPrice"
+                }
+            ]
+             */
+
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetFeaturedOfferExpectedPriceBatch, RestSharp.Method.Post, postJsonObj: getFeaturedOfferExpectedPriceBatchRequest, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<GetFeaturedOfferExpectedPriceBatchResponse>(RateLimitType.ProductPricing_GetListingOffersBatch, cancellationToken);
+        }
+
+        #endregion
+        
     }
 }
