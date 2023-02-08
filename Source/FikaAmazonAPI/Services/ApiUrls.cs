@@ -293,7 +293,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         }
         internal class ProductPricingApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/products/pricing/v0";
+            private static readonly string _resourceBaseUrl = "/products/pricing/v0";
             public static string GetPricing
             {
                 get => $"{_resourceBaseUrl}/price";
@@ -311,6 +311,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 
             public static string GetBatchListingOffers => $"/batches{_resourceBaseUrl}/listingOffers";
 
+            #region v2022-05-01
+            private static readonly string _resourceBaseUrl_v20220501 = "/products/pricing/2022-05-01";
+            public static string FeaturedOfferExpectedPriceUri => $"{_resourceBaseUrl_v20220501}/offer/featuredOfferExpectedPrice";
+            public static string GetFeaturedOfferExpectedPriceBatch => $"/batches{FeaturedOfferExpectedPriceUri}";
+            #endregion
         }
         protected class ProductTypeApiUrls
         {

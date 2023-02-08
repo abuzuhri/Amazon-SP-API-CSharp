@@ -352,6 +352,13 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
     });
 ```
 
+### GetFeaturedOfferExpectedPriceBatch
+```CSharp
+
+ var priceDemo = new ProductPricingSample(amazonConnection);
+ await priceDemo.GetFeaturedOfferExpectedPriceBatch();
+```
+
 
 ### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
 ```CSharp
