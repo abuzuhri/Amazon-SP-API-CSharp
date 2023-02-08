@@ -13,6 +13,7 @@ using Newtonsoft.Json.Converters;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
@@ -242,7 +243,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="sellerDisplayName">The seller’s friendly name registered in the marketplace..</param>
         /// <param name="shippingAddress">shippingAddress.</param>
         /// <param name="buyerInfo">buyerInfo.</param>
-        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum? orderStatus = default(OrderStatusEnum?), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
+        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), DateTime? purchaseDate = default(DateTime?), DateTime? lastUpdateDate = default(DateTime?), OrderStatusEnum? orderStatus = default(OrderStatusEnum?), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), DateTime? earliestShipDate = default(DateTime?), DateTime? latestShipDate = default(DateTime?), DateTime? earliestDeliveryDate = default(DateTime?), DateTime? latestDeliveryDate = default(DateTime?), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), DateTime? promiseResponseDueDate = default(DateTime?), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
         {
 #pragma warning disable 0618
 			// to ensure "amazonOrderId" is required (not null)
@@ -261,7 +262,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             }
             else
             {
-                this.PurchaseDate = purchaseDate;
+                this.PurchaseDateTime = purchaseDate.Value;
             }
             // to ensure "lastUpdateDate" is required (not null)
             if (lastUpdateDate == null)
@@ -270,7 +271,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             }
             else
             {
-                this.LastUpdateDate = lastUpdateDate;
+                this.LastUpdateDateTime = lastUpdateDate.Value;
             }
             // to ensure "orderStatus" is required (not null)
             if (orderStatus == null)
@@ -297,17 +298,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.EasyShipShipmentStatus = easyShipShipmentStatus;
             this.CbaDisplayableShippingLabel = cbaDisplayableShippingLabel;
             this.OrderType = orderType;
-            this.EarliestShipDate = earliestShipDate;
-            this.LatestShipDate = latestShipDate;
-            this.EarliestDeliveryDate = earliestDeliveryDate;
-            this.LatestDeliveryDate = latestDeliveryDate;
+            this.EarliestShipDateTime = earliestShipDate;
+            this.LatestShipDateTime = latestShipDate;
+            this.EarliestDeliveryDateTime = earliestDeliveryDate;
+            this.LatestDeliveryDateTime = latestDeliveryDate;
             this.IsBusinessOrder = isBusinessOrder;
             this.IsPrime = isPrime;
             this.IsPremiumOrder = isPremiumOrder;
             this.IsGlobalExpressEnabled = isGlobalExpressEnabled;
             this.ReplacedOrderId = replacedOrderId;
             this.IsReplacementOrder = isReplacementOrder;
-            this.PromiseResponseDueDate = promiseResponseDueDate;
+            this.PromiseResponseDueDateTime = promiseResponseDueDate;
             this.IsEstimatedShipDateSet = isEstimatedShipDateSet;
             this.IsSoldByAB = isSoldByAB;
             this.IsIBA = isIBA;
@@ -320,6 +321,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.BuyerInfo = buyerInfo;
 #pragma warning restore 0618
 		}
+        [Obsolete("Dates have been changed to DateTime, use the other constructor")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Order(string amazonOrderId = default(string), string sellerOrderId = default(string), string purchaseDate = default(string), string lastUpdateDate = default(string), OrderStatusEnum? orderStatus = default(OrderStatusEnum?), FulfillmentChannelEnum? fulfillmentChannel = default(FulfillmentChannelEnum?), string salesChannel = default(string), string orderChannel = default(string), string shipServiceLevel = default(string), Money orderTotal = default(Money), int? numberOfItemsShipped = default(int?), int? numberOfItemsUnshipped = default(int?), PaymentExecutionDetailItemList paymentExecutionDetail = default(PaymentExecutionDetailItemList), PaymentMethodEnum? paymentMethod = default(PaymentMethodEnum?), PaymentMethodDetailItemList paymentMethodDetails = default(PaymentMethodDetailItemList), string marketplaceId = default(string), string shipmentServiceLevelCategory = default(string), string easyShipShipmentStatus = default(string), string cbaDisplayableShippingLabel = default(string), OrderTypeEnum? orderType = default(OrderTypeEnum?), string earliestShipDate = default(string), string latestShipDate = default(string), string earliestDeliveryDate = default(string), string latestDeliveryDate = default(string), bool? isBusinessOrder = default(bool?), bool? isPrime = default(bool?), bool? isPremiumOrder = default(bool?), bool? isGlobalExpressEnabled = default(bool?), string replacedOrderId = default(string), bool? isReplacementOrder = default(bool?), string promiseResponseDueDate = default(string), bool? isEstimatedShipDateSet = default(bool?), bool? isSoldByAB = default(bool?), bool? isIBA = default(bool?), Address defaultShipFromLocationAddress = default(Address), FulfillmentInstruction fulfillmentInstruction = default(FulfillmentInstruction), bool? isISPU = default(bool?), MarketplaceTaxInfo marketplaceTaxInfo = default(MarketplaceTaxInfo), string sellerDisplayName = default(string), Address shippingAddress = default(Address), BuyerInfo buyerInfo = default(BuyerInfo))
+            : this(amazonOrderId, sellerOrderId, DateTime.Parse(purchaseDate), DateTime.Parse(lastUpdateDate), orderStatus, fulfillmentChannel, salesChannel, orderChannel, shipServiceLevel, orderTotal, numberOfItemsShipped, numberOfItemsUnshipped, paymentExecutionDetail, paymentMethod, paymentMethodDetails, marketplaceId, shipmentServiceLevelCategory, easyShipShipmentStatus, cbaDisplayableShippingLabel, orderType, DateTime.Parse(earliestShipDate), DateTime.Parse(latestShipDate), DateTime.Parse(earliestDeliveryDate), DateTime.Parse(latestDeliveryDate), isBusinessOrder, isPrime, isPremiumOrder, isGlobalExpressEnabled, replacedOrderId, isReplacementOrder, DateTime.Parse(promiseResponseDueDate), isEstimatedShipDateSet, isSoldByAB, isIBA, defaultShipFromLocationAddress, fulfillmentInstruction, isISPU, marketplaceTaxInfo, sellerDisplayName, shippingAddress, buyerInfo) { }
 
 		/// <summary>
 		/// An Amazon-defined order identifier, in 3-7-7 format.
@@ -341,6 +346,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The date when the order was created.</value>
         [DataMember(Name = "PurchaseDate", EmitDefaultValue = false)]
         [Obsolete("Use PurchaseDateTime instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public string PurchaseDate { get; set; }
 #pragma warning disable 0618
         public DateTime PurchaseDateTime {
@@ -355,6 +361,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The date when the order was last updated.  Note: LastUpdateDate is returned with an incorrect date for orders that were last updated before 2009-04-01.</value>
         [DataMember(Name = "LastUpdateDate", EmitDefaultValue = false)]
 		[Obsolete("Use LastUpdateDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LastUpdateDate { get; set; }
 #pragma warning disable 0618
 		public DateTime LastUpdateDateTime {
@@ -457,7 +464,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The start of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: EarliestShipDate might not be returned for orders placed before February 1, 2013.</value>
         [DataMember(Name = "EarliestShipDate", EmitDefaultValue = false)]
         [Obsolete("Use EarliestShipDateTime instead")]
-        public string EarliestShipDate { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string EarliestShipDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? EarliestShipDateTime {
 			get => !string.IsNullOrEmpty(EarliestShipDate) ? (DateTime?)DateTime.Parse(EarliestShipDate) : null;
@@ -471,6 +479,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The end of the time period within which you have committed to ship the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.  Note: LatestShipDate might not be returned for orders placed before February 1, 2013.</value>
 		[DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
 		[Obsolete("Use LatestShipDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LatestShipDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? LatestShipDateTime {
@@ -485,6 +494,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The start of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders.</value>
 		[DataMember(Name = "EarliestDeliveryDate", EmitDefaultValue = false)]
 		[Obsolete("Use EarliestDeliveryDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string EarliestDeliveryDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? EarliestDeliveryDateTime {
@@ -499,6 +509,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 		/// <value>The end of the time period within which you have committed to fulfill the order. In ISO 8601 date time format. Returned only for seller-fulfilled orders that do not have a PendingAvailability, Pending, or Canceled status.</value>
 		[DataMember(Name = "LatestDeliveryDate", EmitDefaultValue = false)]
 		[Obsolete("Use LatestDeliveryDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public string LatestDeliveryDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? LatestDeliveryDateTime {
@@ -555,7 +566,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>Indicates the date by which the seller must respond to the buyer with an estimated ship date. Returned only for Sourcing on Demand orders.</value>
         [DataMember(Name = "PromiseResponseDueDate", EmitDefaultValue = false)]
         [Obsolete("Use PromiseResponseDueDateTime instead")]
-        public string PromiseResponseDueDate { get; set; }
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string PromiseResponseDueDate { get; set; }
 #pragma warning disable 0618
 		public DateTime? PromiseResponseDueDateTime {
 			get => !string.IsNullOrEmpty(PromiseResponseDueDate) ? (DateTime?)DateTime.Parse(PromiseResponseDueDate) : null;

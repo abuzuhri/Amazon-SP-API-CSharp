@@ -4,6 +4,7 @@ using FikaAmazonAPI.Parameter.CatalogItems;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,11 +20,13 @@ namespace FikaAmazonAPI.Services
         }
 
         [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", false)]
-        public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
             Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204Async instead.", false)]
-        public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
                 parameterListCatalogItems.MarketplaceId = AmazonCredential.MarketPlace.ID;
@@ -52,10 +55,12 @@ namespace FikaAmazonAPI.Services
         }
 
         [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
-        public Item GetCatalogItem(string asin) =>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Item GetCatalogItem(string asin) =>
             Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
         [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
-        public async Task<Item> GetCatalogItemAsync(string asin)
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public async Task<Item> GetCatalogItemAsync(string asin)
         {
 
             if (string.IsNullOrEmpty(asin))
