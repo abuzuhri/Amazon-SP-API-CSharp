@@ -55,7 +55,8 @@ namespace FikaAmazonAPI.Utils
             if (RequestsSent >= Burst)
             {
                 LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
-                while (LastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
+                var TempLastRequest = LastRequest;
+                while (TempLastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
                     Task.Delay(100).Wait();
 
             }
