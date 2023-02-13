@@ -24,14 +24,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// Gets or Sets AmazonOrderDetails
     /// </summary>
     [DataMember(Name="amazonOrderDetails", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "amazonOrderDetails")]
+    [JsonProperty(PropertyName = "amazonOrderDetails", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public AmazonOrderDetails AmazonOrderDetails { get; set; }
 
     /// <summary>
     /// Gets or Sets AmazonShipmentDetails
     /// </summary>
     [DataMember(Name="amazonShipmentDetails", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "amazonShipmentDetails")]
+    [JsonProperty(PropertyName = "amazonShipmentDetails", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public AmazonShipmentDetails AmazonShipmentDetails { get; set; }
 
 

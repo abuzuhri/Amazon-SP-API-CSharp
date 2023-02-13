@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The width of the document measured in the units specified.</value>
     [DataMember(Name="width", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "width")]
+    [JsonProperty(PropertyName = "width", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public decimal? Width { get; set; }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The length of the document measured in the units specified.</value>
     [DataMember(Name="length", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "length")]
+    [JsonProperty(PropertyName = "length", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public decimal? Length { get; set; }
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The unit of measurement.</value>
     [DataMember(Name="unit", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "unit")]
+    [JsonProperty(PropertyName = "unit", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string Unit { get; set; }
 
 

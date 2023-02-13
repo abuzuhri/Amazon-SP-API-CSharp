@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>Additional address information, if required.</value>
     [DataMember(Name="addressLine2", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "addressLine2")]
+    [JsonProperty(PropertyName = "addressLine2", DefaultValueHandling = DefaultValueHandling.Ignore )]
     public string AddressLine2 { get; set; }
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>Additional address information, if required.</value>
     [DataMember(Name="addressLine3", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "addressLine3")]
+    [JsonProperty(PropertyName = "addressLine3", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string AddressLine3 { get; set; }
 
     /// <summary>
@@ -49,15 +49,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The name of the business or institution associated with the address.</value>
     [DataMember(Name="companyName", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "companyName")]
+    [JsonProperty(PropertyName = "companyName", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string CompanyName { get; set; }
 
     /// <summary>
     /// Gets or Sets StateOrRegion
     /// </summary>
-    [DataMember(Name="stateOrRegion", EmitDefaultValue=false)]
+    [DataMember(Name = "stateOrRegion", EmitDefaultValue = false)]
     [JsonProperty(PropertyName = "stateOrRegion")]
-    public string StateOrRegion { get; set; }
+    public string StateOrRegion { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or Sets City
@@ -85,7 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The email address of the contact associated with the address.</value>
     [DataMember(Name="email", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "email")]
+    [JsonProperty(PropertyName = "email", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string Email { get; set; }
 
     /// <summary>
@@ -93,7 +93,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The phone number of the person, business or institution located at that address, including the country calling code.</value>
     [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "phoneNumber")]
+    [JsonProperty(PropertyName = "phoneNumber", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string PhoneNumber { get; set; }
 
 
