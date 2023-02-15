@@ -116,7 +116,6 @@ namespace FikaAmazonAPI.Services
 		public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
