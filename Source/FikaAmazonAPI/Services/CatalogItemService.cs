@@ -50,10 +50,10 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", false)]
         public Item GetCatalogItem(string asin) =>
             Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
-        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", false)]
         public async Task<Item> GetCatalogItemAsync(string asin)
         {
 
