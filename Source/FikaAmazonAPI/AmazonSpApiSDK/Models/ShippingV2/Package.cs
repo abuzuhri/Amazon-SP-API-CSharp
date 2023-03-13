@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>When true, the package contains hazardous materials. Defaults to false.</value>
     [DataMember(Name="isHazmat", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "isHazmat")]
+    [JsonProperty(PropertyName = "isHazmat", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public bool? IsHazmat { get; set; }
 
     /// <summary>
@@ -46,14 +46,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The seller name displayed on the label.</value>
     [DataMember(Name="sellerDisplayName", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "sellerDisplayName")]
+    [JsonProperty(PropertyName = "sellerDisplayName", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string SellerDisplayName { get; set; }
 
     /// <summary>
     /// Gets or Sets Charges
     /// </summary>
     [DataMember(Name="charges", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "charges")]
+    [JsonProperty(PropertyName = "charges", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public ChargeList Charges { get; set; }
 
     /// <summary>

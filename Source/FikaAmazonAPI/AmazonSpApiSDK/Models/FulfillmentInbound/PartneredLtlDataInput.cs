@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="PalletList">PalletList.</param>
         /// <param name="TotalWeight">The total weight of the shipment..</param>
         /// <param name="SellerDeclaredValue">The declaration of the total value of the inventory in the shipment..</param>
-        public PartneredLtlDataInput(Contact Contact = default(Contact), UnsignedIntType BoxCount = default(UnsignedIntType), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), string FreightReadyDate = default(string), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount))
+        public PartneredLtlDataInput(Contact Contact = default(Contact), int BoxCount = default(int), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), string FreightReadyDate = default(string), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount))
         {
             this.Contact = Contact;
             this.BoxCount = BoxCount;
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The number of boxes in the shipment.</value>
         [DataMember(Name = "BoxCount", EmitDefaultValue = false)]
-        public UnsignedIntType BoxCount { get; set; }
+        public int BoxCount { get; set; }
 
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
@@ -17,14 +18,14 @@ namespace FikaAmazonAPI.Services
         public SmallAndLightEnrollment GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
             Task.Run(() => GetSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<SmallAndLightEnrollment> GetSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
+        public async Task<SmallAndLightEnrollment> GetSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU, CancellationToken cancellationToken = default)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Get, queryParameters: queryParameters);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Get, queryParameters: queryParameters, cancellationToken: cancellationToken);
 
-            var response = await ExecuteRequestAsync<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU);
+            var response = await ExecuteRequestAsync<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_GetSmallAndLightEnrollmentBySellerSKU, cancellationToken);
 
             return response;
 
@@ -33,15 +34,15 @@ namespace FikaAmazonAPI.Services
         public SmallAndLightEnrollment PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
             Task.Run(() => PutSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<SmallAndLightEnrollment> PutSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
+        public async Task<SmallAndLightEnrollment> PutSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU, CancellationToken cancellationToken = default)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.PutSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Put, queryParameters);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.PutSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Put, queryParameters, cancellationToken: cancellationToken);
 
-            var response = await ExecuteRequestAsync<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU);
+            var response = await ExecuteRequestAsync<SmallAndLightEnrollment>(RateLimitType.FbaSmallandLight_PutSmallAndLightEnrollmentBySellerSKU, cancellationToken);
 
             return response;
 
@@ -50,15 +51,15 @@ namespace FikaAmazonAPI.Services
         public bool DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU) =>
             Task.Run(() => DeleteSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<bool> DeleteSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU)
+        public async Task<bool> DeleteSmallAndLightEnrollmentBySellerSKUAsync(string sellerSKU, CancellationToken cancellationToken = default)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.DeleteSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Delete, queryParameters);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.DeleteSmallAndLightEnrollmentBySellerSKU(sellerSKU), RestSharp.Method.Delete, queryParameters, cancellationToken: cancellationToken);
 
-            var response = await ExecuteRequestAsync<object>(RateLimitType.FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU);
+            var response = await ExecuteRequestAsync<object>(RateLimitType.FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU, cancellationToken);
 
             return true;
 
@@ -67,16 +68,16 @@ namespace FikaAmazonAPI.Services
         public SmallAndLightEligibility GetSmallAndLightEligibilityBySellerSKU(string sellerSKU) =>
             Task.Run(() => GetSmallAndLightEligibilityBySellerSKUAsync(sellerSKU)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<SmallAndLightEligibility> GetSmallAndLightEligibilityBySellerSKUAsync(string sellerSKU)
+        public async Task<SmallAndLightEligibility> GetSmallAndLightEligibilityBySellerSKUAsync(string sellerSKU, CancellationToken cancellationToken = default)
         {
 
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
 
 
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEligibilityBySellerSKU(sellerSKU), RestSharp.Method.Get, queryParameters);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightEligibilityBySellerSKU(sellerSKU), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
 
-            var response = await ExecuteRequestAsync<SmallAndLightEligibility>(RateLimitType.FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU);
+            var response = await ExecuteRequestAsync<SmallAndLightEligibility>(RateLimitType.FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU, cancellationToken);
 
             return response;
 
@@ -85,11 +86,11 @@ namespace FikaAmazonAPI.Services
         public List<FeePreview> GetSmallAndLightFeePreview(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest) =>
             Task.Run(() => GetSmallAndLightFeePreviewAsync(smallAndLightFeePreviewRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<List<FeePreview>> GetSmallAndLightFeePreviewAsync(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest)
+        public async Task<List<FeePreview>> GetSmallAndLightFeePreviewAsync(SmallAndLightFeePreviewRequest smallAndLightFeePreviewRequest, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightFeePreview, RestSharp.Method.Post, postJsonObj: smallAndLightFeePreviewRequest);
+            await CreateAuthorizedRequestAsync(FBASmallAndLightApiUrls.GetSmallAndLightFeePreview, RestSharp.Method.Post, postJsonObj: smallAndLightFeePreviewRequest, cancellationToken: cancellationToken);
 
-            var response = await ExecuteRequestAsync<SmallAndLightFeePreviews>(RateLimitType.FbaSmallandLight_GetSmallAndLightFeePreview);
+            var response = await ExecuteRequestAsync<SmallAndLightFeePreviews>(RateLimitType.FbaSmallandLight_GetSmallAndLightFeePreview, cancellationToken);
             if (response != null && response.Data != null)
                 return response.Data;
 

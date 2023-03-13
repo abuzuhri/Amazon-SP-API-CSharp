@@ -15,6 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using static FikaAmazonAPI.ConstructFeed.BaseXML;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
@@ -28,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets CurrencyCode
         /// </summary>
         [DataMember(Name = "CurrencyCode", EmitDefaultValue = false)]
-        public CurrencyCode CurrencyCode { get; set; }
+        public BaseCurrencyCode CurrencyCode { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Amount" /> class.
         /// </summary>
@@ -37,9 +38,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Amount" /> class.
         /// </summary>
-        /// <param name="CurrencyCode">CurrencyCode (required).</param>
+        /// <param name="BaseCurrencyCode">CurrencyCode (required).</param>
         /// <param name="Value">The amount. (required).</param>
-        public Amount(CurrencyCode CurrencyCode = default(CurrencyCode), double Value = default(double))
+        public Amount(BaseCurrencyCode CurrencyCode = default(BaseCurrencyCode), double Value = default(double))
         {
             // to ensure "CurrencyCode" is required (not null)
             if (CurrencyCode == null)

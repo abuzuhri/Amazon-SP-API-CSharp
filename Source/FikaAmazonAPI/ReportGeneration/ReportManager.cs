@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.ReportGeneration
@@ -197,24 +198,28 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
         }
         #endregion
+    
+        #region Categories
 
-        #region Categries
-
-        public List<CategoiesRow> GetCategries()
+        public List<CategoriesRow> GetCategories()
         {
-            return Task.Run(() => GetCategriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => GetCategoriesAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        public async Task<List<CategoiesRow>> GetCategriesAsync()
+        public async Task<List<CategoriesRow>> GetCategoriesAsync(bool rootNodesOnly = false)
         {
-            var path = await GetCategriesAsync(_amazonConnection);
-            CategoiesReport report = new CategoiesReport(path, _amazonConnection.RefNumber);
+            var path = await GetCategoriesAsync(_amazonConnection, rootNodesOnly);
+            CategoriesReport report = new CategoriesReport(path, _amazonConnection.RefNumber);
             return report.Data.Node;
         }
 
-        private async Task<string> GetCategriesAsync(AmazonConnection amazonConnection)
+        private async Task<string> GetCategoriesAsync(AmazonConnection amazonConnection, bool rootNodesOnly)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA,
+                reportOptions: new ReportOptions
+            {
+                { "RootNodesOnly", rootNodesOnly.ToString() }
+            });
         }
 
         #endregion
@@ -292,6 +297,49 @@ namespace FikaAmazonAPI.ReportGeneration
             var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
             options.Add("ShowSalesChannel", "true");
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
+        }
+        #endregion
+
+        #region Settlement
+        public List<LedgerDetailReportRow> GetLedgerDetail(int days) =>
+            Task.Run(() => GetLedgerDetailAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(int days)
+        {
+            DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
+            DateTime toDate = DateTime.UtcNow;
+            return await GetLedgerDetailAsync(fromDate, toDate);
+        }
+        public async Task<List<LedgerDetailReportRow>> GetLedgerDetailAsync(DateTime fromDate, DateTime toDate)
+        {
+            List<LedgerDetailReportRow> list = new List<LedgerDetailReportRow>();
+            var totalDays = (DateTime.UtcNow - fromDate).TotalDays;
+            if (totalDays > 90)
+                fromDate = DateTime.UtcNow.AddDays(-90);
+
+            var path = await GetLedgerDetailAsync(_amazonConnection, fromDate, toDate);
+            LedgerDetailReport report = new LedgerDetailReport(path, _amazonConnection.RefNumber);
+            list.AddRange(report.Data);
+
+            return list;
+        }
+        private async Task<string> GetLedgerDetailAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
+        }
+        #endregion
+
+        #region InventoryPlanningData
+        public List<InventoryPlanningDataRow> GetInventoryPlanningData() =>
+            Task.Run(() => GetInventoryPlanningDataAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<InventoryPlanningDataRow>> GetInventoryPlanningDataAsync()
+        {
+            var path = await GetInventoryPlanningDataAsync(_amazonConnection);
+            InventoryPlanningDataReport report = new InventoryPlanningDataReport(path, _amazonConnection.RefNumber);
+            return report.Data;
+        }
+        private async Task<string> GetInventoryPlanningDataAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_INVENTORY_PLANNING_DATA);
         }
         #endregion
     }

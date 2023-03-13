@@ -15,6 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
@@ -129,6 +130,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// <value>The number of Amazon Points offered with the purchase of an item.</value>
         [DataMember(Name = "Points", EmitDefaultValue = false)]
         public Points Points { get; set; }
+
+        /// <summary>
+        /// Indicates the type of customer that the offer is valid for.
+        /// </summary>
+        /// <value>Indicates the type of customer that the offer is valid for.</value>
+        [DataMember(Name = "offerType", EmitDefaultValue = false)]
+        public OfferTypeEnum? OfferType { get; set; }
+
+        /// <summary>
+        /// Indicates at what quantity this price becomes active.	
+        /// </summary>
+        /// <value>Indicates at what quantity this price becomes active.	.</value>
+        [DataMember(Name = "quantityTier", EmitDefaultValue = false)]
+        public int? QuantityTier { get; set; }
+
+        /// <summary>
+        /// Indicates the type of quantity discount this price applies to.
+        /// </summary>
+        /// <value>Indicates the type of quantity discount this price applies to.</value>
+        [DataMember(Name = "discountType", EmitDefaultValue = false)]//Amazon Documentation says "quantityDiscountType" but in the API Response Content, it is "discountType"
+        public QuantityDiscountType QuantityDiscountType { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
 {
@@ -29,54 +29,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// </summary>
         [JsonConstructorAttribute]
         public BuyBoxPriceType() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BuyBoxPriceType" /> class.
-        /// </summary>
-        /// <param name="Condition">Indicates the condition of the item. For example: New, Used, Collectible, Refurbished, or Club. (required).</param>
-        /// <param name="LandedPrice">The value calculated by adding ListingPrice + Shipping - Points. (required).</param>
-        /// <param name="ListingPrice">The price of the item. (required).</param>
-        /// <param name="Shipping">The shipping cost. (required).</param>
-        /// <param name="Points">The number of Amazon Points offered with the purchase of an item..</param>
-        public BuyBoxPriceType(string Condition = default(string), MoneyType LandedPrice = default(MoneyType), MoneyType ListingPrice = default(MoneyType), MoneyType Shipping = default(MoneyType), Points Points = default(Points))
-        {
-            // to ensure "Condition" is required (not null)
-            if (Condition == null)
-            {
-                throw new InvalidDataException("Condition is a required property for BuyBoxPriceType and cannot be null");
-            }
-            else
-            {
-                this.Condition = Condition;
-            }
-            // to ensure "LandedPrice" is required (not null)
-            if (LandedPrice == null)
-            {
-                throw new InvalidDataException("LandedPrice is a required property for BuyBoxPriceType and cannot be null");
-            }
-            else
-            {
-                this.LandedPrice = LandedPrice;
-            }
-            // to ensure "ListingPrice" is required (not null)
-            if (ListingPrice == null)
-            {
-                throw new InvalidDataException("ListingPrice is a required property for BuyBoxPriceType and cannot be null");
-            }
-            else
-            {
-                this.ListingPrice = ListingPrice;
-            }
-            // to ensure "Shipping" is required (not null)
-            if (Shipping == null)
-            {
-                throw new InvalidDataException("Shipping is a required property for BuyBoxPriceType and cannot be null");
-            }
-            else
-            {
-                this.Shipping = Shipping;
-            }
-            this.Points = Points;
-        }
 
         /// <summary>
         /// Indicates the condition of the item. For example: New, Used, Collectible, Refurbished, or Club.
@@ -84,6 +36,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         /// <value>Indicates the condition of the item. For example: New, Used, Collectible, Refurbished, or Club.</value>
         [DataMember(Name = "condition", EmitDefaultValue = false)]
         public string Condition { get; set; }
+
+        /// <summary>
+        /// Indicates the type of customer that the offer is valid for.
+        /// </summary>
+        /// <value>Indicates the type of customer that the offer is valid for.</value>
+        [DataMember(Name = "offerType", EmitDefaultValue = false)]
+        public OfferTypeEnum? OfferType { get; set; }
+
+        /// <summary>
+        /// Indicates at what quantity this price becomes active.	
+        /// </summary>
+        /// <value>Indicates at what quantity this price becomes active.	.</value>
+        [DataMember(Name = "quantityTier", EmitDefaultValue = false)]
+        public int? QuantityTier { get; set; }
+
+        /// <summary>
+        /// Indicates the type of quantity discount this price applies to.
+        /// </summary>
+        /// <value>Indicates the type of quantity discount this price applies to.</value>
+        [DataMember(Name = "discountType", EmitDefaultValue = false)]//Amazon Documentation says "quantityDiscountType" but in the API Response Content, it is "discountType"
+        public QuantityDiscountType QuantityDiscountType { get; set; }
 
         /// <summary>
         /// The value calculated by adding ListingPrice + Shipping - Points.
@@ -113,6 +86,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing
         [DataMember(Name = "Points", EmitDefaultValue = false)]
         public Points Points { get; set; }
 
+        /// <summary>
+        /// The seller identifier for the offer.
+        /// </summary>
+        /// <value>The seller identifier for the offer.</value>
+        [DataMember(Name = "sellerId", EmitDefaultValue = false)]
+        public string SellerId { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

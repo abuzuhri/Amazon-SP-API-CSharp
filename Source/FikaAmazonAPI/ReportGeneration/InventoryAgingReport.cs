@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public static InventoryAgingRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new InventoryAgingRow();
-            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"), DataConverter.DateTimeFormate.DATE_AGING_FORMAT);
+            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
             row.SKU = rowData.GetString("sku");
             row.FNSKU = rowData.GetString("fnsku");
             row.ASIN = rowData.GetString("asin");

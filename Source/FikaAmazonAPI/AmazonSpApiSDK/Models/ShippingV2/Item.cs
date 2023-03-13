@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// Gets or Sets ItemValue
     /// </summary>
     [DataMember(Name="itemValue", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "itemValue")]
+    [JsonProperty(PropertyName = "itemValue", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public Currency ItemValue { get; set; }
 
     /// <summary>
@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The product description of the item.</value>
     [DataMember(Name="description", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "description")]
+    [JsonProperty(PropertyName = "description", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string Description { get; set; }
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>A unique identifier for an item provided by the client.</value>
     [DataMember(Name="itemIdentifier", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "itemIdentifier")]
+    [JsonProperty(PropertyName = "itemIdentifier", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string ItemIdentifier { get; set; }
 
     /// <summary>
@@ -63,14 +63,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The product type of the item.</value>
     [DataMember(Name="productType", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "productType")]
+    [JsonProperty(PropertyName = "productType", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string ProductType { get; set; }
 
     /// <summary>
     /// Gets or Sets InvoiceDetails
     /// </summary>
     [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "invoiceDetails")]
+    [JsonProperty(PropertyName = "invoiceDetails", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public InvoiceDetails InvoiceDetails { get; set; }
 
     /// <summary>
@@ -78,14 +78,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>A list of unique serial numbers in an Amazon package that can be used to guarantee non-fraudulent items. The number of serial numbers in the list must be less than or equal to the quantity of items being shipped. Only applicable when channel source is Amazon.</value>
     [DataMember(Name="serialNumbers", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "serialNumbers")]
+    [JsonProperty(PropertyName = "serialNumbers", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public List<string> SerialNumbers { get; set; }
 
     /// <summary>
     /// Gets or Sets DirectFulfillmentItemIdentifiers
     /// </summary>
     [DataMember(Name="directFulfillmentItemIdentifiers", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "directFulfillmentItemIdentifiers")]
+    [JsonProperty(PropertyName = "directFulfillmentItemIdentifiers", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public DirectFulfillmentItemIdentifiers DirectFulfillmentItemIdentifiers { get; set; }
 
 

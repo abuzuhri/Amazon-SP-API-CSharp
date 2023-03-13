@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Parameter.ProductPricing;
+using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
 using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -116,6 +117,25 @@ namespace FikaAmazonAPI.SampleCode
 
             ;
 
+        }
+        
+        public async Task GetFeaturedOfferExpectedPriceBatch()
+        {
+            var data = await amazonConnection.ProductPricing.GetFeaturedOfferExpectedPriceBatchAsync(new GetFeaturedOfferExpectedPriceBatchRequest
+            {
+                FeaturedOfferExpectedPriceRequestLists = new List<FeaturedOfferExpectedPriceRequest>
+                {
+                    new FeaturedOfferExpectedPriceRequest
+                    {
+                        SellerSku  = "SellerSKU_01",
+                        MarketplaceId = MarketPlace.Germany.ID,
+                    },
+                    new FeaturedOfferExpectedPriceRequest{
+                        SellerSku  = "SellerSKU_02",
+                        MarketplaceId = MarketPlace.Germany.ID,
+                    }
+                }
+            });
         }
     }
 }

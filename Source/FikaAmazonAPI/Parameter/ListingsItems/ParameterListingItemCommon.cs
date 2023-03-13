@@ -8,6 +8,6 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 
         public string Sku { get; set; }
 
-        public IList<string> MarketplaceIds { get; set; }
+        public ICollection<string> MarketplaceIds { get; set; }
     }
 }

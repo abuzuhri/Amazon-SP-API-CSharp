@@ -56,19 +56,26 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// You must have valid PII developer to be able to call this method
         /// </summary>
-        public void GetOrdersPII()
+        public void GetOrdersPIISimple()
         {
             ParameterOrderList serachOrderList = new ParameterOrderList();
             serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
             serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
-            serachOrderList.AmazonOrderIds = new List<string>();
-            serachOrderList.AmazonOrderIds.Add("403-1710607-6240347");
-            serachOrderList.AmazonOrderIds.Add("403-5583945-7236361");
-            serachOrderList.AmazonOrderIds.Add("403-3320829-4528316");
-            serachOrderList.AmazonOrderIds.Add("406-2574982-2047546");
+            //You must have valid PII developer to be able to call this 
+            serachOrderList.IsNeedRestrictedDataToken = true;
+
+            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+        }
+        public void GetOrdersPIIAdvance()
+        {
+            ParameterOrderList serachOrderList = new ParameterOrderList();
+            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+
+            serachOrderList.OrderStatuses = new List<OrderStatuses>();
+            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
             //You must have valid PII developer to be able to call this 
             var restrictedResource = new RestrictedResource();
@@ -103,6 +110,18 @@ namespace FikaAmazonAPI.SampleCode
         {
             var Items = amazonConnection.Orders.GetOrderItems("402-0467973-4229120");
         }
+
+        /// <summary>
+        /// You must have valid PII developer to be able to call this method
+        /// </summary>
+        public void GetOrderItemsPIISimple()
+        {
+            ParameterBasedPII parameterBasedPII = new ParameterBasedPII();
+            parameterBasedPII.IsNeedRestrictedDataToken = true;
+
+            var order = amazonConnection.Orders.GetOrderItems("405-0426616-1636335", parameterBasedPII);
+        }
+
         /// <summary>
         /// You must have valid PII developer to be able to call this method
         /// </summary>
@@ -110,7 +129,7 @@ namespace FikaAmazonAPI.SampleCode
         {
             var restrictedResource = new RestrictedResource();
             restrictedResource.method = Method.GET.ToString();
-            restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("404-7777403-8594716");
+            restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("405-0426616-1636335");
             //restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
 
 
@@ -123,7 +142,7 @@ namespace FikaAmazonAPI.SampleCode
             parameterBasedPII.IsNeedRestrictedDataToken = true;
             parameterBasedPII.RestrictedDataTokenRequest = createRDT;
 
-            var order = amazonConnection.Orders.GetOrderItems("404-7777403-8594716", parameterBasedPII);
+            var order = amazonConnection.Orders.GetOrderItems("405-0426616-1636335", parameterBasedPII);
         }
 
         public OrderList GetOrderListFulfillmentChannels()
