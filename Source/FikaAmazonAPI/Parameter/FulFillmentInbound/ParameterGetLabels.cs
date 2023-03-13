@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.Parameter.FulFillmentInbound
         public PageType PageType { get; set; }
         public LabelType LabelType { get; set; }
         public int? NumberOfPackages { get; set; }
-        public IList<string> PackageLabelsToPrint { get; set; }
+        public ICollection<string> PackageLabelsToPrint { get; set; }
         public int? NumberOfPallets { get; set; }
         public int? PageSize { get; set; }
         public int? PageStartIndex { get; set; }

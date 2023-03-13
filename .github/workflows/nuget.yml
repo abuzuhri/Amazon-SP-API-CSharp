@@ -41,13 +41,13 @@ jobs:
 
 
     - name: Add github package source
-      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.USERGIHUB_TOKEN }}
+      run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
       
 
     - name: Push to GitHub Packages
       run: dotnet nuget push "**/*.nupkg" --skip-duplicate --source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --api-key ${GITHUB_TOKEN}
       env:
-        GITHUB_TOKEN: ${{ secrets.USERGIHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
         
     - name: Get tag
       id: tag
@@ -58,7 +58,7 @@ jobs:
       id: create_release
       uses: actions/create-release@latest
       env:
-          GITHUB_TOKEN: ${{ secrets.USERGIHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
       with:
           tag_name: ${{steps.tag.outputs.tag}}
           release_name: Release ${{steps.tag.outputs.tag}}

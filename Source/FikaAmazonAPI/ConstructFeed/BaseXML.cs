@@ -1,4 +1,8 @@
-﻿namespace FikaAmazonAPI.ConstructFeed
+﻿using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+namespace FikaAmazonAPI.ConstructFeed
 {
     /// <summary>
     /// Data here came from Amazon Base XSD
@@ -751,59 +755,114 @@
             }
         }
 
-        /// <remarks/>
+        /// <summary>
+        /// The currency code.
+        /// </summary>
+        /// <value>The currency code.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum BaseCurrencyCode
         {
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum USD for value: USD
+            /// </summary>
+            [EnumMember(Value = "USD")]
             USD,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum GBP for value: GBP
+            /// </summary>
+            [EnumMember(Value = "GBP")]
             GBP,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum EUR for value: EUR
+            /// </summary>
+            [EnumMember(Value = "EUR")]
             EUR,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum JPY for value: JPY
+            /// </summary>
+            [EnumMember(Value = "JPY")]
             JPY,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum CAD for value: CAD
+            /// </summary>
+            [EnumMember(Value = "CAD")]
             CAD,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum CNY for value: CNY
+            /// </summary>
+            [EnumMember(Value = "CNY")]
             CNY,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum INR for value: INR
+            /// </summary>
+            [EnumMember(Value = "INR")]
             INR,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum MXN for value: MXN
+            /// </summary>
+            [EnumMember(Value = "MXN")]
             MXN,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum BRL for value: BRL
+            /// </summary>
+            [EnumMember(Value = "BRL")]
             BRL,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum AUD for value: AUD
+            /// </summary>
+            [EnumMember(Value = "AUD")]
             AUD,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum TRY for value: TRY
+            /// </summary>
+            [EnumMember(Value = "TRY")]
             TRY,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum SGD for value: SGD
+            /// </summary>
+            [EnumMember(Value = "SGD")]
             SGD,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum SEK for value: SEK
+            /// </summary>
+            [EnumMember(Value = "SEK")]
             SEK,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum PLN for value: PLN
+            /// </summary>
+            [EnumMember(Value = "PLN")]
             PLN,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum AED for value: AED
+            /// </summary>
+            [EnumMember(Value = "AED")]
             AED,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum SAR for value: SAR
+            /// </summary>
+            [EnumMember(Value = "SAR")]
             SAR,
 
-            /// <remarks/>
+            /// <summary>
+            /// Enum EGP for value: EGP
+            /// </summary>
+            [EnumMember(Value = "EGP")]
             EGP,
         }
 

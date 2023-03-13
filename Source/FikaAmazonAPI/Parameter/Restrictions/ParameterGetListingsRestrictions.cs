@@ -21,7 +21,7 @@ namespace FikaAmazonAPI.Parameter.Restrictions
         /// <summary>
         /// A comma-delimited list of Amazon marketplace identifiers for the request.
         /// </summary>
-        public IList<string> marketplaceIds { get; set; } = new List<string>();
+        public ICollection<string> marketplaceIds { get; set; } = new List<string>();
         /// <summary>
         /// A locale for reason text localization. When not provided, the default language code of the first marketplace is used. Examples: "en_US", "fr_CA", "fr_FR". Localized messages default to "en_US" when a localization is not available in the specified locale.
         /// </summary>

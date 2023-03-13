@@ -34,7 +34,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum SELLER for value: SELLER
         /// </summary>
         [EnumMember(Value = "SELLER")]
-        SELLER = 2
+        SELLER = 2,
+
+        /// <summary>
+        /// Enum NONE for value: NONE
+        /// </summary>
+        [EnumMember(Value = "NONE")]
+        NONE = 3
     }
 
 }

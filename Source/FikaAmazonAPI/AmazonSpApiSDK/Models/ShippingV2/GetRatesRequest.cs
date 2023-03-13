@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The ship to address.</value>
     [DataMember(Name="shipTo", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "shipTo")]
+    [JsonProperty(PropertyName = "shipTo", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public Address ShipTo { get; set; }
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The return to address.</value>
     [DataMember(Name="returnTo", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "returnTo")]
+    [JsonProperty(PropertyName = "returnTo", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public Address ReturnTo { get; set; }
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// </summary>
     /// <value>The ship date and time (the requested pickup). This defaults to the current date and time.</value>
     [DataMember(Name="shipDate", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "shipDate")]
+    [JsonProperty(PropertyName = "shipDate", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public DateTime? ShipDate { get; set; }
 
     /// <summary>
@@ -55,14 +55,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// Gets or Sets ValueAddedServices
     /// </summary>
     [DataMember(Name="valueAddedServices", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "valueAddedServices")]
+    [JsonProperty(PropertyName = "valueAddedServices", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public ValueAddedServiceDetails ValueAddedServices { get; set; }
 
     /// <summary>
     /// Gets or Sets TaxDetails
     /// </summary>
     [DataMember(Name="taxDetails", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "taxDetails")]
+    [JsonProperty(PropertyName = "taxDetails", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public TaxDetailList TaxDetails { get; set; }
 
     /// <summary>

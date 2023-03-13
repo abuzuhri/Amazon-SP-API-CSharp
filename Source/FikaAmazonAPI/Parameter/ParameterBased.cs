@@ -54,11 +54,11 @@ namespace FikaAmazonAPI.Search
                     }
                     else if (IsEnumerableOfEnum(p.PropertyType) || IsEnumerable(p.PropertyType))
                     {
-                        var data = ((IEnumerable)value).Cast<object>().Select(a => a.ToString());
+                        var data = ((ICollection)value).Cast<object>().Select(a => a.ToString());
                         if (data.Count() > 0)
                         {
                             var result = data.ToArray();
-                            output = String.Join(",", result);
+                            output = string.Join(",", result);
                         }
                         else continue;
                         
@@ -95,6 +95,7 @@ namespace FikaAmazonAPI.Search
             {
                 if (type.IsGenericType
                     && (type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                        || type.GetGenericTypeDefinition() == typeof(ICollection<>)
                         || type.GetGenericTypeDefinition() == typeof(IList<>)
                         || type.GetGenericTypeDefinition() == typeof(List<>)))
                 {

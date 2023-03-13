@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public static ReturnFBAOrderRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new ReturnFBAOrderRow();
-            row.ReturnDate = DataConverter.GetDate(rowData.GetString("return-date"), DataConverter.DateTimeFormate.DATETIME_K_FORMAT);
+            row.ReturnDate = DataConverter.GetDate(rowData.GetString("return-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.OrderId = rowData.GetString("order-id");
             row.SKU = rowData.GetString("sku");
             row.ASIN = rowData.GetString("asin");

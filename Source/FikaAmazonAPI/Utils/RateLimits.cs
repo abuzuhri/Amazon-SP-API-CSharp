@@ -26,12 +26,11 @@ namespace FikaAmazonAPI.Utils
 
             int ratePeriodMs = GetRatePeriodMs();
 
-#if DEBUG
             var nextRequestsSent = RequestsSent + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
             string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
             Console.WriteLine(output);
-#endif
+
 
             if (RequestsSent >= Burst)
             {
@@ -56,7 +55,8 @@ namespace FikaAmazonAPI.Utils
             if (RequestsSent >= Burst)
             {
                 LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
-                while (LastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
+                var TempLastRequest = LastRequest;
+                while (TempLastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
                     Task.Delay(100).Wait();
 
             }

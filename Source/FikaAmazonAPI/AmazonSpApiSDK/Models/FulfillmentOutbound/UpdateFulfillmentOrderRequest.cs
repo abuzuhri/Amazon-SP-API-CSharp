@@ -11,6 +11,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -38,36 +39,39 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         [DataMember(Name = "FulfillmentPolicy", EmitDefaultValue = false)]
         public FulfillmentPolicy? FulfillmentPolicy { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateFulfillmentOrderRequest" /> class.
-        /// </summary>
-        /// <param name="MarketplaceId">The marketplace the fulfillment order is placed against..</param>
-        /// <param name="DisplayableOrderId">A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier..</param>
-        /// <param name="DisplayableOrderDateTime">The date of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip..</param>
-        /// <param name="DisplayableOrderComment">Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip..</param>
-        /// <param name="ShippingSpeedCategory">ShippingSpeedCategory.</param>
-        /// <param name="DestinationAddress">The destination address for the fulfillment order..</param>
-        /// <param name="FulfillmentAction">FulfillmentAction.</param>
-        /// <param name="FulfillmentPolicy">FulfillmentPolicy.</param>
-        /// <param name="FulfillmentMethod">Indicates the intended recipient channel for the order..</param>
-        /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
-        /// <param name="NotificationEmailList">NotificationEmailList.</param>
-        /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity..</param>
-        public UpdateFulfillmentOrderRequest(string MarketplaceId = default(string), string DisplayableOrderId = default(string), Timestamp DisplayableOrderDateTime = default(Timestamp), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmailList = default(NotificationEmailList), UpdateFulfillmentOrderItemList Items = default(UpdateFulfillmentOrderItemList))
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UpdateFulfillmentOrderRequest" /> class.
+		/// </summary>
+		/// <param name="MarketplaceId">The marketplace the fulfillment order is placed against..</param>
+		/// <param name="DisplayableOrderId">A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier..</param>
+		/// <param name="DisplayableOrderDateTime">The date of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip..</param>
+		/// <param name="DisplayableOrderComment">Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip..</param>
+		/// <param name="ShippingSpeedCategory">ShippingSpeedCategory.</param>
+		/// <param name="DestinationAddress">The destination address for the fulfillment order..</param>
+		/// <param name="FulfillmentAction">FulfillmentAction.</param>
+		/// <param name="FulfillmentPolicy">FulfillmentPolicy.</param>
+		/// <param name="FulfillmentMethod">Indicates the intended recipient channel for the order..</param>
+		/// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
+		/// <param name="NotificationEmailList">NotificationEmailList.</param>
+		/// <param name="Items">A list of items to include in the fulfillment order preview, including quantity..</param>
+		public UpdateFulfillmentOrderRequest(string MarketplaceId = default(string), string DisplayableOrderId = default(string), DateTime? DisplayableOrderDateTime = default(DateTime?), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmailList = default(NotificationEmailList), UpdateFulfillmentOrderItemList Items = default(UpdateFulfillmentOrderItemList))
         {
             this.MarketplaceId = MarketplaceId;
             this.DisplayableOrderId = DisplayableOrderId;
-            this.DisplayableOrderDateTime = DisplayableOrderDateTime;
+            this.DisplayableOrderDate = DisplayableOrderDateTime.Value;
             this.DisplayableOrderComment = DisplayableOrderComment;
             this.ShippingSpeedCategory = ShippingSpeedCategory;
             this.DestinationAddress = DestinationAddress;
             this.FulfillmentAction = FulfillmentAction;
             this.FulfillmentPolicy = FulfillmentPolicy;
-            this.FulfillmentMethod = FulfillmentMethod;
             this.ShipFromCountryCode = ShipFromCountryCode;
             this.NotificationEmailList = NotificationEmailList;
             this.Items = Items;
         }
+		[Obsolete("FulfillmentMethod no longer used and , use the other constructor instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public UpdateFulfillmentOrderRequest(string MarketplaceId = default(string), string DisplayableOrderId = default(string), Timestamp DisplayableOrderDateTime = default(Timestamp), string DisplayableOrderComment = default(string), ShippingSpeedCategory? ShippingSpeedCategory = default(ShippingSpeedCategory?), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmailList = default(NotificationEmailList), UpdateFulfillmentOrderItemList Items = default(UpdateFulfillmentOrderItemList))
+            : this(MarketplaceId, DisplayableOrderId, null, DisplayableOrderComment, ShippingSpeedCategory, DestinationAddress, FulfillmentAction, FulfillmentPolicy, ShipFromCountryCode, NotificationEmailList, Items){ }
 
         /// <summary>
         /// The marketplace the fulfillment order is placed against.
@@ -88,13 +92,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The date of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.</value>
         [DataMember(Name = "DisplayableOrderDateTime", EmitDefaultValue = false)]
-        public Timestamp DisplayableOrderDateTime { get; set; }
+        public DateTime DisplayableOrderDate { get; set; }
+        [Obsolete("Timestamp is no longer used, use DisplayableOrderDate instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+		public Timestamp DisplayableOrderDateTime { get; set; }
 
-        /// <summary>
-        /// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
-        /// </summary>
-        /// <value>Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "DisplayableOrderComment", EmitDefaultValue = false)]
+		/// <summary>
+		/// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
+		/// </summary>
+		/// <value>Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.</value>
+		[DataMember(Name = "DisplayableOrderComment", EmitDefaultValue = false)]
         public string DisplayableOrderComment { get; set; }
 
 
@@ -107,18 +114,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 
 
 
-        /// <summary>
-        /// Indicates the intended recipient channel for the order.
-        /// </summary>
-        /// <value>Indicates the intended recipient channel for the order.</value>
-        [DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
-        public string FulfillmentMethod { get; set; }
+		/// <summary>
+		/// Indicates the intended recipient channel for the order.
+		/// </summary>
+		/// <value>Indicates the intended recipient channel for the order.</value>
+		[DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
+        [Obsolete("Property no longer used")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public string FulfillmentMethod { get; set; }
 
-        /// <summary>
-        /// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
-        /// </summary>
-        /// <value>The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.</value>
-        [DataMember(Name = "ShipFromCountryCode", EmitDefaultValue = false)]
+		/// <summary>
+		/// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
+		/// </summary>
+		/// <value>The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.</value>
+		[DataMember(Name = "ShipFromCountryCode", EmitDefaultValue = false)]
         public string ShipFromCountryCode { get; set; }
 
         /// <summary>
@@ -144,13 +153,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("class UpdateFulfillmentOrderRequest {\n");
             sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
             sb.Append("  DisplayableOrderId: ").Append(DisplayableOrderId).Append("\n");
-            sb.Append("  DisplayableOrderDateTime: ").Append(DisplayableOrderDateTime).Append("\n");
+            sb.Append("  DisplayableOrderDate: ").Append(DisplayableOrderDate).Append("\n");
             sb.Append("  DisplayableOrderComment: ").Append(DisplayableOrderComment).Append("\n");
             sb.Append("  ShippingSpeedCategory: ").Append(ShippingSpeedCategory).Append("\n");
             sb.Append("  DestinationAddress: ").Append(DestinationAddress).Append("\n");
             sb.Append("  FulfillmentAction: ").Append(FulfillmentAction).Append("\n");
             sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
-            sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
             sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
             sb.Append("  NotificationEmailList: ").Append(NotificationEmailList).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
@@ -199,9 +207,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.DisplayableOrderId.Equals(input.DisplayableOrderId))
                 ) &&
                 (
-                    this.DisplayableOrderDateTime == input.DisplayableOrderDateTime ||
-                    (this.DisplayableOrderDateTime != null &&
-                    this.DisplayableOrderDateTime.Equals(input.DisplayableOrderDateTime))
+                    this.DisplayableOrderDate == input.DisplayableOrderDate ||
+                    (this.DisplayableOrderDate.Equals(input.DisplayableOrderDate))
                 ) &&
                 (
                     this.DisplayableOrderComment == input.DisplayableOrderComment ||
@@ -227,11 +234,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     this.FulfillmentPolicy == input.FulfillmentPolicy ||
                     (this.FulfillmentPolicy != null &&
                     this.FulfillmentPolicy.Equals(input.FulfillmentPolicy))
-                ) &&
-                (
-                    this.FulfillmentMethod == input.FulfillmentMethod ||
-                    (this.FulfillmentMethod != null &&
-                    this.FulfillmentMethod.Equals(input.FulfillmentMethod))
                 ) &&
                 (
                     this.ShipFromCountryCode == input.ShipFromCountryCode ||
@@ -263,8 +265,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.MarketplaceId.GetHashCode();
                 if (this.DisplayableOrderId != null)
                     hashCode = hashCode * 59 + this.DisplayableOrderId.GetHashCode();
-                if (this.DisplayableOrderDateTime != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderDateTime.GetHashCode();
+                if (this.DisplayableOrderDate != null)
+                    hashCode = hashCode * 59 + this.DisplayableOrderDate.GetHashCode();
                 if (this.DisplayableOrderComment != null)
                     hashCode = hashCode * 59 + this.DisplayableOrderComment.GetHashCode();
                 if (this.ShippingSpeedCategory != null)
@@ -275,8 +277,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.FulfillmentAction.GetHashCode();
                 if (this.FulfillmentPolicy != null)
                     hashCode = hashCode * 59 + this.FulfillmentPolicy.GetHashCode();
-                if (this.FulfillmentMethod != null)
-                    hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
                 if (this.ShipFromCountryCode != null)
                     hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
                 if (this.NotificationEmailList != null)

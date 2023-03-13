@@ -10,6 +10,6 @@ namespace FikaAmazonAPI.Parameter.Report
         {
             reportTypes = new List<ReportTypes>();
         }
-        public IList<ReportTypes> reportTypes { get; set; }
+        public ICollection<ReportTypes> reportTypes { get; set; }
     }
 }
