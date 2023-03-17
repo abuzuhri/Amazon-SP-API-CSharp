@@ -47,44 +47,44 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentInfo" /> class.
         /// </summary>
-        /// <param name="ShipmentId">The shipment identifier submitted in the request..</param>
-        /// <param name="ShipmentName">The name for the inbound shipment..</param>
-        /// <param name="ShipFromAddress">The return address. (required).</param>
-        /// <param name="DestinationFulfillmentCenterId">An Amazon fulfillment center identifier created by Amazon..</param>
-        /// <param name="ShipmentStatus">ShipmentStatus.</param>
-        /// <param name="LabelPrepType">LabelPrepType.</param>
-        /// <param name="AreCasesRequired">Indicates whether or not an inbound shipment contains case-packed boxes. When AreCasesRequired &#x3D; true for an inbound shipment, all items in the inbound shipment must be case packed. (required).</param>
-        /// <param name="ConfirmedNeedByDate">Date by which the shipment must arrive at the Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items..</param>
-        /// <param name="BoxContentsSource">BoxContentsSource.</param>
-        /// <param name="EstimatedBoxContentsFee">An estimate of the manual processing fee charged by Amazon for boxes without box content information. This is only returned when BoxContentsSource is NONE..</param>
-        public InboundShipmentInfo(string ShipmentId = default(string), string ShipmentName = default(string), Address ShipFromAddress = default(Address), string DestinationFulfillmentCenterId = default(string), ShipmentStatus? ShipmentStatus = default(ShipmentStatus?), LabelPrepType? LabelPrepType = default(LabelPrepType?), bool? AreCasesRequired = default(bool?), string ConfirmedNeedByDate = default(string), BoxContentsSource? BoxContentsSource = default(BoxContentsSource?), BoxContentsFeeDetails EstimatedBoxContentsFee = default(BoxContentsFeeDetails))
+        /// <param name="shipmentId">The shipment identifier submitted in the request..</param>
+        /// <param name="shipmentName">The name for the inbound shipment..</param>
+        /// <param name="shipFromAddress">The return address. (required).</param>
+        /// <param name="destinationFulfillmentCenterId">An Amazon fulfillment center identifier created by Amazon..</param>
+        /// <param name="shipmentStatus">shipmentStatus.</param>
+        /// <param name="labelPrepType">labelPrepType.</param>
+        /// <param name="areCasesRequired">Indicates whether or not an inbound shipment contains case-packed boxes. When AreCasesRequired &#x3D; true for an inbound shipment, all items in the inbound shipment must be case packed. (required).</param>
+        /// <param name="confirmedNeedByDate">Date by which the shipment must arrive at the Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items..</param>
+        /// <param name="boxContentsSource">boxContentsSource.</param>
+        /// <param name="estimatedBoxContentsFee">An estimate of the manual processing fee charged by Amazon for boxes without box content information. This is only returned when BoxContentsSource is NONE..</param>
+        public InboundShipmentInfo(string shipmentId = default(string), string shipmentName = default(string), Address shipFromAddress = default(Address), string destinationFulfillmentCenterId = default(string), ShipmentStatus? shipmentStatus = default(ShipmentStatus?), LabelPrepType? labelPrepType = default(LabelPrepType?), bool? areCasesRequired = default(bool?), DateTime? confirmedNeedByDate = default(DateTime?), BoxContentsSource? boxContentsSource = default(BoxContentsSource?), BoxContentsFeeDetails estimatedBoxContentsFee = default(BoxContentsFeeDetails))
         {
-            // to ensure "ShipFromAddress" is required (not null)
-            if (ShipFromAddress == null)
+            // to ensure "shipFromAddress" is required (not null)
+            if (shipFromAddress == null)
             {
-                throw new InvalidDataException("ShipFromAddress is a required property for InboundShipmentInfo and cannot be null");
+                throw new InvalidDataException("shipFromAddress is a required property for InboundShipmentInfo and cannot be null");
             }
             else
             {
-                this.ShipFromAddress = ShipFromAddress;
+                this.ShipFromAddress = shipFromAddress;
             }
-            // to ensure "AreCasesRequired" is required (not null)
-            if (AreCasesRequired == null)
+            // to ensure "areCasesRequired" is required (not null)
+            if (areCasesRequired == null)
             {
-                throw new InvalidDataException("AreCasesRequired is a required property for InboundShipmentInfo and cannot be null");
+                throw new InvalidDataException("areCasesRequired is a required property for InboundShipmentInfo and cannot be null");
             }
             else
             {
-                this.AreCasesRequired = AreCasesRequired;
+                this.AreCasesRequired = areCasesRequired;
             }
-            this.ShipmentId = ShipmentId;
-            this.ShipmentName = ShipmentName;
-            this.DestinationFulfillmentCenterId = DestinationFulfillmentCenterId;
-            this.ShipmentStatus = ShipmentStatus;
-            this.LabelPrepType = LabelPrepType;
-            this.ConfirmedNeedByDate = ConfirmedNeedByDate;
-            this.BoxContentsSource = BoxContentsSource;
-            this.EstimatedBoxContentsFee = EstimatedBoxContentsFee;
+            this.ShipmentId = shipmentId;
+            this.ShipmentName = shipmentName;
+            this.DestinationFulfillmentCenterId = destinationFulfillmentCenterId;
+            this.ShipmentStatus = shipmentStatus;
+            this.LabelPrepType = labelPrepType;
+            this.ConfirmedNeedByDate = confirmedNeedByDate;
+            this.BoxContentsSource = boxContentsSource;
+            this.EstimatedBoxContentsFee = estimatedBoxContentsFee;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>Date by which the shipment must arrive at the Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items.</value>
         [DataMember(Name = "ConfirmedNeedByDate", EmitDefaultValue = false)]
-        public string ConfirmedNeedByDate { get; set; }
+        public DateTime? ConfirmedNeedByDate { get; set; }
 
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

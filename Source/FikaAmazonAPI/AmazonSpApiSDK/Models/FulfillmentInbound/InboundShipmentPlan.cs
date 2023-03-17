@@ -37,60 +37,60 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentPlan" /> class.
         /// </summary>
-        /// <param name="ShipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation. (required).</param>
-        /// <param name="DestinationFulfillmentCenterId">An Amazon fulfillment center identifier created by Amazon. (required).</param>
-        /// <param name="ShipToAddress">The address of the Amazon fulfillment center to which to ship the items. (required).</param>
-        /// <param name="LabelPrepType">LabelPrepType (required).</param>
-        /// <param name="Items">SKU and quantity information for the items in the shipment. (required).</param>
-        /// <param name="EstimatedBoxContentsFee">EstimatedBoxContentsFee.</param>
-        public InboundShipmentPlan(string ShipmentId = default(string), string DestinationFulfillmentCenterId = default(string), Address ShipToAddress = default(Address), LabelPrepType LabelPrepType = default(LabelPrepType), InboundShipmentPlanItemList Items = default(InboundShipmentPlanItemList), BoxContentsFeeDetails EstimatedBoxContentsFee = default(BoxContentsFeeDetails))
+        /// <param name="shipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation. (required).</param>
+        /// <param name="destinationFulfillmentCenterId">An Amazon fulfillment center identifier created by Amazon. (required).</param>
+        /// <param name="shipToAddress">The address of the Amazon fulfillment center to which to ship the items. (required).</param>
+        /// <param name="labelPrepType">labelPrepType (required).</param>
+        /// <param name="items">SKU and quantity information for the items in the shipment. (required).</param>
+        /// <param name="estimatedBoxContentsFee">estimatedBoxContentsFee.</param>
+        public InboundShipmentPlan(string shipmentId = default(string), string destinationFulfillmentCenterId = default(string), Address shipToAddress = default(Address), LabelPrepType labelPrepType = default(LabelPrepType), InboundShipmentPlanItemList items = default(InboundShipmentPlanItemList), BoxContentsFeeDetails estimatedBoxContentsFee = default(BoxContentsFeeDetails))
         {
-            // to ensure "ShipmentId" is required (not null)
-            if (ShipmentId == null)
+            // to ensure "shipmentId" is required (not null)
+            if (shipmentId == null)
             {
-                throw new InvalidDataException("ShipmentId is a required property for InboundShipmentPlan and cannot be null");
+                throw new InvalidDataException("shipmentId is a required property for InboundShipmentPlan and cannot be null");
             }
             else
             {
-                this.ShipmentId = ShipmentId;
+                this.ShipmentId = shipmentId;
             }
-            // to ensure "DestinationFulfillmentCenterId" is required (not null)
-            if (DestinationFulfillmentCenterId == null)
+            // to ensure "destinationFulfillmentCenterId" is required (not null)
+            if (destinationFulfillmentCenterId == null)
             {
-                throw new InvalidDataException("DestinationFulfillmentCenterId is a required property for InboundShipmentPlan and cannot be null");
+                throw new InvalidDataException("destinationFulfillmentCenterId is a required property for InboundShipmentPlan and cannot be null");
             }
             else
             {
-                this.DestinationFulfillmentCenterId = DestinationFulfillmentCenterId;
+                this.DestinationFulfillmentCenterId = destinationFulfillmentCenterId;
             }
-            // to ensure "ShipToAddress" is required (not null)
-            if (ShipToAddress == null)
+            // to ensure "shipToAddress" is required (not null)
+            if (shipToAddress == null)
             {
-                throw new InvalidDataException("ShipToAddress is a required property for InboundShipmentPlan and cannot be null");
+                throw new InvalidDataException("shipToAddress is a required property for InboundShipmentPlan and cannot be null");
             }
             else
             {
-                this.ShipToAddress = ShipToAddress;
+                this.ShipToAddress = shipToAddress;
             }
-            // to ensure "LabelPrepType" is required (not null)
-            if (LabelPrepType == null)
+            // to ensure "labelPrepType" is required (not null)
+            if (labelPrepType == null)
             {
-                throw new InvalidDataException("LabelPrepType is a required property for InboundShipmentPlan and cannot be null");
+                throw new InvalidDataException("labelPrepType is a required property for InboundShipmentPlan and cannot be null");
             }
             else
             {
-                this.LabelPrepType = LabelPrepType;
+                this.LabelPrepType = labelPrepType;
             }
-            // to ensure "Items" is required (not null)
-            if (Items == null)
+            // to ensure "items" is required (not null)
+            if (items == null)
             {
-                throw new InvalidDataException("Items is a required property for InboundShipmentPlan and cannot be null");
+                throw new InvalidDataException("items is a required property for InboundShipmentPlan and cannot be null");
             }
             else
             {
-                this.Items = Items;
+                this.Items = items;
             }
-            this.EstimatedBoxContentsFee = EstimatedBoxContentsFee;
+            this.EstimatedBoxContentsFee = estimatedBoxContentsFee;
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

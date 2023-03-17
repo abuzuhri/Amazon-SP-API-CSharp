@@ -28,41 +28,41 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Initializes a new instance of the <see cref="TransportContent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public TransportContent() { }
+        protected TransportContent() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportContent" /> class.
         /// </summary>
-        /// <param name="TransportHeader">TransportHeader (required).</param>
-        /// <param name="TransportDetails">TransportDetails (required).</param>
-        /// <param name="TransportResult">TransportResult (required).</param>
-        public TransportContent(TransportHeader TransportHeader = default(TransportHeader), TransportDetailOutput TransportDetails = default(TransportDetailOutput), TransportResult TransportResult = default(TransportResult))
+        /// <param name="transportHeader">transportHeader (required).</param>
+        /// <param name="transportDetails">transportDetails (required).</param>
+        /// <param name="transportResult">transportResult (required).</param>
+        public TransportContent(TransportHeader transportHeader = default(TransportHeader), TransportDetailOutput transportDetails = default(TransportDetailOutput), TransportResult transportResult = default(TransportResult))
         {
-            // to ensure "TransportHeader" is required (not null)
-            if (TransportHeader == null)
+            // to ensure "transportHeader" is required (not null)
+            if (transportHeader == null)
             {
-                throw new InvalidDataException("TransportHeader is a required property for TransportContent and cannot be null");
+                throw new InvalidDataException("transportHeader is a required property for TransportContent and cannot be null");
             }
             else
             {
-                this.TransportHeader = TransportHeader;
+                this.TransportHeader = transportHeader;
             }
-            // to ensure "TransportDetails" is required (not null)
-            if (TransportDetails == null)
+            // to ensure "transportDetails" is required (not null)
+            if (transportDetails == null)
             {
-                throw new InvalidDataException("TransportDetails is a required property for TransportContent and cannot be null");
-            }
-            else
-            {
-                this.TransportDetails = TransportDetails;
-            }
-            // to ensure "TransportResult" is required (not null)
-            if (TransportResult == null)
-            {
-                throw new InvalidDataException("TransportResult is a required property for TransportContent and cannot be null");
+                throw new InvalidDataException("transportDetails is a required property for TransportContent and cannot be null");
             }
             else
             {
-                this.TransportResult = TransportResult;
+                this.TransportDetails = transportDetails;
+            }
+            // to ensure "transportResult" is required (not null)
+            if (transportResult == null)
+            {
+                throw new InvalidDataException("transportResult is a required property for TransportContent and cannot be null");
+            }
+            else
+            {
+                this.TransportResult = transportResult;
             }
         }
 
@@ -103,7 +103,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

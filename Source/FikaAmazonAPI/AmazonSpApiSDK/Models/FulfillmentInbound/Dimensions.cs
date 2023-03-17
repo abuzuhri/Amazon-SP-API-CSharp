@@ -38,47 +38,47 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Dimensions" /> class.
         /// </summary>
-        /// <param name="Length">The length dimension. (required).</param>
-        /// <param name="Width">The width dimension. (required).</param>
-        /// <param name="Height">The height dimension. (required).</param>
-        /// <param name="Unit">The unit of measurement for the dimensions. (required).</param>
-        public Dimensions(double Length = default(double), double Width = default(double), double Height = default(double), UnitOfMeasurement Unit = default(UnitOfMeasurement))
+        /// <param name="length">The length dimension. (required).</param>
+        /// <param name="width">The width dimension. (required).</param>
+        /// <param name="height">The height dimension. (required).</param>
+        /// <param name="unit">The unit of measurement for the dimensions. (required).</param>
+        public Dimensions(double? length = default(double?), double? width = default(double?), double? height = default(double?), UnitOfMeasurement unit = default(UnitOfMeasurement))
         {
-            // to ensure "Length" is required (not null)
-            if (Length == null)
+            // to ensure "length" is required (not null)
+            if (length == null)
             {
-                throw new InvalidDataException("Length is a required property for Dimensions and cannot be null");
+                throw new InvalidDataException("length is a required property for Dimensions and cannot be null");
             }
             else
             {
-                this.Length = Length;
+                this.Length = length;
             }
-            // to ensure "Width" is required (not null)
-            if (Width == null)
+            // to ensure "width" is required (not null)
+            if (width == null)
             {
-                throw new InvalidDataException("Width is a required property for Dimensions and cannot be null");
-            }
-            else
-            {
-                this.Width = Width;
-            }
-            // to ensure "Height" is required (not null)
-            if (Height == null)
-            {
-                throw new InvalidDataException("Height is a required property for Dimensions and cannot be null");
+                throw new InvalidDataException("width is a required property for Dimensions and cannot be null");
             }
             else
             {
-                this.Height = Height;
+                this.Width = width;
             }
-            // to ensure "Unit" is required (not null)
-            if (Unit == null)
+            // to ensure "height" is required (not null)
+            if (height == null)
             {
-                throw new InvalidDataException("Unit is a required property for Dimensions and cannot be null");
+                throw new InvalidDataException("height is a required property for Dimensions and cannot be null");
             }
             else
             {
-                this.Unit = Unit;
+                this.Height = height;
+            }
+            // to ensure "unit" is required (not null)
+            if (unit == null)
+            {
+                throw new InvalidDataException("unit is a required property for Dimensions and cannot be null");
+            }
+            else
+            {
+                this.Unit = unit;
             }
         }
 
@@ -87,21 +87,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The length dimension.</value>
         [DataMember(Name = "Length", EmitDefaultValue = false)]
-        public double Length { get; set; }
+        public double? Length { get; set; }
 
         /// <summary>
         /// The width dimension.
         /// </summary>
         /// <value>The width dimension.</value>
         [DataMember(Name = "Width", EmitDefaultValue = false)]
-        public double Width { get; set; }
+        public double? Width { get; set; }
 
         /// <summary>
         /// The height dimension.
         /// </summary>
         /// <value>The height dimension.</value>
         [DataMember(Name = "Height", EmitDefaultValue = false)]
-        public double Height { get; set; }
+        public double? Height { get; set; }
 
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -31,22 +31,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredLtlDataInput" /> class.
         /// </summary>
-        /// <param name="Contact">Contact information for the person in the seller&#39;s organization who is responsible for the shipment. Used by the carrier if they have questions about the shipment..</param>
-        /// <param name="BoxCount">The number of boxes in the shipment..</param>
-        /// <param name="SellerFreightClass">SellerFreightClass.</param>
-        /// <param name="FreightReadyDate">The date that the shipment will be ready to be picked up by the carrier..</param>
-        /// <param name="PalletList">PalletList.</param>
-        /// <param name="TotalWeight">The total weight of the shipment..</param>
-        /// <param name="SellerDeclaredValue">The declaration of the total value of the inventory in the shipment..</param>
-        public PartneredLtlDataInput(Contact Contact = default(Contact), int BoxCount = default(int), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), string FreightReadyDate = default(string), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount))
+        /// <param name="contact">Contact information for the person in the seller&#39;s organization who is responsible for the shipment. Used by the carrier if they have questions about the shipment..</param>
+        /// <param name="boxCount">The number of boxes in the shipment..</param>
+        /// <param name="sellerFreightClass">sellerFreightClass.</param>
+        /// <param name="freightReadyDate">The date that the shipment will be ready to be picked up by the carrier..</param>
+        /// <param name="palletList">palletList.</param>
+        /// <param name="totalWeight">The total weight of the shipment..</param>
+        /// <param name="sellerDeclaredValue">The declaration of the total value of the inventory in the shipment..</param>
+        public PartneredLtlDataInput(Contact contact = default(Contact), long? boxCount = default(long?), SellerFreightClass? sellerFreightClass = default(SellerFreightClass?), DateTime? freightReadyDate = default(DateTime?), PalletList palletList = default(PalletList), Weight totalWeight = default(Weight), Amount sellerDeclaredValue = default(Amount))
         {
-            this.Contact = Contact;
-            this.BoxCount = BoxCount;
-            this.SellerFreightClass = SellerFreightClass;
-            this.FreightReadyDate = FreightReadyDate;
-            this.PalletList = PalletList;
-            this.TotalWeight = TotalWeight;
-            this.SellerDeclaredValue = SellerDeclaredValue;
+            this.Contact = contact;
+            this.BoxCount = boxCount;
+            this.SellerFreightClass = sellerFreightClass;
+            this.FreightReadyDate = freightReadyDate;
+            this.PalletList = palletList;
+            this.TotalWeight = totalWeight;
+            this.SellerDeclaredValue = sellerDeclaredValue;
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The number of boxes in the shipment.</value>
         [DataMember(Name = "BoxCount", EmitDefaultValue = false)]
-        public int BoxCount { get; set; }
+        public long? BoxCount { get; set; }
 
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date that the shipment will be ready to be picked up by the carrier.</value>
         [DataMember(Name = "FreightReadyDate", EmitDefaultValue = false)]
-        public string FreightReadyDate { get; set; }
+        public DateTime? FreightReadyDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PalletList
@@ -114,7 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

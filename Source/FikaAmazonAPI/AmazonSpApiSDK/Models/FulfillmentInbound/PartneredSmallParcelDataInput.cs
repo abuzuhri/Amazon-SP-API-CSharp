@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredSmallParcelDataInput" /> class.
         /// </summary>
-        /// <param name="PackageList">PackageList.</param>
-        /// <param name="CarrierName">The Amazon-partnered carrier to use for the inbound shipment..</param>
-        public PartneredSmallParcelDataInput(PartneredSmallParcelPackageInputList PackageList = default(PartneredSmallParcelPackageInputList), string CarrierName = default(string))
+        /// <param name="packageList">packageList.</param>
+        /// <param name="carrierName">The Amazon-partnered carrier to use for the inbound shipment. **&#x60;CarrierName&#x60;** values in France (FR), Italy (IT), Spain (ES), the United Kingdom (UK), and the United States (US): &#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt; **&#x60;CarrierName&#x60;** values in Germany (DE): &#x60;DHL_STANDARD&#x60;,&#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt;Default: &#x60;UNITED_PARCEL_SERVICE_INC&#x60;..</param>
+        public PartneredSmallParcelDataInput(PartneredSmallParcelPackageInputList packageList = default(PartneredSmallParcelPackageInputList), string carrierName = default(string))
         {
-            this.PackageList = PackageList;
-            this.CarrierName = CarrierName;
+            this.PackageList = packageList;
+            this.CarrierName = carrierName;
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         public PartneredSmallParcelPackageInputList PackageList { get; set; }
 
         /// <summary>
-        /// The Amazon-partnered carrier to use for the inbound shipment.
+        /// The Amazon-partnered carrier to use for the inbound shipment. **&#x60;CarrierName&#x60;** values in France (FR), Italy (IT), Spain (ES), the United Kingdom (UK), and the United States (US): &#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt; **&#x60;CarrierName&#x60;** values in Germany (DE): &#x60;DHL_STANDARD&#x60;,&#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt;Default: &#x60;UNITED_PARCEL_SERVICE_INC&#x60;.
         /// </summary>
-        /// <value>The Amazon-partnered carrier to use for the inbound shipment.</value>
+        /// <value>The Amazon-partnered carrier to use for the inbound shipment. **&#x60;CarrierName&#x60;** values in France (FR), Italy (IT), Spain (ES), the United Kingdom (UK), and the United States (US): &#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt; **&#x60;CarrierName&#x60;** values in Germany (DE): &#x60;DHL_STANDARD&#x60;,&#x60;UNITED_PARCEL_SERVICE_INC&#x60;. &lt;br&gt;Default: &#x60;UNITED_PARCEL_SERVICE_INC&#x60;.</value>
         [DataMember(Name = "CarrierName", EmitDefaultValue = false)]
         public string CarrierName { get; set; }
 
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
