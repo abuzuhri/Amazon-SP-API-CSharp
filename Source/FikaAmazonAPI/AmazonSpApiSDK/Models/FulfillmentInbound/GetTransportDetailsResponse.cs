@@ -33,6 +33,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Payload = payload;
             this.Errors = errors;
         }
+        public GetTransportDetailsResponse()
+        {
+        }
 
         /// <summary>
         /// The payload for the getTransportDetails operation.
