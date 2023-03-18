@@ -23,7 +23,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
     [DataContract]
     public partial class ProductInfoDetail : IEquatable<ProductInfoDetail>, IValidatableObject
     {
-
         public ProductInfoDetail()
         {
 
@@ -31,10 +30,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductInfoDetail" /> class.
         /// </summary>
-        /// <param name="NumberOfItems">The total number of items that are included in the ASIN..</param>
-        public ProductInfoDetail(int? NumberOfItems = default(int?))
+        /// <param name="numberOfItems">The total number of items that are included in the ASIN..</param>
+        public ProductInfoDetail(int? numberOfItems = default(int?))
         {
-            this.NumberOfItems = NumberOfItems;
+            this.NumberOfItems = numberOfItems;
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

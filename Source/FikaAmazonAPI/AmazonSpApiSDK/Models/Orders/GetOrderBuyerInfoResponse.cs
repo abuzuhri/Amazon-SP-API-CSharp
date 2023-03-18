@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOrderBuyerInfoResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getOrderBuyerInfo operations..</param>
-        /// <param name="Errors">One or more unexpected errors occurred during the getOrderBuyerInfo operation..</param>
-        public GetOrderBuyerInfoResponse(OrderBuyerInfo Payload = default(OrderBuyerInfo), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getOrderBuyerInfo operation..</param>
+        /// <param name="errors">One or more unexpected errors occurred during the getOrderBuyerInfo operation..</param>
+        public GetOrderBuyerInfoResponse(OrderBuyerInfo payload = default(OrderBuyerInfo), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
 
         public GetOrderBuyerInfoResponse()
@@ -41,9 +41,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         }
 
         /// <summary>
-        /// The payload for the getOrderBuyerInfo operations.
+        /// The payload for the getOrderBuyerInfo operation.
         /// </summary>
-        /// <value>The payload for the getOrderBuyerInfo operations.</value>
+        /// <value>The payload for the getOrderBuyerInfo operation.</value>
         [DataMember(Name = "payload", EmitDefaultValue = false)]
         public OrderBuyerInfo Payload { get; set; }
 
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

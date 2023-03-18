@@ -236,7 +236,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="Order" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Order() { }
+        public Order() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Order" /> class.
         /// </summary>
@@ -998,6 +998,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.ElectronicInvoiceStatus == input.ElectronicInvoiceStatus ||
                     (this.ElectronicInvoiceStatus != null &&
                     this.ElectronicInvoiceStatus.Equals(input.ElectronicInvoiceStatus))
+                ) &&
+                (
+                    this.ItemApprovalTypes == input.ItemApprovalTypes ||
+                    this.ItemApprovalTypes != null
+                ) &&
+                (
+                    this.ItemApprovalStatus == input.ItemApprovalStatus ||
+                    this.ItemApprovalStatus != null
                 );
         }
 

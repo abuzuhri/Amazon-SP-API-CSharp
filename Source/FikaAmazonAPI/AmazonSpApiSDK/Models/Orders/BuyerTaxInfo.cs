@@ -27,23 +27,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="BuyerTaxInfo" /> class.
         /// </summary>
-        /// <param name="CompanyLegalName">The legal name of the company..</param>
-        /// <param name="TaxingRegion">The country or region imposing the tax..</param>
-        /// <param name="TaxClassifications">A list of tax classifications that apply to the order..</param>
-        public BuyerTaxInfo(string CompanyLegalName = default(string), string TaxingRegion = default(string), List<TaxClassification> TaxClassifications = default(List<TaxClassification>))
+        /// <param name="companyLegalName">The legal name of the company..</param>
+        /// <param name="taxingRegion">The country or region imposing the tax..</param>
+        /// <param name="taxClassifications">A list of tax classifications that apply to the order..</param>
+        public BuyerTaxInfo(string companyLegalName = default(string), string taxingRegion = default(string), List<TaxClassification> taxClassifications = default(List<TaxClassification>))
         {
-            this.CompanyLegalName = CompanyLegalName;
-            this.TaxingRegion = TaxingRegion;
-            this.TaxClassifications = TaxClassifications;
+            this.CompanyLegalName = companyLegalName;
+            this.TaxingRegion = taxingRegion;
+            this.TaxClassifications = taxClassifications;
         }
-
         public BuyerTaxInfo()
         {
             this.CompanyLegalName = default(string);
             this.TaxingRegion = default(string);
             this.TaxClassifications = default(List<TaxClassification>);
         }
-
         /// <summary>
         /// The legal name of the company.
         /// </summary>
@@ -84,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

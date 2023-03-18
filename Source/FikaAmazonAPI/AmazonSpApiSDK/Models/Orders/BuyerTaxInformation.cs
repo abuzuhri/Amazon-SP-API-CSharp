@@ -27,7 +27,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.BuyerTaxRegistrationId = buyerTaxRegistrationId;
             this.BuyerTaxOffice = buyerTaxOffice;
         }
-
+        public BuyerTaxInformation()
+        {
+        }
         /// <summary>
         /// Business buyer&#39;s company legal name.
         /// </summary>
@@ -155,4 +157,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             yield break;
         }
     }
+
 }
