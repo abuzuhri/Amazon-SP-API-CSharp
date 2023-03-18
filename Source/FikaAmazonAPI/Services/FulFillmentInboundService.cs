@@ -245,11 +245,11 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
-        public List<InboundShipmentItem> GetShipmentItems(ParameterGetShipmentItems parameterShipmentItems) =>
+        public InboundShipmentItemList GetShipmentItems(ParameterGetShipmentItems parameterShipmentItems) =>
             Task.Run(() => GetShipmentItemsAsync(parameterShipmentItems)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<InboundShipmentItem>> GetShipmentItemsAsync(ParameterGetShipmentItems parameterShipmentItems, CancellationToken cancellationToken = default)
+        public async Task<InboundShipmentItemList> GetShipmentItemsAsync(ParameterGetShipmentItems parameterShipmentItems, CancellationToken cancellationToken = default)
         {
-            var shipmentItemList = new List<InboundShipmentItem>();
+            var inboundShipmentItemList = new InboundShipmentItemList();
 
             var parameter = parameterShipmentItems.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipmentItems, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
@@ -257,23 +257,34 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetShipmentItemsResponse>(RateLimitType.FulFillmentInbound_GetShipmentItems, cancellationToken);
 
             var nextToken = response.Payload?.NextToken;
-            shipmentItemList = response.Payload?.ItemData;
+            inboundShipmentItemList = response.Payload?.ItemData;
             int PageCount = 1;
-            while (!string.IsNullOrEmpty(nextToken))
-            {
-                var orderPayload = await GetShipmentItemsByNextTokenAsync(nextToken, parameterShipmentItems, cancellationToken);
-                shipmentItemList.AddRange(orderPayload.ItemData);
-                nextToken = orderPayload.NextToken;
 
-                if (parameterShipmentItems.MaxNumberOfPages.HasValue)
+            if (parameterShipmentItems.MaxNumberOfPages.HasValue && parameterShipmentItems.MaxNumberOfPages.Value == 1)
+            {
+                inboundShipmentItemList.NextToken = nextToken;
+            }
+            else
+            {
+                while (!string.IsNullOrEmpty(nextToken))
                 {
-                    PageCount++;
-                    if (PageCount >= parameterShipmentItems.MaxNumberOfPages.Value)
-                        break;
+                    var orderPayload = await GetShipmentItemsByNextTokenAsync(nextToken, parameterShipmentItems, cancellationToken);
+                    inboundShipmentItemList.AddRange(orderPayload.ItemData);
+
+                    nextToken = orderPayload.NextToken;
+                    inboundShipmentItemList.NextToken = nextToken;
+
+                    if (parameterShipmentItems.MaxNumberOfPages.HasValue)
+                    {
+                        PageCount++;
+                        if (PageCount >= parameterShipmentItems.MaxNumberOfPages.Value)
+                            break;
+                    }
                 }
             }
 
-            return shipmentItemList;
+
+            return inboundShipmentItemList;
         }
 
         public async Task<GetShipmentItemsResult> GetShipmentItemsByNextTokenAsync(string nextToken, ParameterGetShipmentItems parameterShipmentItems, CancellationToken cancellationToken = default)

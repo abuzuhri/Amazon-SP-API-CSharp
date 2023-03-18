@@ -31,6 +31,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         {
         }
 
+        public string NextToken { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
