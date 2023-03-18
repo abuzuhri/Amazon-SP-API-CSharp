@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Utils;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,9 +27,14 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => PutListingsItemAsync(parameterPutListingItem)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListingsItemSubmissionResponse> PutListingsItemAsync(ParameterPutListingItem parameterPutListingItem, CancellationToken cancellationToken = default)
         {
+            if (parameterPutListingItem.marketplaceIds == null || parameterPutListingItem.marketplaceIds.Count == 0)
+            {
+                parameterPutListingItem.marketplaceIds = new List<string>() { AmazonCredential.MarketPlace.ID };
+            }
+
             parameterPutListingItem.Check();
             var queryParameters = parameterPutListingItem.getParameters();
-            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.Put, postJsonObj: parameterPutListingItem.listingsItemPutRequest, queryParameters: queryParameters, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.PutListingItem(parameterPutListingItem.sellerId, parameterPutListingItem.sku), RestSharp.Method.Put, queryParameters, postJsonObj: parameterPutListingItem.listingsItemPutRequest, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<ListingsItemSubmissionResponse>(RateLimitType.ListingsItem_PutListingsItem, cancellationToken);
             return response;
         }

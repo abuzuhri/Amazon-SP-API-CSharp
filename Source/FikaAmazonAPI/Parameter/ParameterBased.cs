@@ -30,6 +30,8 @@ namespace FikaAmazonAPI.Search
             foreach (PropertyInfo p in pi)
             {
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(IgnoreToAddParameterAttribute))) continue;
+                if (p.CustomAttributes.Any(x => x.AttributeType == typeof(PathParameterAttribute))) continue;
+                if (p.CustomAttributes.Any(x => x.AttributeType == typeof(BodyParameterAttribute))) continue;
                 var value = p.GetValue(this);
                 if (value != null)
                 {
@@ -48,7 +50,7 @@ namespace FikaAmazonAPI.Search
                     {
                         output = value.ToString();
                     }
-                    else if(p.PropertyType.IsEnum || IsNullableEnum(p.PropertyType))
+                    else if (p.PropertyType.IsEnum || IsNullableEnum(p.PropertyType))
                     {
                         output = value.ToString();
                     }
@@ -61,19 +63,19 @@ namespace FikaAmazonAPI.Search
                             output = string.Join(",", result);
                         }
                         else continue;
-                        
+
                     }
                     else
                     {
                         output = JsonConvert.SerializeObject(value);
                     }
-                    
+
 
                     var propName = p.Name;
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }
-                
+
             }
 
             return queryParameters;
