@@ -56,8 +56,9 @@ namespace FikaAmazonAPI.Services
 
         private void CreateRequest(string url, RestSharp.Method method)
         {
-            RequestClient = new RestClient(ApiBaseUrl);
-            RequestClient.UseNewtonsoftJson();
+            RequestClient = RestClientSingleton.GetRestClient(ApiBaseUrl);
+            // RequestClient = new RestClient(ApiBaseUrl);
+            // RequestClient.UseNewtonsoftJson();
             Request = new RestRequest(url, method);
         }
 
