@@ -23,7 +23,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
-            RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+            // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+            RestClient =
+                RestClientSingleton.GetRestClient(
+                    LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
         }
 
 
