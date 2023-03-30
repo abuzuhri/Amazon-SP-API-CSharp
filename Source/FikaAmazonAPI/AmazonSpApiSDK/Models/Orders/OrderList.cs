@@ -32,6 +32,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         }
 
         public string NextToken { get; set; }
+        public DateTime? LastUpdatedBefore { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
