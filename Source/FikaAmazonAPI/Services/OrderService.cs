@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using System;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
@@ -51,6 +52,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders, cancellationToken);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
+            if (!string.IsNullOrEmpty(response.Payload.LastUpdatedBefore))
+                orderList.LastUpdatedBefore = DateTime.Parse(response.Payload.LastUpdatedBefore);
+
             int PageCount = 1;
             if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
             {
