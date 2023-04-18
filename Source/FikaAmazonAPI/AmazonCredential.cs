@@ -23,12 +23,13 @@ namespace FikaAmazonAPI
         public bool IsDebugMode { get; set; }
         public string MarketPlaceID { get; set; }
         public string SellerID { get; set; }
+        public string ProxyAddress { get; set; }
 
         public AmazonCredential()
         {
             CacheTokenData = new CacheTokenData();
         }
-        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken)
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken, string ProxyAddress = null)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;
@@ -36,6 +37,7 @@ namespace FikaAmazonAPI
             this.ClientId = ClientId;
             this.ClientSecret = ClientSecret;
             this.RefreshToken = RefreshToken;
+            this.ProxyAddress = ProxyAddress;
             CacheTokenData = new CacheTokenData();
         }
 
