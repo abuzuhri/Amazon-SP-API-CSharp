@@ -97,6 +97,8 @@ For more information about keys please check [New Amazon doc for create keys Dev
 ---
 ## Usage
 
+> ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
+
 ### Configuration
 You can configure a connection like so please see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 ```CSharp
