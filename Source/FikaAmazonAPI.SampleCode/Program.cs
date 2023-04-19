@@ -27,6 +27,20 @@ namespace FikaAmazonAPI.SampleCode
                 SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
                 IsDebugMode = true
             });
+            
+            AmazonConnection amazonConnectionUsingAProxy = new AmazonConnection(new AmazonCredential()
+            {
+                AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
+                SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
+                RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
+                ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
+                ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
+                RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
+                MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
+                SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
+                IsDebugMode = true,
+                ProxyAddress = config.GetSection("FikaAmazonAPI:ProxyAddress").Value,
+            });
 
             var search = amazonConnection.ProductType.SearchDefinitionsProductTypes(new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter
             {

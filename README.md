@@ -125,6 +125,24 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ```
 
+### Configuration using a proxy
+>```csharp
+>AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+>{
+>     AccessKey = "AKIAXXXXXXXXXXXXXXX",
+>     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
+>     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     MarketPlaceID = "A2VIGQ35RCS4UG",
+>     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
+>});
+>```
+>> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
+>>
+>> ***This is not required and will operate normally without the ProxyAddress being set.***
+
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
 ParameterOrderList serachOrderList = new ParameterOrderList();
