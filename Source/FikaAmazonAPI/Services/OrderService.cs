@@ -186,13 +186,13 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public Address GetOrderAddress(string orderId) =>
+        public OrderAddress GetOrderAddress(string orderId) =>
             Task.Run(() => GetOrderAddressAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Address> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
+        public async Task<OrderAddress> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress, cancellationToken);
-            return response.Payload.ShippingAddress;
+            return response.Payload;
         }
 
         public bool UpdateShipmentStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
