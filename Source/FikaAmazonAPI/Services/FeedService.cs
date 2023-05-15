@@ -6,6 +6,7 @@ using FikaAmazonAPI.Parameter.Feed;
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -111,10 +112,11 @@ namespace FikaAmazonAPI.Services
         }
 
         [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public ProcessingReportMessage GetFeedDocumentProcessingReport(string url) =>
             Task.Run(() => GetFeedDocumentProcessingReportAsync(url)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        [Obsolete("Use GetFeedDocumentProcessingReportAsync as it handles compressed responses.")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public async Task<ProcessingReportMessage> GetFeedDocumentProcessingReportAsync(string url)
         {
             ProcessingReportMessage processingReport = null;
@@ -266,7 +268,7 @@ namespace FikaAmazonAPI.Services
             }
             else if (contentFormate == ContentFormate.AutoDetect)
             {
-                if (System.IO.Path.IsPathRooted(contentOrFilePath))
+                if (IsPathRooted(contentOrFilePath))
                 {
                     // The string looks like a file path, so try to read the file
                     if (System.IO.File.Exists(contentOrFilePath))
@@ -274,36 +276,11 @@ namespace FikaAmazonAPI.Services
                         bytes = System.IO.File.ReadAllBytes(contentOrFilePath);
                     }
                     else
-                    {
-                        // The file does not exist, so treat the string as content
-                        bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
-                    }
-                }
-                else if (Uri.IsWellFormedUriString(contentOrFilePath, UriKind.RelativeOrAbsolute))
-                {
-                    // The string looks like a URI, so try to parse it as a file URI
-                    var uri = new Uri(contentOrFilePath);
-                    if (uri.IsFile)
-                    {
-                        if (System.IO.File.Exists(uri.LocalPath))
-                        {
-                            bytes = System.IO.File.ReadAllBytes(uri.LocalPath);
-                        }
-                        else
-                        {
-                            // The file does not exist, so treat the string as content
-                            bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
-                        }
-                    }
-                    else
-                    {
-                        // The URI is not a file URI, so treat the string as content
-                        bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
-                    }
+                        throw new AmazonException("Feed File not exist");
                 }
                 else
                 {
-                    // The string is not a file path or a URI, so treat it as content
+                    // The file does not exist, so treat the string as content
                     bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
                 }
             }
@@ -325,6 +302,17 @@ namespace FikaAmazonAPI.Services
                 }
             }
             return null;
+        }
+
+        private bool IsPathRooted(string content)
+        {
+            if (string.IsNullOrEmpty(content))
+                return false;
+
+            if (content.Length > 255 || content.Contains("\n"))
+                return false;
+
+            return true;
         }
 
     }

@@ -37,27 +37,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Weight" /> class.
         /// </summary>
-        /// <param name="Value">The weight value. (required).</param>
-        /// <param name="Unit">Unit (required).</param>
-        public Weight(double Value = default(double), UnitOfWeight Unit = default(UnitOfWeight))
+        /// <param name="value">The weight value. (required).</param>
+        /// <param name="unit">unit (required).</param>
+        public Weight(double? value = default(double?), UnitOfWeight unit = default(UnitOfWeight))
         {
-            // to ensure "Value" is required (not null)
-            if (Value == null)
+            // to ensure "value" is required (not null)
+            if (value == null)
             {
-                throw new InvalidDataException("Value is a required property for Weight and cannot be null");
+                throw new InvalidDataException("value is a required property for Weight and cannot be null");
             }
             else
             {
-                this.Value = Value;
+                this.Value = value;
             }
-            // to ensure "Unit" is required (not null)
-            if (Unit == null)
+            // to ensure "unit" is required (not null)
+            if (unit == null)
             {
-                throw new InvalidDataException("Unit is a required property for Weight and cannot be null");
+                throw new InvalidDataException("unit is a required property for Weight and cannot be null");
             }
             else
             {
-                this.Unit = Unit;
+                this.Unit = unit;
             }
         }
 
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The weight value.</value>
         [DataMember(Name = "Value", EmitDefaultValue = false)]
-        public double Value { get; set; }
+        public double? Value { get; set; }
 
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -32,28 +32,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderItemBuyerInfo" /> class.
         /// </summary>
-        /// <param name="OrderItemId">An Amazon-defined order item identifier. (required).</param>
-        /// <param name="BuyerCustomizedInfo">Buyer information for custom orders from the Amazon Custom program..</param>
-        /// <param name="GiftWrapPrice">The gift wrap price of the item..</param>
-        /// <param name="GiftWrapTax">The tax on the gift wrap price..</param>
-        /// <param name="GiftMessageText">A gift message provided by the buyer..</param>
-        /// <param name="GiftWrapLevel">The gift wrap level specified by the buyer..</param>
-        public OrderItemBuyerInfo(string OrderItemId = default(string), BuyerCustomizedInfoDetail BuyerCustomizedInfo = default(BuyerCustomizedInfoDetail), Money GiftWrapPrice = default(Money), Money GiftWrapTax = default(Money), string GiftMessageText = default(string), string GiftWrapLevel = default(string))
+        /// <param name="orderItemId">An Amazon-defined order item identifier. (required).</param>
+        /// <param name="buyerCustomizedInfo">Buyer information for custom orders from the Amazon Custom program..</param>
+        /// <param name="giftWrapPrice">The gift wrap price of the item..</param>
+        /// <param name="giftWrapTax">The tax on the gift wrap price..</param>
+        /// <param name="giftMessageText">A gift message provided by the buyer..</param>
+        /// <param name="giftWrapLevel">The gift wrap level specified by the buyer..</param>
+        public OrderItemBuyerInfo(string orderItemId = default(string), BuyerCustomizedInfoDetail buyerCustomizedInfo = default(BuyerCustomizedInfoDetail), Money giftWrapPrice = default(Money), Money giftWrapTax = default(Money), string giftMessageText = default(string), string giftWrapLevel = default(string))
         {
-            // to ensure "OrderItemId" is required (not null)
-            if (OrderItemId == null)
+            // to ensure "orderItemId" is required (not null)
+            if (orderItemId == null)
             {
-                throw new InvalidDataException("OrderItemId is a required property for OrderItemBuyerInfo and cannot be null");
+                throw new InvalidDataException("orderItemId is a required property for OrderItemBuyerInfo and cannot be null");
             }
             else
             {
-                this.OrderItemId = OrderItemId;
+                this.OrderItemId = orderItemId;
             }
-            this.BuyerCustomizedInfo = BuyerCustomizedInfo;
-            this.GiftWrapPrice = GiftWrapPrice;
-            this.GiftWrapTax = GiftWrapTax;
-            this.GiftMessageText = GiftMessageText;
-            this.GiftWrapLevel = GiftWrapLevel;
+            this.BuyerCustomizedInfo = buyerCustomizedInfo;
+            this.GiftWrapPrice = giftWrapPrice;
+            this.GiftWrapTax = giftWrapTax;
+            this.GiftMessageText = giftMessageText;
+            this.GiftWrapLevel = giftWrapLevel;
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

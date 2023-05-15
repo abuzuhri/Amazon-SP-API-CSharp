@@ -27,18 +27,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// <summary>
         /// Initializes a new instance of the <see cref="FeePreview" /> class.
         /// </summary>
-        /// <param name="Asin">The Amazon Standard Identification Number (ASIN) value used to identify the item..</param>
-        /// <param name="Price">The price that the seller plans to charge for the item..</param>
-        /// <param name="FeeBreakdown">A list of the Small and Light fees for the item..</param>
-        /// <param name="TotalFees">The total fees charged if the item participated in the Small and Light program..</param>
-        /// <param name="Errors">One or more unexpected errors occurred during the getSmallAndLightFeePreview operation..</param>
-        public FeePreview(string Asin = default(string), MoneyType Price = default(MoneyType), List<FeeLineItem> FeeBreakdown = default(List<FeeLineItem>), MoneyType TotalFees = default(MoneyType), ErrorList Errors = default(ErrorList))
+        /// <param name="asin">The Amazon Standard Identification Number (ASIN) value used to identify the item..</param>
+        /// <param name="price">The price that the seller plans to charge for the item..</param>
+        /// <param name="feeBreakdown">A list of the Small and Light fees for the item..</param>
+        /// <param name="totalFees">The total fees charged if the item participated in the Small and Light program..</param>
+        /// <param name="errors">One or more unexpected errors occurred during the getSmallAndLightFeePreview operation..</param>
+        public FeePreview(string asin = default(string), MoneyType price = default(MoneyType), List<FeeLineItem> feeBreakdown = default(List<FeeLineItem>), MoneyType totalFees = default(MoneyType), List<Error> errors = default(List<Error>))
         {
-            this.Asin = Asin;
-            this.Price = Price;
-            this.FeeBreakdown = FeeBreakdown;
-            this.TotalFees = TotalFees;
-            this.Errors = Errors;
+            this.Asin = asin;
+            this.Price = price;
+            this.FeeBreakdown = feeBreakdown;
+            this.TotalFees = totalFees;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// </summary>
         /// <value>One or more unexpected errors occurred during the getSmallAndLightFeePreview operation.</value>
         [DataMember(Name = "errors", EmitDefaultValue = false)]
-        public ErrorList Errors { get; set; }
+        public List<Error> Errors { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -97,7 +97,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -145,8 +145,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight
                 ) &&
                 (
                     this.Errors == input.Errors ||
-                    (this.Errors != null &&
-                    this.Errors.Equals(input.Errors))
+                    this.Errors != null &&
+                    this.Errors.SequenceEqual(input.Errors)
                 );
         }
 

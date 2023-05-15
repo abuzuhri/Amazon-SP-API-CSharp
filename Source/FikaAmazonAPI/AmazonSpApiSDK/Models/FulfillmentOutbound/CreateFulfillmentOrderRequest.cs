@@ -11,6 +11,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
@@ -18,430 +19,430 @@ using System.Text;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 {
+  /// <summary>
+  /// The request body schema for the createFulfillmentOrder operation.
+  /// </summary>
+  [DataContract]
+  public partial class CreateFulfillmentOrderRequest : IEquatable<CreateFulfillmentOrderRequest>, IValidatableObject
+  {
     /// <summary>
-    /// The request body schema for the createFulfillmentOrder operation.
+    /// The shipping method for the fulfillment order.
     /// </summary>
-    [DataContract]
-    public partial class CreateFulfillmentOrderRequest : IEquatable<CreateFulfillmentOrderRequest>, IValidatableObject
+    /// <value>The shipping method for the fulfillment order.</value>
+    [DataMember(Name = "shippingSpeedCategory", EmitDefaultValue = false)]
+    public string ShippingSpeedCategory { get; set; }
+    /// <summary>
+    /// Gets or Sets FulfillmentAction
+    /// </summary>
+    [DataMember(Name = "fulfillmentAction", EmitDefaultValue = false)]
+    public FulfillmentAction? FulfillmentAction { get; set; }
+    /// <summary>
+    /// Gets or Sets FulfillmentPolicy
+    /// </summary>
+    [DataMember(Name = "fulfillmentPolicy", EmitDefaultValue = false)]
+    public FulfillmentPolicy? FulfillmentPolicy { get; set; }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CreateFulfillmentOrderRequest" /> class.
+    /// </summary>
+    [JsonConstructorAttribute]
+    public CreateFulfillmentOrderRequest() { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CreateFulfillmentOrderRequest" /> class.
+    /// </summary>
+    /// <param name="MarketplaceId">The marketplace the fulfillment order is placed against..</param>
+    /// <param name="SellerFulfillmentOrderId">A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use. (required).</param>
+    /// <param name="DisplayableOrderId">A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed. (required).</param>
+    /// <param name="DisplayableOrderDate">The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip. (required).</param>
+    /// <param name="DisplayableOrderComment">Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip. (required).</param>
+    /// <param name="ShippingSpeedCategory">The shipping method for the fulfillment order. (required).</param>
+    /// <param name="DeliveryWindow">DeliveryWindow.</param>
+    /// <param name="DestinationAddress">The destination address for the fulfillment order. (required).</param>
+    /// <param name="FulfillmentAction">FulfillmentAction.</param>
+    /// <param name="FulfillmentPolicy">FulfillmentPolicy.</param>
+    /// <param name="FulfillmentMethod">Indicates the intended recipient channel for the order..</param>
+    /// <param name="CODSettings">CODSettings.</param>
+    /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
+    /// <param name="NotificationEmailList">NotificationEmailList.</param>
+    /// <param name="FeatureConstraints">FeatureSettingsList</param>
+    /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity. (required).</param>
+    public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime DisplayableOrderDate = default(DateTime), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), FeatureConstraintsList FeatureConstraints = default(FeatureConstraintsList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
     {
-        /// <summary>
-        /// The shipping method for the fulfillment order.
-        /// </summary>
-        /// <value>The shipping method for the fulfillment order.</value>
-        [DataMember(Name = "shippingSpeedCategory", EmitDefaultValue = false)]
-        public string ShippingSpeedCategory { get; set; }
-        /// <summary>
-        /// Gets or Sets FulfillmentAction
-        /// </summary>
-        [DataMember(Name = "fulfillmentAction", EmitDefaultValue = false)]
-        public FulfillmentAction? FulfillmentAction { get; set; }
-        /// <summary>
-        /// Gets or Sets FulfillmentPolicy
-        /// </summary>
-        [DataMember(Name = "fulfillmentPolicy", EmitDefaultValue = false)]
-        public FulfillmentPolicy? FulfillmentPolicy { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CreateFulfillmentOrderRequest" /> class.
-        /// </summary>
-        [JsonConstructorAttribute]
-        public CreateFulfillmentOrderRequest() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CreateFulfillmentOrderRequest" /> class.
-        /// </summary>
-        /// <param name="MarketplaceId">The marketplace the fulfillment order is placed against..</param>
-        /// <param name="SellerFulfillmentOrderId">A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use. (required).</param>
-        /// <param name="DisplayableOrderId">A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed. (required).</param>
-        /// <param name="DisplayableOrderDate">The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip. (required).</param>
-        /// <param name="DisplayableOrderComment">Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip. (required).</param>
-        /// <param name="ShippingSpeedCategory">The shipping method for the fulfillment order. (required).</param>
-        /// <param name="DeliveryWindow">DeliveryWindow.</param>
-        /// <param name="DestinationAddress">The destination address for the fulfillment order. (required).</param>
-        /// <param name="FulfillmentAction">FulfillmentAction.</param>
-        /// <param name="FulfillmentPolicy">FulfillmentPolicy.</param>
-        /// <param name="FulfillmentMethod">Indicates the intended recipient channel for the order..</param>
-        /// <param name="CODSettings">CODSettings.</param>
-        /// <param name="ShipFromCountryCode">The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format..</param>
-        /// <param name="NotificationEmailList">NotificationEmailList.</param>
-        /// <param name="FeatureConstraints">FeatureSettingsList</param>
-        /// <param name="Items">A list of items to include in the fulfillment order preview, including quantity. (required).</param>
-        public CreateFulfillmentOrderRequest(string MarketplaceId = default(string), string SellerFulfillmentOrderId = default(string), string DisplayableOrderId = default(string), DateTime DisplayableOrderDate = default(DateTime), string DisplayableOrderComment = default(string), string ShippingSpeedCategory = null, DeliveryWindow DeliveryWindow = default(DeliveryWindow), Address DestinationAddress = default(Address), FulfillmentAction? FulfillmentAction = default(FulfillmentAction?), FulfillmentPolicy? FulfillmentPolicy = default(FulfillmentPolicy?), string FulfillmentMethod = default(string), CODSettings CODSettings = default(CODSettings), string ShipFromCountryCode = default(string), NotificationEmailList NotificationEmails = default(NotificationEmailList), FeatureConstraintsList FeatureConstraints = default(FeatureConstraintsList), CreateFulfillmentOrderItemList Items = default(CreateFulfillmentOrderItemList))
-        {
-            // to ensure "SellerFulfillmentOrderId" is required (not null)
-            if (SellerFulfillmentOrderId == null)
-            {
-                throw new InvalidDataException("SellerFulfillmentOrderId is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.SellerFulfillmentOrderId = SellerFulfillmentOrderId;
-            }
-            // to ensure "DisplayableOrderId" is required (not null)
-            if (DisplayableOrderId == null)
-            {
-                throw new InvalidDataException("DisplayableOrderId is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.DisplayableOrderId = DisplayableOrderId;
-            }
-            // to ensure "DisplayableOrderDate" is required (not null)
-            if (DisplayableOrderDate == null)
-            {
-                throw new InvalidDataException("DisplayableOrderDate is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.DisplayableOrderDate = DisplayableOrderDate;
-            }
-            // to ensure "DisplayableOrderComment" is required (not null)
-            if (DisplayableOrderComment == null)
-            {
-                throw new InvalidDataException("DisplayableOrderComment is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.DisplayableOrderComment = DisplayableOrderComment;
-            }
-            // to ensure "ShippingSpeedCategory" is required (not null)
-            if (ShippingSpeedCategory == null)
-            {
-                throw new InvalidDataException("ShippingSpeedCategory is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.ShippingSpeedCategory = ShippingSpeedCategory;
-            }
-            // to ensure "DestinationAddress" is required (not null)
-            if (DestinationAddress == null)
-            {
-                throw new InvalidDataException("DestinationAddress is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.DestinationAddress = DestinationAddress;
-            }
-            // to ensure "Items" is required (not null)
-            if (Items == null)
-            {
-                throw new InvalidDataException("Items is a required property for CreateFulfillmentOrderRequest and cannot be null");
-            }
-            else
-            {
-                this.Items = Items;
-            }
-            this.MarketplaceId = MarketplaceId;
-            this.DeliveryWindow = DeliveryWindow;
-            this.FulfillmentAction = FulfillmentAction;
-            this.FulfillmentPolicy = FulfillmentPolicy;
-            this.FulfillmentMethod = FulfillmentMethod;
-            this.CODSettings = CODSettings;
-            this.ShipFromCountryCode = ShipFromCountryCode;
-            this.NotificationEmails = NotificationEmails;
-            this.FeatureConstraints = FeatureConstraints;
-        }
-
-        /// <summary>
-        /// The marketplace the fulfillment order is placed against.
-        /// </summary>
-        /// <value>The marketplace the fulfillment order is placed against.</value>
-        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
-        public string MarketplaceId { get; set; }
-
-        /// <summary>
-        /// A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.
-        /// </summary>
-        /// <value>A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.</value>
-        [DataMember(Name = "sellerFulfillmentOrderId", EmitDefaultValue = false)]
-        public string SellerFulfillmentOrderId { get; set; }
-
-        /// <summary>
-        /// A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.
-        /// </summary>
-        /// <value>A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.</value>
-        [DataMember(Name = "displayableOrderId", EmitDefaultValue = false)]
-        public string DisplayableOrderId { get; set; }
-
-        /// <summary>
-        /// The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.
-        /// </summary>
-        /// <value>The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "displayableOrderDate", EmitDefaultValue = false)]
-        public DateTime DisplayableOrderDate { get; set; }
-
-        /// <summary>
-        /// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
-        /// </summary>
-        /// <value>Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.</value>
-        [DataMember(Name = "displayableOrderComment", EmitDefaultValue = false)]
-        public string DisplayableOrderComment { get; set; }
-
-
-        /// <summary>
-        /// Gets or Sets DeliveryWindow
-        /// </summary>
-        [DataMember(Name = "deliveryWindow", EmitDefaultValue = false)]
-        public DeliveryWindow DeliveryWindow { get; set; }
-
-        /// <summary>
-        /// The destination address for the fulfillment order.
-        /// </summary>
-        /// <value>The destination address for the fulfillment order.</value>
-        [DataMember(Name = "destinationAddress", EmitDefaultValue = false)]
-        public Address DestinationAddress { get; set; }
-
-
-
-        /// <summary>
-        /// Indicates the intended recipient channel for the order.
-        /// </summary>
-        /// <value>Indicates the intended recipient channel for the order.</value>
-        [DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
-        public string FulfillmentMethod { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CODSettings
-        /// </summary>
-        [DataMember(Name = "codSettings", EmitDefaultValue = false)]
-        public CODSettings CODSettings { get; set; }
-
-        /// <summary>
-        /// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
-        /// </summary>
-        /// <value>The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.</value>
-        [DataMember(Name = "shipFromCountryCode", EmitDefaultValue = false)]
-        public string ShipFromCountryCode { get; set; }
-
-        /// <summary>
-        /// Gets or Sets NotificationEmails
-        /// </summary>
-        [DataMember(Name = "notificationEmails", EmitDefaultValue = false)]
-        public NotificationEmailList NotificationEmails { get; set; }
-
-        /// <summary>
-        /// Gets or Sets FeatureConstraints
-        /// </summary>
-        [DataMember(Name = "featureConstraints", EmitDefaultValue = false)]
-        public FeatureConstraintsList FeatureConstraints { get; set; }
-
-        /// <summary>
-        /// A list of items to include in the fulfillment order preview, including quantity.
-        /// </summary>
-        /// <value>A list of items to include in the fulfillment order preview, including quantity.</value>
-        [DataMember(Name = "items", EmitDefaultValue = false)]
-        public CreateFulfillmentOrderItemList Items { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class CreateFulfillmentOrderRequest {\n");
-            sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
-            sb.Append("  SellerFulfillmentOrderId: ").Append(SellerFulfillmentOrderId).Append("\n");
-            sb.Append("  DisplayableOrderId: ").Append(DisplayableOrderId).Append("\n");
-            sb.Append("  DisplayableOrderDate: ").Append(DisplayableOrderDate).Append("\n");
-            sb.Append("  DisplayableOrderComment: ").Append(DisplayableOrderComment).Append("\n");
-            sb.Append("  ShippingSpeedCategory: ").Append(ShippingSpeedCategory).Append("\n");
-            sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
-            sb.Append("  DestinationAddress: ").Append(DestinationAddress).Append("\n");
-            sb.Append("  FulfillmentAction: ").Append(FulfillmentAction).Append("\n");
-            sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
-            sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
-            sb.Append("  CODSettings: ").Append(CODSettings).Append("\n");
-            sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
-            sb.Append("  NotificationEmails: ").Append(NotificationEmails).Append("\n");
-            sb.Append("  FeatureConstraints: ").Append(FeatureConstraints).Append("\n");
-            sb.Append("  Items: ").Append(Items).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CreateFulfillmentOrderRequest);
-        }
-
-        /// <summary>
-        /// Returns true if CreateFulfillmentOrderRequest instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CreateFulfillmentOrderRequest to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CreateFulfillmentOrderRequest input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.MarketplaceId == input.MarketplaceId ||
-                    (this.MarketplaceId != null &&
-                    this.MarketplaceId.Equals(input.MarketplaceId))
-                ) &&
-                (
-                    this.SellerFulfillmentOrderId == input.SellerFulfillmentOrderId ||
-                    (this.SellerFulfillmentOrderId != null &&
-                    this.SellerFulfillmentOrderId.Equals(input.SellerFulfillmentOrderId))
-                ) &&
-                (
-                    this.DisplayableOrderId == input.DisplayableOrderId ||
-                    (this.DisplayableOrderId != null &&
-                    this.DisplayableOrderId.Equals(input.DisplayableOrderId))
-                ) &&
-                (
-                    this.DisplayableOrderDate == input.DisplayableOrderDate ||
-                    (this.DisplayableOrderDate != null &&
-                    this.DisplayableOrderDate.Equals(input.DisplayableOrderDate))
-                ) &&
-                (
-                    this.DisplayableOrderComment == input.DisplayableOrderComment ||
-                    (this.DisplayableOrderComment != null &&
-                    this.DisplayableOrderComment.Equals(input.DisplayableOrderComment))
-                ) &&
-                (
-                    this.ShippingSpeedCategory == input.ShippingSpeedCategory ||
-                    (this.ShippingSpeedCategory != null &&
-                    this.ShippingSpeedCategory.Equals(input.ShippingSpeedCategory))
-                ) &&
-                (
-                    this.DeliveryWindow == input.DeliveryWindow ||
-                    (this.DeliveryWindow != null &&
-                    this.DeliveryWindow.Equals(input.DeliveryWindow))
-                ) &&
-                (
-                    this.DestinationAddress == input.DestinationAddress ||
-                    (this.DestinationAddress != null &&
-                    this.DestinationAddress.Equals(input.DestinationAddress))
-                ) &&
-                (
-                    this.FulfillmentAction == input.FulfillmentAction ||
-                    (this.FulfillmentAction != null &&
-                    this.FulfillmentAction.Equals(input.FulfillmentAction))
-                ) &&
-                (
-                    this.FulfillmentPolicy == input.FulfillmentPolicy ||
-                    (this.FulfillmentPolicy != null &&
-                    this.FulfillmentPolicy.Equals(input.FulfillmentPolicy))
-                ) &&
-                (
-                    this.FulfillmentMethod == input.FulfillmentMethod ||
-                    (this.FulfillmentMethod != null &&
-                    this.FulfillmentMethod.Equals(input.FulfillmentMethod))
-                ) &&
-                (
-                    this.CODSettings == input.CODSettings ||
-                    (this.CODSettings != null &&
-                    this.CODSettings.Equals(input.CODSettings))
-                ) &&
-                (
-                    this.ShipFromCountryCode == input.ShipFromCountryCode ||
-                    (this.ShipFromCountryCode != null &&
-                    this.ShipFromCountryCode.Equals(input.ShipFromCountryCode))
-                ) &&
-                (
-                    this.NotificationEmails == input.NotificationEmails ||
-                    (this.NotificationEmails != null &&
-                    this.NotificationEmails.Equals(input.NotificationEmails))
-                ) &&
-                (
-                    this.FeatureConstraints == input.FeatureConstraints ||
-                    (this.FeatureConstraints != null &&
-                    this.FeatureConstraints.Equals(input.FeatureConstraints))
-                ) &&
-                (
-                    this.Items == input.Items ||
-                    (this.Items != null &&
-                    this.Items.Equals(input.Items))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.MarketplaceId != null)
-                    hashCode = hashCode * 59 + this.MarketplaceId.GetHashCode();
-                if (this.SellerFulfillmentOrderId != null)
-                    hashCode = hashCode * 59 + this.SellerFulfillmentOrderId.GetHashCode();
-                if (this.DisplayableOrderId != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderId.GetHashCode();
-                if (this.DisplayableOrderDate != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderDate.GetHashCode();
-                if (this.DisplayableOrderComment != null)
-                    hashCode = hashCode * 59 + this.DisplayableOrderComment.GetHashCode();
-                if (this.ShippingSpeedCategory != null)
-                    hashCode = hashCode * 59 + this.ShippingSpeedCategory.GetHashCode();
-                if (this.DeliveryWindow != null)
-                    hashCode = hashCode * 59 + this.DeliveryWindow.GetHashCode();
-                if (this.DestinationAddress != null)
-                    hashCode = hashCode * 59 + this.DestinationAddress.GetHashCode();
-                if (this.FulfillmentAction != null)
-                    hashCode = hashCode * 59 + this.FulfillmentAction.GetHashCode();
-                if (this.FulfillmentPolicy != null)
-                    hashCode = hashCode * 59 + this.FulfillmentPolicy.GetHashCode();
-                if (this.FulfillmentMethod != null)
-                    hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
-                if (this.CODSettings != null)
-                    hashCode = hashCode * 59 + this.CODSettings.GetHashCode();
-                if (this.ShipFromCountryCode != null)
-                    hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
-                if (this.NotificationEmails != null)
-                    hashCode = hashCode * 59 + this.NotificationEmails.GetHashCode();
-                if (this.FeatureConstraints != null)
-                    hashCode = hashCode * 59 + this.FeatureConstraints.GetHashCode();
-                if (this.Items != null)
-                    hashCode = hashCode * 59 + this.Items.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            // SellerFulfillmentOrderId (string) maxLength
-            if (this.SellerFulfillmentOrderId != null && this.SellerFulfillmentOrderId.Length > 40)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SellerFulfillmentOrderId, length must be less than 40.", new[] { "SellerFulfillmentOrderId" });
-            }
-
-            // DisplayableOrderId (string) maxLength
-            if (this.DisplayableOrderId != null && this.DisplayableOrderId.Length > 40)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderId, length must be less than 40.", new[] { "DisplayableOrderId" });
-            }
-
-            // DisplayableOrderComment (string) maxLength
-            if (this.DisplayableOrderComment != null && this.DisplayableOrderComment.Length > 1000)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderComment, length must be less than 1000.", new[] { "DisplayableOrderComment" });
-            }
-
-            yield break;
-        }
+      // to ensure "SellerFulfillmentOrderId" is required (not null)
+      if (SellerFulfillmentOrderId == null)
+      {
+        throw new InvalidDataException("SellerFulfillmentOrderId is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.SellerFulfillmentOrderId = SellerFulfillmentOrderId;
+      }
+      // to ensure "DisplayableOrderId" is required (not null)
+      if (DisplayableOrderId == null)
+      {
+        throw new InvalidDataException("DisplayableOrderId is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.DisplayableOrderId = DisplayableOrderId;
+      }
+      // to ensure "DisplayableOrderDate" is required (not null)
+      if (DisplayableOrderDate == null)
+      {
+        throw new InvalidDataException("DisplayableOrderDate is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.DisplayableOrderDate = DisplayableOrderDate;
+      }
+      // to ensure "DisplayableOrderComment" is required (not null)
+      if (DisplayableOrderComment == null)
+      {
+        throw new InvalidDataException("DisplayableOrderComment is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.DisplayableOrderComment = DisplayableOrderComment;
+      }
+      // to ensure "ShippingSpeedCategory" is required (not null)
+      if (ShippingSpeedCategory == null)
+      {
+        throw new InvalidDataException("ShippingSpeedCategory is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.ShippingSpeedCategory = ShippingSpeedCategory;
+      }
+      // to ensure "DestinationAddress" is required (not null)
+      if (DestinationAddress == null)
+      {
+        throw new InvalidDataException("DestinationAddress is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.DestinationAddress = DestinationAddress;
+      }
+      // to ensure "Items" is required (not null)
+      if (Items == null)
+      {
+        throw new InvalidDataException("Items is a required property for CreateFulfillmentOrderRequest and cannot be null");
+      }
+      else
+      {
+        this.Items = Items;
+      }
+      this.MarketplaceId = MarketplaceId;
+      this.DeliveryWindow = DeliveryWindow;
+      this.FulfillmentAction = FulfillmentAction;
+      this.FulfillmentPolicy = FulfillmentPolicy;
+      this.FulfillmentMethod = FulfillmentMethod;
+      this.CODSettings = CODSettings;
+      this.ShipFromCountryCode = ShipFromCountryCode;
+      this.NotificationEmails = NotificationEmails;
+      this.FeatureConstraints = FeatureConstraints;
     }
+
+    /// <summary>
+    /// The marketplace the fulfillment order is placed against.
+    /// </summary>
+    /// <value>The marketplace the fulfillment order is placed against.</value>
+    [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
+    public string MarketplaceId { get; set; }
+
+    /// <summary>
+    /// A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.
+    /// </summary>
+    /// <value>A fulfillment order identifier that the seller creates to track their fulfillment order. The SellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates. If the seller&#39;s system already creates unique order identifiers, then these might be good values for them to use.</value>
+    [DataMember(Name = "sellerFulfillmentOrderId", EmitDefaultValue = false)]
+    public string SellerFulfillmentOrderId { get; set; }
+
+    /// <summary>
+    /// A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.
+    /// </summary>
+    /// <value>A fulfillment order identifier that the seller creates. This value displays as the order identifier in recipient-facing materials such as the outbound shipment packing slip. The value of DisplayableOrderId should match the order identifier that the seller provides to the recipient. The seller can use the SellerFulfillmentOrderId for this value or they can specify an alternate value if they want the recipient to reference an alternate order identifier.  The value must be an alpha-numeric or ISO 8859-1 compliant string from one to 40 characters in length. Cannot contain two spaces in a row. Leading and trailing white space is removed.</value>
+    [DataMember(Name = "displayableOrderId", EmitDefaultValue = false)]
+    public string DisplayableOrderId { get; set; }
+
+    /// <summary>
+    /// The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.
+    /// </summary>
+    /// <value>The date and time of the fulfillment order. Displays as the order date in recipient-facing materials such as the outbound shipment packing slip.</value>
+    [DataMember(Name = "displayableOrderDate", EmitDefaultValue = false)]
+    public DateTime DisplayableOrderDate { get; set; }
+
+    /// <summary>
+    /// Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.
+    /// </summary>
+    /// <value>Order-specific text that appears in recipient-facing materials such as the outbound shipment packing slip.</value>
+    [DataMember(Name = "displayableOrderComment", EmitDefaultValue = false)]
+    public string DisplayableOrderComment { get; set; }
+
+
+    /// <summary>
+    /// Gets or Sets DeliveryWindow
+    /// </summary>
+    [DataMember(Name = "deliveryWindow", EmitDefaultValue = false)]
+    public DeliveryWindow DeliveryWindow { get; set; }
+
+    /// <summary>
+    /// The destination address for the fulfillment order.
+    /// </summary>
+    /// <value>The destination address for the fulfillment order.</value>
+    [DataMember(Name = "destinationAddress", EmitDefaultValue = false)]
+    public Address DestinationAddress { get; set; }
+
+
+
+    /// <summary>
+    /// Indicates the intended recipient channel for the order.
+    /// </summary>
+    /// <value>Indicates the intended recipient channel for the order.</value>
+    [DataMember(Name = "FulfillmentMethod", EmitDefaultValue = false)]
+    public string FulfillmentMethod { get; set; }
+
+    /// <summary>
+    /// Gets or Sets CODSettings
+    /// </summary>
+    [DataMember(Name = "codSettings", EmitDefaultValue = false)]
+    public CODSettings CODSettings { get; set; }
+
+    /// <summary>
+    /// The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.
+    /// </summary>
+    /// <value>The two-character country code for the country from which the fulfillment order ships. Must be in ISO 3166-1 alpha-2 format.</value>
+    [DataMember(Name = "shipFromCountryCode", EmitDefaultValue = false)]
+    public string ShipFromCountryCode { get; set; }
+
+    /// <summary>
+    /// Gets or Sets NotificationEmails
+    /// </summary>
+    [DataMember(Name = "notificationEmails", EmitDefaultValue = false)]
+    public NotificationEmailList NotificationEmails { get; set; }
+
+    /// <summary>
+    /// Gets or Sets FeatureConstraints
+    /// </summary>
+    [DataMember(Name = "featureConstraints", EmitDefaultValue = false)]
+    public FeatureConstraintsList FeatureConstraints { get; set; }
+
+    /// <summary>
+    /// A list of items to include in the fulfillment order preview, including quantity.
+    /// </summary>
+    /// <value>A list of items to include in the fulfillment order preview, including quantity.</value>
+    [DataMember(Name = "items", EmitDefaultValue = false)]
+    public CreateFulfillmentOrderItemList Items { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
+    {
+      var sb = new StringBuilder();
+      sb.Append("class CreateFulfillmentOrderRequest {\n");
+      sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
+      sb.Append("  SellerFulfillmentOrderId: ").Append(SellerFulfillmentOrderId).Append("\n");
+      sb.Append("  DisplayableOrderId: ").Append(DisplayableOrderId).Append("\n");
+      sb.Append("  DisplayableOrderDate: ").Append(DisplayableOrderDate).Append("\n");
+      sb.Append("  DisplayableOrderComment: ").Append(DisplayableOrderComment).Append("\n");
+      sb.Append("  ShippingSpeedCategory: ").Append(ShippingSpeedCategory).Append("\n");
+      sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
+      sb.Append("  DestinationAddress: ").Append(DestinationAddress).Append("\n");
+      sb.Append("  FulfillmentAction: ").Append(FulfillmentAction).Append("\n");
+      sb.Append("  FulfillmentPolicy: ").Append(FulfillmentPolicy).Append("\n");
+      sb.Append("  FulfillmentMethod: ").Append(FulfillmentMethod).Append("\n");
+      sb.Append("  CODSettings: ").Append(CODSettings).Append("\n");
+      sb.Append("  ShipFromCountryCode: ").Append(ShipFromCountryCode).Append("\n");
+      sb.Append("  NotificationEmails: ").Append(NotificationEmails).Append("\n");
+      sb.Append("  FeatureConstraints: ").Append(FeatureConstraints).Append("\n");
+      sb.Append("  Items: ").Append(Items).Append("\n");
+      sb.Append("}\n");
+      return sb.ToString();
+    }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+      return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="input">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object input)
+    {
+      return this.Equals(input as CreateFulfillmentOrderRequest);
+    }
+
+    /// <summary>
+    /// Returns true if CreateFulfillmentOrderRequest instances are equal
+    /// </summary>
+    /// <param name="input">Instance of CreateFulfillmentOrderRequest to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(CreateFulfillmentOrderRequest input)
+    {
+      if (input == null)
+        return false;
+
+      return
+          (
+              this.MarketplaceId == input.MarketplaceId ||
+              (this.MarketplaceId != null &&
+              this.MarketplaceId.Equals(input.MarketplaceId))
+          ) &&
+          (
+              this.SellerFulfillmentOrderId == input.SellerFulfillmentOrderId ||
+              (this.SellerFulfillmentOrderId != null &&
+              this.SellerFulfillmentOrderId.Equals(input.SellerFulfillmentOrderId))
+          ) &&
+          (
+              this.DisplayableOrderId == input.DisplayableOrderId ||
+              (this.DisplayableOrderId != null &&
+              this.DisplayableOrderId.Equals(input.DisplayableOrderId))
+          ) &&
+          (
+              this.DisplayableOrderDate == input.DisplayableOrderDate ||
+              (this.DisplayableOrderDate != null &&
+              this.DisplayableOrderDate.Equals(input.DisplayableOrderDate))
+          ) &&
+          (
+              this.DisplayableOrderComment == input.DisplayableOrderComment ||
+              (this.DisplayableOrderComment != null &&
+              this.DisplayableOrderComment.Equals(input.DisplayableOrderComment))
+          ) &&
+          (
+              this.ShippingSpeedCategory == input.ShippingSpeedCategory ||
+              (this.ShippingSpeedCategory != null &&
+              this.ShippingSpeedCategory.Equals(input.ShippingSpeedCategory))
+          ) &&
+          (
+              this.DeliveryWindow == input.DeliveryWindow ||
+              (this.DeliveryWindow != null &&
+              this.DeliveryWindow.Equals(input.DeliveryWindow))
+          ) &&
+          (
+              this.DestinationAddress == input.DestinationAddress ||
+              (this.DestinationAddress != null &&
+              this.DestinationAddress.Equals(input.DestinationAddress))
+          ) &&
+          (
+              this.FulfillmentAction == input.FulfillmentAction ||
+              (this.FulfillmentAction != null &&
+              this.FulfillmentAction.Equals(input.FulfillmentAction))
+          ) &&
+          (
+              this.FulfillmentPolicy == input.FulfillmentPolicy ||
+              (this.FulfillmentPolicy != null &&
+              this.FulfillmentPolicy.Equals(input.FulfillmentPolicy))
+          ) &&
+          (
+              this.FulfillmentMethod == input.FulfillmentMethod ||
+              (this.FulfillmentMethod != null &&
+              this.FulfillmentMethod.Equals(input.FulfillmentMethod))
+          ) &&
+          (
+              this.CODSettings == input.CODSettings ||
+              (this.CODSettings != null &&
+              this.CODSettings.Equals(input.CODSettings))
+          ) &&
+          (
+              this.ShipFromCountryCode == input.ShipFromCountryCode ||
+              (this.ShipFromCountryCode != null &&
+              this.ShipFromCountryCode.Equals(input.ShipFromCountryCode))
+          ) &&
+          (
+              this.NotificationEmails == input.NotificationEmails ||
+              (this.NotificationEmails != null &&
+              this.NotificationEmails.Equals(input.NotificationEmails))
+          ) &&
+          (
+              this.FeatureConstraints == input.FeatureConstraints ||
+              (this.FeatureConstraints != null &&
+              this.FeatureConstraints.Equals(input.FeatureConstraints))
+          ) &&
+          (
+              this.Items == input.Items ||
+              (this.Items != null &&
+              this.Items.Equals(input.Items))
+          );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+      unchecked // Overflow is fine, just wrap
+      {
+        int hashCode = 41;
+        if (this.MarketplaceId != null)
+          hashCode = hashCode * 59 + this.MarketplaceId.GetHashCode();
+        if (this.SellerFulfillmentOrderId != null)
+          hashCode = hashCode * 59 + this.SellerFulfillmentOrderId.GetHashCode();
+        if (this.DisplayableOrderId != null)
+          hashCode = hashCode * 59 + this.DisplayableOrderId.GetHashCode();
+        if (this.DisplayableOrderDate != null)
+          hashCode = hashCode * 59 + this.DisplayableOrderDate.GetHashCode();
+        if (this.DisplayableOrderComment != null)
+          hashCode = hashCode * 59 + this.DisplayableOrderComment.GetHashCode();
+        if (this.ShippingSpeedCategory != null)
+          hashCode = hashCode * 59 + this.ShippingSpeedCategory.GetHashCode();
+        if (this.DeliveryWindow != null)
+          hashCode = hashCode * 59 + this.DeliveryWindow.GetHashCode();
+        if (this.DestinationAddress != null)
+          hashCode = hashCode * 59 + this.DestinationAddress.GetHashCode();
+        if (this.FulfillmentAction != null)
+          hashCode = hashCode * 59 + this.FulfillmentAction.GetHashCode();
+        if (this.FulfillmentPolicy != null)
+          hashCode = hashCode * 59 + this.FulfillmentPolicy.GetHashCode();
+        if (this.FulfillmentMethod != null)
+          hashCode = hashCode * 59 + this.FulfillmentMethod.GetHashCode();
+        if (this.CODSettings != null)
+          hashCode = hashCode * 59 + this.CODSettings.GetHashCode();
+        if (this.ShipFromCountryCode != null)
+          hashCode = hashCode * 59 + this.ShipFromCountryCode.GetHashCode();
+        if (this.NotificationEmails != null)
+          hashCode = hashCode * 59 + this.NotificationEmails.GetHashCode();
+        if (this.FeatureConstraints != null)
+          hashCode = hashCode * 59 + this.FeatureConstraints.GetHashCode();
+        if (this.Items != null)
+          hashCode = hashCode * 59 + this.Items.GetHashCode();
+        return hashCode;
+      }
+    }
+
+    /// <summary>
+    /// To validate all properties of the instance
+    /// </summary>
+    /// <param name="validationContext">Validation context</param>
+    /// <returns>Validation Result</returns>
+    IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+    {
+      // SellerFulfillmentOrderId (string) maxLength
+      if (this.SellerFulfillmentOrderId != null && this.SellerFulfillmentOrderId.Length > 40)
+      {
+        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SellerFulfillmentOrderId, length must be less than 40.", new[] { "SellerFulfillmentOrderId" });
+      }
+
+      // DisplayableOrderId (string) maxLength
+      if (this.DisplayableOrderId != null && this.DisplayableOrderId.Length > 40)
+      {
+        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderId, length must be less than 40.", new[] { "DisplayableOrderId" });
+      }
+
+      // DisplayableOrderComment (string) maxLength
+      if (this.DisplayableOrderComment != null && this.DisplayableOrderComment.Length > 1000)
+      {
+        yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DisplayableOrderComment, length must be less than 1000.", new[] { "DisplayableOrderComment" });
+      }
+
+      yield break;
+    }
+  }
 
 }

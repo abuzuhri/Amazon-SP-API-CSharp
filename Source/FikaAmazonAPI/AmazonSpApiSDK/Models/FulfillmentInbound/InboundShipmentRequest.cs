@@ -32,37 +32,37 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentRequest" /> class.
         /// </summary>
-        /// <param name="InboundShipmentHeader">InboundShipmentHeader (required).</param>
-        /// <param name="InboundShipmentItems">InboundShipmentItems (required).</param>
-        /// <param name="MarketplaceId">A marketplace identifier. Specifies the marketplace where the product would be stored. (required).</param>
-        public InboundShipmentRequest(InboundShipmentHeader InboundShipmentHeader = default(InboundShipmentHeader), InboundShipmentItemList InboundShipmentItems = default(InboundShipmentItemList), string MarketplaceId = default(string))
+        /// <param name="inboundShipmentHeader">inboundShipmentHeader (required).</param>
+        /// <param name="inboundShipmentItems">inboundShipmentItems (required).</param>
+        /// <param name="marketplaceId">A marketplace identifier. Specifies the marketplace where the product would be stored. (required).</param>
+        public InboundShipmentRequest(InboundShipmentHeader inboundShipmentHeader = default(InboundShipmentHeader), InboundShipmentItemList inboundShipmentItems = default(InboundShipmentItemList), string marketplaceId = default(string))
         {
-            // to ensure "InboundShipmentHeader" is required (not null)
-            if (InboundShipmentHeader == null)
+            // to ensure "inboundShipmentHeader" is required (not null)
+            if (inboundShipmentHeader == null)
             {
-                throw new InvalidDataException("InboundShipmentHeader is a required property for InboundShipmentRequest and cannot be null");
+                throw new InvalidDataException("inboundShipmentHeader is a required property for InboundShipmentRequest and cannot be null");
             }
             else
             {
-                this.InboundShipmentHeader = InboundShipmentHeader;
+                this.InboundShipmentHeader = inboundShipmentHeader;
             }
-            // to ensure "InboundShipmentItems" is required (not null)
-            if (InboundShipmentItems == null)
+            // to ensure "inboundShipmentItems" is required (not null)
+            if (inboundShipmentItems == null)
             {
-                throw new InvalidDataException("InboundShipmentItems is a required property for InboundShipmentRequest and cannot be null");
-            }
-            else
-            {
-                this.InboundShipmentItems = InboundShipmentItems;
-            }
-            // to ensure "MarketplaceId" is required (not null)
-            if (MarketplaceId == null)
-            {
-                throw new InvalidDataException("MarketplaceId is a required property for InboundShipmentRequest and cannot be null");
+                throw new InvalidDataException("inboundShipmentItems is a required property for InboundShipmentRequest and cannot be null");
             }
             else
             {
-                this.MarketplaceId = MarketplaceId;
+                this.InboundShipmentItems = inboundShipmentItems;
+            }
+            // to ensure "marketplaceId" is required (not null)
+            if (marketplaceId == null)
+            {
+                throw new InvalidDataException("marketplaceId is a required property for InboundShipmentRequest and cannot be null");
+            }
+            else
+            {
+                this.MarketplaceId = marketplaceId;
             }
         }
 
@@ -104,7 +104,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

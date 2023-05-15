@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         /// </summary>
         [DataMember(Name = "needFileJoining", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "needFileJoining")]
-        public string NeedFileJoining { get; set; }
+        public bool NeedFileJoining { get; set; }
 
         /// <summary>
         /// A list of the document types requested.

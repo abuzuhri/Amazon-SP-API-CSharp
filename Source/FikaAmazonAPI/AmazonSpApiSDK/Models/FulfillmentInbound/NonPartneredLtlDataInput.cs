@@ -32,27 +32,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredLtlDataInput" /> class.
         /// </summary>
-        /// <param name="CarrierName">The carrier that you are using for the inbound shipment. (required).</param>
-        /// <param name="ProNumber">ProNumber (required).</param>
-        public NonPartneredLtlDataInput(string CarrierName = default(string), string ProNumber = default(string))
+        /// <param name="carrierName">The carrier that you are using for the inbound shipment. (required).</param>
+        /// <param name="proNumber">proNumber (required).</param>
+        public NonPartneredLtlDataInput(string carrierName = default(string), string proNumber = default(string))
         {
-            // to ensure "CarrierName" is required (not null)
-            if (CarrierName == null)
+            // to ensure "carrierName" is required (not null)
+            if (carrierName == null)
             {
-                throw new InvalidDataException("CarrierName is a required property for NonPartneredLtlDataInput and cannot be null");
+                throw new InvalidDataException("carrierName is a required property for NonPartneredLtlDataInput and cannot be null");
             }
             else
             {
-                this.CarrierName = CarrierName;
+                this.CarrierName = carrierName;
             }
-            // to ensure "ProNumber" is required (not null)
-            if (ProNumber == null)
+            // to ensure "proNumber" is required (not null)
+            if (proNumber == null)
             {
-                throw new InvalidDataException("ProNumber is a required property for NonPartneredLtlDataInput and cannot be null");
+                throw new InvalidDataException("proNumber is a required property for NonPartneredLtlDataInput and cannot be null");
             }
             else
             {
-                this.ProNumber = ProNumber;
+                this.ProNumber = proNumber;
             }
         }
 
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

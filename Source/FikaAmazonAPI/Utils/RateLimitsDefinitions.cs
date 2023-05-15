@@ -9,13 +9,17 @@ namespace FikaAmazonAPI.Utils
             //This has to create a new list for each connection, so that rate limits are per seller, not overall.
             return new Dictionary<RateLimitType, RateLimits>()
             {
-              { RateLimitType.Order_GetOrders,                            new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_GetOrder,                             new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_GetOrderBuyerInfo,                    new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_GetOrderAddress,                      new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_GetOrderItems,                        new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_GetOrderItemsBuyerInfo,               new RateLimits(0.0055M, 20) },
-              { RateLimitType.Order_UpdateShipmentStatus,                 new RateLimits(0.0055M, 20) },
+              { RateLimitType.Order_GetOrders,                            new RateLimits(0.0167M, 20) },
+              { RateLimitType.Order_GetOrder,                             new RateLimits(0.0167M, 20) },
+              { RateLimitType.Order_GetOrderBuyerInfo,                    new RateLimits(0.0167M, 20) },
+              { RateLimitType.Order_GetOrderAddress,                      new RateLimits(0.0167M, 20) },
+              { RateLimitType.Order_GetOrderItems,                        new RateLimits(0.5M, 20) },
+              { RateLimitType.Order_GetOrderItemsBuyerInfo,               new RateLimits(0.5M, 30) },
+              { RateLimitType.Order_UpdateShipmentStatus,                 new RateLimits(5M, 15) },
+              { RateLimitType.Order_GetOrderRegulatedInfo,                new RateLimits(0.5M, 15) },
+              { RateLimitType.Order_UpdateVerificationStatus,             new RateLimits(0.5M, 30) },
+              { RateLimitType.Order_UpdateOrderItemsApprovals,            new RateLimits(5M, 15) },
+              { RateLimitType.Order_ShipmentConfirmation,                 new RateLimits(2M, 10) },
 
               { RateLimitType.Report_GetReports,                          new RateLimits(0.0222M, 10) },
               { RateLimitType.Report_GetReport,                           new RateLimits(2.0M, 15) },

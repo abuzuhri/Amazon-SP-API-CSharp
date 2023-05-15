@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOrdersResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getOrders operation..</param>
-        /// <param name="Errors">One or more unexpected errors occurred during the getOrders operation..</param>
-        public GetOrdersResponse(OrdersList Payload = default(OrdersList), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getOrders operation..</param>
+        /// <param name="errors">One or more unexpected errors occurred during the getOrders operation..</param>
+        public GetOrdersResponse(OrdersList payload = default(OrdersList), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
 
         public GetOrdersResponse()
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

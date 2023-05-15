@@ -26,18 +26,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransportDetailsResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getTransportDetails operation..</param>
-        /// <param name="Errors">Errors.</param>
-        public GetTransportDetailsResponse(GetTransportDetailsResult Payload = default(GetTransportDetailsResult), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getTransportDetails operation..</param>
+        /// <param name="errors">errors.</param>
+        public GetTransportDetailsResponse(GetTransportDetailsResult payload = default(GetTransportDetailsResult), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
         public GetTransportDetailsResponse()
         {
-            this.Payload = default(GetTransportDetailsResult);
-            this.Errors = default(ErrorList);
         }
+
         /// <summary>
         /// The payload for the getTransportDetails operation.
         /// </summary>
@@ -69,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

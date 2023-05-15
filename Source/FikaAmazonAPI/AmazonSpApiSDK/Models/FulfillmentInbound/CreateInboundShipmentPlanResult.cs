@@ -26,10 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInboundShipmentPlanResult" /> class.
         /// </summary>
-        /// <param name="InboundShipmentPlans">InboundShipmentPlans.</param>
-        public CreateInboundShipmentPlanResult(InboundShipmentPlanList InboundShipmentPlans = default(InboundShipmentPlanList))
+        /// <param name="inboundShipmentPlans">inboundShipmentPlans.</param>
+        public CreateInboundShipmentPlanResult(InboundShipmentPlanList inboundShipmentPlans = default(InboundShipmentPlanList))
         {
-            this.InboundShipmentPlans = InboundShipmentPlans;
+            this.InboundShipmentPlans = inboundShipmentPlans;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

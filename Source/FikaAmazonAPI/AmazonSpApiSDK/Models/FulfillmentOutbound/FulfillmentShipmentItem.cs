@@ -95,11 +95,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         [DataMember(Name = "PackageNumber", EmitDefaultValue = false)]
         public int? PackageNumber { get; set; }
 
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
+		/// <summary>
+		/// The serial number of the shipped item.
+		/// </summary>
+		/// <value>The serial number of the shipped item.</value>
+		[DataMember(Name = "SerialNumber", EmitDefaultValue = false)]
+		public string SerialNumber { get; set; }
+
+		/// <summary>
+		/// Returns the string presentation of the object
+		/// </summary>
+		/// <returns>String presentation of the object</returns>
+		public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append("class FulfillmentShipmentItem {\n");
@@ -107,7 +114,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             sb.Append("  SellerFulfillmentOrderItemId: ").Append(SellerFulfillmentOrderItemId).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  PackageNumber: ").Append(PackageNumber).Append("\n");
-            sb.Append("}\n");
+			sb.Append("  SerialNumber: ").Append(SerialNumber).Append("\n");
+			sb.Append("}\n");
             return sb.ToString();
         }
 
@@ -153,14 +161,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 ) &&
                 (
                     this.Quantity == input.Quantity ||
-                    (this.Quantity != null &&
-                    this.Quantity.Equals(input.Quantity))
+                    (this.Quantity.Equals(input.Quantity))
                 ) &&
                 (
                     this.PackageNumber == input.PackageNumber ||
                     (this.PackageNumber != null &&
                     this.PackageNumber.Equals(input.PackageNumber))
-                );
+				) &&
+				(
+					this.SerialNumber == input.SerialNumber ||
+					(this.SerialNumber != null &&
+					this.SerialNumber.Equals(input.SerialNumber))
+				);
         }
 
         /// <summary>
@@ -176,11 +188,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                     hashCode = hashCode * 59 + this.SellerSKU.GetHashCode();
                 if (this.SellerFulfillmentOrderItemId != null)
                     hashCode = hashCode * 59 + this.SellerFulfillmentOrderItemId.GetHashCode();
-                if (this.Quantity != null)
-                    hashCode = hashCode * 59 + this.Quantity.GetHashCode();
+                hashCode = hashCode * 59 + this.Quantity.GetHashCode();
                 if (this.PackageNumber != null)
                     hashCode = hashCode * 59 + this.PackageNumber.GetHashCode();
-                return hashCode;
+				if (this.SerialNumber != null)
+					hashCode = hashCode * 59 + this.SerialNumber.GetHashCode();
+				return hashCode;
             }
         }
 

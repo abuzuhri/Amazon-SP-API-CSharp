@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmPreorderResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the confirmPreorder operation..</param>
-        /// <param name="Errors">Errors.</param>
-        public ConfirmPreorderResponse(ConfirmPreorderResult Payload = default(ConfirmPreorderResult), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the confirmPreorder operation..</param>
+        /// <param name="errors">errors.</param>
+        public ConfirmPreorderResponse(ConfirmPreorderResult payload = default(ConfirmPreorderResult), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
         public ConfirmPreorderResponse()
         {
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

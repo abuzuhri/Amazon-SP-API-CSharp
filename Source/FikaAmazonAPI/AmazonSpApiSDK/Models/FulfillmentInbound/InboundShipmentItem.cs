@@ -32,40 +32,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentItem" /> class.
         /// </summary>
-        /// <param name="ShipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation..</param>
-        /// <param name="SellerSKU">The seller SKU of the item. (required).</param>
-        /// <param name="FulfillmentNetworkSKU">Amazon&#39;s fulfillment network SKU of the item..</param>
-        /// <param name="QuantityShipped">The item quantity that you are shipping. (required).</param>
-        /// <param name="QuantityReceived">The item quantity that has been received at an Amazon fulfillment center..</param>
-        /// <param name="QuantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
-        /// <param name="ReleaseDate">The date that a pre-order item will be available for sale..</param>
-        /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentItem(string ShipmentId = default(string), string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int QuantityShipped = default(int), int QuantityReceived = default(int), int QuantityInCase = default(int), string ReleaseDate = default(string), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        /// <param name="shipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation..</param>
+        /// <param name="sellerSKU">The seller SKU of the item. (required).</param>
+        /// <param name="fulfillmentNetworkSKU">Amazon&#39;s fulfillment network SKU of the item..</param>
+        /// <param name="quantityShipped">The item quantity that you are shipping. (required).</param>
+        /// <param name="quantityReceived">The item quantity that has been received at an Amazon fulfillment center..</param>
+        /// <param name="quantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
+        /// <param name="releaseDate">The date that a pre-order item will be available for sale..</param>
+        /// <param name="prepDetailsList">prepDetailsList.</param>
+        public InboundShipmentItem(string shipmentId = default(string), string sellerSKU = default(string), string fulfillmentNetworkSKU = default(string), int? quantityShipped = default(int?), int? quantityReceived = default(int?), int? quantityInCase = default(int?), DateTime? releaseDate = default(DateTime?), PrepDetailsList prepDetailsList = default(PrepDetailsList))
         {
-            // to ensure "SellerSKU" is required (not null)
-            if (SellerSKU == null)
+            // to ensure "sellerSKU" is required (not null)
+            if (sellerSKU == null)
             {
-                throw new InvalidDataException("SellerSKU is a required property for InboundShipmentItem and cannot be null");
+                throw new InvalidDataException("sellerSKU is a required property for InboundShipmentItem and cannot be null");
             }
             else
             {
-                this.SellerSKU = SellerSKU;
+                this.SellerSKU = sellerSKU;
             }
-            // to ensure "QuantityShipped" is required (not null)
-            if (QuantityShipped == null)
+            // to ensure "quantityShipped" is required (not null)
+            if (quantityShipped == null)
             {
-                throw new InvalidDataException("QuantityShipped is a required property for InboundShipmentItem and cannot be null");
+                throw new InvalidDataException("quantityShipped is a required property for InboundShipmentItem and cannot be null");
             }
             else
             {
-                this.QuantityShipped = QuantityShipped;
+                this.QuantityShipped = quantityShipped;
             }
-            this.ShipmentId = ShipmentId;
-            this.FulfillmentNetworkSKU = FulfillmentNetworkSKU;
-            this.QuantityReceived = QuantityReceived;
-            this.QuantityInCase = QuantityInCase;
-            this.ReleaseDate = ReleaseDate;
-            this.PrepDetailsList = PrepDetailsList;
+            this.ShipmentId = shipmentId;
+            this.FulfillmentNetworkSKU = fulfillmentNetworkSKU;
+            this.QuantityReceived = quantityReceived;
+            this.QuantityInCase = quantityInCase;
+            this.ReleaseDate = releaseDate;
+            this.PrepDetailsList = prepDetailsList;
         }
 
         /// <summary>
@@ -94,28 +94,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The item quantity that you are shipping.</value>
         [DataMember(Name = "QuantityShipped", EmitDefaultValue = false)]
-        public int QuantityShipped { get; set; }
+        public int? QuantityShipped { get; set; }
 
         /// <summary>
         /// The item quantity that has been received at an Amazon fulfillment center.
         /// </summary>
         /// <value>The item quantity that has been received at an Amazon fulfillment center.</value>
         [DataMember(Name = "QuantityReceived", EmitDefaultValue = false)]
-        public int QuantityReceived { get; set; }
+        public int? QuantityReceived { get; set; }
 
         /// <summary>
         /// The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.
         /// </summary>
         /// <value>The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of boxes in the inbound shipment equals QuantityShipped. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipment or the updateInboundShipment operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.</value>
         [DataMember(Name = "QuantityInCase", EmitDefaultValue = false)]
-        public int QuantityInCase { get; set; }
+        public int? QuantityInCase { get; set; }
 
         /// <summary>
         /// The date that a pre-order item will be available for sale.
         /// </summary>
         /// <value>The date that a pre-order item will be available for sale.</value>
         [DataMember(Name = "ReleaseDate", EmitDefaultValue = false)]
-        public string ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PrepDetailsList
@@ -147,7 +147,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

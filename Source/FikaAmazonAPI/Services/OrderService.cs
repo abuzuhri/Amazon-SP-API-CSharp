@@ -1,4 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using System;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
@@ -51,6 +52,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders, cancellationToken);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
+            if (!string.IsNullOrWhiteSpace(response.Payload.LastUpdatedBefore))
+                orderList.LastUpdatedBefore = DateTime.Parse(response.Payload.LastUpdatedBefore);
+
             int PageCount = 1;
             if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
             {
@@ -60,7 +64,7 @@ namespace FikaAmazonAPI.Services
             {
                 while (!string.IsNullOrEmpty(nextToken))
                 {
-					var orderPayload = await GetGetOrdersByNextTokenAsync(nextToken, searchOrderList, cancellationToken);
+                    var orderPayload = await GetGetOrdersByNextTokenAsync(nextToken, searchOrderList, cancellationToken);
                     orderList.AddRange(orderPayload.Orders);
                     nextToken = orderPayload.NextToken;
 
@@ -182,13 +186,66 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public Address GetOrderAddress(string orderId) =>
+        public OrderAddress GetOrderAddress(string orderId) =>
             Task.Run(() => GetOrderAddressAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Address> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
+        public async Task<OrderAddress> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress, cancellationToken);
-            return response.Payload.ShippingAddress;
+            return response.Payload;
+        }
+
+        public bool UpdateShipmentStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
+            Task.Run(() => UpdateShipmentStatusAsync(orderId, updateShipmentStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> UpdateShipmentStatusAsync(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateShipmentStatus(orderId), RestSharp.Method.Post, postJsonObj: updateShipmentStatusRequest, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
+            return true;
+        }
+
+
+        public OrderRegulatedInfo GetOrderRegulatedInfo(string orderId) =>
+            Task.Run(() => GetOrderRegulatedInfoAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<OrderRegulatedInfo> GetOrderRegulatedInfoAsync(string orderId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.GetOrderRegulatedInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetOrderRegulatedInfoResponse>(Utils.RateLimitType.Order_GetOrderRegulatedInfo, cancellationToken);
+            return response.Payload;
+        }
+
+        public bool UpdateVerificationStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
+            Task.Run(() => UpdateVerificationStatusAsync(orderId, updateShipmentStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateVerificationStatus(orderId), RestSharp.Method.Patch, postJsonObj: updateShipmentStatusRequest, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
+            return true;
+        }
+
+
+        public OrderApprovalsResponse GetOrderItemsApprovals(ParameterGetOrderItemsApprovals parameterGetOrderItemsApprovals) =>
+            Task.Run(() => GetOrderItemsApprovalsAsync(parameterGetOrderItemsApprovals)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<OrderApprovalsResponse> GetOrderItemsApprovalsAsync(ParameterGetOrderItemsApprovals parameterGetOrderItemsApprovals, CancellationToken cancellationToken = default)
+        {
+            var queryParameters = parameterGetOrderItemsApprovals.getParameters();
+
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.GetOrderItemsApprovals(parameterGetOrderItemsApprovals.OrderId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetOrderApprovalsResponse>(Utils.RateLimitType.Order_GetOrderRegulatedInfo, cancellationToken);
+            return response.Payload;
+        }
+
+
+        public bool ConfirmShipment(string orderId, ConfirmShipmentRequest confirmShipmentRequest) =>
+            Task.Run(() => ConfirmShipmentAsync(orderId, confirmShipmentRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> ConfirmShipmentAsync(string orderId, ConfirmShipmentRequest confirmShipmentRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.ConfirmShipment(orderId), RestSharp.Method.Post, postJsonObj: confirmShipmentRequest, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
+            return true;
         }
     }
 }

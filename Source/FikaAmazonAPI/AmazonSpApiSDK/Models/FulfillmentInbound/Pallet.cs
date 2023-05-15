@@ -32,30 +32,30 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Pallet" /> class.
         /// </summary>
-        /// <param name="Dimensions">The dimensions of the pallet. Length and width must be 40 inches by 48 inches. Height must be less than or equal to 60 inches. (required).</param>
-        /// <param name="Weight">The weight of the pallet..</param>
-        /// <param name="IsStacked">Indicates whether pallets will be stacked when carrier arrives for pick-up. (required).</param>
-        public Pallet(Dimensions Dimensions = default(Dimensions), Weight Weight = default(Weight), bool? IsStacked = default(bool?))
+        /// <param name="dimensions">The dimensions of the pallet. Length and width must be 40 inches by 48 inches. Height must be less than or equal to 60 inches. (required).</param>
+        /// <param name="weight">The weight of the pallet..</param>
+        /// <param name="isStacked">Indicates whether pallets will be stacked when carrier arrives for pick-up. (required).</param>
+        public Pallet(Dimensions dimensions = default(Dimensions), Weight weight = default(Weight), bool? isStacked = default(bool?))
         {
-            // to ensure "Dimensions" is required (not null)
-            if (Dimensions == null)
+            // to ensure "dimensions" is required (not null)
+            if (dimensions == null)
             {
-                throw new InvalidDataException("Dimensions is a required property for Pallet and cannot be null");
+                throw new InvalidDataException("dimensions is a required property for Pallet and cannot be null");
             }
             else
             {
-                this.Dimensions = Dimensions;
+                this.Dimensions = dimensions;
             }
-            // to ensure "IsStacked" is required (not null)
-            if (IsStacked == null)
+            // to ensure "isStacked" is required (not null)
+            if (isStacked == null)
             {
-                throw new InvalidDataException("IsStacked is a required property for Pallet and cannot be null");
+                throw new InvalidDataException("isStacked is a required property for Pallet and cannot be null");
             }
             else
             {
-                this.IsStacked = IsStacked;
+                this.IsStacked = isStacked;
             }
-            this.Weight = Weight;
+            this.Weight = weight;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -11,6 +11,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
@@ -37,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <param name="EarliestArrivalDate">The earliest date that the shipment is expected to arrive at its destination. (required).</param>
         /// <param name="LatestArrivalDate">The latest date that the shipment is expected to arrive at its destination, in ISO 8601 date time format. (required).</param>
         /// <param name="FulfillmentPreviewItems">Information about the items in the shipment. (required).</param>
-        public FulfillmentPreviewShipment(Timestamp EarliestShipDate = default(Timestamp), Timestamp LatestShipDate = default(Timestamp), Timestamp EarliestArrivalDate = default(Timestamp), Timestamp LatestArrivalDate = default(Timestamp), FulfillmentPreviewItemList FulfillmentPreviewItems = default(FulfillmentPreviewItemList))
+        public FulfillmentPreviewShipment(DateTime? EarliestShipDate = default(DateTime?), DateTime? LatestShipDate = default(DateTime?), DateTime? EarliestArrivalDate = default(DateTime?), DateTime? LatestArrivalDate = default(DateTime?), FulfillmentPreviewItemList FulfillmentPreviewItems = default(FulfillmentPreviewItemList))
         {
             // to ensure "EarliestShipDate" is required (not null)
             if (EarliestShipDate == null)
@@ -46,7 +47,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.EarliestShipDate = EarliestShipDate;
+                this.EarliestShipDateTime = EarliestShipDate.Value;
             }
             // to ensure "LatestShipDate" is required (not null)
             if (LatestShipDate == null)
@@ -55,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.LatestShipDate = LatestShipDate;
+                this.LatestShipDateTime = LatestShipDate.Value;
             }
             // to ensure "EarliestArrivalDate" is required (not null)
             if (EarliestArrivalDate == null)
@@ -64,7 +65,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.EarliestArrivalDate = EarliestArrivalDate;
+                this.EarliestArrivalDateTime = EarliestArrivalDate.Value;
             }
             // to ensure "LatestArrivalDate" is required (not null)
             if (LatestArrivalDate == null)
@@ -73,7 +74,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             }
             else
             {
-                this.LatestArrivalDate = LatestArrivalDate;
+                this.LatestArrivalDateTime = LatestArrivalDate.Value;
             }
             // to ensure "FulfillmentPreviewItems" is required (not null)
             if (FulfillmentPreviewItems == null)
@@ -85,40 +86,56 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
                 this.FulfillmentPreviewItems = FulfillmentPreviewItems;
             }
         }
+        [Obsolete("Timestamp is no longer used, use the other constructor")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+		public FulfillmentPreviewShipment(Timestamp EarliestShipDate = default(Timestamp), Timestamp LatestShipDate = default(Timestamp), Timestamp EarliestArrivalDate = default(Timestamp), Timestamp LatestArrivalDate = default(Timestamp), FulfillmentPreviewItemList FulfillmentPreviewItems = default(FulfillmentPreviewItemList)) 
+            : this(DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, FulfillmentPreviewItems) { }
 
-        /// <summary>
-        /// The earliest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.
-        /// </summary>
-        /// <value>The earliest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.</value>
-        [DataMember(Name = "EarliestShipDate", EmitDefaultValue = false)]
-        public Timestamp EarliestShipDate { get; set; }
+		/// <summary>
+		/// The earliest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.
+		/// </summary>
+		/// <value>The earliest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.</value>
+		[DataMember(Name = "EarliestShipDate", EmitDefaultValue = false)]
+        public DateTime EarliestShipDateTime { get; set; }
+		[Obsolete("Use EarliestShipDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Timestamp EarliestShipDate { get; set; }
 
-        /// <summary>
-        /// The latest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.
-        /// </summary>
-        /// <value>The latest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.</value>
-        [DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
-        public Timestamp LatestShipDate { get; set; }
+		/// <summary>
+		/// The latest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.
+		/// </summary>
+		/// <value>The latest date that the shipment is expected to be sent from the fulfillment center, in ISO 8601 date time format.</value>
+		[DataMember(Name = "LatestShipDate", EmitDefaultValue = false)]
+        public DateTime LatestShipDateTime { get; set; }
+		[Obsolete("Use LatestShipDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Timestamp LatestShipDate { get; set; }
 
-        /// <summary>
-        /// The earliest date that the shipment is expected to arrive at its destination.
-        /// </summary>
-        /// <value>The earliest date that the shipment is expected to arrive at its destination.</value>
-        [DataMember(Name = "EarliestArrivalDate", EmitDefaultValue = false)]
-        public Timestamp EarliestArrivalDate { get; set; }
+		/// <summary>
+		/// The earliest date that the shipment is expected to arrive at its destination.
+		/// </summary>
+		/// <value>The earliest date that the shipment is expected to arrive at its destination.</value>
+		[DataMember(Name = "EarliestArrivalDate", EmitDefaultValue = false)]
+        public DateTime EarliestArrivalDateTime { get; set; }
+		[Obsolete("Use EarliestArrivalDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Timestamp EarliestArrivalDate { get; set; }
 
-        /// <summary>
-        /// The latest date that the shipment is expected to arrive at its destination, in ISO 8601 date time format.
-        /// </summary>
-        /// <value>The latest date that the shipment is expected to arrive at its destination, in ISO 8601 date time format.</value>
-        [DataMember(Name = "LatestArrivalDate", EmitDefaultValue = false)]
-        public Timestamp LatestArrivalDate { get; set; }
+		/// <summary>
+		/// The latest date that the shipment is expected to arrive at its destination, in ISO 8601 date time format.
+		/// </summary>
+		/// <value>The latest date that the shipment is expected to arrive at its destination, in ISO 8601 date time format.</value>
+		[DataMember(Name = "LatestArrivalDate", EmitDefaultValue = false)]
+        public DateTime LatestArrivalDateTime { get; set; }
+		[Obsolete("Use LatestArrivalDateTime instead")]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Timestamp LatestArrivalDate { get; set; }
 
-        /// <summary>
-        /// Information about the items in the shipment.
-        /// </summary>
-        /// <value>Information about the items in the shipment.</value>
-        [DataMember(Name = "FulfillmentPreviewItems", EmitDefaultValue = false)]
+		/// <summary>
+		/// Information about the items in the shipment.
+		/// </summary>
+		/// <value>Information about the items in the shipment.</value>
+		[DataMember(Name = "FulfillmentPreviewItems", EmitDefaultValue = false)]
         public FulfillmentPreviewItemList FulfillmentPreviewItems { get; set; }
 
         /// <summary>
@@ -129,10 +146,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         {
             var sb = new StringBuilder();
             sb.Append("class FulfillmentPreviewShipment {\n");
-            sb.Append("  EarliestShipDate: ").Append(EarliestShipDate).Append("\n");
-            sb.Append("  LatestShipDate: ").Append(LatestShipDate).Append("\n");
-            sb.Append("  EarliestArrivalDate: ").Append(EarliestArrivalDate).Append("\n");
-            sb.Append("  LatestArrivalDate: ").Append(LatestArrivalDate).Append("\n");
+            sb.Append("  EarliestShipDateTime: ").Append(EarliestShipDateTime).Append("\n");
+            sb.Append("  LatestShipDateTime: ").Append(LatestShipDateTime).Append("\n");
+            sb.Append("  EarliestArrivalDateTime: ").Append(EarliestArrivalDateTime).Append("\n");
+            sb.Append("  LatestArrivalDateTime: ").Append(LatestArrivalDateTime).Append("\n");
             sb.Append("  FulfillmentPreviewItems: ").Append(FulfillmentPreviewItems).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -169,24 +186,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
 
             return
                 (
-                    this.EarliestShipDate == input.EarliestShipDate ||
-                    (this.EarliestShipDate != null &&
-                    this.EarliestShipDate.Equals(input.EarliestShipDate))
+                    this.EarliestShipDateTime == input.EarliestShipDateTime ||
+                    (this.EarliestShipDateTime.Equals(input.EarliestShipDateTime))
                 ) &&
                 (
-                    this.LatestShipDate == input.LatestShipDate ||
-                    (this.LatestShipDate != null &&
-                    this.LatestShipDate.Equals(input.LatestShipDate))
+                    this.LatestShipDateTime == input.LatestShipDateTime ||
+                    (this.LatestShipDateTime.Equals(input.LatestShipDateTime))
                 ) &&
                 (
-                    this.EarliestArrivalDate == input.EarliestArrivalDate ||
-                    (this.EarliestArrivalDate != null &&
-                    this.EarliestArrivalDate.Equals(input.EarliestArrivalDate))
+                    this.EarliestArrivalDateTime == input.EarliestArrivalDateTime ||
+                    (this.EarliestArrivalDateTime.Equals(input.EarliestArrivalDateTime))
                 ) &&
                 (
-                    this.LatestArrivalDate == input.LatestArrivalDate ||
-                    (this.LatestArrivalDate != null &&
-                    this.LatestArrivalDate.Equals(input.LatestArrivalDate))
+                    this.LatestArrivalDateTime == input.LatestArrivalDateTime ||
+                    (this.LatestArrivalDateTime.Equals(input.LatestArrivalDateTime))
                 ) &&
                 (
                     this.FulfillmentPreviewItems == input.FulfillmentPreviewItems ||

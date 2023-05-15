@@ -102,7 +102,13 @@ namespace FikaAmazonAPI.SampleCode
 
         public void GetOrderAddress()
         {
+            // This method has been changed and is a breaking change
+            // If you would like the default behavior please reference the 
+            // ShippingAddress variable
             var Address = amazonConnection.Orders.GetOrderAddress("402-0467973-4229120");
+            var BuyerCompanyName = Address.BuyerCompanyName;
+            var ShippingAddress = Address.ShippingAddress;
+            var DeliveryPreferences = Address.DeliveryPreferences;
         }
 
 

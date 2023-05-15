@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmPreorderResult" /> class.
         /// </summary>
-        /// <param name="ConfirmedNeedByDate">Date passed in with the NeedByDate parameter. The confirmed shipment must arrive at the Amazon fulfillment center by this date to avoid delivery promise breaks for pre-ordered items. In YYYY-MM-DD format..</param>
-        /// <param name="ConfirmedFulfillableDate">Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format..</param>
-        public ConfirmPreorderResult(string ConfirmedNeedByDate = default(string), string ConfirmedFulfillableDate = default(string))
+        /// <param name="confirmedNeedByDate">Date passed in with the NeedByDate parameter. The confirmed shipment must arrive at the Amazon fulfillment center by this date to avoid delivery promise breaks for pre-ordered items. In YYYY-MM-DD format..</param>
+        /// <param name="confirmedFulfillableDate">Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format..</param>
+        public ConfirmPreorderResult(DateTime? confirmedNeedByDate = default(DateTime?), DateTime? confirmedFulfillableDate = default(DateTime?))
         {
-            this.ConfirmedNeedByDate = ConfirmedNeedByDate;
-            this.ConfirmedFulfillableDate = ConfirmedFulfillableDate;
+            this.ConfirmedNeedByDate = confirmedNeedByDate;
+            this.ConfirmedFulfillableDate = confirmedFulfillableDate;
         }
 
         /// <summary>
@@ -39,14 +39,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>Date passed in with the NeedByDate parameter. The confirmed shipment must arrive at the Amazon fulfillment center by this date to avoid delivery promise breaks for pre-ordered items. In YYYY-MM-DD format.</value>
         [DataMember(Name = "ConfirmedNeedByDate", EmitDefaultValue = false)]
-        public string ConfirmedNeedByDate { get; set; }
+        public DateTime? ConfirmedNeedByDate { get; set; }
 
         /// <summary>
         /// Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format.
         /// </summary>
         /// <value>Date that determines which pre-order items in the shipment are eligible for pre-order. The pre-order Buy Box will appear for any pre-order item in the shipment with a release date on or after this date. In YYYY-MM-DD format.</value>
         [DataMember(Name = "ConfirmedFulfillableDate", EmitDefaultValue = false)]
-        public string ConfirmedFulfillableDate { get; set; }
+        public DateTime? ConfirmedFulfillableDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

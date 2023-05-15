@@ -37,37 +37,37 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PutTransportDetailsRequest" /> class.
         /// </summary>
-        /// <param name="IsPartnered">Indicates whether a putTransportDetails request is for an Amazon-partnered carrier. (required).</param>
-        /// <param name="ShipmentType">ShipmentType (required).</param>
-        /// <param name="TransportDetails">Information required to create an Amazon-partnered carrier shipping estimate, or to alert the Amazon fulfillment center to the arrival of an inbound shipment by a non-Amazon-partnered carrier. (required).</param>
-        public PutTransportDetailsRequest(bool? IsPartnered = default(bool?), ShipmentType ShipmentType = default(ShipmentType), TransportDetailInput TransportDetails = default(TransportDetailInput))
+        /// <param name="isPartnered">Indicates whether a putTransportDetails request is for an Amazon-partnered carrier. (required).</param>
+        /// <param name="shipmentType">shipmentType (required).</param>
+        /// <param name="transportDetails">Information required to create an Amazon-partnered carrier shipping estimate, or to alert the Amazon fulfillment center to the arrival of an inbound shipment by a non-Amazon-partnered carrier. (required).</param>
+        public PutTransportDetailsRequest(bool? isPartnered = default(bool?), ShipmentType shipmentType = default(ShipmentType), TransportDetailInput transportDetails = default(TransportDetailInput))
         {
-            // to ensure "IsPartnered" is required (not null)
-            if (IsPartnered == null)
+            // to ensure "isPartnered" is required (not null)
+            if (isPartnered == null)
             {
-                throw new InvalidDataException("IsPartnered is a required property for PutTransportDetailsRequest and cannot be null");
+                throw new InvalidDataException("isPartnered is a required property for PutTransportDetailsRequest and cannot be null");
             }
             else
             {
-                this.IsPartnered = IsPartnered;
+                this.IsPartnered = isPartnered;
             }
-            // to ensure "ShipmentType" is required (not null)
-            if (ShipmentType == null)
+            // to ensure "shipmentType" is required (not null)
+            if (shipmentType == null)
             {
-                throw new InvalidDataException("ShipmentType is a required property for PutTransportDetailsRequest and cannot be null");
-            }
-            else
-            {
-                this.ShipmentType = ShipmentType;
-            }
-            // to ensure "TransportDetails" is required (not null)
-            if (TransportDetails == null)
-            {
-                throw new InvalidDataException("TransportDetails is a required property for PutTransportDetailsRequest and cannot be null");
+                throw new InvalidDataException("shipmentType is a required property for PutTransportDetailsRequest and cannot be null");
             }
             else
             {
-                this.TransportDetails = TransportDetails;
+                this.ShipmentType = shipmentType;
+            }
+            // to ensure "transportDetails" is required (not null)
+            if (transportDetails == null)
+            {
+                throw new InvalidDataException("transportDetails is a required property for PutTransportDetailsRequest and cannot be null");
+            }
+            else
+            {
+                this.TransportDetails = transportDetails;
             }
         }
 
@@ -105,7 +105,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -97,7 +97,10 @@ For more information about keys please check [New Amazon doc for create keys Dev
 ---
 ## Usage
 
+> ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
+
 ### Configuration
+You can configure a connection like so please see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -124,6 +127,25 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 });
 
 ```
+
+### Configuration using a proxy
+Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
+>```csharp
+>AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+>{
+>     AccessKey = "AKIAXXXXXXXXXXXXXXX",
+>     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
+>     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     MarketPlaceID = "A2VIGQ35RCS4UG",
+>     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
+>});
+>```
+>> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
+>>
+>> ***This is not required and will operate normally without the ProxyAddress being set.***
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
@@ -350,6 +372,13 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
         MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
         Asins = new string[] { "B00CZC5F0G" },
     });
+```
+
+### GetFeaturedOfferExpectedPriceBatch
+```CSharp
+
+ var priceDemo = new ProductPricingSample(amazonConnection);
+ await priceDemo.GetFeaturedOfferExpectedPriceBatch();
 ```
 
 

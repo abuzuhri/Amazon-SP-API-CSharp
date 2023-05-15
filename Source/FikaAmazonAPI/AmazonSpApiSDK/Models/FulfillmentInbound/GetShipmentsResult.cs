@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetShipmentsResult" /> class.
         /// </summary>
-        /// <param name="ShipmentData">Information about your inbound shipments..</param>
-        /// <param name="NextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
-        public GetShipmentsResult(InboundShipmentList ShipmentData = default(InboundShipmentList), string NextToken = default(string))
+        /// <param name="shipmentData">Information about your inbound shipments..</param>
+        /// <param name="nextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
+        public GetShipmentsResult(InboundShipmentList shipmentData = default(InboundShipmentList), string nextToken = default(string))
         {
-            this.ShipmentData = ShipmentData;
-            this.NextToken = NextToken;
+            this.ShipmentData = shipmentData;
+            this.NextToken = nextToken;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

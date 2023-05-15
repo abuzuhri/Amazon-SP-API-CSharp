@@ -26,10 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="BuyerCustomizedInfoDetail" /> class.
         /// </summary>
-        /// <param name="CustomizedURL">The location of a zip file containing Amazon Custom data..</param>
-        public BuyerCustomizedInfoDetail(string CustomizedURL = default(string))
+        /// <param name="customizedURL">The location of a zip file containing Amazon Custom data..</param>
+        public BuyerCustomizedInfoDetail(string customizedURL = default(string))
         {
-            this.CustomizedURL = CustomizedURL;
+            this.CustomizedURL = customizedURL;
         }
         public BuyerCustomizedInfoDetail()
         {
@@ -60,7 +60,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

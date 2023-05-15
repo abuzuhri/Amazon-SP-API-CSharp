@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         /// Gets or Sets RequestToken
         /// </summary>
         [DataMember(Name = "requestToken", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "requestToken")]
+        [JsonProperty(PropertyName = "requestToken", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string RequestToken { get; set; }
 
         /// <summary>
@@ -31,14 +31,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         /// Gets or Sets RequestedDocumentSpecification
         /// </summary>
         [DataMember(Name = "requestedDocumentSpecification", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "requestedDocumentSpecification")]
+        [JsonProperty(PropertyName = "requestedDocumentSpecification", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public RequestedDocumentSpecification RequestedDocumentSpecification { get; set; }
 
         /// <summary>
         /// Gets or Sets RequestedValueAddedServices
         /// </summary>
         [DataMember(Name = "requestedValueAddedServices", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "requestedValueAddedServices")]
+        [JsonProperty(PropertyName = "requestedValueAddedServices", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public RequestedValueAddedServiceList RequestedValueAddedServices { get; set; }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         /// </summary>
         /// <value>The additional inputs required to purchase a shipping offering, in JSON format. The JSON provided here must adhere to the JSON schema that is returned in the response to the getAdditionalInputs operation.  Additional inputs are only required when indicated by the requiresAdditionalInputs property in the response to the getRates operation.</value>
         [DataMember(Name = "additionalInputs", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "additionalInputs")]
+        [JsonProperty(PropertyName = "additionalInputs", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Dictionary<string, Object> AdditionalInputs { get; set; }
 
 

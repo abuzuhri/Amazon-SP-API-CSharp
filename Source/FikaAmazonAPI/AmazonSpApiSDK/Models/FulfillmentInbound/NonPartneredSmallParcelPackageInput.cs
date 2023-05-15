@@ -32,17 +32,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelPackageInput" /> class.
         /// </summary>
-        /// <param name="TrackingId">TrackingId (required).</param>
-        public NonPartneredSmallParcelPackageInput(string TrackingId = default(string))
+        /// <param name="trackingId">trackingId (required).</param>
+        public NonPartneredSmallParcelPackageInput(string trackingId = default(string))
         {
-            // to ensure "TrackingId" is required (not null)
-            if (TrackingId == null)
+            // to ensure "trackingId" is required (not null)
+            if (trackingId == null)
             {
-                throw new InvalidDataException("TrackingId is a required property for NonPartneredSmallParcelPackageInput and cannot be null");
+                throw new InvalidDataException("trackingId is a required property for NonPartneredSmallParcelPackageInput and cannot be null");
             }
             else
             {
-                this.TrackingId = TrackingId;
+                this.TrackingId = trackingId;
             }
         }
 
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

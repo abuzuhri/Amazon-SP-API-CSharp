@@ -26,10 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransportDetailsResult" /> class.
         /// </summary>
-        /// <param name="TransportContent">TransportContent.</param>
-        public GetTransportDetailsResult(TransportContent TransportContent = default(TransportContent))
+        /// <param name="transportContent">transportContent.</param>
+        public GetTransportDetailsResult(TransportContent transportContent = default(TransportContent))
         {
-            this.TransportContent = TransportContent;
+            this.TransportContent = transportContent;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

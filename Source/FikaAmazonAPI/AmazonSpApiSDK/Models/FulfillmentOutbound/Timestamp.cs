@@ -21,6 +21,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
     /// Timestamp
     /// </summary>
     [DataContract]
+    [Obsolete("This class should not be used as it has no members, use DateTime")]
     public partial class Timestamp : IEquatable<Timestamp>, IValidatableObject
     {
         /// <summary>

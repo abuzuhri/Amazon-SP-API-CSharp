@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetLabelsResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getLabels operation..</param>
-        /// <param name="Errors">Errors.</param>
-        public GetLabelsResponse(LabelDownloadURL Payload = default(LabelDownloadURL), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getLabels operation..</param>
+        /// <param name="errors">errors.</param>
+        public GetLabelsResponse(LabelDownloadURL payload = default(LabelDownloadURL), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
 
         public GetLabelsResponse()
@@ -70,7 +70,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

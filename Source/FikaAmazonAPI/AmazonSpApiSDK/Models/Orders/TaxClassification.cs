@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="TaxClassification" /> class.
         /// </summary>
-        /// <param name="Name">The type of tax..</param>
-        /// <param name="Value">The buyer&#39;s tax identifier..</param>
-        public TaxClassification(string Name = default(string), string Value = default(string))
+        /// <param name="name">The type of tax..</param>
+        /// <param name="value">The buyer&#39;s tax identifier..</param>
+        public TaxClassification(string name = default(string), string value = default(string))
         {
-            this.Name = Name;
-            this.Value = Value;
+            this.Name = name;
+            this.Value = value;
         }
 
         public TaxClassification()
@@ -72,7 +72,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

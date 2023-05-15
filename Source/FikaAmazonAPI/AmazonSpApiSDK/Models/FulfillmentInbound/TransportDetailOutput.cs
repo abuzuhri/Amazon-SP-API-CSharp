@@ -26,16 +26,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportDetailOutput" /> class.
         /// </summary>
-        /// <param name="PartneredSmallParcelData">PartneredSmallParcelData.</param>
-        /// <param name="NonPartneredSmallParcelData">NonPartneredSmallParcelData.</param>
-        /// <param name="PartneredLtlData">PartneredLtlData.</param>
-        /// <param name="NonPartneredLtlData">NonPartneredLtlData.</param>
-        public TransportDetailOutput(PartneredSmallParcelDataOutput PartneredSmallParcelData = default(PartneredSmallParcelDataOutput), NonPartneredSmallParcelDataOutput NonPartneredSmallParcelData = default(NonPartneredSmallParcelDataOutput), PartneredLtlDataOutput PartneredLtlData = default(PartneredLtlDataOutput), NonPartneredLtlDataOutput NonPartneredLtlData = default(NonPartneredLtlDataOutput))
+        /// <param name="partneredSmallParcelData">partneredSmallParcelData.</param>
+        /// <param name="nonPartneredSmallParcelData">nonPartneredSmallParcelData.</param>
+        /// <param name="partneredLtlData">partneredLtlData.</param>
+        /// <param name="nonPartneredLtlData">nonPartneredLtlData.</param>
+        public TransportDetailOutput(PartneredSmallParcelDataOutput partneredSmallParcelData = default(PartneredSmallParcelDataOutput), NonPartneredSmallParcelDataOutput nonPartneredSmallParcelData = default(NonPartneredSmallParcelDataOutput), PartneredLtlDataOutput partneredLtlData = default(PartneredLtlDataOutput), NonPartneredLtlDataOutput nonPartneredLtlData = default(NonPartneredLtlDataOutput))
         {
-            this.PartneredSmallParcelData = PartneredSmallParcelData;
-            this.NonPartneredSmallParcelData = NonPartneredSmallParcelData;
-            this.PartneredLtlData = PartneredLtlData;
-            this.NonPartneredLtlData = NonPartneredLtlData;
+            this.PartneredSmallParcelData = partneredSmallParcelData;
+            this.NonPartneredSmallParcelData = nonPartneredSmallParcelData;
+            this.PartneredLtlData = partneredLtlData;
+            this.NonPartneredLtlData = nonPartneredLtlData;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
