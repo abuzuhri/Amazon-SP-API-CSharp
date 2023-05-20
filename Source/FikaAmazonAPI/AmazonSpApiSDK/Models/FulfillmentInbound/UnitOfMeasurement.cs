@@ -11,6 +11,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
@@ -19,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     /// </summary>
     /// <value>Indicates the unit of measurement.</value>
 
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(UnitOfMeasurementConverter))]
 
     public enum UnitOfMeasurement
     {
