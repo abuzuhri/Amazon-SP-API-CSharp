@@ -260,7 +260,7 @@ namespace FikaAmazonAPI.Services
 
         protected void ParseResponse(RestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
                 return;
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
