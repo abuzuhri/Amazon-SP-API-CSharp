@@ -21,8 +21,8 @@
 	<Description>.Net C# library for the new Amazon Selling Partner API</Description>
 	<RepositoryType>git</RepositoryType>
 	<PackageIcon>icon.jpg</PackageIcon>
-	<TargetFramework>netstandard2.0</TargetFramework>
 	<UserSecretsId>2ff602c6-a213-4df0-88f2-cf1a1df95fbc</UserSecretsId>
+	<TargetFrameworks>net461;net462;net472;net5.0;net6.0;net7.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     
   </PropertyGroup>
   <ItemGroup>
@@ -39,14 +39,14 @@
     <PackageReference Include="AWSSDK.SQS" Version="3.7.100.52" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="108.0.3" />
     <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.4" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
   </ItemGroup>
   <ItemGroup>
         <None Include="..\..\Others\icon\icon.jpg">
