@@ -179,11 +179,11 @@ namespace FikaAmazonAPI.Services
         {
             lock (Request)
             {
-                Request.Parameters.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-                Request.Parameters.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
-                Request.Parameters.RemoveParameter(AccessTokenHeaderName);
-                Request.Parameters.RemoveParameter(SecurityTokenHeaderName);
-                Request.Parameters.RemoveParameter(ShippingBusinessIdHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                Request?.Parameters?.RemoveParameter(AccessTokenHeaderName);
+                Request?.Parameters?.RemoveParameter(SecurityTokenHeaderName);
+                Request?.Parameters?.RemoveParameter(ShippingBusinessIdHeaderName);
 
             }
         }
@@ -260,7 +260,7 @@ namespace FikaAmazonAPI.Services
 
         protected void ParseResponse(RestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
                 return;
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
