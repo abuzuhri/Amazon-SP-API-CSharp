@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             this.Contact = contact;
             this.BoxCount = boxCount;
             this.SellerFreightClass = sellerFreightClass;
-            this.FreightReadyDate = freightReadyDate;
+            this.FreightReadyDate = freightReadyDate.GetValueOrDefault().ToString("yyyy-MM-dd");
             this.PalletList = palletList;
             this.TotalWeight = totalWeight;
             this.SellerDeclaredValue = sellerDeclaredValue;
@@ -69,7 +69,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date that the shipment will be ready to be picked up by the carrier.</value>
         [DataMember(Name = "FreightReadyDate", EmitDefaultValue = false)]
-        public DateTime? FreightReadyDate { get; set; }
+        public string FreightReadyDate { get; set; }
+
+        //public string FreightReadyDateString { 
+        //    get {
+        //        if (!this.FreightReadyDate.HasValue)
+        //            return null;
+        //        else
+        //            return this.FreightReadyDate.Value.ToString("yyyy-MM-dd");
+        //    } 
+        //}
 
         /// <summary>
         /// Gets or Sets PalletList
