@@ -59,6 +59,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         }
     }
 
+    public class AmazonInternalErrorException : AmazonException
+    {
+        public AmazonInternalErrorException(string msg, RestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
+
+    public class AmazonBadRequestException : AmazonException
+    {
+        public AmazonBadRequestException(string msg, RestResponse response = null) : base(msg, response)
+        {
+
+        }
+    }
+
     public class AmazonProcessingReportDeserializeException : AmazonException
     {
         public string ReportContent { get; set; }
@@ -66,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         {
             ReportContent = reportContent;
         }
-    }
+    } 
 
     public class ExceptionResponse
     {
