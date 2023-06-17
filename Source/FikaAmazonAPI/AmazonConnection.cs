@@ -139,6 +139,8 @@ namespace FikaAmazonAPI
             this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
             this._VendorOrders = new VendorOrderService(this.Credentials);
+
+            AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }
         private void ValidateCredentials(AmazonCredential Credentials)
         {
