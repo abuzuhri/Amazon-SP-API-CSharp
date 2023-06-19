@@ -405,7 +405,7 @@ namespace FikaAmazonAPI.Services
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
             return response;
         }
     }
