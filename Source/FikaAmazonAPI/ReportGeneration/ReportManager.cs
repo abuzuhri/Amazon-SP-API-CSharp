@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using static FikaAmazonAPI.Utils.Constants;
+using System.Threading;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -70,26 +71,26 @@ namespace FikaAmazonAPI.ReportGeneration
         #region ReturnFBAOrder
         public List<ReturnFBAOrderRow> GetReturnFBAOrder(int days) =>
             Task.Run(() => GetReturnFBAOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(int days)
+        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(int days, CancellationToken cancellationToken = default)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
             DateTime toDate = DateTime.UtcNow;
-            return await GetReturnFBAOrderAsync(fromDate, toDate);
+            return await GetReturnFBAOrderAsync(fromDate, toDate, cancellationToken);
         }
 
         public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate) =>
             Task.Run(() => GetReturnFBAOrderAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate)
+        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate, CancellationToken cancellationToken = default)
         {
-            var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate);
+            var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate, cancellationToken);
             ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, _amazonConnection.RefNumber);
 
             return report.Data;
         }
 
-        private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, CancellationToken cancellationToken = default)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate, cancellationToken: cancellationToken);
         }
 
 
