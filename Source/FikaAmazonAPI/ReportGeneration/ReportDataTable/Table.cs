@@ -48,9 +48,9 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             this.header = header;
         }
 
-        public static Table ConvertFromCSV(string path, char separator = '\t')
+        public static Table ConvertFromCSV(string path, char separator = '\t', Encoding encoding = default)
         {
-            var lines = File.ReadAllLines(path);
+            var lines = File.ReadAllLines(path, encoding ?? Encoding.UTF8);
 
             var table = new Table(lines.First().Split(separator));
 
