@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
     public class PatchOperation
     {
         public Op op { get; set; }
-       public string path { get; set; }
+        public string path { get; set; }
 
         public ICollection<object> value { get; set; }
     }
