@@ -71,5 +71,15 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        public Transaction GetTransaction(string TransactionId) =>
+            Task.Run(() => GetTransactionAsync(TransactionId)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<Transaction> GetTransactionAsync(string TransactionId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(VendorOrdersApiUrls.GetTransaction(TransactionId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetTransactionResponse>(RateLimitType.VendorOrdersV1_GetTransaction);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
     }
 }
