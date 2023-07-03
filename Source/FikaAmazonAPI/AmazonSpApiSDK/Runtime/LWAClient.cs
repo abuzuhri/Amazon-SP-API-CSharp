@@ -18,12 +18,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; private set; }
 
 
-        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials)
+        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, string proxyAddress = null)
         {
 
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
-            RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+            // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+            if (string.IsNullOrWhiteSpace(proxyAddress))
+            {
+                RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+            }else
+            {
+                var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
+                {
+                    Proxy = new System.Net.WebProxy()
+                    {
+                        Address = new Uri(proxyAddress)
+                    }
+                };
+
+                RestClient = new RestClient(options);
+            }
         }
 
 

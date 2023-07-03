@@ -23,7 +23,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
     [DataContract]
     public partial class GetOrderItemsResponse : IEquatable<GetOrderItemsResponse>, IValidatableObject
     {
-
         public GetOrderItemsResponse()
         {
             this.Payload = default(OrderItemsList);
@@ -32,12 +31,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOrderItemsResponse" /> class.
         /// </summary>
-        /// <param name="Payload">The payload for the getOrderItems operation..</param>
-        /// <param name="Errors">One or more unexpected errors occurred during the getOrderItems operation..</param>
-        public GetOrderItemsResponse(OrderItemsList Payload = default(OrderItemsList), ErrorList Errors = default(ErrorList))
+        /// <param name="payload">The payload for the getOrderItems operation..</param>
+        /// <param name="errors">One or more unexpected errors occurred during the getOrderItems operation..</param>
+        public GetOrderItemsResponse(OrderItemsList payload = default(OrderItemsList), ErrorList errors = default(ErrorList))
         {
-            this.Payload = Payload;
-            this.Errors = Errors;
+            this.Payload = payload;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

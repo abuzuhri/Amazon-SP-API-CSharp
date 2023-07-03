@@ -37,57 +37,57 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredSmallParcelPackageOutput" /> class.
         /// </summary>
-        /// <param name="Dimensions">Dimensions (required).</param>
-        /// <param name="Weight">Weight (required).</param>
-        /// <param name="CarrierName">The carrier specified with a previous call to putTransportDetails. (required).</param>
-        /// <param name="TrackingId">TrackingId (required).</param>
-        /// <param name="PackageStatus">PackageStatus (required).</param>
-        public PartneredSmallParcelPackageOutput(Dimensions Dimensions = default(Dimensions), Weight Weight = default(Weight), string CarrierName = default(string), string TrackingId = default(string), PackageStatus PackageStatus = default(PackageStatus))
+        /// <param name="dimensions">dimensions (required).</param>
+        /// <param name="weight">weight (required).</param>
+        /// <param name="carrierName">The carrier specified with a previous call to putTransportDetails. (required).</param>
+        /// <param name="trackingId">trackingId (required).</param>
+        /// <param name="packageStatus">packageStatus (required).</param>
+        public PartneredSmallParcelPackageOutput(Dimensions dimensions = default(Dimensions), Weight weight = default(Weight), string carrierName = default(string), string trackingId = default(string), PackageStatus packageStatus = default(PackageStatus))
         {
-            // to ensure "Dimensions" is required (not null)
-            if (Dimensions == null)
+            // to ensure "dimensions" is required (not null)
+            if (dimensions == null)
             {
-                throw new InvalidDataException("Dimensions is a required property for PartneredSmallParcelPackageOutput and cannot be null");
+                throw new InvalidDataException("dimensions is a required property for PartneredSmallParcelPackageOutput and cannot be null");
             }
             else
             {
-                this.Dimensions = Dimensions;
+                this.Dimensions = dimensions;
             }
-            // to ensure "Weight" is required (not null)
-            if (Weight == null)
+            // to ensure "weight" is required (not null)
+            if (weight == null)
             {
-                throw new InvalidDataException("Weight is a required property for PartneredSmallParcelPackageOutput and cannot be null");
-            }
-            else
-            {
-                this.Weight = Weight;
-            }
-            // to ensure "CarrierName" is required (not null)
-            if (CarrierName == null)
-            {
-                throw new InvalidDataException("CarrierName is a required property for PartneredSmallParcelPackageOutput and cannot be null");
+                throw new InvalidDataException("weight is a required property for PartneredSmallParcelPackageOutput and cannot be null");
             }
             else
             {
-                this.CarrierName = CarrierName;
+                this.Weight = weight;
             }
-            // to ensure "TrackingId" is required (not null)
-            if (TrackingId == null)
+            // to ensure "carrierName" is required (not null)
+            if (carrierName == null)
             {
-                throw new InvalidDataException("TrackingId is a required property for PartneredSmallParcelPackageOutput and cannot be null");
-            }
-            else
-            {
-                this.TrackingId = TrackingId;
-            }
-            // to ensure "PackageStatus" is required (not null)
-            if (PackageStatus == null)
-            {
-                throw new InvalidDataException("PackageStatus is a required property for PartneredSmallParcelPackageOutput and cannot be null");
+                throw new InvalidDataException("carrierName is a required property for PartneredSmallParcelPackageOutput and cannot be null");
             }
             else
             {
-                this.PackageStatus = PackageStatus;
+                this.CarrierName = carrierName;
+            }
+            // to ensure "trackingId" is required (not null)
+            if (trackingId == null)
+            {
+                throw new InvalidDataException("trackingId is a required property for PartneredSmallParcelPackageOutput and cannot be null");
+            }
+            else
+            {
+                this.TrackingId = trackingId;
+            }
+            // to ensure "packageStatus" is required (not null)
+            if (packageStatus == null)
+            {
+                throw new InvalidDataException("packageStatus is a required property for PartneredSmallParcelPackageOutput and cannot be null");
+            }
+            else
+            {
+                this.PackageStatus = packageStatus;
             }
         }
 
@@ -138,7 +138,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

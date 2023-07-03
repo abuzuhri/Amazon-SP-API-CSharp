@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
 namespace FikaAmazonAPI.ConstructFeed
 {
@@ -767,7 +767,7 @@ namespace FikaAmazonAPI.ConstructFeed
             /// Enum USD for value: USD
             /// </summary>
             [EnumMember(Value = "USD")]
-            USD,
+            USD = 1,
 
             /// <summary>
             /// Enum GBP for value: GBP

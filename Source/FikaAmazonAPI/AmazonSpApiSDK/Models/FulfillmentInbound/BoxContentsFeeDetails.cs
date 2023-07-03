@@ -26,14 +26,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="BoxContentsFeeDetails" /> class.
         /// </summary>
-        /// <param name="TotalUnits">The number of units to ship..</param>
-        /// <param name="FeePerUnit">The manual processing fee per unit..</param>
-        /// <param name="TotalFee">The total manual processing fee for the shipment..</param>
-        public BoxContentsFeeDetails(int TotalUnits = default(int), Amount FeePerUnit = default(Amount), Amount TotalFee = default(Amount))
+        /// <param name="totalUnits">The number of units to ship..</param>
+        /// <param name="feePerUnit">The manual processing fee per unit..</param>
+        /// <param name="totalFee">The total manual processing fee for the shipment..</param>
+        public BoxContentsFeeDetails(int? totalUnits = default(int?), Amount feePerUnit = default(Amount), Amount totalFee = default(Amount))
         {
-            this.TotalUnits = TotalUnits;
-            this.FeePerUnit = FeePerUnit;
-            this.TotalFee = TotalFee;
+            this.TotalUnits = totalUnits;
+            this.FeePerUnit = feePerUnit;
+            this.TotalFee = totalFee;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The number of units to ship.</value>
         [DataMember(Name = "TotalUnits", EmitDefaultValue = false)]
-        public int TotalUnits { get; set; }
+        public int? TotalUnits { get; set; }
 
         /// <summary>
         /// The manual processing fee per unit.
@@ -76,7 +76,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -102,7 +102,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
                 return false;
 
             return
-                
+                (
+                    this.TotalUnits == input.TotalUnits ||
+                    (this.TotalUnits != null &&
+                    this.TotalUnits.Equals(input.TotalUnits))
+                ) &&
                 (
                     this.FeePerUnit == input.FeePerUnit ||
                     (this.FeePerUnit != null &&
@@ -124,6 +128,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.TotalUnits != null)
+                    hashCode = hashCode * 59 + this.TotalUnits.GetHashCode();
                 if (this.FeePerUnit != null)
                     hashCode = hashCode * 59 + this.FeePerUnit.GetHashCode();
                 if (this.TotalFee != null)

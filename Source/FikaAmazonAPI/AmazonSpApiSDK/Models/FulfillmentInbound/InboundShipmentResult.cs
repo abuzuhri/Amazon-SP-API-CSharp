@@ -32,17 +32,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentResult" /> class.
         /// </summary>
-        /// <param name="ShipmentId">The shipment identifier submitted in the request. (required).</param>
-        public InboundShipmentResult(string ShipmentId = default(string))
+        /// <param name="shipmentId">The shipment identifier submitted in the request. (required).</param>
+        public InboundShipmentResult(string shipmentId = default(string))
         {
-            // to ensure "ShipmentId" is required (not null)
-            if (ShipmentId == null)
+            // to ensure "shipmentId" is required (not null)
+            if (shipmentId == null)
             {
-                throw new InvalidDataException("ShipmentId is a required property for InboundShipmentResult and cannot be null");
+                throw new InvalidDataException("shipmentId is a required property for InboundShipmentResult and cannot be null");
             }
             else
             {
-                this.ShipmentId = ShipmentId;
+                this.ShipmentId = shipmentId;
             }
         }
 
@@ -70,7 +70,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -32,28 +32,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderBuyerInfo" /> class.
         /// </summary>
-        /// <param name="AmazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
-        /// <param name="BuyerEmail">The anonymized email address of the buyer..</param>
-        /// <param name="BuyerName">The name of the buyer..</param>
-        /// <param name="BuyerCounty">The county of the buyer..</param>
-        /// <param name="BuyerTaxInfo">Tax information about the buyer..</param>
-        /// <param name="PurchaseOrderNumber">The purchase order (PO) number entered by the buyer at checkout. Returned only for orders where the buyer entered a PO number at checkout..</param>
-        public OrderBuyerInfo(string AmazonOrderId = default(string), string BuyerEmail = default(string), string BuyerName = default(string), string BuyerCounty = default(string), BuyerTaxInfo BuyerTaxInfo = default(BuyerTaxInfo), string PurchaseOrderNumber = default(string))
+        /// <param name="amazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
+        /// <param name="buyerEmail">The anonymized email address of the buyer..</param>
+        /// <param name="buyerName">The buyer name or the recipient name..</param>
+        /// <param name="buyerCounty">The county of the buyer..</param>
+        /// <param name="buyerTaxInfo">Tax information about the buyer..</param>
+        /// <param name="purchaseOrderNumber">The purchase order (PO) number entered by the buyer at checkout. Returned only for orders where the buyer entered a PO number at checkout..</param>
+        public OrderBuyerInfo(string amazonOrderId = default(string), string buyerEmail = default(string), string buyerName = default(string), string buyerCounty = default(string), BuyerTaxInfo buyerTaxInfo = default(BuyerTaxInfo), string purchaseOrderNumber = default(string))
         {
-            // to ensure "AmazonOrderId" is required (not null)
-            if (AmazonOrderId == null)
+            // to ensure "amazonOrderId" is required (not null)
+            if (amazonOrderId == null)
             {
-                throw new InvalidDataException("AmazonOrderId is a required property for OrderBuyerInfo and cannot be null");
+                throw new InvalidDataException("amazonOrderId is a required property for OrderBuyerInfo and cannot be null");
             }
             else
             {
-                this.AmazonOrderId = AmazonOrderId;
+                this.AmazonOrderId = amazonOrderId;
             }
-            this.BuyerEmail = BuyerEmail;
-            this.BuyerName = BuyerName;
-            this.BuyerCounty = BuyerCounty;
-            this.BuyerTaxInfo = BuyerTaxInfo;
-            this.PurchaseOrderNumber = PurchaseOrderNumber;
+            this.BuyerEmail = buyerEmail;
+            this.BuyerName = buyerName;
+            this.BuyerCounty = buyerCounty;
+            this.BuyerTaxInfo = buyerTaxInfo;
+            this.PurchaseOrderNumber = purchaseOrderNumber;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public string BuyerEmail { get; set; }
 
         /// <summary>
-        /// The name of the buyer.
+        /// The buyer name or the recipient name.
         /// </summary>
-        /// <value>The name of the buyer.</value>
+        /// <value>The buyer name or the recipient name.</value>
         [DataMember(Name = "BuyerName", EmitDefaultValue = false)]
         public string BuyerName { get; set; }
 
@@ -120,7 +120,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

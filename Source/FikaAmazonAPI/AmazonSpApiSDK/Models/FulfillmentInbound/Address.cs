@@ -32,72 +32,72 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
-        /// <param name="Name">Name of the individual or business. (required).</param>
-        /// <param name="AddressLine1">The street address information. (required).</param>
-        /// <param name="AddressLine2">Additional street address information, if required..</param>
-        /// <param name="DistrictOrCounty">The district or county..</param>
-        /// <param name="City">The city. (required).</param>
-        /// <param name="StateOrProvinceCode">The state or province code.  If state or province codes are used in your marketplace, it is recommended that you include one with your request. This helps Amazon to select the most appropriate Amazon fulfillment center for your inbound shipment plan. (required).</param>
-        /// <param name="CountryCode">The country code in two-character ISO 3166-1 alpha-2 format. (required).</param>
-        /// <param name="PostalCode">The postal code.  If postal codes are used in your marketplace, we recommended that you include one with your request. This helps Amazon select the most appropriate Amazon fulfillment center for the inbound shipment plan. (required).</param>
-        public Address(string Name = default(string), string AddressLine1 = default(string), string AddressLine2 = default(string), string DistrictOrCounty = default(string), string City = default(string), string StateOrProvinceCode = default(string), string CountryCode = default(string), string PostalCode = default(string))
+        /// <param name="name">Name of the individual or business. (required).</param>
+        /// <param name="addressLine1">The street address information. (required).</param>
+        /// <param name="addressLine2">Additional street address information, if required..</param>
+        /// <param name="districtOrCounty">The district or county..</param>
+        /// <param name="city">The city. (required).</param>
+        /// <param name="stateOrProvinceCode">The state or province code.  If state or province codes are used in your marketplace, it is recommended that you include one with your request. This helps Amazon to select the most appropriate Amazon fulfillment center for your inbound shipment plan. (required).</param>
+        /// <param name="countryCode">The country code in two-character ISO 3166-1 alpha-2 format. (required).</param>
+        /// <param name="postalCode">The postal code.  If postal codes are used in your marketplace, we recommended that you include one with your request. This helps Amazon select the most appropriate Amazon fulfillment center for the inbound shipment plan. (required).</param>
+        public Address(string name = default(string), string addressLine1 = default(string), string addressLine2 = default(string), string districtOrCounty = default(string), string city = default(string), string stateOrProvinceCode = default(string), string countryCode = default(string), string postalCode = default(string))
         {
-            // to ensure "Name" is required (not null)
-            if (Name == null)
+            // to ensure "name" is required (not null)
+            if (name == null)
             {
-                throw new InvalidDataException("Name is a required property for Address and cannot be null");
+                throw new InvalidDataException("name is a required property for Address and cannot be null");
             }
             else
             {
-                this.Name = Name;
+                this.Name = name;
             }
-            // to ensure "AddressLine1" is required (not null)
-            if (AddressLine1 == null)
+            // to ensure "addressLine1" is required (not null)
+            if (addressLine1 == null)
             {
-                throw new InvalidDataException("AddressLine1 is a required property for Address and cannot be null");
+                throw new InvalidDataException("addressLine1 is a required property for Address and cannot be null");
             }
             else
             {
-                this.AddressLine1 = AddressLine1;
+                this.AddressLine1 = addressLine1;
             }
-            // to ensure "City" is required (not null)
-            if (City == null)
+            // to ensure "city" is required (not null)
+            if (city == null)
             {
-                throw new InvalidDataException("City is a required property for Address and cannot be null");
+                throw new InvalidDataException("city is a required property for Address and cannot be null");
             }
             else
             {
-                this.City = City;
+                this.City = city;
             }
-            // to ensure "StateOrProvinceCode" is required (not null)
-            if (StateOrProvinceCode == null)
+            // to ensure "stateOrProvinceCode" is required (not null)
+            if (stateOrProvinceCode == null)
             {
-                throw new InvalidDataException("StateOrProvinceCode is a required property for Address and cannot be null");
+                throw new InvalidDataException("stateOrProvinceCode is a required property for Address and cannot be null");
             }
             else
             {
-                this.StateOrProvinceCode = StateOrProvinceCode;
+                this.StateOrProvinceCode = stateOrProvinceCode;
             }
-            // to ensure "CountryCode" is required (not null)
-            if (CountryCode == null)
+            // to ensure "countryCode" is required (not null)
+            if (countryCode == null)
             {
-                throw new InvalidDataException("CountryCode is a required property for Address and cannot be null");
+                throw new InvalidDataException("countryCode is a required property for Address and cannot be null");
             }
             else
             {
-                this.CountryCode = CountryCode;
+                this.CountryCode = countryCode;
             }
-            // to ensure "PostalCode" is required (not null)
-            if (PostalCode == null)
+            // to ensure "postalCode" is required (not null)
+            if (postalCode == null)
             {
-                throw new InvalidDataException("PostalCode is a required property for Address and cannot be null");
+                throw new InvalidDataException("postalCode is a required property for Address and cannot be null");
             }
             else
             {
-                this.PostalCode = PostalCode;
+                this.PostalCode = postalCode;
             }
-            this.AddressLine2 = AddressLine2;
-            this.DistrictOrCounty = DistrictOrCounty;
+            this.AddressLine2 = addressLine2;
+            this.DistrictOrCounty = districtOrCounty;
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

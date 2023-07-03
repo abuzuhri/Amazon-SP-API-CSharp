@@ -26,16 +26,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPreorderInfoResult" /> class.
         /// </summary>
-        /// <param name="ShipmentContainsPreorderableItems">Indicates whether the shipment contains items that have been enabled for pre-order. For more information about enabling items for pre-order, see the Seller Central Help..</param>
-        /// <param name="ShipmentConfirmedForPreorder">Indicates whether this shipment has been confirmed for pre-order..</param>
-        /// <param name="NeedByDate">Date that the shipment would need to arrive at an Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items if this shipment is later confirmed for pre-order. In YYYY-MM-DD format. See also the confirmPreorder operation..</param>
-        /// <param name="ConfirmedFulfillableDate">Date in YYYY-MM-DD format that determines which pre-order items in the shipment are eligible for pre-order. If this shipment is confirmed for pre-order with a subsequent call to the confirmPreorder operation, the pre-order Buy Box will appear for any pre-order items in the shipment with a release date on or after this date. Call the getShipmentItems operation to get the release dates for the pre-order items in this shipment..</param>
-        public GetPreorderInfoResult(bool? ShipmentContainsPreorderableItems = default(bool?), bool? ShipmentConfirmedForPreorder = default(bool?), string NeedByDate = default(string), string ConfirmedFulfillableDate = default(string))
+        /// <param name="shipmentContainsPreorderableItems">Indicates whether the shipment contains items that have been enabled for pre-order. For more information about enabling items for pre-order, see the Seller Central Help..</param>
+        /// <param name="shipmentConfirmedForPreorder">Indicates whether this shipment has been confirmed for pre-order..</param>
+        /// <param name="needByDate">Date that the shipment would need to arrive at an Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items if this shipment is later confirmed for pre-order. In YYYY-MM-DD format. See also the confirmPreorder operation..</param>
+        /// <param name="confirmedFulfillableDate">Date in YYYY-MM-DD format that determines which pre-order items in the shipment are eligible for pre-order. If this shipment is confirmed for pre-order with a subsequent call to the confirmPreorder operation, the pre-order Buy Box will appear for any pre-order items in the shipment with a release date on or after this date. Call the getShipmentItems operation to get the release dates for the pre-order items in this shipment..</param>
+        public GetPreorderInfoResult(bool? shipmentContainsPreorderableItems = default(bool?), bool? shipmentConfirmedForPreorder = default(bool?), DateTime? needByDate = default(DateTime?), DateTime? confirmedFulfillableDate = default(DateTime?))
         {
-            this.ShipmentContainsPreorderableItems = ShipmentContainsPreorderableItems;
-            this.ShipmentConfirmedForPreorder = ShipmentConfirmedForPreorder;
-            this.NeedByDate = NeedByDate;
-            this.ConfirmedFulfillableDate = ConfirmedFulfillableDate;
+            this.ShipmentContainsPreorderableItems = shipmentContainsPreorderableItems;
+            this.ShipmentConfirmedForPreorder = shipmentConfirmedForPreorder;
+            this.NeedByDate = needByDate;
+            this.ConfirmedFulfillableDate = confirmedFulfillableDate;
         }
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>Date that the shipment would need to arrive at an Amazon fulfillment center to avoid delivery promise breaks for pre-ordered items if this shipment is later confirmed for pre-order. In YYYY-MM-DD format. See also the confirmPreorder operation.</value>
         [DataMember(Name = "NeedByDate", EmitDefaultValue = false)]
-        public string NeedByDate { get; set; }
+        public DateTime? NeedByDate { get; set; }
 
         /// <summary>
         /// Date in YYYY-MM-DD format that determines which pre-order items in the shipment are eligible for pre-order. If this shipment is confirmed for pre-order with a subsequent call to the confirmPreorder operation, the pre-order Buy Box will appear for any pre-order items in the shipment with a release date on or after this date. Call the getShipmentItems operation to get the release dates for the pre-order items in this shipment.
         /// </summary>
         /// <value>Date in YYYY-MM-DD format that determines which pre-order items in the shipment are eligible for pre-order. If this shipment is confirmed for pre-order with a subsequent call to the confirmPreorder operation, the pre-order Buy Box will appear for any pre-order items in the shipment with a release date on or after this date. Call the getShipmentItems operation to get the release dates for the pre-order items in this shipment.</value>
         [DataMember(Name = "ConfirmedFulfillableDate", EmitDefaultValue = false)]
-        public string ConfirmedFulfillableDate { get; set; }
+        public DateTime? ConfirmedFulfillableDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

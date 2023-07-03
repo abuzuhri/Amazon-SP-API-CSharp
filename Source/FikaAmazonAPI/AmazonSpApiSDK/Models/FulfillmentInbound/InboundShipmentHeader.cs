@@ -48,62 +48,62 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentHeader" /> class.
         /// </summary>
-        /// <param name="ShipmentName">The name for the shipment. Use a naming convention that helps distinguish between shipments over time, such as the date the shipment was created. (required).</param>
-        /// <param name="ShipFromAddress">The return address. (required).</param>
-        /// <param name="DestinationFulfillmentCenterId">The identifier for the fulfillment center to which the shipment will be shipped. Get this value from the InboundShipmentPlan object in the response returned by the createInboundShipmentPlan operation. (required).</param>
-        /// <param name="AreCasesRequired">Indicates whether or not an inbound shipment contains case-packed boxes. Note: A shipment must contain either all case-packed boxes or all individually packed boxes.  Possible values:  true - All boxes in the shipment must be case packed.  false - All boxes in the shipment must be individually packed.  Note: If AreCasesRequired &#x3D; true for an inbound shipment, then the value of QuantityInCase must be greater than zero for every item in the shipment. Otherwise the service returns an error..</param>
-        /// <param name="ShipmentStatus">ShipmentStatus (required).</param>
-        /// <param name="LabelPrepPreference">The preference for label preparation for an inbound shipment. (required).</param>
-        /// <param name="IntendedBoxContentsSource">IntendedBoxContentsSource.</param>
-        public InboundShipmentHeader(string ShipmentName = default(string), Address ShipFromAddress = default(Address), string DestinationFulfillmentCenterId = default(string), bool? AreCasesRequired = default(bool?), ShipmentStatus ShipmentStatus = default(ShipmentStatus), LabelPrepPreference LabelPrepPreference = default(LabelPrepPreference), IntendedBoxContentsSource? IntendedBoxContentsSource = default(IntendedBoxContentsSource?))
+        /// <param name="shipmentName">The name for the shipment. Use a naming convention that helps distinguish between shipments over time, such as the date the shipment was created. (required).</param>
+        /// <param name="shipFromAddress">The return address. (required).</param>
+        /// <param name="destinationFulfillmentCenterId">The identifier for the fulfillment center to which the shipment will be shipped. Get this value from the InboundShipmentPlan object in the response returned by the createInboundShipmentPlan operation. (required).</param>
+        /// <param name="areCasesRequired">Indicates whether or not an inbound shipment contains case-packed boxes. Note: A shipment must contain either all case-packed boxes or all individually packed boxes.  Possible values:  true - All boxes in the shipment must be case packed.  false - All boxes in the shipment must be individually packed.  Note: If AreCasesRequired &#x3D; true for an inbound shipment, then the value of QuantityInCase must be greater than zero for every item in the shipment. Otherwise the service returns an error..</param>
+        /// <param name="shipmentStatus">shipmentStatus (required).</param>
+        /// <param name="labelPrepPreference">The preference for label preparation for an inbound shipment. (required).</param>
+        /// <param name="intendedBoxContentsSource">intendedBoxContentsSource.</param>
+        public InboundShipmentHeader(string shipmentName = default(string), Address shipFromAddress = default(Address), string destinationFulfillmentCenterId = default(string), bool? areCasesRequired = default(bool?), ShipmentStatus shipmentStatus = default(ShipmentStatus), LabelPrepPreference labelPrepPreference = default(LabelPrepPreference), IntendedBoxContentsSource? intendedBoxContentsSource = default(IntendedBoxContentsSource?))
         {
-            // to ensure "ShipmentName" is required (not null)
-            if (ShipmentName == null)
+            // to ensure "shipmentName" is required (not null)
+            if (shipmentName == null)
             {
-                throw new InvalidDataException("ShipmentName is a required property for InboundShipmentHeader and cannot be null");
+                throw new InvalidDataException("shipmentName is a required property for InboundShipmentHeader and cannot be null");
             }
             else
             {
-                this.ShipmentName = ShipmentName;
+                this.ShipmentName = shipmentName;
             }
-            // to ensure "ShipFromAddress" is required (not null)
-            if (ShipFromAddress == null)
+            // to ensure "shipFromAddress" is required (not null)
+            if (shipFromAddress == null)
             {
-                throw new InvalidDataException("ShipFromAddress is a required property for InboundShipmentHeader and cannot be null");
+                throw new InvalidDataException("shipFromAddress is a required property for InboundShipmentHeader and cannot be null");
             }
             else
             {
-                this.ShipFromAddress = ShipFromAddress;
+                this.ShipFromAddress = shipFromAddress;
             }
-            // to ensure "DestinationFulfillmentCenterId" is required (not null)
-            if (DestinationFulfillmentCenterId == null)
+            // to ensure "destinationFulfillmentCenterId" is required (not null)
+            if (destinationFulfillmentCenterId == null)
             {
-                throw new InvalidDataException("DestinationFulfillmentCenterId is a required property for InboundShipmentHeader and cannot be null");
+                throw new InvalidDataException("destinationFulfillmentCenterId is a required property for InboundShipmentHeader and cannot be null");
             }
             else
             {
-                this.DestinationFulfillmentCenterId = DestinationFulfillmentCenterId;
+                this.DestinationFulfillmentCenterId = destinationFulfillmentCenterId;
             }
-            // to ensure "ShipmentStatus" is required (not null)
-            if (ShipmentStatus == null)
+            // to ensure "shipmentStatus" is required (not null)
+            if (shipmentStatus == null)
             {
-                throw new InvalidDataException("ShipmentStatus is a required property for InboundShipmentHeader and cannot be null");
+                throw new InvalidDataException("shipmentStatus is a required property for InboundShipmentHeader and cannot be null");
             }
             else
             {
-                this.ShipmentStatus = ShipmentStatus;
+                this.ShipmentStatus = shipmentStatus;
             }
-            // to ensure "LabelPrepPreference" is required (not null)
-            if (LabelPrepPreference == null)
+            // to ensure "labelPrepPreference" is required (not null)
+            if (labelPrepPreference == null)
             {
-                throw new InvalidDataException("LabelPrepPreference is a required property for InboundShipmentHeader and cannot be null");
+                throw new InvalidDataException("labelPrepPreference is a required property for InboundShipmentHeader and cannot be null");
             }
             else
             {
-                this.LabelPrepPreference = LabelPrepPreference;
+                this.LabelPrepPreference = labelPrepPreference;
             }
-            this.AreCasesRequired = AreCasesRequired;
-            this.IntendedBoxContentsSource = IntendedBoxContentsSource;
+            this.AreCasesRequired = areCasesRequired;
+            this.IntendedBoxContentsSource = intendedBoxContentsSource;
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

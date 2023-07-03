@@ -41,14 +41,18 @@ namespace FikaAmazonAPI.Parameter.ListingItem
             }
             return true;
         }
+
+        [PathParameter]
         public string sellerId { get; set; }
 
+        [PathParameter]
         public string sku { get; set; }
 
         public ICollection<string> marketplaceIds { get; set; }
 
         public string issueLocale { get; set; }
 
+        [BodyParameter]
         public ListingsItemPutRequest listingsItemPutRequest { get; set; }
 
     }

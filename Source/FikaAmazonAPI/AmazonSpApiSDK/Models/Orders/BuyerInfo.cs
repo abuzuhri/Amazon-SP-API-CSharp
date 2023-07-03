@@ -8,7 +8,7 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
-    /// Buyer information
+    /// Buyer information.
     /// </summary>
     [DataContract]
     public partial class BuyerInfo : IEquatable<BuyerInfo>, IValidatableObject
@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="BuyerInfo" /> class.
         /// </summary>
         /// <param name="buyerEmail">The anonymized email address of the buyer..</param>
-        /// <param name="buyerName">The name of the buyer..</param>
+        /// <param name="buyerName">The buyer name or the recipient name..</param>
         /// <param name="buyerCounty">The county of the buyer..</param>
         /// <param name="buyerTaxInfo">Tax information about the buyer..</param>
         /// <param name="purchaseOrderNumber">The purchase order (PO) number entered by the buyer at checkout. Returned only for orders where the buyer entered a PO number at checkout..</param>
@@ -46,9 +46,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public string BuyerEmail { get; set; }
 
         /// <summary>
-        /// The name of the buyer.
+        /// The buyer name or the recipient name.
         /// </summary>
-        /// <value>The name of the buyer.</value>
+        /// <value>The buyer name or the recipient name.</value>
         [DataMember(Name = "BuyerName", EmitDefaultValue = false)]
         public string BuyerName { get; set; }
 
@@ -180,4 +180,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             yield break;
         }
     }
+
 }

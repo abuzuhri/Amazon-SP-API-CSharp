@@ -99,19 +99,19 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// UnderTest
         /// </summary>
-        public void SubmitFeedAddProductMessage()
+        public void SubmitFeedAddProductMessage(string ASIN, string SKU)
         {
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
 
             var list = new List<ProductMessage>();
             list.Add(new ProductMessage()
             {
-                SKU = "8432225129778...",
+                SKU = SKU,
 
                 StandardProductID = new ConstructFeed.Messages.StandardProductID()
                 {
                     Type = "ASIN",
-                    Value = "B00M9B66BU"
+                    Value = ASIN
                 }
             });
             createDocument.AddProductMessage(list, OperationType.Update);

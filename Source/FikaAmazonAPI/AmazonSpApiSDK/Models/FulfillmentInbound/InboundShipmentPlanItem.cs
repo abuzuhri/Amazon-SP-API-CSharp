@@ -32,40 +32,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentPlanItem" /> class.
         /// </summary>
-        /// <param name="SellerSKU">The seller SKU of the item. (required).</param>
-        /// <param name="FulfillmentNetworkSKU">Amazon&#39;s fulfillment network SKU of the item. (required).</param>
-        /// <param name="Quantity">The item quantity that you are shipping. (required).</param>
-        /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentPlanItem(string SellerSKU = default(string), string FulfillmentNetworkSKU = default(string), int Quantity = default(int), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        /// <param name="sellerSKU">The seller SKU of the item. (required).</param>
+        /// <param name="fulfillmentNetworkSKU">Amazon&#39;s fulfillment network SKU of the item. (required).</param>
+        /// <param name="quantity">The item quantity that you are shipping. (required).</param>
+        /// <param name="prepDetailsList">prepDetailsList.</param>
+        public InboundShipmentPlanItem(string sellerSKU = default(string), string fulfillmentNetworkSKU = default(string), int? quantity = default(int?), PrepDetailsList prepDetailsList = default(PrepDetailsList))
         {
-            // to ensure "SellerSKU" is required (not null)
-            if (SellerSKU == null)
+            // to ensure "sellerSKU" is required (not null)
+            if (sellerSKU == null)
             {
-                throw new InvalidDataException("SellerSKU is a required property for InboundShipmentPlanItem and cannot be null");
+                throw new InvalidDataException("sellerSKU is a required property for InboundShipmentPlanItem and cannot be null");
             }
             else
             {
-                this.SellerSKU = SellerSKU;
+                this.SellerSKU = sellerSKU;
             }
-            // to ensure "FulfillmentNetworkSKU" is required (not null)
-            if (FulfillmentNetworkSKU == null)
+            // to ensure "fulfillmentNetworkSKU" is required (not null)
+            if (fulfillmentNetworkSKU == null)
             {
-                throw new InvalidDataException("FulfillmentNetworkSKU is a required property for InboundShipmentPlanItem and cannot be null");
+                throw new InvalidDataException("fulfillmentNetworkSKU is a required property for InboundShipmentPlanItem and cannot be null");
             }
             else
             {
-                this.FulfillmentNetworkSKU = FulfillmentNetworkSKU;
+                this.FulfillmentNetworkSKU = fulfillmentNetworkSKU;
             }
-            // to ensure "Quantity" is required (not null)
-            if (Quantity == null)
+            // to ensure "quantity" is required (not null)
+            if (quantity == null)
             {
-                throw new InvalidDataException("Quantity is a required property for InboundShipmentPlanItem and cannot be null");
+                throw new InvalidDataException("quantity is a required property for InboundShipmentPlanItem and cannot be null");
             }
             else
             {
-                this.Quantity = Quantity;
+                this.Quantity = quantity;
             }
-            this.PrepDetailsList = PrepDetailsList;
+            this.PrepDetailsList = prepDetailsList;
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The item quantity that you are shipping.</value>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         /// <summary>
         /// Gets or Sets PrepDetailsList
@@ -115,7 +115,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

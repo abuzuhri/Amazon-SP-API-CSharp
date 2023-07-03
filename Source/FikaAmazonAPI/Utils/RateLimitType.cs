@@ -11,6 +11,11 @@
         Order_GetOrderItems,
         Order_GetOrderItemsBuyerInfo,
         Order_UpdateShipmentStatus,
+        Order_GetOrderRegulatedInfo,
+        Order_UpdateVerificationStatus,
+        Order_UpdateOrderItemsApprovals,
+        Order_ShipmentConfirmation,
+
 
         Report_GetReports,
         Report_GetReport,

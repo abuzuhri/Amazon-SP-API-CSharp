@@ -26,16 +26,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPrepInstructionsResult" /> class.
         /// </summary>
-        /// <param name="SKUPrepInstructionsList">SKUPrepInstructionsList.</param>
-        /// <param name="InvalidSKUList">InvalidSKUList.</param>
-        /// <param name="ASINPrepInstructionsList">ASINPrepInstructionsList.</param>
-        /// <param name="InvalidASINList">InvalidASINList.</param>
-        public GetPrepInstructionsResult(SKUPrepInstructionsList SKUPrepInstructionsList = default(SKUPrepInstructionsList), InvalidSKUList InvalidSKUList = default(InvalidSKUList), ASINPrepInstructionsList ASINPrepInstructionsList = default(ASINPrepInstructionsList), InvalidASINList InvalidASINList = default(InvalidASINList))
+        /// <param name="sKUPrepInstructionsList">sKUPrepInstructionsList.</param>
+        /// <param name="invalidSKUList">invalidSKUList.</param>
+        /// <param name="aSINPrepInstructionsList">aSINPrepInstructionsList.</param>
+        /// <param name="invalidASINList">invalidASINList.</param>
+        public GetPrepInstructionsResult(SKUPrepInstructionsList sKUPrepInstructionsList = default(SKUPrepInstructionsList), InvalidSKUList invalidSKUList = default(InvalidSKUList), ASINPrepInstructionsList aSINPrepInstructionsList = default(ASINPrepInstructionsList), InvalidASINList invalidASINList = default(InvalidASINList))
         {
-            this.SKUPrepInstructionsList = SKUPrepInstructionsList;
-            this.InvalidSKUList = InvalidSKUList;
-            this.ASINPrepInstructionsList = ASINPrepInstructionsList;
-            this.InvalidASINList = InvalidASINList;
+            this.SKUPrepInstructionsList = sKUPrepInstructionsList;
+            this.InvalidSKUList = invalidSKUList;
+            this.ASINPrepInstructionsList = aSINPrepInstructionsList;
+            this.InvalidASINList = invalidASINList;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

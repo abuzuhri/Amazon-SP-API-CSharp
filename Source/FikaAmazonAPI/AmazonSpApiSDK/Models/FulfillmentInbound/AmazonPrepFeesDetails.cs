@@ -31,12 +31,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="AmazonPrepFeesDetails" /> class.
         /// </summary>
-        /// <param name="PrepInstruction">PrepInstruction.</param>
-        /// <param name="FeePerUnit">The fee for Amazon to prepare 1 unit..</param>
-        public AmazonPrepFeesDetails(PrepInstruction? PrepInstruction = default(PrepInstruction?), Amount FeePerUnit = default(Amount))
+        /// <param name="prepInstruction">prepInstruction.</param>
+        /// <param name="feePerUnit">The fee for Amazon to prepare 1 unit..</param>
+        public AmazonPrepFeesDetails(PrepInstruction? prepInstruction = default(PrepInstruction?), Amount feePerUnit = default(Amount))
         {
-            this.PrepInstruction = PrepInstruction;
-            this.FeePerUnit = FeePerUnit;
+            this.PrepInstruction = prepInstruction;
+            this.FeePerUnit = feePerUnit;
         }
 
 
@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

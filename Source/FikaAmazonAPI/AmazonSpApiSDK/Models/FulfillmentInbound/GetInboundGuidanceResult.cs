@@ -26,16 +26,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="GetInboundGuidanceResult" /> class.
         /// </summary>
-        /// <param name="SKUInboundGuidanceList">SKUInboundGuidanceList.</param>
-        /// <param name="InvalidSKUList">InvalidSKUList.</param>
-        /// <param name="ASINInboundGuidanceList">ASINInboundGuidanceList.</param>
-        /// <param name="InvalidASINList">InvalidASINList.</param>
-        public GetInboundGuidanceResult(SKUInboundGuidanceList SKUInboundGuidanceList = default(SKUInboundGuidanceList), InvalidSKUList InvalidSKUList = default(InvalidSKUList), ASINInboundGuidanceList ASINInboundGuidanceList = default(ASINInboundGuidanceList), InvalidASINList InvalidASINList = default(InvalidASINList))
+        /// <param name="sKUInboundGuidanceList">sKUInboundGuidanceList.</param>
+        /// <param name="invalidSKUList">invalidSKUList.</param>
+        /// <param name="aSINInboundGuidanceList">aSINInboundGuidanceList.</param>
+        /// <param name="invalidASINList">invalidASINList.</param>
+        public GetInboundGuidanceResult(SKUInboundGuidanceList sKUInboundGuidanceList = default(SKUInboundGuidanceList), InvalidSKUList invalidSKUList = default(InvalidSKUList), ASINInboundGuidanceList aSINInboundGuidanceList = default(ASINInboundGuidanceList), InvalidASINList invalidASINList = default(InvalidASINList))
         {
-            this.SKUInboundGuidanceList = SKUInboundGuidanceList;
-            this.InvalidSKUList = InvalidSKUList;
-            this.ASINInboundGuidanceList = ASINInboundGuidanceList;
-            this.InvalidASINList = InvalidASINList;
+            this.SKUInboundGuidanceList = sKUInboundGuidanceList;
+            this.InvalidSKUList = invalidSKUList;
+            this.ASINInboundGuidanceList = aSINInboundGuidanceList;
+            this.InvalidASINList = invalidASINList;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

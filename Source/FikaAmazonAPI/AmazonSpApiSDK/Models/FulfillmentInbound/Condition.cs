@@ -10,6 +10,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
@@ -17,115 +18,119 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     /// The condition of the item.
     /// </summary>
     /// <value>The condition of the item.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
+
     public enum Condition
     {
+
         /// <summary>
         /// Enum NewItem for value: NewItem
         /// </summary>
+        [EnumMember(Value = "NewItem")]
         NewItem = 1,
 
         /// <summary>
         /// Enum NewWithWarranty for value: NewWithWarranty
         /// </summary>
-
-        NewWithWarranty,
+        [EnumMember(Value = "NewWithWarranty")]
+        NewWithWarranty = 2,
 
         /// <summary>
         /// Enum NewOEM for value: NewOEM
         /// </summary>
-
-        NewOEM,
+        [EnumMember(Value = "NewOEM")]
+        NewOEM = 3,
 
         /// <summary>
         /// Enum NewOpenBox for value: NewOpenBox
         /// </summary>
-
-        NewOpenBox,
+        [EnumMember(Value = "NewOpenBox")]
+        NewOpenBox = 4,
 
         /// <summary>
         /// Enum UsedLikeNew for value: UsedLikeNew
         /// </summary>
-
-        UsedLikeNew,
+        [EnumMember(Value = "UsedLikeNew")]
+        UsedLikeNew = 5,
 
         /// <summary>
         /// Enum UsedVeryGood for value: UsedVeryGood
         /// </summary>
-
-        UsedVeryGood,
+        [EnumMember(Value = "UsedVeryGood")]
+        UsedVeryGood = 6,
 
         /// <summary>
         /// Enum UsedGood for value: UsedGood
         /// </summary>
-
-        UsedGood,
+        [EnumMember(Value = "UsedGood")]
+        UsedGood = 7,
 
         /// <summary>
         /// Enum UsedAcceptable for value: UsedAcceptable
         /// </summary>
-
-        UsedAcceptable,
+        [EnumMember(Value = "UsedAcceptable")]
+        UsedAcceptable = 8,
 
         /// <summary>
         /// Enum UsedPoor for value: UsedPoor
         /// </summary>
-
-        UsedPoor,
+        [EnumMember(Value = "UsedPoor")]
+        UsedPoor = 9,
 
         /// <summary>
         /// Enum UsedRefurbished for value: UsedRefurbished
         /// </summary>
-
-        UsedRefurbished,
+        [EnumMember(Value = "UsedRefurbished")]
+        UsedRefurbished = 10,
 
         /// <summary>
         /// Enum CollectibleLikeNew for value: CollectibleLikeNew
         /// </summary>
-
-        CollectibleLikeNew,
+        [EnumMember(Value = "CollectibleLikeNew")]
+        CollectibleLikeNew = 11,
 
         /// <summary>
         /// Enum CollectibleVeryGood for value: CollectibleVeryGood
         /// </summary>
-
-        CollectibleVeryGood,
+        [EnumMember(Value = "CollectibleVeryGood")]
+        CollectibleVeryGood = 12,
 
         /// <summary>
         /// Enum CollectibleGood for value: CollectibleGood
         /// </summary>
-
-        CollectibleGood,
+        [EnumMember(Value = "CollectibleGood")]
+        CollectibleGood = 13,
 
         /// <summary>
         /// Enum CollectibleAcceptable for value: CollectibleAcceptable
         /// </summary>
-
-        CollectibleAcceptable,
+        [EnumMember(Value = "CollectibleAcceptable")]
+        CollectibleAcceptable = 14,
 
         /// <summary>
         /// Enum CollectiblePoor for value: CollectiblePoor
         /// </summary>
-
-        CollectiblePoor,
+        [EnumMember(Value = "CollectiblePoor")]
+        CollectiblePoor = 15,
 
         /// <summary>
         /// Enum RefurbishedWithWarranty for value: RefurbishedWithWarranty
         /// </summary>
-
-        RefurbishedWithWarranty,
+        [EnumMember(Value = "RefurbishedWithWarranty")]
+        RefurbishedWithWarranty = 16,
 
         /// <summary>
         /// Enum Refurbished for value: Refurbished
         /// </summary>
-
-        Refurbished,
+        [EnumMember(Value = "Refurbished")]
+        Refurbished = 17,
 
         /// <summary>
         /// Enum Club for value: Club
         /// </summary>
-
-        Club
+        [EnumMember(Value = "Club")]
+        Club = 18
     }
 
 }

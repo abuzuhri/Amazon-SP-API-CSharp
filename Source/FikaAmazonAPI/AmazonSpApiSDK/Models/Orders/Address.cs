@@ -60,42 +60,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
-        /// <param name="Name">The name. (required).</param>
-        /// <param name="AddressLine1">The street address..</param>
-        /// <param name="AddressLine2">Additional street address information, if required..</param>
-        /// <param name="AddressLine3">Additional street address information, if required..</param>
-        /// <param name="City">The city .</param>
-        /// <param name="County">The county..</param>
-        /// <param name="District">The district..</param>
-        /// <param name="StateOrRegion">The state or region..</param>
-        /// <param name="Municipality">The municipality..</param>
-        /// <param name="PostalCode">The postal code..</param>
-        /// <param name="CountryCode">The country code. A two-character country code, in ISO 3166-1 alpha-2 format..</param>
-        /// <param name="Phone">The phone number. Not returned for Fulfillment by Amazon (FBA) orders..</param>
-        /// <param name="AddressType">The address type of the shipping address..</param>
-        public Address(string Name = default(string), string AddressLine1 = default(string), string AddressLine2 = default(string), string AddressLine3 = default(string), string City = default(string), string County = default(string), string District = default(string), string StateOrRegion = default(string), string Municipality = default(string), string PostalCode = default(string), string CountryCode = default(string), string Phone = default(string), AddressTypeEnum? AddressType = default(AddressTypeEnum?))
+        /// <param name="name">The name. (required).</param>
+        /// <param name="addressLine1">The street address..</param>
+        /// <param name="addressLine2">Additional street address information, if required..</param>
+        /// <param name="addressLine3">Additional street address information, if required..</param>
+        /// <param name="city">The city .</param>
+        /// <param name="county">The county..</param>
+        /// <param name="district">The district..</param>
+        /// <param name="stateOrRegion">The state or region..</param>
+        /// <param name="municipality">The municipality..</param>
+        /// <param name="postalCode">The postal code..</param>
+        /// <param name="countryCode">The country code. A two-character country code, in ISO 3166-1 alpha-2 format..</param>
+        /// <param name="phone">The phone number. Not returned for Fulfillment by Amazon (FBA) orders..</param>
+        /// <param name="addressType">The address type of the shipping address..</param>
+        public Address(string name = default(string), string addressLine1 = default(string), string addressLine2 = default(string), string addressLine3 = default(string), string city = default(string), string county = default(string), string district = default(string), string stateOrRegion = default(string), string municipality = default(string), string postalCode = default(string), string countryCode = default(string), string phone = default(string), AddressTypeEnum? addressType = default(AddressTypeEnum?))
         {
-            // to ensure "Name" is required (not null)
-            if (Name == null)
+            // to ensure "name" is required (not null)
+            if (name == null)
             {
-                throw new InvalidDataException("Name is a required property for Address and cannot be null");
+                throw new InvalidDataException("name is a required property for Address and cannot be null");
             }
             else
             {
-                this.Name = Name;
+                this.Name = name;
             }
-            this.AddressLine1 = AddressLine1;
-            this.AddressLine2 = AddressLine2;
-            this.AddressLine3 = AddressLine3;
-            this.City = City;
-            this.County = County;
-            this.District = District;
-            this.StateOrRegion = StateOrRegion;
-            this.Municipality = Municipality;
-            this.PostalCode = PostalCode;
-            this.CountryCode = CountryCode;
-            this.Phone = Phone;
-            this.AddressType = AddressType;
+            this.AddressLine1 = addressLine1;
+            this.AddressLine2 = addressLine2;
+            this.AddressLine3 = addressLine3;
+            this.City = city;
+            this.County = county;
+            this.District = district;
+            this.StateOrRegion = stateOrRegion;
+            this.Municipality = municipality;
+            this.PostalCode = postalCode;
+            this.CountryCode = countryCode;
+            this.Phone = phone;
+            this.AddressType = addressType;
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

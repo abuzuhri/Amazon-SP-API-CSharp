@@ -31,12 +31,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="PointsGrantedDetail" /> class.
         /// </summary>
-        /// <param name="PointsNumber">The number of Amazon Points granted with the purchase of an item..</param>
-        /// <param name="PointsMonetaryValue">The monetary value of the Amazon Points granted..</param>
-        public PointsGrantedDetail(int? PointsNumber = default(int?), Money PointsMonetaryValue = default(Money))
+        /// <param name="pointsNumber">The number of Amazon Points granted with the purchase of an item..</param>
+        /// <param name="pointsMonetaryValue">The monetary value of the Amazon Points granted..</param>
+        public PointsGrantedDetail(int? pointsNumber = default(int?), Money pointsMonetaryValue = default(Money))
         {
-            this.PointsNumber = PointsNumber;
-            this.PointsMonetaryValue = PointsMonetaryValue;
+            this.PointsNumber = pointsNumber;
+            this.PointsMonetaryValue = pointsMonetaryValue;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -36,20 +36,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="SKUPrepInstructions" /> class.
         /// </summary>
-        /// <param name="SellerSKU">The seller SKU of the item..</param>
-        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item..</param>
-        /// <param name="BarcodeInstruction">BarcodeInstruction.</param>
-        /// <param name="PrepGuidance">PrepGuidance.</param>
-        /// <param name="PrepInstructionList">PrepInstructionList.</param>
-        /// <param name="AmazonPrepFeesDetailsList">AmazonPrepFeesDetailsList.</param>
-        public SKUPrepInstructions(string SellerSKU = default(string), string ASIN = default(string), BarcodeInstruction? BarcodeInstruction = default(BarcodeInstruction?), PrepGuidance? PrepGuidance = default(PrepGuidance?), PrepInstructionList PrepInstructionList = default(PrepInstructionList), AmazonPrepFeesDetailsList AmazonPrepFeesDetailsList = default(AmazonPrepFeesDetailsList))
+        /// <param name="sellerSKU">The seller SKU of the item..</param>
+        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item..</param>
+        /// <param name="barcodeInstruction">barcodeInstruction.</param>
+        /// <param name="prepGuidance">prepGuidance.</param>
+        /// <param name="prepInstructionList">prepInstructionList.</param>
+        /// <param name="amazonPrepFeesDetailsList">amazonPrepFeesDetailsList.</param>
+        public SKUPrepInstructions(string sellerSKU = default(string), string aSIN = default(string), BarcodeInstruction? barcodeInstruction = default(BarcodeInstruction?), PrepGuidance? prepGuidance = default(PrepGuidance?), PrepInstructionList prepInstructionList = default(PrepInstructionList), AmazonPrepFeesDetailsList amazonPrepFeesDetailsList = default(AmazonPrepFeesDetailsList))
         {
-            this.SellerSKU = SellerSKU;
-            this.ASIN = ASIN;
-            this.BarcodeInstruction = BarcodeInstruction;
-            this.PrepGuidance = PrepGuidance;
-            this.PrepInstructionList = PrepInstructionList;
-            this.AmazonPrepFeesDetailsList = AmazonPrepFeesDetailsList;
+            this.SellerSKU = sellerSKU;
+            this.ASIN = aSIN;
+            this.BarcodeInstruction = barcodeInstruction;
+            this.PrepGuidance = prepGuidance;
+            this.PrepInstructionList = prepInstructionList;
+            this.AmazonPrepFeesDetailsList = amazonPrepFeesDetailsList;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

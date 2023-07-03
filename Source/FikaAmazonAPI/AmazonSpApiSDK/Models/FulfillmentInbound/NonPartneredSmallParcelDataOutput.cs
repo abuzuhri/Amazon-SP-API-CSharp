@@ -32,17 +32,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelDataOutput" /> class.
         /// </summary>
-        /// <param name="PackageList">PackageList (required).</param>
-        public NonPartneredSmallParcelDataOutput(NonPartneredSmallParcelPackageOutputList PackageList = default(NonPartneredSmallParcelPackageOutputList))
+        /// <param name="packageList">packageList (required).</param>
+        public NonPartneredSmallParcelDataOutput(NonPartneredSmallParcelPackageOutputList packageList = default(NonPartneredSmallParcelPackageOutputList))
         {
-            // to ensure "PackageList" is required (not null)
-            if (PackageList == null)
+            // to ensure "packageList" is required (not null)
+            if (packageList == null)
             {
-                throw new InvalidDataException("PackageList is a required property for NonPartneredSmallParcelDataOutput and cannot be null");
+                throw new InvalidDataException("packageList is a required property for NonPartneredSmallParcelDataOutput and cannot be null");
             }
             else
             {
-                this.PackageList = PackageList;
+                this.PackageList = packageList;
             }
         }
 
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

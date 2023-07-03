@@ -70,10 +70,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             AmazonServicesInc = 1,
 
             /// <summary>
-            /// Enum AmazonCommercialServicesPtyLtd for value: Amazon Commercial Services Pty Ltd
+            /// Enum LowValueGoods for value: LowValueGoods
             /// </summary>
-            [EnumMember(Value = "Amazon Commercial Services Pty Ltd")]
-            AmazonCommercialServicesPtyLtd = 2
+            [EnumMember(Value = "LowValueGoods")]
+            LowValueGoods = 2,
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="TaxCollection" /> class.
         /// </summary>
-        /// <param name="Model">The tax collection model applied to the item..</param>
-        /// <param name="ResponsibleParty">The party responsible for withholding the taxes and remitting them to the taxing authority..</param>
-        public TaxCollection(ModelEnum? Model = default(ModelEnum?), ResponsiblePartyEnum? ResponsibleParty = default(ResponsiblePartyEnum?))
+        /// <param name="model">The tax collection model applied to the item..</param>
+        /// <param name="responsibleParty">The party responsible for withholding the taxes and remitting them to the taxing authority..</param>
+        public TaxCollection(ModelEnum? model = default(ModelEnum?), ResponsiblePartyEnum? responsibleParty = default(ResponsiblePartyEnum?))
         {
-            this.Model = Model;
-            this.ResponsibleParty = ResponsibleParty;
+            this.Model = model;
+            this.ResponsibleParty = responsibleParty;
         }
 
 
@@ -113,7 +113,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

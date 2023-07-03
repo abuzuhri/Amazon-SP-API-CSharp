@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
@@ -56,7 +56,23 @@ namespace FikaAmazonAPI.Services
 
         private void CreateRequest(string url, RestSharp.Method method)
         {
-            RequestClient = new RestClient(ApiBaseUrl);
+            if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
+            {
+                RequestClient = new RestClient(ApiBaseUrl);
+            }
+            else
+            {
+                var options = new RestClientOptions(ApiBaseUrl)
+                {
+                    Proxy = new System.Net.WebProxy()
+                    {
+                        Address = new Uri(AmazonCredential.ProxyAddress)
+                    }
+                };
+
+                RequestClient = new RestClient(options);
+            }
+
             RequestClient.UseNewtonsoftJson();
             Request = new RestRequest(url, method);
         }
@@ -163,11 +179,11 @@ namespace FikaAmazonAPI.Services
         {
             lock (Request)
             {
-                Request.Parameters.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-                Request.Parameters.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
-                Request.Parameters.RemoveParameter(AccessTokenHeaderName);
-                Request.Parameters.RemoveParameter(SecurityTokenHeaderName);
-                Request.Parameters.RemoveParameter(ShippingBusinessIdHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                Request?.Parameters?.RemoveParameter(AccessTokenHeaderName);
+                Request?.Parameters?.RemoveParameter(SecurityTokenHeaderName);
+                Request?.Parameters?.RemoveParameter(ShippingBusinessIdHeaderName);
 
             }
         }
@@ -244,7 +260,7 @@ namespace FikaAmazonAPI.Services
 
         protected void ParseResponse(RestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
                 return;
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -270,9 +286,16 @@ namespace FikaAmazonAPI.Services
                             throw new AmazonInvalidInputException(error.Message, response);
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
+                        case "InternalFailure":
+                            throw new AmazonInternalErrorException(error.Message, response);
                     }
 
                 }
+            }
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                throw new AmazonBadRequestException("BadRequest see https://developer-docs.amazon.com/sp-api/changelog/api-request-validation-for-400-errors-with-html-response for advice", response);
             }
 
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
@@ -382,7 +405,7 @@ namespace FikaAmazonAPI.Services
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
             return response;
         }
     }

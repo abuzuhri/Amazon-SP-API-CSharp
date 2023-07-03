@@ -38,42 +38,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInboundShipmentPlanRequest" /> class.
         /// </summary>
-        /// <param name="ShipFromAddress">The address from which the inbound shipment will be sent. (required).</param>
-        /// <param name="LabelPrepPreference">The seller&#39;s preference for label preparation for an inbound shipment. (required).</param>
-        /// <param name="ShipToCountryCode">The two-character country code for the country where the inbound shipment is to be sent.  Note: Not required. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error.   Values:   ShipToCountryCode values for North America:  * CA – Canada  * MX - Mexico  * US - United States  ShipToCountryCode values for MCI sellers in Europe:  * DE – Germany  * ES – Spain  * FR – France  * GB – United Kingdom  * IT – Italy  Default: The country code for the seller&#39;s home marketplace..</param>
-        /// <param name="ShipToCountrySubdivisionCode">The two-character country code, followed by a dash and then up to three characters that represent the subdivision of the country where the inbound shipment is to be sent. For example, \&quot;IN-MH\&quot;. In full ISO 3166-2 format.  Note: Not required. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error..</param>
-        /// <param name="InboundShipmentPlanRequestItems">InboundShipmentPlanRequestItems (required).</param>
-        public CreateInboundShipmentPlanRequest(Address ShipFromAddress = default(Address), LabelPrepPreference LabelPrepPreference = default(LabelPrepPreference), string ShipToCountryCode = default(string), string ShipToCountrySubdivisionCode = default(string), InboundShipmentPlanRequestItemList InboundShipmentPlanRequestItems = default(InboundShipmentPlanRequestItemList))
+        /// <param name="shipFromAddress">The address from which the inbound shipment will be sent. (required).</param>
+        /// <param name="labelPrepPreference">The seller&#39;s preference for label preparation for an inbound shipment. (required).</param>
+        /// <param name="shipToCountryCode">The two-character country code for the country where the inbound shipment is to be sent.  Note: Not required. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error.   Values:   ShipToCountryCode values for North America:  * CA – Canada  * MX - Mexico  * US - United States  ShipToCountryCode values for MCI sellers in Europe:  * DE – Germany  * ES – Spain  * FR – France  * GB – United Kingdom  * IT – Italy  Default: The country code for the seller&#39;s home marketplace..</param>
+        /// <param name="shipToCountrySubdivisionCode">The two-character country code, followed by a dash and then up to three characters that represent the subdivision of the country where the inbound shipment is to be sent. For example, \&quot;IN-MH\&quot;. In full ISO 3166-2 format.  Note: Not required. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error..</param>
+        /// <param name="inboundShipmentPlanRequestItems">inboundShipmentPlanRequestItems (required).</param>
+        public CreateInboundShipmentPlanRequest(Address shipFromAddress = default(Address), LabelPrepPreference labelPrepPreference = default(LabelPrepPreference), string shipToCountryCode = default(string), string shipToCountrySubdivisionCode = default(string), InboundShipmentPlanRequestItemList inboundShipmentPlanRequestItems = default(InboundShipmentPlanRequestItemList))
         {
-            // to ensure "ShipFromAddress" is required (not null)
-            if (ShipFromAddress == null)
+            // to ensure "shipFromAddress" is required (not null)
+            if (shipFromAddress == null)
             {
-                throw new InvalidDataException("ShipFromAddress is a required property for CreateInboundShipmentPlanRequest and cannot be null");
+                throw new InvalidDataException("shipFromAddress is a required property for CreateInboundShipmentPlanRequest and cannot be null");
             }
             else
             {
-                this.ShipFromAddress = ShipFromAddress;
+                this.ShipFromAddress = shipFromAddress;
             }
-            // to ensure "LabelPrepPreference" is required (not null)
-            if (LabelPrepPreference == null)
+            // to ensure "labelPrepPreference" is required (not null)
+            if (labelPrepPreference == null)
             {
-                throw new InvalidDataException("LabelPrepPreference is a required property for CreateInboundShipmentPlanRequest and cannot be null");
+                throw new InvalidDataException("labelPrepPreference is a required property for CreateInboundShipmentPlanRequest and cannot be null");
             }
             else
             {
-                this.LabelPrepPreference = LabelPrepPreference;
+                this.LabelPrepPreference = labelPrepPreference;
             }
-            // to ensure "InboundShipmentPlanRequestItems" is required (not null)
-            if (InboundShipmentPlanRequestItems == null)
+            // to ensure "inboundShipmentPlanRequestItems" is required (not null)
+            if (inboundShipmentPlanRequestItems == null)
             {
-                throw new InvalidDataException("InboundShipmentPlanRequestItems is a required property for CreateInboundShipmentPlanRequest and cannot be null");
+                throw new InvalidDataException("inboundShipmentPlanRequestItems is a required property for CreateInboundShipmentPlanRequest and cannot be null");
             }
             else
             {
-                this.InboundShipmentPlanRequestItems = InboundShipmentPlanRequestItems;
+                this.InboundShipmentPlanRequestItems = inboundShipmentPlanRequestItems;
             }
-            this.ShipToCountryCode = ShipToCountryCode;
-            this.ShipToCountrySubdivisionCode = ShipToCountrySubdivisionCode;
+            this.ShipToCountryCode = shipToCountryCode;
+            this.ShipToCountrySubdivisionCode = shipToCountrySubdivisionCode;
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

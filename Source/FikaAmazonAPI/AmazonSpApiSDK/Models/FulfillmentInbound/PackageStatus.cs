@@ -18,52 +18,53 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     /// The shipment status of the package.
     /// </summary>
     /// <value>The shipment status of the package.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
+
     public enum PackageStatus
     {
 
         /// <summary>
         /// Enum SHIPPED for value: SHIPPED
         /// </summary>
-
-        SHIPPED,
+        [EnumMember(Value = "SHIPPED")]
+        SHIPPED = 1,
 
         /// <summary>
-        /// Enum INTRANSIT for value: INTRANSIT
+        /// Enum INTRANSIT for value: IN_TRANSIT
         /// </summary>
-
         [EnumMember(Value = "IN_TRANSIT")]
-        IN_TRANSIT,
+        INTRANSIT = 2,
 
         /// <summary>
         /// Enum DELIVERED for value: DELIVERED
         /// </summary>
-
-        DELIVERED,
+        [EnumMember(Value = "DELIVERED")]
+        DELIVERED = 3,
 
         /// <summary>
         /// Enum CHECKEDIN for value: CHECKED_IN
         /// </summary>
         [EnumMember(Value = "CHECKED_IN")]
-        CHECKED_IN,
+        CHECKEDIN = 4,
 
         /// <summary>
         /// Enum RECEIVING for value: RECEIVING
         /// </summary>
-
-        RECEIVING,
+        [EnumMember(Value = "RECEIVING")]
+        RECEIVING = 5,
 
         /// <summary>
         /// Enum CLOSED for value: CLOSED
         /// </summary>
-
-        CLOSED,
+        [EnumMember(Value = "CLOSED")]
+        CLOSED = 6,
 
         /// <summary>
         /// Enum DELETED for value: DELETED
         /// </summary>
-
-        DELETED
+        [EnumMember(Value = "DELETED")]
+        DELETED = 7
     }
 
 }

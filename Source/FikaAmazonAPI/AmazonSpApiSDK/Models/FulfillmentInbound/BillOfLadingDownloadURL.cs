@@ -26,10 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="BillOfLadingDownloadURL" /> class.
         /// </summary>
-        /// <param name="DownloadURL">URL to download the bill of lading for the package. Note: The URL will only be valid for 15 seconds.</param>
-        public BillOfLadingDownloadURL(string DownloadURL = default(string))
+        /// <param name="downloadURL">URL to download the bill of lading for the package. Note: The URL will only be valid for 15 seconds.</param>
+        public BillOfLadingDownloadURL(string downloadURL = default(string))
         {
-            this.DownloadURL = DownloadURL;
+            this.DownloadURL = downloadURL;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
