@@ -26,12 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="Money" /> class.
         /// </summary>
-        /// <param name="CurrencyCode">The three-digit currency code. In ISO 4217 format..</param>
-        /// <param name="Amount">The currency amount..</param>
-        public Money(string CurrencyCode = default(string), string Amount = default(string))
+        /// <param name="currencyCode">The three-digit currency code. In ISO 4217 format..</param>
+        /// <param name="amount">The currency amount..</param>
+        public Money(string currencyCode = default(string), string amount = default(string))
         {
-            this.CurrencyCode = CurrencyCode;
-            this.Amount = Amount;
+            this.CurrencyCode = currencyCode;
+            this.Amount = amount;
         }
 
         public Money()
@@ -71,7 +71,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

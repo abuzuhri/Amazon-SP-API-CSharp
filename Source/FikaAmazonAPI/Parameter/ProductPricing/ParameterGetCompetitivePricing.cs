@@ -21,6 +21,6 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
 
                 throw new ArgumentException("You cant request without fill Skus or Asins , you need to fill only of them only");
             }  }
-        public CustomerType? ItemCondition { get; set; }
+        public CustomerType? CustomerType { get; set; }
     }
 }

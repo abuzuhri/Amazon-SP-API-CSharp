@@ -18,7 +18,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     /// Indicates the unit of weight.
     /// </summary>
     /// <value>Indicates the unit of weight.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
+
     public enum UnitOfWeight
     {
 

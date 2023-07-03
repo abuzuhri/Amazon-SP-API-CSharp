@@ -32,30 +32,30 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderItemsBuyerInfoList" /> class.
         /// </summary>
-        /// <param name="OrderItems">OrderItems (required).</param>
-        /// <param name="NextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
-        /// <param name="AmazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
-        public OrderItemsBuyerInfoList(OrderItemBuyerInfoList OrderItems = default(OrderItemBuyerInfoList), string NextToken = default(string), string AmazonOrderId = default(string))
+        /// <param name="orderItems">orderItems (required).</param>
+        /// <param name="nextToken">When present and not empty, pass this string token in the next request to return the next response page..</param>
+        /// <param name="amazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
+        public OrderItemsBuyerInfoList(OrderItemBuyerInfoList orderItems = default(OrderItemBuyerInfoList), string nextToken = default(string), string amazonOrderId = default(string))
         {
-            // to ensure "OrderItems" is required (not null)
-            if (OrderItems == null)
+            // to ensure "orderItems" is required (not null)
+            if (orderItems == null)
             {
-                throw new InvalidDataException("OrderItems is a required property for OrderItemsBuyerInfoList and cannot be null");
+                throw new InvalidDataException("orderItems is a required property for OrderItemsBuyerInfoList and cannot be null");
             }
             else
             {
-                this.OrderItems = OrderItems;
+                this.OrderItems = orderItems;
             }
-            // to ensure "AmazonOrderId" is required (not null)
-            if (AmazonOrderId == null)
+            // to ensure "amazonOrderId" is required (not null)
+            if (amazonOrderId == null)
             {
-                throw new InvalidDataException("AmazonOrderId is a required property for OrderItemsBuyerInfoList and cannot be null");
+                throw new InvalidDataException("amazonOrderId is a required property for OrderItemsBuyerInfoList and cannot be null");
             }
             else
             {
-                this.AmazonOrderId = AmazonOrderId;
+                this.AmazonOrderId = amazonOrderId;
             }
-            this.NextToken = NextToken;
+            this.NextToken = nextToken;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

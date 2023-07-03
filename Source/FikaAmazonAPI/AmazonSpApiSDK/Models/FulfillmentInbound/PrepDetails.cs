@@ -42,27 +42,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PrepDetails" /> class.
         /// </summary>
-        /// <param name="PrepInstruction">PrepInstruction (required).</param>
-        /// <param name="PrepOwner">PrepOwner (required).</param>
-        public PrepDetails(PrepInstruction PrepInstruction = default(PrepInstruction), PrepOwner PrepOwner = default(PrepOwner))
+        /// <param name="prepInstruction">prepInstruction (required).</param>
+        /// <param name="prepOwner">prepOwner (required).</param>
+        public PrepDetails(PrepInstruction prepInstruction = default(PrepInstruction), PrepOwner prepOwner = default(PrepOwner))
         {
-            // to ensure "PrepInstruction" is required (not null)
-            if (PrepInstruction == null)
+            // to ensure "prepInstruction" is required (not null)
+            if (prepInstruction == null)
             {
-                throw new InvalidDataException("PrepInstruction is a required property for PrepDetails and cannot be null");
+                throw new InvalidDataException("prepInstruction is a required property for PrepDetails and cannot be null");
             }
             else
             {
-                this.PrepInstruction = PrepInstruction;
+                this.PrepInstruction = prepInstruction;
             }
-            // to ensure "PrepOwner" is required (not null)
-            if (PrepOwner == null)
+            // to ensure "prepOwner" is required (not null)
+            if (prepOwner == null)
             {
-                throw new InvalidDataException("PrepOwner is a required property for PrepDetails and cannot be null");
+                throw new InvalidDataException("prepOwner is a required property for PrepDetails and cannot be null");
             }
             else
             {
-                this.PrepOwner = PrepOwner;
+                this.PrepOwner = prepOwner;
             }
         }
 
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

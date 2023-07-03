@@ -32,40 +32,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="Contact" /> class.
         /// </summary>
-        /// <param name="Name">The name of the contact person. (required).</param>
-        /// <param name="Phone">The phone number of the contact person. (required).</param>
-        /// <param name="Email">The email address of the contact person. (required).</param>
-        /// <param name="Fax">The fax number of the contact person..</param>
-        public Contact(string Name = default(string), string Phone = default(string), string Email = default(string), string Fax = default(string))
+        /// <param name="name">The name of the contact person. (required).</param>
+        /// <param name="phone">The phone number of the contact person. (required).</param>
+        /// <param name="email">The email address of the contact person. (required).</param>
+        /// <param name="fax">The fax number of the contact person..</param>
+        public Contact(string name = default(string), string phone = default(string), string email = default(string), string fax = default(string))
         {
-            // to ensure "Name" is required (not null)
-            if (Name == null)
+            // to ensure "name" is required (not null)
+            if (name == null)
             {
-                throw new InvalidDataException("Name is a required property for Contact and cannot be null");
+                throw new InvalidDataException("name is a required property for Contact and cannot be null");
             }
             else
             {
-                this.Name = Name;
+                this.Name = name;
             }
-            // to ensure "Phone" is required (not null)
-            if (Phone == null)
+            // to ensure "phone" is required (not null)
+            if (phone == null)
             {
-                throw new InvalidDataException("Phone is a required property for Contact and cannot be null");
+                throw new InvalidDataException("phone is a required property for Contact and cannot be null");
             }
             else
             {
-                this.Phone = Phone;
+                this.Phone = phone;
             }
-            // to ensure "Email" is required (not null)
-            if (Email == null)
+            // to ensure "email" is required (not null)
+            if (email == null)
             {
-                throw new InvalidDataException("Email is a required property for Contact and cannot be null");
+                throw new InvalidDataException("email is a required property for Contact and cannot be null");
             }
             else
             {
-                this.Email = Email;
+                this.Email = email;
             }
-            this.Fax = Fax;
+            this.Fax = fax;
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

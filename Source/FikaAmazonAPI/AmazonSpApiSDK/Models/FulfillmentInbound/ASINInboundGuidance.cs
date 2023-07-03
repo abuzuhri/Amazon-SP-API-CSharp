@@ -37,30 +37,30 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="ASINInboundGuidance" /> class.
         /// </summary>
-        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
-        /// <param name="InboundGuidance">InboundGuidance (required).</param>
-        /// <param name="GuidanceReasonList">A list of reasons for the current inbound guidance for this item..</param>
-        public ASINInboundGuidance(string ASIN = default(string), InboundGuidance InboundGuidance = default(InboundGuidance), GuidanceReasonList GuidanceReasonList = default(GuidanceReasonList))
+        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
+        /// <param name="inboundGuidance">inboundGuidance (required).</param>
+        /// <param name="guidanceReasonList">A list of reasons for the current inbound guidance for this item..</param>
+        public ASINInboundGuidance(string aSIN = default(string), InboundGuidance inboundGuidance = default(InboundGuidance), GuidanceReasonList guidanceReasonList = default(GuidanceReasonList))
         {
-            // to ensure "ASIN" is required (not null)
-            if (ASIN == null)
+            // to ensure "aSIN" is required (not null)
+            if (aSIN == null)
             {
-                throw new InvalidDataException("ASIN is a required property for ASINInboundGuidance and cannot be null");
+                throw new InvalidDataException("aSIN is a required property for ASINInboundGuidance and cannot be null");
             }
             else
             {
-                this.ASIN = ASIN;
+                this.ASIN = aSIN;
             }
-            // to ensure "InboundGuidance" is required (not null)
-            if (InboundGuidance == null)
+            // to ensure "inboundGuidance" is required (not null)
+            if (inboundGuidance == null)
             {
-                throw new InvalidDataException("InboundGuidance is a required property for ASINInboundGuidance and cannot be null");
+                throw new InvalidDataException("inboundGuidance is a required property for ASINInboundGuidance and cannot be null");
             }
             else
             {
-                this.InboundGuidance = InboundGuidance;
+                this.InboundGuidance = inboundGuidance;
             }
-            this.GuidanceReasonList = GuidanceReasonList;
+            this.GuidanceReasonList = guidanceReasonList;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

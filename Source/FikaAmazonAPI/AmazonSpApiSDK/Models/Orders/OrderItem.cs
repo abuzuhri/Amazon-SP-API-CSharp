@@ -57,8 +57,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             [EnumMember(Value = "GB_VOEC")]
             GB_VOEC = 4,
 
-
-
             /// <summary>
             /// Enum CA_MPF for value: CA_MPF
             /// </summary>
@@ -75,7 +73,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// Enum SG_VOEC for value: SG_VOEC
             /// </summary>
             [EnumMember(Value = "SG_VOEC")]
-            SG_VOEC = 6,
+            SG_VOEC = 7,
+
+            /// <summary>
+            /// Enum NZ_VOEC for value: NZ_VOEC
+            /// </summary>
+            [EnumMember(Value = "NZ_VOEC")]
+            NZ_VOEC = 8,
+
+            /// <summary>
+            /// Enum JE_VOEC for value: JE_VOEC
+            /// </summary>
+            [EnumMember(Value = "JE_VOEC")]
+            JE_VOEC
         }
 
         /// <summary>
@@ -88,102 +98,108 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="OrderItem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public OrderItem() { }
+        protected OrderItem() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderItem" /> class.
         /// </summary>
-        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
-        /// <param name="SellerSKU">The seller stock keeping unit (SKU) of the item..</param>
-        /// <param name="OrderItemId">An Amazon-defined order item identifier. (required).</param>
-        /// <param name="Title">The name of the item..</param>
-        /// <param name="QuantityOrdered">The number of items in the order.  (required).</param>
-        /// <param name="QuantityShipped">The number of items shipped..</param>
-        /// <param name="ProductInfo">Product information for the item..</param>
-        /// <param name="PointsGranted">The number and value of Amazon Points granted with the purchase of an item..</param>
-        /// <param name="ItemPrice">The selling price of the order item. Note that an order item is an item and a quantity. This means that the value of ItemPrice is equal to the selling price of the item multiplied by the quantity ordered. Note that ItemPrice excludes ShippingPrice and GiftWrapPrice..</param>
-        /// <param name="ShippingPrice">The shipping price of the item..</param>
-        /// <param name="ItemTax">The tax on the item price..</param>
-        /// <param name="ShippingTax">The tax on the shipping price..</param>
-        /// <param name="ShippingDiscount">The discount on the shipping price..</param>
-        /// <param name="ShippingDiscountTax">The tax on the discount on the shipping price..</param>
-        /// <param name="PromotionDiscount">The total of all promotional discounts in the offer..</param>
-        /// <param name="PromotionDiscountTax">The tax on the total of all promotional discounts in the offer..</param>
-        /// <param name="PromotionIds">PromotionIds.</param>
-        /// <param name="CODFee">The fee charged for COD service..</param>
-        /// <param name="CODFeeDiscount">The discount on the COD fee..</param>
-        /// <param name="IsGift">When true, the item is a gift..</param>
-        /// <param name="ConditionNote">The condition of the item as described by the seller..</param>
-        /// <param name="ConditionId">The condition of the item.  Possible values: New, Used, Collectible, Refurbished, Preorder, Club..</param>
-        /// <param name="ConditionSubtypeId">The subcondition of the item.  Possible values: New, Mint, Very Good, Good, Acceptable, Poor, Club, OEM, Warranty, Refurbished Warranty, Refurbished, Open Box, Any, Other..</param>
-        /// <param name="ScheduledDeliveryStartDate">The start date of the scheduled delivery window in the time zone of the order destination. In ISO 8601 date time format..</param>
-        /// <param name="ScheduledDeliveryEndDate">The end date of the scheduled delivery window in the time zone of the order destination. In ISO 8601 date time format..</param>
-        /// <param name="PriceDesignation">Indicates that the selling price is a special price that is available only for Amazon Business orders. For more information about the Amazon Business Seller Program, see the [Amazon Business website](https://www.amazon.com/b2b/info/amazon-business).   Possible values: BusinessPrice - A special price that is available only for Amazon Business orders..</param>
-        /// <param name="TaxCollection">Information about withheld taxes..</param>
-        /// <param name="SerialNumberRequired">When true, the product type for this item has a serial number.  Returned only for Amazon Easy Ship orders..</param>
-        /// <param name="IsTransparency">When true, transparency codes are required..</param>
-        /// <param name="IossNumber">The IOSS number of the seller. Sellers selling in the EU will be assigned a unique IOSS number that must be listed on all packages sent to the EU..</param>
-        /// <param name="DeemedResellerCategory">The category of deemed reseller. This applies to selling partners that are not based in the EU and is used to help them meet the VAT Deemed Reseller tax laws in the EU and UK..</param>
-        /// <param name="BuyerInfo">The Buyer Info .</param>
-
-        public OrderItem(string ASIN = default(string), string SellerSKU = default(string), string OrderItemId = default(string), string Title = default(string), int? QuantityOrdered = default(int?), int? QuantityShipped = default(int?), ProductInfoDetail ProductInfo = default(ProductInfoDetail), PointsGrantedDetail PointsGranted = default(PointsGrantedDetail), Money ItemPrice = default(Money), Money ShippingPrice = default(Money), Money ItemTax = default(Money), Money ShippingTax = default(Money), Money ShippingDiscount = default(Money), Money ShippingDiscountTax = default(Money), Money PromotionDiscount = default(Money), Money PromotionDiscountTax = default(Money), PromotionIdList PromotionIds = default(PromotionIdList), Money CODFee = default(Money), Money CODFeeDiscount = default(Money), bool? IsGift = default(bool?), string ConditionNote = default(string), string ConditionId = default(string), string ConditionSubtypeId = default(string), string ScheduledDeliveryStartDate = default(string), string ScheduledDeliveryEndDate = default(string), string PriceDesignation = default(string), TaxCollection TaxCollection = default(TaxCollection), bool? SerialNumberRequired = default(bool?), bool? IsTransparency = default(bool?), string IossNumber = default(string), DeemedResellerCategoryEnum? DeemedResellerCategory = default(DeemedResellerCategoryEnum?), OrderItemBuyerInfo BuyerInfo = default(OrderItemBuyerInfo), IEnumerable<string> SerialNumbers = null)
+        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
+        /// <param name="sellerSKU">The seller stock keeping unit (SKU) of the item..</param>
+        /// <param name="orderItemId">An Amazon-defined order item identifier. (required).</param>
+        /// <param name="title">The name of the item..</param>
+        /// <param name="quantityOrdered">The number of items in the order.  (required).</param>
+        /// <param name="quantityShipped">The number of items shipped..</param>
+        /// <param name="productInfo">Product information for the item..</param>
+        /// <param name="pointsGranted">The number and value of Amazon Points granted with the purchase of an item..</param>
+        /// <param name="itemPrice">The selling price of the order item. Note that an order item is an item and a quantity. This means that the value of ItemPrice is equal to the selling price of the item multiplied by the quantity ordered. Note that ItemPrice excludes ShippingPrice and GiftWrapPrice..</param>
+        /// <param name="shippingPrice">The shipping price of the item..</param>
+        /// <param name="itemTax">The tax on the item price..</param>
+        /// <param name="shippingTax">The tax on the shipping price..</param>
+        /// <param name="shippingDiscount">The discount on the shipping price..</param>
+        /// <param name="shippingDiscountTax">The tax on the discount on the shipping price..</param>
+        /// <param name="promotionDiscount">The total of all promotional discounts in the offer..</param>
+        /// <param name="promotionDiscountTax">The tax on the total of all promotional discounts in the offer..</param>
+        /// <param name="promotionIds">promotionIds.</param>
+        /// <param name="cODFee">The fee charged for COD service..</param>
+        /// <param name="cODFeeDiscount">The discount on the COD fee..</param>
+        /// <param name="isGift">When true, the item is a gift..</param>
+        /// <param name="conditionNote">The condition of the item as described by the seller..</param>
+        /// <param name="conditionId">The condition of the item.  Possible values: New, Used, Collectible, Refurbished, Preorder, Club..</param>
+        /// <param name="conditionSubtypeId">The subcondition of the item.  Possible values: New, Mint, Very Good, Good, Acceptable, Poor, Club, OEM, Warranty, Refurbished Warranty, Refurbished, Open Box, Any, Other..</param>
+        /// <param name="scheduledDeliveryStartDate">The start date of the scheduled delivery window in the time zone of the order destination. In ISO 8601 date time format..</param>
+        /// <param name="scheduledDeliveryEndDate">The end date of the scheduled delivery window in the time zone of the order destination. In ISO 8601 date time format..</param>
+        /// <param name="priceDesignation">Indicates that the selling price is a special price that is available only for Amazon Business orders. For more information about the Amazon Business Seller Program, see the [Amazon Business website](https://www.amazon.com/b2b/info/amazon-business).   Possible values: BusinessPrice - A special price that is available only for Amazon Business orders..</param>
+        /// <param name="taxCollection">Information about withheld taxes..</param>
+        /// <param name="serialNumberRequired">When true, the product type for this item has a serial number.  Returned only for Amazon Easy Ship orders..</param>
+        /// <param name="isTransparency">When true, transparency codes are required..</param>
+        /// <param name="iossNumber">The IOSS number for the marketplace. Sellers shipping to the European Union (EU) from outside of the EU must provide this IOSS number to their carrier when Amazon has collected the VAT on the sale..</param>
+        /// <param name="storeChainStoreId">The store chain store identifier. Linked to a specific store in a store chain..</param>
+        /// <param name="deemedResellerCategory">The category of deemed reseller. This applies to selling partners that are not based in the EU and is used to help them meet the VAT Deemed Reseller tax laws in the EU and UK..</param>
+        /// <param name="buyerInfo">buyerInfo.</param>
+        /// <param name="buyerRequestedCancel">Information about whether or not a buyer requested cancellation..</param>
+        /// <param name="itemApprovalContext">Item approval context containing the information regarding the status and progress of the item approval..</param>
+        /// <param name="serialNumbers">A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only..</param>
+        public OrderItem(string aSIN = default(string), string sellerSKU = default(string), string orderItemId = default(string), string title = default(string), int? quantityOrdered = default(int?), int? quantityShipped = default(int?), ProductInfoDetail productInfo = default(ProductInfoDetail), PointsGrantedDetail pointsGranted = default(PointsGrantedDetail), Money itemPrice = default(Money), Money shippingPrice = default(Money), Money itemTax = default(Money), Money shippingTax = default(Money), Money shippingDiscount = default(Money), Money shippingDiscountTax = default(Money), Money promotionDiscount = default(Money), Money promotionDiscountTax = default(Money), PromotionIdList promotionIds = default(PromotionIdList), Money cODFee = default(Money), Money cODFeeDiscount = default(Money), bool? isGift = default(bool?), string conditionNote = default(string), string conditionId = default(string), string conditionSubtypeId = default(string), string scheduledDeliveryStartDate = default(string), string scheduledDeliveryEndDate = default(string), string priceDesignation = default(string), TaxCollection taxCollection = default(TaxCollection), bool? serialNumberRequired = default(bool?), bool? isTransparency = default(bool?), string iossNumber = default(string), string storeChainStoreId = default(string), DeemedResellerCategoryEnum? deemedResellerCategory = default(DeemedResellerCategoryEnum?), ItemBuyerInfo buyerInfo = default(ItemBuyerInfo), BuyerRequestedCancel buyerRequestedCancel = default(BuyerRequestedCancel), ItemApprovalContext itemApprovalContext = default(ItemApprovalContext), List<string> serialNumbers = default(List<string>))
         {
-            // to ensure "ASIN" is required (not null)
-            if (ASIN == null)
+            // to ensure "aSIN" is required (not null)
+            if (aSIN == null)
             {
-                throw new InvalidDataException("ASIN is a required property for OrderItem and cannot be null");
+                throw new InvalidDataException("aSIN is a required property for OrderItem and cannot be null");
             }
             else
             {
-                this.ASIN = ASIN;
+                this.ASIN = aSIN;
             }
-            // to ensure "OrderItemId" is required (not null)
-            if (OrderItemId == null)
+            // to ensure "orderItemId" is required (not null)
+            if (orderItemId == null)
             {
-                throw new InvalidDataException("OrderItemId is a required property for OrderItem and cannot be null");
+                throw new InvalidDataException("orderItemId is a required property for OrderItem and cannot be null");
             }
             else
             {
-                this.OrderItemId = OrderItemId;
+                this.OrderItemId = orderItemId;
             }
-            // to ensure "QuantityOrdered" is required (not null)
-            if (QuantityOrdered == null)
+            // to ensure "quantityOrdered" is required (not null)
+            if (quantityOrdered == null)
             {
-                throw new InvalidDataException("QuantityOrdered is a required property for OrderItem and cannot be null");
+                throw new InvalidDataException("quantityOrdered is a required property for OrderItem and cannot be null");
             }
             else
             {
-                this.QuantityOrdered = QuantityOrdered;
+                this.QuantityOrdered = quantityOrdered;
             }
-            this.SellerSKU = SellerSKU;
-            this.Title = Title;
-            this.QuantityShipped = QuantityShipped;
-            this.ProductInfo = ProductInfo;
-            this.PointsGranted = PointsGranted;
-            this.ItemPrice = ItemPrice;
-            this.ShippingPrice = ShippingPrice;
-            this.ItemTax = ItemTax;
-            this.ShippingTax = ShippingTax;
-            this.ShippingDiscount = ShippingDiscount;
-            this.ShippingDiscountTax = ShippingDiscountTax;
-            this.PromotionDiscount = PromotionDiscount;
-            this.PromotionDiscountTax = PromotionDiscountTax;
-            this.PromotionIds = PromotionIds;
-            this.CODFee = CODFee;
-            this.CODFeeDiscount = CODFeeDiscount;
-            this.IsGift = IsGift;
-            this.ConditionNote = ConditionNote;
-            this.ConditionId = ConditionId;
-            this.ConditionSubtypeId = ConditionSubtypeId;
-            this.ScheduledDeliveryStartDate = ScheduledDeliveryStartDate;
-            this.ScheduledDeliveryEndDate = ScheduledDeliveryEndDate;
-            this.PriceDesignation = PriceDesignation;
-            this.TaxCollection = TaxCollection;
-            this.SerialNumberRequired = SerialNumberRequired;
-            this.IsTransparency = IsTransparency;
-            this.IossNumber = IossNumber;
-            this.DeemedResellerCategory = DeemedResellerCategory;
-            this.BuyerInfo = BuyerInfo;
-            this.SerialNumbers = SerialNumbers;
+            this.SellerSKU = sellerSKU;
+            this.Title = title;
+            this.QuantityShipped = quantityShipped;
+            this.ProductInfo = productInfo;
+            this.PointsGranted = pointsGranted;
+            this.ItemPrice = itemPrice;
+            this.ShippingPrice = shippingPrice;
+            this.ItemTax = itemTax;
+            this.ShippingTax = shippingTax;
+            this.ShippingDiscount = shippingDiscount;
+            this.ShippingDiscountTax = shippingDiscountTax;
+            this.PromotionDiscount = promotionDiscount;
+            this.PromotionDiscountTax = promotionDiscountTax;
+            this.PromotionIds = promotionIds;
+            this.CODFee = cODFee;
+            this.CODFeeDiscount = cODFeeDiscount;
+            this.IsGift = isGift;
+            this.ConditionNote = conditionNote;
+            this.ConditionId = conditionId;
+            this.ConditionSubtypeId = conditionSubtypeId;
+            this.ScheduledDeliveryStartDate = scheduledDeliveryStartDate;
+            this.ScheduledDeliveryEndDate = scheduledDeliveryEndDate;
+            this.PriceDesignation = priceDesignation;
+            this.TaxCollection = taxCollection;
+            this.SerialNumberRequired = serialNumberRequired;
+            this.IsTransparency = isTransparency;
+            this.IossNumber = iossNumber;
+            this.StoreChainStoreId = storeChainStoreId;
+            this.DeemedResellerCategory = deemedResellerCategory;
+            this.BuyerInfo = buyerInfo;
+            this.BuyerRequestedCancel = buyerRequestedCancel;
+            this.ItemApprovalContext = itemApprovalContext;
+            this.SerialNumbers = serialNumbers;
         }
 
         /// <summary>
@@ -389,32 +405,52 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public bool? IsTransparency { get; set; }
 
         /// <summary>
-        /// The IOSS number of the seller. Sellers selling in the EU will be assigned a unique IOSS number that must be listed on all packages sent to the EU.
+        /// The IOSS number for the marketplace. Sellers shipping to the European Union (EU) from outside of the EU must provide this IOSS number to their carrier when Amazon has collected the VAT on the sale.
         /// </summary>
-        /// <value>The IOSS number of the seller. Sellers selling in the EU will be assigned a unique IOSS number that must be listed on all packages sent to the EU.</value>
+        /// <value>The IOSS number for the marketplace. Sellers shipping to the European Union (EU) from outside of the EU must provide this IOSS number to their carrier when Amazon has collected the VAT on the sale.</value>
         [DataMember(Name = "IossNumber", EmitDefaultValue = false)]
         public string IossNumber { get; set; }
 
         /// <summary>
+        /// The store chain store identifier. Linked to a specific store in a store chain.
+        /// </summary>
+        /// <value>The store chain store identifier. Linked to a specific store in a store chain.</value>
+        [DataMember(Name = "StoreChainStoreId", EmitDefaultValue = false)]
+        public string StoreChainStoreId { get; set; }
+
+
+        /// <summary>
         /// Gets or Sets BuyerInfo
         /// </summary>
-        /// <value>Gets or Sets BuyerInfo</value>
         [DataMember(Name = "BuyerInfo", EmitDefaultValue = false)]
-        public OrderItemBuyerInfo BuyerInfo { get; set; }
+        public ItemBuyerInfo BuyerInfo { get; set; }
 
-		/// <summary>
-		/// A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.
-		/// </summary>
-		/// <value>A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.</value>
-		[DataMember(Name = "SerialNumbers", EmitDefaultValue = false)]
-        public IEnumerable<string> SerialNumbers { get; set; }
+        /// <summary>
+        /// Information about whether or not a buyer requested cancellation.
+        /// </summary>
+        /// <value>Information about whether or not a buyer requested cancellation.</value>
+        [DataMember(Name = "BuyerRequestedCancel", EmitDefaultValue = false)]
+        public BuyerRequestedCancel BuyerRequestedCancel { get; set; }
 
+        /// <summary>
+        /// Item approval context containing the information regarding the status and progress of the item approval.
+        /// </summary>
+        /// <value>Item approval context containing the information regarding the status and progress of the item approval.</value>
+        [DataMember(Name = "ItemApprovalContext", EmitDefaultValue = false)]
+        public ItemApprovalContext ItemApprovalContext { get; set; }
 
-		/// <summary>
-		/// Returns the string presentation of the object
-		/// </summary>
-		/// <returns>String presentation of the object</returns>
-		public override string ToString()
+        /// <summary>
+        /// A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.
+        /// </summary>
+        /// <value>A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only.</value>
+        [DataMember(Name = "SerialNumbers", EmitDefaultValue = false)]
+        public List<string> SerialNumbers { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append("class OrderItem {\n");
@@ -448,8 +484,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  SerialNumberRequired: ").Append(SerialNumberRequired).Append("\n");
             sb.Append("  IsTransparency: ").Append(IsTransparency).Append("\n");
             sb.Append("  IossNumber: ").Append(IossNumber).Append("\n");
+            sb.Append("  StoreChainStoreId: ").Append(StoreChainStoreId).Append("\n");
             sb.Append("  DeemedResellerCategory: ").Append(DeemedResellerCategory).Append("\n");
             sb.Append("  BuyerInfo: ").Append(BuyerInfo).Append("\n");
+            sb.Append("  BuyerRequestedCancel: ").Append(BuyerRequestedCancel).Append("\n");
+            sb.Append("  ItemApprovalContext: ").Append(ItemApprovalContext).Append("\n");
             sb.Append("  SerialNumbers: ").Append(SerialNumbers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -459,7 +498,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -636,6 +675,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.IossNumber.Equals(input.IossNumber))
                 ) &&
                 (
+                    this.StoreChainStoreId == input.StoreChainStoreId ||
+                    (this.StoreChainStoreId != null &&
+                    this.StoreChainStoreId.Equals(input.StoreChainStoreId))
+                ) &&
+                (
                     this.DeemedResellerCategory == input.DeemedResellerCategory ||
                     (this.DeemedResellerCategory != null &&
                     this.DeemedResellerCategory.Equals(input.DeemedResellerCategory))
@@ -646,10 +690,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.BuyerInfo.Equals(input.BuyerInfo))
                 ) &&
                 (
-					this.SerialNumbers == input.SerialNumbers ||
-                    (this.SerialNumbers != null &&
-                    this.SerialNumbers.Equals(input.SerialNumbers))
-				);
+                    this.BuyerRequestedCancel == input.BuyerRequestedCancel ||
+                    (this.BuyerRequestedCancel != null &&
+                    this.BuyerRequestedCancel.Equals(input.BuyerRequestedCancel))
+                ) &&
+                (
+                    this.ItemApprovalContext == input.ItemApprovalContext ||
+                    (this.ItemApprovalContext != null &&
+                    this.ItemApprovalContext.Equals(input.ItemApprovalContext))
+                ) &&
+                (
+                    this.SerialNumbers == input.SerialNumbers ||
+                    this.SerialNumbers != null
+                );
         }
 
         /// <summary>
@@ -721,13 +774,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     hashCode = hashCode * 59 + this.IsTransparency.GetHashCode();
                 if (this.IossNumber != null)
                     hashCode = hashCode * 59 + this.IossNumber.GetHashCode();
+                if (this.StoreChainStoreId != null)
+                    hashCode = hashCode * 59 + this.StoreChainStoreId.GetHashCode();
                 if (this.DeemedResellerCategory != null)
                     hashCode = hashCode * 59 + this.DeemedResellerCategory.GetHashCode();
                 if (this.BuyerInfo != null)
                     hashCode = hashCode * 59 + this.BuyerInfo.GetHashCode();
-				if (this.SerialNumbers != null)
-					hashCode = hashCode * 59 + this.SerialNumbers.GetHashCode();
-				return hashCode;
+                if (this.BuyerRequestedCancel != null)
+                    hashCode = hashCode * 59 + this.BuyerRequestedCancel.GetHashCode();
+                if (this.ItemApprovalContext != null)
+                    hashCode = hashCode * 59 + this.ItemApprovalContext.GetHashCode();
+                if (this.SerialNumbers != null)
+                    hashCode = hashCode * 59 + this.SerialNumbers.GetHashCode();
+                return hashCode;
             }
         }
 

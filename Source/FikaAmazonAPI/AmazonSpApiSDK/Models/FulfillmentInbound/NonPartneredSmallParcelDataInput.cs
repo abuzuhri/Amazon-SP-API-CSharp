@@ -32,27 +32,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="NonPartneredSmallParcelDataInput" /> class.
         /// </summary>
-        /// <param name="CarrierName">The carrier that you are using for the inbound shipment. (required).</param>
-        /// <param name="PackageList">PackageList (required).</param>
-        public NonPartneredSmallParcelDataInput(string CarrierName = default(string), NonPartneredSmallParcelPackageInputList PackageList = default(NonPartneredSmallParcelPackageInputList))
+        /// <param name="carrierName">The carrier that you are using for the inbound shipment. (required).</param>
+        /// <param name="packageList">packageList (required).</param>
+        public NonPartneredSmallParcelDataInput(string carrierName = default(string), NonPartneredSmallParcelPackageInputList packageList = default(NonPartneredSmallParcelPackageInputList))
         {
-            // to ensure "CarrierName" is required (not null)
-            if (CarrierName == null)
+            // to ensure "carrierName" is required (not null)
+            if (carrierName == null)
             {
-                throw new InvalidDataException("CarrierName is a required property for NonPartneredSmallParcelDataInput and cannot be null");
+                throw new InvalidDataException("carrierName is a required property for NonPartneredSmallParcelDataInput and cannot be null");
             }
             else
             {
-                this.CarrierName = CarrierName;
+                this.CarrierName = carrierName;
             }
-            // to ensure "PackageList" is required (not null)
-            if (PackageList == null)
+            // to ensure "packageList" is required (not null)
+            if (packageList == null)
             {
-                throw new InvalidDataException("PackageList is a required property for NonPartneredSmallParcelDataInput and cannot be null");
+                throw new InvalidDataException("packageList is a required property for NonPartneredSmallParcelDataInput and cannot be null");
             }
             else
             {
-                this.PackageList = PackageList;
+                this.PackageList = packageList;
             }
         }
 
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

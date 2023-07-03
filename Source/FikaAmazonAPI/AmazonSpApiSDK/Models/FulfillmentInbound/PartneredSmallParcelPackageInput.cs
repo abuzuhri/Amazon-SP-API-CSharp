@@ -32,27 +32,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredSmallParcelPackageInput" /> class.
         /// </summary>
-        /// <param name="Dimensions">Dimensions (required).</param>
-        /// <param name="Weight">Weight (required).</param>
-        public PartneredSmallParcelPackageInput(Dimensions Dimensions = default(Dimensions), Weight Weight = default(Weight))
+        /// <param name="dimensions">dimensions (required).</param>
+        /// <param name="weight">weight (required).</param>
+        public PartneredSmallParcelPackageInput(Dimensions dimensions = default(Dimensions), Weight weight = default(Weight))
         {
-            // to ensure "Dimensions" is required (not null)
-            if (Dimensions == null)
+            // to ensure "dimensions" is required (not null)
+            if (dimensions == null)
             {
-                throw new InvalidDataException("Dimensions is a required property for PartneredSmallParcelPackageInput and cannot be null");
+                throw new InvalidDataException("dimensions is a required property for PartneredSmallParcelPackageInput and cannot be null");
             }
             else
             {
-                this.Dimensions = Dimensions;
+                this.Dimensions = dimensions;
             }
-            // to ensure "Weight" is required (not null)
-            if (Weight == null)
+            // to ensure "weight" is required (not null)
+            if (weight == null)
             {
-                throw new InvalidDataException("Weight is a required property for PartneredSmallParcelPackageInput and cannot be null");
+                throw new InvalidDataException("weight is a required property for PartneredSmallParcelPackageInput and cannot be null");
             }
             else
             {
-                this.Weight = Weight;
+                this.Weight = weight;
             }
         }
 
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

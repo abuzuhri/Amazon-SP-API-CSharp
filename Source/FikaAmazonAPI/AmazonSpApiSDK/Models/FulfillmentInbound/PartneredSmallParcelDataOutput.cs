@@ -32,20 +32,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredSmallParcelDataOutput" /> class.
         /// </summary>
-        /// <param name="PackageList">PackageList (required).</param>
-        /// <param name="PartneredEstimate">PartneredEstimate.</param>
-        public PartneredSmallParcelDataOutput(PartneredSmallParcelPackageOutputList PackageList = default(PartneredSmallParcelPackageOutputList), PartneredEstimate PartneredEstimate = default(PartneredEstimate))
+        /// <param name="packageList">packageList (required).</param>
+        /// <param name="partneredEstimate">partneredEstimate.</param>
+        public PartneredSmallParcelDataOutput(PartneredSmallParcelPackageOutputList packageList = default(PartneredSmallParcelPackageOutputList), PartneredEstimate partneredEstimate = default(PartneredEstimate))
         {
-            // to ensure "PackageList" is required (not null)
-            if (PackageList == null)
+            // to ensure "packageList" is required (not null)
+            if (packageList == null)
             {
-                throw new InvalidDataException("PackageList is a required property for PartneredSmallParcelDataOutput and cannot be null");
+                throw new InvalidDataException("packageList is a required property for PartneredSmallParcelDataOutput and cannot be null");
             }
             else
             {
-                this.PackageList = PackageList;
+                this.PackageList = packageList;
             }
-            this.PartneredEstimate = PartneredEstimate;
+            this.PartneredEstimate = partneredEstimate;
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

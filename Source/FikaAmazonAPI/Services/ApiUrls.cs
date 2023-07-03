@@ -532,6 +532,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string OrderBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/buyerInfo";
             public static string OrderItemsBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems/buyerInfo";
             public static string OrderShipmentInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/address";
+            public static string UpdateShipmentStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipment";
+            public static string GetOrderRegulatedInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
+            public static string UpdateVerificationStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
+            public static string GetOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
+            public static string UpdateOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
+            public static string ConfirmShipment(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
         }
 
         protected class CategoryApiUrls

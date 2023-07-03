@@ -32,12 +32,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidSKU" /> class.
         /// </summary>
-        /// <param name="SellerSKU">The seller SKU of the item..</param>
-        /// <param name="ErrorReason">The reason why the seller SKU is invalid..</param>
-        public InvalidSKU(string SellerSKU = default(string), ErrorReason? ErrorReason = default(ErrorReason?))
+        /// <param name="sellerSKU">The seller SKU of the item..</param>
+        /// <param name="errorReason">The reason why the seller SKU is invalid..</param>
+        public InvalidSKU(string sellerSKU = default(string), ErrorReason? errorReason = default(ErrorReason?))
         {
-            this.SellerSKU = SellerSKU;
-            this.ErrorReason = ErrorReason;
+            this.SellerSKU = sellerSKU;
+            this.ErrorReason = errorReason;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

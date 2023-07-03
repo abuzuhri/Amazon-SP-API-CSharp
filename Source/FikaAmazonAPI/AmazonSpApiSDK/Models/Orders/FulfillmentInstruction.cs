@@ -26,12 +26,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="FulfillmentInstruction" /> class.
         /// </summary>
-        /// <param name="FulfillmentSupplySourceId">Denotes the recommended sourceId where the order should be fulfilled from..</param>
-        public FulfillmentInstruction(string FulfillmentSupplySourceId = default(string))
+        /// <param name="fulfillmentSupplySourceId">Denotes the recommended sourceId where the order should be fulfilled from..</param>
+        public FulfillmentInstruction(string fulfillmentSupplySourceId = default(string))
         {
-            this.FulfillmentSupplySourceId = FulfillmentSupplySourceId;
+            this.FulfillmentSupplySourceId = fulfillmentSupplySourceId;
         }
-
         public FulfillmentInstruction()
         {
 
@@ -61,7 +60,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

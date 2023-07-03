@@ -32,20 +32,24 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderAddress" /> class.
         /// </summary>
-        /// <param name="AmazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
-        /// <param name="ShippingAddress">ShippingAddress.</param>
-        public OrderAddress(string AmazonOrderId = default(string), Address ShippingAddress = default(Address))
+        /// <param name="amazonOrderId">An Amazon-defined order identifier, in 3-7-7 format. (required).</param>
+        /// <param name="buyerCompanyName">Company name of the destination address..</param>
+        /// <param name="shippingAddress">shippingAddress.</param>
+        /// <param name="deliveryPreferences">deliveryPreferences.</param>
+        public OrderAddress(string amazonOrderId = default(string), string buyerCompanyName = default(string), Address shippingAddress = default(Address), DeliveryPreferences deliveryPreferences = default(DeliveryPreferences))
         {
-            // to ensure "AmazonOrderId" is required (not null)
-            if (AmazonOrderId == null)
+            // to ensure "amazonOrderId" is required (not null)
+            if (amazonOrderId == null)
             {
-                throw new InvalidDataException("AmazonOrderId is a required property for OrderAddress and cannot be null");
+                throw new InvalidDataException("amazonOrderId is a required property for OrderAddress and cannot be null");
             }
             else
             {
-                this.AmazonOrderId = AmazonOrderId;
+                this.AmazonOrderId = amazonOrderId;
             }
-            this.ShippingAddress = ShippingAddress;
+            this.BuyerCompanyName = buyerCompanyName;
+            this.ShippingAddress = shippingAddress;
+            this.DeliveryPreferences = deliveryPreferences;
         }
 
         /// <summary>
@@ -56,10 +60,23 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public string AmazonOrderId { get; set; }
 
         /// <summary>
+        /// Company name of the destination address.
+        /// </summary>
+        /// <value>Company name of the destination address.</value>
+        [DataMember(Name = "BuyerCompanyName", EmitDefaultValue = false)]
+        public string BuyerCompanyName { get; set; }
+
+        /// <summary>
         /// Gets or Sets ShippingAddress
         /// </summary>
         [DataMember(Name = "ShippingAddress", EmitDefaultValue = false)]
         public Address ShippingAddress { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DeliveryPreferences
+        /// </summary>
+        [DataMember(Name = "DeliveryPreferences", EmitDefaultValue = false)]
+        public DeliveryPreferences DeliveryPreferences { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -70,7 +87,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             var sb = new StringBuilder();
             sb.Append("class OrderAddress {\n");
             sb.Append("  AmazonOrderId: ").Append(AmazonOrderId).Append("\n");
+            sb.Append("  BuyerCompanyName: ").Append(BuyerCompanyName).Append("\n");
             sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
+            sb.Append("  DeliveryPreferences: ").Append(DeliveryPreferences).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,7 +98,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -111,9 +130,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.AmazonOrderId.Equals(input.AmazonOrderId))
                 ) &&
                 (
+                    this.BuyerCompanyName == input.BuyerCompanyName ||
+                    (this.BuyerCompanyName != null &&
+                    this.BuyerCompanyName.Equals(input.BuyerCompanyName))
+                ) &&
+                (
                     this.ShippingAddress == input.ShippingAddress ||
                     (this.ShippingAddress != null &&
                     this.ShippingAddress.Equals(input.ShippingAddress))
+                ) &&
+                (
+                    this.DeliveryPreferences == input.DeliveryPreferences ||
+                    (this.DeliveryPreferences != null &&
+                    this.DeliveryPreferences.Equals(input.DeliveryPreferences))
                 );
         }
 
@@ -128,8 +157,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                 int hashCode = 41;
                 if (this.AmazonOrderId != null)
                     hashCode = hashCode * 59 + this.AmazonOrderId.GetHashCode();
+                if (this.BuyerCompanyName != null)
+                    hashCode = hashCode * 59 + this.BuyerCompanyName.GetHashCode();
                 if (this.ShippingAddress != null)
                     hashCode = hashCode * 59 + this.ShippingAddress.GetHashCode();
+                if (this.DeliveryPreferences != null)
+                    hashCode = hashCode * 59 + this.DeliveryPreferences.GetHashCode();
                 return hashCode;
             }
         }

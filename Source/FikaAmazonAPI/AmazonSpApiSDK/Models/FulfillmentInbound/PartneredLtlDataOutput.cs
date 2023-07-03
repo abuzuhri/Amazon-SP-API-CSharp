@@ -43,126 +43,126 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredLtlDataOutput" /> class.
         /// </summary>
-        /// <param name="Contact">Contact information for the person in the seller&#39;s organization who is responsible for the shipment. Used by the carrier if they have questions about the shipment. (required).</param>
-        /// <param name="BoxCount">The number of boxes in the shipment. (required).</param>
-        /// <param name="SellerFreightClass">SellerFreightClass.</param>
-        /// <param name="FreightReadyDate">The date that the shipment will be ready to be picked up by the carrier. Must be in YYYY-MM-DD format. (required).</param>
-        /// <param name="PalletList">PalletList (required).</param>
-        /// <param name="TotalWeight">The total weight of the shipment. (required).</param>
-        /// <param name="SellerDeclaredValue">Your declaration of the total value of the inventory in the shipment..</param>
-        /// <param name="AmazonCalculatedValue">Estimate by Amazon of the total value of the inventory in the shipment..</param>
-        /// <param name="PreviewPickupDate">The estimated date that the shipment will be picked up by the carrier, in YYYY-MM-DD format. (required).</param>
-        /// <param name="PreviewDeliveryDate">The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format. (required).</param>
-        /// <param name="PreviewFreightClass">The freight class of the shipment as estimated by Amazon if you did not include a freight class when you called the putTransportDetails operation. (required).</param>
-        /// <param name="AmazonReferenceId">A unique identifier created by Amazon that identifies this Amazon-partnered, Less Than Truckload/Full Truckload (LTL/FTL) shipment. (required).</param>
-        /// <param name="IsBillOfLadingAvailable">Indicates whether the bill of lading for the shipment is available. (required).</param>
-        /// <param name="PartneredEstimate">The estimated shipping cost using an Amazon-partnered carrier..</param>
-        /// <param name="CarrierName">The carrier for the inbound shipment. (required).</param>
-        public PartneredLtlDataOutput(Contact Contact = default(Contact), UnsignedIntType BoxCount = default(UnsignedIntType), SellerFreightClass? SellerFreightClass = default(SellerFreightClass?), string FreightReadyDate = default(string), PalletList PalletList = default(PalletList), Weight TotalWeight = default(Weight), Amount SellerDeclaredValue = default(Amount), Amount AmazonCalculatedValue = default(Amount), string PreviewPickupDate = default(string), string PreviewDeliveryDate = default(string), SellerFreightClass PreviewFreightClass = default(SellerFreightClass), string AmazonReferenceId = default(string), bool? IsBillOfLadingAvailable = default(bool?), PartneredEstimate PartneredEstimate = default(PartneredEstimate), string CarrierName = default(string))
+        /// <param name="contact">Contact information for the person in the seller&#39;s organization who is responsible for the shipment. Used by the carrier if they have questions about the shipment. (required).</param>
+        /// <param name="boxCount">The number of boxes in the shipment. (required).</param>
+        /// <param name="sellerFreightClass">sellerFreightClass.</param>
+        /// <param name="freightReadyDate">The date that the shipment will be ready to be picked up by the carrier. Must be in YYYY-MM-DD format. (required).</param>
+        /// <param name="palletList">palletList (required).</param>
+        /// <param name="totalWeight">The total weight of the shipment. (required).</param>
+        /// <param name="sellerDeclaredValue">Your declaration of the total value of the inventory in the shipment..</param>
+        /// <param name="amazonCalculatedValue">Estimate by Amazon of the total value of the inventory in the shipment..</param>
+        /// <param name="previewPickupDate">The estimated date that the shipment will be picked up by the carrier, in YYYY-MM-DD format. (required).</param>
+        /// <param name="previewDeliveryDate">The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format. (required).</param>
+        /// <param name="previewFreightClass">The freight class of the shipment as estimated by Amazon if you did not include a freight class when you called the putTransportDetails operation. (required).</param>
+        /// <param name="amazonReferenceId">A unique identifier created by Amazon that identifies this Amazon-partnered, Less Than Truckload/Full Truckload (LTL/FTL) shipment. (required).</param>
+        /// <param name="isBillOfLadingAvailable">Indicates whether the bill of lading for the shipment is available. (required).</param>
+        /// <param name="partneredEstimate">The estimated shipping cost using an Amazon-partnered carrier..</param>
+        /// <param name="carrierName">The carrier for the inbound shipment. (required).</param>
+        public PartneredLtlDataOutput(Contact contact = default(Contact), long? boxCount = default(long?), SellerFreightClass? sellerFreightClass = default(SellerFreightClass?), DateTime? freightReadyDate = default(DateTime?), PalletList palletList = default(PalletList), Weight totalWeight = default(Weight), Amount sellerDeclaredValue = default(Amount), Amount amazonCalculatedValue = default(Amount), DateTime? previewPickupDate = default(DateTime?), DateTime? previewDeliveryDate = default(DateTime?), SellerFreightClass previewFreightClass = default(SellerFreightClass), string amazonReferenceId = default(string), bool? isBillOfLadingAvailable = default(bool?), PartneredEstimate partneredEstimate = default(PartneredEstimate), string carrierName = default(string))
         {
-            // to ensure "Contact" is required (not null)
-            if (Contact == null)
+            // to ensure "contact" is required (not null)
+            if (contact == null)
             {
-                throw new InvalidDataException("Contact is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("contact is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.Contact = Contact;
+                this.Contact = contact;
             }
-            // to ensure "BoxCount" is required (not null)
-            if (BoxCount == null)
+            // to ensure "boxCount" is required (not null)
+            if (boxCount == null)
             {
-                throw new InvalidDataException("BoxCount is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("boxCount is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.BoxCount = BoxCount;
+                this.BoxCount = boxCount;
             }
-            // to ensure "FreightReadyDate" is required (not null)
-            if (FreightReadyDate == null)
+            // to ensure "freightReadyDate" is required (not null)
+            if (freightReadyDate == null)
             {
-                throw new InvalidDataException("FreightReadyDate is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("freightReadyDate is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.FreightReadyDate = FreightReadyDate;
+                this.FreightReadyDate = freightReadyDate;
             }
-            // to ensure "PalletList" is required (not null)
-            if (PalletList == null)
+            // to ensure "palletList" is required (not null)
+            if (palletList == null)
             {
-                throw new InvalidDataException("PalletList is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("palletList is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.PalletList = PalletList;
+                this.PalletList = palletList;
             }
-            // to ensure "TotalWeight" is required (not null)
-            if (TotalWeight == null)
+            // to ensure "totalWeight" is required (not null)
+            if (totalWeight == null)
             {
-                throw new InvalidDataException("TotalWeight is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("totalWeight is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.TotalWeight = TotalWeight;
+                this.TotalWeight = totalWeight;
             }
-            // to ensure "PreviewPickupDate" is required (not null)
-            if (PreviewPickupDate == null)
+            // to ensure "previewPickupDate" is required (not null)
+            if (previewPickupDate == null)
             {
-                throw new InvalidDataException("PreviewPickupDate is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("previewPickupDate is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.PreviewPickupDate = PreviewPickupDate;
+                this.PreviewPickupDate = previewPickupDate;
             }
-            // to ensure "PreviewDeliveryDate" is required (not null)
-            if (PreviewDeliveryDate == null)
+            // to ensure "previewDeliveryDate" is required (not null)
+            if (previewDeliveryDate == null)
             {
-                throw new InvalidDataException("PreviewDeliveryDate is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("previewDeliveryDate is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.PreviewDeliveryDate = PreviewDeliveryDate;
+                this.PreviewDeliveryDate = previewDeliveryDate;
             }
-            // to ensure "PreviewFreightClass" is required (not null)
-            if (PreviewFreightClass == null)
+            // to ensure "previewFreightClass" is required (not null)
+            if (previewFreightClass == null)
             {
-                throw new InvalidDataException("PreviewFreightClass is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("previewFreightClass is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.PreviewFreightClass = PreviewFreightClass;
+                this.PreviewFreightClass = previewFreightClass;
             }
-            // to ensure "AmazonReferenceId" is required (not null)
-            if (AmazonReferenceId == null)
+            // to ensure "amazonReferenceId" is required (not null)
+            if (amazonReferenceId == null)
             {
-                throw new InvalidDataException("AmazonReferenceId is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("amazonReferenceId is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.AmazonReferenceId = AmazonReferenceId;
+                this.AmazonReferenceId = amazonReferenceId;
             }
-            // to ensure "IsBillOfLadingAvailable" is required (not null)
-            if (IsBillOfLadingAvailable == null)
+            // to ensure "isBillOfLadingAvailable" is required (not null)
+            if (isBillOfLadingAvailable == null)
             {
-                throw new InvalidDataException("IsBillOfLadingAvailable is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("isBillOfLadingAvailable is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.IsBillOfLadingAvailable = IsBillOfLadingAvailable;
+                this.IsBillOfLadingAvailable = isBillOfLadingAvailable;
             }
-            // to ensure "CarrierName" is required (not null)
-            if (CarrierName == null)
+            // to ensure "carrierName" is required (not null)
+            if (carrierName == null)
             {
-                throw new InvalidDataException("CarrierName is a required property for PartneredLtlDataOutput and cannot be null");
+                throw new InvalidDataException("carrierName is a required property for PartneredLtlDataOutput and cannot be null");
             }
             else
             {
-                this.CarrierName = CarrierName;
+                this.CarrierName = carrierName;
             }
-            this.SellerFreightClass = SellerFreightClass;
-            this.SellerDeclaredValue = SellerDeclaredValue;
-            this.AmazonCalculatedValue = AmazonCalculatedValue;
-            this.PartneredEstimate = PartneredEstimate;
+            this.SellerFreightClass = sellerFreightClass;
+            this.SellerDeclaredValue = sellerDeclaredValue;
+            this.AmazonCalculatedValue = amazonCalculatedValue;
+            this.PartneredEstimate = partneredEstimate;
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The number of boxes in the shipment.</value>
         [DataMember(Name = "BoxCount", EmitDefaultValue = false)]
-        public UnsignedIntType BoxCount { get; set; }
+        public long? BoxCount { get; set; }
 
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date that the shipment will be ready to be picked up by the carrier. Must be in YYYY-MM-DD format.</value>
         [DataMember(Name = "FreightReadyDate", EmitDefaultValue = false)]
-        public string FreightReadyDate { get; set; }
+        public DateTime? FreightReadyDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PalletList
@@ -219,14 +219,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The estimated date that the shipment will be picked up by the carrier, in YYYY-MM-DD format.</value>
         [DataMember(Name = "PreviewPickupDate", EmitDefaultValue = false)]
-        public string PreviewPickupDate { get; set; }
+        public DateTime? PreviewPickupDate { get; set; }
 
         /// <summary>
         /// The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format.
         /// </summary>
         /// <value>The estimated date that the shipment will be delivered to an Amazon fulfillment center, in YYYY-MM-DD format.</value>
         [DataMember(Name = "PreviewDeliveryDate", EmitDefaultValue = false)]
-        public string PreviewDeliveryDate { get; set; }
+        public DateTime? PreviewDeliveryDate { get; set; }
 
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

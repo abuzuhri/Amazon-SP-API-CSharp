@@ -32,22 +32,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredEstimate" /> class.
         /// </summary>
-        /// <param name="Amount">The amount that the Amazon-partnered carrier will charge to ship the inbound shipment. (required).</param>
-        /// <param name="ConfirmDeadline">The date in ISO 8601 date time format by which this estimate must be confirmed. After this date the estimate is no longer valid and cannot be confirmed.  Returned only if the TransportStatus value of the inbound shipment is ESTIMATED..</param>
-        /// <param name="VoidDeadline">The date in ISO 8601 date time format after which a confirmed transportation request can no longer be voided. This date is 24 hours after a Small Parcel shipment transportation request is confirmed or one hour after a Less Than Truckload/Full Truckload (LTL/FTL) shipment transportation request is confirmed. After the void deadline passes the seller&#39;s account will be charged for the shipping cost.  Returned only if the TransportStatus value of the inbound shipment is CONFIRMED..</param>
-        public PartneredEstimate(Amount Amount = default(Amount), TimeStampStringType ConfirmDeadline = default(TimeStampStringType), TimeStampStringType VoidDeadline = default(TimeStampStringType))
+        /// <param name="amount">The amount that the Amazon-partnered carrier will charge to ship the inbound shipment. (required).</param>
+        /// <param name="confirmDeadline">The date in ISO 8601 date time format by which this estimate must be confirmed. After this date the estimate is no longer valid and cannot be confirmed.  Returned only if the TransportStatus value of the inbound shipment is ESTIMATED..</param>
+        /// <param name="voidDeadline">The date in ISO 8601 date time format after which a confirmed transportation request can no longer be voided. This date is 24 hours after a Small Parcel shipment transportation request is confirmed or one hour after a Less Than Truckload/Full Truckload (LTL/FTL) shipment transportation request is confirmed. After the void deadline passes the seller&#39;s account will be charged for the shipping cost.  Returned only if the TransportStatus value of the inbound shipment is CONFIRMED..</param>
+        public PartneredEstimate(Amount amount = default(Amount), DateTime? confirmDeadline = default(DateTime?), DateTime? voidDeadline = default(DateTime?))
         {
-            // to ensure "Amount" is required (not null)
-            if (Amount == null)
+            // to ensure "amount" is required (not null)
+            if (amount == null)
             {
-                throw new InvalidDataException("Amount is a required property for PartneredEstimate and cannot be null");
+                throw new InvalidDataException("amount is a required property for PartneredEstimate and cannot be null");
             }
             else
             {
-                this.Amount = Amount;
+                this.Amount = amount;
             }
-            this.ConfirmDeadline = ConfirmDeadline;
-            this.VoidDeadline = VoidDeadline;
+            this.ConfirmDeadline = confirmDeadline;
+            this.VoidDeadline = voidDeadline;
         }
 
         /// <summary>
@@ -62,14 +62,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         /// <value>The date in ISO 8601 date time format by which this estimate must be confirmed. After this date the estimate is no longer valid and cannot be confirmed.  Returned only if the TransportStatus value of the inbound shipment is ESTIMATED.</value>
         [DataMember(Name = "ConfirmDeadline", EmitDefaultValue = false)]
-        public TimeStampStringType ConfirmDeadline { get; set; }
+        public DateTime? ConfirmDeadline { get; set; }
 
         /// <summary>
         /// The date in ISO 8601 date time format after which a confirmed transportation request can no longer be voided. This date is 24 hours after a Small Parcel shipment transportation request is confirmed or one hour after a Less Than Truckload/Full Truckload (LTL/FTL) shipment transportation request is confirmed. After the void deadline passes the seller&#39;s account will be charged for the shipping cost.  Returned only if the TransportStatus value of the inbound shipment is CONFIRMED.
         /// </summary>
         /// <value>The date in ISO 8601 date time format after which a confirmed transportation request can no longer be voided. This date is 24 hours after a Small Parcel shipment transportation request is confirmed or one hour after a Less Than Truckload/Full Truckload (LTL/FTL) shipment transportation request is confirmed. After the void deadline passes the seller&#39;s account will be charged for the shipping cost.  Returned only if the TransportStatus value of the inbound shipment is CONFIRMED.</value>
         [DataMember(Name = "VoidDeadline", EmitDefaultValue = false)]
-        public TimeStampStringType VoidDeadline { get; set; }
+        public DateTime? VoidDeadline { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

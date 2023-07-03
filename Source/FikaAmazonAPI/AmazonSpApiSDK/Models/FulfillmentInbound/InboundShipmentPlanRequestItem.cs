@@ -37,52 +37,52 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundShipmentPlanRequestItem" /> class.
         /// </summary>
-        /// <param name="SellerSKU">The seller SKU of the item. (required).</param>
-        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
-        /// <param name="Condition">Condition (required).</param>
-        /// <param name="Quantity">Quantity (required).</param>
-        /// <param name="QuantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of cases in the inbound shipment equals Quantity. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipmentPlan operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
-        /// <param name="PrepDetailsList">PrepDetailsList.</param>
-        public InboundShipmentPlanRequestItem(string SellerSKU = default(string), string ASIN = default(string), Condition Condition = default(Condition), int Quantity = default(int), int QuantityInCase = default(int), PrepDetailsList PrepDetailsList = default(PrepDetailsList))
+        /// <param name="sellerSKU">The seller SKU of the item. (required).</param>
+        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
+        /// <param name="condition">condition (required).</param>
+        /// <param name="quantity">quantity (required).</param>
+        /// <param name="quantityInCase">The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of cases in the inbound shipment equals Quantity. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipmentPlan operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment..</param>
+        /// <param name="prepDetailsList">prepDetailsList.</param>
+        public InboundShipmentPlanRequestItem(string sellerSKU = default(string), string aSIN = default(string), Condition condition = default(Condition), int? quantity = default(int?), int? quantityInCase = default(int?), PrepDetailsList prepDetailsList = default(PrepDetailsList))
         {
-            // to ensure "SellerSKU" is required (not null)
-            if (SellerSKU == null)
+            // to ensure "sellerSKU" is required (not null)
+            if (sellerSKU == null)
             {
-                throw new InvalidDataException("SellerSKU is a required property for InboundShipmentPlanRequestItem and cannot be null");
+                throw new InvalidDataException("sellerSKU is a required property for InboundShipmentPlanRequestItem and cannot be null");
             }
             else
             {
-                this.SellerSKU = SellerSKU;
+                this.SellerSKU = sellerSKU;
             }
-            // to ensure "ASIN" is required (not null)
-            if (ASIN == null)
+            // to ensure "aSIN" is required (not null)
+            if (aSIN == null)
             {
-                throw new InvalidDataException("ASIN is a required property for InboundShipmentPlanRequestItem and cannot be null");
+                throw new InvalidDataException("aSIN is a required property for InboundShipmentPlanRequestItem and cannot be null");
             }
             else
             {
-                this.ASIN = ASIN;
+                this.ASIN = aSIN;
             }
-            // to ensure "Condition" is required (not null)
-            if (Condition == null)
+            // to ensure "condition" is required (not null)
+            if (condition == null)
             {
-                throw new InvalidDataException("Condition is a required property for InboundShipmentPlanRequestItem and cannot be null");
+                throw new InvalidDataException("condition is a required property for InboundShipmentPlanRequestItem and cannot be null");
             }
             else
             {
-                this.Condition = Condition;
+                this.Condition = condition;
             }
-            // to ensure "Quantity" is required (not null)
-            if (Quantity == null)
+            // to ensure "quantity" is required (not null)
+            if (quantity == null)
             {
-                throw new InvalidDataException("Quantity is a required property for InboundShipmentPlanRequestItem and cannot be null");
+                throw new InvalidDataException("quantity is a required property for InboundShipmentPlanRequestItem and cannot be null");
             }
             else
             {
-                this.Quantity = Quantity;
+                this.Quantity = quantity;
             }
-            this.QuantityInCase = QuantityInCase;
-            this.PrepDetailsList = PrepDetailsList;
+            this.QuantityInCase = quantityInCase;
+            this.PrepDetailsList = prepDetailsList;
         }
 
         /// <summary>
@@ -104,14 +104,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "Quantity", EmitDefaultValue = false)]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         /// <summary>
         /// The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of cases in the inbound shipment equals Quantity. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipmentPlan operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.
         /// </summary>
         /// <value>The item quantity in each case, for case-packed items. Note that QuantityInCase multiplied by the number of cases in the inbound shipment equals Quantity. Also note that all of the boxes of an inbound shipment must either be case packed or individually packed. For that reason, when you submit the createInboundShipmentPlan operation, the value of QuantityInCase must be provided for every item in the shipment or for none of the items in the shipment.</value>
         [DataMember(Name = "QuantityInCase", EmitDefaultValue = false)]
-        public int QuantityInCase { get; set; }
+        public int? QuantityInCase { get; set; }
 
         /// <summary>
         /// Gets or Sets PrepDetailsList
@@ -141,7 +141,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -214,6 +214,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
                     hashCode = hashCode * 59 + this.ASIN.GetHashCode();
                 if (this.Condition != null)
                     hashCode = hashCode * 59 + this.Condition.GetHashCode();
+                if (this.Quantity != null)
+                    hashCode = hashCode * 59 + this.Quantity.GetHashCode();
+                if (this.QuantityInCase != null)
+                    hashCode = hashCode * 59 + this.QuantityInCase.GetHashCode();
                 if (this.PrepDetailsList != null)
                     hashCode = hashCode * 59 + this.PrepDetailsList.GetHashCode();
                 return hashCode;

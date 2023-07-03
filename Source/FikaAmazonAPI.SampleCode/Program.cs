@@ -1,6 +1,4 @@
-﻿using FikaAmazonAPI.Parameter.ProductPricing;
-using FikaAmazonAPI.ReportGeneration;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -25,49 +23,25 @@ namespace FikaAmazonAPI.SampleCode
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
                 MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
+                SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
                 IsDebugMode = true
             });
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            feedsSample.SubmitFeedDeleteAddProductMessage();
 
-            IList<string> scopes = new List<string> { "jgjhgh" };
-            var listww = scopes.Select(s => new ItemOffersRequest
+            var x = amazonConnection.CatalogItem.GetCatalogItem202204(new FikaAmazonAPI.Parameter.CatalogItems.ParameterGetCatalogItem()
             {
-                HttpMethod = HttpMethodEnum.GET,
-                QueryParams = new ParameterGetItemOffers
-                {
-                    Asin = s,
-                    CustomerType = CustomerType.Consumer,
-                    ItemCondition = ItemCondition.New,
-                    MarketplaceId = amazonConnection.GetCurrentMarketplace.ID
-                }
-            }).ToList();
-
-            var restultt = amazonConnection.ProductPricing.GetItemOffersBatch(new Parameter.ProductPricing.ParameterGetItemOffersBatchRequest
-            {
-                ParameterGetItemOffers = listww,
+                ASIN = "B01I3JW7PK",
+                includedData = new List<IncludedData> {
+               IncludedData.summaries,
+               IncludedData.identifiers,
+               IncludedData.summaries,
+               IncludedData.productTypes,
+               IncludedData.dimensions,
+               IncludedData.images,
+               IncludedData.relationships,
+               IncludedData.attributes//,
+               
+               }
             });
-
-            var offers = amazonConnection.ProductPricing.GetItemOffers(new Parameter.ProductPricing.ParameterGetItemOffers
-            {
-                Asin = "B004Z00S8U",//"B07MW2SSZD",// "B0026XRFY8",
-                CustomerType = CustomerType.Consumer,
-                ItemCondition = ItemCondition.New,
-            });
-
-
-
-
-            //B0026XRFY8
-
-            ReportManager reportManager1 = new ReportManager(amazonConnection);
-            var list = await reportManager1.GetLedgerDetailAsync(10);
-
-
-            //var data2220002 = amazonConnection.Reports.CreateReportAndDownloadFile(
-            //    ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, 
-            //    DateTime.UtcNow.AddDays(-10), 
-            //    DateTime.UtcNow, null);
 
 
             Console.ReadLine();

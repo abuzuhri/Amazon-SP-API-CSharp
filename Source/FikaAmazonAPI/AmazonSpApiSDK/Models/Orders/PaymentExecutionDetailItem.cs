@@ -32,27 +32,27 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentExecutionDetailItem" /> class.
         /// </summary>
-        /// <param name="Payment">Payment (required).</param>
-        /// <param name="PaymentMethod">A sub-payment method for a COD order.  Possible values:  * COD - Cash On Delivery.  * GC - Gift Card.  * PointsAccount - Amazon Points. (required).</param>
-        public PaymentExecutionDetailItem(Money Payment = default(Money), string PaymentMethod = default(string))
+        /// <param name="payment">payment (required).</param>
+        /// <param name="paymentMethod">A sub-payment method for a COD order.  Possible values:  * COD - Cash On Delivery.  * GC - Gift Card.  * PointsAccount - Amazon Points. (required).</param>
+        public PaymentExecutionDetailItem(Money payment = default(Money), string paymentMethod = default(string))
         {
-            // to ensure "Payment" is required (not null)
-            if (Payment == null)
+            // to ensure "payment" is required (not null)
+            if (payment == null)
             {
-                throw new InvalidDataException("Payment is a required property for PaymentExecutionDetailItem and cannot be null");
+                throw new InvalidDataException("payment is a required property for PaymentExecutionDetailItem and cannot be null");
             }
             else
             {
-                this.Payment = Payment;
+                this.Payment = payment;
             }
-            // to ensure "PaymentMethod" is required (not null)
-            if (PaymentMethod == null)
+            // to ensure "paymentMethod" is required (not null)
+            if (paymentMethod == null)
             {
-                throw new InvalidDataException("PaymentMethod is a required property for PaymentExecutionDetailItem and cannot be null");
+                throw new InvalidDataException("paymentMethod is a required property for PaymentExecutionDetailItem and cannot be null");
             }
             else
             {
-                this.PaymentMethod = PaymentMethod;
+                this.PaymentMethod = paymentMethod;
             }
         }
 
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

@@ -37,47 +37,47 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportHeader" /> class.
         /// </summary>
-        /// <param name="SellerId">The Amazon seller identifier. (required).</param>
-        /// <param name="ShipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation. (required).</param>
-        /// <param name="IsPartnered">Indicates whether a putTransportDetails request is for a partnered carrier.  Possible values:  * true – Request is for an Amazon-partnered carrier.  * false – Request is for a non-Amazon-partnered carrier. (required).</param>
-        /// <param name="ShipmentType">ShipmentType (required).</param>
-        public TransportHeader(string SellerId = default(string), string ShipmentId = default(string), bool? IsPartnered = default(bool?), ShipmentType ShipmentType = default(ShipmentType))
+        /// <param name="sellerId">The Amazon seller identifier. (required).</param>
+        /// <param name="shipmentId">A shipment identifier originally returned by the createInboundShipmentPlan operation. (required).</param>
+        /// <param name="isPartnered">Indicates whether a putTransportDetails request is for a partnered carrier.  Possible values:  * true – Request is for an Amazon-partnered carrier.  * false – Request is for a non-Amazon-partnered carrier. (required).</param>
+        /// <param name="shipmentType">shipmentType (required).</param>
+        public TransportHeader(string sellerId = default(string), string shipmentId = default(string), bool? isPartnered = default(bool?), ShipmentType shipmentType = default(ShipmentType))
         {
-            // to ensure "SellerId" is required (not null)
-            if (SellerId == null)
+            // to ensure "sellerId" is required (not null)
+            if (sellerId == null)
             {
-                throw new InvalidDataException("SellerId is a required property for TransportHeader and cannot be null");
+                throw new InvalidDataException("sellerId is a required property for TransportHeader and cannot be null");
             }
             else
             {
-                this.SellerId = SellerId;
+                this.SellerId = sellerId;
             }
-            // to ensure "ShipmentId" is required (not null)
-            if (ShipmentId == null)
+            // to ensure "shipmentId" is required (not null)
+            if (shipmentId == null)
             {
-                throw new InvalidDataException("ShipmentId is a required property for TransportHeader and cannot be null");
-            }
-            else
-            {
-                this.ShipmentId = ShipmentId;
-            }
-            // to ensure "IsPartnered" is required (not null)
-            if (IsPartnered == null)
-            {
-                throw new InvalidDataException("IsPartnered is a required property for TransportHeader and cannot be null");
+                throw new InvalidDataException("shipmentId is a required property for TransportHeader and cannot be null");
             }
             else
             {
-                this.IsPartnered = IsPartnered;
+                this.ShipmentId = shipmentId;
             }
-            // to ensure "ShipmentType" is required (not null)
-            if (ShipmentType == null)
+            // to ensure "isPartnered" is required (not null)
+            if (isPartnered == null)
             {
-                throw new InvalidDataException("ShipmentType is a required property for TransportHeader and cannot be null");
+                throw new InvalidDataException("isPartnered is a required property for TransportHeader and cannot be null");
             }
             else
             {
-                this.ShipmentType = ShipmentType;
+                this.IsPartnered = isPartnered;
+            }
+            // to ensure "shipmentType" is required (not null)
+            if (shipmentType == null)
+            {
+                throw new InvalidDataException("shipmentType is a required property for TransportHeader and cannot be null");
+            }
+            else
+            {
+                this.ShipmentType = shipmentType;
             }
         }
 
@@ -123,7 +123,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

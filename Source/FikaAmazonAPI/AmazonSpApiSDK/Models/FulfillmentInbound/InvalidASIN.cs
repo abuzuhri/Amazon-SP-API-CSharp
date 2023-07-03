@@ -32,12 +32,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidASIN" /> class.
         /// </summary>
-        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item..</param>
-        /// <param name="ErrorReason">The reason that the ASIN is invalid..</param>
-        public InvalidASIN(string ASIN = default(string), ErrorReason? ErrorReason = default(ErrorReason?))
+        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item..</param>
+        /// <param name="errorReason">The reason that the ASIN is invalid..</param>
+        public InvalidASIN(string aSIN = default(string), ErrorReason? errorReason = default(ErrorReason?))
         {
-            this.ASIN = ASIN;
-            this.ErrorReason = ErrorReason;
+            this.ASIN = aSIN;
+            this.ErrorReason = errorReason;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }

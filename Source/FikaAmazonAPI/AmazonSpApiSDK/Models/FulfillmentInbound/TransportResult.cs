@@ -37,22 +37,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportResult" /> class.
         /// </summary>
-        /// <param name="TransportStatus">TransportStatus (required).</param>
-        /// <param name="ErrorCode">An error code that identifies the type of error that occured..</param>
-        /// <param name="ErrorDescription">A message that describes the error condition..</param>
-        public TransportResult(TransportStatus TransportStatus = default(TransportStatus), string ErrorCode = default(string), string ErrorDescription = default(string))
+        /// <param name="transportStatus">transportStatus (required).</param>
+        /// <param name="errorCode">An error code that identifies the type of error that occured..</param>
+        /// <param name="errorDescription">A message that describes the error condition..</param>
+        public TransportResult(TransportStatus transportStatus = default(TransportStatus), string errorCode = default(string), string errorDescription = default(string))
         {
-            // to ensure "TransportStatus" is required (not null)
-            if (TransportStatus == null)
+            // to ensure "transportStatus" is required (not null)
+            if (transportStatus == null)
             {
-                throw new InvalidDataException("TransportStatus is a required property for TransportResult and cannot be null");
+                throw new InvalidDataException("transportStatus is a required property for TransportResult and cannot be null");
             }
             else
             {
-                this.TransportStatus = TransportStatus;
+                this.TransportStatus = transportStatus;
             }
-            this.ErrorCode = ErrorCode;
-            this.ErrorDescription = ErrorDescription;
+            this.ErrorCode = errorCode;
+            this.ErrorDescription = errorDescription;
         }
 
 
@@ -89,7 +89,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
