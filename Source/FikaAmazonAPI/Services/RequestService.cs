@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
@@ -286,9 +286,16 @@ namespace FikaAmazonAPI.Services
                             throw new AmazonInvalidInputException(error.Message, response);
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
+                        case "InternalFailure":
+                            throw new AmazonInternalErrorException(error.Message, response);
                     }
 
                 }
+            }
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                throw new AmazonBadRequestException("BadRequest see https://developer-docs.amazon.com/sp-api/changelog/api-request-validation-for-400-errors-with-html-response for advice", response);
             }
 
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
@@ -398,7 +405,7 @@ namespace FikaAmazonAPI.Services
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
             return response;
         }
     }

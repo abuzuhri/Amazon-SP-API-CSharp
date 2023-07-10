@@ -1,5 +1,4 @@
-﻿using FikaAmazonAPI.Parameter.ListingItem;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -55,8 +54,7 @@ namespace FikaAmazonAPI.SampleCode
 
          });
 
-
-      var x = amazonConnection.CatalogItem.GetCatalogItem202204(new FikaAmazonAPI.Parameter.CatalogItems.ParameterGetCatalogItem()
+                  var x = amazonConnection.CatalogItem.GetCatalogItem202204(new FikaAmazonAPI.Parameter.CatalogItems.ParameterGetCatalogItem()
       {
         ASIN = "B01I3JW7PK",
         includedData = new List<IncludedData> {
