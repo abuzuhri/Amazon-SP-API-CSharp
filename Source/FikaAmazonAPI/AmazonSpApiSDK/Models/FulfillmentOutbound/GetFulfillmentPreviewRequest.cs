@@ -68,42 +68,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The marketplace the fulfillment order is placed against.
         /// </summary>
         /// <value>The marketplace the fulfillment order is placed against.</value>
-        [DataMember(Name = "MarketplaceId", EmitDefaultValue = false)]
+        [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
         public string MarketplaceId { get; set; }
 
         /// <summary>
         /// The destination address for the fulfillment order preview.
         /// </summary>
         /// <value>The destination address for the fulfillment order preview.</value>
-        [DataMember(Name = "Address", EmitDefaultValue = false)]
+        [DataMember(Name = "address", EmitDefaultValue = false)]
         public Address Address { get; set; }
 
         /// <summary>
         /// Identifying information and quantity information for the items in the fulfillment order preview.
         /// </summary>
         /// <value>Identifying information and quantity information for the items in the fulfillment order preview.</value>
-        [DataMember(Name = "Items", EmitDefaultValue = false)]
+        [DataMember(Name = "items", EmitDefaultValue = false)]
         public GetFulfillmentPreviewItemList Items { get; set; }
 
         /// <summary>
         /// A list of shipping methods used for creating fulfillment order previews. Note: Shipping method service level agreements vary by marketplace. Sellers should see the Seller Central website in their marketplace for shipping method service level agreements and fulfillment fees.
         /// </summary>
         /// <value>A list of shipping methods used for creating fulfillment order previews. Note: Shipping method service level agreements vary by marketplace. Sellers should see the Seller Central website in their marketplace for shipping method service level agreements and fulfillment fees.</value>
-        [DataMember(Name = "ShippingSpeedCategories", EmitDefaultValue = false)]
+        [DataMember(Name = "shippingSpeedCategories", EmitDefaultValue = false)]
         public ShippingSpeedCategoryList ShippingSpeedCategories { get; set; }
 
         /// <summary>
         /// Specifies whether to return fulfillment order previews that are for COD (Cash On Delivery).  Possible values:  true - Returns all fulfillment order previews (both for COD and not for COD).  false - Returns only fulfillment order previews that are not for COD.
         /// </summary>
         /// <value>Specifies whether to return fulfillment order previews that are for COD (Cash On Delivery).  Possible values:  true - Returns all fulfillment order previews (both for COD and not for COD).  false - Returns only fulfillment order previews that are not for COD.</value>
-        [DataMember(Name = "IncludeCODFulfillmentPreview", EmitDefaultValue = false)]
+        [DataMember(Name = "includeCODFulfillmentPreview", EmitDefaultValue = false)]
         public bool? IncludeCODFulfillmentPreview { get; set; }
 
         /// <summary>
         /// Specifies whether to return the ScheduledDeliveryInfo response object, which contains the available delivery windows for a Scheduled Delivery. The ScheduledDeliveryInfo response object can only be returned for fulfillment order previews with ShippingSpeedCategories &#x3D; ScheduledDelivery.
         /// </summary>
         /// <value>Specifies whether to return the ScheduledDeliveryInfo response object, which contains the available delivery windows for a Scheduled Delivery. The ScheduledDeliveryInfo response object can only be returned for fulfillment order previews with ShippingSpeedCategories &#x3D; ScheduledDelivery.</value>
-        [DataMember(Name = "IncludeDeliveryWindows", EmitDefaultValue = false)]
+        [DataMember(Name = "includeDeliveryWindows", EmitDefaultValue = false)]
         public bool? IncludeDeliveryWindows { get; set; }
 
         /// <summary>
