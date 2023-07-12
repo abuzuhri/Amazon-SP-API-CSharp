@@ -38,7 +38,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredLtlDataOutput" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
         public PartneredLtlDataOutput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PartneredLtlDataOutput" /> class.
@@ -58,7 +57,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// <param name="isBillOfLadingAvailable">Indicates whether the bill of lading for the shipment is available. (required).</param>
         /// <param name="partneredEstimate">The estimated shipping cost using an Amazon-partnered carrier..</param>
         /// <param name="carrierName">The carrier for the inbound shipment. (required).</param>
-        public PartneredLtlDataOutput(Contact contact = default(Contact), long? boxCount = default(long?), SellerFreightClass? sellerFreightClass = default(SellerFreightClass?), DateTime? freightReadyDate = default(DateTime?), PalletList palletList = default(PalletList), Weight totalWeight = default(Weight), Amount sellerDeclaredValue = default(Amount), Amount amazonCalculatedValue = default(Amount), DateTime? previewPickupDate = default(DateTime?), DateTime? previewDeliveryDate = default(DateTime?), SellerFreightClass previewFreightClass = default(SellerFreightClass), string amazonReferenceId = default(string), bool? isBillOfLadingAvailable = default(bool?), PartneredEstimate partneredEstimate = default(PartneredEstimate), string carrierName = default(string))
+        [JsonConstructorAttribute]
+        public PartneredLtlDataOutput(Contact contact = default(Contact), long? boxCount = default(long?), SellerFreightClass? sellerFreightClass = default(SellerFreightClass?), string freightReadyDate = default(string), PalletList palletList = default(PalletList), Weight totalWeight = default(Weight), Amount sellerDeclaredValue = default(Amount), Amount amazonCalculatedValue = default(Amount), string previewPickupDate = default(string), string previewDeliveryDate = default(string), SellerFreightClass previewFreightClass = default(SellerFreightClass), string amazonReferenceId = default(string), bool? isBillOfLadingAvailable = default(bool?), PartneredEstimate partneredEstimate = default(PartneredEstimate), string carrierName = default(string))
         {
             // to ensure "contact" is required (not null)
             if (contact == null)
@@ -85,7 +85,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             }
             else
             {
-                this.FreightReadyDate = freightReadyDate;
+                var formatStrings = new string[] { "ddd MMM dd HH:mm:ss 'GMT' yyyy", "yyyy-MM-dd" };
+                this.FreightReadyDate = DateTime.ParseExact(freightReadyDate, formatStrings, null, System.Globalization.DateTimeStyles.None);
             }
             // to ensure "palletList" is required (not null)
             if (palletList == null)
@@ -96,15 +97,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             {
                 this.PalletList = palletList;
             }
-            // to ensure "totalWeight" is required (not null)
-            if (totalWeight == null)
-            {
-                throw new InvalidDataException("totalWeight is a required property for PartneredLtlDataOutput and cannot be null");
-            }
-            else
-            {
-                this.TotalWeight = totalWeight;
-            }
             // to ensure "previewPickupDate" is required (not null)
             if (previewPickupDate == null)
             {
@@ -112,7 +104,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             }
             else
             {
-                this.PreviewPickupDate = previewPickupDate;
+                var formatStrings = new string[] { "ddd MMM dd HH:mm:ss 'GMT' yyyy", "yyyy-MM-dd" };
+                this.PreviewPickupDate = DateTime.ParseExact(previewPickupDate, formatStrings, null, System.Globalization.DateTimeStyles.None);
             }
             // to ensure "previewDeliveryDate" is required (not null)
             if (previewDeliveryDate == null)
@@ -121,7 +114,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             }
             else
             {
-                this.PreviewDeliveryDate = previewDeliveryDate;
+                var formatStrings = new string[] { "ddd MMM dd HH:mm:ss 'GMT' yyyy", "yyyy-MM-dd" };
+                this.PreviewDeliveryDate = DateTime.ParseExact(previewDeliveryDate, formatStrings, null, System.Globalization.DateTimeStyles.None);                
             }
             // to ensure "previewFreightClass" is required (not null)
             if (previewFreightClass == null)
@@ -150,15 +144,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
             {
                 this.IsBillOfLadingAvailable = isBillOfLadingAvailable;
             }
-            // to ensure "carrierName" is required (not null)
-            if (carrierName == null)
-            {
-                throw new InvalidDataException("carrierName is a required property for PartneredLtlDataOutput and cannot be null");
-            }
-            else
-            {
-                this.CarrierName = carrierName;
-            }
+            this.TotalWeight = totalWeight;
+            this.CarrierName = carrierName;
             this.SellerFreightClass = sellerFreightClass;
             this.SellerDeclaredValue = sellerDeclaredValue;
             this.AmazonCalculatedValue = amazonCalculatedValue;
