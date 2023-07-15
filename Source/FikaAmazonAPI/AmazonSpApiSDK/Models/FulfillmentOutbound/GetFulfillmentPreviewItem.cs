@@ -70,7 +70,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The seller SKU of the item.
         /// </summary>
         /// <value>The seller SKU of the item.</value>
-        [DataMember(Name = "sellerSKU", EmitDefaultValue = false)]
+        [DataMember(Name = "sellerSku", EmitDefaultValue = false)]
         public string SellerSKU { get; set; }
 
         /// <summary>
