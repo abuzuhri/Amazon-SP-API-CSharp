@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -24,11 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <param name="featureName">The feature name. (required).</param>
         /// <param name="featureDescription">The feature description. (required).</param>
+        /// <param name="featureFulfillmentPolicy">The feature FulfillmentPolicy. (required).</param>
         /// <param name="sellerEligible">When true, indicates that the seller is eligible to use the feature..</param>
-        public FeatureSettings(string featureName = default(string), FeatureFulfillmentPolicy featureFulfillmentPolicy = default(FeatureFulfillmentPolicy))
+        public FeatureSettings(string featureName = default(string), FeatureFulfillmentPolicyEnum featureFulfillmentPolicy = default(FeatureFulfillmentPolicyEnum))
         {
             this.FeatureName = featureName;
-            this.featureFulfillmentPolicy = featureFulfillmentPolicy;
+            this.FeatureFulfillmentPolicy = featureFulfillmentPolicy;
         }
 
         /// <summary>
@@ -43,7 +46,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// </summary>
         /// <value>The feature description.</value>
         [DataMember(Name = "featureFulfillmentPolicy", EmitDefaultValue = false)]
-        public FeatureFulfillmentPolicy featureFulfillmentPolicy { get; set; }
+        [JsonProperty("featureFulfillmentPolicy", Required = Required.Always)]
+        public FeatureFulfillmentPolicyEnum FeatureFulfillmentPolicy { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,7 +57,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         {
             var sb = new StringBuilder();
             sb.Append("class Feature {\n");
-            sb.Append("  FeatureName: ").Append(FeatureName).Append("\n");
+            sb.Append("  FeatureName: ").Append(this.FeatureName).Append("\n");
+            sb.Append("  FeatureFulfillmentPolicy: ").Append(this.FeatureFulfillmentPolicy).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +69,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var jsonSettings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented
+            };
+
+            var jsonObject = JObject.FromObject(this, JsonSerializer.Create(jsonSettings));
+            jsonObject["featureFulfillmentPolicy"] = this.FeatureFulfillmentPolicy.ToString();
+
+            return jsonObject.ToString();
         }
 
         /// <summary>
@@ -125,8 +139,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
     /// Variant of the image, such as &#x60;MAIN&#x60; or &#x60;PT01&#x60;.
     /// </summary>
     /// <value>Variant of the image, such as &#x60;MAIN&#x60; or &#x60;PT01&#x60;.</value>
+
+    [DefaultValue(FeatureFulfillmentPolicyEnum.Required)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum FeatureFulfillmentPolicy
+    public enum FeatureFulfillmentPolicyEnum
     {
 
         /// <summary>

@@ -40,10 +40,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
             KG = 1,
 
             /// <summary>
+            /// Enum KILOGRAMS for value: KILOGRAMS
+            /// </summary>
+            [EnumMember(Value = "KILOGRAMS")]
+            KILOGRAMS = 2,
+
+            /// <summary>
             /// Enum LB for value: LB
             /// </summary>
             [EnumMember(Value = "LB")]
-            LB = 2
+            LB = 3,
+
+            /// <summary>
+            /// Enum POUNDS for value: POUNDS
+            /// </summary>
+            [EnumMember(Value = "POUNDS")]
+            POUNDS =4
         }
 
         /// <summary>
