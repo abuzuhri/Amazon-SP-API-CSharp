@@ -380,6 +380,24 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
+        public void SubmitFeedEasyShipDocument()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+            var list = new List<EasyShipDocumentMessage>();
+            list.Add(new EasyShipDocumentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                DocumentTypes = new List<EasyShipDocumentType>() {
+                    EasyShipDocumentType.ShippingLabel
+                }
+            });
+            createDocument.AddEasyShipDocumentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_EASYSHIP_DOCUMENTS);
+            GetFeedDetails(feedID);
+        }
+
         private void GetFeedDetails(string feedID)
         {
             string ResultFeedDocumentId = string.Empty;
