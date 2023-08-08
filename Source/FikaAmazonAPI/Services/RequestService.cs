@@ -58,7 +58,9 @@ namespace FikaAmazonAPI.Services
         {
             if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
             {
-                RequestClient = new RestClient(ApiBaseUrl);
+                var options = new RestClientOptions(ApiBaseUrl);
+                RequestClient = new RestClient(options,
+                    configureSerialization: s => s.UseNewtonsoftJson());
             }
             else
             {
@@ -70,10 +72,10 @@ namespace FikaAmazonAPI.Services
                     }
                 };
 
-                RequestClient = new RestClient(options);
+                RequestClient = new RestClient(options,
+                    configureSerialization: s => s.UseNewtonsoftJson());
             }
 
-            RequestClient.UseNewtonsoftJson();
             Request = new RestRequest(url, method);
         }
 
