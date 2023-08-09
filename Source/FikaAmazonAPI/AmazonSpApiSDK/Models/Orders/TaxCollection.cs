@@ -74,6 +74,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// </summary>
             [EnumMember(Value = "LowValueGoods")]
             LowValueGoods = 2,
+
+            /// <summary>
+            /// Enum AmazonServicesInc for value: Amazon Commercial Services Pty Ltd  (undocumented but exists)
+            /// </summary>
+            [EnumMember(Value = "Amazon Commercial Services Pty Ltd")]
+            AmazonCommercialServicesPtyLtd = 3,
         }
 
         /// <summary>
