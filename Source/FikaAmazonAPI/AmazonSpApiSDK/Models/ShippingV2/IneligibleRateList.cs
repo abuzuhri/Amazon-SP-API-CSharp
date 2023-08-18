@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of ineligible shipping service offerings.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class IneligibleRateList : List<IneligibleRate> {
 
     /// <summary>
