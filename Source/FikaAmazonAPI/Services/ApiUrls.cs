@@ -177,6 +177,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetAttributes(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
             public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
             public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
+            public static string SendInvoice(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/invoice";
         }
         protected class EasyShip20220323
         {
