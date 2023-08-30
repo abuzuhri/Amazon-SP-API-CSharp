@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => CancelShipmentAsync(shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> CancelShipmentAsync(string shipmentId, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.CancelShipment(shipmentId), RestSharp.Method.Post, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.CancelShipment(shipmentId), RestSharp.Method.Put, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<CancelShipmentResponse>(RateLimitType.ShippingV2_CancelShipment, cancellationToken);
             if (response != null)
                 return true;
