@@ -155,10 +155,10 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public async void SubmitFeedPRICING(double PRICE, string SKU)
+        public void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
 
             var list = new List<PriceMessage>();
             list.Add(new PriceMessage()
@@ -174,7 +174,7 @@ namespace FikaAmazonAPI.SampleCode
 
             var xml = createDocument.GetXML();
 
-            var feedID = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
 
