@@ -215,11 +215,11 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public bool UpdateVerificationStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
-            Task.Run(() => UpdateVerificationStatusAsync(orderId, updateShipmentStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest, CancellationToken cancellationToken = default)
+        public bool UpdateVerificationStatus(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest) =>
+            Task.Run(() => UpdateVerificationStatusAsync(orderId, updateVerificationStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateVerificationStatus(orderId), RestSharp.Method.Patch, postJsonObj: updateShipmentStatusRequest, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateVerificationStatus(orderId), RestSharp.Method.Patch, postJsonObj: updateVerificationStatusRequest, cancellationToken: cancellationToken);
 
             var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
             return true;
