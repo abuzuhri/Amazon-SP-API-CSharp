@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// The value-added services to be added to a shipping service purchase.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class RequestedValueAddedServiceList : List<RequestedValueAddedService> {
 
     /// <summary>
