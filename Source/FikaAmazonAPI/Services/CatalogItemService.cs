@@ -65,7 +65,7 @@ namespace FikaAmazonAPI.Services
             var param = new List<KeyValuePair<string, string>>();
             param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
 
-            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.GET, param);
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.Get, param);
             var response = await ExecuteRequestAsync<GetCatalogItemResponse>(RateLimitType.CatalogItems_GetCatalogItem);
 
             if (response != null && response.Payload != null)
