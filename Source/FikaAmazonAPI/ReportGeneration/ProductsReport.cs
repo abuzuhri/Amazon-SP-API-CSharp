@@ -173,7 +173,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.BidForFeaturedPlacement = rowData.GetString("bid-for-featured-placement");
             row.AddDelete = rowData.GetString("add-delete");
             row.PendingQuantity = rowData.GetInt32Nullable("pending-quantity");
-            row.FulfillmentChannel = rowData.GetString("fulfillment-channel");
+            row.FulfillmentChannel = rowData.GetString("fulfillment-channel") ?? rowData.GetString("fulfilment-channel");
             row.OptionalPaymentTypeExclusion = rowData.GetString("optional-payment-type-exclusion");
             row.Status = rowData.GetString("status");
             row.MerchantShippingGroup = rowData.GetString("merchant-shipping-group");
