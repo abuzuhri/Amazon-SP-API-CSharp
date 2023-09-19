@@ -63,6 +63,7 @@ namespace FikaAmazonAPI.ConstructFeed
         public PendingOrderReportMessage PendingOrderReport { get; set; }
         public PurchaseConfirmationMessage PurchaseConfirmation { get; set; }
         public SalesAdjustmentMessage SalesAdjustment { get; set; }
+        public EasyShipDocumentMessage EasyShipDocument { get; set; }
 
 
         [XmlIgnore]
@@ -118,6 +119,7 @@ namespace FikaAmazonAPI.ConstructFeed
         [XmlIgnore] public bool PendingOrderReportSpecified { get { return PendingOrderReport != null; } }
         [XmlIgnore] public bool PurchaseConfirmationSpecified { get { return PurchaseConfirmation != null; } }
         [XmlIgnore] public bool SalesAdjustmentSpecified { get { return SalesAdjustment != null; } }
+        [XmlIgnore] public bool EasyShipDocumentSpecified { get { return EasyShipDocument != null; } }
 
 
 

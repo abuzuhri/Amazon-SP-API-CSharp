@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of tax detail information.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class TaxDetailList : List<TaxDetail> {
 
     /// <summary>

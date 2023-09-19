@@ -161,14 +161,19 @@ namespace FikaAmazonAPI.Utils
             REPORT_PROCESSING_FINISHED,
             BRANDED_ITEM_CONTENT_CHANGE,
             ITEM_PRODUCT_TYPE_CHANGE,
+            ITEM_INVENTORY_EVENT_CHANGE,
+            ITEM_SALES_EVENT_CHANGE,
             LISTINGS_ITEM_STATUS_CHANGE,
             LISTINGS_ITEM_ISSUES_CHANGE,
+            LISTINGS_ITEM_MFN_QUANTITY_CHANGE,
+            DETAIL_PAGE_TRAFFIC_EVENT,
             MFN_ORDER_STATUS_CHANGE,
             B2B_ANY_OFFER_CHANGED,
             ACCOUNT_STATUS_CHANGED,
             EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE,
             PRODUCT_TYPE_DEFINITIONS_CHANGE,
             ORDER_STATUS_CHANGE,
+            ORDER_CHANGE,
             PRICING_HEALTH,
             FBA_INVENTORY_AVAILABILITY_CHANGES
         }
@@ -601,7 +606,8 @@ namespace FikaAmazonAPI.Utils
             Store,
             StoreStockMovement,
             WebstoreItem,
-            CartonContentsRequest
+            CartonContentsRequest,
+            EasyShipDocument,
         }
 
         [JsonConverter(typeof(StringEnumConverter))]

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Configuration;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -27,21 +28,24 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             });
 
-            var x = amazonConnection.CatalogItem.GetCatalogItem202204(new FikaAmazonAPI.Parameter.CatalogItems.ParameterGetCatalogItem()
+
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedPRICING(69.3F, "8809606851663");
+
+            var feeds = amazonConnection.Feed.GetFeeds(new Parameter.Feed.ParameterGetFeed()
             {
-                ASIN = "B01I3JW7PK",
-                includedData = new List<IncludedData> {
-               IncludedData.summaries,
-               IncludedData.identifiers,
-               IncludedData.summaries,
-               IncludedData.productTypes,
-               IncludedData.dimensions,
-               IncludedData.images,
-               IncludedData.relationships,
-               IncludedData.attributes//,
-               
-               }
+                processingStatuses = ProcessingStatuses.IN_QUEUE,
+                pageSize = 100,
+                feedTypes = new List<FeedType> { FeedType.POST_PRODUCT_PRICING_DATA },
+                marketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID }
             });
+
+            foreach (var feed in feeds)
+            {
+                Console.WriteLine("FeedId " + feed.FeedId);
+                //var result = amazonConnection.Feed.CancelFeed(feed.FeedId);
+            }
+
 
 
             Console.ReadLine();

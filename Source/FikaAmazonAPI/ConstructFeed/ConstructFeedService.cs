@@ -173,6 +173,23 @@ namespace FikaAmazonAPI.ConstructFeed
             envelope.MessageType = Utils.Constants.FeedMessageType.ProductImage;
         }
 
+        public void AddEasyShipDocumentMessage(IList<EasyShipDocumentMessage> messages, Constants.OperationType operationType = Constants.OperationType.Update)
+        {
+            var msgs = new List<BaseMessage>();
+            int index = 1;
+            foreach (var itm in messages)
+            {
+                msgs.Add(new BaseMessage()
+                {
+                    MessageID = index++,
+                    EasyShipDocument = itm,
+                    OperationType = operationType
+                });
+            }
+            envelope.Message = msgs;
+            envelope.MessageType = Utils.Constants.FeedMessageType.EasyShipDocument;
+        }
+
         public string GetXML()
         {
             return LinqHelper.SerializeObject(envelope);

@@ -155,10 +155,10 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public async void SubmitFeedPRICING(double PRICE, string SKU)
+        public void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
 
             var list = new List<PriceMessage>();
             list.Add(new PriceMessage()
@@ -174,7 +174,7 @@ namespace FikaAmazonAPI.SampleCode
 
             var xml = createDocument.GetXML();
 
-            var feedID = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
 
@@ -377,6 +377,24 @@ namespace FikaAmazonAPI.SampleCode
             var xml222 = createDocument2.GetXML();
 
             var feedID = amazonConnection.Feed.SubmitFeed(xml222, FeedType.POST_FBA_INBOUND_CARTON_CONTENTS);
+            GetFeedDetails(feedID);
+        }
+
+        public void SubmitFeedEasyShipDocument()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+            var list = new List<EasyShipDocumentMessage>();
+            list.Add(new EasyShipDocumentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                DocumentTypes = new List<EasyShipDocumentType>() {
+                    EasyShipDocumentType.ShippingLabel
+                }
+            });
+            createDocument.AddEasyShipDocumentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_EASYSHIP_DOCUMENTS);
             GetFeedDetails(feedID);
         }
 
