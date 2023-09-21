@@ -186,20 +186,20 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region Products
-        public List<ProductsRow> GetProducts() =>
-            Task.Run(() => GetProductsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ProductsRow>> GetProductsAsync()
+        public List<ProductsRow> GetProducts(List<MarketPlace> marketplaces = null) =>
+            Task.Run(() => GetProductsAsync(marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<ProductsRow>> GetProductsAsync(List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
         {
-            var path = await GetProductsAsync(_amazonConnection);
-            ProductsReport report = new ProductsReport(path, _amazonConnection.RefNumber);
+            var path = await GetProductsAsync(_amazonConnection, marketplaces, cancellationToken);
+            ProductsReport report = new ProductsReport(path);
             return report.Data;
         }
-        private async Task<string> GetProductsAsync(AmazonConnection amazonConnection)
+        private async Task<string> GetProductsAsync(AmazonConnection amazonConnection, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA, marketplaces: marketplaces, cancellationToken: cancellationToken);
         }
         #endregion
-    
+
         #region Categories
 
         public List<CategoriesRow> GetCategories()
