@@ -46,6 +46,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
             //this.Data["Details"] = details;
         }
     }
+
     public class AmazonQuotaExceededException : AmazonException
     {
         public AmazonQuotaExceededException(string msg, RestResponse response = null) : base(msg, response)
