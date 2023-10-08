@@ -26,6 +26,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         [JsonProperty(PropertyName = "eventFilterType")]
         public string EventFilterType { get; set; }
 
+        /// <summary>
+        /// Gets or Sets OrderChangeTypes
+        /// </summary>
+        [DataMember(Name = "orderChangeTypes", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "orderChangeTypes")]
+        public IList<string> OrderChangeTypes { get; set; }
+
 
         /// <summary>
         /// Get the string presentation of the object
@@ -37,6 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
             sb.Append("class EventFilter {\n");
             sb.Append("  MarketplaceIds: ").Append(MarketplaceIds).Append("\n");
             sb.Append("  EventFilterType: ").Append(EventFilterType).Append("\n");
+            sb.Append("  OrderChangeTypes: ").Append(OrderChangeTypes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

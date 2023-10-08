@@ -82,10 +82,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="modelNumber">Model number associated with an Amazon catalog item..</param>
         /// <param name="packageQuantity">Quantity of an Amazon catalog item in one package..</param>
         /// <param name="partNumber">Part number associated with an Amazon catalog item..</param>
+        /// <param name="releaseDate">First date on which an Amazon catalog item is shippable to customers..</param>
         /// <param name="size">Name of the size associated with an Amazon catalog item..</param>
         /// <param name="style">Name of the style associated with an Amazon catalog item..</param>
         /// <param name="websiteDisplayGroup">Name of the website display group associated with an Amazon catalog item..</param>
-        public ItemSummaryByMarketplace(string marketplaceId = default(string), string brand = default(string), ItemBrowseClassification browseClassification = default(ItemBrowseClassification), string color = default(string), ItemClassificationEnum? itemClassification = default(ItemClassificationEnum?), string itemName = default(string), string manufacturer = default(string), string modelNumber = default(string), int? packageQuantity = default(int?), string partNumber = default(string), string size = default(string), string style = default(string), string websiteDisplayGroup = default(string), string websiteDisplayGroupName = default(string))
+        public ItemSummaryByMarketplace(string marketplaceId = default, string brand = default, ItemBrowseClassification browseClassification = default,
+            string color = default, ItemClassificationEnum? itemClassification = default, string itemName = default, string manufacturer = default,
+            string modelNumber = default, int? packageQuantity = default, string partNumber = default, DateTime? releaseDate = default,
+            string size = default, string style = default, string websiteDisplayGroup = default, string websiteDisplayGroupName = default)
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
@@ -105,6 +109,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             this.ModelNumber = modelNumber;
             this.PackageQuantity = packageQuantity;
             this.PartNumber = partNumber;
+            this.ReleaseDate = releaseDate;
             this.Size = size;
             this.Style = style;
             this.WebsiteDisplayGroup = websiteDisplayGroup;
@@ -174,6 +179,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <value>Part number associated with an Amazon catalog item.</value>
         [DataMember(Name = "partNumber", EmitDefaultValue = false)]
         public string PartNumber { get; set; }
+
+        /// <summary>
+        /// First date on which an Amazon catalog item is shippable to customers.
+        /// </summary>
+        /// <value>First date on which an Amazon catalog item is shippable to customers.</value>
+        [DataMember(Name = "releaseDate", EmitDefaultValue = false)]
+        public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Name of the size associated with an Amazon catalog item.
