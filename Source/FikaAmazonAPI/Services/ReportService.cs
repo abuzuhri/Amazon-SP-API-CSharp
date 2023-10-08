@@ -285,7 +285,7 @@ namespace FikaAmazonAPI.Services
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            if (marketplaces == null)
+            if (marketplaces == null || marketplaces.Count() == 0)
             {
                 parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
