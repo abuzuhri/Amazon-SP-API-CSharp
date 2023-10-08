@@ -285,7 +285,7 @@ namespace FikaAmazonAPI.Services
                         case "InvalidSignature":
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":
-                            throw new AmazonInvalidInputException(error.Message, response);
+                            throw new AmazonInvalidInputException(error.Message, error.Details, response);
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
                         case "InternalFailure":
