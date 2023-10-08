@@ -398,7 +398,7 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        private void GetFeedDetails(string feedID)
+        public void GetFeedDetails(string feedID)
         {
             string ResultFeedDocumentId = string.Empty;
             while (string.IsNullOrEmpty(ResultFeedDocumentId))
