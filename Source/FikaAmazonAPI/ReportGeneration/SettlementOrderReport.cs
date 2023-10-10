@@ -76,10 +76,8 @@ namespace FikaAmazonAPI.ReportGeneration
             row.MerchantAdjustmentItemId = values[20];
             row.SKU = values[21];
             row.QuantityPurchased = DataConverter.GetInt(values[22]);
-            row.PromotionId = values[23];
-
+            
             row.refNumber = refNumber;
-
 
             return row;
         }
