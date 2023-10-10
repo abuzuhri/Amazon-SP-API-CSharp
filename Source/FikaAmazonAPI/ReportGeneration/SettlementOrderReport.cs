@@ -46,7 +46,6 @@ namespace FikaAmazonAPI.ReportGeneration
         public string MerchantAdjustmentItemId { get; set; }
         public string SKU { get; set; }
         public int? QuantityPurchased { get; set; }
-        public string PromotionId { get; set; }
         public string refNumber { get; set; }
 
         public static SettlementOrderRow FromCsv(string csvLine, string refNumber)
