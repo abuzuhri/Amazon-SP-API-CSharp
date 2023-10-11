@@ -172,7 +172,7 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.ProductPricing_GetListingOffers,                new RateLimits(1M, 2) },
               { RateLimitType.ProductPricing_GetItemOffers,                   new RateLimits(0.5M, 1) },
 
-              { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.5M, 1) },
+              { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.1M, 1) },
               { RateLimitType.ProductPricing_GetListingOffersBatch,                   new RateLimits(0.5M, 1) },
 
               { RateLimitType.Sales_GetOrderMetrics,                          new RateLimits(0.5M, 15) },

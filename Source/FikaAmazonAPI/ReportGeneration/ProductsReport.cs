@@ -7,7 +7,7 @@ namespace FikaAmazonAPI.ReportGeneration
     public class ProductsReport
     {
         public List<ProductsRow> Data { get; set; } = new List<ProductsRow>();
-        public ProductsReport(string path, string refNumber, Encoding encoding = default)
+        public ProductsReport(string path, Encoding encoding = default)
         {
             if (string.IsNullOrEmpty(path))
                 return;
@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.ReportGeneration
             List<ProductsRow> values = new List<ProductsRow>();
             foreach (var row in table.Rows)
             {
-                values.Add(ProductsRow.FromRow(row, refNumber));
+                values.Add(ProductsRow.FromRow(row));
             }
             Data = values;
         }
@@ -144,7 +144,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string refNumber { get; set; }
         public string MerchantShippingGroup { get; set; }
 
-        public static ProductsRow FromRow(TableRow rowData, string refNumber)
+        public static ProductsRow FromRow(TableRow rowData)
         {
             var row = new ProductsRow();
             row.ItemName = rowData.GetString("item-name");
@@ -173,7 +173,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.BidForFeaturedPlacement = rowData.GetString("bid-for-featured-placement");
             row.AddDelete = rowData.GetString("add-delete");
             row.PendingQuantity = rowData.GetInt32Nullable("pending-quantity");
-            row.FulfillmentChannel = rowData.GetString("fulfillment-channel");
+            row.FulfillmentChannel = rowData.GetString("fulfillment-channel") ?? rowData.GetString("fulfilment-channel");
             row.OptionalPaymentTypeExclusion = rowData.GetString("optional-payment-type-exclusion");
             row.Status = rowData.GetString("status");
             row.MerchantShippingGroup = rowData.GetString("merchant-shipping-group");

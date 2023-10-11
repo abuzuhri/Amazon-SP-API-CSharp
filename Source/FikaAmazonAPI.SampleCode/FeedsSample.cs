@@ -99,19 +99,19 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// UnderTest
         /// </summary>
-        public void SubmitFeedAddProductMessage()
+        public void SubmitFeedAddProductMessage(string ASIN, string SKU)
         {
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
 
             var list = new List<ProductMessage>();
             list.Add(new ProductMessage()
             {
-                SKU = "8432225129778...",
+                SKU = SKU,
 
                 StandardProductID = new ConstructFeed.Messages.StandardProductID()
                 {
                     Type = "ASIN",
-                    Value = "B00M9B66BU"
+                    Value = ASIN
                 }
             });
             createDocument.AddProductMessage(list, OperationType.Update);
@@ -155,10 +155,10 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public async void SubmitFeedPRICING(double PRICE, string SKU)
+        public void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
-            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
 
             var list = new List<PriceMessage>();
             list.Add(new PriceMessage()
@@ -174,7 +174,7 @@ namespace FikaAmazonAPI.SampleCode
 
             var xml = createDocument.GetXML();
 
-            var feedID = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
 
@@ -380,7 +380,25 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        private void GetFeedDetails(string feedID)
+        public void SubmitFeedEasyShipDocument()
+        {
+            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
+            var list = new List<EasyShipDocumentMessage>();
+            list.Add(new EasyShipDocumentMessage()
+            {
+                AmazonOrderID = "AMZ1234567890123",
+                DocumentTypes = new List<EasyShipDocumentType>() {
+                    EasyShipDocumentType.ShippingLabel
+                }
+            });
+            createDocument.AddEasyShipDocumentMessage(list);
+            var xml = createDocument.GetXML();
+
+            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_EASYSHIP_DOCUMENTS);
+            GetFeedDetails(feedID);
+        }
+
+        public void GetFeedDetails(string feedID)
         {
             string ResultFeedDocumentId = string.Empty;
             while (string.IsNullOrEmpty(ResultFeedDocumentId))
