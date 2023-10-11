@@ -2,24 +2,53 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions
 {
     /// <summary>
-    /// TransactionId
+    /// TransactionStatus
     /// </summary>
     [DataContract]
-    public partial class TransactionId : IEquatable<TransactionId>, IValidatableObject
+    public partial class TransactionStatus : IEquatable<TransactionStatus>, IValidatableObject
     {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TransactionStatusEnum
+        {
+            [EnumMember(Value = "Failure")]
+            Failure,
+
+            [EnumMember(Value = "Processing")]
+            Processing,
+
+            [EnumMember(Value = "Success")]
+            Success
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionId" /> class.
+        /// Current status of the transaction.
+        /// </summary>
+        /// <value>Current status of the transaction.</value>
+        [DataMember(Name = "status", EmitDefaultValue = false)]
+        public TransactionStatusEnum? Status { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionStatus" /> class.
+        /// </summary>
+        //[JsonConstructorAttribute]
+        //public TransactionStatus() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VendorOrders.TransactionStatus" /> class.
         /// </summary>
         /// <param name="transactionId">GUID assigned by Amazon to identify this transaction. This value can be used with the Transaction Status API to return the status of this transaction..</param>
-        public TransactionId(string transactionId = default(string))
+        /// <param name="status">Transaction status</param>
+        public TransactionStatus(string transactionId = default, TransactionStatusEnum? status = default)
         {
-            this._TransactionId = transactionId;
+            TransactionId = transactionId;
+            Status = status;
         }
 
         /// <summary>
@@ -27,7 +56,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <value>GUID assigned by Amazon to identify this transaction. This value can be used with the Transaction Status API to return the status of this transaction.</value>
         [DataMember(Name = "transactionId", EmitDefaultValue = false)]
-        public string _TransactionId { get; set; }
+        public string TransactionId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -36,8 +65,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TransactionId {\n");
-            sb.Append("  _TransactionId: ").Append(_TransactionId).Append("\n");
+            sb.Append("class TransactionStatus {\n");
+            sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -58,7 +88,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TransactionId);
+            return Equals(input as TransactionStatus);
         }
 
         /// <summary>
@@ -66,16 +96,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <param name="input">Instance of TransactionId to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TransactionId input)
+        public bool Equals(TransactionStatus input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                    this._TransactionId == input._TransactionId ||
-                    (this._TransactionId != null &&
-                    this._TransactionId.Equals(input._TransactionId))
+                    TransactionId == input.TransactionId ||
+                    TransactionId != null &&
+                    TransactionId.Equals(input.TransactionId)
+                ) &&
+                (
+                    Status == input.Status ||
+                    Status != null &&
+                    Status.Equals(input.Status)
                 );
         }
 
@@ -88,8 +123,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._TransactionId != null)
-                    hashCode = hashCode * 59 + this._TransactionId.GetHashCode();
+                if (TransactionId != null)
+                    hashCode = hashCode * 59 + TransactionId.GetHashCode();
+                if (Status != null)
+                    hashCode = hashCode * 59 + Status.GetHashCode();
                 return hashCode;
             }
         }
@@ -99,9 +136,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }
     }
+
 }
