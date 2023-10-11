@@ -21,15 +21,15 @@ namespace FikaAmazonAPI.Parameter.ListingItem
                 sku = "BadSKU";
             if (string.IsNullOrWhiteSpace(sellerId))
             {
-                throw new InvalidDataException("SellerId is a required property for ParameterPutListingItem and cannot be null");
+                throw new InvalidDataException("SellerId is a required property for ParameterGetListingsItem and cannot be null");
             }
             if (string.IsNullOrWhiteSpace(sku))
             {
-                throw new InvalidDataException("Sku is a required property for ParameterPutListingItem and cannot be null");
+                throw new InvalidDataException("Sku is a required property for ParameterGetListingsItem and cannot be null");
             }
             if (marketplaceIds == null || !marketplaceIds.Any())
             {
-                throw new InvalidDataException("MarketplaceIds is a required property for ParameterPutListingItem and cannot be null");
+                throw new InvalidDataException("MarketplaceIds is a required property for ParameterGetListingsItem and cannot be null");
             }
             if (includedData is null)
             {

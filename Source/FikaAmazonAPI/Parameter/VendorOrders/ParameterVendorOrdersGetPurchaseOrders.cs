@@ -19,6 +19,5 @@ namespace FikaAmazonAPI.Parameter.VendorOrders
         public bool? isPOChanged { get; set; }
         public PurchaseOrderState? purchaseOrderState { get; set; }
         public string orderingVendorCode { get; set; }
-
     }
 }

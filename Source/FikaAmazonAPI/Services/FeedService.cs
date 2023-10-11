@@ -23,8 +23,6 @@ namespace FikaAmazonAPI.Services
 
         }
 
-
-
         public IList<Feed> GetFeeds(ParameterGetFeed parameterGetFeed) =>
             Task.Run(() => GetFeedsAsync(parameterGetFeed)).ConfigureAwait(false).GetAwaiter().GetResult();
 
@@ -50,7 +48,6 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-
         public GetFeedsResponseV00 GetFeedsByNextToken(string nextToken) =>
             Task.Run(() => GetFeedsByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
 
@@ -64,7 +61,6 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetFeedsResponseV00>(RateLimitType.Feed_GetFeeds, cancellationToken);
             return response;
         }
-
 
         public CreateFeedResult CreateFeed(CreateFeedSpecification createFeedSpecification) =>
             Task.Run(() => CreateFeedAsync(createFeedSpecification)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -242,7 +238,6 @@ namespace FikaAmazonAPI.Services
             return feed.FeedId;
         }
 
-
         private static async Task<Stream> GetStreamFromUrlAsync(string url, CancellationToken cancellationToken = default)
         {
             byte[] imageData = null;
@@ -284,7 +279,6 @@ namespace FikaAmazonAPI.Services
                     bytes = System.Text.Encoding.UTF8.GetBytes(contentOrFilePath);
                 }
             }
-
 
             request.ContentType = LinqHelper.GetEnumMemberValue(contentType);
             request.ContentLength = bytes.Length;
