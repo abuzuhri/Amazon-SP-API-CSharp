@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
+using FikaAmazonAPI.Utils;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,33 +56,32 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             string[] values = csvLine.Split('\t');
             var row = new SettlementOrderRow();
-            row.SettlementId = values[0];
-            row.SettlementStartDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.SettlementEndDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.DepositDate = DataConverter.GetDate(values[3], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.TotalAmount = DataConverter.GetDecimal(values[4]);
-            row.Currency = values[5];
-            row.TransactionType = values[6];
-            row.OrderId = values[7];
-            row.MerchantOrderId = values[8];
-            row.AdjustmentId = values[9];
-            row.ShipmentId = values[10];
-            row.MarketplaceName = values[11];
-            row.AmountType = values[12];
-            row.AmountDescription = values[13];
-            row.Amount = DataConverter.GetDecimal(values[14]);
-            row.FulfillmentId = values[15];
-            row.PostedDate = DataConverter.GetDate(values[16], DataConverter.DateTimeFormat.DATE_FORMAT_DOT);
-            row.PostedDateTime = DataConverter.GetDate(values[17], DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.OrderItemCode = values[18];
-            row.MerchantOrderItemId = values[19];
-            row.MerchantAdjustmentItemId = values[20];
-            row.SKU = values[21];
+            row.SettlementId = values.GetElementAtIndexOrDefault(0);
+            row.SettlementStartDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(1), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.SettlementEndDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(2), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.DepositDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(3), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.TotalAmount = DataConverter.GetDecimal(values.GetElementAtIndexOrDefault(4));
+            row.Currency = values.GetElementAtIndexOrDefault(5);
+            row.TransactionType = values.GetElementAtIndexOrDefault(6);
+            row.OrderId = values.GetElementAtIndexOrDefault(7);
+            row.MerchantOrderId = values.GetElementAtIndexOrDefault(8);
+            row.AdjustmentId = values.GetElementAtIndexOrDefault(9);
+            row.ShipmentId = values.GetElementAtIndexOrDefault(10);
+            row.MarketplaceName = values.GetElementAtIndexOrDefault(11);
+            row.AmountType = values.GetElementAtIndexOrDefault(12);
+            row.AmountDescription = values.GetElementAtIndexOrDefault(13);
+            row.Amount = DataConverter.GetDecimal(values.GetElementAtIndexOrDefault(14));
+            row.FulfillmentId = values.GetElementAtIndexOrDefault(15);
+            row.PostedDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(16), DataConverter.DateTimeFormat.DATE_FORMAT_DOT);
+            row.PostedDateTime = DataConverter.GetDate(values.GetElementAtIndexOrDefault(17), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.OrderItemCode = values.GetElementAtIndexOrDefault(18);
+            row.MerchantOrderItemId = values.GetElementAtIndexOrDefault(19);
+            row.MerchantAdjustmentItemId = values.GetElementAtIndexOrDefault(20);
+            row.SKU = values.GetElementAtIndexOrDefault(21);
             row.QuantityPurchased = DataConverter.GetInt(values[22]);
-            row.PromotionId = values[23];
+            row.PromotionId = values.GetElementAtIndexOrDefault(23);
 
             row.refNumber = refNumber;
-
 
             return row;
         }

@@ -2,6 +2,8 @@
 using FikaAmazonAPI.Services;
 using FikaAmazonAPI.Utils;
 using System;
+using System.Globalization;
+using System.Threading;
 
 namespace FikaAmazonAPI
 {
@@ -86,10 +88,11 @@ namespace FikaAmazonAPI
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null)
+        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null)
         {
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
+            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.InvariantCulture;
         }
 
         private void Authenticate(AmazonCredential Credentials)
