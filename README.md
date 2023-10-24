@@ -80,7 +80,7 @@ Install-Package CSharpAmazonSpAPI
 ## Keys
 To get all keys needed you need to follow this step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) and then you need to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application) then [Authorizing Selling Partner API applications
 ](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
-> :warning: **Use role ARN created in step 5 when you register your application**: and dont use IAM user
+
 
 | Name | Description |
 | --- | --- |
