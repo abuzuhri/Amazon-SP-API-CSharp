@@ -84,10 +84,7 @@ To get all keys needed you need to follow this step [Creating and configuring IA
 
 | Name | Description |
 | --- | --- |
-| AccessKey | AWS USER ACCESS KEY |
-| SecretKey | AWS USER SECRET KEY |
-| RoleArn | AWS IAM Role ARN (needs permission to “Assume Role” STS) |
-| Region | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
+| Marketplace | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
 | RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
@@ -105,9 +102,6 @@ You can configure a connection like so please see [Here](https://github.com/abuz
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -118,9 +112,6 @@ or
 
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -134,9 +125,6 @@ Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Sou
 >```csharp
 >AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 >{
->     AccessKey = "AKIAXXXXXXXXXXXXXXX",
->     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
 >     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 >     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 >     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -216,9 +204,6 @@ var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
