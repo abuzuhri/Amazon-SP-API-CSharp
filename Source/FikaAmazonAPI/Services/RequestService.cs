@@ -1,7 +1,6 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
@@ -118,7 +117,8 @@ namespace FikaAmazonAPI.Services
             AddAccessToken();
             AddShippingBusinessId();
 
-            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
+            //Remove AWS authorization
+            //Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
             var response = await RequestClient.ExecuteAsync<T>(Request, cancellationToken);
             LogRequest(Request, response);
             SaveLastRequestHeader(response.Headers);
@@ -181,8 +181,8 @@ namespace FikaAmazonAPI.Services
         {
             lock (Request)
             {
-                Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-                Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
                 Request?.Parameters?.RemoveParameter(AccessTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(SecurityTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(ShippingBusinessIdHeaderName);

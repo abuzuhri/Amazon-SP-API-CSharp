@@ -30,9 +30,6 @@
     <EmbeddedResource Remove="ConstructFeed\xsd\**" />
     <None Remove="ConstructFeed\xsd\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="AmazonSpApiSDK\Runtime\LWAAuthorizationSigner.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.100.52" />
