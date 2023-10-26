@@ -140,20 +140,12 @@ namespace FikaAmazonAPI.Services
                         {
                             foreach (var msg in Messages)
                             {
-                                try
-                                {
-                                    var data = DeserializeNotification(msg);
-
-                                    messageReceiver.NewMessageRevicedTriger(data);
-                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
-                                }
-                                catch (Exception ex)
-                                {
-                                    messageReceiver.ErrorCatch(ex);
-                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
-                                }
+                                ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, cancellationToken).ConfigureAwait(false);
 
                             }
+
+                            if (Messages.Count < 10)
+                                Thread.Sleep(1000 * 5);
                         }
                     }
                     catch (Exception ex)
@@ -161,6 +153,22 @@ namespace FikaAmazonAPI.Services
                         messageReceiver.ErrorCatch(ex);
                     }
                 }
+            }
+        }
+
+        private async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiver messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var data = DeserializeNotification(msg);
+
+                messageReceiver.NewMessageRevicedTriger(data);
+                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                messageReceiver.ErrorCatch(ex);
+                await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
         }
         private async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle, CancellationToken cancellationToken = default)
