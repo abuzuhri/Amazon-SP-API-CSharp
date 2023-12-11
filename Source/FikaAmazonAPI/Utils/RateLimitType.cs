@@ -16,7 +16,6 @@
         Order_UpdateOrderItemsApprovals,
         Order_ShipmentConfirmation,
 
-
         Report_GetReports,
         Report_GetReport,
         Report_CreateReport,
@@ -80,7 +79,6 @@
         FbaSmallandLight_DeleteSmallAndLightEnrollmentBySellerSKU,
         FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU,
         FbaSmallandLight_GetSmallAndLightFeePreview,
-
 
         FBAInboundEligibility_GetItemEligibilityPreview,
 
@@ -159,12 +157,10 @@
 
         Sales_GetOrderMetrics,
 
-
         EasyShip_ListHandoverSlots,
         EasyShip_GetScheduledPackage,
         EasyShip_CreateScheduledPackage,
         EasyShip_UpdateScheduledPackages,
-
 
         Sellers_GetMarketplaceParticipations,
 
@@ -189,6 +185,8 @@
         VendorOrdersV1_GetPurchaseOrder,
         VendorOrdersV1_SubmitAcknowledgement,
         VendorOrdersV1_GetPurchaseOrdersStatus,
+
+		VendorTransactionStatus_GetTransaction,
 
     }
 }

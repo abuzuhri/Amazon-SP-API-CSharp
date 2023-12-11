@@ -2,40 +2,38 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions;
+using Newtonsoft.Json;
 
-namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
+namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions
 {
     /// <summary>
-    /// The response schema for the submitAcknowledgement operation.
+    /// The response schema for the getTransactionResponse operation.
     /// </summary>
     [DataContract]
-    public partial class SubmitAcknowledgementResponse : IEquatable<SubmitAcknowledgementResponse>, IValidatableObject
+    public partial class GetTransactionResponse : IEquatable<GetTransactionResponse>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubmitAcknowledgementResponse" /> class.
+        /// Initializes a new instance of the <see cref="GetTransactionResponse" /> class.
         /// </summary>
-        /// <param name="payload">The payload for the submitAcknowledgement operation..</param>
+        /// <param name="payload">The payload for the getTransactionResponse operation..</param>
         /// <param name="errors">errors.</param>
-        public SubmitAcknowledgementResponse(TransactionId payload = default(TransactionId), ErrorList errors = default(ErrorList))
+        public GetTransactionResponse(Transaction payload = default, ErrorList errors = default)
         {
-            this.Payload = payload;
-            this.Errors = errors;
+            Payload = payload;
+            Errors = errors;
         }
-        public SubmitAcknowledgementResponse()
+        public GetTransactionResponse()
         {
-            this.Payload = default(TransactionId);
-            this.Errors = default(ErrorList);
+            Payload = default;
+            Errors = default;
         }
         /// <summary>
-        /// The payload for the submitAcknowledgement operation.
+        /// The payload for the getTransactionResponse operation.
         /// </summary>
-        /// <value>The payload for the submitAcknowledgement operation.</value>
+        /// <value>The payload for the getTransactionResponse operation.</value>
         [DataMember(Name = "payload", EmitDefaultValue = false)]
-        public TransactionId Payload { get; set; }
+        public Transaction Payload { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
@@ -50,7 +48,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SubmitAcknowledgementResponse {\n");
+            sb.Append("class GetTransactionResponse {\n");
             sb.Append("  Payload: ").Append(Payload).Append("\n");
             sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("}\n");
@@ -73,29 +71,29 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SubmitAcknowledgementResponse);
+            return Equals(input as GetTransactionResponse);
         }
 
         /// <summary>
-        /// Returns true if SubmitAcknowledgementResponse instances are equal
+        /// Returns true if GetTransactionResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of SubmitAcknowledgementResponse to be compared</param>
+        /// <param name="input">Instance of GetTransactionResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SubmitAcknowledgementResponse input)
+        public bool Equals(GetTransactionResponse input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                    this.Payload == input.Payload ||
-                    (this.Payload != null &&
-                    this.Payload.Equals(input.Payload))
+                    Payload == input.Payload ||
+                    Payload != null &&
+                    Payload.Equals(input.Payload)
                 ) &&
                 (
-                    this.Errors == input.Errors ||
-                    (this.Errors != null &&
-                    this.Errors.Equals(input.Errors))
+                    Errors == input.Errors ||
+                    Errors != null &&
+                    Errors.Equals(input.Errors)
                 );
         }
 
@@ -108,10 +106,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Payload != null)
-                    hashCode = hashCode * 59 + this.Payload.GetHashCode();
-                if (this.Errors != null)
-                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
+                if (Payload != null)
+                    hashCode = hashCode * 59 + Payload.GetHashCode();
+                if (Errors != null)
+                    hashCode = hashCode * 59 + Errors.GetHashCode();
                 return hashCode;
             }
         }
@@ -121,9 +119,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }
+
     }
+
 }

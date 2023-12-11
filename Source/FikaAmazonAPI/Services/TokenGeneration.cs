@@ -22,7 +22,7 @@ namespace FikaAmazonAPI.Services
             {
                 ClientId = credentials.ClientId,
                 ClientSecret = credentials.ClientSecret,
-                Endpoint = new Uri(Constants.AmazonToeknEndPoint),
+                Endpoint = new Uri(Constants.AmazonTokenEndPoint),
                 RefreshToken = credentials.RefreshToken,
                 Scopes = null
             };

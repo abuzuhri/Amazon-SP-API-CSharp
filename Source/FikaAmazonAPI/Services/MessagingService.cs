@@ -195,7 +195,7 @@ namespace FikaAmazonAPI.Services
         }
 
         public bool SendInvoice(string amazonOrderId, InvoiceRequest invoiceRequest) =>
-    Task.Run(() => SendInvoiceAsync(amazonOrderId, invoiceRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            Task.Run(() => SendInvoiceAsync(amazonOrderId, invoiceRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> SendInvoiceAsync(string amazonOrderId, InvoiceRequest invoiceRequest, CancellationToken cancellationToken = default)
         {
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();

@@ -52,7 +52,6 @@ namespace FikaAmazonAPI.Services
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
         }
 
-
         private void CreateRequest(string url, RestSharp.Method method)
         {
             if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
@@ -104,7 +103,6 @@ namespace FikaAmazonAPI.Services
             }
             AddAccessToken();
         }
-
 
         /// <summary>
         /// Executes the request

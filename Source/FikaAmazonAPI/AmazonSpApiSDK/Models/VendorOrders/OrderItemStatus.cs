@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public OrderItemStatus() { }
         public OrderItemStatus(
             string itemSequenceNumber = default(string), string buyerProductIdentifier = default(string), string vendorProductIdentifier = default(string), Money netCost = default(Money), Money listPrice = default(Money), 
-            orderedQuantity orderedQuantity = default(orderedQuantity), acknowledgementStatus acknowledgementStatus = default(acknowledgementStatus)
+            orderedQuantity orderedQuantity = default(orderedQuantity), AcknowledgementStatus acknowledgementStatus = default(AcknowledgementStatus)
         )
         {
             if (itemSequenceNumber == null)
@@ -57,7 +57,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public orderedQuantity OrderedQuantity { get; set; }
 
         [DataMember(Name = "acknowledgementStatus", EmitDefaultValue = false)]
-        public acknowledgementStatus AcknowledgementStatus { get; set; }
+        public AcknowledgementStatus AcknowledgementStatus { get; set; }
 
         [DataMember(Name = "receivingStatus", EmitDefaultValue = false)]
         public receivingStatus ReceivingStatus { get; set; }

@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         {
             ReportContent = reportContent;
         }
-    } 
+    }
 
     public class ExceptionResponse
     {
