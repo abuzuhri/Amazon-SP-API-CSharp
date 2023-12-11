@@ -152,12 +152,13 @@ namespace FikaAmazonAPI
         {
             if (Credentials == null)
                 throw new AmazonUnauthorizedException($"Error, you cannot make calls to Amazon without credentials!");
-            else if (string.IsNullOrEmpty(Credentials.AccessKey))
-                throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
-            else if (string.IsNullOrEmpty(Credentials.SecretKey))
-                throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
-            else if (string.IsNullOrEmpty(Credentials.RoleArn))
-                throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
+            //Remove AWS authorization
+            //else if (string.IsNullOrEmpty(Credentials.AccessKey))
+            //    throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
+            //else if (string.IsNullOrEmpty(Credentials.SecretKey))
+            //    throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
+            //else if (string.IsNullOrEmpty(Credentials.RoleArn))
+            //    throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientId))
                 throw new AmazonInvalidInputException($"InvalidInput, ClientId cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientSecret))

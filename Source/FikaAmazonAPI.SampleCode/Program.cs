@@ -17,9 +17,9 @@ namespace FikaAmazonAPI.SampleCode
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
-                AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
-                SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
-                RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
+                //AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
+                //SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
+                //RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
                 ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
@@ -29,8 +29,8 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
-            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            //feedsSample.SubmitFeedPRICING(69.3F, "8809606851663");
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            feedsSample.SubmitFeedPRICING(69.3F, "8809606851663");
 
             var feeds = amazonConnection.Feed.GetFeeds(new Parameter.Feed.ParameterGetFeed()
             {

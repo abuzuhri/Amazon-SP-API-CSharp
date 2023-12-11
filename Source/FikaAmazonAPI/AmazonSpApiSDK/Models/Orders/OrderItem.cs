@@ -85,7 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// Enum JE_VOEC for value: JE_VOEC
             /// </summary>
             [EnumMember(Value = "JE_VOEC")]
-            JE_VOEC
+            JE_VOEC = 9
         }
 
         /// <summary>
