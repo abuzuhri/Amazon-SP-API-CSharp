@@ -53,7 +53,26 @@ namespace FikaAmazonAPI.Services
 
             return list;
         }
+        public String GetCatalogItemJson(string asin) =>
+            Task.Run(() => GetCatalogItemAsyncJson(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        public async Task<String> GetCatalogItemAsyncJson(string asin)
+        {
+
+            if (string.IsNullOrEmpty(asin))
+                throw new InvalidDataException("asin is a required property and cannot be null");
+
+            var param = new List<KeyValuePair<string, string>>();
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
+
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.Get, param);
+            var response = await ExecuteRequestAsync<GetCatalogItemResponse>(RateLimitType.CatalogItems_GetCatalogItem);
+
+            if (response != null && response.Payload != null)
+                return response.Payload.ToJson();
+
+            return null;
+        }
         [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public Item GetCatalogItem(string asin) =>
