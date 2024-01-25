@@ -864,6 +864,12 @@ namespace FikaAmazonAPI.ConstructFeed
             /// </summary>
             [EnumMember(Value = "EGP")]
             EGP,
+
+            /// <summary>
+            /// Enum ZAR for value: ZAR
+            /// </summary>
+            [EnumMember(Value = "ZAR")]
+            ZAR,
         }
 
         /// <remarks/>
