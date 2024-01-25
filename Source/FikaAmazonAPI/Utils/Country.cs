@@ -45,7 +45,6 @@
         public static Country AU { get { return new Country("AU", "Australia", "com.au", "https://sellercentral.amazon.com.au", "https://vendorcentral.amazon.com.au"); } }
         public static Country JP { get { return new Country("JP", "Japan", "co.jp", "https://sellercentral.amazon.co.jp", "https://vendorcentral.amazon.co.jp"); } }
 
-
-
+        public static Country ZA { get { return new Country("ZA", "South Africa", "co.za", "https://sellercentral.amazon.co.za", "https://vendorcentral.amazon.co.za"); } }
     }
 }
