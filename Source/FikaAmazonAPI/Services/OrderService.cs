@@ -6,6 +6,9 @@ using FikaAmazonAPI.Search;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using RestSharp;
+using FikaAmazonAPI.AmazonSpApiSDK.Services;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
@@ -140,10 +143,17 @@ namespace FikaAmazonAPI.Services
        
         public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", searchOrderList.MarketplaceIds)));
 
+            var parameterOrderList = new ParameterOrderList
+            {
+                MarketplaceIds = searchOrderList.MarketplaceIds,
+                NextToken = nextToken,
+                IsNeedRestrictedDataToken = searchOrderList.IsNeedRestrictedDataToken,
+                RestrictedDataTokenRequest = searchOrderList.RestrictedDataTokenRequest 
+            };
+
+            List<KeyValuePair<string, string>> queryParameters = parameterOrderList.getParameters();
+           
             await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters);
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
             return response.Payload;
