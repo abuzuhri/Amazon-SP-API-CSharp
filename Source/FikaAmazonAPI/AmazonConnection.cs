@@ -92,7 +92,7 @@ namespace FikaAmazonAPI
         {
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
-            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
         }
 
         private void Authenticate(AmazonCredential Credentials)
