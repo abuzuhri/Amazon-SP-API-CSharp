@@ -6,9 +6,6 @@ using FikaAmazonAPI.Search;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using RestSharp;
-using FikaAmazonAPI.AmazonSpApiSDK.Services;
-using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
