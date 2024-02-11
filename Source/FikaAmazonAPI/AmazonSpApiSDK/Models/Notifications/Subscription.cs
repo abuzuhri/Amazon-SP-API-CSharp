@@ -1,7 +1,7 @@
 /* 
  * Selling Partner API for Notifications
  *
- * The Selling Partner API for Notifications lets you subscribe to notifications that are relevant to a selling partner's business. Using this API you can create a destination to receive notifications, subscribe to notifications, delete notification subscriptions, and more.  For more information, see the [Notifications Use Case Guide](doc:notifications-api-v1-use-case-guide).
+ * The Selling Partner API for Notifications lets you subscribe to notifications that are relevant to a selling partner's business. Using this API you can create a destination to receive notifications, subscribe to notifications, delete notification subscriptions, and more.
  *
  * OpenAPI spec version: v1
  * 
@@ -32,40 +32,38 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// <summary>
         /// Initializes a new instance of the <see cref="Subscription" /> class.
         /// </summary>
-        /// <param name="subscriptionId">The subscription identifier generated when the subscription is created. (required).</param>
-        /// <param name="payloadVersion">The version of the payload object to be used in the notification. (required).</param>
-        /// <param name="destinationId">The identifier for the destination where notifications will be delivered. (required).</param>
-        /// <param name="processingDirective">processingDirective.</param>
-        public Subscription(string subscriptionId = default(string), string payloadVersion = default(string), string destinationId = default(string), ProcessingDirective processingDirective = default(ProcessingDirective))
+        /// <param name="SubscriptionId">The subscription identifier generated when the subscription is created. (required).</param>
+        /// <param name="PayloadVersion">The version of the payload object to be used in the notification. (required).</param>
+        /// <param name="DestinationId">The identifier for the destination where notifications will be delivered. (required).</param>
+        public Subscription(string SubscriptionId = default(string), string PayloadVersion = default(string), string DestinationId = default(string))
         {
-            // to ensure "subscriptionId" is required (not null)
-            if (subscriptionId == null)
+            // to ensure "SubscriptionId" is required (not null)
+            if (SubscriptionId == null)
             {
-                throw new InvalidDataException("subscriptionId is a required property for Subscription and cannot be null");
+                throw new InvalidDataException("SubscriptionId is a required property for Subscription and cannot be null");
             }
             else
             {
-                this.SubscriptionId = subscriptionId;
+                this.SubscriptionId = SubscriptionId;
             }
-            // to ensure "payloadVersion" is required (not null)
-            if (payloadVersion == null)
+            // to ensure "PayloadVersion" is required (not null)
+            if (PayloadVersion == null)
             {
-                throw new InvalidDataException("payloadVersion is a required property for Subscription and cannot be null");
+                throw new InvalidDataException("PayloadVersion is a required property for Subscription and cannot be null");
             }
             else
             {
-                this.PayloadVersion = payloadVersion;
+                this.PayloadVersion = PayloadVersion;
             }
-            // to ensure "destinationId" is required (not null)
-            if (destinationId == null)
+            // to ensure "DestinationId" is required (not null)
+            if (DestinationId == null)
             {
-                throw new InvalidDataException("destinationId is a required property for Subscription and cannot be null");
+                throw new InvalidDataException("DestinationId is a required property for Subscription and cannot be null");
             }
             else
             {
-                this.DestinationId = destinationId;
+                this.DestinationId = DestinationId;
             }
-            this.ProcessingDirective = processingDirective;
         }
 
         /// <summary>
@@ -90,12 +88,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         public string DestinationId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ProcessingDirective
-        /// </summary>
-        [DataMember(Name = "processingDirective", EmitDefaultValue = false)]
-        public ProcessingDirective ProcessingDirective { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -106,7 +98,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
             sb.Append("  SubscriptionId: ").Append(SubscriptionId).Append("\n");
             sb.Append("  PayloadVersion: ").Append(PayloadVersion).Append("\n");
             sb.Append("  DestinationId: ").Append(DestinationId).Append("\n");
-            sb.Append("  ProcessingDirective: ").Append(ProcessingDirective).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +106,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -155,11 +146,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
                     this.DestinationId == input.DestinationId ||
                     (this.DestinationId != null &&
                     this.DestinationId.Equals(input.DestinationId))
-                ) &&
-                (
-                    this.ProcessingDirective == input.ProcessingDirective ||
-                    (this.ProcessingDirective != null &&
-                    this.ProcessingDirective.Equals(input.ProcessingDirective))
                 );
         }
 
@@ -178,8 +164,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
                     hashCode = hashCode * 59 + this.PayloadVersion.GetHashCode();
                 if (this.DestinationId != null)
                     hashCode = hashCode * 59 + this.DestinationId.GetHashCode();
-                if (this.ProcessingDirective != null)
-                    hashCode = hashCode * 59 + this.ProcessingDirective.GetHashCode();
                 return hashCode;
             }
         }

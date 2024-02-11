@@ -10,8 +10,9 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
+using System;
 using FikaAmazonAPI.Utils;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
 {
@@ -36,6 +37,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// </summary>
         [EnumMember(Value = "centimeters")]
         Centimeters = 2
+    
     }
 
 }

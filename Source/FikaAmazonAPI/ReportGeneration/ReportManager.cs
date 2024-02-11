@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using static FikaAmazonAPI.Utils.Constants;
-using System.Threading;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -69,28 +68,28 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region ReturnFBAOrder
-        public List<ReturnFBAOrderRow> GetReturnFBAOrder(int days, List<MarketPlace> marketplaces = null) =>
-            Task.Run(() => GetReturnFBAOrderAsync(days, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(int days, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
+        public List<ReturnFBAOrderRow> GetReturnFBAOrder(int days) =>
+            Task.Run(() => GetReturnFBAOrderAsync(days)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(int days)
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-1 * days);
             DateTime toDate = DateTime.UtcNow;
-            return await GetReturnFBAOrderAsync(fromDate, toDate, marketplaces, cancellationToken);
+            return await GetReturnFBAOrderAsync(fromDate, toDate);
         }
 
-        public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null) =>
-            Task.Run(() => GetReturnFBAOrderAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
+        public List<ReturnFBAOrderRow> GetReturnFBAOrder(DateTime fromDate, DateTime toDate) =>
+            Task.Run(() => GetReturnFBAOrderAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate)
         {
-            var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate, marketplaces, cancellationToken);
+            var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate);
             ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, _amazonConnection.RefNumber);
 
             return report.Data;
         }
 
-        private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
+        private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate, marketplaces: marketplaces,  cancellationToken: cancellationToken);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate);
         }
 
 
@@ -186,20 +185,20 @@ namespace FikaAmazonAPI.ReportGeneration
         #endregion
 
         #region Products
-        public List<ProductsRow> GetProducts(List<MarketPlace> marketplaces = null) =>
-            Task.Run(() => GetProductsAsync(marketplaces)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<ProductsRow>> GetProductsAsync(List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
+        public List<ProductsRow> GetProducts() =>
+            Task.Run(() => GetProductsAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<ProductsRow>> GetProductsAsync()
         {
-            var path = await GetProductsAsync(_amazonConnection, marketplaces, cancellationToken);
-            ProductsReport report = new ProductsReport(path);
+            var path = await GetProductsAsync(_amazonConnection);
+            ProductsReport report = new ProductsReport(path, _amazonConnection.RefNumber);
             return report.Data;
         }
-        private async Task<string> GetProductsAsync(AmazonConnection amazonConnection, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
+        private async Task<string> GetProductsAsync(AmazonConnection amazonConnection)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA, marketplaces: marketplaces, cancellationToken: cancellationToken);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA);
         }
         #endregion
-
+    
         #region Categories
 
         public List<CategoriesRow> GetCategories()

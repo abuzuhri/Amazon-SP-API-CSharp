@@ -99,19 +99,19 @@ namespace FikaAmazonAPI.SampleCode
         /// <summary>
         /// UnderTest
         /// </summary>
-        public void SubmitFeedAddProductMessage(string ASIN, string SKU)
+        public void SubmitFeedAddProductMessage()
         {
-            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
 
             var list = new List<ProductMessage>();
             list.Add(new ProductMessage()
             {
-                SKU = SKU,
+                SKU = "8432225129778...",
 
                 StandardProductID = new ConstructFeed.Messages.StandardProductID()
                 {
                     Type = "ASIN",
-                    Value = ASIN
+                    Value = "B00M9B66BU"
                 }
             });
             createDocument.AddProductMessage(list, OperationType.Update);
@@ -155,10 +155,10 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public void SubmitFeedPRICING(double PRICE, string SKU)
+        public async void SubmitFeedPRICING(double PRICE, string SKU)
         {
 
-            ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
+            ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
 
             var list = new List<PriceMessage>();
             list.Add(new PriceMessage()
@@ -174,7 +174,7 @@ namespace FikaAmazonAPI.SampleCode
 
             var xml = createDocument.GetXML();
 
-            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
+            var feedID = await amazonConnection.Feed.SubmitFeedAsync(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
 
@@ -380,25 +380,7 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public void SubmitFeedEasyShipDocument()
-        {
-            ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
-            var list = new List<EasyShipDocumentMessage>();
-            list.Add(new EasyShipDocumentMessage()
-            {
-                AmazonOrderID = "AMZ1234567890123",
-                DocumentTypes = new List<EasyShipDocumentType>() {
-                    EasyShipDocumentType.ShippingLabel
-                }
-            });
-            createDocument.AddEasyShipDocumentMessage(list);
-            var xml = createDocument.GetXML();
-
-            var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_EASYSHIP_DOCUMENTS);
-            GetFeedDetails(feedID);
-        }
-
-        public void GetFeedDetails(string feedID)
+        private void GetFeedDetails(string feedID)
         {
             string ResultFeedDocumentId = string.Empty;
             while (string.IsNullOrEmpty(ResultFeedDocumentId))

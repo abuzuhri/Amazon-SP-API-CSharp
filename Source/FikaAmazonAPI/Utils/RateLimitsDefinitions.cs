@@ -172,7 +172,7 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.ProductPricing_GetListingOffers,                new RateLimits(1M, 2) },
               { RateLimitType.ProductPricing_GetItemOffers,                   new RateLimits(0.5M, 1) },
 
-              { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.1M, 1) },
+              { RateLimitType.ProductPricing_GetItemOffersBatch,                   new RateLimits(0.5M, 1) },
               { RateLimitType.ProductPricing_GetListingOffersBatch,                   new RateLimits(0.5M, 1) },
 
               { RateLimitType.Sales_GetOrderMetrics,                          new RateLimits(0.5M, 15) },
@@ -192,8 +192,6 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.VendorOrdersV1_GetPurchaseOrder,          new RateLimits(10.0M, 10) },
               { RateLimitType.VendorOrdersV1_SubmitAcknowledgement,     new RateLimits(10.0M, 10) },
               { RateLimitType.VendorOrdersV1_GetPurchaseOrdersStatus,   new RateLimits(10.0M, 10) },
-
-              { RateLimitType.VendorTransactionStatus_GetTransaction,     new RateLimits(10.0M, 10) },
             };
         }
     }

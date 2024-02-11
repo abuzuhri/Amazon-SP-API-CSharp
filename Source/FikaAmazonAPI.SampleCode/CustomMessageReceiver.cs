@@ -1,5 +1,11 @@
-﻿using FikaAmazonAPI.NotificationMessages;
+﻿using Amazon;
+using FikaAmazonAPI.NotificationMessages;
 using FikaAmazonAPI.Parameter.Notification;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -13,7 +19,6 @@ namespace FikaAmazonAPI.SampleCode
 
         public void NewMessageRevicedTriger(NotificationMessageResponce message)
         {
-            Console.Write(".");
             //Your Code here
         }
     }

@@ -24,7 +24,7 @@ namespace FikaAmazonAPI
         public string MarketPlaceID { get; set; }
         public string SellerID { get; set; }
         public string ProxyAddress { get; set; }
-        public static bool DebugMode { get; set; }
+
         public AmazonCredential()
         {
             CacheTokenData = new CacheTokenData();

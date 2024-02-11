@@ -94,15 +94,9 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetReportsByNextTokenAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetReportsResponseV00> GetReportsByNextTokenAsync(ParameterReportList parameterReportList, CancellationToken cancellationToken = default)
         {
-	    List<KeyValuePair<string, string>> parameters = null;
-	    if(string.IsNullOrEmpty(parameterReportList.nextToken))
-                parameters = parameterReportList.getParameters();
-	    else
-            {
-                var parameterReportListNew = new ParameterReportList();
-                parameterReportListNew.nextToken = parameterReportList.nextToken;
-                parameters = parameterReportListNew.getParameters();
-            }
+            var parameterReportListNew = new ParameterReportList();
+            parameterReportListNew.nextToken = parameterReportList.nextToken;
+            var parameters = parameterReportListNew.getParameters();
 
             await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.Get, parameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetReportsResponseV00>(RateLimitType.Report_GetReports, cancellationToken);
@@ -291,7 +285,7 @@ namespace FikaAmazonAPI.Services
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            if (marketplaces == null || marketplaces.Count() == 0)
+            if (marketplaces == null)
             {
                 parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }

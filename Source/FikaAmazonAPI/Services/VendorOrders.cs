@@ -1,5 +1,4 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions;
 using FikaAmazonAPI.Parameter.VendorOrders;
 using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
@@ -14,6 +13,7 @@ namespace FikaAmazonAPI.Services
         {
 
         }
+
 
         public List<Order> GetPurchaseOrders(ParameterVendorOrdersGetPurchaseOrders searchOrderList) =>
             Task.Run(() => GetPurchaseOrdersAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -70,5 +70,6 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
+
     }
 }

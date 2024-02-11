@@ -1,6 +1,7 @@
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
@@ -52,13 +54,12 @@ namespace FikaAmazonAPI.Services
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
         }
 
+
         private void CreateRequest(string url, RestSharp.Method method)
         {
             if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
             {
-                var options = new RestClientOptions(ApiBaseUrl);
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
+                RequestClient = new RestClient(ApiBaseUrl);
             }
             else
             {
@@ -70,8 +71,7 @@ namespace FikaAmazonAPI.Services
                     }
                 };
 
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
+                RequestClient = new RestClient(options);
             }
 
             Request = new RestRequest(url, method);
@@ -104,6 +104,7 @@ namespace FikaAmazonAPI.Services
             AddAccessToken();
         }
 
+
         /// <summary>
         /// Executes the request
         /// </summary>
@@ -115,8 +116,7 @@ namespace FikaAmazonAPI.Services
             AddAccessToken();
             AddShippingBusinessId();
 
-            //Remove AWS authorization
-            //Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
+            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
             var response = await RequestClient.ExecuteAsync<T>(Request, cancellationToken);
             LogRequest(Request, response);
             SaveLastRequestHeader(response.Headers);
@@ -125,7 +125,13 @@ namespace FikaAmazonAPI.Services
 
             if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
             {
-                response.Data = JsonConvert.DeserializeObject<T>(response.Content);
+
+                var settings = new JsonSerializerSettings()
+                {
+                    Converters = { new DateTimeConverter() }
+                };
+
+                response.Data = JsonConvert.DeserializeObject<T>(response.Content, settings);
             }
             return response.Data;
         }
@@ -179,8 +185,8 @@ namespace FikaAmazonAPI.Services
         {
             lock (Request)
             {
-                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
                 Request?.Parameters?.RemoveParameter(AccessTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(SecurityTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(ShippingBusinessIdHeaderName);
@@ -202,7 +208,7 @@ namespace FikaAmazonAPI.Services
                 {
                     return await ExecuteRequestTry<T>(rateLimitType, cancellationToken);
                 }
-                catch (AmazonQuotaExceededException ex)
+                catch (AmazonQuotaExceededException)
                 {
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
@@ -252,7 +258,7 @@ namespace FikaAmazonAPI.Services
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -260,7 +266,7 @@ namespace FikaAmazonAPI.Services
 
         protected void ParseResponse(RestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created)
                 return;
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -283,19 +289,12 @@ namespace FikaAmazonAPI.Services
                         case "InvalidSignature":
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":
-                            throw new AmazonInvalidInputException(error.Message, error.Details, response);
+                            throw new AmazonInvalidInputException(error.Message, response);
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
-                        case "InternalFailure":
-                            throw new AmazonInternalErrorException(error.Message, response);
                     }
 
                 }
-            }
-
-            if (response.StatusCode == HttpStatusCode.BadRequest)
-            {
-                throw new AmazonBadRequestException("BadRequest see https://developer-docs.amazon.com/sp-api/changelog/api-request-validation-for-400-errors-with-html-response for advice", response);
             }
 
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
@@ -313,9 +312,14 @@ namespace FikaAmazonAPI.Services
         }
         protected void AddJsonBody(object jsonData)
         {
-            var json = JsonConvert.SerializeObject(jsonData);
+            var settings = new JsonSerializerSettings()
+            {
+                Converters = { new DateTimeConverter() }
+            };
+            var json = JsonConvert.SerializeObject(jsonData, settings);
             Request.AddJsonBody(json);
         }
+
         protected void AddAccessToken()
         {
             lock (Request)
@@ -405,9 +409,41 @@ namespace FikaAmazonAPI.Services
         public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(cancellationToken: cancellationToken);
             return response;
         }
+    }
+
+    // Define a custom converter for the DateTime? property
+    public class DateTimeConverter : JsonConverter<DateTime?>
+    {
+        public override void WriteJson(JsonWriter writer, DateTime? value, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (value.HasValue)
+            {
+                writer.WriteValue(value.Value.ToString("yyyy-MM-dd"));
+            }
+            else
+            {
+                writer.WriteNull();
+            }
+        }
+
+        public override DateTime? ReadJson(JsonReader reader, Type objectType, DateTime? existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            var valueToParse = reader?.Value?.ToString();
+            if (DateTime.TryParse(valueToParse, out var dateTimeResult)) return dateTimeResult;
+            if (DateTime.TryParseExact(valueToParse, "ddd MMM dd HH:mm:ss 'GMT' yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTimeResult)) return dateTimeResult;
+
+
+            return reader.ReadAsDateTime();
+        }
+
     }
 
 }

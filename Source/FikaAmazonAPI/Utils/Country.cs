@@ -27,7 +27,7 @@
         public static Country ES { get { return new Country("ES", "Spain", "es", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.es"); } }
         public static Country GB { get { return new Country("GB", "United Kingdom", "co.uk", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.co.uk"); } }
         public static Country FR { get { return new Country("FR", "France", "fr", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.fr"); } }
-        public static Country BE { get { return new Country("BE", "Belgium", "com.be", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.eu"); } }
+        public static Country BE { get { return new Country("BE", "Belgium", "be", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.eu"); } }
         public static Country NL { get { return new Country("NL", "Netherlands", "nl", "https://sellercentral.amazon.nl", "https://vendorcentral.amazon.nl"); } }
         public static Country DE { get { return new Country("DE", "Germany", "de", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.de"); } }
         public static Country IT { get { return new Country("IT", "Italy", "it", "https://sellercentral-europe.amazon.com", "https://vendorcentral.amazon.it"); } }
@@ -45,6 +45,7 @@
         public static Country AU { get { return new Country("AU", "Australia", "com.au", "https://sellercentral.amazon.com.au", "https://vendorcentral.amazon.com.au"); } }
         public static Country JP { get { return new Country("JP", "Japan", "co.jp", "https://sellercentral.amazon.co.jp", "https://vendorcentral.amazon.co.jp"); } }
 
-        public static Country ZA { get { return new Country("ZA", "South Africa", "co.za", "https://sellercentral.amazon.co.za", "https://vendorcentral.amazon.co.za"); } }
+
+
     }
 }

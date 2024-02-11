@@ -12,7 +12,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         public bool? Available { get; set; }
         public InventoryLookup? Lookup { get; set; }
         public int? Quantity { get; set; }
-        [XmlElement(DataType = "date")]
+
         public DateTime? RestockDate { get; set; }
 
         public string FulfillmentLatency { get; set; }

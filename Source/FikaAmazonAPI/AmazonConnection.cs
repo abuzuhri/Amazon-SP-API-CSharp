@@ -2,8 +2,6 @@
 using FikaAmazonAPI.Services;
 using FikaAmazonAPI.Utils;
 using System;
-using System.Globalization;
-using System.Threading;
 
 namespace FikaAmazonAPI
 {
@@ -46,7 +44,6 @@ namespace FikaAmazonAPI
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
         public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
 
-        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;
 
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
@@ -83,16 +80,14 @@ namespace FikaAmazonAPI
         private FulFillmentOutboundService _FulFillmentOutbound { get; set; }
         private VendorDirectFulfillmentOrderService _VendorDirectFulfillmentOrders { get; set; }
         private VendorOrderService _VendorOrders { get; set; }
-        private VendorTransactionStatusService _VendorTransactionStatus { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null)
+        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null)
         {
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
-            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
         }
 
         private void Authenticate(AmazonCredential Credentials)
@@ -144,21 +139,17 @@ namespace FikaAmazonAPI
             this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
             this._VendorOrders = new VendorOrderService(this.Credentials);
-            this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials);
-
-            AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }
         private void ValidateCredentials(AmazonCredential Credentials)
         {
             if (Credentials == null)
                 throw new AmazonUnauthorizedException($"Error, you cannot make calls to Amazon without credentials!");
-            //Remove AWS authorization
-            //else if (string.IsNullOrEmpty(Credentials.AccessKey))
-            //    throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
-            //else if (string.IsNullOrEmpty(Credentials.SecretKey))
-            //    throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
-            //else if (string.IsNullOrEmpty(Credentials.RoleArn))
-            //    throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.AccessKey))
+                throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.SecretKey))
+                throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
+            else if (string.IsNullOrEmpty(Credentials.RoleArn))
+                throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientId))
                 throw new AmazonInvalidInputException($"InvalidInput, ClientId cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientSecret))

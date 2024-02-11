@@ -1,5 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications;
-using FikaAmazonAPI.Search;
+﻿using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Notification
@@ -9,7 +8,6 @@ namespace FikaAmazonAPI.Parameter.Notification
         public string payloadVersion { get; set; }
         public string destinationId { get; set; }
         public NotificationType notificationType { get; set; }
-        public ProcessingDirective processingDirective { get; set; }
 
     }
 }

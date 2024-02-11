@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Authorization;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {

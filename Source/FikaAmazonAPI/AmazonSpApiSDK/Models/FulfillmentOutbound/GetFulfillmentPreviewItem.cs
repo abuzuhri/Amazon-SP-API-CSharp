@@ -70,20 +70,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// The seller SKU of the item.
         /// </summary>
         /// <value>The seller SKU of the item.</value>
-        [DataMember(Name = "sellerSku", EmitDefaultValue = false)]
+        [DataMember(Name = "SellerSKU", EmitDefaultValue = false)]
         public string SellerSKU { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
-        [DataMember(Name = "quantity", EmitDefaultValue = false)]
+        [DataMember(Name = "Quantity", EmitDefaultValue = false)]
         public int Quantity { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier that the seller creates to track items in the fulfillment preview.
         /// </summary>
         /// <value>A fulfillment order item identifier that the seller creates to track items in the fulfillment preview.</value>
-        [DataMember(Name = "sellerFulfillmentOrderItemId", EmitDefaultValue = false)]
+        [DataMember(Name = "SellerFulfillmentOrderItemId", EmitDefaultValue = false)]
         public string SellerFulfillmentOrderItemId { get; set; }
 
         /// <summary>
