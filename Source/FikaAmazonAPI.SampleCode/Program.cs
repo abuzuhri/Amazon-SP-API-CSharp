@@ -28,18 +28,29 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             });
 
+            //var feedTypes = new ParameterGetFeed { feedTypes = { FeedType.POST_PRODUCT_PRICING_DATA }, processingStatuses = ProcessingStatuses.IN_PROGRESS };
 
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            feedsSample.SubmitFeedPRICING(69.3F, "8809606851663");
+            //var feeds = amazonConnection.Feed.GetFeeds(feedTypes);
+
+
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedPRICING(69.3F, "8809606851663");
 
             var feeds = amazonConnection.Feed.GetFeeds(new Parameter.Feed.ParameterGetFeed()
             {
-                processingStatuses = ProcessingStatuses.IN_QUEUE,
+                processingStatuses = ProcessingStatuses.IN_PROGRESS,//ProcessingStatuses.IN_QUEUE,
                 pageSize = 100,
                 feedTypes = new List<FeedType> { FeedType.POST_PRODUCT_PRICING_DATA },
                 marketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID }
             });
 
+            var feeds2 = amazonConnection.Feed.GetFeeds(new Parameter.Feed.ParameterGetFeed()
+            {
+                processingStatuses = ProcessingStatuses.IN_PROGRESS,//ProcessingStatuses.IN_PROGRESS,
+                pageSize = 100,
+                feedTypes = new List<FeedType> { FeedType.POST_INVENTORY_AVAILABILITY_DATA },
+                marketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID }
+            });
             foreach (var feed in feeds)
             {
                 Console.WriteLine("FeedId " + feed.FeedId);
