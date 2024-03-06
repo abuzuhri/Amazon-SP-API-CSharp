@@ -1,10 +1,10 @@
-﻿using FikaAmazonAPI.Utils;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
-using static FikaAmazonAPI.Utils.Constants;
 using System.Threading;
+using System.Threading.Tasks;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -90,7 +90,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate, marketplaces: marketplaces,  cancellationToken: cancellationToken);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate, marketplaces: marketplaces, cancellationToken: cancellationToken);
         }
 
 
@@ -343,5 +343,25 @@ namespace FikaAmazonAPI.ReportGeneration
             return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_INVENTORY_PLANNING_DATA);
         }
         #endregion
+
+        #region FbaEstimateFee
+        public List<FbaEstimateFeeReportRow> GetFbaEstimateFeeData(DateTime fromDate, DateTime toDate) =>
+            Task.Run(() => GetFbaEstimateFeeDataAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<FbaEstimateFeeReportRow>> GetFbaEstimateFeeDataAsync(DateTime fromDate, DateTime toDate)
+        {
+            List<FbaEstimateFeeReportRow> list = new List<FbaEstimateFeeReportRow>();
+
+            var path = await GetFbaEstimateFeeDataAsync(_amazonConnection, fromDate, toDate);
+            FbaEstimateFeeReport report = new FbaEstimateFeeReport(path, _amazonConnection.RefNumber);
+            list.AddRange(report.Data);
+
+            return list;
+        }
+        private async Task<string> GetFbaEstimateFeeDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_ESTIMATED_FBA_FEES_TXT_DATA, fromDate, toDate);
+        }
+        #endregion
+
     }
 }
