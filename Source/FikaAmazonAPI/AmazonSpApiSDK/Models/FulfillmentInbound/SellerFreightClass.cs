@@ -10,6 +10,8 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
@@ -19,8 +21,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
     /// </summary>
     /// <value>The freight class of the shipment. For information about determining the freight class, contact the carrier.</value>
 
-    [JsonConverter(typeof(StringEnumConverter))]
-
+    [JsonConverter(typeof(SellerFreightClassConverter))]
     public enum SellerFreightClass
     {
 
@@ -132,5 +133,72 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         [EnumMember(Value = "500")]
         _500 = 18
     }
+
+    public class SellerFreightClassConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType) => objectType == typeof(SellerFreightClass);
+
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        {
+            var value = reader.Value.ToString();
+            // Try direct parsing for decimal and integer values.
+            if (TryGetFromDecimalValue(value, out var result) || TryGetFromIntegerValue(value, out result))
+            {
+                return result;
+            }
+
+            throw new JsonSerializationException($"Unable to convert '{value}' to SellerFreightClass.");
+        }
+
+        private bool TryGetFromDecimalValue(string value, out SellerFreightClass result)
+        {
+            var enumType = typeof(SellerFreightClass);
+            var enumNames = Enum.GetNames(enumType);
+            var valueToCompare = decimal.Parse(value).ToString("###");
+            foreach (var name in enumNames)
+            {
+                var enumMemberAttribute = enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), false)
+                    .FirstOrDefault() as EnumMemberAttribute;
+
+                if (enumMemberAttribute?.Value == valueToCompare || enumMemberAttribute?.Value == value)
+                {
+                    result = (SellerFreightClass)Enum.Parse(enumType, name);
+                    return true;
+                }
+            }
+
+            result = default;
+            return false;
+        }
+
+        private bool TryGetFromIntegerValue(string value, out SellerFreightClass result)
+        {
+            var integerValue = (int)Math.Round(decimal.Parse(value));
+            foreach (SellerFreightClass enumValue in Enum.GetValues(typeof(SellerFreightClass)))
+            {
+                if (Convert.ToInt32(enumValue) == integerValue)
+                {
+                    result = enumValue;
+                    return true;
+                }
+            }
+
+            result = default;
+            return false;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var enumValue = (SellerFreightClass)value;
+            var enumType = enumValue.GetType();
+            var name = Enum.GetName(enumType, value);
+
+            var enumMemberAttribute = enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), false)
+                .FirstOrDefault() as EnumMemberAttribute;
+
+            writer.WriteValue(enumMemberAttribute?.Value ?? name);
+        }
+    }
+
 
 }
