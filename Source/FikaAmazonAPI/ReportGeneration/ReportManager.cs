@@ -363,5 +363,24 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
+
+        #region GetReferralFee
+        public List<ReferralFeeReportRow> GetReferralFeeReportData(DateTime fromDate, DateTime toDate) =>
+            Task.Run(() => GetReferralFeeReportDataAsync(fromDate, toDate)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<List<ReferralFeeReportRow>> GetReferralFeeReportDataAsync(DateTime fromDate, DateTime toDate)
+        {
+            List<ReferralFeeReportRow> list = new List<ReferralFeeReportRow>();
+
+            var path = await GetReferralFeeReportDataAsync(_amazonConnection, fromDate, toDate);
+            ReferralFeeReport report = new ReferralFeeReport(path, _amazonConnection.RefNumber);
+            list.AddRange(report.Data);
+
+            return list;
+        }
+        private async Task<string> GetReferralFeeReportDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_REFERRAL_FEE_PREVIEW_REPORT, fromDate, toDate);
+        }
+        #endregion
     }
 }
