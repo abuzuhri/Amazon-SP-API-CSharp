@@ -2,6 +2,7 @@
 using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
@@ -379,7 +380,23 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         private async Task<string> GetReferralFeeReportDataAsync(AmazonConnection amazonConnection, DateTime fromDate, DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_REFERRAL_FEE_PREVIEW_REPORT, fromDate, toDate);
+            var reportPath = await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_REFERRAL_FEE_PREVIEW_REPORT, fromDate, toDate);
+            if (reportPath == null)
+            {
+                var getOldReports = amazonConnection.Reports.GetReports(new Parameter.Report.ParameterReportList()
+                {
+                    reportTypes = new ReportTypes[] { ReportTypes.GET_REFERRAL_FEE_PREVIEW_REPORT },
+                    processingStatuses = new List<ProcessingStatuses> { ProcessingStatuses.DONE }
+                });
+
+                if (getOldReports != null && getOldReports.Count > 0)
+                {
+                    var reportId = getOldReports.FirstOrDefault().ReportId;
+                    return await amazonConnection.Reports.GetReportFileByReportIdAsync(reportId, false);
+
+                }
+            }
+            return reportPath;
         }
         #endregion
     }
