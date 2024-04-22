@@ -158,6 +158,20 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         #endregion
 
+
+        #region GetUnsuppressedInventoryData
+        public async Task<List<UnsuppressedInventoryDataRow>> GetUnsuppressedInventoryDataAsync()
+        {
+            var path = await GetUnsuppressedInventoryDatayAsync(_amazonConnection);
+            var report = new UnsuppressedInventoryDataReport(path, _amazonConnection.RefNumber);
+            return report.Data;
+        }
+        private async Task<string> GetUnsuppressedInventoryDatayAsync(AmazonConnection amazonConnection)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
+        }
+        #endregion
+
         #region GetInventoryQty
         public async Task<List<ProductAFNInventoryRow>> GetAFNInventoryQtyAsync()
         {
