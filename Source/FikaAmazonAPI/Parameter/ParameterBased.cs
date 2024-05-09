@@ -73,7 +73,7 @@ namespace FikaAmazonAPI.Search
 
                     var propName = p.Name;
 
-                    queryParameters.Add(new KeyValuePair<string, string>(propName.ToCamelCase(), output));
+                    queryParameters.Add(new KeyValuePair<string, string>(propName.FirstCharToLower(), output));
                 }
 
             }
