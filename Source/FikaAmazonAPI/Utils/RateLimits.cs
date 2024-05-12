@@ -79,9 +79,9 @@ namespace FikaAmazonAPI.Utils
             Rate = rate;
         }
 
-        internal void Delay()
+        internal Task Delay()
         {
-            Task.Delay(GetRatePeriodMs()).Wait();
+            return Task.Delay(GetRatePeriodMs());
         }
     }
 }
