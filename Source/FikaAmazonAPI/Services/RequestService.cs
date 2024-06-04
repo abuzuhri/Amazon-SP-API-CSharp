@@ -214,7 +214,7 @@ namespace FikaAmazonAPI.Services
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    AmazonCredential.UsagePlansTimings[rateLimitType].Delay();
+                    await AmazonCredential.UsagePlansTimings[rateLimitType].Delay();
                     tryCount++;
                 }
             }
