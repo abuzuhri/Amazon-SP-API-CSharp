@@ -114,7 +114,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ConfirmPlacementOption(string inboundPlanId, string placementOptionId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions/{placementOptionId}/confirmation";
             public static string GetShipment(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}";
             public static string GetDeliveryChallanDocument(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument";
-            public static string UpdateShipmentDeliveryWindow(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindow";
             public static string GetSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
             public static string GenerateSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
             public static string CancelSelfShipAppointment(string inboundPlanId, string shipmentId, string slotId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots/{slotId}/cancellation";
@@ -126,38 +125,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ListItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
             public static string UpdateItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
             public static string GetInboundOperationStatus(string operationId) => $"{_resourceBaseUrl}/operations/{operationId}";
-
-
-            
-            public static string GetInboundGuidance
-            {
-                get => $"{_resourceBaseUrl}/itemsGuidance";
-            }
-         
-            public static string UpdateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string CreateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string GetPreorderInfo(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder";
-            public static string ConfirmPreorder(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder/confirm";
-            public static string GetPrepInstructions
-            {
-                get => $"{_resourceBaseUrl}/prepInstructions";
-            }
-            public static string GetTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
-            public static string PutTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
-            public static string VoidTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/void";
-            public static string EstimateTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/estimate";
-            public static string ConfirmTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/confirm";
-            public static string GetLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/labels";
-            public static string GetBillOfLading(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/billOfLading";
-            public static string GetShipments
-            {
-                get => $"{_resourceBaseUrl}/shipments";
-            }
-            public static string GetShipmentItemsByShipmentId(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/items";
-            public static string GetShipmentItems
-            {
-                get => $"{_resourceBaseUrl}/shipmentItems";
-            }
         }
         protected class ShippingApiUrls
         {

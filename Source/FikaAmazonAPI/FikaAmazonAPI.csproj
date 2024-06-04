@@ -63,7 +63,7 @@
       <Options>/GenerateClientClasses:false</Options>
     </OpenApiReference>
     <OpenApiReference Include="OpenAPIs\fulfillmentInboundv2024-03-20.json" CodeGenerator="NSwagCSharp" Namespace="FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound" ClassName="FulfillmentInbound">
-      <SourceUri>https://raw.githubusercontent.com/amzn/selling-partner-api-models/main/models/fulfillment-inbound-api-model/fulfillmentInboundv2024-03-20.json</SourceUri>
+      <SourceUri>https://raw.githubusercontent.com/amzn/selling-partner-api-models/main/models/fulfillment-inbound-api-model/fulfillmentInbound_2024-03-20.json</SourceUri>
       <Options>/GenerateClientClasses:false</Options>
     </OpenApiReference>
   </ItemGroup>

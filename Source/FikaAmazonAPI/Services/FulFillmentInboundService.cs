@@ -1,9 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping;
 using FikaAmazonAPI.Parameter.FulFillmentInbound;
 using FikaAmazonAPI.Utils;
-using RestSharp;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -403,17 +400,6 @@ namespace FikaAmazonAPI.Services
         }
         #endregion
 
-        #region UpdateShipmentDeliveryWindow
-        public UpdateShipmentDeliveryWindowResponse UpdateShipmentDeliveryWindow(string inboundPlanId, string shipmentId, UpdateShipmentDeliveryWindowRequest updateShipmentDeliveryWindowRequest) =>
-        Task.Run(() => UpdateShipmentDeliveryWindowAsync(inboundPlanId, shipmentId, updateShipmentDeliveryWindowRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
-
-        public async Task<UpdateShipmentDeliveryWindowResponse> UpdateShipmentDeliveryWindowAsync(string inboundPlanId, string shipmentId, UpdateShipmentDeliveryWindowRequest updateShipmentDeliveryWindowRequest, CancellationToken cancellationToken = default)
-        {
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateShipmentDeliveryWindow(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: updateShipmentDeliveryWindowRequest, cancellationToken: cancellationToken);
-            return await ExecuteRequestAsync<UpdateShipmentDeliveryWindowResponse>(RateLimitType.FulFillmentInbound_UpdateShipmentDeliveryWindow, cancellationToken);
-        }
-        #endregion
-
         #region GetSelfShipAppointmentSlots
         public List<SelfShipAppointmentSlotsAvailability> GetSelfShipAppointmentSlots(string shipmentId, ParameterListInboundPlan parameterListInboundPlan) =>
         Task.Run(() => GetSelfShipAppointmentSlotsAsync(shipmentId, parameterListInboundPlan)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -482,7 +468,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<ScheduleSelfShipAppointmentResponse> ScheduleSelfShipAppointmentAsync(string inboundPlanId, string shipmentId, string slotId, ScheduleSelfShipAppointmentRequest scheduleSelfShipAppointmentRequest, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CancelSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Post, postJsonObj: scheduleSelfShipAppointmentRequest, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ScheduleSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Post, postJsonObj: scheduleSelfShipAppointmentRequest, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<ScheduleSelfShipAppointmentResponse>(RateLimitType.FulFillmentInbound_ScheduleSelfShipAppointment, cancellationToken);
         }
         #endregion
@@ -594,5 +580,24 @@ namespace FikaAmazonAPI.Services
             return await ExecuteRequestAsync<InboundOperationStatus>(RateLimitType.FulFillmentInbound_GetInboundOperationStatus, cancellationToken);
         }
         #endregion
+
+
+        // ToDo
+        // updateInboundPlanName
+        // listPackingGroupBoxes
+        // listShipmentBoxes
+        // listShipmentContentUpdatePreviews
+        // generateShipmentContentUpdatePreviews
+        // getShipmentContentUpdatePreview
+        // confirmShipmentContentUpdatePreview
+        // listDeliveryWindowOptions
+        // generateDeliveryWindowOptions
+        // confirmDeliveryWindowOptions
+        // listShipmentItems
+        // updateShipmentName
+        // listShipmentPallets
+        // updateShipmentSourceAddress
+        // createMarketplaceItemLabels
+
     }
 }
