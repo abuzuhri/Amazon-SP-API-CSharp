@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.SampleCode
             parameters.dataStartTime = DateTime.UtcNow.AddDays(-30);
             parameters.dataEndTime = DateTime.UtcNow.AddDays(-10);
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
             parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
@@ -85,7 +85,7 @@ namespace FikaAmazonAPI.SampleCode
             parameters.reportType = ReportTypes.GET_AFN_INVENTORY_DATA;
             parameters.period = FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.CreateReportScheduleSpecification.PeriodEnum.PT30M;
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
             parameters.reportOptions = new AmazonSpApiSDK.Models.Reports.ReportOptions();
@@ -125,7 +125,7 @@ namespace FikaAmazonAPI.SampleCode
             var parameters = new ParameterCreateReportSpecification();
             parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
             parameters.reportOptions = new FikaAmazonAPI.AmazonSpApiSDK.Models.Reports.ReportOptions();
@@ -155,7 +155,7 @@ namespace FikaAmazonAPI.SampleCode
             var parameters = new ParameterCreateReportSpecification();
             parameters.reportType = ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE;
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(MarketPlace.UnitedArabEmirates.ID);
 
 

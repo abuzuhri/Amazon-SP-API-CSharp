@@ -2,6 +2,7 @@
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using System;
+using System.Collections.Generic;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report
@@ -12,6 +13,6 @@ namespace FikaAmazonAPI.Parameter.Report
         public ReportTypes reportType { get; set; }
         public DateTime? dataStartTime { get; set; }
         public DateTime? dataEndTime { get; set; }
-        public MarketplaceIds marketplaceIds { get; set; }
+        public List<string> marketplaceIds { get; set; }
     }
 }

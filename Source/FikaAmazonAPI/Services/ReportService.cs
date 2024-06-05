@@ -115,7 +115,7 @@ namespace FikaAmazonAPI.Services
         {
             if (createReportSpecification.marketplaceIds == null || createReportSpecification.marketplaceIds.Count == 0)
             {
-                createReportSpecification.marketplaceIds = new MarketplaceIds();
+                createReportSpecification.marketplaceIds = new List<string>();
                 createReportSpecification.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
             await CreateAuthorizedRequestAsync(ReportApiUrls.CreateReport, RestSharp.Method.Post, null, createReportSpecification, cancellationToken: cancellationToken);
@@ -295,7 +295,7 @@ namespace FikaAmazonAPI.Services
             var parameters = new ParameterCreateReportSpecification();
             parameters.reportType = reportType;
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
 
             if (marketplaces == null || marketplaces.Count() == 0)
             {
@@ -355,7 +355,7 @@ namespace FikaAmazonAPI.Services
             parameters.reportTypes = new List<ReportTypes>();
             parameters.reportTypes.Add(reportTypes);
 
-            parameters.marketplaceIds = new MarketplaceIds();
+            parameters.marketplaceIds = new List<string>();
             parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
 
 
