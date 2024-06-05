@@ -111,7 +111,22 @@
         FulFillmentInbound_ListItemComplianceDetails,
         FulFillmentInbound_UpdateItemComplianceDetails,
         FulFillmentInbound_GetInboundOperationStatus,
-       
+        FulFillmentInbound_UpdateInboundPlanName,
+        FulFillmentInbound_UpdateShipmentName,
+        FulFillmentInbound_GenerateShipmentContentUpdatePreviews,
+        FulFillmentInbound_GetShipmentContentUpdatePreview,
+        FulFillmentInbound_ConfirmShipmentContentUpdatePreview,
+        FulFillmentInbound_ConfirmDeliveryWindowOptions,
+        FulFillmentInbound_GenerateDeliveryWindowOptions,
+        FulFillmentInbound_UpdateShipmentSourceAddress,
+        FulFillmentInbound_CreateMarketplaceItemLabels,
+        FulFillmentInbound_ListPackingGroupBoxes,
+        FulFillmentInbound_ListShipmentBoxes,
+        FulFillmentInbound_ListShipmentContentUpdatePreviews,
+        FulFillmentInbound_ListDeliveryWindowOptions,
+        FulFillmentInbound_ListShipmentItems,
+        FulFillmentInbound_ListShipmentPallets,
+
         FulFillmentOutbound_GetFulfillmentPreview,
         FulFillmentOutbound_ListAllFulfillmentOrders,
         FulFillmentOutbound_CreateFulfillmentOrder,
@@ -124,7 +139,7 @@
         FulFillmentOutbound_GetFeatures,
         FulFillmentOutbound_GetFeatureInventory,
         FulFillmentOutbound_GetFeatureSKU,
-
+        
         MerchantFulFillment_GetEligibleShipmentServicesOld,
         MerchantFulFillment_GetEligibleShipmentServices,
         MerchantFulFillment_GetShipment,

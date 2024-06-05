@@ -205,7 +205,7 @@ namespace FikaAmazonAPI.Services
             }
 
             return list;
-  
+
         }
 
         private async Task<ListPackingOptionsResponse> ListPackingOptionsAsyncByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
@@ -233,7 +233,7 @@ namespace FikaAmazonAPI.Services
 
         public async Task<ConfirmPackingOptionResponse> ConfirmPackingOptionAsync(ParameterConfirmPackingOption parameterConfirmPackingOption, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmPackingOption(parameterConfirmPackingOption.InboundPlanId,parameterConfirmPackingOption.PackingOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmPackingOption(parameterConfirmPackingOption.InboundPlanId, parameterConfirmPackingOption.PackingOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<ConfirmPackingOptionResponse>(RateLimitType.FulFillmentInbound_ConfirmPackingOption, cancellationToken);
         }
         #endregion
@@ -246,7 +246,7 @@ namespace FikaAmazonAPI.Services
         {
             var parameter = parameterListPackingGroupItems.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupItems(parameterListPackingGroupItems.InboundPlanId, parameterListPackingGroupItems.PackingOptionId, parameterListPackingGroupItems.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
-      
+
             List<Item> list = new List<Item>();
 
             var response = await ExecuteRequestAsync<ListPackingGroupItemsResponse>(RateLimitType.FulFillmentInbound_ListPackingGroupItems, cancellationToken);
@@ -267,7 +267,7 @@ namespace FikaAmazonAPI.Services
             }
             return list;
         }
-        
+
 
         private async Task<ListPackingGroupItemsResponse> ListPackingGroupItemsAsyncByNextTokenAsync(ParameterListPackingGroupItems parameterListPackingGroupItems, CancellationToken cancellationToken = default)
         {
@@ -285,7 +285,7 @@ namespace FikaAmazonAPI.Services
         {
             var parameter = parameterListInboundPlan.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanPallets(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
-    
+
             List<Pallet> list = new List<Pallet>();
 
             var response = await ExecuteRequestAsync<ListInboundPlanPalletsResponse>(RateLimitType.FulFillmentInbound_ListInboundPlanPallets, cancellationToken);
@@ -325,7 +325,7 @@ namespace FikaAmazonAPI.Services
         {
             var parameter = parameterListInboundPlan.getParameters();
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPlacementOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
-   
+
             List<PlacementOption> list = new List<PlacementOption>();
 
             var response = await ExecuteRequestAsync<ListPlacementOptionsResponse>(RateLimitType.FulFillmentInbound_ListPlacementOptions, cancellationToken);
@@ -538,7 +538,7 @@ namespace FikaAmazonAPI.Services
         #region ConfirmTransportationOptions
         public ConfirmTransportationOptionsResponse ConfirmTransportationOptions(string inboundPlanId, ConfirmTransportationOptionsRequest confirmTransportationOptionsRequest) =>
         Task.Run(() => ConfirmTransportationOptionsAsync(inboundPlanId, confirmTransportationOptionsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
-        
+
         public async Task<ConfirmTransportationOptionsResponse> ConfirmTransportationOptionsAsync(string inboundPlanId, ConfirmTransportationOptionsRequest confirmTransportationOptionsRequest, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmTransportationOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: confirmTransportationOptionsRequest, cancellationToken: cancellationToken);
@@ -576,28 +576,368 @@ namespace FikaAmazonAPI.Services
 
         public async Task<InboundOperationStatus> GetInboundOperationStatusAsync(string operationId, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundOperationStatus(operationId), RestSharp.Method.Get,null, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundOperationStatus(operationId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<InboundOperationStatus>(RateLimitType.FulFillmentInbound_GetInboundOperationStatus, cancellationToken);
         }
         #endregion
 
+        #region UpdateInboundPlanName
+        public bool UpdateInboundPlanName(string inboundPlanId, UpdateInboundPlanNameRequest updateInboundPlanNameRequest) =>
+          Task.Run(() => UpdateInboundPlanNameAsync(inboundPlanId, updateInboundPlanNameRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        // ToDo
-        // updateInboundPlanName
-        // listPackingGroupBoxes
-        // listShipmentBoxes
-        // listShipmentContentUpdatePreviews
-        // generateShipmentContentUpdatePreviews
-        // getShipmentContentUpdatePreview
-        // confirmShipmentContentUpdatePreview
-        // listDeliveryWindowOptions
-        // generateDeliveryWindowOptions
-        // confirmDeliveryWindowOptions
-        // listShipmentItems
-        // updateShipmentName
-        // listShipmentPallets
-        // updateShipmentSourceAddress
-        // createMarketplaceItemLabels
+        public async Task<bool> UpdateInboundPlanNameAsync(string inboundPlanId, UpdateInboundPlanNameRequest updateInboundPlanNameRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateInboundPlanName(inboundPlanId), RestSharp.Method.Put, postJsonObj: updateInboundPlanNameRequest, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<object>(RateLimitType.FulFillmentInbound_UpdateInboundPlanName, cancellationToken);
+
+            return true;
+        }
+
+        #endregion
+
+        #region UpdateInboundPlanName
+        public bool UpdateShipmentName(string inboundPlanId, string shipmentId, UpdateShipmentNameRequest updateShipmentNameRequest) =>
+          Task.Run(() => UpdateShipmentNameAsync(inboundPlanId, shipmentId, updateShipmentNameRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<bool> UpdateShipmentNameAsync(string inboundPlanId, string shipmentId, UpdateShipmentNameRequest updateShipmentNameRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateShipmentName(inboundPlanId, shipmentId), RestSharp.Method.Put, postJsonObj: updateShipmentNameRequest, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<object>(RateLimitType.FulFillmentInbound_UpdateShipmentName, cancellationToken);
+
+            return true;
+        }
+
+        #endregion
+
+        #region GenerateShipmentContentUpdatePreviews
+        public GenerateShipmentContentUpdatePreviewsResponse GenerateShipmentContentUpdatePreviews(string inboundPlanId, string shipmentId, GenerateShipmentContentUpdatePreviewsRequest generateShipmentContentUpdatePreviewsRequest) =>
+          Task.Run(() => GenerateShipmentContentUpdatePreviewsAsync(inboundPlanId, shipmentId, generateShipmentContentUpdatePreviewsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GenerateShipmentContentUpdatePreviewsResponse> GenerateShipmentContentUpdatePreviewsAsync(string inboundPlanId, string shipmentId, GenerateShipmentContentUpdatePreviewsRequest generateShipmentContentUpdatePreviewsRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GenerateShipmentContentUpdatePreviews(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: generateShipmentContentUpdatePreviewsRequest, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<GenerateShipmentContentUpdatePreviewsResponse>(RateLimitType.FulFillmentInbound_GenerateShipmentContentUpdatePreviews, cancellationToken);
+        }
+        #endregion
+
+        #region GetShipmentContentUpdatePreview
+        public ContentUpdatePreview GetShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) =>
+          Task.Run(() => GetShipmentContentUpdatePreviewAsync(inboundPlanId, shipmentId, contentUpdatePreviewId)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ContentUpdatePreview> GetShipmentContentUpdatePreviewAsync(string inboundPlanId, string shipmentId, string contentUpdatePreviewId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipmentContentUpdatePreview(inboundPlanId, shipmentId, contentUpdatePreviewId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<ContentUpdatePreview>(RateLimitType.FulFillmentInbound_GetShipmentContentUpdatePreview, cancellationToken);
+        }
+
+        #endregion
+
+        #region ConfirmShipmentContentUpdatePreview
+        public ConfirmShipmentContentUpdatePreviewResponse ConfirmShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) =>
+          Task.Run(() => ConfirmShipmentContentUpdatePreviewAsync(inboundPlanId, shipmentId, contentUpdatePreviewId)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ConfirmShipmentContentUpdatePreviewResponse> ConfirmShipmentContentUpdatePreviewAsync(string inboundPlanId, string shipmentId, string contentUpdatePreviewId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmShipmentContentUpdatePreview(inboundPlanId, shipmentId, contentUpdatePreviewId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<ConfirmShipmentContentUpdatePreviewResponse>(RateLimitType.FulFillmentInbound_ConfirmShipmentContentUpdatePreview, cancellationToken);
+        }
+        #endregion
+
+        #region ConfirmDeliveryWindowOptions
+        public ConfirmDeliveryWindowOptionsResponse ConfirmDeliveryWindowOptions(string inboundPlanId, string shipmentId, string deliveryWindowOptionId) =>
+          Task.Run(() => ConfirmDeliveryWindowOptionsAsync(inboundPlanId, shipmentId, deliveryWindowOptionId)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ConfirmDeliveryWindowOptionsResponse> ConfirmDeliveryWindowOptionsAsync(string inboundPlanId, string shipmentId, string deliveryWindowOptionId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmDeliveryWindowOptions(inboundPlanId, shipmentId, deliveryWindowOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<ConfirmDeliveryWindowOptionsResponse>(RateLimitType.FulFillmentInbound_ConfirmDeliveryWindowOptions, cancellationToken);
+        }
+        #endregion
+
+        #region GenerateDeliveryWindowOptions
+        public GenerateDeliveryWindowOptionsResponse GenerateDeliveryWindowOptions(string inboundPlanId, string shipmentId) =>
+          Task.Run(() => GenerateDeliveryWindowOptionsAsync(inboundPlanId, shipmentId)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GenerateDeliveryWindowOptionsResponse> GenerateDeliveryWindowOptionsAsync(string inboundPlanId, string shipmentId, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GenerateDeliveryWindowOptions(inboundPlanId, shipmentId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<GenerateDeliveryWindowOptionsResponse>(RateLimitType.FulFillmentInbound_GenerateDeliveryWindowOptions, cancellationToken);
+        }
+        #endregion
+
+        #region UpdateShipmentSourceAddress
+        public UpdateShipmentSourceAddressResponse UpdateShipmentSourceAddress(string inboundPlanId, string shipmentId, UpdateShipmentSourceAddressRequest updateShipmentSourceAddressRequest) =>
+          Task.Run(() => UpdateShipmentSourceAddressAsync(inboundPlanId, shipmentId, updateShipmentSourceAddressRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<UpdateShipmentSourceAddressResponse> UpdateShipmentSourceAddressAsync(string inboundPlanId, string shipmentId, UpdateShipmentSourceAddressRequest updateShipmentSourceAddressRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateShipmentSourceAddress(inboundPlanId, shipmentId), RestSharp.Method.Put, postJsonObj: updateShipmentSourceAddressRequest, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<UpdateShipmentSourceAddressResponse>(RateLimitType.FulFillmentInbound_UpdateShipmentSourceAddress, cancellationToken);
+        }
+        #endregion
+
+        #region CreateMarketplaceItemLabels
+        public CreateMarketplaceItemLabelsResponse CreateMarketplaceItemLabels(CreateMarketplaceItemLabelsRequest updateShipmentSourceAddressRequest) =>
+          Task.Run(() => CreateMarketplaceItemLabelsAsync(updateShipmentSourceAddressRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<CreateMarketplaceItemLabelsResponse> CreateMarketplaceItemLabelsAsync(CreateMarketplaceItemLabelsRequest updateShipmentSourceAddressRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateMarketplaceItemLabels(), RestSharp.Method.Post, postJsonObj: updateShipmentSourceAddressRequest, cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<CreateMarketplaceItemLabelsResponse>(RateLimitType.FulFillmentInbound_CreateMarketplaceItemLabels, cancellationToken);
+        }
+        #endregion
+
+        #region ListPackingGroupBoxes
+        public List<Box> ListPackingGroupBoxes(ParameterListPackingGroupBoxes parameterListPackingGroupBoxes) =>
+        Task.Run(() => ListPackingGroupBoxesAsync(parameterListPackingGroupBoxes)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<List<Box>> ListPackingGroupBoxesAsync(ParameterListPackingGroupBoxes parameterListPackingGroupBoxes, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListPackingGroupBoxes.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupBoxes(parameterListPackingGroupBoxes.InboundPlanId, parameterListPackingGroupBoxes.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<Box> list = new List<Box>();
+
+            var response = await ExecuteRequestAsync<ListPackingGroupBoxesResponse>(RateLimitType.FulFillmentInbound_ListPackingGroupBoxes, cancellationToken);
+            list.AddRange(response.Boxes);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListPackingGroupBoxes.maxPages.HasValue || totalPages < parameterListPackingGroupBoxes.maxPages.Value))
+                {
+                    parameterListPackingGroupBoxes.PaginationToken = nextToken;
+                    var getItemNextPage = await ListPackingGroupBoxesByNextTokenAsync(parameterListPackingGroupBoxes, cancellationToken);
+                    list.AddRange(getItemNextPage.Boxes);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+
+        private async Task<ListPackingGroupBoxesResponse> ListPackingGroupBoxesByNextTokenAsync(ParameterListPackingGroupBoxes parameterListPackingGroupBoxes, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListPackingGroupBoxes.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupBoxes(parameterListPackingGroupBoxes.InboundPlanId, parameterListPackingGroupBoxes.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListPackingGroupBoxesResponse>(RateLimitType.FulFillmentInbound_ListPackingGroupBoxes, cancellationToken);
+        }
+        #endregion
+
+        #region ListShipmentBoxes
+        public List<Box> ListShipmentBoxes(ParameterListInboundPlanShipment parameterListInboundPlanShipment) =>
+        Task.Run(() => ListShipmentBoxesAsync(parameterListInboundPlanShipment)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        private async Task<ListShipmentBoxesResponse> ListShipmentBoxesByNextTokenAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupBoxes(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListShipmentBoxesResponse>(RateLimitType.FulFillmentInbound_ListShipmentBoxes, cancellationToken);
+        }
+
+        public async Task<List<Box>> ListShipmentBoxesAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupBoxes(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<Box> list = new List<Box>();
+
+            var response = await ExecuteRequestAsync<ListShipmentBoxesResponse>(RateLimitType.FulFillmentInbound_ListShipmentBoxes, cancellationToken);
+            list.AddRange(response.Boxes);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListInboundPlanShipment.maxPages.HasValue || totalPages < parameterListInboundPlanShipment.maxPages.Value))
+                {
+                    parameterListInboundPlanShipment.PaginationToken = nextToken;
+                    var getItemNextPage = await ListShipmentBoxesByNextTokenAsync(parameterListInboundPlanShipment, cancellationToken);
+                    list.AddRange(getItemNextPage.Boxes);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+
+        #endregion
+
+        #region ListShipmentContentUpdatePreviews
+        public List<ContentUpdatePreview> ListShipmentContentUpdatePreviews(ParameterListInboundPlanShipment parameterListInboundPlanShipment) =>
+        Task.Run(() => ListShipmentContentUpdatePreviewsAsync(parameterListInboundPlanShipment)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        private async Task<ListShipmentContentUpdatePreviewsResponse> ListShipmentContentUpdatePreviewsByNextTokenAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentContentUpdatePreviews(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListShipmentContentUpdatePreviewsResponse>(RateLimitType.FulFillmentInbound_ListShipmentContentUpdatePreviews, cancellationToken);
+        }
+
+        public async Task<List<ContentUpdatePreview>> ListShipmentContentUpdatePreviewsAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentContentUpdatePreviews(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<ContentUpdatePreview> list = new List<ContentUpdatePreview>();
+
+            var response = await ExecuteRequestAsync<ListShipmentContentUpdatePreviewsResponse>(RateLimitType.FulFillmentInbound_ListShipmentContentUpdatePreviews, cancellationToken);
+            list.AddRange(response.ContentUpdatePreviews);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListInboundPlanShipment.maxPages.HasValue || totalPages < parameterListInboundPlanShipment.maxPages.Value))
+                {
+                    parameterListInboundPlanShipment.PaginationToken = nextToken;
+                    var getItemNextPage = await ListShipmentContentUpdatePreviewsByNextTokenAsync(parameterListInboundPlanShipment, cancellationToken);
+                    list.AddRange(getItemNextPage.ContentUpdatePreviews);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+
+        #endregion
+
+        #region ListDeliveryWindowOptions
+        public List<DeliveryWindowOption> ListDeliveryWindowOptions(ParameterListInboundPlanShipment parameterListInboundPlanShipment) =>
+        Task.Run(() => ListDeliveryWindowOptionsAsync(parameterListInboundPlanShipment)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        private async Task<ListDeliveryWindowOptionsResponse> ListDeliveryWindowOptionsByNextTokenAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListDeliveryWindowOptions(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListDeliveryWindowOptionsResponse>(RateLimitType.FulFillmentInbound_ListDeliveryWindowOptions, cancellationToken);
+        }
+
+        public async Task<List<DeliveryWindowOption>> ListDeliveryWindowOptionsAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListDeliveryWindowOptions(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<DeliveryWindowOption> list = new List<DeliveryWindowOption>();
+
+            var response = await ExecuteRequestAsync<ListDeliveryWindowOptionsResponse>(RateLimitType.FulFillmentInbound_ListDeliveryWindowOptions, cancellationToken);
+            list.AddRange(response.DeliveryWindowOptions);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListInboundPlanShipment.maxPages.HasValue || totalPages < parameterListInboundPlanShipment.maxPages.Value))
+                {
+                    parameterListInboundPlanShipment.PaginationToken = nextToken;
+                    var getItemNextPage = await ListDeliveryWindowOptionsByNextTokenAsync(parameterListInboundPlanShipment, cancellationToken);
+                    list.AddRange(getItemNextPage.DeliveryWindowOptions);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+
+        #endregion
+
+        #region ListShipmentItems
+        public List<Item> ListShipmentItems(ParameterListInboundPlanShipment parameterListInboundPlanShipment) =>
+        Task.Run(() => ListShipmentItemsAsync(parameterListInboundPlanShipment)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        private async Task<ListShipmentItemsResponse> ListShipmentItemsByNextTokenAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentItems(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListShipmentItemsResponse>(RateLimitType.FulFillmentInbound_ListShipmentItems, cancellationToken);
+        }
+
+        public async Task<List<Item>> ListShipmentItemsAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentItems(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<Item> list = new List<Item>();
+
+            var response = await ExecuteRequestAsync<ListShipmentItemsResponse>(RateLimitType.FulFillmentInbound_ListShipmentItems, cancellationToken);
+            list.AddRange(response.Items);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListInboundPlanShipment.maxPages.HasValue || totalPages < parameterListInboundPlanShipment.maxPages.Value))
+                {
+                    parameterListInboundPlanShipment.PaginationToken = nextToken;
+                    var getItemNextPage = await ListShipmentItemsByNextTokenAsync(parameterListInboundPlanShipment, cancellationToken);
+                    list.AddRange(getItemNextPage.Items);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+        #endregion
+
+        #region ListShipmentPallets
+        public List<Pallet> ListShipmentPallets(ParameterListInboundPlanShipment parameterListInboundPlanShipment) =>
+        Task.Run(() => ListShipmentPalletsAsync(parameterListInboundPlanShipment)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        private async Task<ListShipmentPalletsResponse> ListShipmentPalletsByNextTokenAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentPallets(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ListShipmentPalletsResponse>(RateLimitType.FulFillmentInbound_ListShipmentPallets, cancellationToken);
+        }
+
+        public async Task<List<Pallet>> ListShipmentPalletsAsync(ParameterListInboundPlanShipment parameterListInboundPlanShipment, CancellationToken cancellationToken = default)
+        {
+            var parameter = parameterListInboundPlanShipment.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListShipmentPallets(parameterListInboundPlanShipment.InboundPlanId, parameterListInboundPlanShipment.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            List<Pallet> list = new List<Pallet>();
+
+            var response = await ExecuteRequestAsync<ListShipmentPalletsResponse>(RateLimitType.FulFillmentInbound_ListShipmentPallets, cancellationToken);
+            list.AddRange(response.Pallets);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterListInboundPlanShipment.maxPages.HasValue || totalPages < parameterListInboundPlanShipment.maxPages.Value))
+                {
+                    parameterListInboundPlanShipment.PaginationToken = nextToken;
+                    var getItemNextPage = await ListShipmentPalletsByNextTokenAsync(parameterListInboundPlanShipment, cancellationToken);
+                    list.AddRange(getItemNextPage.Pallets);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+
+        }
+        #endregion
 
     }
 }

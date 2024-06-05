@@ -113,6 +113,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GeneratePlacementOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions";
             public static string ConfirmPlacementOption(string inboundPlanId, string placementOptionId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions/{placementOptionId}/confirmation";
             public static string GetShipment(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}";
+            public static string UpdateShipmentName(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/name";
+            public static string GenerateShipmentContentUpdatePreviews(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews";
+            public static string GetShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}";
+            public static string ConfirmShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}/confirmation";
+            public static string ConfirmDeliveryWindowOptions(string inboundPlanId, string shipmentId, string deliveryWindowOptionId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions/{deliveryWindowOptionId}/confirmation";
+            public static string GenerateDeliveryWindowOptions(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions";
+            public static string UpdateShipmentSourceAddress(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/sourceAddress";
             public static string GetDeliveryChallanDocument(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument";
             public static string GetSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
             public static string GenerateSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
@@ -125,6 +132,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ListItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
             public static string UpdateItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
             public static string GetInboundOperationStatus(string operationId) => $"{_resourceBaseUrl}/operations/{operationId}";
+            public static string UpdateInboundPlanName(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/name";
+            public static string CreateMarketplaceItemLabels() => $"{_resourceBaseUrl}/items/labels";
+            public static string ListPackingGroupBoxes(string inboundPlanId, string packingGroupId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/boxes";
+            public static string ListShipmentBoxes(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/boxes";
+            public static string ListShipmentContentUpdatePreviews(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews";
+            public static string ListDeliveryWindowOptions(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions";
+            public static string ListShipmentItems(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/items";
+            public static string ListShipmentPallets(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/pallets";
+
         }
         protected class ShippingApiUrls
         {
