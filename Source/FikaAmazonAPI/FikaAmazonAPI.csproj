@@ -21,7 +21,7 @@
 	<Description>.Net C# library for the new Amazon Selling Partner API</Description>
 	<RepositoryType>git</RepositoryType>
 	<PackageIcon>icon.jpg</PackageIcon>
-	<TargetFramework>netstandard2.1</TargetFramework>
+	<TargetFramework>netstandard2.0</TargetFramework>
 	<UserSecretsId>2ff602c6-a213-4df0-88f2-cf1a1df95fbc</UserSecretsId>
     
   </PropertyGroup>
