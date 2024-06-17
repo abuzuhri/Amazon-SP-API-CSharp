@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Utils
             this.RequestsSent = 0;
         }
         private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
-        public RateLimits NextRate(RateLimitType rateLimitType)
+        public async Task<RateLimits> NextRate(RateLimitType rateLimitType)
         {
             if (RequestsSent < 0)
                 RequestsSent = 0;
@@ -61,7 +61,7 @@ namespace FikaAmazonAPI.Utils
                 LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
                 var TempLastRequest = LastRequest;
                 while (TempLastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
-                    Task.Delay(100).Wait();
+                    await Task.Delay(100);
 
             }
 

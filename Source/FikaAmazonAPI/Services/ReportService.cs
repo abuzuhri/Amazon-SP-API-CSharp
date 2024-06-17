@@ -297,7 +297,7 @@ namespace FikaAmazonAPI.Services
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            if (marketplaces == null || marketplaces.Count() == 0)
+            if (marketplaces == null || !marketplaces.Any())
             {
                 parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
@@ -324,7 +324,7 @@ namespace FikaAmazonAPI.Services
             var filePath = string.Empty;
             string ReportDocumentId = string.Empty;
 
-            while (string.IsNullOrEmpty(ReportDocumentId))
+            while (string.IsNullOrEmpty(ReportDocumentId) && !cancellationToken.IsCancellationRequested)
             {
                 var reportData = await GetReportAsync(reportId, cancellationToken);
                 if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
