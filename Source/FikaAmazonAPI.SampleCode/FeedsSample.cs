@@ -180,7 +180,7 @@ namespace FikaAmazonAPI.SampleCode
 
         }
 
-        public async void SubmitFeedPricingWithSalePrice(string sku, decimal price, decimal salePrice, DateTime startDate, DateTime endDate)
+        public async Task SubmitFeedPricingWithSalePrice(string sku, decimal price, decimal salePrice, DateTime startDate, DateTime endDate)
         {
             var currencyCode = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString();
 
