@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// Designates which fulfillment network will be used.
         /// </summary>
         /// <value>Designates which fulfillment network will be used.</value>
-        [DataMember(Name="fulfillmentChannelCode", EmitDefaultValue=false)]
+        [DataMember(Name="fulfillment_channel_code", EmitDefaultValue=false)]
         public string FulfillmentChannelCode { get; set; }
 
         /// <summary>
