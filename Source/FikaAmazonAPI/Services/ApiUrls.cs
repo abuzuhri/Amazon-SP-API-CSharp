@@ -119,6 +119,50 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipmentItems";
             }
+
+            #region V20240320
+
+            public static string GetListInboundPlans
+            {
+                get => $"{_resourceBaseUrl}/inboundPlans";
+            }
+            public static string CreateInboundPlan
+            {
+                get => $"{_resourceBaseUrl}/inboundPlans";
+            }
+
+            public static string GetInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}";
+            public static string ListInboundPlanBoxes(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/boxes";
+            public static string CancelInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/cancellation";
+            public static string ListInboundPlanItems(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/items";
+            public static string SetPackingInformation(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingInformation";
+            public static string ListPackingOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingOptions";
+            public static string GeneratePackingOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingOptions";
+            public static string ConfirmPackingOption(string inboundPlanId, string packingOptionId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingOptions/{packingOptionId}/confirmation";
+            public static string ListPackingGroupItems(string inboundPlanId, string packingOptionId, string packingGroupId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/packingOptions/{packingOptionId}/packingGroups/{packingGroupId}/items";
+            public static string ListInboundPlanPallets(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/pallets";
+            public static string ListPlacementOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions";
+            public static string GeneratePlacementOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions";
+            public static string ConfirmPlacementOption(string inboundPlanId, string placementOptionId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/placementOptions/{placementOptionId}/confirmation";
+            public static string GetShipment(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}";
+            public static string GetDeliveryChallanDocument(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument";
+            public static string UpdateShipmentDeliveryWindow(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindow";
+            public static string GetSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
+            public static string GenerateSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
+            public static string CancelSelfShipAppointment(string inboundPlanId, string shipmentId, string slotId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots/{slotId}/cancellation";
+            public static string ScheduleSelfShipAppointment(string inboundPlanId, string shipmentId, string slotId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots/{slotId}/schedule";
+            public static string UpdateShipmentTrackingDetails(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/trackingDetails";
+            public static string ListTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/transportationOptions";
+            public static string GenerateTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/transportationOptions";
+            public static string ConfirmTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/transportationOptions/confirmation";
+            public static string ListItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
+            public static string UpdateItemComplianceDetails() => $"{_resourceBaseUrl}/items/compliance";
+            public static string GetInboundOperationStatus(string operationId) => $"{_resourceBaseUrl}/operations/{operationId}";
+
+
+            #endregion
+
+
         }
         protected class ShippingApiUrls
         {
