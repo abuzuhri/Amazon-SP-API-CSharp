@@ -737,4 +737,28 @@ namespace FikaAmazonAPI.Utils
         //}
 
     }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum FullFillmentInboundPlanStatus
+    {
+        [EnumMember(Value = "ACTIVE")]
+        ACTIVE = 0,
+
+        [EnumMember(Value = "VOIDED")]
+        VOIDED = 1,
+
+        [EnumMember(Value = "SHIPPED")]
+        SHIPPED = 2,
+    }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum FullFillmentInboundSortBy
+    {
+        [EnumMember(Value = "LAST_UPDATED_TIME")]
+        LAST_UPDATED_TIME = 0,
+
+        [EnumMember(Value = "CREATION_TIME")]
+        CREATION_TIME = 1,
+
+    }
 }
