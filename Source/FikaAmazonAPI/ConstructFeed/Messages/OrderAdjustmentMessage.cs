@@ -47,6 +47,12 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
 
     public class AdjustmentBuyerPrice
     {
+        [XmlElement(ElementName = "Component")]
+        public List<AdjustmentBuyerPriceComponent> Component { get; set; }
+    }
+
+    public class AdjustmentBuyerPriceComponent
+    { 
         [XmlElement(ElementName = "Type")]
         public AdjustmentBuyerTypePrice BuyerPriceType { get; set; }
 
