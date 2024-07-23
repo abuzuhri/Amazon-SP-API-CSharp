@@ -42,6 +42,7 @@ namespace FikaAmazonAPI
         public UploadService Upload => this._Upload ?? throw _NoCredentials;
         public TokenService Tokens => this._Tokens ?? throw _NoCredentials;
         public FulFillmentInboundService FulFillmentInbound => this._FulFillmentInbound ?? throw _NoCredentials;
+        public FulFillmentInboundServicev20240320 FulFillmentInboundv20240320 => this._FulFillmentInboundv20240320 ?? throw _NoCredentials;
         public FulFillmentOutboundService FulFillmentOutbound => this._FulFillmentOutbound ?? throw _NoCredentials;
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
         public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
@@ -77,9 +78,9 @@ namespace FikaAmazonAPI
         private ShippingService _Shipping { get; set; }
         private ShippingServiceV2 _ShippingV2 { get; set; }
         private UploadService _Upload { get; set; }
-
         private TokenService _Tokens { get; set; }
         private FulFillmentInboundService _FulFillmentInbound { get; set; }
+        private FulFillmentInboundServicev20240320 _FulFillmentInboundv20240320 { get; set; }
         private FulFillmentOutboundService _FulFillmentOutbound { get; set; }
         private VendorDirectFulfillmentOrderService _VendorDirectFulfillmentOrders { get; set; }
         private VendorOrderService _VendorOrders { get; set; }
@@ -141,6 +142,7 @@ namespace FikaAmazonAPI
             this._Upload = new UploadService(this.Credentials);
             this._Tokens = new TokenService(this.Credentials);
             this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials);
+            this._FulFillmentInboundv20240320 = new FulFillmentInboundServicev20240320(this.Credentials);
             this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
             this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
             this._VendorOrders = new VendorOrderService(this.Credentials);
