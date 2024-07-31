@@ -21,7 +21,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<InboundPlanSummary>> GetListInboundPlansAsync(ParameterGetListInboundPlans parameterGetListInboundPlans, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterGetListInboundPlans.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetListInboundPlans, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetListInboundPlans, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<InboundPlanSummary> list = new List<InboundPlanSummary>();
 
@@ -49,7 +49,7 @@ namespace FikaAmazonAPI.Services
             {
                 var parameter = parameterGetListInboundPlans.getParameters();
 
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetListInboundPlans, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetListInboundPlans, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListInboundPlansResponse>(RateLimitType.FulFillmentInboundV20240320_GetListInboundPlans, cancellationToken);
             }
             #endregion
@@ -60,7 +60,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<CreateInboundPlanResponse> CreateInboundPlanAsync(CreateInboundPlanRequest createInboundPlanRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateInboundPlan, RestSharp.Method.Post, postJsonObj: createInboundPlanRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.CreateInboundPlan, RestSharp.Method.Post, postJsonObj: createInboundPlanRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<CreateInboundPlanResponse>(RateLimitType.FulFillmentInboundV20240320_CreateInboundPlan, cancellationToken);
             }
             #endregion
@@ -71,7 +71,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<InboundPlan> GetInboundPlanAsync(string inboundPlanId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundPlan(inboundPlanId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetInboundPlan(inboundPlanId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<InboundPlan>(RateLimitType.FulFillmentInboundV20240320_GetInboundPlan, cancellationToken);
             }
             #endregion
@@ -83,7 +83,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<Box>> ListInboundPlanBoxesAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanBoxes(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanBoxes(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<Box> list = new List<Box>();
 
@@ -110,7 +110,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListInboundPlanBoxesResponse> GetListInboundPlanBoxesByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanBoxes(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanBoxes(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListInboundPlanBoxesResponse>(RateLimitType.FulFillmentInboundV20240320_ListInboundPlanBoxes, cancellationToken);
             }
             #endregion
@@ -121,7 +121,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<CancelInboundPlanResponse> CancelInboundPlanAsync(string inboundPlanId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CancelInboundPlan(inboundPlanId), RestSharp.Method.Put, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.CancelInboundPlan(inboundPlanId), RestSharp.Method.Put, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<CancelInboundPlanResponse>(RateLimitType.FulFillmentInboundV20240320_CancelInboundPlan, cancellationToken);
             }
             #endregion
@@ -133,7 +133,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<Item>> ListInboundPlanItemsAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanItems(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanItems(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<Item> list = new List<Item>();
 
@@ -160,7 +160,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListInboundPlanItemsResponse> ListInboundPlanItemsByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanItems(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanItems(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListInboundPlanItemsResponse>(RateLimitType.FulFillmentInboundV20240320_ListInboundPlanItems, cancellationToken);
             }
             #endregion
@@ -171,7 +171,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<SetPackingInformationResponse> SetPackingInformationAsync(string inboundPlanId, SetPackingInformationRequest setPackingInformationRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPackingInformation(inboundPlanId), RestSharp.Method.Post, postJsonObj: setPackingInformationRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.SetPackingInformation(inboundPlanId), RestSharp.Method.Post, postJsonObj: setPackingInformationRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<SetPackingInformationResponse>(RateLimitType.FulFillmentInboundV20240320_SetPackingInformation, cancellationToken);
             }
             #endregion
@@ -183,7 +183,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<PackingOption>> ListPackingOptionsAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPackingOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<PackingOption> list = new List<PackingOption>();
 
@@ -211,7 +211,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListPackingOptionsResponse> ListPackingOptionsAsyncByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPackingOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListPackingOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPackingOptions, cancellationToken);
             }
             #endregion
@@ -222,7 +222,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<GeneratePackingOptionsResponse> GeneratePackingOptionsAsync(string inboundPlanId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GeneratePackingOptions(inboundPlanId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GeneratePackingOptions(inboundPlanId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GeneratePackingOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_GeneratePackingOptions, cancellationToken);
             }
             #endregion
@@ -233,7 +233,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<ConfirmPackingOptionResponse> ConfirmPackingOptionAsync(ParameterConfirmPackingOption parameterConfirmPackingOption, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmPackingOption(parameterConfirmPackingOption.InboundPlanId, parameterConfirmPackingOption.PackingOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ConfirmPackingOption(parameterConfirmPackingOption.InboundPlanId, parameterConfirmPackingOption.PackingOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ConfirmPackingOptionResponse>(RateLimitType.FulFillmentInboundV20240320_ConfirmPackingOption, cancellationToken);
             }
             #endregion
@@ -245,7 +245,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<Item>> ListPackingGroupItemsAsync(ParameterListPackingGroupItems parameterListPackingGroupItems, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListPackingGroupItems.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupItems(parameterListPackingGroupItems.InboundPlanId, parameterListPackingGroupItems.PackingOptionId, parameterListPackingGroupItems.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPackingGroupItems(parameterListPackingGroupItems.InboundPlanId, parameterListPackingGroupItems.PackingOptionId, parameterListPackingGroupItems.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<Item> list = new List<Item>();
 
@@ -272,7 +272,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListPackingGroupItemsResponse> ListPackingGroupItemsAsyncByNextTokenAsync(ParameterListPackingGroupItems parameterListPackingGroupItems, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListPackingGroupItems.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPackingGroupItems(parameterListPackingGroupItems.InboundPlanId, parameterListPackingGroupItems.PackingOptionId, parameterListPackingGroupItems.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPackingGroupItems(parameterListPackingGroupItems.InboundPlanId, parameterListPackingGroupItems.PackingOptionId, parameterListPackingGroupItems.PackingGroupId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListPackingGroupItemsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPackingGroupItems, cancellationToken);
             }
             #endregion
@@ -284,7 +284,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<Pallet>> ListInboundPlanPalletsAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanPallets(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanPallets(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<Pallet> list = new List<Pallet>();
 
@@ -312,7 +312,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListInboundPlanPalletsResponse> ListPackingGroupItemsAsyncByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListInboundPlanPallets(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListInboundPlanPallets(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListInboundPlanPalletsResponse>(RateLimitType.FulFillmentInboundV20240320_ListInboundPlanPallets, cancellationToken);
             }
             #endregion
@@ -324,7 +324,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<PlacementOption>> ListPlacementOptionsAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPlacementOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPlacementOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<PlacementOption> list = new List<PlacementOption>();
 
@@ -351,7 +351,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListPlacementOptionsResponse> ListPlacementOptionsAsyncByNextTokenAsync(ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPlacementOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListPlacementOptions(parameterListInboundPlan.InboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListPlacementOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPlacementOptions, cancellationToken);
             }
             #endregion
@@ -362,7 +362,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<GeneratePlacementOptionsResponse> GeneratePlacementOptionsAsync(string inboundPlanId, GeneratePlacementOptionsRequest generatePlacementOptionsRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GeneratePlacementOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: generatePlacementOptionsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GeneratePlacementOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: generatePlacementOptionsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GeneratePlacementOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_GeneratePlacementOptions, cancellationToken);
             }
             #endregion
@@ -373,7 +373,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<ConfirmPlacementOptionResponse> ConfirmPlacementOptionAsync(string inboundPlanId, string placementOptionId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmPlacementOption(inboundPlanId, placementOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ConfirmPlacementOption(inboundPlanId, placementOptionId), RestSharp.Method.Post, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ConfirmPlacementOptionResponse>(RateLimitType.FulFillmentInboundV20240320_ConfirmPlacementOption, cancellationToken);
             }
             #endregion
@@ -384,7 +384,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<Shipment> GetShipmentAsync(string inboundPlanId, string shipmentId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetShipment(inboundPlanId, shipmentId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetShipment(inboundPlanId, shipmentId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<Shipment>(RateLimitType.FulFillmentInboundV20240320_GetShipment, cancellationToken);
             }
             #endregion
@@ -395,7 +395,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<GetDeliveryChallanDocumentResponse> GetDeliveryChallanDocumentAsync(string inboundPlanId, string shipmentId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetDeliveryChallanDocument(inboundPlanId, shipmentId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetDeliveryChallanDocument(inboundPlanId, shipmentId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GetDeliveryChallanDocumentResponse>(RateLimitType.FulFillmentInboundV20240320_GetDeliveryChallanDocument, cancellationToken);
             }
             #endregion
@@ -406,7 +406,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<UpdateShipmentDeliveryWindowResponse> UpdateShipmentDeliveryWindowAsync(string inboundPlanId, string shipmentId, UpdateShipmentDeliveryWindowRequest updateShipmentDeliveryWindowRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateShipmentDeliveryWindow(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: updateShipmentDeliveryWindowRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.UpdateShipmentDeliveryWindow(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: updateShipmentDeliveryWindowRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<UpdateShipmentDeliveryWindowResponse>(RateLimitType.FulFillmentInboundV20240320_UpdateShipmentDeliveryWindow, cancellationToken);
             }
             #endregion
@@ -418,7 +418,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<SelfShipAppointmentSlotsAvailability>> GetSelfShipAppointmentSlotsAsync(string shipmentId, ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetSelfShipAppointmentSlots(parameterListInboundPlan.InboundPlanId, shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetSelfShipAppointmentSlots(parameterListInboundPlan.InboundPlanId, shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<SelfShipAppointmentSlotsAvailability> list = new List<SelfShipAppointmentSlotsAvailability>();
 
@@ -446,7 +446,7 @@ namespace FikaAmazonAPI.Services
             private async Task<GetSelfShipAppointmentSlotsResponse> GetSelfShipAppointmentSlotsByNextTokenAsync(string shipmentId, ParameterListInboundPlan parameterListInboundPlan, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListInboundPlan.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetSelfShipAppointmentSlots(parameterListInboundPlan.InboundPlanId, shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetSelfShipAppointmentSlots(parameterListInboundPlan.InboundPlanId, shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GetSelfShipAppointmentSlotsResponse>(RateLimitType.FulFillmentInboundV20240320_GetSelfShipAppointmentSlots, cancellationToken);
             }
             #endregion
@@ -457,7 +457,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<GenerateSelfShipAppointmentSlotsResponse> GenerateSelfShipAppointmentSlotsAsync(string inboundPlanId, string shipmentId, GenerateSelfShipAppointmentSlotsRequest generateSelfShipAppointmentSlotsRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GenerateSelfShipAppointmentSlots(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: generateSelfShipAppointmentSlotsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GenerateSelfShipAppointmentSlots(inboundPlanId, shipmentId), RestSharp.Method.Post, postJsonObj: generateSelfShipAppointmentSlotsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GenerateSelfShipAppointmentSlotsResponse>(RateLimitType.FulFillmentInboundV20240320_GenerateSelfShipAppointmentSlots, cancellationToken);
             }
             #endregion
@@ -468,7 +468,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<CancelSelfShipAppointmentResponse> CancelSelfShipAppointmentAsync(string inboundPlanId, string shipmentId, string slotId, CancelSelfShipAppointmentRequest cancelSelfShipAppointmentRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CancelSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Put, postJsonObj: cancelSelfShipAppointmentRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.CancelSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Put, postJsonObj: cancelSelfShipAppointmentRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<CancelSelfShipAppointmentResponse>(RateLimitType.FulFillmentInboundV20240320_CancelSelfShipAppointment, cancellationToken);
             }
             #endregion
@@ -479,7 +479,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<ScheduleSelfShipAppointmentResponse> ScheduleSelfShipAppointmentAsync(string inboundPlanId, string shipmentId, string slotId, ScheduleSelfShipAppointmentRequest scheduleSelfShipAppointmentRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CancelSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Post, postJsonObj: scheduleSelfShipAppointmentRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.CancelSelfShipAppointment(inboundPlanId, shipmentId, slotId), RestSharp.Method.Post, postJsonObj: scheduleSelfShipAppointmentRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ScheduleSelfShipAppointmentResponse>(RateLimitType.FulFillmentInboundV20240320_ScheduleSelfShipAppointment, cancellationToken);
             }
             #endregion
@@ -490,7 +490,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<UpdateShipmentTrackingDetailsResponse> UpdateShipmentTrackingDetailsAsync(string inboundPlanId, string shipmentId, UpdateShipmentTrackingDetailsRequest updateShipmentTrackingDetailsRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateShipmentTrackingDetails(inboundPlanId, shipmentId), RestSharp.Method.Put, postJsonObj: updateShipmentTrackingDetailsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.UpdateShipmentTrackingDetails(inboundPlanId, shipmentId), RestSharp.Method.Put, postJsonObj: updateShipmentTrackingDetailsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<UpdateShipmentTrackingDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_UpdateShipmentTrackingDetails, cancellationToken);
             }
             #endregion
@@ -502,7 +502,7 @@ namespace FikaAmazonAPI.Services
             public async Task<List<TransportationOption>> ListTransportationOptionsAsync(string inboundPlanId, ParameterListTransportationOptions parameterListTransportationOptions, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListTransportationOptions.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListTransportationOptions(inboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListTransportationOptions(inboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
                 List<TransportationOption> list = new List<TransportationOption>();
 
@@ -530,7 +530,7 @@ namespace FikaAmazonAPI.Services
             private async Task<ListTransportationOptionsResponse> ListTransportationOptionsByNextTokenAsync(string inboundPlanId, ParameterListTransportationOptions parameterListTransportationOptions, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterListTransportationOptions.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListTransportationOptions(inboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListTransportationOptions(inboundPlanId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListTransportationOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_ListTransportationOptions, cancellationToken);
             }
             #endregion
@@ -541,7 +541,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<GenerateTransportationOptionsResponse> GenerateTransportationOptionsAsync(string inboundPlanId, GenerateTransportationOptionsRequest generateTransportationOptionsRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GenerateTransportationOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: generateTransportationOptionsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GenerateTransportationOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: generateTransportationOptionsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<GenerateTransportationOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_GenerateTransportationOptions, cancellationToken);
             }
             #endregion
@@ -552,7 +552,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<ConfirmTransportationOptionsResponse> ConfirmTransportationOptionsAsync(string inboundPlanId, ConfirmTransportationOptionsRequest confirmTransportationOptionsRequest, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ConfirmTransportationOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: confirmTransportationOptionsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ConfirmTransportationOptions(inboundPlanId), RestSharp.Method.Post, postJsonObj: confirmTransportationOptionsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ConfirmTransportationOptionsResponse>(RateLimitType.FulFillmentInboundV20240320_ConfirmTransportationOptions, cancellationToken);
             }
             #endregion
@@ -564,7 +564,7 @@ namespace FikaAmazonAPI.Services
             public async Task<ListItemComplianceDetailsResponse> ListItemComplianceDetailsAsync(ParematerListItemComplianceDetails parematerListItemComplianceDetails, CancellationToken cancellationToken = default)
             {
                 var parameter = parematerListItemComplianceDetails.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListItemComplianceDetails(), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.ListItemComplianceDetails(), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<ListItemComplianceDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_ListItemComplianceDetails, cancellationToken);
             }
             #endregion
@@ -576,7 +576,7 @@ namespace FikaAmazonAPI.Services
             public async Task<UpdateItemComplianceDetailsResponse> UpdateItemComplianceDetailsAsync(ParameterUpdateItemComplianceDetails parameterUpdateItemComplianceDetails, UpdateItemComplianceDetailsRequest updateItemComplianceDetailsRequest, CancellationToken cancellationToken = default)
             {
                 var parameter = parameterUpdateItemComplianceDetails.getParameters();
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.UpdateItemComplianceDetails(), RestSharp.Method.Put, parameter: parameter, postJsonObj: updateItemComplianceDetailsRequest, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.UpdateItemComplianceDetails(), RestSharp.Method.Put, parameter: parameter, postJsonObj: updateItemComplianceDetailsRequest, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<UpdateItemComplianceDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_UpdateItemComplianceDetails, cancellationToken);
             }
             #endregion
@@ -587,7 +587,7 @@ namespace FikaAmazonAPI.Services
 
             public async Task<InboundOperationStatus> GetInboundOperationStatusAsync(string operationId, CancellationToken cancellationToken = default)
             {
-                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetInboundOperationStatus(operationId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
+                await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrlsv20240320.GetInboundOperationStatus(operationId), RestSharp.Method.Get, null, cancellationToken: cancellationToken);
                 return await ExecuteRequestAsync<InboundOperationStatus>(RateLimitType.FulFillmentInboundV20240320_GetInboundOperationStatus, cancellationToken);
             }
             #endregion

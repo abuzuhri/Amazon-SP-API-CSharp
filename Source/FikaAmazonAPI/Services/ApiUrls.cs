@@ -119,18 +119,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipmentItems";
             }
+        }
 
-            #region V20240320
+        protected class FulFillmentInboundApiUrlsv20240320
+        {
 
-            public static string GetListInboundPlans
-            {
-                get => $"{_resourceBaseUrl}/inboundPlans";
-            }
-            public static string CreateInboundPlan
-            {
-                get => $"{_resourceBaseUrl}/inboundPlans";
-            }
+            private readonly static string _resourceBaseUrl = "/inbound/fba/2024-03-20";
 
+            public static string GetListInboundPlans=> $"{_resourceBaseUrl}/inboundPlans";
+            public static string CreateInboundPlan => $"{_resourceBaseUrl}/inboundPlans";
             public static string GetInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}";
             public static string ListInboundPlanBoxes(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/boxes";
             public static string CancelInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl}/inboundPlans/{inboundPlanId}/cancellation";
@@ -160,11 +157,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetInboundOperationStatus(string operationId) => $"{_resourceBaseUrl}/operations/{operationId}";
 
 
-            #endregion
+         }
 
-
-        }
-        protected class ShippingApiUrls
+            protected class ShippingApiUrls
         {
             private readonly static string _resourceBaseUrl = "/shipping/v1";
             public static string CreateShipment
