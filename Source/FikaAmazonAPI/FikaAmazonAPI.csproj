@@ -36,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.300.109" />
-    <PackageReference Include="AWSSDK.SQS" Version="3.7.301.21" />
+    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.400.11" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.400.11" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
