@@ -41,7 +41,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="name">The name of the individual or business. (required).</param>
         /// <param name="postalCode">The postal code. (required).</param>
         /// <param name="stateOrProvinceCode">The state or province code..</param>
-        public Address(string addressLine1 = default(string), string addressLine2 = default(string), string city = default(string), string companyName = default(string), string countryCode = default(string), string name = default(string), string postalCode = default(string), string stateOrProvinceCode = default(string))
+        /// /// <param name="phoneNumber">The phone number for the business.</param>
+        public Address(string addressLine1 = default(string), string addressLine2 = default(string), string city = default(string), string companyName = default(string), string countryCode = default(string), string name = default(string), string postalCode = default(string), string stateOrProvinceCode = default(string), string phoneNumber = default(string))
         {
             // to ensure "addressLine1" is required (not null)
             if (addressLine1 == null)
@@ -87,6 +88,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             else
             {
                 this.PostalCode = postalCode;
+            }
+            // to ensure "phoneNumber" is required (not null)
+            if (phoneNumber == null)
+            {
+                throw new InvalidDataException("phoneNumber is a required property for Address and cannot be null");
+            }
+            else
+            {
+                this.PhoneNumber = phoneNumber;
             }
             this.AddressLine2 = addressLine2;
             this.CompanyName = companyName;
@@ -150,6 +160,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string StateOrProvinceCode { get; set; }
 
         /// <summary>
+        /// The phone number.
+        /// </summary>
+        /// <value>The phone number.</value>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -165,6 +182,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
             sb.Append("  StateOrProvinceCode: ").Append(StateOrProvinceCode).Append("\n");
+            sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -233,6 +251,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.PostalCode == input.PostalCode ||
                     (this.PostalCode != null &&
                     this.PostalCode.Equals(input.PostalCode))
+                ) &&
+                (
+                    this.PhoneNumber == input.PhoneNumber ||
+                    (this.PhoneNumber != null &&
+                    this.PhoneNumber.Equals(input.PhoneNumber))
                 ) && 
                 (
                     this.StateOrProvinceCode == input.StateOrProvinceCode ||
@@ -266,6 +289,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     hashCode = hashCode * 59 + this.PostalCode.GetHashCode();
                 if (this.StateOrProvinceCode != null)
                     hashCode = hashCode * 59 + this.StateOrProvinceCode.GetHashCode();
+                if (this.PhoneNumber != null)
+                    hashCode = hashCode * 59 + this.PhoneNumber.GetHashCode();
                 return hashCode;
             }
         }
@@ -378,6 +403,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.StateOrProvinceCode != null && this.StateOrProvinceCode.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for StateOrProvinceCode, length must be greater than 1.", new [] { "StateOrProvinceCode" });
+            }
+
+            // PhoneNumber (string) maxLength
+            if (this.PhoneNumber != null && this.PhoneNumber.Length > 20)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be less than 20.", new[] { "PhoneNumber" });
+            }
+
+            // PhoneNumber (string) minLength
+            if (this.PhoneNumber != null && this.PhoneNumber.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be greater than 1.", new[] { "PhoneNumber" });
             }
 
             yield break;
