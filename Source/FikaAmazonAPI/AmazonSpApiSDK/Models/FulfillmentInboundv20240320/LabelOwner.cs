@@ -15,15 +15,14 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// Specifies who will label the items. Options include &#x60;AMAZON&#x60; and &#x60;SELLER&#x60;.
+    /// Specifies who will label the items. Options include AMAZON, SELLER, and NONE.
     /// </summary>
-    /// <value>Specifies who will label the items. Options include &#x60;AMAZON&#x60; and &#x60;SELLER&#x60;.</value>
+    /// <value>Specifies who will label the items. Options include AMAZON, SELLER, and NONE.</value>
 
     [JsonConverter(typeof(StringEnumConverter))]
     
     public enum LabelOwner
     {
-        
         /// <summary>
         /// Enum AMAZON for value: AMAZON
         /// </summary>
@@ -34,7 +33,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Enum SELLER for value: SELLER
         /// </summary>
         [EnumMember(Value = "SELLER")]
-        SELLER = 2
+        SELLER = 2,
+
+        /// <summary>
+        /// Enum NONE for value: NONE
+        /// </summary>
+        [EnumMember(Value = "NONE")]
+        NONE = 3
     }
 
 }

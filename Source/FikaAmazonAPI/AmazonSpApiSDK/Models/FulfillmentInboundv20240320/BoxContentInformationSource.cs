@@ -23,24 +23,24 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     
     public enum BoxContentInformationSource
     {
-        
+
         /// <summary>
-        /// Enum BOXCONTENTPROVIDED for value: BOX_CONTENT_PROVIDED
+        /// Box contents have been provided by the seller.
         /// </summary>
         [EnumMember(Value = "BOX_CONTENT_PROVIDED")]
-        BOXCONTENTPROVIDED = 1,
-        
+        BOX_CONTENT_PROVIDED = 1,
+
         /// <summary>
-        /// Enum MANUALPROCESS for value: MANUAL_PROCESS
+        /// Box contents will be manually processed during receive. This service incurs charges.
         /// </summary>
         [EnumMember(Value = "MANUAL_PROCESS")]
-        MANUALPROCESS = 2,
-        
+        MANUAL_PROCESS = 2,
+
         /// <summary>
-        /// Enum BARCODE2D for value: BARCODE_2D
+        /// Box contents information is provided by a barcode on the shipment. For more information, see Using 2D barcodes for box content information on Seller Central.
         /// </summary>
         [EnumMember(Value = "BARCODE_2D")]
-        BARCODE2D = 3
+        BARCODE_2D = 3
     }
 
 }

@@ -1,6 +1,5 @@
 ﻿using FikaAmazonAPI.Search;
 using System.Collections.Generic;
-using FikaAmazonAPI.Parameter.FulFillmentInbound;
 
 namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
 {

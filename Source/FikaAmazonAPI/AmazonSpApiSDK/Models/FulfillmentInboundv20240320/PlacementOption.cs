@@ -30,7 +30,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PlacementOption" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PlacementOption() { }
+        public PlacementOption() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PlacementOption" /> class.
         /// </summary>
@@ -39,8 +39,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="fees">Fee for the offered option. (required).</param>
         /// <param name="placementOptionId">Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs. (required).</param>
         /// <param name="shipmentIds">Shipment ids. (required).</param>
-        /// <param name="status">The status of a placement option. Can be &#x60;OFFERED&#x60;, &#x60;ACCEPTED&#x60;, or &#x60;EXPIRED&#x60;. (required).</param>
-        public PlacementOption(List<Incentive> discounts = default(List<Incentive>), DateTime? expiration = default(DateTime?), List<Incentive> fees = default(List<Incentive>), string placementOptionId = default(string), List<string> shipmentIds = default(List<string>), string status = default(string))
+        /// <param name="status">The status of a placement option. Can be: OFFERED, ACCEPTED, or EXPIRED. (required).</param>
+        public PlacementOption(List<Incentive> discounts = default(List<Incentive>),
+                               DateTime? expiration = default(DateTime?),
+                               List<Incentive> fees = default(List<Incentive>),
+                               string placementOptionId = default(string),
+                               List<string> shipmentIds = default(List<string>),
+                               PlacementOptionStatus status = default(PlacementOptionStatus))
         {
             // to ensure "discounts" is required (not null)
             if (discounts == null)
@@ -130,7 +135,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>The status of a placement option. Can be &#x60;OFFERED&#x60;, &#x60;ACCEPTED&#x60;, or &#x60;EXPIRED&#x60;.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public PlacementOptionStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -261,18 +266,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexPlacementOptionId.Match(this.PlacementOptionId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PlacementOptionId, must match a pattern of " + regexPlacementOptionId, new [] { "PlacementOptionId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

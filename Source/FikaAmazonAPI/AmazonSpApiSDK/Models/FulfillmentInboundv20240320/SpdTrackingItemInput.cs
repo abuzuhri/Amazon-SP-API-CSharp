@@ -28,12 +28,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="SpdTrackingItemInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SpdTrackingItemInput() { }
+        public SpdTrackingItemInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SpdTrackingItemInput" /> class.
         /// </summary>
-        /// <param name="boxId">The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box. (required).</param>
-        /// <param name="trackingId">The tracking Id associated with each box in a non-Amazon partnered Small Parcel Delivery (SPD) shipment. The seller must provide this information.  (required).</param>
+        /// <param name="boxId">The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box. (required).</param>
+        /// <param name="trackingId">The tracking Id associated with each box in a non-Amazon partnered Small Parcel Delivery (SPD) shipment. The seller must provide this information. (required).</param>
         public SpdTrackingItemInput(string boxId = default(string), string trackingId = default(string))
         {
             // to ensure "boxId" is required (not null)
@@ -57,9 +57,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         }
         
         /// <summary>
-        /// The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box.
+        /// The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box.
         /// </summary>
-        /// <value>The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box.</value>
+        /// <value>The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box.</value>
         [DataMember(Name="boxId", EmitDefaultValue=false)]
         public string BoxId { get; set; }
 

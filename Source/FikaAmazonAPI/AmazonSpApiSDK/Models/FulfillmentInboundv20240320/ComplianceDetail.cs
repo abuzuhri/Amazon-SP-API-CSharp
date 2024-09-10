@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="asin">The Amazon Standard Identification Number, which identifies the detail page identifier..</param>
         /// <param name="fnsku">The Fulfillment Network SKU, which identifies a real fulfillable item with catalog data and condition..</param>
         /// <param name="msku">The merchant SKU, a merchant-supplied identifier for a specific SKU..</param>
-        /// <param name="taxDetails">taxDetails.</param>
+        /// <param name="taxDetails">Information used to determine the tax compliance.</param>
         public ComplianceDetail(string asin = default(string), string fnsku = default(string), string msku = default(string), TaxDetails taxDetails = default(TaxDetails))
         {
             this.Asin = asin;

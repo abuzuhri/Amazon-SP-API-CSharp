@@ -15,15 +15,14 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include &#x60;AMAZON&#x60; or &#x60;SELLER&#x60;.
+    /// In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.
     /// </summary>
-    /// <value>In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include &#x60;AMAZON&#x60; or &#x60;SELLER&#x60;.</value>
+    /// <value>In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.</value>
 
     [JsonConverter(typeof(StringEnumConverter))]
     
     public enum PrepOwner
     {
-        
         /// <summary>
         /// Enum AMAZON for value: AMAZON
         /// </summary>
@@ -34,7 +33,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Enum SELLER for value: SELLER
         /// </summary>
         [EnumMember(Value = "SELLER")]
-        SELLER = 2
+        SELLER = 2,
+
+        /// <summary>
+        /// Enum NONE for value: NONE
+        /// </summary>
+        [EnumMember(Value = "NONE")]
+        NONE = 3
     }
 
 }

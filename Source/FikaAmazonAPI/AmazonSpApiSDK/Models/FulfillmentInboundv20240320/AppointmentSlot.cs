@@ -29,12 +29,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="AppointmentSlot" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AppointmentSlot() { }
+        public AppointmentSlot() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentSlot" /> class.
         /// </summary>
         /// <param name="slotId">An identifier to a self-ship appointment slot. (required).</param>
-        /// <param name="slotTime">slotTime (required).</param>
+        /// <param name="slotTime">An appointment slot time with start and end. (required).</param>
         public AppointmentSlot(string slotId = default(string), AppointmentSlotTime slotTime = default(AppointmentSlotTime))
         {
             // to ensure "slotId" is required (not null)
@@ -65,8 +65,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string SlotId { get; set; }
 
         /// <summary>
-        /// Gets or Sets SlotTime
+        /// An appointment slot time with start and end.
         /// </summary>
+        /// <value>An appointment slot time with start and end.</value>
         [DataMember(Name="slotTime", EmitDefaultValue=false)]
         public AppointmentSlotTime SlotTime { get; set; }
 

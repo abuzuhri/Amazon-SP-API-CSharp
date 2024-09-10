@@ -29,20 +29,26 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="TransportationOption" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TransportationOption() { }
+        public TransportationOption() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportationOption" /> class.
         /// </summary>
-        /// <param name="appointmentSlot">appointmentSlot.</param>
-        /// <param name="carrier">carrier (required).</param>
-        /// <param name="inboundPlanId">Identifier to an inbound plan. (required).</param>
-        /// <param name="placementOptionId">The identifier of a placement option. A placement option represents the shipment splits and destinations of SKUs. (required).</param>
-        /// <param name="quote">quote.</param>
+        /// <param name="carrier">The carrier for the inbound shipment. (required).</param>
+        /// <param name="carrierAppointment">Contains details for a transportation carrier appointment. This appointment is vended out by Amazon and is an indicator for when a transportation carrier is accepting shipments to be picked up.</param>
+        /// <param name="preconditions">Identifies a list of preconditions for confirming the transportation option. (required).</param>
+        /// <param name="quote">The estimated shipping cost associated with the transportation option.</param>
         /// <param name="shipmentId">Identifier to a shipment. A shipment contains the boxes and units being inbounded. (required).</param>
-        /// <param name="shippingMode">The shipping mode associated with the transportation option. Available modes are ground small parcel, freight less-than-truckload (LTL), freight full-truckload (FTL) palletized, freight FTL non-palletized, ocean less-than-container-load (LCL), ocean full-container load (FCL), air small parcel, and air small parcel express. (required).</param>
-        /// <param name="shippingSolution">The shipping solution associated with the transportation option. Available solutions are Amazon-partnered carrier or &#39;use your own carrier&#39;. (required).</param>
+        /// <param name="shippingMode">Mode of shipment transportation that this option will provide. Can be: GROUND_SMALL_PARCEL, FREIGHT_LTL, FREIGHT_FTL_PALLET, FREIGHT_FTL_NONPALLET, OCEAN_LCL, OCEAN_FCL, AIR_SMALL_PARCEL, AIR_SMALL_PARCEL_EXPRESS. (required).</param>
+        /// <param name="shippingSolution">Shipping program for the option. Can be: AMAZON_PARTNERED_CARRIER, USE_YOUR_OWN_CARRIER. (required).</param>
         /// <param name="transportationOptionId">Identifier to a transportation option. A transportation option represent one option for how to send a shipment. (required).</param>
-        public TransportationOption(AppointmentSlot appointmentSlot = default(AppointmentSlot), Carrier carrier = default(Carrier), string inboundPlanId = default(string), string placementOptionId = default(string), Quote quote = default(Quote), string shipmentId = default(string), string shippingMode = default(string), string shippingSolution = default(string), string transportationOptionId = default(string))
+        public TransportationOption(Carrier carrier = default(Carrier),
+                                    CarrierAppointment carrierAppointment = default(CarrierAppointment),
+                                    List<string> preconditions = default(List<string>),
+                                    Quote quote = default(Quote),
+                                    string shipmentId = default(string),
+                                    ShippingMode shippingMode = default(ShippingMode),
+                                    ShippingSolution shippingSolution = default(ShippingSolution),
+                                    string transportationOptionId = default(string))
         {
             // to ensure "carrier" is required (not null)
             if (carrier == null)
@@ -53,23 +59,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.Carrier = carrier;
             }
-            // to ensure "inboundPlanId" is required (not null)
-            if (inboundPlanId == null)
+            // to ensure "preconditions" is required (not null)
+            if (preconditions == null)
             {
-                throw new InvalidDataException("inboundPlanId is a required property for TransportationOption and cannot be null");
+                throw new InvalidDataException("preconditions is a required property for TransportationOption and cannot be null");
             }
             else
             {
-                this.InboundPlanId = inboundPlanId;
-            }
-            // to ensure "placementOptionId" is required (not null)
-            if (placementOptionId == null)
-            {
-                throw new InvalidDataException("placementOptionId is a required property for TransportationOption and cannot be null");
-            }
-            else
-            {
-                this.PlacementOptionId = placementOptionId;
+                this.Preconditions = preconditions;
             }
             // to ensure "shipmentId" is required (not null)
             if (shipmentId == null)
@@ -107,38 +104,31 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.TransportationOptionId = transportationOptionId;
             }
-            this.AppointmentSlot = appointmentSlot;
+            this.CarrierAppointment = carrierAppointment;
             this.Quote = quote;
         }
-        
-        /// <summary>
-        /// Gets or Sets AppointmentSlot
-        /// </summary>
-        [DataMember(Name="appointmentSlot", EmitDefaultValue=false)]
-        public AppointmentSlot AppointmentSlot { get; set; }
+
 
         /// <summary>
-        /// Gets or Sets Carrier
+        /// The carrier for the inbound shipment.
         /// </summary>
         [DataMember(Name="carrier", EmitDefaultValue=false)]
         public Carrier Carrier { get; set; }
 
         /// <summary>
-        /// Identifier to an inbound plan.
+        /// Contains details for a transportation carrier appointment. This appointment is vended out by Amazon and is an indicator for when a transportation carrier is accepting shipments to be picked up.
         /// </summary>
-        /// <value>Identifier to an inbound plan.</value>
-        [DataMember(Name="inboundPlanId", EmitDefaultValue=false)]
-        public string InboundPlanId { get; set; }
+        [DataMember(Name = "carrierAppointment", EmitDefaultValue = false)]
+        public CarrierAppointment CarrierAppointment { get; set; }
 
         /// <summary>
-        /// The identifier of a placement option. A placement option represents the shipment splits and destinations of SKUs.
+        /// Identifies a list of preconditions for confirming the transportation option.
         /// </summary>
-        /// <value>The identifier of a placement option. A placement option represents the shipment splits and destinations of SKUs.</value>
-        [DataMember(Name="placementOptionId", EmitDefaultValue=false)]
-        public string PlacementOptionId { get; set; }
+        [DataMember(Name = "preconditions", EmitDefaultValue = false)]
+        public List<string> Preconditions { get; set; }
 
         /// <summary>
-        /// Gets or Sets Quote
+        /// The estimated shipping cost associated with the transportation option.
         /// </summary>
         [DataMember(Name="quote", EmitDefaultValue=false)]
         public Quote Quote { get; set; }
@@ -151,18 +141,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string ShipmentId { get; set; }
 
         /// <summary>
-        /// The shipping mode associated with the transportation option. Available modes are ground small parcel, freight less-than-truckload (LTL), freight full-truckload (FTL) palletized, freight FTL non-palletized, ocean less-than-container-load (LCL), ocean full-container load (FCL), air small parcel, and air small parcel express.
+        /// Mode of shipment transportation that this option will provide. Can be: GROUND_SMALL_PARCEL, FREIGHT_LTL, FREIGHT_FTL_PALLET, FREIGHT_FTL_NONPALLET, OCEAN_LCL, OCEAN_FCL, AIR_SMALL_PARCEL, AIR_SMALL_PARCEL_EXPRESS.
         /// </summary>
-        /// <value>The shipping mode associated with the transportation option. Available modes are ground small parcel, freight less-than-truckload (LTL), freight full-truckload (FTL) palletized, freight FTL non-palletized, ocean less-than-container-load (LCL), ocean full-container load (FCL), air small parcel, and air small parcel express.</value>
+        /// <value>Mode of shipment transportation that this option will provide. Can be: GROUND_SMALL_PARCEL, FREIGHT_LTL, FREIGHT_FTL_PALLET, FREIGHT_FTL_NONPALLET, OCEAN_LCL, OCEAN_FCL, AIR_SMALL_PARCEL, AIR_SMALL_PARCEL_EXPRESS.</value>
         [DataMember(Name="shippingMode", EmitDefaultValue=false)]
-        public string ShippingMode { get; set; }
+        public ShippingMode ShippingMode { get; set; }
 
         /// <summary>
-        /// The shipping solution associated with the transportation option. Available solutions are Amazon-partnered carrier or &#39;use your own carrier&#39;.
+        /// Shipping program for the option. Can be: AMAZON_PARTNERED_CARRIER, USE_YOUR_OWN_CARRIER.
         /// </summary>
-        /// <value>The shipping solution associated with the transportation option. Available solutions are Amazon-partnered carrier or &#39;use your own carrier&#39;.</value>
+        /// <value>Shipping program for the option. Can be: AMAZON_PARTNERED_CARRIER, USE_YOUR_OWN_CARRIER.</value>
         [DataMember(Name="shippingSolution", EmitDefaultValue=false)]
-        public string ShippingSolution { get; set; }
+        public ShippingSolution ShippingSolution { get; set; }
 
         /// <summary>
         /// Identifier to a transportation option. A transportation option represent one option for how to send a shipment.
@@ -179,10 +169,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class TransportationOption {\n");
-            sb.Append("  AppointmentSlot: ").Append(AppointmentSlot).Append("\n");
             sb.Append("  Carrier: ").Append(Carrier).Append("\n");
-            sb.Append("  InboundPlanId: ").Append(InboundPlanId).Append("\n");
-            sb.Append("  PlacementOptionId: ").Append(PlacementOptionId).Append("\n");
+            sb.Append("  CarrierAppointment: ").Append(CarrierAppointment).Append("\n");
+            sb.Append("  Preconditions: ").Append(Preconditions).Append("\n");
             sb.Append("  Quote: ").Append(Quote).Append("\n");
             sb.Append("  ShipmentId: ").Append(ShipmentId).Append("\n");
             sb.Append("  ShippingMode: ").Append(ShippingMode).Append("\n");
@@ -223,24 +212,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
             return 
                 (
-                    this.AppointmentSlot == input.AppointmentSlot ||
-                    (this.AppointmentSlot != null &&
-                    this.AppointmentSlot.Equals(input.AppointmentSlot))
-                ) && 
-                (
                     this.Carrier == input.Carrier ||
                     (this.Carrier != null &&
                     this.Carrier.Equals(input.Carrier))
                 ) && 
                 (
-                    this.InboundPlanId == input.InboundPlanId ||
-                    (this.InboundPlanId != null &&
-                    this.InboundPlanId.Equals(input.InboundPlanId))
+                    this.CarrierAppointment == input.CarrierAppointment ||
+                    (this.CarrierAppointment != null &&
+                    this.CarrierAppointment.Equals(input.CarrierAppointment))
                 ) && 
                 (
-                    this.PlacementOptionId == input.PlacementOptionId ||
-                    (this.PlacementOptionId != null &&
-                    this.PlacementOptionId.Equals(input.PlacementOptionId))
+                    this.Preconditions == input.Preconditions ||
+                    (this.Preconditions != null &&
+                    this.Preconditions.Equals(input.Preconditions))
                 ) && 
                 (
                     this.Quote == input.Quote ||
@@ -278,14 +262,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.AppointmentSlot != null)
-                    hashCode = hashCode * 59 + this.AppointmentSlot.GetHashCode();
                 if (this.Carrier != null)
                     hashCode = hashCode * 59 + this.Carrier.GetHashCode();
-                if (this.InboundPlanId != null)
-                    hashCode = hashCode * 59 + this.InboundPlanId.GetHashCode();
-                if (this.PlacementOptionId != null)
-                    hashCode = hashCode * 59 + this.PlacementOptionId.GetHashCode();
+                if (this.CarrierAppointment != null)
+                    hashCode = hashCode * 59 + this.CarrierAppointment.GetHashCode();
+                if (this.Preconditions != null)
+                    hashCode = hashCode * 59 + this.Preconditions.GetHashCode();
                 if (this.Quote != null)
                     hashCode = hashCode * 59 + this.Quote.GetHashCode();
                 if (this.ShipmentId != null)
@@ -307,43 +289,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // InboundPlanId (string) maxLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length > 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be less than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) minLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length < 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be greater than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) pattern
-            Regex regexInboundPlanId = new Regex(@"^[a-zA-Z0-9-]*$", RegexOptions.CultureInvariant);
-            if (false == regexInboundPlanId.Match(this.InboundPlanId).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, must match a pattern of " + regexInboundPlanId, new [] { "InboundPlanId" });
-            }
-
-            // PlacementOptionId (string) maxLength
-            if(this.PlacementOptionId != null && this.PlacementOptionId.Length > 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PlacementOptionId, length must be less than 38.", new [] { "PlacementOptionId" });
-            }
-
-            // PlacementOptionId (string) minLength
-            if(this.PlacementOptionId != null && this.PlacementOptionId.Length < 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PlacementOptionId, length must be greater than 38.", new [] { "PlacementOptionId" });
-            }
-
-            // PlacementOptionId (string) pattern
-            Regex regexPlacementOptionId = new Regex(@"^[a-zA-Z0-9-]*$", RegexOptions.CultureInvariant);
-            if (false == regexPlacementOptionId.Match(this.PlacementOptionId).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PlacementOptionId, must match a pattern of " + regexPlacementOptionId, new [] { "PlacementOptionId" });
-            }
 
             // ShipmentId (string) maxLength
             if(this.ShipmentId != null && this.ShipmentId.Length > 38)
@@ -362,30 +307,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexShipmentId.Match(this.ShipmentId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShipmentId, must match a pattern of " + regexShipmentId, new [] { "ShipmentId" });
-            }
-
-            // ShippingMode (string) maxLength
-            if(this.ShippingMode != null && this.ShippingMode.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShippingMode, length must be less than 1024.", new [] { "ShippingMode" });
-            }
-
-            // ShippingMode (string) minLength
-            if(this.ShippingMode != null && this.ShippingMode.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShippingMode, length must be greater than 1.", new [] { "ShippingMode" });
-            }
-
-            // ShippingSolution (string) maxLength
-            if(this.ShippingSolution != null && this.ShippingSolution.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShippingSolution, length must be less than 1024.", new [] { "ShippingSolution" });
-            }
-
-            // ShippingSolution (string) minLength
-            if(this.ShippingSolution != null && this.ShippingSolution.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShippingSolution, length must be greater than 1.", new [] { "ShippingSolution" });
             }
 
             // TransportationOptionId (string) maxLength

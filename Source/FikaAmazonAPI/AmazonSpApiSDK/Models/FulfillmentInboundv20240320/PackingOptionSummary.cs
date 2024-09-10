@@ -29,13 +29,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PackingOptionSummary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PackingOptionSummary() { }
+        public PackingOptionSummary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PackingOptionSummary" /> class.
         /// </summary>
         /// <param name="packingOptionId">Identifier to a packing option. (required).</param>
-        /// <param name="status">The status of a packing option. Can be &#39;OFFERED&#39;, &#39;ACCEPTED&#39;, or &#39;EXPIRED&#39;. (required).</param>
-        public PackingOptionSummary(string packingOptionId = default(string), string status = default(string))
+        /// <param name="status">The status of a packing option. Can be OFFERED, ACCEPTED, or EXPIRED. (required).</param>
+        public PackingOptionSummary(string packingOptionId = default(string), PackingOptionStatus status = default(PackingOptionStatus))
         {
             // to ensure "packingOptionId" is required (not null)
             if (packingOptionId == null)
@@ -65,11 +65,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string PackingOptionId { get; set; }
 
         /// <summary>
-        /// The status of a packing option. Can be &#39;OFFERED&#39;, &#39;ACCEPTED&#39;, or &#39;EXPIRED&#39;.
+        /// The status of a packing option. Can be OFFERED, ACCEPTED, or EXPIRED.
         /// </summary>
-        /// <value>The status of a packing option. Can be &#39;OFFERED&#39;, &#39;ACCEPTED&#39;, or &#39;EXPIRED&#39;.</value>
+        /// <value>The status of a packing option. Can be OFFERED, ACCEPTED, or EXPIRED.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public PackingOptionStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -168,18 +168,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexPackingOptionId.Match(this.PackingOptionId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PackingOptionId, must match a pattern of " + regexPackingOptionId, new [] { "PackingOptionId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="OperationProblem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OperationProblem() { }
+        public OperationProblem() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationProblem" /> class.
         /// </summary>
@@ -36,7 +36,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="details">Additional details that can help the caller understand or fix the issue..</param>
         /// <param name="message">A message that describes the error condition. (required).</param>
         /// <param name="severity">The severity of the problem. Can be &#39;WARNING&#39;, or &#39;ERROR&#39;. (required).</param>
-        public OperationProblem(string code = default(string), string details = default(string), string message = default(string), string severity = default(string))
+        public OperationProblem(string code = default(string),
+                                string details = default(string),
+                                string message = default(string),
+                                Severity severity = default(Severity))
         {
             // to ensure "code" is required (not null)
             if (code == null)
@@ -94,7 +97,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>The severity of the problem. Can be &#39;WARNING&#39;, or &#39;ERROR&#39;.</value>
         [DataMember(Name="severity", EmitDefaultValue=false)]
-        public string Severity { get; set; }
+        public Severity Severity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -226,18 +229,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.Message != null && this.Message.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Message, length must be greater than 1.", new [] { "Message" });
-            }
-
-            // Severity (string) maxLength
-            if(this.Severity != null && this.Severity.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Severity, length must be less than 1024.", new [] { "Severity" });
-            }
-
-            // Severity (string) minLength
-            if(this.Severity != null && this.Severity.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Severity, length must be greater than 1.", new [] { "Severity" });
             }
 
             yield break;

@@ -1,10 +1,9 @@
-﻿using FikaAmazonAPI.Parameter.FulFillmentInbound;
-namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
+﻿namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
 {
     public class ParameterListTransportationOptions : PaginationParameter
     {
-        public string PlacementOptionId { get; set; }
-        public string ShipmentId { get; set; }
+        public string placementOptionId { get; set; }
+        public string shipmentId { get; set; }
         public string PaginationToken { get; set; }
     }
 }

@@ -29,26 +29,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="CreateInboundPlanRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CreateInboundPlanRequest() { }
+        public CreateInboundPlanRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInboundPlanRequest" /> class.
         /// </summary>
-        /// <param name="contactInformation">contactInformation (required).</param>
         /// <param name="destinationMarketplaces">Marketplaces where the items need to be shipped to. Currently only one marketplace can be selected in this request. (required).</param>
         /// <param name="items">Items included in this plan. (required).</param>
-        /// <param name="name">Name for the Inbound Plan. If one isn&#39;t provided, a default name will be provided..</param>
-        /// <param name="sourceAddress">sourceAddress (required).</param>
-        public CreateInboundPlanRequest(ContactInformation contactInformation = default(ContactInformation), List<string> destinationMarketplaces = default(List<string>), List<ItemInput> items = default(List<ItemInput>), string name = default(string), Address sourceAddress = default(Address))
+        /// <param name="name">Name for the Inbound Plan. If one isn&#39;t provided, a default name will be provided.</param>
+        /// <param name="sourceAddress">Specific details to identify a place. (required).</param>
+        public CreateInboundPlanRequest(List<string> destinationMarketplaces = default(List<string>),
+                                        List<ItemInput> items = default(List<ItemInput>),
+                                        string name = default(string),
+                                        AddressInput sourceAddress = default(AddressInput))
         {
-            // to ensure "contactInformation" is required (not null)
-            if (contactInformation == null)
-            {
-                throw new InvalidDataException("contactInformation is a required property for CreateInboundPlanRequest and cannot be null");
-            }
-            else
-            {
-                this.ContactInformation = contactInformation;
-            }
             // to ensure "destinationMarketplaces" is required (not null)
             if (destinationMarketplaces == null)
             {
@@ -78,12 +71,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             }
             this.Name = name;
         }
-        
-        /// <summary>
-        /// Gets or Sets ContactInformation
-        /// </summary>
-        [DataMember(Name="contactInformation", EmitDefaultValue=false)]
-        public ContactInformation ContactInformation { get; set; }
 
         /// <summary>
         /// Marketplaces where the items need to be shipped to. Currently only one marketplace can be selected in this request.
@@ -110,7 +97,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Gets or Sets SourceAddress
         /// </summary>
         [DataMember(Name="sourceAddress", EmitDefaultValue=false)]
-        public Address SourceAddress { get; set; }
+        public AddressInput SourceAddress { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,7 +107,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class CreateInboundPlanRequest {\n");
-            sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
             sb.Append("  DestinationMarketplaces: ").Append(DestinationMarketplaces).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -160,11 +146,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
             return 
                 (
-                    this.ContactInformation == input.ContactInformation ||
-                    (this.ContactInformation != null &&
-                    this.ContactInformation.Equals(input.ContactInformation))
-                ) && 
-                (
                     this.DestinationMarketplaces == input.DestinationMarketplaces ||
                     this.DestinationMarketplaces != null &&
                     this.DestinationMarketplaces.SequenceEqual(input.DestinationMarketplaces)
@@ -195,8 +176,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.ContactInformation != null)
-                    hashCode = hashCode * 59 + this.ContactInformation.GetHashCode();
                 if (this.DestinationMarketplaces != null)
                     hashCode = hashCode * 59 + this.DestinationMarketplaces.GetHashCode();
                 if (this.Items != null)

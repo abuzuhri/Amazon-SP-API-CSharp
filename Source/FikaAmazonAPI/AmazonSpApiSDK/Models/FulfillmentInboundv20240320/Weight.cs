@@ -25,15 +25,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     public partial class Weight :  IEquatable<Weight>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets Unit
-        /// </summary>
-        [DataMember(Name="unit", EmitDefaultValue=false)]
-        public UnitOfWeight Unit { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="Weight" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Weight() { }
+        public Weight() { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Weight" /> class.
         /// </summary>
@@ -60,7 +56,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 this.Value = value;
             }
         }
-        
+
+        /// <summary>
+        /// Gets or Sets Unit
+        /// </summary>
+        [DataMember(Name = "unit", EmitDefaultValue = false)]
+        public UnitOfWeight Unit { get; set; }
 
         /// <summary>
         /// Value of a weight.

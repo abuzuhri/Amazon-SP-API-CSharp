@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ListInboundPlansResponse" /> class.
         /// </summary>
         /// <param name="inboundPlans">A list of inbound plans with minimal information..</param>
-        /// <param name="pagination">pagination.</param>
+        /// <param name="pagination">Contains tokens to fetch from a certain page.</param>
         public ListInboundPlansResponse(List<InboundPlanSummary> inboundPlans = default(List<InboundPlanSummary>), Pagination pagination = default(Pagination))
         {
             this.InboundPlans = inboundPlans;

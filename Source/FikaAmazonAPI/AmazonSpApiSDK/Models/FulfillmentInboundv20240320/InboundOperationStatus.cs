@@ -26,20 +26,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     [DataContract]
     public partial class InboundOperationStatus :  IEquatable<InboundOperationStatus>, IValidatableObject
     {
-        /// <summary>
-        /// Gets or Sets OperationStatus
-        /// </summary>
-        [DataMember(Name="operationStatus", EmitDefaultValue=false)]
-        public OperationStatus OperationStatus { get; set; }
-       
+
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundOperationStatus" /> class.
         /// </summary>
         /// <param name="operation">The name of the operation that was executed in the asynchronous API call. (required).</param>
         /// <param name="operationId">The operation Id returned by the asynchronous API call. (required).</param>
         /// <param name="operationProblems">The problems in the processing of the asynchronous operation. (required).</param>
-        /// <param name="operationStatus">operationStatus (required).</param>
-        public InboundOperationStatus(string operation = default(string), string operationId = default(string), List<OperationProblem> operationProblems = default(List<OperationProblem>), OperationStatus operationStatus = default(OperationStatus))
+        /// <param name="operationStatus">The status of an operation. Can be: SUCCESS, FAILED, IN_PROGRESS. (required).</param>
+        public InboundOperationStatus(string operation = default(string),
+                                      string operationId = default(string),
+                                      List<OperationProblem> operationProblems = default(List<OperationProblem>),
+                                      OperationStatus operationStatus = default(OperationStatus))
         {
             // to ensure "operation" is required (not null)
             if (operation == null)
@@ -107,6 +105,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         [DataMember(Name="operationProblems", EmitDefaultValue=false)]
         public List<OperationProblem> OperationProblems { get; set; }
 
+        /// <summary>
+        /// The status of an operation. Can be: SUCCESS, FAILED, IN_PROGRESS.
+        /// </summary>
+        /// <value>The status of an operation. Can be: SUCCESS, FAILED, IN_PROGRESS.</value>
+        [DataMember(Name = "operationStatus", EmitDefaultValue = false)]
+        public OperationStatus OperationStatus { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

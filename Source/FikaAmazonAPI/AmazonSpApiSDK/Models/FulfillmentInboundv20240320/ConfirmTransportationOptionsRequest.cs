@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ConfirmTransportationOptionsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ConfirmTransportationOptionsRequest() { }
+        public ConfirmTransportationOptionsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmTransportationOptionsRequest" /> class.
         /// </summary>

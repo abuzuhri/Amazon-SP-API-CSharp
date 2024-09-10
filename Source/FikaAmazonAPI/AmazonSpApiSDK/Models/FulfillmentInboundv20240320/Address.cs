@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Address() { }
+        public Address() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
@@ -38,11 +38,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="city">The city. (required).</param>
         /// <param name="companyName">The name of the business..</param>
         /// <param name="countryCode">The country code in two-character ISO 3166-1 alpha-2 format. (required).</param>
-        /// <param name="name">The name of the individual or business. (required).</param>
+        /// <param name="email">The email address.</param>
+        /// <param name="name">The name of the individual who is the primary contact. (required).</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="postalCode">The postal code. (required).</param>
         /// <param name="stateOrProvinceCode">The state or province code..</param>
-        /// /// <param name="phoneNumber">The phone number for the business.</param>
-        public Address(string addressLine1 = default(string), string addressLine2 = default(string), string city = default(string), string companyName = default(string), string countryCode = default(string), string name = default(string), string postalCode = default(string), string stateOrProvinceCode = default(string), string phoneNumber = default(string))
+        public Address(string addressLine1 = default(string),
+                       string addressLine2 = default(string),
+                       string city = default(string),
+                       string companyName = default(string),
+                       string countryCode = default(string),
+                       string email = default(string),
+                       string name = default(string),
+                       string phoneNumber = default(string),
+                       string postalCode = default(string),
+                       string stateOrProvinceCode = default(string))
         {
             // to ensure "addressLine1" is required (not null)
             if (addressLine1 == null)
@@ -89,17 +99,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.PostalCode = postalCode;
             }
-            // to ensure "phoneNumber" is required (not null)
-            if (phoneNumber == null)
-            {
-                throw new InvalidDataException("phoneNumber is a required property for Address and cannot be null");
-            }
-            else
-            {
-                this.PhoneNumber = phoneNumber;
-            }
             this.AddressLine2 = addressLine2;
             this.CompanyName = companyName;
+            this.Email = email;
+            this.PhoneNumber = phoneNumber;
             this.StateOrProvinceCode = stateOrProvinceCode;
         }
         
@@ -139,11 +142,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// The name of the individual or business.
+        /// The email address.
         /// </summary>
-        /// <value>The name of the individual or business.</value>
+        /// <value>The email address.</value>
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
+
+        /// <summary>
+        /// The name of the individual who is the primary contact.
+        /// </summary>
+        /// <value>The name of the individual who is the primary contact.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The phone number.
+        /// </summary>
+        /// <value>The phone number.</value>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// The postal code.
@@ -160,13 +177,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string StateOrProvinceCode { get; set; }
 
         /// <summary>
-        /// The phone number.
-        /// </summary>
-        /// <value>The phone number.</value>
-        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
-        public string PhoneNumber { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -179,10 +189,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             sb.Append("  City: ").Append(City).Append("\n");
             sb.Append("  CompanyName: ").Append(CompanyName).Append("\n");
             sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
             sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
             sb.Append("  StateOrProvinceCode: ").Append(StateOrProvinceCode).Append("\n");
-            sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -241,21 +252,26 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.CountryCode == input.CountryCode ||
                     (this.CountryCode != null &&
                     this.CountryCode.Equals(input.CountryCode))
-                ) && 
+                ) &&
+                (
+                    this.Email == input.Email ||
+                    (this.Email != null &&
+                    this.Email.Equals(input.Email))
+                ) &&
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.PostalCode == input.PostalCode ||
-                    (this.PostalCode != null &&
-                    this.PostalCode.Equals(input.PostalCode))
                 ) &&
                 (
                     this.PhoneNumber == input.PhoneNumber ||
                     (this.PhoneNumber != null &&
                     this.PhoneNumber.Equals(input.PhoneNumber))
+                ) &&
+                (
+                    this.PostalCode == input.PostalCode ||
+                    (this.PostalCode != null &&
+                    this.PostalCode.Equals(input.PostalCode))
                 ) && 
                 (
                     this.StateOrProvinceCode == input.StateOrProvinceCode ||
@@ -283,14 +299,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     hashCode = hashCode * 59 + this.CompanyName.GetHashCode();
                 if (this.CountryCode != null)
                     hashCode = hashCode * 59 + this.CountryCode.GetHashCode();
+                if (this.Email != null)
+                    hashCode = hashCode * 59 + this.Email.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.PhoneNumber != null)
+                    hashCode = hashCode * 59 + this.PhoneNumber.GetHashCode();
                 if (this.PostalCode != null)
                     hashCode = hashCode * 59 + this.PostalCode.GetHashCode();
                 if (this.StateOrProvinceCode != null)
                     hashCode = hashCode * 59 + this.StateOrProvinceCode.GetHashCode();
-                if (this.PhoneNumber != null)
-                    hashCode = hashCode * 59 + this.PhoneNumber.GetHashCode();
                 return hashCode;
             }
         }
@@ -362,6 +380,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CountryCode, length must be greater than 2.", new [] { "CountryCode" });
             }
 
+            // Email (string) maxLength
+            if (this.Email != null && this.Email.Length > 1024)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Email, length must be less than 1024.", new[] { "Email" });
+            }
+
+            // Email (string) minLength
+            if (this.Email != null && this.Email.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Email, length must be greater than 1.", new[] { "Email" });
+            }
+
             // CountryCode (string) pattern
             Regex regexCountryCode = new Regex(@"^[A-Z]{2}$", RegexOptions.CultureInvariant);
             if (false == regexCountryCode.Match(this.CountryCode).Success)
@@ -369,8 +399,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CountryCode, must match a pattern of " + regexCountryCode, new [] { "CountryCode" });
             }
 
+            // PhoneNumber (string) maxLength
+            if (this.PhoneNumber != null && this.PhoneNumber.Length > 20)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be less than 20.", new[] { "PhoneNumber" });
+            }
+
+            // PhoneNumber (string) minLength
+            if (this.PhoneNumber != null && this.PhoneNumber.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be greater than 1.", new[] { "PhoneNumber" });
+            }
+
             // Name (string) maxLength
-            if(this.Name != null && this.Name.Length > 50)
+            if (this.Name != null && this.Name.Length > 50)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be less than 50.", new [] { "Name" });
             }
@@ -403,18 +445,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.StateOrProvinceCode != null && this.StateOrProvinceCode.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for StateOrProvinceCode, length must be greater than 1.", new [] { "StateOrProvinceCode" });
-            }
-
-            // PhoneNumber (string) maxLength
-            if (this.PhoneNumber != null && this.PhoneNumber.Length > 20)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be less than 20.", new[] { "PhoneNumber" });
-            }
-
-            // PhoneNumber (string) minLength
-            if (this.PhoneNumber != null && this.PhoneNumber.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PhoneNumber, length must be greater than 1.", new[] { "PhoneNumber" });
             }
 
             yield break;

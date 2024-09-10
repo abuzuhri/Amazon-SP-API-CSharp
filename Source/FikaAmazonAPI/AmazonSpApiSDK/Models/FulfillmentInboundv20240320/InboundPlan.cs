@@ -26,11 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     [DataContract]
     public partial class InboundPlan :  IEquatable<InboundPlan>, IValidatableObject
     {
-      
+
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundPlan" /> class.
         /// </summary>
-        /// <param name="contactInformation">contactInformation (required).</param>
         /// <param name="createdAt">The ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;. (required).</param>
         /// <param name="inboundPlanId">Identifier to an inbound plan. (required).</param>
         /// <param name="lastUpdatedAt">The ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;. (required).</param>
@@ -39,19 +38,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="packingOptions">Packing options for the inbound plan. This property will be populated when it has been generated via the corresponding endpoint. If there is a chosen placement option, only packing options for that placement option will be returned. If there are confirmed shipments, only packing options for those shipments will be returned. Query the packing option for more details..</param>
         /// <param name="placementOptions">Placement options for the inbound plan. This property will be populated when it has been generated via the corresponding endpoint. If there is a chosen placement option, that will be the only returned option. Query the placement option for more details..</param>
         /// <param name="shipments">Shipment IDs for the inbound plan. This property will be populated when it has been generated via the corresponding endpoint. If there is a chosen placement option, only shipments for that option will be returned. If there are confirmed shipments, only those shipments will be returned. Query the shipment for more details..</param>
-        /// <param name="sourceAddress">sourceAddress (required).</param>
-        /// <param name="status">Current status of the inbound plan. Can be &#x60;ACTIVE&#x60;, &#x60;VOIDED&#x60;, or &#x60;SHIPPED&#x60;. (required).</param>
-        public InboundPlan(ContactInformation contactInformation = default(ContactInformation), DateTime? createdAt = default(DateTime?), string inboundPlanId = default(string), DateTime? lastUpdatedAt = default(DateTime?), List<string> marketplaceIds = default(List<string>), string name = default(string), List<PackingOptionSummary> packingOptions = default(List<PackingOptionSummary>), List<PlacementOptionSummary> placementOptions = default(List<PlacementOptionSummary>), List<ShipmentSummary> shipments = default(List<ShipmentSummary>), Address sourceAddress = default(Address), string status = default(string))
+        /// <param name="sourceAddress">Specific details to identify a place. (required).</param>
+        /// <param name="status">Current status of the inbound plan. Can be: ACTIVE, VOIDED, SHIPPED, ERRORED (required).</param>
+        public InboundPlan(DateTime? createdAt = default(DateTime?),
+                           string inboundPlanId = default(string),
+                           DateTime? lastUpdatedAt = default(DateTime?),
+                           List<string> marketplaceIds = default(List<string>),
+                           string name = default(string),
+                           List<PackingOptionSummary> packingOptions = default(List<PackingOptionSummary>),
+                           List<PlacementOptionSummary> placementOptions = default(List<PlacementOptionSummary>),
+                           List<ShipmentSummary> shipments = default(List<ShipmentSummary>),
+                           Address sourceAddress = default(Address),
+                           InboundPlanStatus status = default(InboundPlanStatus))
         {
-            // to ensure "contactInformation" is required (not null)
-            if (contactInformation == null)
-            {
-                throw new InvalidDataException("contactInformation is a required property for InboundPlan and cannot be null");
-            }
-            else
-            {
-                this.ContactInformation = contactInformation;
-            }
             // to ensure "createdAt" is required (not null)
             if (createdAt == null)
             {
@@ -123,24 +122,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
         public InboundPlan()
         {
-            this.ContactInformation = default(ContactInformation);
             this.CreatedAt = default(DateTime?);
             this.InboundPlanId = default(string);
             this.LastUpdatedAt = default(DateTime?);
             this.MarketplaceIds = default(List<string>);
             this.Name = default(string);
             this.SourceAddress = default(Address);
-            this.Status = default(string);
+            this.Status = default(InboundPlanStatus);
             this.PackingOptions = default(List<PackingOptionSummary>);
             this.PlacementOptions = default(List<PlacementOptionSummary>);
             this.Shipments = default(List<ShipmentSummary>);
         }
 
-        /// <summary>
-        /// Gets or Sets ContactInformation
-        /// </summary>
-        [DataMember(Name="contactInformation", EmitDefaultValue=false)]
-        public ContactInformation ContactInformation { get; set; }
 
         /// <summary>
         /// The ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;.
@@ -207,9 +200,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Current status of the inbound plan. Can be &#x60;ACTIVE&#x60;, &#x60;VOIDED&#x60;, or &#x60;SHIPPED&#x60;.
         /// </summary>
-        /// <value>Current status of the inbound plan. Can be &#x60;ACTIVE&#x60;, &#x60;VOIDED&#x60;, or &#x60;SHIPPED&#x60;.</value>
+        /// <value>Current status of the inbound plan. Can be ACTIVE, VOIDED, SHIPPED or ERRORED.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public InboundPlanStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -219,7 +212,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class InboundPlan {\n");
-            sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  InboundPlanId: ").Append(InboundPlanId).Append("\n");
             sb.Append("  LastUpdatedAt: ").Append(LastUpdatedAt).Append("\n");
@@ -264,11 +256,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 return false;
 
             return 
-                (
-                    this.ContactInformation == input.ContactInformation ||
-                    (this.ContactInformation != null &&
-                    this.ContactInformation.Equals(input.ContactInformation))
-                ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
@@ -330,8 +317,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.ContactInformation != null)
-                    hashCode = hashCode * 59 + this.ContactInformation.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.InboundPlanId != null)
@@ -380,18 +365,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexInboundPlanId.Match(this.InboundPlanId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, must match a pattern of " + regexInboundPlanId, new [] { "InboundPlanId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

@@ -28,11 +28,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Quote" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Quote() { }
+        public Quote() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Quote" /> class.
         /// </summary>
-        /// <param name="cost">cost (required).</param>
+        /// <param name="cost">Currency definition. (required).</param>
         /// <param name="expiration">The timestamp at which this transportation option quote becomes no longer valid. This is in ISO 8601 datetime format with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;..</param>
         /// <param name="voidableUntil">Voidable until timestamp..</param>
         public Quote(Currency cost = default(Currency), DateTime? expiration = default(DateTime?), DateTime? voidableUntil = default(DateTime?))

@@ -30,13 +30,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="GenerateTransportationOptionsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenerateTransportationOptionsRequest() { }
+        public GenerateTransportationOptionsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="GenerateTransportationOptionsRequest" /> class.
         /// </summary>
         /// <param name="placementOptionId">The placement option to generate transportation options for. (required).</param>
         /// <param name="shipmentTransportationConfigurations">List of shipment transportation configurations. (required).</param>
-        public GenerateTransportationOptionsRequest(string placementOptionId = default(string), List<ShipmentTransportationConfiguration> shipmentTransportationConfigurations = default(List<ShipmentTransportationConfiguration>))
+        public GenerateTransportationOptionsRequest(string placementOptionId = default(string),
+                                                    List<ShipmentTransportationConfiguration> shipmentTransportationConfigurations = default(List<ShipmentTransportationConfiguration>))
         {
             // to ensure "placementOptionId" is required (not null)
             if (placementOptionId == null)

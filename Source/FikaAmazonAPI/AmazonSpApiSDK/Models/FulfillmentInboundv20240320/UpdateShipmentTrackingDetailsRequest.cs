@@ -28,11 +28,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="UpdateShipmentTrackingDetailsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected UpdateShipmentTrackingDetailsRequest() { }
+        public UpdateShipmentTrackingDetailsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateShipmentTrackingDetailsRequest" /> class.
         /// </summary>
-        /// <param name="trackingDetails">trackingDetails (required).</param>
+        /// <param name="trackingDetails">Tracking information input for Less-Than-Truckload (LTL) and Small Parcel Delivery (SPD) shipments. (required).</param>
         public UpdateShipmentTrackingDetailsRequest(TrackingDetailsInput trackingDetails = default(TrackingDetailsInput))
         {
             // to ensure "trackingDetails" is required (not null)
@@ -45,9 +45,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 this.TrackingDetails = trackingDetails;
             }
         }
-        
+
         /// <summary>
-        /// Gets or Sets TrackingDetails
+        /// Tracking information input for Less-Than-Truckload (LTL) and Small Parcel Delivery (SPD) shipments.
         /// </summary>
         [DataMember(Name="trackingDetails", EmitDefaultValue=false)]
         public TrackingDetailsInput TrackingDetails { get; set; }

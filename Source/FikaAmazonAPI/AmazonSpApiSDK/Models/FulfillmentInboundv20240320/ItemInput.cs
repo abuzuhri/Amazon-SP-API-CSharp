@@ -26,30 +26,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     public partial class ItemInput :  IEquatable<ItemInput>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets LabelOwner
-        /// </summary>
-        [DataMember(Name="labelOwner", EmitDefaultValue=false)]
-        public LabelOwner LabelOwner { get; set; }
-        /// <summary>
-        /// Gets or Sets PrepOwner
-        /// </summary>
-        [DataMember(Name="prepOwner", EmitDefaultValue=false)]
-        public PrepOwner PrepOwner { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="ItemInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ItemInput() { }
+        public ItemInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemInput" /> class.
         /// </summary>
-        /// <param name="expiration">The expiration date of the MSKU in ISO 8601 format. The same MSKU with different expiration dates cannot go into the same box..</param>
-        /// <param name="labelOwner">labelOwner (required).</param>
-        /// <param name="manufacturingLotCode">The manufacturing lot code..</param>
+        /// <param name="expiration">The expiration date of the MSKU in ISO 8601 format. The same MSKU with different expiration dates cannot go into the same box.</param>
+        /// <param name="labelOwner">Specifies who will label the items. Options include AMAZON, SELLER or NONE. (required).</param>
+        /// <param name="manufacturingLotCode">The manufacturing lot code.</param>
         /// <param name="msku">The merchant SKU. (required).</param>
-        /// <param name="prepOwner">prepOwner (required).</param>
+        /// <param name="prepOwner">In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE. (required).</param>
         /// <param name="quantity">The number of units of the specified MSKU that will be shipped. (required).</param>
-        public ItemInput(string expiration = default(string), LabelOwner labelOwner = default(LabelOwner), string manufacturingLotCode = default(string), string msku = default(string), PrepOwner prepOwner = default(PrepOwner), int? quantity = default(int?))
+        public ItemInput(string expiration = default(string),
+                         LabelOwner labelOwner = default(LabelOwner),
+                         string manufacturingLotCode = default(string),
+                         string msku = default(string),
+                         PrepOwner prepOwner = default(PrepOwner),
+                         int? quantity = default(int?))
         {
             // to ensure "labelOwner" is required (not null)
             if (labelOwner == null)
@@ -90,7 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.Expiration = expiration;
             this.ManufacturingLotCode = manufacturingLotCode;
         }
-        
+
         /// <summary>
         /// The expiration date of the MSKU in ISO 8601 format. The same MSKU with different expiration dates cannot go into the same box.
         /// </summary>
@@ -98,6 +93,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         [DataMember(Name="expiration", EmitDefaultValue=false)]
         public string Expiration { get; set; }
 
+        /// <summary>
+        /// Specifies who will label the items. Options include AMAZON, SELLER or NONE.
+        /// </summary>
+        [DataMember(Name = "labelOwner", EmitDefaultValue = false)]
+        public LabelOwner LabelOwner { get; set; }
 
         /// <summary>
         /// The manufacturing lot code.
@@ -113,6 +113,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         [DataMember(Name="msku", EmitDefaultValue=false)]
         public string Msku { get; set; }
 
+        /// <summary>
+        /// In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.
+        /// </summary>
+        [DataMember(Name = "prepOwner", EmitDefaultValue = false)]
+        public PrepOwner PrepOwner { get; set; }
 
         /// <summary>
         /// The number of units of the specified MSKU that will be shipped.

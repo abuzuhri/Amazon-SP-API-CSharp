@@ -26,19 +26,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Initializes a new instance of the <see cref="Dates" /> class.
         /// </summary>
-        /// <param name="deliveryWindow">deliveryWindow.</param>
-        /// <param name="readyToShipWindow">readyToShipWindow.</param>
-        public Dates(Window deliveryWindow = default(Window), Window readyToShipWindow = default(Window))
+        /// <param name="readyToShipWindow">Contains a start and end DateTime representing a time range.</param>
+        public Dates(Window readyToShipWindow = default(Window))
         {
-            this.DeliveryWindow = deliveryWindow;
             this.ReadyToShipWindow = readyToShipWindow;
         }
-        
-        /// <summary>
-        /// Gets or Sets DeliveryWindow
-        /// </summary>
-        [DataMember(Name="deliveryWindow", EmitDefaultValue=false)]
-        public Window DeliveryWindow { get; set; }
 
         /// <summary>
         /// Gets or Sets ReadyToShipWindow
@@ -54,7 +46,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class Dates {\n");
-            sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
             sb.Append("  ReadyToShipWindow: ").Append(ReadyToShipWindow).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -89,12 +80,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.DeliveryWindow == input.DeliveryWindow ||
-                    (this.DeliveryWindow != null &&
-                    this.DeliveryWindow.Equals(input.DeliveryWindow))
-                ) && 
+            return
                 (
                     this.ReadyToShipWindow == input.ReadyToShipWindow ||
                     (this.ReadyToShipWindow != null &&
@@ -111,8 +97,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.DeliveryWindow != null)
-                    hashCode = hashCode * 59 + this.DeliveryWindow.GetHashCode();
                 if (this.ReadyToShipWindow != null)
                     hashCode = hashCode * 59 + this.ReadyToShipWindow.GetHashCode();
                 return hashCode;

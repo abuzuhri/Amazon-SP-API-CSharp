@@ -28,8 +28,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <param name="cessRate">Rate of cess tax..</param>
         /// <param name="gstRate">Rate of gst tax..</param>
-        /// <param name="taxType">Type of tax. Can be &#x60;CGST&#x60;, &#x60;SGST&#x60;, &#x60;IGST&#x60;, or &#x60;TOTAL_TAX&#x60;..</param>
-        public TaxRate(double? cessRate = default(double?), double? gstRate = default(double?), string taxType = default(string))
+        /// <param name="taxType">Type of tax. Can be: CGST, SGST, IGST, TOTAL_TAX.</param>
+        public TaxRate(double? cessRate = default(double?), double? gstRate = default(double?), TaxType? taxType = default(TaxType?))
         {
             this.CessRate = cessRate;
             this.GstRate = gstRate;
@@ -51,11 +51,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public double? GstRate { get; set; }
 
         /// <summary>
-        /// Type of tax. Can be &#x60;CGST&#x60;, &#x60;SGST&#x60;, &#x60;IGST&#x60;, or &#x60;TOTAL_TAX&#x60;.
+        /// Type of tax. Can be: CGST, SGST, IGST, TOTAL_TAX.
         /// </summary>
-        /// <value>Type of tax. Can be &#x60;CGST&#x60;, &#x60;SGST&#x60;, &#x60;IGST&#x60;, or &#x60;TOTAL_TAX&#x60;.</value>
+        /// <value>Type of tax. Can be: CGST, SGST, IGST, TOTAL_TAX.</value>
         [DataMember(Name="taxType", EmitDefaultValue=false)]
-        public string TaxType { get; set; }
+        public TaxType? TaxType { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -145,18 +145,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // TaxType (string) maxLength
-            if(this.TaxType != null && this.TaxType.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TaxType, length must be less than 1024.", new [] { "TaxType" });
-            }
-
-            // TaxType (string) minLength
-            if(this.TaxType != null && this.TaxType.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TaxType, length must be greater than 1.", new [] { "TaxType" });
-            }
-
             yield break;
         }
     }

@@ -28,13 +28,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ShipmentSource" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShipmentSource() { }
+        public ShipmentSource() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ShipmentSource" /> class.
         /// </summary>
-        /// <param name="address">address.</param>
+        /// <param name="address">Specific details to identify a place.</param>
         /// <param name="sourceType">The type of source for this shipment. Can be &#x60;SELLER_FACILITY&#x60;. (required).</param>
-        public ShipmentSource(Address address = default(Address), string sourceType = default(string))
+        public ShipmentSource(Address address = default(Address), SourceType sourceType = default(SourceType))
         {
             // to ensure "sourceType" is required (not null)
             if (sourceType == null)
@@ -59,7 +59,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>The type of source for this shipment. Can be &#x60;SELLER_FACILITY&#x60;.</value>
         [DataMember(Name="sourceType", EmitDefaultValue=false)]
-        public string SourceType { get; set; }
+        public SourceType SourceType { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -141,17 +141,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // SourceType (string) maxLength
-            if(this.SourceType != null && this.SourceType.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SourceType, length must be less than 1024.", new [] { "SourceType" });
-            }
-
-            // SourceType (string) minLength
-            if(this.SourceType != null && this.SourceType.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SourceType, length must be greater than 1.", new [] { "SourceType" });
-            }
 
             yield break;
         }

@@ -28,14 +28,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="DocumentDownload" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DocumentDownload() { }
+        public DocumentDownload() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentDownload" /> class.
         /// </summary>
-        /// <param name="downloadType">The type of download. Can be &#x60;URL&#x60; or &#x60;PDF_BASE64&#x60;. (required).</param>
+        /// <param name="downloadType">The type of download. Can be URL. (required).</param>
         /// <param name="expiration">The timestamp of expiration of the URI. This is in ISO 8601 datetime format with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;..</param>
         /// <param name="uri">Uniform resource identifier to identify where the document is located. (required).</param>
-        public DocumentDownload(string downloadType = default(string), DateTime? expiration = default(DateTime?), string uri = default(string))
+        public DocumentDownload(DownloadType downloadType = default(DownloadType), DateTime? expiration = default(DateTime?), string uri = default(string))
         {
             // to ensure "downloadType" is required (not null)
             if (downloadType == null)
@@ -57,13 +57,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             }
             this.Expiration = expiration;
         }
-        
+
         /// <summary>
-        /// The type of download. Can be &#x60;URL&#x60; or &#x60;PDF_BASE64&#x60;.
+        /// The type of download. Can be URL.
         /// </summary>
-        /// <value>The type of download. Can be &#x60;URL&#x60; or &#x60;PDF_BASE64&#x60;.</value>
+        /// <value>The type of download. Can be URL.</value>
         [DataMember(Name="downloadType", EmitDefaultValue=false)]
-        public string DownloadType { get; set; }
+        public DownloadType DownloadType { get; set; }
 
         /// <summary>
         /// The timestamp of expiration of the URI. This is in ISO 8601 datetime format with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;.
