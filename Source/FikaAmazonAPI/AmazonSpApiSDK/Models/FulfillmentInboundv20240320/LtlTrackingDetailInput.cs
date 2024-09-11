@@ -29,11 +29,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="LtlTrackingDetailInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LtlTrackingDetailInput() { }
+        public LtlTrackingDetailInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="LtlTrackingDetailInput" /> class.
         /// </summary>
-        /// <param name="billOfLadingNumber">The number of the carrier shipment acknowledgement document..</param>
+        /// <param name="billOfLadingNumber">The number of the carrier shipment acknowledgement document.</param>
         /// <param name="freightBillNumber">Number associated with the freight bill. (required).</param>
         public LtlTrackingDetailInput(string billOfLadingNumber = default(string), List<string> freightBillNumber = default(List<string>))
         {

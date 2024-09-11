@@ -26,26 +26,23 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     public partial class BoxInput :  IEquatable<BoxInput>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets ContentInformationSource
-        /// </summary>
-        [DataMember(Name="contentInformationSource", EmitDefaultValue=false)]
-        public BoxContentInformationSource ContentInformationSource { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="BoxInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected BoxInput() { }
+        public BoxInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="BoxInput" /> class.
         /// </summary>
-        /// <param name="boxId">The ID of the box to update that was provided by Amazon. This ID is comprised of the external shipment ID         (which is generated after transportation has been confirmed) and the index of the box..</param>
-        /// <param name="contentInformationSource">contentInformationSource (required).</param>
-        /// <param name="contents">The Contents of the box containing a list of MSKUs and their quantity. If &#x60;boxAttribute&#x60; is &#x60;BARCODE_2D&#x60; or &#x60;MANUAL_PROCESS&#x60;, user should provide ALL of the items that could be in the box, without specifying item quantities..</param>
-        /// <param name="dimensions">dimensions (required).</param>
+        /// <param name="contentInformationSource">Indication of how box content is meant to be provided. (required).</param>
+        /// <param name="dimensions">Measurement of a package's dimensions. (required).</param>
+        /// <param name="items">The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.</param>
         /// <param name="quantity">The number of containers where all other properties like weight or dimensions are identical. (required).</param>
-        /// <param name="templateName">The seller-provided name for a &#39;type&#39; of box (or a group of boxes with the same contents), which will be used to identify all created boxes of that type. When providing bulk box information, this value must be unique from the other box types. When providing individual boxes with existing IDs, this value can be shared between many boxes that have the same contents. (required).</param>
-        /// <param name="weight">weight (required).</param>
-        public BoxInput(string boxId = default(string), BoxContentInformationSource contentInformationSource = default(BoxContentInformationSource), List<BoxContent> contents = default(List<BoxContent>), Dimensions dimensions = default(Dimensions), int? quantity = default(int?), string templateName = default(string), Weight weight = default(Weight))
+        /// <param name="weight">The weight of a package. (required).</param>
+        public BoxInput(BoxContentInformationSource contentInformationSource = default(BoxContentInformationSource),
+                        Dimensions dimensions = default(Dimensions),
+                        List<ItemInput> items = default(List<ItemInput>),
+                        int? quantity = default(int?),
+                        Weight weight = default(Weight))
         {
             // to ensure "contentInformationSource" is required (not null)
             if (contentInformationSource == null)
@@ -74,15 +71,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.Quantity = quantity;
             }
-            // to ensure "templateName" is required (not null)
-            if (templateName == null)
-            {
-                throw new InvalidDataException("templateName is a required property for BoxInput and cannot be null");
-            }
-            else
-            {
-                this.TemplateName = templateName;
-            }
             // to ensure "weight" is required (not null)
             if (weight == null)
             {
@@ -92,30 +80,29 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.Weight = weight;
             }
-            this.BoxId = boxId;
-            this.Contents = contents;
+            this.Items = items;
         }
-        
-        /// <summary>
-        /// The ID of the box to update that was provided by Amazon. This ID is comprised of the external shipment ID         (which is generated after transportation has been confirmed) and the index of the box.
-        /// </summary>
-        /// <value>The ID of the box to update that was provided by Amazon. This ID is comprised of the external shipment ID         (which is generated after transportation has been confirmed) and the index of the box.</value>
-        [DataMember(Name="boxId", EmitDefaultValue=false)]
-        public string BoxId { get; set; }
-
 
         /// <summary>
-        /// The Contents of the box containing a list of MSKUs and their quantity. If &#x60;boxAttribute&#x60; is &#x60;BARCODE_2D&#x60; or &#x60;MANUAL_PROCESS&#x60;, user should provide ALL of the items that could be in the box, without specifying item quantities.
+        /// Indication of how box content is meant to be provided.
         /// </summary>
-        /// <value>The Contents of the box containing a list of MSKUs and their quantity. If &#x60;boxAttribute&#x60; is &#x60;BARCODE_2D&#x60; or &#x60;MANUAL_PROCESS&#x60;, user should provide ALL of the items that could be in the box, without specifying item quantities.</value>
-        [DataMember(Name="contents", EmitDefaultValue=false)]
-        public List<BoxContent> Contents { get; set; }
+        /// <value>Indication of how box content is meant to be provided.</value>
+        [DataMember(Name = "contentInformationSource", EmitDefaultValue = false)]
+        public BoxContentInformationSource ContentInformationSource { get; set; }
 
         /// <summary>
-        /// Gets or Sets Dimensions
+        /// Measurement of a package's dimensions.
         /// </summary>
+        /// <value>Measurement of a package's dimensions.</value>
         [DataMember(Name="dimensions", EmitDefaultValue=false)]
         public Dimensions Dimensions { get; set; }
+
+        /// <summary>
+        /// The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.
+        /// </summary>
+        /// <value>The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.</value>
+        [DataMember(Name = "items ", EmitDefaultValue = false)]
+        public List<ItemInput> Items { get; set; }
 
         /// <summary>
         /// The number of containers where all other properties like weight or dimensions are identical.
@@ -125,15 +112,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public int? Quantity { get; set; }
 
         /// <summary>
-        /// The seller-provided name for a &#39;type&#39; of box (or a group of boxes with the same contents), which will be used to identify all created boxes of that type. When providing bulk box information, this value must be unique from the other box types. When providing individual boxes with existing IDs, this value can be shared between many boxes that have the same contents.
+        /// The weight of a package.
         /// </summary>
-        /// <value>The seller-provided name for a &#39;type&#39; of box (or a group of boxes with the same contents), which will be used to identify all created boxes of that type. When providing bulk box information, this value must be unique from the other box types. When providing individual boxes with existing IDs, this value can be shared between many boxes that have the same contents.</value>
-        [DataMember(Name="templateName", EmitDefaultValue=false)]
-        public string TemplateName { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Weight
-        /// </summary>
+        /// <value>The weight of a package.</value>
         [DataMember(Name="weight", EmitDefaultValue=false)]
         public Weight Weight { get; set; }
 
@@ -145,12 +126,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class BoxInput {\n");
-            sb.Append("  BoxId: ").Append(BoxId).Append("\n");
             sb.Append("  ContentInformationSource: ").Append(ContentInformationSource).Append("\n");
-            sb.Append("  Contents: ").Append(Contents).Append("\n");
             sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
+            sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
-            sb.Append("  TemplateName: ").Append(TemplateName).Append("\n");
             sb.Append("  Weight: ").Append(Weight).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -187,35 +166,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
             return 
                 (
-                    this.BoxId == input.BoxId ||
-                    (this.BoxId != null &&
-                    this.BoxId.Equals(input.BoxId))
-                ) && 
-                (
                     this.ContentInformationSource == input.ContentInformationSource ||
                     (this.ContentInformationSource != null &&
                     this.ContentInformationSource.Equals(input.ContentInformationSource))
                 ) && 
                 (
-                    this.Contents == input.Contents ||
-                    this.Contents != null &&
-                    this.Contents.SequenceEqual(input.Contents)
-                ) && 
-                (
                     this.Dimensions == input.Dimensions ||
                     (this.Dimensions != null &&
                     this.Dimensions.Equals(input.Dimensions))
-                ) && 
+                ) &&
+                (
+                    this.Items == input.Items ||
+                    (this.Items != null &&
+                    this.Items.SequenceEqual(input.Items))
+                ) &&
                 (
                     this.Quantity == input.Quantity ||
                     (this.Quantity != null &&
                     this.Quantity.Equals(input.Quantity))
-                ) && 
-                (
-                    this.TemplateName == input.TemplateName ||
-                    (this.TemplateName != null &&
-                    this.TemplateName.Equals(input.TemplateName))
-                ) && 
+                ) &&
                 (
                     this.Weight == input.Weight ||
                     (this.Weight != null &&
@@ -232,18 +201,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.BoxId != null)
-                    hashCode = hashCode * 59 + this.BoxId.GetHashCode();
                 if (this.ContentInformationSource != null)
                     hashCode = hashCode * 59 + this.ContentInformationSource.GetHashCode();
-                if (this.Contents != null)
-                    hashCode = hashCode * 59 + this.Contents.GetHashCode();
                 if (this.Dimensions != null)
                     hashCode = hashCode * 59 + this.Dimensions.GetHashCode();
+                if (this.Items != null)
+                    hashCode = hashCode * 59 + this.Items.GetHashCode();
                 if (this.Quantity != null)
                     hashCode = hashCode * 59 + this.Quantity.GetHashCode();
-                if (this.TemplateName != null)
-                    hashCode = hashCode * 59 + this.TemplateName.GetHashCode();
                 if (this.Weight != null)
                     hashCode = hashCode * 59 + this.Weight.GetHashCode();
                 return hashCode;
@@ -257,18 +222,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // BoxId (string) maxLength
-            if(this.BoxId != null && this.BoxId.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BoxId, length must be less than 1024.", new [] { "BoxId" });
-            }
-
-            // BoxId (string) minLength
-            if(this.BoxId != null && this.BoxId.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BoxId, length must be greater than 1.", new [] { "BoxId" });
-            }
-
             // Quantity (int?) maximum
             if(this.Quantity > (int?)10000)
             {
@@ -279,18 +232,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.Quantity < (int?)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Quantity, must be a value greater than or equal to 1.", new [] { "Quantity" });
-            }
-
-            // TemplateName (string) maxLength
-            if(this.TemplateName != null && this.TemplateName.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TemplateName, length must be less than 1024.", new [] { "TemplateName" });
-            }
-
-            // TemplateName (string) minLength
-            if(this.TemplateName != null && this.TemplateName.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TemplateName, length must be greater than 1.", new [] { "TemplateName" });
             }
 
             yield break;

@@ -29,13 +29,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PlacementOptionSummary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PlacementOptionSummary() { }
+        public PlacementOptionSummary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PlacementOptionSummary" /> class.
         /// </summary>
         /// <param name="placementOptionId">Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs. (required).</param>
-        /// <param name="status">The status of a placement option. Can be &#x60;OFFERED&#x60; or &#x60;ACCEPTED&#x60;. (required).</param>
-        public PlacementOptionSummary(string placementOptionId = default(string), string status = default(string))
+        /// <param name="status">The status of a placement option. Can be: OFFERED or ACCEPTED. (required).</param>
+        public PlacementOptionSummary(string placementOptionId = default(string), PlacementOptionStatus status = default(PlacementOptionStatus))
         {
             // to ensure "placementOptionId" is required (not null)
             if (placementOptionId == null)
@@ -65,11 +65,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string PlacementOptionId { get; set; }
 
         /// <summary>
-        /// The status of a placement option. Can be &#x60;OFFERED&#x60; or &#x60;ACCEPTED&#x60;.
+        /// The status of a placement option. Can be: OFFERED or ACCEPTED.
         /// </summary>
-        /// <value>The status of a placement option. Can be &#x60;OFFERED&#x60; or &#x60;ACCEPTED&#x60;.</value>
+        /// <value>The status of a placement option. Can be: OFFERED or ACCEPTED.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public PlacementOptionStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -168,18 +168,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexPlacementOptionId.Match(this.PlacementOptionId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PlacementOptionId, must match a pattern of " + regexPlacementOptionId, new [] { "PlacementOptionId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

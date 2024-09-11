@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="CustomPlacementInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CustomPlacementInput() { }
+        public CustomPlacementInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomPlacementInput" /> class.
         /// </summary>

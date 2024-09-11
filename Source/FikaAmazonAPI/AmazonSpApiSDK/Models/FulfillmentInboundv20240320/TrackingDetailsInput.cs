@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingDetailsInput" /> class.
         /// </summary>
-        /// <param name="ltlTrackingDetail">ltlTrackingDetail.</param>
-        /// <param name="spdTrackingDetail">spdTrackingDetail.</param>
+        /// <param name="ltlTrackingDetail">Contains input information to update Less-Than-Truckload (LTL) tracking information.</param>
+        /// <param name="spdTrackingDetail">Contains input information to update Small Parcel Delivery (SPD) tracking information.</param>
         public TrackingDetailsInput(LtlTrackingDetailInput ltlTrackingDetail = default(LtlTrackingDetailInput), SpdTrackingDetailInput spdTrackingDetail = default(SpdTrackingDetailInput))
         {
             this.LtlTrackingDetail = ltlTrackingDetail;

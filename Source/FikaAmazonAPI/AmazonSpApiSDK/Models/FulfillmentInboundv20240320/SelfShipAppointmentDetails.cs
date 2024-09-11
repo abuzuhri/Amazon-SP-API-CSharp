@@ -26,9 +26,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Initializes a new instance of the <see cref="SelfShipAppointmentDetails" /> class.
         /// </summary>
-        /// <param name="appointmentId">Identifier for appointment..</param>
-        /// <param name="appointmentSlotTime">appointmentSlotTime.</param>
-        /// <param name="appointmentStatus">Status of the appointment..</param>
+        /// <param name="appointmentId">Identifier for appointment.</param>
+        /// <param name="appointmentSlotTime">An appointment slot time with start and end.</param>
+        /// <param name="appointmentStatus">Status of the appointment.</param>
         public SelfShipAppointmentDetails(decimal? appointmentId = default(decimal?), AppointmentSlotTime appointmentSlotTime = default(AppointmentSlotTime), string appointmentStatus = default(string))
         {
             this.AppointmentId = appointmentId;

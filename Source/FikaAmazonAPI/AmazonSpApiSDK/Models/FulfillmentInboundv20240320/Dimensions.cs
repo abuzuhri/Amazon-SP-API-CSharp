@@ -25,15 +25,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
     public partial class Dimensions :  IEquatable<Dimensions>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets UnitOfMeasurement
-        /// </summary>
-        [DataMember(Name="unitOfMeasurement", EmitDefaultValue=false)]
-        public UnitOfMeasurement UnitOfMeasurement { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="Dimensions" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Dimensions() { }
+        public Dimensions() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Dimensions" /> class.
         /// </summary>
@@ -41,7 +36,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="length">Length. (required).</param>
         /// <param name="unitOfMeasurement">unitOfMeasurement (required).</param>
         /// <param name="width">Width. (required).</param>
-        public Dimensions(double? height = default(double?), double? length = default(double?), UnitOfMeasurement unitOfMeasurement = default(UnitOfMeasurement), double? width = default(double?))
+        public Dimensions(double? height = default(double?),
+                          double? length = default(double?),
+                          UnitOfMeasurement unitOfMeasurement = default(UnitOfMeasurement),
+                          double? width = default(double?))
         {
             // to ensure "height" is required (not null)
             if (height == null)
@@ -95,6 +93,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         [DataMember(Name="length", EmitDefaultValue=false)]
         public double? Length { get; set; }
 
+        /// <summary>
+        /// Gets or Sets UnitOfMeasurement
+        /// </summary>
+        [DataMember(Name = "unitOfMeasurement", EmitDefaultValue = false)]
+        public UnitOfMeasurement UnitOfMeasurement { get; set; }
 
         /// <summary>
         /// Width.

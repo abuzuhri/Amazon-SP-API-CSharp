@@ -28,12 +28,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="UpdateItemComplianceDetailsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected UpdateItemComplianceDetailsRequest() { }
+        public UpdateItemComplianceDetailsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateItemComplianceDetailsRequest" /> class.
         /// </summary>
         /// <param name="msku">The merchant SKU, a merchant-supplied identifier for a specific SKU. (required).</param>
-        /// <param name="taxDetails">taxDetails (required).</param>
+        /// <param name="taxDetails">Information used to determine the tax compliance. (required).</param>
         public UpdateItemComplianceDetailsRequest(string msku = default(string), TaxDetails taxDetails = default(TaxDetails))
         {
             // to ensure "msku" is required (not null)
@@ -64,7 +64,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string Msku { get; set; }
 
         /// <summary>
-        /// Gets or Sets TaxDetails
+        /// Information used to determine the tax compliance.
         /// </summary>
         [DataMember(Name="taxDetails", EmitDefaultValue=false)]
         public TaxDetails TaxDetails { get; set; }

@@ -19,7 +19,7 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// The &#x60;getSelfShipAppointmentSlots&#x60; response.
+    /// The getSelfShipAppointmentSlots response.
     /// </summary>
     [DataContract]
     public partial class GetSelfShipAppointmentSlotsResponse :  IEquatable<GetSelfShipAppointmentSlotsResponse>, IValidatableObject
@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="GetSelfShipAppointmentSlotsResponse" /> class.
         /// </summary>
         /// <param name="pagination">pagination.</param>
-        /// <param name="selfShipAppointmentSlotsAvailability">selfShipAppointmentSlotsAvailability (required).</param>
+        /// <param name="selfShipAppointmentSlotsAvailability">The self ship appointment time slots availability and an expiration date for which the slots can be scheduled. (required).</param>
         public GetSelfShipAppointmentSlotsResponse(Pagination pagination = default(Pagination), SelfShipAppointmentSlotsAvailability selfShipAppointmentSlotsAvailability = default(SelfShipAppointmentSlotsAvailability))
         {
             // to ensure "selfShipAppointmentSlotsAvailability" is required (not null)
@@ -56,8 +56,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public Pagination Pagination { get; set; }
 
         /// <summary>
-        /// Gets or Sets SelfShipAppointmentSlotsAvailability
+        /// The self ship appointment time slots availability and an expiration date for which the slots can be scheduled.
         /// </summary>
+        /// <value>The self ship appointment time slots availability and an expiration date for which the slots can be scheduled.</value>
         [DataMember(Name="selfShipAppointmentSlotsAvailability", EmitDefaultValue=false)]
         public SelfShipAppointmentSlotsAvailability SelfShipAppointmentSlotsAvailability { get; set; }
 

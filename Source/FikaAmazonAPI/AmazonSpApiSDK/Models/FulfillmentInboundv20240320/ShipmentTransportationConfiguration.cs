@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,15 +30,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ShipmentTransportationConfiguration" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShipmentTransportationConfiguration() { }
+        public ShipmentTransportationConfiguration() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ShipmentTransportationConfiguration" /> class.
         /// </summary>
-        /// <param name="contactInformation">contactInformation.</param>
-        /// <param name="palletInformation">palletInformation.</param>
+        /// <param name="contactInformation">The seller's contact information.</param>
+        /// <param name="freightInformation ">Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.</param>
+        /// <param name="pallets ">List of pallet configuration inputs.</param>
         /// <param name="readyToShipWindow">The range of dates within which the seller intends to ship their items. This is the pick-up date or “ready to ship” date, not an estimated delivery date.  (required).</param>
         /// <param name="shipmentId">Identifier to a shipment. A shipment contains the boxes and units being inbounded. (required).</param>
-        public ShipmentTransportationConfiguration(ContactInformation contactInformation = default(ContactInformation), PalletInformation palletInformation = default(PalletInformation), WindowInput readyToShipWindow = default(WindowInput), string shipmentId = default(string))
+        public ShipmentTransportationConfiguration(ContactInformation contactInformation = default(ContactInformation),
+                                                   FreightInformation freightInformation = default(FreightInformation),
+                                                   List<PalletInput> pallets = default(List<PalletInput>),
+                                                   WindowInput readyToShipWindow = default(WindowInput),
+                                                   string shipmentId = default(string))
         {
             // to ensure "readyToShipWindow" is required (not null)
             if (readyToShipWindow == null)
@@ -57,8 +63,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.ShipmentId = shipmentId;
             }
+            this.Pallets = pallets;
             this.ContactInformation = contactInformation;
-            this.PalletInformation = palletInformation;
+            this.FreightInformation = freightInformation;
         }
         
         /// <summary>
@@ -68,10 +75,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public ContactInformation ContactInformation { get; set; }
 
         /// <summary>
-        /// Gets or Sets PalletInformation
+        /// Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.
         /// </summary>
-        [DataMember(Name="palletInformation", EmitDefaultValue=false)]
-        public PalletInformation PalletInformation { get; set; }
+        [DataMember(Name= "freightInformation", EmitDefaultValue=false)]
+        public FreightInformation FreightInformation { get; set; }
+
+        /// <summary>
+        /// List of pallet configuration inputs.
+        /// </summary>
+        [DataMember(Name = "pallets", EmitDefaultValue = false)]
+        public List<PalletInput> Pallets { get; set; }
 
         /// <summary>
         /// The range of dates within which the seller intends to ship their items. This is the pick-up date or “ready to ship” date, not an estimated delivery date. 
@@ -96,7 +109,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             var sb = new StringBuilder();
             sb.Append("class ShipmentTransportationConfiguration {\n");
             sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
-            sb.Append("  PalletInformation: ").Append(PalletInformation).Append("\n");
+            sb.Append("  FreightInformation: ").Append(FreightInformation).Append("\n");
+            sb.Append("  Pallets: ").Append(Pallets).Append("\n");
             sb.Append("  ReadyToShipWindow: ").Append(ReadyToShipWindow).Append("\n");
             sb.Append("  ShipmentId: ").Append(ShipmentId).Append("\n");
             sb.Append("}\n");
@@ -139,10 +153,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.ContactInformation.Equals(input.ContactInformation))
                 ) && 
                 (
-                    this.PalletInformation == input.PalletInformation ||
-                    (this.PalletInformation != null &&
-                    this.PalletInformation.Equals(input.PalletInformation))
-                ) && 
+                    this.FreightInformation == input.FreightInformation ||
+                    (this.FreightInformation != null &&
+                    this.FreightInformation.Equals(input.FreightInformation))
+                ) &&
+                (
+                    this.Pallets == input.Pallets ||
+                    (this.Pallets != null &&
+                    this.Pallets.SequenceEqual(input.Pallets))
+                ) &&
                 (
                     this.ReadyToShipWindow == input.ReadyToShipWindow ||
                     (this.ReadyToShipWindow != null &&
@@ -166,8 +185,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 int hashCode = 41;
                 if (this.ContactInformation != null)
                     hashCode = hashCode * 59 + this.ContactInformation.GetHashCode();
-                if (this.PalletInformation != null)
-                    hashCode = hashCode * 59 + this.PalletInformation.GetHashCode();
+                if (this.FreightInformation != null)
+                    hashCode = hashCode * 59 + this.FreightInformation.GetHashCode();
+                if (this.Pallets != null)
+                    hashCode = hashCode * 59 + this.Pallets.GetHashCode();
                 if (this.ReadyToShipWindow != null)
                     hashCode = hashCode * 59 + this.ReadyToShipWindow.GetHashCode();
                 if (this.ShipmentId != null)

@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Initializes a new instance of the <see cref="Carrier" /> class.
         /// </summary>
-        /// <param name="alphaCode">The carrier code. For example, USPS or DHLEX..</param>
-        /// <param name="name">The name of the carrier..</param>
+        /// <param name="alphaCode">The carrier code. For example, USPS or DHLEX.</param>
+        /// <param name="name">The name of the carrier.</param>
         public Carrier(string alphaCode = default(string), string name = default(string))
         {
             this.AlphaCode = alphaCode;

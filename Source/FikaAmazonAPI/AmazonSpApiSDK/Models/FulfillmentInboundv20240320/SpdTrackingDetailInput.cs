@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="SpdTrackingDetailInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SpdTrackingDetailInput() { }
+        public SpdTrackingDetailInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="SpdTrackingDetailInput" /> class.
         /// </summary>

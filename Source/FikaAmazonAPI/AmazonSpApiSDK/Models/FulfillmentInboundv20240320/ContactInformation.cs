@@ -28,15 +28,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ContactInformation" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ContactInformation() { }
+        public ContactInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ContactInformation" /> class.
         /// </summary>
-        /// <param name="email">Email address..</param>
-        /// <param name="name">The name belonging to the contact. This field is required when contact information is being provided for         Less-Than-Truckload (LTL) carrier shipments..</param>
-        /// <param name="phoneNumber">The phone number of the seller. (required).</param>
+        /// <param name="email">The email address.</param>
+        /// <param name="name">The contact name. (required)</param>
+        /// <param name="phoneNumber">The phone number. (required).</param>
         public ContactInformation(string email = default(string), string name = default(string), string phoneNumber = default(string))
         {
+            // to ensure "name" is required (not null)
+            if (name == null)
+            {
+                throw new InvalidDataException("name is a required property for ContactInformation and cannot be null");
+            }
+            else
+            {
+                this.Name = name;
+            }
+
             // to ensure "phoneNumber" is required (not null)
             if (phoneNumber == null)
             {
@@ -47,7 +57,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 this.PhoneNumber = phoneNumber;
             }
             this.Email = email;
-            this.Name = name;
         }
         
         /// <summary>
@@ -58,16 +67,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string Email { get; set; }
 
         /// <summary>
-        /// The name belonging to the contact. This field is required when contact information is being provided for         Less-Than-Truckload (LTL) carrier shipments.
+        /// The contact name.
         /// </summary>
-        /// <value>The name belonging to the contact. This field is required when contact information is being provided for         Less-Than-Truckload (LTL) carrier shipments.</value>
+        /// <value>The contact name.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// The phone number of the seller.
+        /// The phone number.
         /// </summary>
-        /// <value>The phone number of the seller.</value>
+        /// <value>The phone number.</value>
         [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
         public string PhoneNumber { get; set; }
 

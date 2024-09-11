@@ -30,19 +30,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Box" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Box() { }
+        public Box() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Box" /> class.
         /// </summary>
-        /// <param name="boxId">The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box..</param>
-        /// <param name="destinationRegion">destinationRegion.</param>
-        /// <param name="dimensions">dimensions.</param>
-        /// <param name="items">Items contained within the box..</param>
+        /// <param name="boxId">The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box.</param>
+        /// <param name="contentInformationSource">Indication of how box content is meant to be provided.</param>
+        /// <param name="destinationRegion">Representation of a location used within the inbounding experience.</param>
+        /// <param name="dimensions">Measurement of a package's dimensions.</param>
+        /// <param name="items">Items contained within the box.</param>
         /// <param name="packageId">Primary key to uniquely identify a Package (Box or Pallet). (required).</param>
-        /// <param name="quantity">The number of containers where all other properties like weight or dimensions are identical..</param>
-        /// <param name="templateName">Template name of the box..</param>
+        /// <param name="quantity">The number of containers where all other properties like weight or dimensions are identical.</param>
+        /// <param name="templateName">Template name of the box.</param>
         /// <param name="weight">weight.</param>
-        public Box(string boxId = default(string), Region destinationRegion = default(Region), Dimensions dimensions = default(Dimensions), List<Item> items = default(List<Item>), string packageId = default(string), int? quantity = default(int?), string templateName = default(string), Weight weight = default(Weight))
+        public Box(string boxId = default(string),
+                   BoxContentInformationSource? contentInformationSource = default(BoxContentInformationSource?),
+                   Region destinationRegion = default(Region),
+                   Dimensions dimensions = default(Dimensions),
+                   List<Item> items = default(List<Item>),
+                   string packageId = default(string),
+                   int? quantity = default(int?),
+                   string templateName = default(string),
+                   Weight weight = default(Weight))
         {
             // to ensure "packageId" is required (not null)
             if (packageId == null)
@@ -53,7 +62,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             {
                 this.PackageId = packageId;
             }
+
             this.BoxId = boxId;
+            this.ContentInformationSource = contentInformationSource;
             this.DestinationRegion = destinationRegion;
             this.Dimensions = dimensions;
             this.Items = items;
@@ -61,23 +72,32 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.TemplateName = templateName;
             this.Weight = weight;
         }
-        
+
         /// <summary>
-        /// The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box.
+        /// The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box.
         /// </summary>
-        /// <value>The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box.</value>
+        /// <value>The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which is generated after transportation has been confirmed) and the index of the box.</value>
         [DataMember(Name="boxId", EmitDefaultValue=false)]
         public string BoxId { get; set; }
 
         /// <summary>
+        /// Indication of how box content is meant to be provided.
+        /// </summary>
+        /// <value>Indication of how box content is meant to be provided.</value>
+        [DataMember(Name = "contentInformationSource", EmitDefaultValue = false)]
+        public BoxContentInformationSource? ContentInformationSource { get; set; }
+
+        /// <summary>
         /// Gets or Sets DestinationRegion
         /// </summary>
+        /// <value>Representation of a location used within the inbounding experience.</value>
         [DataMember(Name="destinationRegion", EmitDefaultValue=false)]
         public Region DestinationRegion { get; set; }
 
         /// <summary>
-        /// Gets or Sets Dimensions
+        /// Measurement of a package's dimensions.
         /// </summary>
+        /// <value>Measurement of a package's dimensions.</value>
         [DataMember(Name="dimensions", EmitDefaultValue=false)]
         public Dimensions Dimensions { get; set; }
 
@@ -124,6 +144,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             var sb = new StringBuilder();
             sb.Append("class Box {\n");
             sb.Append("  BoxId: ").Append(BoxId).Append("\n");
+            sb.Append("  ContentInformationSource: ").Append(ContentInformationSource).Append("\n");
             sb.Append("  DestinationRegion: ").Append(DestinationRegion).Append("\n");
             sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
@@ -169,7 +190,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.BoxId == input.BoxId ||
                     (this.BoxId != null &&
                     this.BoxId.Equals(input.BoxId))
-                ) && 
+                ) &&
+                                (
+                    this.ContentInformationSource == input.ContentInformationSource ||
+                    (this.ContentInformationSource != null &&
+                    this.ContentInformationSource.Equals(input.ContentInformationSource))
+                ) &&
                 (
                     this.DestinationRegion == input.DestinationRegion ||
                     (this.DestinationRegion != null &&
@@ -218,6 +244,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 int hashCode = 41;
                 if (this.BoxId != null)
                     hashCode = hashCode * 59 + this.BoxId.GetHashCode();
+                if (this.ContentInformationSource != null)
+                    hashCode = hashCode * 59 + this.ContentInformationSource.GetHashCode();
                 if (this.DestinationRegion != null)
                     hashCode = hashCode * 59 + this.DestinationRegion.GetHashCode();
                 if (this.Dimensions != null)
@@ -256,7 +284,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             }
 
             // PackageId (string) maxLength
-            if(this.PackageId != null && this.PackageId.Length > 38)
+            if (this.PackageId != null && this.PackageId.Length > 38)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PackageId, length must be less than 38.", new [] { "PackageId" });
             }

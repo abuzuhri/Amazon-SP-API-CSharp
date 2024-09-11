@@ -30,29 +30,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="InboundPlanSummary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InboundPlanSummary() { }
+        public InboundPlanSummary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="InboundPlanSummary" /> class.
         /// </summary>
-        /// <param name="contactInformation">contactInformation (required).</param>
         /// <param name="createdAt">The ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;. (required).</param>
         /// <param name="inboundPlanId">Identifier to an inbound plan. (required).</param>
         /// <param name="lastUpdatedAt">ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;. (required).</param>
         /// <param name="marketplaceIds">Marketplace IDs. (required).</param>
         /// <param name="name">Human-readable name of the inbound plan. (required).</param>
         /// <param name="sourceAddress">sourceAddress (required).</param>
-        /// <param name="status">Current status of the inbound plan. Can be &#39;ACTIVE&#39;, &#39;VOIDED&#39;, or &#39;SHIPPED&#39;. (required).</param>
-        public InboundPlanSummary(ContactInformation contactInformation = default(ContactInformation), DateTime? createdAt = default(DateTime?), string inboundPlanId = default(string), DateTime? lastUpdatedAt = default(DateTime?), List<string> marketplaceIds = default(List<string>), string name = default(string), Address sourceAddress = default(Address), string status = default(string))
+        /// <param name="status">Current status of the inbound plan. Can be: ACTIVE, VOIDED, SHIPPED, ERRORED. (required).</param>
+        public InboundPlanSummary(DateTime? createdAt = default(DateTime?),
+                                  string inboundPlanId = default(string),
+                                  DateTime? lastUpdatedAt = default(DateTime?),
+                                  List<string> marketplaceIds = default(List<string>),
+                                  string name = default(string),
+                                  Address sourceAddress = default(Address),
+                                  InboundPlanStatus status = default(InboundPlanStatus))
         {
-            // to ensure "contactInformation" is required (not null)
-            if (contactInformation == null)
-            {
-                throw new InvalidDataException("contactInformation is a required property for InboundPlanSummary and cannot be null");
-            }
-            else
-            {
-                this.ContactInformation = contactInformation;
-            }
             // to ensure "createdAt" is required (not null)
             if (createdAt == null)
             {
@@ -118,11 +114,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             }
         }
         
-        /// <summary>
-        /// Gets or Sets ContactInformation
-        /// </summary>
-        [DataMember(Name="contactInformation", EmitDefaultValue=false)]
-        public ContactInformation ContactInformation { get; set; }
 
         /// <summary>
         /// The ISO 8601 datetime with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;.
@@ -166,11 +157,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public Address SourceAddress { get; set; }
 
         /// <summary>
-        /// Current status of the inbound plan. Can be &#39;ACTIVE&#39;, &#39;VOIDED&#39;, or &#39;SHIPPED&#39;.
+        /// Current status of the inbound plan. Can be: ACTIVE, VOIDED, SHIPPED, ERRORED.
         /// </summary>
-        /// <value>Current status of the inbound plan. Can be &#39;ACTIVE&#39;, &#39;VOIDED&#39;, or &#39;SHIPPED&#39;.</value>
+        /// <value>Current status of the inbound plan. Can be: ACTIVE, VOIDED, SHIPPED, ERRORED.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public InboundPlanStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -180,7 +171,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         {
             var sb = new StringBuilder();
             sb.Append("class InboundPlanSummary {\n");
-            sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  InboundPlanId: ").Append(InboundPlanId).Append("\n");
             sb.Append("  LastUpdatedAt: ").Append(LastUpdatedAt).Append("\n");
@@ -222,11 +212,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 return false;
 
             return 
-                (
-                    this.ContactInformation == input.ContactInformation ||
-                    (this.ContactInformation != null &&
-                    this.ContactInformation.Equals(input.ContactInformation))
-                ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
@@ -273,8 +258,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.ContactInformation != null)
-                    hashCode = hashCode * 59 + this.ContactInformation.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.InboundPlanId != null)
@@ -317,18 +300,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexInboundPlanId.Match(this.InboundPlanId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, must match a pattern of " + regexInboundPlanId, new [] { "InboundPlanId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

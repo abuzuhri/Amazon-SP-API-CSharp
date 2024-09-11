@@ -19,28 +19,23 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// Set pallet configuration for Less-Than-Truckload (LTL).
+    /// Contains input information about a pallet to be used in the inbound plan.
     /// </summary>
     [DataContract]
     public partial class PalletInput :  IEquatable<PalletInput>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets Stackability
-        /// </summary>
-        [DataMember(Name="stackability", EmitDefaultValue=false)]
-        public Stackability? Stackability { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="PalletInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PalletInput() { }
+        public PalletInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PalletInput" /> class.
         /// </summary>
-        /// <param name="dimensions">dimensions.</param>
+        /// <param name="dimensions">Measurement of a package dimensions.</param>
         /// <param name="quantity">The number of containers where all other properties like weight or dimensions are identical. (required).</param>
-        /// <param name="stackability">stackability.</param>
-        /// <param name="weight">weight.</param>
+        /// <param name="stackability">Indicates whether pallets will be stacked when carrier arrives for pick-up.</param>
+        /// <param name="weight">The weight of a package.</param>
         public PalletInput(Dimensions dimensions = default(Dimensions), int? quantity = default(int?), Stackability? stackability = default(Stackability?), Weight weight = default(Weight))
         {
             // to ensure "quantity" is required (not null)
@@ -56,12 +51,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.Stackability = stackability;
             this.Weight = weight;
         }
-        
+
         /// <summary>
-        /// Gets or Sets Dimensions
+        /// Measurement of a package dimensions.
         /// </summary>
         [DataMember(Name="dimensions", EmitDefaultValue=false)]
         public Dimensions Dimensions { get; set; }
+
+        /// <summary>
+        /// Indicates whether pallets will be stacked when carrier arrives for pick-up.
+        /// </summary>
+        [DataMember(Name = "stackability", EmitDefaultValue = false)]
+        public Stackability? Stackability { get; set; }
 
         /// <summary>
         /// The number of containers where all other properties like weight or dimensions are identical.
@@ -72,7 +73,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
 
         /// <summary>
-        /// Gets or Sets Weight
+        /// The weight of a package.
         /// </summary>
         [DataMember(Name="weight", EmitDefaultValue=false)]
         public Weight Weight { get; set; }

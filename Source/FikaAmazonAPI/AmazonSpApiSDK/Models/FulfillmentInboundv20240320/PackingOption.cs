@@ -30,19 +30,24 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PackingOption" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PackingOption() { }
+        public PackingOption() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PackingOption" /> class.
         /// </summary>
         /// <param name="discounts">Discount for the offered option. (required).</param>
         /// <param name="expiration">The timestamp at which this packing option becomes no longer valid. This is in ISO 8601 datetime format with pattern &#x60;yyyy-MM-ddTHH:mm:ss.sssZ&#x60;..</param>
         /// <param name="fees">Fee for the offered option. (required).</param>
-        /// <param name="inboundPlanId">Identifier to an inbound plan. (required).</param>
         /// <param name="packingGroups">Packing group IDs. (required).</param>
         /// <param name="packingOptionId">Identifier to a packing option. (required).</param>
-        /// <param name="status">The status of the packing option. Can be &#x60;OFFERED&#x60;, &#x60;ACCEPTED&#x60;, or &#x60;EXPIRED&#x60;. (required).</param>
+        /// <param name="status">The status of the packing option. Can be: OFFERED, ACCEPTED, or EXPIRED.</param>
         /// <param name="supportedShippingConfigurations">List of supported shipping modes. (required).</param>
-        public PackingOption(List<Incentive> discounts = default(List<Incentive>), DateTime? expiration = default(DateTime?), List<Incentive> fees = default(List<Incentive>), string inboundPlanId = default(string), List<string> packingGroups = default(List<string>), string packingOptionId = default(string), string status = default(string), List<ShippingConfiguration> supportedShippingConfigurations = default(List<ShippingConfiguration>))
+        public PackingOption(List<Incentive> discounts = default(List<Incentive>),
+                             DateTime? expiration = default(DateTime?),
+                             List<Incentive> fees = default(List<Incentive>),
+                             List<string> packingGroups = default(List<string>),
+                             string packingOptionId = default(string),
+                             PackingOptionStatus status = default(PackingOptionStatus),
+                             List<ShippingConfiguration> supportedShippingConfigurations = default(List<ShippingConfiguration>))
         {
             // to ensure "discounts" is required (not null)
             if (discounts == null)
@@ -61,15 +66,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             else
             {
                 this.Fees = fees;
-            }
-            // to ensure "inboundPlanId" is required (not null)
-            if (inboundPlanId == null)
-            {
-                throw new InvalidDataException("inboundPlanId is a required property for PackingOption and cannot be null");
-            }
-            else
-            {
-                this.InboundPlanId = inboundPlanId;
             }
             // to ensure "packingGroups" is required (not null)
             if (packingGroups == null)
@@ -132,13 +128,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public List<Incentive> Fees { get; set; }
 
         /// <summary>
-        /// Identifier to an inbound plan.
-        /// </summary>
-        /// <value>Identifier to an inbound plan.</value>
-        [DataMember(Name="inboundPlanId", EmitDefaultValue=false)]
-        public string InboundPlanId { get; set; }
-
-        /// <summary>
         /// Packing group IDs.
         /// </summary>
         /// <value>Packing group IDs.</value>
@@ -157,7 +146,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>The status of the packing option. Can be &#x60;OFFERED&#x60;, &#x60;ACCEPTED&#x60;, or &#x60;EXPIRED&#x60;.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public PackingOptionStatus Status { get; set; }
 
         /// <summary>
         /// List of supported shipping modes.
@@ -177,7 +166,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             sb.Append("  Discounts: ").Append(Discounts).Append("\n");
             sb.Append("  Expiration: ").Append(Expiration).Append("\n");
             sb.Append("  Fees: ").Append(Fees).Append("\n");
-            sb.Append("  InboundPlanId: ").Append(InboundPlanId).Append("\n");
             sb.Append("  PackingGroups: ").Append(PackingGroups).Append("\n");
             sb.Append("  PackingOptionId: ").Append(PackingOptionId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
@@ -230,12 +218,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.Fees == input.Fees ||
                     this.Fees != null &&
                     this.Fees.SequenceEqual(input.Fees)
-                ) && 
-                (
-                    this.InboundPlanId == input.InboundPlanId ||
-                    (this.InboundPlanId != null &&
-                    this.InboundPlanId.Equals(input.InboundPlanId))
-                ) && 
+                ) &&
                 (
                     this.PackingGroups == input.PackingGroups ||
                     this.PackingGroups != null &&
@@ -273,8 +256,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     hashCode = hashCode * 59 + this.Expiration.GetHashCode();
                 if (this.Fees != null)
                     hashCode = hashCode * 59 + this.Fees.GetHashCode();
-                if (this.InboundPlanId != null)
-                    hashCode = hashCode * 59 + this.InboundPlanId.GetHashCode();
                 if (this.PackingGroups != null)
                     hashCode = hashCode * 59 + this.PackingGroups.GetHashCode();
                 if (this.PackingOptionId != null)
@@ -294,25 +275,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // InboundPlanId (string) maxLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length > 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be less than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) minLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length < 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be greater than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) pattern
-            Regex regexInboundPlanId = new Regex(@"^[a-zA-Z0-9-]*$", RegexOptions.CultureInvariant);
-            if (false == regexInboundPlanId.Match(this.InboundPlanId).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, must match a pattern of " + regexInboundPlanId, new [] { "InboundPlanId" });
-            }
-
             // PackingOptionId (string) maxLength
             if(this.PackingOptionId != null && this.PackingOptionId.Length > 38)
             {
@@ -330,18 +292,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexPackingOptionId.Match(this.PackingOptionId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PackingOptionId, must match a pattern of " + regexPackingOptionId, new [] { "PackingOptionId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

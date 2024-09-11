@@ -29,7 +29,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="boxId">The ID provided by Amazon that identifies a given box. This ID is comprised of the external shipment ID (which         is generated after transportation has been confirmed) and the index of the box..</param>
         /// <param name="trackingId">The tracking ID associated with each box in a non-Amazon partnered Small Parcel Delivery (SPD) shipment..</param>
         /// <param name="trackingNumberValidationStatus">Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is         not yet &#39;VALIDATED&#39;, please verify the number and update if necessary. Can be &#x60;VALIDATED&#x60; or &#x60;NOT_VALIDATED&#x60;..</param>
-        public SpdTrackingItem(string boxId = default(string), string trackingId = default(string), string trackingNumberValidationStatus = default(string))
+        public SpdTrackingItem(string boxId = default(string),
+                               string trackingId = default(string),
+                               TrackingNumberValidationStatus? trackingNumberValidationStatus = default(TrackingNumberValidationStatus?))
         {
             this.BoxId = boxId;
             this.TrackingId = trackingId;
@@ -55,7 +57,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is         not yet &#39;VALIDATED&#39;, please verify the number and update if necessary. Can be &#x60;VALIDATED&#x60; or &#x60;NOT_VALIDATED&#x60;.</value>
         [DataMember(Name="trackingNumberValidationStatus", EmitDefaultValue=false)]
-        public string TrackingNumberValidationStatus { get; set; }
+        public TrackingNumberValidationStatus? TrackingNumberValidationStatus { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -167,18 +169,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.TrackingId != null && this.TrackingId.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TrackingId, length must be greater than 1.", new [] { "TrackingId" });
-            }
-
-            // TrackingNumberValidationStatus (string) maxLength
-            if(this.TrackingNumberValidationStatus != null && this.TrackingNumberValidationStatus.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TrackingNumberValidationStatus, length must be less than 1024.", new [] { "TrackingNumberValidationStatus" });
-            }
-
-            // TrackingNumberValidationStatus (string) minLength
-            if(this.TrackingNumberValidationStatus != null && this.TrackingNumberValidationStatus.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TrackingNumberValidationStatus, length must be greater than 1.", new [] { "TrackingNumberValidationStatus" });
             }
 
             yield break;

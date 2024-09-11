@@ -29,13 +29,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ShipmentSummary" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShipmentSummary() { }
+        public ShipmentSummary() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ShipmentSummary" /> class.
         /// </summary>
         /// <param name="shipmentId">Identifier to a shipment. A shipment contains the boxes and units being inbounded. (required).</param>
-        /// <param name="status">The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;. (required).</param>
-        public ShipmentSummary(string shipmentId = default(string), string status = default(string))
+        /// <param name="status">The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING. (required).</param>
+        public ShipmentSummary(string shipmentId = default(string), ShipmentStatus status = default(ShipmentStatus))
         {
             // to ensure "shipmentId" is required (not null)
             if (shipmentId == null)
@@ -65,11 +65,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string ShipmentId { get; set; }
 
         /// <summary>
-        /// The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;.
+        /// The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING.
         /// </summary>
-        /// <value>The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;.</value>
+        /// <value>The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public ShipmentStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -168,18 +168,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexShipmentId.Match(this.ShipmentId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShipmentId, must match a pattern of " + regexShipmentId, new [] { "ShipmentId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

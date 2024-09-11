@@ -30,19 +30,26 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Item() { }
+        public Item() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
         /// <param name="asin">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
         /// <param name="expiration">The expiration date of the MSKU in ISO 8601 format. The same MSKU with different expiration dates cannot go into the same box..</param>
         /// <param name="fnsku">A unique identifier assigned by Amazon to products stored in and fulfilled from an Amazon fulfillment center. (required).</param>
-        /// <param name="labelOwner">Specifies who will label the items. Options include &#x60;AMAZON&#x60; and &#x60;SELLER&#x60;. (required).</param>
+        /// <param name="labelOwner">Specifies who will label the items. Options include AMAZON, SELLER, and NONE. (required).</param>
         /// <param name="manufacturingLotCode">The manufacturing lot code..</param>
         /// <param name="msku">The merchant defined SKU ID. (required).</param>
         /// <param name="prepInstructions">Special preparations that are required for an item. (required).</param>
         /// <param name="quantity">The number of the specified MSKU. (required).</param>
-        public Item(string asin = default(string), string expiration = default(string), string fnsku = default(string), string labelOwner = default(string), string manufacturingLotCode = default(string), string msku = default(string), List<PrepInstruction> prepInstructions = default(List<PrepInstruction>), int? quantity = default(int?))
+        public Item(string asin = default(string),
+                    string expiration = default(string),
+                    string fnsku = default(string),
+                    LabelOwner labelOwner = default(LabelOwner),
+                    string manufacturingLotCode = default(string),
+                    string msku = default(string),
+                    List<PrepInstruction> prepInstructions = default(List<PrepInstruction>),
+                    int? quantity = default(int?))
         {
             // to ensure "asin" is required (not null)
             if (asin == null)
@@ -124,11 +131,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string Fnsku { get; set; }
 
         /// <summary>
-        /// Specifies who will label the items. Options include &#x60;AMAZON&#x60; and &#x60;SELLER&#x60;.
+        /// Specifies who will label the items. Options include AMAZON, SELLER, and NONE.
         /// </summary>
-        /// <value>Specifies who will label the items. Options include &#x60;AMAZON&#x60; and &#x60;SELLER&#x60;.</value>
+        /// <value>Specifies who will label the items. Options include AMAZON, SELLER, and NONE.</value>
         [DataMember(Name="labelOwner", EmitDefaultValue=false)]
-        public string LabelOwner { get; set; }
+        public LabelOwner LabelOwner { get; set; }
 
         /// <summary>
         /// The manufacturing lot code.
@@ -315,18 +322,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.Fnsku != null && this.Fnsku.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Fnsku, length must be greater than 1.", new [] { "Fnsku" });
-            }
-
-            // LabelOwner (string) maxLength
-            if(this.LabelOwner != null && this.LabelOwner.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LabelOwner, length must be less than 1024.", new [] { "LabelOwner" });
-            }
-
-            // LabelOwner (string) minLength
-            if(this.LabelOwner != null && this.LabelOwner.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LabelOwner, length must be greater than 1.", new [] { "LabelOwner" });
             }
 
             // ManufacturingLotCode (string) maxLength

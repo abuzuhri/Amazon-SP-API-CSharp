@@ -28,11 +28,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Window" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Window() { }
+        public Window() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Window" /> class.
         /// </summary>
-        /// <param name="editableUntil">The timestamp at which this Window can no longer be edited..</param>
+        /// <param name="editableUntil">The timestamp at which this Window can no longer be edited.</param>
         /// <param name="end">The end timestamp of the window. (required).</param>
         /// <param name="start">The start timestamp of the window. (required).</param>
         public Window(DateTime? editableUntil = default(DateTime?), DateTime? end = default(DateTime?), DateTime? start = default(DateTime?))

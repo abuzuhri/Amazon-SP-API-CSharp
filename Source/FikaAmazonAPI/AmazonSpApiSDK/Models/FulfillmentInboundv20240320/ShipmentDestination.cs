@@ -28,14 +28,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="ShipmentDestination" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShipmentDestination() { }
+        public ShipmentDestination() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ShipmentDestination" /> class.
         /// </summary>
-        /// <param name="address">The address the shipment should be sent to. Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;..</param>
-        /// <param name="destinationType">The type of destination for this shipment. Can be &#x60;AMAZON_OPTIMIZED&#x60;, or &#x60;AMAZON_WAREHOUSE&#x60;. (required).</param>
-        /// <param name="warehouseId">The warehouse that the shipment should be sent to.  Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;..</param>
-        public ShipmentDestination(Address address = default(Address), string destinationType = default(string), string warehouseId = default(string))
+        /// <param name="address">The address the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.</param>
+        /// <param name="destinationType">The type of destination for this shipment. Can be: AMAZON_OPTIMIZED, AMAZON_WAREHOUSE. (required).</param>
+        /// <param name="warehouseId">The warehouse that the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.</param>
+        public ShipmentDestination(Address address = default(Address),
+                                   DestinationType destinationType = default(DestinationType),
+                                   string warehouseId = default(string))
         {
             // to ensure "destinationType" is required (not null)
             if (destinationType == null)
@@ -49,25 +51,25 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.Address = address;
             this.WarehouseId = warehouseId;
         }
-        
+
         /// <summary>
-        /// The address the shipment should be sent to. Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;.
+        /// The address the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.
         /// </summary>
-        /// <value>The address the shipment should be sent to. Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;.</value>
+        /// <value>The address the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.</value>
         [DataMember(Name="address", EmitDefaultValue=false)]
         public Address Address { get; set; }
 
         /// <summary>
-        /// The type of destination for this shipment. Can be &#x60;AMAZON_OPTIMIZED&#x60;, or &#x60;AMAZON_WAREHOUSE&#x60;.
+        /// The type of destination for this shipment. Can be: AMAZON_OPTIMIZED, AMAZON_WAREHOUSE.
         /// </summary>
-        /// <value>The type of destination for this shipment. Can be &#x60;AMAZON_OPTIMIZED&#x60;, or &#x60;AMAZON_WAREHOUSE&#x60;.</value>
+        /// <value>The type of destination for this shipment. Can be: AMAZON_OPTIMIZED, AMAZON_WAREHOUSE.</value>
         [DataMember(Name="destinationType", EmitDefaultValue=false)]
-        public string DestinationType { get; set; }
+        public DestinationType DestinationType { get; set; }
 
         /// <summary>
-        /// The warehouse that the shipment should be sent to.  Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;.
+        /// The warehouse that the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.
         /// </summary>
-        /// <value>The warehouse that the shipment should be sent to.  Empty if the destination type is &#x60;AMAZON_OPTIMIZED&#x60;.</value>
+        /// <value>The warehouse that the shipment should be sent to. Empty if the destination type is AMAZON_OPTIMIZED.</value>
         [DataMember(Name="warehouseId", EmitDefaultValue=false)]
         public string WarehouseId { get; set; }
 
@@ -159,18 +161,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // DestinationType (string) maxLength
-            if(this.DestinationType != null && this.DestinationType.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DestinationType, length must be less than 1024.", new [] { "DestinationType" });
-            }
-
-            // DestinationType (string) minLength
-            if(this.DestinationType != null && this.DestinationType.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DestinationType, length must be greater than 1.", new [] { "DestinationType" });
-            }
-
             // WarehouseId (string) maxLength
             if(this.WarehouseId != null && this.WarehouseId.Length > 1024)
             {

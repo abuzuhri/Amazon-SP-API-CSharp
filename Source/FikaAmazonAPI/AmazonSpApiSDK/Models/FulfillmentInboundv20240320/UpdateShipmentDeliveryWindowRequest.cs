@@ -28,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="UpdateShipmentDeliveryWindowRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected UpdateShipmentDeliveryWindowRequest() { }
+        public UpdateShipmentDeliveryWindowRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateShipmentDeliveryWindowRequest" /> class.
         /// </summary>

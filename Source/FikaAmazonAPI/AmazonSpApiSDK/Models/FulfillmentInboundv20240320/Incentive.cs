@@ -28,15 +28,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Incentive" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Incentive() { }
+        public Incentive() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Incentive" /> class.
         /// </summary>
         /// <param name="description">Description of the incentive. (required).</param>
         /// <param name="target">Target of the incentive. Can be &#39;Placement Services&#39; or &#39;Fulfillment Fee Discount&#39;. (required).</param>
         /// <param name="type">Type of incentive. Can be &#x60;FEE&#x60; or &#x60;DISCOUNT&#x60;. (required).</param>
-        /// <param name="value">value (required).</param>
-        public Incentive(string description = default(string), string target = default(string), string type = default(string), Currency value = default(Currency))
+        /// <param name="value">Currency definition. (required).</param>
+        public Incentive(string description = default(string),
+                         string target = default(string),
+                         IncentiveType type = default(IncentiveType),
+                         Currency value = default(Currency))
         {
             // to ensure "description" is required (not null)
             if (description == null)
@@ -95,7 +98,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>Type of incentive. Can be &#x60;FEE&#x60; or &#x60;DISCOUNT&#x60;.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        public IncentiveType Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
@@ -221,18 +224,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.Target != null && this.Target.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Target, length must be greater than 1.", new [] { "Target" });
-            }
-
-            // Type (string) maxLength
-            if(this.Type != null && this.Type.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, length must be less than 1024.", new [] { "Type" });
-            }
-
-            // Type (string) minLength
-            if(this.Type != null && this.Type.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, length must be greater than 1.", new [] { "Type" });
             }
 
             yield break;

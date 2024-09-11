@@ -30,21 +30,35 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="Shipment" /> class.
         /// </summary>
         /// <param name="amazonReferenceId">A unique identifier created by Amazon that identifies this Amazon-partnered, Less Than Truckload/Full Truckload (LTL/FTL) shipment..</param>
-        /// <param name="contactInformation">contactInformation.</param>
-        /// <param name="dates">dates.</param>
-        /// <param name="destination">destination (required).</param>
-        /// <param name="inboundPlanId">Identifier to an inbound plan. (required).</param>
+        /// <param name="contactInformation">The seller's contact information.</param>
+        /// <param name="dates">Specifies the date that the seller expects their shipment will be shipped.</param>
+        /// <param name="destination">The Amazon fulfillment center address and warehouse ID. (required).</param>
+        /// <param name="freightInformation">Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided. (required).</param>
         /// <param name="name">The name of the shipment..</param>
-        /// <param name="palletInformation">palletInformation.</param>
         /// <param name="placementOptionId">Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs. (required).</param>
+        /// <param name="selectedDeliveryWindow">Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs. (required).</param>
         /// <param name="selectedTransportationOptionId">Identifier to a transportation option. A transportation option represent one option for how to send a shipment..</param>
         /// <param name="selfShipAppointmentDetails">List of self ship appointment details..</param>
         /// <param name="shipmentConfirmationId">The confirmed shipment ID which shows up on labels (for example, FBA1234ABCD)..</param>
         /// <param name="shipmentId">Identifier to a shipment. A shipment contains the boxes and units being inbounded. (required).</param>
         /// <param name="source">source (required).</param>
-        /// <param name="status">The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;..</param>
-        /// <param name="trackingDetails">trackingDetails.</param>
-        public Shipment(string amazonReferenceId = default(string), ContactInformation contactInformation = default(ContactInformation), Dates dates = default(Dates), ShipmentDestination destination = default(ShipmentDestination), string inboundPlanId = default(string), string name = default(string), PalletInformation palletInformation = default(PalletInformation), string placementOptionId = default(string), string selectedTransportationOptionId = default(string), List<SelfShipAppointmentDetails> selfShipAppointmentDetails = default(List<SelfShipAppointmentDetails>), string shipmentConfirmationId = default(string), string shipmentId = default(string), ShipmentSource source = default(ShipmentSource), string status = default(string), TrackingDetails trackingDetails = default(TrackingDetails))
+        /// <param name="status">The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING.</param>
+        /// <param name="trackingDetails">Tracking information for Less-Than-Truckload (LTL) and Small Parcel Delivery (SPD) shipments.</param>
+        public Shipment(string amazonReferenceId = default(string),
+                        ContactInformation contactInformation = default(ContactInformation),
+                        Dates dates = default(Dates),
+                        ShipmentDestination destination = default(ShipmentDestination),
+                        FreightInformation freightInformation = default(FreightInformation),
+                        string name = default(string),
+                        string placementOptionId = default(string),
+                        SelectedDeliveryWindow selectedDeliveryWindow = default(SelectedDeliveryWindow),
+                        string selectedTransportationOptionId = default(string),
+                        List<SelfShipAppointmentDetails> selfShipAppointmentDetails = default(List<SelfShipAppointmentDetails>),
+                        string shipmentConfirmationId = default(string),
+                        string shipmentId = default(string),
+                        ShipmentSource source = default(ShipmentSource),
+                        ShipmentStatus? status = default(ShipmentStatus?),
+                        TrackingDetails trackingDetails = default(TrackingDetails))
         {
             // to ensure "destination" is required (not null)
             if (destination == null)
@@ -54,15 +68,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             else
             {
                 this.Destination = destination;
-            }
-            // to ensure "inboundPlanId" is required (not null)
-            if (inboundPlanId == null)
-            {
-                throw new InvalidDataException("inboundPlanId is a required property for Shipment and cannot be null");
-            }
-            else
-            {
-                this.InboundPlanId = inboundPlanId;
             }
             // to ensure "placementOptionId" is required (not null)
             if (placementOptionId == null)
@@ -94,8 +99,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.AmazonReferenceId = amazonReferenceId;
             this.ContactInformation = contactInformation;
             this.Dates = dates;
+            this.FreightInformation = freightInformation;
             this.Name = name;
-            this.PalletInformation = palletInformation;
+            this.SelectedDeliveryWindow = selectedDeliveryWindow;
             this.SelectedTransportationOptionId = selectedTransportationOptionId;
             this.SelfShipAppointmentDetails = selfShipAppointmentDetails;
             this.ShipmentConfirmationId = shipmentConfirmationId;
@@ -104,20 +110,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         }
         public Shipment()
         {
-            this.Destination = default(ShipmentDestination);
-            this.InboundPlanId = default(string);
-            this.PlacementOptionId = default(string);
-            this.ShipmentId = default(string);
-            this.Source = default(ShipmentSource);
             this.AmazonReferenceId = default(string);
             this.ContactInformation = default(ContactInformation);
             this.Dates = default(Dates);
+            this.Destination = default(ShipmentDestination);
+            this.FreightInformation = default(FreightInformation);
             this.Name = default(string);
-            this.PalletInformation = default(PalletInformation);
+            this.PlacementOptionId = default(string);
+            this.SelectedDeliveryWindow = default(SelectedDeliveryWindow);
             this.SelectedTransportationOptionId = default(string);
             this.SelfShipAppointmentDetails = default(List<SelfShipAppointmentDetails>);
             this.ShipmentConfirmationId = default(string);
-            this.Status = default(string);
+            this.ShipmentId = default(string);
+            this.Source = default(ShipmentSource);
+            this.Status = default(ShipmentStatus?);
             this.TrackingDetails = default(TrackingDetails);
         }
 
@@ -147,11 +153,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public ShipmentDestination Destination { get; set; }
 
         /// <summary>
-        /// Identifier to an inbound plan.
+        /// Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.
         /// </summary>
-        /// <value>Identifier to an inbound plan.</value>
-        [DataMember(Name="inboundPlanId", EmitDefaultValue=false)]
-        public string InboundPlanId { get; set; }
+        /// <value>Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.</value>
+        [DataMember(Name= "freightInformation ", EmitDefaultValue=false)]
+        public FreightInformation FreightInformation { get; set; }
 
         /// <summary>
         /// The name of the shipment.
@@ -161,17 +167,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets PalletInformation
-        /// </summary>
-        [DataMember(Name="palletInformation", EmitDefaultValue=false)]
-        public PalletInformation PalletInformation { get; set; }
-
-        /// <summary>
         /// Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs.
         /// </summary>
         /// <value>Identifier to a placement option. A placement option represents the shipment splits and destinations of SKUs.</value>
         [DataMember(Name="placementOptionId", EmitDefaultValue=false)]
         public string PlacementOptionId { get; set; }
+
+        /// <summary>
+        /// Selected delivery window attributes.	
+        /// </summary>
+        /// <value>Selected delivery window attributes.	</value>
+        [DataMember(Name = "selectedDeliveryWindow ", EmitDefaultValue = false)]
+        public SelectedDeliveryWindow SelectedDeliveryWindow { get; set; }
 
         /// <summary>
         /// Identifier to a transportation option. A transportation option represent one option for how to send a shipment.
@@ -208,11 +215,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public ShipmentSource Source { get; set; }
 
         /// <summary>
-        /// The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;.
+        /// The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING.
         /// </summary>
-        /// <value>The status of a shipment. The state of the shipment will typically start in &#x60;WORKING&#x60; and transition to &#x60;READY_TO_SHIP&#x60; once required actions are complete prior to being picked up or shipped out. Can be &#x60;ABANDONED&#x60;, &#x60;CANCELLED&#x60;, &#x60;CHECKED_IN&#x60;, &#x60;CLOSED&#x60;, &#x60;DELETED&#x60;, &#x60;DELIVERED&#x60;, &#x60;IN_TRANSIT&#x60;, &#x60;MIXED&#x60;, &#x60;READY_TO_SHIP&#x60;, &#x60;RECEIVING&#x60;, &#x60;SHIPPED&#x60;, or &#x60;WORKING&#x60;.</value>
+        /// <value>The status of a shipment. The state of the shipment will typically start in UNCONFIRMED, then transition to WORKING after a placement option has been confirmed, and then to READY_TO_SHIP once labels are generated. Can be ABANDONED, CANCELLED, CHECKED_IN, CLOSED, DELETED, DELIVERED, IN_TRANSIT, MIXED, READY_TO_SHIP, RECEIVING, SHIPPED, UNCONFIRMED, or WORKING.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        public ShipmentStatus? Status { get; set; }
 
         /// <summary>
         /// Gets or Sets TrackingDetails
@@ -232,10 +239,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
             sb.Append("  Dates: ").Append(Dates).Append("\n");
             sb.Append("  Destination: ").Append(Destination).Append("\n");
-            sb.Append("  InboundPlanId: ").Append(InboundPlanId).Append("\n");
+            sb.Append("  FreightInformation: ").Append(FreightInformation).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  PalletInformation: ").Append(PalletInformation).Append("\n");
             sb.Append("  PlacementOptionId: ").Append(PlacementOptionId).Append("\n");
+            sb.Append("  SelectedDeliveryWindow: ").Append(SelectedDeliveryWindow).Append("\n");
             sb.Append("  SelectedTransportationOptionId: ").Append(SelectedTransportationOptionId).Append("\n");
             sb.Append("  SelfShipAppointmentDetails: ").Append(SelfShipAppointmentDetails).Append("\n");
             sb.Append("  ShipmentConfirmationId: ").Append(ShipmentConfirmationId).Append("\n");
@@ -298,9 +305,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.Destination.Equals(input.Destination))
                 ) && 
                 (
-                    this.InboundPlanId == input.InboundPlanId ||
-                    (this.InboundPlanId != null &&
-                    this.InboundPlanId.Equals(input.InboundPlanId))
+                    this.FreightInformation == input.FreightInformation ||
+                    (this.FreightInformation != null &&
+                    this.FreightInformation.Equals(input.FreightInformation))
                 ) && 
                 (
                     this.Name == input.Name ||
@@ -308,15 +315,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.PalletInformation == input.PalletInformation ||
-                    (this.PalletInformation != null &&
-                    this.PalletInformation.Equals(input.PalletInformation))
-                ) && 
-                (
                     this.PlacementOptionId == input.PlacementOptionId ||
                     (this.PlacementOptionId != null &&
                     this.PlacementOptionId.Equals(input.PlacementOptionId))
-                ) && 
+                ) &&
+                (
+                    this.SelectedDeliveryWindow == input.SelectedDeliveryWindow ||
+                    (this.SelectedDeliveryWindow != null &&
+                    this.SelectedDeliveryWindow.Equals(input.SelectedDeliveryWindow))
+                ) &&
                 (
                     this.SelectedTransportationOptionId == input.SelectedTransportationOptionId ||
                     (this.SelectedTransportationOptionId != null &&
@@ -371,14 +378,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     hashCode = hashCode * 59 + this.Dates.GetHashCode();
                 if (this.Destination != null)
                     hashCode = hashCode * 59 + this.Destination.GetHashCode();
-                if (this.InboundPlanId != null)
-                    hashCode = hashCode * 59 + this.InboundPlanId.GetHashCode();
+                if (this.FreightInformation != null)
+                    hashCode = hashCode * 59 + this.FreightInformation.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.PalletInformation != null)
-                    hashCode = hashCode * 59 + this.PalletInformation.GetHashCode();
                 if (this.PlacementOptionId != null)
                     hashCode = hashCode * 59 + this.PlacementOptionId.GetHashCode();
+                if (this.SelectedDeliveryWindow != null)
+                    hashCode = hashCode * 59 + this.SelectedDeliveryWindow.GetHashCode();
                 if (this.SelectedTransportationOptionId != null)
                     hashCode = hashCode * 59 + this.SelectedTransportationOptionId.GetHashCode();
                 if (this.SelfShipAppointmentDetails != null)
@@ -414,25 +421,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if(this.AmazonReferenceId != null && this.AmazonReferenceId.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AmazonReferenceId, length must be greater than 1.", new [] { "AmazonReferenceId" });
-            }
-
-            // InboundPlanId (string) maxLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length > 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be less than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) minLength
-            if(this.InboundPlanId != null && this.InboundPlanId.Length < 38)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, length must be greater than 38.", new [] { "InboundPlanId" });
-            }
-
-            // InboundPlanId (string) pattern
-            Regex regexInboundPlanId = new Regex(@"^[a-zA-Z0-9-]*$", RegexOptions.CultureInvariant);
-            if (false == regexInboundPlanId.Match(this.InboundPlanId).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InboundPlanId, must match a pattern of " + regexInboundPlanId, new [] { "InboundPlanId" });
             }
 
             // PlacementOptionId (string) maxLength
@@ -502,18 +490,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             if (false == regexShipmentId.Match(this.ShipmentId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShipmentId, must match a pattern of " + regexShipmentId, new [] { "ShipmentId" });
-            }
-
-            // Status (string) maxLength
-            if(this.Status != null && this.Status.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be less than 1024.", new [] { "Status" });
-            }
-
-            // Status (string) minLength
-            if(this.Status != null && this.Status.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Status, length must be greater than 1.", new [] { "Status" });
             }
 
             yield break;

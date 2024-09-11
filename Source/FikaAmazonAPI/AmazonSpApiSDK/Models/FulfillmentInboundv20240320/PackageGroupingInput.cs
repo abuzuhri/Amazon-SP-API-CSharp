@@ -30,14 +30,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PackageGroupingInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PackageGroupingInput() { }
+        public PackageGroupingInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PackageGroupingInput" /> class.
         /// </summary>
         /// <param name="boxes">Box level information being provided. (required).</param>
         /// <param name="packingGroupId">The ID of the &#x60;packingGroup&#x60; that packages are grouped according to. The &#x60;PackingGroupId&#x60; can only be provided before placement confirmation, and it must belong to the confirmed &#x60;PackingOption&#x60;. One of &#x60;ShipmentId&#x60; or &#x60;PackingGroupId&#x60; must be provided with every request..</param>
         /// <param name="shipmentId">The ID of the shipment that packages are grouped according to. The &#x60;ShipmentId&#x60; can only be provided after placement confirmation, and the shipment must belong to the confirmed placement option. One of &#x60;ShipmentId&#x60; or &#x60;PackingGroupId&#x60; must be provided with every request..</param>
-        public PackageGroupingInput(List<BoxInput> boxes = default(List<BoxInput>), string packingGroupId = default(string), string shipmentId = default(string))
+        public PackageGroupingInput(List<BoxInput> boxes = default(List<BoxInput>),
+                                    string packingGroupId = default(string),
+                                    string shipmentId = default(string))
         {
             // to ensure "boxes" is required (not null)
             if (boxes == null)

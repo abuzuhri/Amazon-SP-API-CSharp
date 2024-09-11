@@ -18,25 +18,26 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// The &#x60;cancelSelfShipAppointment&#x60; request.
+    /// The cancelSelfShipAppointment request.
     /// </summary>
     [DataContract]
     public partial class CancelSelfShipAppointmentRequest :  IEquatable<CancelSelfShipAppointmentRequest>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets ReasonComment
-        /// </summary>
-        [DataMember(Name="reasonComment", EmitDefaultValue=false)]
-        public ReasonComment? ReasonComment { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="CancelSelfShipAppointmentRequest" /> class.
         /// </summary>
-        /// <param name="reasonComment">reasonComment.</param>
+        /// <param name="reasonComment">Reason for cancelling or rescheduling a self-ship appointment.</param>
         public CancelSelfShipAppointmentRequest(ReasonComment? reasonComment = default(ReasonComment?))
         {
             this.ReasonComment = reasonComment;
         }
-        
+
+        /// <summary>
+        /// Reason for cancelling or rescheduling a self-ship appointment.
+        /// </summary>
+        /// <value>Reason for cancelling or rescheduling a self-ship appointment.</value>>
+        [DataMember(Name = "reasonComment", EmitDefaultValue = false)]
+        public ReasonComment? ReasonComment { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

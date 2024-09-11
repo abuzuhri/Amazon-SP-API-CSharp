@@ -29,15 +29,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="TransportationSelection" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TransportationSelection() { }
+        public TransportationSelection() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportationSelection" /> class.
         /// </summary>
-        /// <param name="contactInformation">contactInformation.</param>
-        /// <param name="deliveryWindow">The range of dates within which the seller expects that their shipment will be delivered to Amazon. .</param>
+        /// <param name="contactInformation">The seller contact information.</param>
         /// <param name="shipmentId">Shipment ID that the transportation Option is for. (required).</param>
         /// <param name="transportationOptionId">Transportation option being selected for the provided shipment. (required).</param>
-        public TransportationSelection(ContactInformation contactInformation = default(ContactInformation), WindowInput deliveryWindow = default(WindowInput), string shipmentId = default(string), string transportationOptionId = default(string))
+        public TransportationSelection(ContactInformation contactInformation = default(ContactInformation),
+                                       string shipmentId = default(string),
+                                       string transportationOptionId = default(string))
         {
             // to ensure "shipmentId" is required (not null)
             if (shipmentId == null)
@@ -58,7 +59,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 this.TransportationOptionId = transportationOptionId;
             }
             this.ContactInformation = contactInformation;
-            this.DeliveryWindow = deliveryWindow;
         }
         
         /// <summary>
@@ -66,13 +66,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         [DataMember(Name="contactInformation", EmitDefaultValue=false)]
         public ContactInformation ContactInformation { get; set; }
-
-        /// <summary>
-        /// The range of dates within which the seller expects that their shipment will be delivered to Amazon. 
-        /// </summary>
-        /// <value>The range of dates within which the seller expects that their shipment will be delivered to Amazon. </value>
-        [DataMember(Name="deliveryWindow", EmitDefaultValue=false)]
-        public WindowInput DeliveryWindow { get; set; }
 
         /// <summary>
         /// Shipment ID that the transportation Option is for.
@@ -97,7 +90,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             var sb = new StringBuilder();
             sb.Append("class TransportationSelection {\n");
             sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
-            sb.Append("  DeliveryWindow: ").Append(DeliveryWindow).Append("\n");
             sb.Append("  ShipmentId: ").Append(ShipmentId).Append("\n");
             sb.Append("  TransportationOptionId: ").Append(TransportationOptionId).Append("\n");
             sb.Append("}\n");
@@ -140,11 +132,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.ContactInformation.Equals(input.ContactInformation))
                 ) && 
                 (
-                    this.DeliveryWindow == input.DeliveryWindow ||
-                    (this.DeliveryWindow != null &&
-                    this.DeliveryWindow.Equals(input.DeliveryWindow))
-                ) && 
-                (
                     this.ShipmentId == input.ShipmentId ||
                     (this.ShipmentId != null &&
                     this.ShipmentId.Equals(input.ShipmentId))
@@ -167,8 +154,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 int hashCode = 41;
                 if (this.ContactInformation != null)
                     hashCode = hashCode * 59 + this.ContactInformation.GetHashCode();
-                if (this.DeliveryWindow != null)
-                    hashCode = hashCode * 59 + this.DeliveryWindow.GetHashCode();
                 if (this.ShipmentId != null)
                     hashCode = hashCode * 59 + this.ShipmentId.GetHashCode();
                 if (this.TransportationOptionId != null)

@@ -27,9 +27,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="PrepInstruction" /> class.
         /// </summary>
         /// <param name="fee">fee.</param>
-        /// <param name="prepOwner">In some situations, special preparations are required for items and this field reflects the owner of the         preparations. Options include &#x60;AMAZON&#x60; or &#x60;SELLER&#x60;..</param>
-        /// <param name="prepType">Type of preparation that should be done. Can be &#x60;ITEM_LABELING&#x60;, &#x60;ITEM_BUBBLEWRAP&#x60;, &#x60;ITEM_POLYBAGGING&#x60;, &#x60;ITEM_TAPING&#x60;, &#x60;ITEM_BLACK_SHRINKWRAP&#x60;, &#x60;ITEM_HANG_GARMENT&#x60;, &#x60;ITEM_BOXING&#x60;, &#x60;ITEM_SETCREAT&#x60;, &#x60;ITEM_RMOVHANG&#x60;, &#x60;ITEM_SUFFOSTK&#x60;, &#x60;ITEM_CAP_SEALING&#x60;, &#x60;ITEM_DEBUNDLE&#x60;, &#x60;ITEM_SETSTK&#x60;, &#x60;ITEM_SIOC&#x60;, &#x60;ITEM_NO_PREP&#x60;, &#x60;ADULT&#x60;, &#x60;BABY&#x60;, &#x60;TEXTILE&#x60;, &#x60;HANGER&#x60;, &#x60;FRAGILE&#x60;, &#x60;LIQUID&#x60;, &#x60;SHARP&#x60;, &#x60;SMALL&#x60;, &#x60;PERFORATED&#x60;, &#x60;GRANULAR&#x60;, &#x60;SET&#x60;, &#x60;FC_PROVIDED&#x60;, &#x60;UNKNOWN&#x60;, or &#x60;NONE&#x60;..</param>
-        public PrepInstruction(Currency fee = default(Currency), string prepOwner = default(string), string prepType = default(string))
+        /// <param name="prepOwner">In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.</param>
+        /// <param name="prepType">Type of preparation that should be done. Can be: ITEM_LABELING, ITEM_BUBBLEWRAP, ITEM_POLYBAGGING, ITEM_TAPING, ITEM_BLACK_SHRINKWRAP, ITEM_HANG_GARMENT, ITEM_BOXING, ITEM_SETCREAT, ITEM_RMOVHANG, ITEM_SUFFOSTK, ITEM_CAP_SEALING, ITEM_DEBUNDLE, ITEM_SETSTK, ITEM_SIOC, ITEM_NO_PREP, ADULT, BABY, TEXTILE, HANGER, FRAGILE, LIQUID, SHARP, SMALL, PERFORATED, GRANULAR, SET, FC_PROVIDED, UNKNOWN, NONE.</param>
+        public PrepInstruction(Currency fee = default(Currency), PrepOwner? prepOwner = default(PrepOwner?), PrepType? prepType = default(PrepType?))
         {
             this.Fee = fee;
             this.PrepOwner = prepOwner;
@@ -43,18 +43,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public Currency Fee { get; set; }
 
         /// <summary>
-        /// In some situations, special preparations are required for items and this field reflects the owner of the         preparations. Options include &#x60;AMAZON&#x60; or &#x60;SELLER&#x60;.
+        /// In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.
         /// </summary>
-        /// <value>In some situations, special preparations are required for items and this field reflects the owner of the         preparations. Options include &#x60;AMAZON&#x60; or &#x60;SELLER&#x60;.</value>
+        /// <value>In some situations, special preparations are required for items and this field reflects the owner of the preparations. Options include AMAZON, SELLER or NONE.</value>
         [DataMember(Name="prepOwner", EmitDefaultValue=false)]
-        public string PrepOwner { get; set; }
+        public PrepOwner? PrepOwner { get; set; }
 
         /// <summary>
-        /// Type of preparation that should be done. Can be &#x60;ITEM_LABELING&#x60;, &#x60;ITEM_BUBBLEWRAP&#x60;, &#x60;ITEM_POLYBAGGING&#x60;, &#x60;ITEM_TAPING&#x60;, &#x60;ITEM_BLACK_SHRINKWRAP&#x60;, &#x60;ITEM_HANG_GARMENT&#x60;, &#x60;ITEM_BOXING&#x60;, &#x60;ITEM_SETCREAT&#x60;, &#x60;ITEM_RMOVHANG&#x60;, &#x60;ITEM_SUFFOSTK&#x60;, &#x60;ITEM_CAP_SEALING&#x60;, &#x60;ITEM_DEBUNDLE&#x60;, &#x60;ITEM_SETSTK&#x60;, &#x60;ITEM_SIOC&#x60;, &#x60;ITEM_NO_PREP&#x60;, &#x60;ADULT&#x60;, &#x60;BABY&#x60;, &#x60;TEXTILE&#x60;, &#x60;HANGER&#x60;, &#x60;FRAGILE&#x60;, &#x60;LIQUID&#x60;, &#x60;SHARP&#x60;, &#x60;SMALL&#x60;, &#x60;PERFORATED&#x60;, &#x60;GRANULAR&#x60;, &#x60;SET&#x60;, &#x60;FC_PROVIDED&#x60;, &#x60;UNKNOWN&#x60;, or &#x60;NONE&#x60;.
+        /// Type of preparation that should be done. Can be: ITEM_LABELING, ITEM_BUBBLEWRAP, ITEM_POLYBAGGING, ITEM_TAPING, ITEM_BLACK_SHRINKWRAP, ITEM_HANG_GARMENT, ITEM_BOXING, ITEM_SETCREAT, ITEM_RMOVHANG, ITEM_SUFFOSTK, ITEM_CAP_SEALING, ITEM_DEBUNDLE, ITEM_SETSTK, ITEM_SIOC, ITEM_NO_PREP, ADULT, BABY, TEXTILE, HANGER, FRAGILE, LIQUID, SHARP, SMALL, PERFORATED, GRANULAR, SET, FC_PROVIDED, UNKNOWN, NONE.
         /// </summary>
-        /// <value>Type of preparation that should be done. Can be &#x60;ITEM_LABELING&#x60;, &#x60;ITEM_BUBBLEWRAP&#x60;, &#x60;ITEM_POLYBAGGING&#x60;, &#x60;ITEM_TAPING&#x60;, &#x60;ITEM_BLACK_SHRINKWRAP&#x60;, &#x60;ITEM_HANG_GARMENT&#x60;, &#x60;ITEM_BOXING&#x60;, &#x60;ITEM_SETCREAT&#x60;, &#x60;ITEM_RMOVHANG&#x60;, &#x60;ITEM_SUFFOSTK&#x60;, &#x60;ITEM_CAP_SEALING&#x60;, &#x60;ITEM_DEBUNDLE&#x60;, &#x60;ITEM_SETSTK&#x60;, &#x60;ITEM_SIOC&#x60;, &#x60;ITEM_NO_PREP&#x60;, &#x60;ADULT&#x60;, &#x60;BABY&#x60;, &#x60;TEXTILE&#x60;, &#x60;HANGER&#x60;, &#x60;FRAGILE&#x60;, &#x60;LIQUID&#x60;, &#x60;SHARP&#x60;, &#x60;SMALL&#x60;, &#x60;PERFORATED&#x60;, &#x60;GRANULAR&#x60;, &#x60;SET&#x60;, &#x60;FC_PROVIDED&#x60;, &#x60;UNKNOWN&#x60;, or &#x60;NONE&#x60;.</value>
+        /// <value>Type of preparation that should be done. Can be: ITEM_LABELING, ITEM_BUBBLEWRAP, ITEM_POLYBAGGING, ITEM_TAPING, ITEM_BLACK_SHRINKWRAP, ITEM_HANG_GARMENT, ITEM_BOXING, ITEM_SETCREAT, ITEM_RMOVHANG, ITEM_SUFFOSTK, ITEM_CAP_SEALING, ITEM_DEBUNDLE, ITEM_SETSTK, ITEM_SIOC, ITEM_NO_PREP, ADULT, BABY, TEXTILE, HANGER, FRAGILE, LIQUID, SHARP, SMALL, PERFORATED, GRANULAR, SET, FC_PROVIDED, UNKNOWN, NONE.</value>
         [DataMember(Name="prepType", EmitDefaultValue=false)]
-        public string PrepType { get; set; }
+        public PrepType? PrepType { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -144,29 +144,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // PrepOwner (string) maxLength
-            if(this.PrepOwner != null && this.PrepOwner.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PrepOwner, length must be less than 1024.", new [] { "PrepOwner" });
-            }
-
-            // PrepOwner (string) minLength
-            if(this.PrepOwner != null && this.PrepOwner.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PrepOwner, length must be greater than 1.", new [] { "PrepOwner" });
-            }
-
-            // PrepType (string) maxLength
-            if(this.PrepType != null && this.PrepType.Length > 1024)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PrepType, length must be less than 1024.", new [] { "PrepType" });
-            }
-
-            // PrepType (string) minLength
-            if(this.PrepType != null && this.PrepType.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PrepType, length must be greater than 1.", new [] { "PrepType" });
-            }
 
             yield break;
         }

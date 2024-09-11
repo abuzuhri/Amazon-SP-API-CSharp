@@ -27,7 +27,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <summary>
         /// Initializes a new instance of the <see cref="GetDeliveryChallanDocumentResponse" /> class.
         /// </summary>
-        /// <param name="documentDownload">documentDownload (required).</param>
+        /// <param name="documentDownload">Resource to download the requested document. (required).</param>
         public GetDeliveryChallanDocumentResponse(DocumentDownload documentDownload = default(DocumentDownload))
         {
             // to ensure "documentDownload" is required (not null)
