@@ -1,7 +1,12 @@
-﻿namespace FikaAmazonAPI.Utils
+﻿using System.Text.Json.Serialization;
+
+namespace FikaAmazonAPI.Utils
 {
     public class Country
     {
+        [JsonConstructorAttribute]
+        public Country() { }
+
         public string Code { get; set; }
         public string Name { get; set; }
         public string SellercentralURL { get; set; }
