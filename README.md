@@ -593,7 +593,7 @@ public void SubmitFeedOrderAdjustment()
 ## Usage Plans and Rate Limits in the Selling Partner API
 
 Please read this doc to get all information about this limitation
-https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-plans-rate-limits/Usage-Plans-and-Rate-Limits.md
+https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits
 
 we calc waiting time by read x-amzn-RateLimit-Limit header 
 
