@@ -59,6 +59,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
 - [x] [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference)
 - [ ] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
+- [ ] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference)
 
 
 #### Vendor 
@@ -79,14 +80,11 @@ Install-Package CSharpAmazonSpAPI
 ## Keys
 To get all keys needed you need to follow this step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) and then you need to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application) then [Authorizing Selling Partner API applications
 ](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
-> :warning: **Use role ARN created in step 5 when you register your application**: and dont use IAM user
+
 
 | Name | Description |
 | --- | --- |
-| AccessKey | AWS USER ACCESS KEY |
-| SecretKey | AWS USER SECRET KEY |
-| RoleArn | AWS IAM Role ARN (needs permission to “Assume Role” STS) |
-| Region | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
+| Marketplace | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
 | ClientId | Your amazon app id |
 | ClientSecret | Your amazon app secret |
 | RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
@@ -97,13 +95,13 @@ For more information about keys please check [New Amazon doc for create keys Dev
 ---
 ## Usage
 
+> ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
+
 ### Configuration
+You can configure a connection like so please see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -114,9 +112,6 @@ or
 
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -124,6 +119,22 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 });
 
 ```
+
+### Configuration using a proxy
+Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
+>```csharp
+>AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+>{
+>     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+>     MarketPlaceID = "A2VIGQ35RCS4UG",
+>     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
+>});
+>```
+>> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
+>>
+>> ***This is not required and will operate normally without the ProxyAddress being set.***
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
@@ -193,9 +204,6 @@ var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
-     AccessKey = "AKIAXXXXXXXXXXXXXXX",
-     SecretKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RoleArn = "arn:aws:iam::XXXXXXXXXXXXX:role/XXXXXXXXXXXX",
      ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -262,6 +270,7 @@ var returnFBAOrder = reportManager.GetReturnFBAOrder(90); //GET_FBA_FULFILLMENT_
 var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_REIMBURSEMENTS_DATA
 var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 var LedgerDetails = reportManager.GetLedgerDetailAsync(10); //GET_LEDGER_DETAIL_VIEW_DATA
+var UnsuppressedInventory = reportManager.GetUnsuppressedInventoryDataAsync().ConfigureAwait(false).GetAwaiter().GetResult(); //GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA
 ```
 
 

@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of charges based on the shipping service charges applied on a package.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class ChargeList : List<ChargeComponent> {
 
     /// <summary>
@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

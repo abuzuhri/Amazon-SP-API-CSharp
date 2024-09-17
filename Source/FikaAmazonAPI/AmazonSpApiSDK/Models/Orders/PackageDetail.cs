@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
@@ -120,6 +121,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// The shipping date for the package. Must be in ISO-8601 date/time format.
         /// </summary>
         /// <value>The shipping date for the package. Must be in ISO-8601 date/time format.</value>
+        [JsonConverter(typeof(Iso8601DateTimeConverter))]
         [DataMember(Name = "shipDate", EmitDefaultValue = false)]
         public DateTime? ShipDate { get; set; }
 

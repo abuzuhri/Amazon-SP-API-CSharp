@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Utils
             this.RequestsSent = 0;
         }
         private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
-        public RateLimits NextRate(RateLimitType rateLimitType)
+        public async Task<RateLimits> NextRate(RateLimitType rateLimitType)
         {
             if (RequestsSent < 0)
                 RequestsSent = 0;
@@ -28,8 +28,12 @@ namespace FikaAmazonAPI.Utils
 
             var nextRequestsSent = RequestsSent + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
-            string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
-            Console.WriteLine(output);
+            if (AmazonCredential.DebugMode)
+            {
+                string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
+                Console.WriteLine(output);
+            }
+
 
 
             if (RequestsSent >= Burst)
@@ -57,7 +61,7 @@ namespace FikaAmazonAPI.Utils
                 LastRequest = LastRequest.AddMilliseconds(ratePeriodMs);
                 var TempLastRequest = LastRequest;
                 while (TempLastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
-                    Task.Delay(100).Wait();
+                    await Task.Delay(100);
 
             }
 
@@ -75,9 +79,9 @@ namespace FikaAmazonAPI.Utils
             Rate = rate;
         }
 
-        internal void Delay()
+        internal Task Delay()
         {
-            Task.Delay(GetRatePeriodMs()).Wait();
+            return Task.Delay(GetRatePeriodMs());
         }
     }
 }

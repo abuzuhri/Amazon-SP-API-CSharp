@@ -52,7 +52,7 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders, cancellationToken);
             var nextToken = response.Payload.NextToken;
             orderList = response.Payload.Orders;
-            if(!string.IsNullOrWhiteSpace(response.Payload.LastUpdatedBefore))
+            if (!string.IsNullOrWhiteSpace(response.Payload.LastUpdatedBefore))
                 orderList.LastUpdatedBefore = DateTime.Parse(response.Payload.LastUpdatedBefore);
 
             int PageCount = 1;
@@ -94,7 +94,84 @@ namespace FikaAmazonAPI.Services
         }
 
         #endregion
+        #region GetOrders
 
+        
+        public async Task<OrderList> GetOrdersAsync(ParameterOrderList searchOrderList)
+        {
+            var orderList = new OrderList();
+
+            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
+            {
+                searchOrderList.MarketplaceIds = new List<string>();
+                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
+            var queryParameters = searchOrderList.getParameters();
+
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
+            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
+            var nextToken = response.Payload.NextToken;
+            orderList = response.Payload.Orders;
+            int PageCount = 1;
+            if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
+            {
+                orderList.NextToken = nextToken;
+            }
+            else
+            {
+                while (!string.IsNullOrEmpty(nextToken))
+                {
+                    var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
+                    orderList.AddRange(orderPayload.Orders);
+                    nextToken = orderPayload.NextToken;
+
+                    if (searchOrderList.MaxNumberOfPages.HasValue)
+                    {
+                        PageCount++;
+                        if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
+                            break;
+                    }
+                }
+            }
+
+            return orderList;
+        }
+
+       
+        public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
+        {
+
+            var parameterOrderList = new ParameterOrderList
+            {
+                MarketplaceIds = searchOrderList.MarketplaceIds,
+                NextToken = nextToken,
+                IsNeedRestrictedDataToken = searchOrderList.IsNeedRestrictedDataToken,
+                RestrictedDataTokenRequest = searchOrderList.RestrictedDataTokenRequest 
+            };
+
+            List<KeyValuePair<string, string>> queryParameters = parameterOrderList.getParameters();
+           
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters);
+            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
+            return response.Payload;
+        }
+        public OrdersList GetOrdersList(ParameterOrderList searchOrderList) =>
+            Task.Run(() => GetOrdersListAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<OrdersList> GetOrdersListAsync(ParameterOrderList searchOrderList)
+        {
+            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
+            {
+                searchOrderList.MarketplaceIds = new List<string>();
+                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
+            var queryParameters = searchOrderList.getParameters();
+
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
+            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
+            return response.Payload;
+        }
+
+        #endregion
         public Order GetOrder(ParameterGetOrder parameter) =>
             Task.Run(() => GetOrderAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<Order> GetOrderAsync(ParameterGetOrder parameter, CancellationToken cancellationToken = default)
@@ -186,13 +263,13 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public Address GetOrderAddress(string orderId) =>
+        public OrderAddress GetOrderAddress(string orderId) =>
             Task.Run(() => GetOrderAddressAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Address> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
+        public async Task<OrderAddress> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
         {
             await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress, cancellationToken);
-            return response.Payload.ShippingAddress;
+            return response.Payload;
         }
 
         public bool UpdateShipmentStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
@@ -215,11 +292,11 @@ namespace FikaAmazonAPI.Services
             return response.Payload;
         }
 
-        public bool UpdateVerificationStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
-            Task.Run(() => UpdateVerificationStatusAsync(orderId, updateShipmentStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest, CancellationToken cancellationToken = default)
+        public bool UpdateVerificationStatus(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest) =>
+            Task.Run(() => UpdateVerificationStatusAsync(orderId, updateVerificationStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest, CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateVerificationStatus(orderId), RestSharp.Method.Patch, postJsonObj: updateShipmentStatusRequest, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.UpdateVerificationStatus(orderId), RestSharp.Method.Patch, postJsonObj: updateVerificationStatusRequest, cancellationToken: cancellationToken);
 
             var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
             return true;

@@ -194,7 +194,18 @@ namespace FikaAmazonAPI.Services
             return false;
         }
 
+        public bool SendInvoice(string amazonOrderId, InvoiceRequest invoiceRequest) =>
+            Task.Run(() => SendInvoiceAsync(amazonOrderId, invoiceRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<bool> SendInvoiceAsync(string amazonOrderId, InvoiceRequest invoiceRequest, CancellationToken cancellationToken = default)
+        {
+            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            queryParameters.Add(new KeyValuePair<string, string>("marketplaceIds", AmazonCredential.MarketPlace.ID));
+            await CreateAuthorizedRequestAsync(MessaginApiUrls.SendInvoice(amazonOrderId), RestSharp.Method.Post, queryParameters, postJsonObj: invoiceRequest, cancellationToken: cancellationToken);
 
-
+            var response = await ExecuteRequestAsync<InvoiceResponse>(RateLimitType.Messaging_CreateUnexpectedProblem, cancellationToken);
+            if (response != null)
+                return true;
+            return false;
+        }
     }
 }

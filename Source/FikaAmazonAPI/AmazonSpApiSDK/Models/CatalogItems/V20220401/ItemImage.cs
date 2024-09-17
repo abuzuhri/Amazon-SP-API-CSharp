@@ -91,7 +91,61 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             /// Enum SWCH for value: SWCH
             /// </summary>
             [EnumMember(Value = "SWCH")]
-            SWCH = 10
+            SWCH = 10,
+
+            /// <summary>
+            /// Enum PT09 for value: PT09
+            /// </summary>
+            [EnumMember(Value = "PT09")]
+            PT09 = 11,
+
+            /// <summary>
+            /// Enum PT10 for value: PT10
+            /// </summary>
+            [EnumMember(Value = "PT10")]
+            PT10 = 12,
+
+            /// <summary>
+            /// Enum PT11 for value: PT11
+            /// </summary>
+            [EnumMember(Value = "PT11")]
+            PT11 = 13,
+
+            /// <summary>
+            /// Enum PT12 for value: PT12
+            /// </summary>
+            [EnumMember(Value = "PT12")]
+            PT12 = 14,
+
+            /// <summary>
+            /// Enum PT13 for value: PT13
+            /// </summary>
+            [EnumMember(Value = "PT13")]
+            PT13 = 15,
+
+            /// <summary>
+            /// Enum PT14 for value: PT14
+            /// </summary>
+            [EnumMember(Value = "PT14")]
+            PT14 = 16,
+
+            /// <summary>
+            /// Enum PT15 for value: PT15
+            /// </summary>
+            [EnumMember(Value = "PT15")]
+            PT15 = 17,
+
+            /// <summary>
+            /// Enum EEGL for value: EEGL
+            /// </summary>
+            [EnumMember(Value = "EEGL")]
+            EEGL = 18,
+
+            /// <summary>
+            /// Enum EGUS for value: EGUS
+            /// </summary>
+            [EnumMember(Value = "EGUS")]
+            EGUS = 19
         }
 
         /// <summary>

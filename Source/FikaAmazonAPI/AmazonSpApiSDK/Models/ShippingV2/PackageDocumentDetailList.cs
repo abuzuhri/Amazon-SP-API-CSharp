@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of post-purchase details about a package that will be shipped using a shipping service.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class PackageDocumentDetailList : List<PackageDocumentDetail> {
 
     /// <summary>
@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

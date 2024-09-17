@@ -9,11 +9,11 @@ using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders.Constants;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class acknowledgementStatus : IEquatable<acknowledgementStatus>, IValidatableObject
+    public partial class AcknowledgementStatus : IEquatable<AcknowledgementStatus>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public acknowledgementStatus() { }
-        public acknowledgementStatus(
+        public AcknowledgementStatus() { }
+        public AcknowledgementStatus(
             ItemConfirmationStatus? confirmationStatus = default(ItemConfirmationStatus?), ItemQuantity acceptedQuantity = default(ItemQuantity), ItemQuantity rejectedQuantity = default(ItemQuantity), 
             List<AcknowledgementStatusDetails> acknowledgementStatusDetails = default(List<AcknowledgementStatusDetails>)
         )
@@ -69,7 +69,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as acknowledgementStatus);
+            return this.Equals(input as AcknowledgementStatus);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         /// </summary>
         /// <param name="input">Instance of ItemQuantity to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(acknowledgementStatus input)
+        public bool Equals(AcknowledgementStatus input)
         {
             if (input == null)
                 return false;

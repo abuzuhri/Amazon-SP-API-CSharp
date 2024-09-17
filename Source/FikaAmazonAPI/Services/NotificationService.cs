@@ -113,10 +113,10 @@ namespace FikaAmazonAPI.Services
             return true;
         }
 
-        public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver) =>
-            Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true) =>
+            Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver, isDeleteNotificationAfterRead)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, CancellationToken cancellationToken = default)
+        public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
         {
             var awsAccessKeyId = param.awsAccessKeyId;
             var awsSecretAccessKey = param.awsSecretAccessKey;
@@ -140,20 +140,12 @@ namespace FikaAmazonAPI.Services
                         {
                             foreach (var msg in Messages)
                             {
-                                try
-                                {
-                                    var data = DeserializeNotification(msg);
-
-                                    messageReceiver.NewMessageRevicedTriger(data);
-                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
-                                }
-                                catch (Exception ex)
-                                {
-                                    messageReceiver.ErrorCatch(ex);
-                                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
-                                }
+                                ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, isDeleteNotificationAfterRead, cancellationToken).ConfigureAwait(false);
 
                             }
+
+                            if (Messages.Count < 10)
+                                Thread.Sleep(1000 * 5);
                         }
                     }
                     catch (Exception ex)
@@ -161,6 +153,26 @@ namespace FikaAmazonAPI.Services
                         messageReceiver.ErrorCatch(ex);
                     }
                 }
+            }
+        }
+
+        private async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiver messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var data = DeserializeNotification(msg);
+
+                messageReceiver.NewMessageRevicedTriger(data);
+
+                if (isDeleteNotificationAfterRead)
+                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                messageReceiver.ErrorCatch(ex);
+
+                if (isDeleteNotificationAfterRead)
+                    await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
         }
         private async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle, CancellationToken cancellationToken = default)

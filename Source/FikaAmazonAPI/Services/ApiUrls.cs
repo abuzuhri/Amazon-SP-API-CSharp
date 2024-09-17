@@ -119,6 +119,72 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipmentItems";
             }
+
+            #region V20240320
+            private readonly static string _resourceBaseUrl_V20240320 = "/inbound/fba/2024-03-20";
+            public static string ListInboundPlans
+            {
+                get => $"{_resourceBaseUrl_V20240320}/inboundPlans";
+            }
+            public static string CreateInboundPlan
+            {
+                get => $"{_resourceBaseUrl_V20240320}/inboundPlans";
+            }
+
+            public static string GetInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}";
+            public static string ListInboundPlanBoxes(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/boxes";
+            public static string CancelInboundPlan(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/cancellation";
+            public static string ListInboundPlanItems(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/items";
+            public static string UpdateInboundPlanName(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/name";
+            public static string ListPackingGroupBoxes(string inboundPlanId, string packingGroupId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/boxes";
+            public static string ListPackingGroupItems(string inboundPlanId, string packingGroupId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/items";
+            public static string SetPackingInformation(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingInformation";
+            public static string ListPackingOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingOptions";
+            public static string GeneratePackingOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingOptions";
+            public static string ConfirmPackingOption(string inboundPlanId, string packingOptionId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/packingOptions/{packingOptionId}/confirmation";
+            public static string ListInboundPlanPallets(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/pallets";
+            public static string ListPlacementOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/placementOptions";
+            public static string GeneratePlacementOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/placementOptions";
+            public static string ConfirmPlacementOption(string inboundPlanId, string placementOptionId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/placementOptions/{placementOptionId}/confirmation";
+            public static string GetShipment(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}";
+            public static string ListShipmentBoxes(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/boxes";
+            public static string ListShipmentContentUpdatePreviews(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews";
+            public static string GenerateShipmentContentUpdatePreviews(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews";
+            public static string GetShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}";
+            public static string ConfirmShipmentContentUpdatePreview(string inboundPlanId, string shipmentId, string contentUpdatePreviewId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}/confirmation";
+            public static string GetDeliveryChallanDocument(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument";
+            public static string ListDeliveryWindowOptions(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions";
+            public static string GenerateDeliveryWindowOptions(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions";
+            public static string ConfirmDeliveryWindowOption(string inboundPlanId, string shipmentId, string deliveryWindowOptionId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions/{deliveryWindowOptionId}/confirmation";
+            public static string ListShipmentItems(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/items";
+            public static string UpdateShipmentName(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/name";
+            public static string ListShipmentPallets(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/pallets";
+            public static string CancelSelfShipAppointment(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentCancellation";
+            public static string GetSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
+            public static string GenerateSelfShipAppointmentSlots(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots";
+            public static string ScheduleSelfShipAppointment(string inboundPlanId, string shipmentId, string slotId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots/{slotId}/schedule";
+            public static string UpdateShipmentSourceAddress(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/sourceAddress";
+            public static string UpdateShipmentTrackingDetails(string inboundPlanId, string shipmentId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/trackingDetails";
+            public static string ListTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
+            public static string GenerateTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
+            public static string ConfirmTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions/confirmation";
+            public static string ListItemComplianceDetails
+            {
+                get => $"{_resourceBaseUrl_V20240320}/items/compliance";
+            }
+            public static string UpdateItemComplianceDetails
+            {
+                get => $"{_resourceBaseUrl_V20240320}/items/compliance";
+            }
+            public static string CreateMarketplaceItemLabels
+            {
+                get => $"{_resourceBaseUrl_V20240320}/items/labels";
+            }
+            public static string GetInboundOperationStatus(string operationId) => $"{_resourceBaseUrl_V20240320}/operations/{operationId}";
+
+            #endregion
+
+
         }
         protected class ShippingApiUrls
         {
@@ -177,6 +243,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetAttributes(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
             public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
             public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
+            public static string SendInvoice(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/invoice";
         }
         protected class EasyShip20220323
         {
@@ -383,6 +450,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/purchaseOrdersStatus";
             }
+        }
+        protected class VendorTransactionStatusApiUrls
+		{
+			private readonly static string _resourceBaseUrl = "/vendor/transactions/v1";
+			public static string GetTransaction(string transactionId) => $"{_resourceBaseUrl}/transactions/{transactionId}";
         }
         protected class UploadApiUrls
         {

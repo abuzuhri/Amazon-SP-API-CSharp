@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.Utils
 {
     public class Constants
     {
-        public readonly static string AmazonToeknEndPoint = "https://api.amazon.com/auth/o2/token";
+        public readonly static string AmazonTokenEndPoint = "https://api.amazon.com/auth/o2/token";
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
         public readonly static string TestCase200 = "TEST_CASE_200";
         public readonly static string TestCase400 = "TEST_CASE_400";
@@ -108,7 +108,7 @@ namespace FikaAmazonAPI.Utils
             POST_PRODUCT_RELATIONSHIP_DATA,
             POST_FLAT_FILE_INVLOADER_DATA,
             POST_FLAT_FILE_LISTINGS_DATA,
-            POST_FLAT_FILE_BOOKLOADER_DATA_,
+            POST_FLAT_FILE_BOOKLOADER_DATA,
             POST_FLAT_FILE_CONVERGENCE_LISTINGS_DATA,
             POST_FLAT_FILE_PRICEANDQUANTITYONLY_UPDATE_DATA,
             POST_UIEE_BOOKLOADER_DATA,
@@ -161,14 +161,19 @@ namespace FikaAmazonAPI.Utils
             REPORT_PROCESSING_FINISHED,
             BRANDED_ITEM_CONTENT_CHANGE,
             ITEM_PRODUCT_TYPE_CHANGE,
+            ITEM_INVENTORY_EVENT_CHANGE,
+            ITEM_SALES_EVENT_CHANGE,
             LISTINGS_ITEM_STATUS_CHANGE,
             LISTINGS_ITEM_ISSUES_CHANGE,
+            LISTINGS_ITEM_MFN_QUANTITY_CHANGE,
+            DETAIL_PAGE_TRAFFIC_EVENT,
             MFN_ORDER_STATUS_CHANGE,
             B2B_ANY_OFFER_CHANGED,
             ACCOUNT_STATUS_CHANGED,
             EXTERNAL_FULFILLMENT_SHIPMENT_STATUS_CHANGE,
             PRODUCT_TYPE_DEFINITIONS_CHANGE,
             ORDER_STATUS_CHANGE,
+            ORDER_CHANGE,
             PRICING_HEALTH,
             FBA_INVENTORY_AVAILABILITY_CHANGES
         }
@@ -601,7 +606,8 @@ namespace FikaAmazonAPI.Utils
             Store,
             StoreStockMovement,
             WebstoreItem,
-            CartonContentsRequest
+            CartonContentsRequest,
+            EasyShipDocument,
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -731,4 +737,5 @@ namespace FikaAmazonAPI.Utils
         //}
 
     }
+
 }

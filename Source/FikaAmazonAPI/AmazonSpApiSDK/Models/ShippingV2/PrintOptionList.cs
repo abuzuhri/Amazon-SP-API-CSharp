@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of the format options for a label.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class PrintOptionList : List<PrintOption> {
 
     /// <summary>
@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

@@ -31,7 +31,7 @@ namespace FikaAmazonAPI.Utils
             list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Belgium);
             list.Add(Netherlands); list.Add(Germany); list.Add(Italy); list.Add(Sweden);
             list.Add(Egypt); list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates);
-            list.Add(India); list.Add(SaudiArabia);
+            list.Add(India); list.Add(SaudiArabia); list.Add(SouthAfrica);
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
 
@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.Utils
             list.Add(Spain); list.Add(UnitedKingdom); list.Add(France); list.Add(Belgium);
             list.Add(Netherlands); list.Add(Germany); list.Add(Italy); list.Add(Sweden);
             list.Add(Egypt); list.Add(Poland); list.Add(Turkey); list.Add(UnitedArabEmirates);
-            list.Add(India); list.Add(SaudiArabia);
+            list.Add(India); list.Add(SaudiArabia); list.Add(SouthAfrica);
             //FarEast
             list.Add(Singapore); list.Add(Australia); list.Add(Japan);
             return list.FirstOrDefault(a => a.Country.Code == countryCode);
@@ -80,6 +80,7 @@ namespace FikaAmazonAPI.Utils
         public static MarketPlace UnitedArabEmirates { get { return new MarketPlace("A2VIGQ35RCS4UG", Region.Europe, Country.AE, BaseCurrencyCode.AED); } }
         public static MarketPlace India { get { return new MarketPlace("A21TJRUUN4KGV", Region.Europe, Country.IN, BaseCurrencyCode.INR); } }
         public static MarketPlace SaudiArabia { get { return new MarketPlace("A17E79C6D8DWNP", Region.Europe, Country.SA, BaseCurrencyCode.SAR); } }
+        public static MarketPlace SouthAfrica { get { return new MarketPlace("AE08WJ6YKNBMC", Region.Europe, Country.ZA, BaseCurrencyCode.ZAR); } }
 
         //FarEast
         public static MarketPlace Singapore { get { return new MarketPlace("A19VAU5U5O7RUS", Region.FarEast, Country.SG, BaseCurrencyCode.SGD); } }

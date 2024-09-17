@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of eligible shipping service offerings.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class RateList : List<Rate> {
 
     /// <summary>
@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

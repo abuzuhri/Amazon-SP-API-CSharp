@@ -1,9 +1,4 @@
 ﻿using FikaAmazonAPI.ReportGeneration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -25,9 +20,10 @@ namespace FikaAmazonAPI.SampleCode
             var ordersByLastUpdate = reportManager.GetOrdersByLastUpdate(90); //GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL
             var settlementOrder = reportManager.GetSettlementOrder(90); //GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2
             var returnMFNOrder = reportManager.GetReturnMFNOrder(90); //GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE
-            var returnFBAOrder = reportManager.GetReturnFBAOrder(90); //GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA
-            var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_REIMBURSEMENTS_DATA
+            var returnFBAOrder = reportManager.GetReturnFBAOrder(50); //GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA
+            var reimbursementsOrder = reportManager.GetReimbursementsOrder(1000); //GET_FBA_REIMBURSEMENTS_DATA
             var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
+            var UnsuppressedInventory = reportManager.GetUnsuppressedInventoryDataAsync().ConfigureAwait(false).GetAwaiter().GetResult(); //GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA
         }
     }
 }

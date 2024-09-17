@@ -16,7 +16,6 @@
         Order_UpdateOrderItemsApprovals,
         Order_ShipmentConfirmation,
 
-
         Report_GetReports,
         Report_GetReport,
         Report_CreateReport,
@@ -81,7 +80,6 @@
         FbaSmallandLight_GetSmallAndLightEligibilityBySellerSKU,
         FbaSmallandLight_GetSmallAndLightFeePreview,
 
-
         FBAInboundEligibility_GetItemEligibilityPreview,
 
         FulFillmentInbound_GetInboundGuidance,
@@ -101,6 +99,50 @@
         FulFillmentInbound_GetShipments,
         FulFillmentInbound_GetShipmentItemsByShipmentId,
         FulFillmentInbound_GetShipmentItems,
+
+        FulFillmentInboundV20240320_ListInboundPlans,
+        FulFillmentInboundV20240320_CreateInboundPlan,
+        FulFillmentInboundV20240320_GetInboundPlan,
+        FulFillmentInboundV20240320_ListInboundPlanBoxes,
+        FulFillmentInboundV20240320_CancelInboundPlan,
+        FulFillmentInboundV20240320_ListInboundPlanItems,
+        FulFillmentInboundV20240320_UpdateInboundPlanName,
+        FulFillmentInboundV20240320_ListPackingGroupBoxes,
+        FulFillmentInboundV20240320_ListPackingGroupItems,
+        FulFillmentInboundV20240320_SetPackingInformation,
+        FulFillmentInboundV20240320_ListPackingOptions,
+        FulFillmentInboundV20240320_GeneratePackingOptions,
+        FulFillmentInboundV20240320_ConfirmPackingOption,
+        FulFillmentInboundV20240320_ListInboundPlanPallets,
+        FulFillmentInboundV20240320_ListPlacementOptions,
+        FulFillmentInboundV20240320_GeneratePlacementOptions,
+        FulFillmentInboundV20240320_ConfirmPlacementOption,
+        FulFillmentInboundV20240320_GetShipment,
+        FulFillmentInboundV20240320_ListShipmentBoxes,
+        FulFillmentInboundV20240320_ListShipmentContentUpdatePreviews,
+        FulFillmentInboundV20240320_GenerateShipmentContentUpdatePreviews,
+        FulFillmentInboundV20240320_GetShipmentContentUpdatePreview,
+        FulFillmentInboundV20240320_ConfirmShipmentContentUpdatePreview,
+        FulFillmentInboundV20240320_GetDeliveryChallanDocument,
+        FulFillmentInboundV20240320_ListDeliveryWindowOptions,
+        FulFillmentInboundV20240320_GenerateDeliveryWindowOptions,
+        FulFillmentInboundV20240320_ConfirmDeliveryWindowOption,
+        FulFillmentInboundV20240320_ListShipmentItems,
+        FulFillmentInboundV20240320_UpdateShipmentName,
+        FulFillmentInboundV20240320_ListShipmentPallets,
+        FulFillmentInboundV20240320_CancelSelfShipAppointment,
+        FulFillmentInboundV20240320_GetSelfShipAppointmentSlots,
+        FulFillmentInboundV20240320_GenerateSelfShipAppointmentSlots,
+        FulFillmentInboundV20240320_ScheduleSelfShipAppointment,
+        FulFillmentInboundV20240320_UpdateShipmentSourceAddress,
+        FulFillmentInboundV20240320_UpdateShipmentTrackingDetails,
+        FulFillmentInboundV20240320_ListTransportationOptions,
+        FulFillmentInboundV20240320_GenerateTransportationOptions,
+        FulFillmentInboundV20240320_ConfirmTransportationOptions,
+        FulFillmentInboundV20240320_ListItemComplianceDetails,
+        FulFillmentInboundV20240320_UpdateItemComplianceDetails,
+        FulFillmentInboundV20240320_CreateMarketplaceItemLabels,
+        FulFillmentInboundV20240320_GetInboundOperationStatus,
 
         FulFillmentOutbound_GetFulfillmentPreview,
         FulFillmentOutbound_ListAllFulfillmentOrders,
@@ -159,12 +201,10 @@
 
         Sales_GetOrderMetrics,
 
-
         EasyShip_ListHandoverSlots,
         EasyShip_GetScheduledPackage,
         EasyShip_CreateScheduledPackage,
         EasyShip_UpdateScheduledPackages,
-
 
         Sellers_GetMarketplaceParticipations,
 
@@ -189,6 +229,8 @@
         VendorOrdersV1_GetPurchaseOrder,
         VendorOrdersV1_SubmitAcknowledgement,
         VendorOrdersV1_GetPurchaseOrdersStatus,
+
+		VendorTransactionStatus_GetTransaction,
 
     }
 }

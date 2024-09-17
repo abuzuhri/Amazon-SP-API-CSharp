@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
   /// <summary>
   /// A list of the document specifications supported for a shipment service offering.
   /// </summary>
-  [DataContract]
+  [CollectionDataContract]
   public class SupportedDocumentSpecificationList : List<SupportedDocumentSpecification> {
 
     /// <summary>
@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

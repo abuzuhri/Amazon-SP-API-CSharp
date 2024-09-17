@@ -74,6 +74,31 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             /// </summary>
             [EnumMember(Value = "SG_VOEC")]
             SG_VOEC = 7,
+
+            /// <summary>
+            /// Enum NZ_VOEC for value: NZ_VOEC
+            /// </summary>
+            [EnumMember(Value = "NZ_VOEC")]
+            NZ_VOEC = 8,
+
+            /// <summary>
+            /// Enum JE_VOEC for value: JE_VOEC
+            /// </summary>
+            [EnumMember(Value = "JE_VOEC")]
+            JE_VOEC = 9,
+
+            /// <summary>
+            /// Enum JE_VOEC for value: JE_VOEC
+            /// </summary>
+            [EnumMember(Value = "NG_VOEC")]
+            NG_VOEC = 10,
+
+            /// <summary>
+            /// Enum MY_VOEC for value: MY_VOEC
+            /// </summary>
+            [EnumMember(Value = "MY_VOEC")]
+            MY_VOEC = 11
+
         }
 
         /// <summary>
