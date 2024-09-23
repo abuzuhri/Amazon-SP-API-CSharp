@@ -47,6 +47,17 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
+        public GetAdditionalInputsResult GetAdditionalInputs(GetAdditionalInputsRequest getRatesRequest) =>
+            Task.Run(() => GetAdditionalInputsAsync(getRatesRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetAdditionalInputsResult> GetAdditionalInputsAsync(GetAdditionalInputsRequest getRatesRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetAdditionalInputs(getRatesRequest.RequestToken, getRatesRequest.RateId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetAdditionalInputsResponse>(RateLimitType.ShippingV2_GetAdditionalInputs, cancellationToken);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
         public GetTrackingResult GetTracking(string carrierId, string trackingId) =>
             Task.Run(() => GetTrackingAsync(carrierId, trackingId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetTrackingResult> GetTrackingAsync(string carrierId, string trackingId, CancellationToken cancellationToken = default)

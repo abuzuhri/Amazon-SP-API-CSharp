@@ -223,6 +223,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipments";
             }
+            public static string GetAdditionalInputs(string requestToken, string rateId) => $"{_resourceBaseUrl}/shipments/additionalInputs/schema?requestToken={requestToken}&rateId={rateId}";            
             public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
             public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
             public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";

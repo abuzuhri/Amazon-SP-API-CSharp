@@ -9,6 +9,7 @@ using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -179,10 +180,11 @@ namespace FikaAmazonAPI.Services
                     responseUri = response.ResponseUri,
                     errorMessage = response.ErrorMessage,
                 };
-                Console.WriteLine("\n\n");
-                Console.WriteLine(string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}",
-                    JsonConvert.SerializeObject(requestToLog),
-                    JsonConvert.SerializeObject(responseToLog)));
+
+                Debug.WriteLine("\n\n---------------------------------------------------------\n");
+                string msg = string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}", requestToLog, responseToLog);
+
+                Debug.WriteLine(msg);
             }
         }
 
