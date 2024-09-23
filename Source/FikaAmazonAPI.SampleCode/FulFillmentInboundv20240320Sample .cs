@@ -17,7 +17,7 @@
             oCreateInboundShipmentPlanRequest.DestinationMarketplaces = new List<string> {amazonConnection.GetCurrentMarketplace.ID};
 
 
-            oCreateInboundShipmentPlanRequest.SourceAddress = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320.Address();
+            oCreateInboundShipmentPlanRequest.SourceAddress = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320.AddressInput();
             oCreateInboundShipmentPlanRequest.SourceAddress.AddressLine1 = "Add";
             oCreateInboundShipmentPlanRequest.SourceAddress.AddressLine2 = "ADD2";
             oCreateInboundShipmentPlanRequest.SourceAddress.City = "City";
