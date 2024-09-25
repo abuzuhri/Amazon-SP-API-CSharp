@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using FikaAmazonAPI.ConstructFeed.Messages;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
@@ -86,7 +86,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         [XmlElement(ElementName = "Type")]
         public string DirectPaymentType { get; set; }
 
-        [XmlElement(ElementName = "AdjustmentCurrencyAmount")]
+        [XmlElement(ElementName = "Amount")]
         public CurrencyAmount Amount { get; set; }
     }
 
