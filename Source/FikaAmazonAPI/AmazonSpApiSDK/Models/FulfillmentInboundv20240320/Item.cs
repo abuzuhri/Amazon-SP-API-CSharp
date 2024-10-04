@@ -43,7 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="prepInstructions">Special preparations that are required for an item. (required).</param>
         /// <param name="quantity">The number of the specified MSKU. (required).</param>
         public Item(string asin = default(string),
-                    string expiration = default(string),
+                    DateTime? expiration = default(DateTime?),
                     string fnsku = default(string),
                     LabelOwner labelOwner = default(LabelOwner),
                     string manufacturingLotCode = default(string),
@@ -121,7 +121,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>The expiration date of the MSKU in ISO 8601 format. The same MSKU with different expiration dates cannot go into the same box.</value>
         [DataMember(Name="expiration", EmitDefaultValue=false)]
-        public string Expiration { get; set; }
+        public DateTime? Expiration { get; set; }
 
         /// <summary>
         /// A unique identifier assigned by Amazon to products stored in and fulfilled from an Amazon fulfillment center.
@@ -305,12 +305,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Asin, length must be greater than 1.", new [] { "Asin" });
             }
 
-            // Expiration (string) pattern
-            Regex regexExpiration = new Regex(@"^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$", RegexOptions.CultureInvariant);
-            if (false == regexExpiration.Match(this.Expiration).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Expiration, must match a pattern of " + regexExpiration, new [] { "Expiration" });
-            }
 
             // Fnsku (string) maxLength
             if(this.Fnsku != null && this.Fnsku.Length > 10)
