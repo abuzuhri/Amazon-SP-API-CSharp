@@ -36,7 +36,8 @@ namespace FikaAmazonAPI.SampleCode
             oInboundShipmentPlanRequestItem.Quantity = 1;
             oInboundShipmentPlanRequestItem.LabelOwner = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.LabelOwner.SELLER;
             oInboundShipmentPlanRequestItem.PrepOwner = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.PrepOwner.SELLER;
-          
+            oInboundShipmentPlanRequestItem.Expiration = DateTime.Now.AddDays(110);
+
             var oResult = amazonConnection.FulFillmentInboundv20240320.CreateInboundPlan(oCreateInboundShipmentPlanRequest);
 
         }

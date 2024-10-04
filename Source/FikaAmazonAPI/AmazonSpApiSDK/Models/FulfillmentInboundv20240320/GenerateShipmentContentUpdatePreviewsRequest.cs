@@ -68,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// A list of all items that will be present in the shipment after the update.
         /// </summary>
         /// <value>A list of all items that will be present in the shipment after the update.</value>
-        [DataMember(Name= "items ", EmitDefaultValue=false)]
+        [DataMember(Name= "items", EmitDefaultValue=false)]
         public List<ItemInput> Items { get; set; }
 
         /// <summary>
