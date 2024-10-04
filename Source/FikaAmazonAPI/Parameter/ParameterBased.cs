@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,7 +68,12 @@ namespace FikaAmazonAPI.Search
                     }
                     else
                     {
-                        output = JsonConvert.SerializeObject(value);
+                        var settings = new JsonSerializerSettings()
+                        {
+                            Converters = new List<JsonConverter>() { new StringEnumConverter() }
+                        };
+
+                        output = JsonConvert.SerializeObject(value, settings);
                     }
 
 
