@@ -156,7 +156,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.
         /// </summary>
         /// <value>Freight information describes the skus being transported. Freight carrier options and quotes will only be returned if the freight information is provided.</value>
-        [DataMember(Name= "freightInformation ", EmitDefaultValue=false)]
+        [DataMember(Name= "freightInformation", EmitDefaultValue=false)]
         public FreightInformation FreightInformation { get; set; }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Selected delivery window attributes.	
         /// </summary>
         /// <value>Selected delivery window attributes.	</value>
-        [DataMember(Name = "selectedDeliveryWindow ", EmitDefaultValue = false)]
+        [DataMember(Name = "selectedDeliveryWindow", EmitDefaultValue = false)]
         public SelectedDeliveryWindow SelectedDeliveryWindow { get; set; }
 
         /// <summary>
