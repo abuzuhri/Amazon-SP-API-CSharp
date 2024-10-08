@@ -94,28 +94,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Identifier of a delivery window option. A delivery window option represent one option for when a shipment is expected to be delivered.
         /// </summary>
         /// <value>Identifier of a delivery window option. A delivery window option represent one option for when a shipment is expected to be delivered.</value>
-        [DataMember(Name = "deliveryWindowOptionId ", EmitDefaultValue = false)]
+        [DataMember(Name = "deliveryWindowOptionId", EmitDefaultValue = false)]
         public string DeliveryWindowOptionId { get; set; }
 
         /// <summary>
         /// The timestamp at which this Window can no longer be edited.
         /// </summary>
         /// <value>The timestamp at which this Window can no longer be edited.</value>
-        [DataMember(Name = "editableUntil  ", EmitDefaultValue = false)]
+        [DataMember(Name = "editableUntil", EmitDefaultValue = false)]
         public DateTime? EditableUntil { get; set; }
 
         /// <summary>
         /// The end timestamp of the window.
         /// </summary>
         /// <value>The end timestamp of the window.</value>
-        [DataMember(Name = "endDate ", EmitDefaultValue = false)]
+        [DataMember(Name = "endDate", EmitDefaultValue = false)]
         public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// The start timestamp of the window.
         /// </summary>
         /// <value>The start timestamp of the window.</value>
-        [DataMember(Name = "startDate ", EmitDefaultValue = false)]
+        [DataMember(Name = "startDate", EmitDefaultValue = false)]
         public DateTime? StartDate { get; set; }
 
         /// <summary>

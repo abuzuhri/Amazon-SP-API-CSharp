@@ -101,7 +101,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.
         /// </summary>
         /// <value>The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.</value>
-        [DataMember(Name = "items ", EmitDefaultValue = false)]
+        [DataMember(Name = "items", EmitDefaultValue = false)]
         public List<ItemInput> Items { get; set; }
 
         /// <summary>

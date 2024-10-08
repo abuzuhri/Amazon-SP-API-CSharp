@@ -85,7 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Identifier of a content update preview.
         /// </summary>
         /// <value>Identifier of a content update preview.</value>
-        [DataMember(Name= "contentUpdatePreviewId ", EmitDefaultValue=false)]
+        [DataMember(Name="contentUpdatePreviewId", EmitDefaultValue=false)]
         public string ContentUpdatePreviewId { get; set; }
 
         /// <summary>
@@ -99,14 +99,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Objects that were included in the update request.
         /// </summary>
         /// <value>Objects that were included in the update request.</value>
-        [DataMember(Name= "requestedUpdates", EmitDefaultValue=false)]
+        [DataMember(Name="requestedUpdates", EmitDefaultValue=false)]
         public RequestedUpdates RequestedUpdates { get; set; }
 
         /// <summary>
         /// Contains information pertaining to a transportation option and the related carrier.
         /// </summary>
         /// <value>Contains information pertaining to a transportation option and the related carrier.</value>
-        [DataMember(Name= "transportationOption", EmitDefaultValue=false)]
+        [DataMember(Name="transportationOption", EmitDefaultValue=false)]
         public TransportationOption TransportationOption { get; set; }
 
         /// <summary>
