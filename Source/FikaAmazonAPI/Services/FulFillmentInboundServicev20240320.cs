@@ -923,6 +923,37 @@ namespace FikaAmazonAPI.Services
         }
         #endregion
 
+        #region ListPrepDetails
+        public List<MskuPrepDetail> ListPrepDetails(ParameterListPrepDetails parameterListPrep) =>
+            Task.Run(() => ListPrepDetailsAsync(parameterListPrep)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<List<MskuPrepDetail>> ListPrepDetailsAsync(ParameterListPrepDetails parameterListPrepDetails, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(parameterListPrepDetails.marketplaceId))
+            {
+                parameterListPrepDetails.marketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+
+            var parameter = parameterListPrepDetails.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPrepDetails, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<ListPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPrepDetails, cancellationToken);
+
+            return response?.MskuPrepDetails;
+        }
+        #endregion
+
+        #region SetPrepDetails
+        public SetPrepDetailsResponse SetPrepDetails(SetPrepDetailsRequest setPrepDetailsRequest) =>
+            Task.Run(() => SetPrepDetailsAsync(setPrepDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<SetPrepDetailsResponse> SetPrepDetailsAsync(SetPrepDetailsRequest setPrepDetailsRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPrepDetails, RestSharp.Method.Post, postJsonObj: setPrepDetailsRequest, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<SetPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_SetPrepDetails, cancellationToken);
+        }
+        #endregion
+
         #region GetInboundOperationStatus
         public InboundOperationStatus GetInboundOperationStatus(string operationId) =>
         Task.Run(() => GetInboundOperationStatusAsync(operationId)).ConfigureAwait(false).GetAwaiter().GetResult();

@@ -168,6 +168,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ListTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
             public static string GenerateTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
             public static string ConfirmTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions/confirmation";
+
+            public static string ListPrepDetails => $"{_resourceBaseUrl_V20240320}/items/prepDetails";
+
+            public static string SetPrepDetails => $"{_resourceBaseUrl_V20240320}/items/prepDetails";
+
+
             public static string ListItemComplianceDetails
             {
                 get => $"{_resourceBaseUrl_V20240320}/items/compliance";
