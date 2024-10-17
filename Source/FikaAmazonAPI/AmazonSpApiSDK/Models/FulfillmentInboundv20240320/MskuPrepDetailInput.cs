@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Initializes a new instance of the <see cref="MskuPrepDetailInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected MskuPrepDetailInput() { }
+        public MskuPrepDetailInput() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="MskuPrepDetailInput" /> class.
         /// </summary>

@@ -949,6 +949,11 @@ namespace FikaAmazonAPI.Services
 
         public async Task<SetPrepDetailsResponse> SetPrepDetailsAsync(SetPrepDetailsRequest setPrepDetailsRequest, CancellationToken cancellationToken = default)
         {
+        	if (string.IsNullOrWhiteSpace(setPrepDetailsRequest.MarketplaceId))
+            {
+                setPrepDetailsRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+            
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPrepDetails, RestSharp.Method.Post, postJsonObj: setPrepDetailsRequest, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<SetPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_SetPrepDetails, cancellationToken);
         }
