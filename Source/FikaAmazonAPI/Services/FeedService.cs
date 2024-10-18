@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -178,6 +179,27 @@ namespace FikaAmazonAPI.Services
                 throw;
             }
             return processingReport;
+        }
+
+        public async Task<string> GetJsonFeedDocumentProcessingReportAsync(FeedDocument feedDocument, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            try
+            {
+                Stream stream = await GetStreamFromUrlAsync(feedDocument.Url, cancellationToken);
+                if (feedDocument.CompressionAlgorithm.HasValue && feedDocument.CompressionAlgorithm.Value == FeedDocument.CompressionAlgorithmEnum.GZIP)
+                {
+                    stream = new GZipStream(stream, CompressionMode.Decompress);
+                }
+
+                using var reader = new StreamReader(stream);
+                string jsonContent = await reader.ReadToEndAsync();
+
+                return jsonContent;
+            }
+            catch (AmazonProcessingReportDeserializeException)
+            {
+                throw;
+            }
         }
 
         public CreateFeedDocumentResult CreateFeedDocument(ContentType contentType) =>
