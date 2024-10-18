@@ -142,6 +142,8 @@
         FulFillmentInboundV20240320_ListItemComplianceDetails,
         FulFillmentInboundV20240320_UpdateItemComplianceDetails,
         FulFillmentInboundV20240320_CreateMarketplaceItemLabels,
+        FulFillmentInboundV20240320_ListPrepDetails,
+        FulFillmentInboundV20240320_SetPrepDetails,
         FulFillmentInboundV20240320_GetInboundOperationStatus,
 
         FulFillmentOutbound_GetFulfillmentPreview,

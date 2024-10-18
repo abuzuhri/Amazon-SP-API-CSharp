@@ -161,6 +161,8 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.FulFillmentInboundV20240320_ListItemComplianceDetails,            new RateLimits(2.0M, 6) },
               { RateLimitType.FulFillmentInboundV20240320_UpdateItemComplianceDetails,          new RateLimits(2.0M, 2) },
               { RateLimitType.FulFillmentInboundV20240320_CreateMarketplaceItemLabels,          new RateLimits(2.0M, 30) },
+              { RateLimitType.FulFillmentInboundV20240320_ListPrepDetails,                      new RateLimits(2.0M, 30) },
+              { RateLimitType.FulFillmentInboundV20240320_SetPrepDetails,                       new RateLimits(2.0M, 30) },
               { RateLimitType.FulFillmentInboundV20240320_GetInboundOperationStatus,            new RateLimits(2.0M, 6) },
 
 
