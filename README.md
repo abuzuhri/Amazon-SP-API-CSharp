@@ -473,6 +473,64 @@ var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(out
 ```
 
 
+#### JSON_LISTINGS_FEED Submit for change price
+```CSharp
+string sellerId = "SellerId";
+string sku = "SKU";
+decimal price = 19.99m;
+
+string jsonString = $@"
+{{
+    ""header"": {{
+    ""sellerId"": ""{sellerId}"",
+    ""version"": ""2.0"",
+    ""issueLocale"": ""en_US""
+    }},
+    ""messages"": [
+    {{
+        ""messageId"": 1,
+        ""sku"": ""{sku}"",
+        ""operationType"": ""PATCH"",
+        ""productType"": ""PRODUCT"",
+        ""patches"": [
+        {{
+            ""op"": ""replace"",
+            ""path"": ""/attributes/purchasable_offer"",
+            ""value"": [
+            {{
+                ""currency"": ""USD"",
+                ""our_price"": [
+                {{
+                    ""schedule"": [
+                    {{
+                        ""value_with_tax"": {price}
+                    }}
+                    ]
+                }}
+                ]
+            }}
+            ]
+        }}
+        ]
+    }}
+    ]
+}}";
+
+string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string>() { MarketPlace.UnitedArabEmirates.ID }, null, ContentType.JSON);
+
+Thread.Sleep(1000*60);
+
+var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+
+var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+var reportOutpit = outPut.Url;
+
+var processingReport = await amazonConnection.Feed.GetJsonFeedDocumentProcessingReportAsync(output);
+
+```
+
+
 #### Feed Submit for change Quantity
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
