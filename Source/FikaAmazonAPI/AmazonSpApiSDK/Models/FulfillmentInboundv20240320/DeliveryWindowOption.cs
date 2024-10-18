@@ -95,35 +95,35 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED
         /// </summary>
         /// <value>Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED</value>
-        [DataMember(Name = "availabilityType", EmitDefaultValue = false)]
+        [DataMember(Name="availabilityType", EmitDefaultValue = false)]
         public AvailabilityType AvailabilityType { get; set; }
 
         /// <summary>
         /// Identifier of a delivery window option. A delivery window option represent one option for when a shipment is expected to be delivered.
         /// </summary>
         /// <value>Identifier of a delivery window option. A delivery window option represent one option for when a shipment is expected to be delivered.</value>
-        [DataMember(Name = "deliveryWindowOptionId ", EmitDefaultValue = false)]
+        [DataMember(Name="deliveryWindowOptionId", EmitDefaultValue = false)]
         public string DeliveryWindowOptionId { get; set; }
 
         /// <summary>
         /// The timestamp at which this delivery window option ends. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.
         /// </summary>
         /// <value>The timestamp at which this delivery window option ends. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.</value>
-        [DataMember(Name = "endDate ", EmitDefaultValue = false)]
+        [DataMember(Name="endDate", EmitDefaultValue = false)]
         public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// The timestamp at which this delivery window option starts. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.
         /// </summary>
         /// <value>The timestamp at which this delivery window option starts. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.</value>
-        [DataMember(Name = "startDate ", EmitDefaultValue = false)]
+        [DataMember(Name="startDate", EmitDefaultValue = false)]
         public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// The timestamp at which this window delivery option becomes no longer valid. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.
         /// </summary>
         /// <value>The timestamp at which this window delivery option becomes no longer valid. This is based in ISO 8601 datetime with pattern yyyy-MM-ddTHH:mm:ss.sssZ.</value>
-        [DataMember(Name = "validUntil  ", EmitDefaultValue = false)]
+        [DataMember(Name="validUntil", EmitDefaultValue = false)]
         public DateTime? ValidUntil { get; set; }
 
         /// <summary>

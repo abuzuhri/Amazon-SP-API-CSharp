@@ -15,9 +15,9 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// The status of a placement option. Can be: OFFERED or ACCEPTED.
+    /// The status of a placement option. Can be: OFFERED, ACCEPTED, or EXPIRED.
     /// </summary>
-    /// <value>The status of a placement option. Can be: OFFERED or ACCEPTED.
+    /// <value>The status of a placement option. Can be: OFFERED, ACCEPTED, or EXPIRED.</value>
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PlacementOptionStatus
@@ -26,7 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         OFFERED = 1,
 
         [EnumMember(Value = "ACCEPTED")]
-        ACCEPTED = 2
+        ACCEPTED = 2,
+
+        [EnumMember(Value = "EXPIRED")]
+        EXPIRED = 3
     }
 
 }

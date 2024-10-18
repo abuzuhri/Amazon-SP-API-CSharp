@@ -91,7 +91,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// Indication of how box content is meant to be provided.
         /// </summary>
         /// <value>Indication of how box content is meant to be provided.</value>
-        [DataMember(Name = "contentInformationSource", EmitDefaultValue = false)]
+        [DataMember(Name="contentInformationSource", EmitDefaultValue = false)]
         public BoxContentInformationSource ContentInformationSource { get; set; }
 
         /// <summary>
@@ -105,14 +105,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.
         /// </summary>
         /// <value>The items and their quantity in the box. This must be empty if the box contentInformationSource is BARCODE_2D or MANUAL_PROCESS.</value>
-        [DataMember(Name = "items ", EmitDefaultValue = false)]
+        [DataMember(Name="items", EmitDefaultValue = false)]
         public List<ItemInput> Items { get; set; }
 
         /// <summary>
         /// Primary key to uniquely identify a Box Package. PackageId must be provided if the intent is to update an existing box. Adding a new box will not require providing this value. Any existing PackageIds not provided will be treated as to-be-removed.
         /// </summary>
         /// <value>Primary key to uniquely identify a Box Package. PackageId must be provided if the intent is to update an existing box. Adding a new box will not require providing this value. Any existing PackageIds not provided will be treated as to-be-removed.</value>
-        [DataMember(Name = "packageId  ", EmitDefaultValue = false)]
+        [DataMember(Name="packageId", EmitDefaultValue = false)]
         public string PackageId { get; set; }
 
         /// <summary>
