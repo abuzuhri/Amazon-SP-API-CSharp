@@ -4,6 +4,6 @@
     {
         public string placementOptionId { get; set; }
         public string shipmentId { get; set; }
-        public string PaginationToken { get; set; }
+        public string paginationToken { get; set; }
     }
 }
