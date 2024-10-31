@@ -4,6 +4,10 @@
     {
         UNSET,
 
+        AppIntegrationsV20240401_CreateNotification,
+        AppIntegrationsV20240401_DeleteNotifications,
+        AppIntegrationsV20240401_RecordActionFeedback,
+
         Order_GetOrders,
         Order_GetOrder,
         Order_GetOrderBuyerInfo,

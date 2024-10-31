@@ -672,6 +672,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string SearchDefinitionsProductTypes => $"{_resourceBaseUrl}";
         }
 
+        protected class AppIntegrationsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "appIntegrations";
+
+            #region V20240401
+            private readonly static string _resourceBaseUrl_V20240401 = "appIntegrations/2024-04-01";
+
+            public static string CreateNotification
+            {
+                get => $"{_resourceBaseUrl_V20240401}/notifications";
+            }
+
+            public static string DeleteNotifications
+            {
+                get => $"{_resourceBaseUrl_V20240401}/notifications/deletion";
+            }
+
+            public static string RecordActionFeedback(string notificationId) => $"{_resourceBaseUrl_V20240401}/notifications/{notificationId}/feedback";
+
+            #endregion
+        }
+
     }
 
 

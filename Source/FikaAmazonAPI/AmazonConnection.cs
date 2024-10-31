@@ -11,6 +11,7 @@ namespace FikaAmazonAPI
     {
         private AmazonCredential Credentials { get; set; }
 
+        public AppIntegrationsServiceV20240401 AppIntegrationsServiceV20240401 => this._AppIntegrationsServiceV20240401 ?? throw _NoCredentials;
         public OrderService Orders => this._Orders ?? throw _NoCredentials;
         public ReportService Reports => this._Reports ?? throw _NoCredentials;
         public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
@@ -49,6 +50,7 @@ namespace FikaAmazonAPI
 
         public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;
 
+        private AppIntegrationsServiceV20240401 _AppIntegrationsServiceV20240401 { get; set; }
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
         private SolicitationService _Solicitations { get; set; }
@@ -111,6 +113,7 @@ namespace FikaAmazonAPI
             this.Credentials = Credentials;
 
             this._Authorization = new AuthorizationService(this.Credentials);
+            this._AppIntegrationsServiceV20240401 = new AppIntegrationsServiceV20240401(this.Credentials);
             this._Orders = new OrderService(this.Credentials);
             this._Reports = new ReportService(this.Credentials);
             this._Solicitations = new SolicitationService(this.Credentials);
