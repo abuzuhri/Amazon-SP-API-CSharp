@@ -1,30 +1,45 @@
+**Describe why you require Personally Identifiable Information to build your application or feature.**
+- We are shipping internationally from our store  to  (UK) and need to automate the generation of AWBs (Air Waybills) through our system and the shipping company. To generate the AWB, we require the customer's address.
+- The only purpose for using PII (Personal Identifiable Information) is to create the AWB by passing the necessary information to the shipping company's API. 
+
+
+
+
+**List all outside parties with whom your organization shares Amazon Information and describe how your organization shares this information.**
+- We share customer addresses with the shipping company to automate the shipping process. This is done through a customized API that generates AWB labels. We only provide the necessary information to the shipping company’s API by submitting a request from our side, which includes all required personal information (PII) to create a new AWB.
+
+
 **Describe the network protection controls used by your organization to restrict public access to databases, file servers, and desktop/developer endpoints.**
-- Access to the Amazon Aurora database through the network is disabled and standard ports are closed. The database is only accessible through a socket on the server itself.
-- The reverse proxy only serves whitelisted directories that are only from sources controlled by us used (AWS Amplify).
-- API endpoints are password protected (PBKDF2 & SHA512 encryption, salted, and stretched for thousands of rounds).
-- Login credentials are always transmitted securely over SSL.
+- Our database server is behind a firewall Only allows connection from certain addresses IP, in addition to being protected by username and password. As for our file server, we use Azure Storage. where we also block requests through a private Key Access.
+
+
 
 **Describe how your organization individually identifies employees who have access to Amazon Information, and restricts employee access to Amazon information on a need- to-know basis.**
-- If all your employees are properly assigned separate users and given only relevant access rights: Access rights are provided to employees based on their role within the company and are progressive, based on their responsibility.
+- All of our employees are identified by a unique ID. accessing with username and password. that determines your role and permissions within our system. In this way, only authorized employees will have access to information from Amazon, keeping at all times the traceability of who and what information accesses
 
-For instance, salespersons only have access to their own leads/quotes (and thus no access to quotes generated through the Amazon API). A salesmanager has access to all quotes/leads for reporting purposes (including quotes generated through the Amazon API). A quote will generate a delivery order which will be accessible to a „normal“ user of the Inventory application for him to be able to print the delivery label and pack the products.
-
-- If your employees share users or if they are given more permissions than necessary. They will be fired and be held responsible before the law for the consequences of leaking user information.
 
 **Describe the mechanism your organization has in place to monitor and prevent Amazon Information from being accessed from employee personal devices (such as USB flash drives, cellphones) and how are you alerted in the event such incidents occur.**
-- We does not allowed developers access to PII. Role-based restrictions and access rights still apply. Developers must not store PII in removable media, personal devices, or unsecured public cloud applications (e.g., public links made available through Google Drive) unless it is encrypted using at least RSA-2048 bit keys or higher. Developers must securely dispose of any printed documents containing PII.
+- The USB connections of all computers are disabled and the use of personal email, messaging or cloud storage accounts. they are totally prohibited. We have an alert system that warns when abnormal behavior is detected when accessing sensitive information. providing the user, date and time. the IP address of the connection and the event that triggered the alarm (for example, a large number of requests to a sensitive endpoint).
 
 **Provide your organization's privacy and data handling policies to describe how Amazon data is collected, processed, stored, used, shared and disposed. You may provide this in the form of a public website URL.**
 1000 characters maximum
 
+
+**Provide your organisation's privacy and data-handling policies to describe how Amazon data is collected, processed, stored, used, shared and disposed of. You may provide this in the form of a public website URL.**
+- {URL}/Home/PrivacyPolicy
+
 **Describe where your organization stores Amazon Information at rest and provide details on any encryption algorithm used.**
-- Developers must encrypt all PII at rest using at least RSA with 2048-bit key size or higher. The cryptographic materials (e.g., encryption/decryption keys) and cryptographic capabilities (e.g. daemons implementing virtual Trusted Platform Modules and providing encryption/decryption APIs) used for encryption of PII at rest must be only accessible to the Developer's processes and services. Direct access to the database is not possible for the customer outside of UI interactions or API calls. Granular access rights control ensures that access is not shared to all users of the database.
+- We store information about personalization of the products necessary for their manufacture. This data is stored on our database server, with symmetric AES 256 encryption and is removed as manufacturing proceeds. Any resource or application that accesses this data must do so through the HTTPS protocol, to guarantee encryption in transit.
+
 
 **Describe how your organization backups or archives Amazon Information and provide details on any encryption algorithm used.**
-- The entire database is backed up once a day and no longer than 30 days after order delivery and only for the purpose of, and as long as is necessary to (i) fulfill orders, (ii) calculate and remit taxes, (iii) produce tax invoices, or (iv) meet legal requirements, including tax or regulatory requirements. If a Developer is required by law to retain archival copies of PII for tax or other regulatory purposes, PII must be stored as a "cold" or offline encrypted backup (e.g., not available for immediate or interactive use). And these backups can only be retrieved by Teecom employees through support requests.
+- The stored information (product customization) is included in our periodic backups. These copies are encrypted using the AES 256 algorithm and managed by Azure, including access restriction by username and password. firewall and security alerts. Backups are done in Azure. where no one has access, only the database administrator.
 
 **Describe how your organization monitors, detects, and logs malicious activity in your application(s).**
-- We uses automated probes on our server that report their status in Munin (an opensource monitoring tool). This tool automatically triggers alarms when probes detect values outside of their pre-defined range. We monitor (among many other things) access rates, response times, ssh connections, network activity.
+We uses automated probes on our server that report their status in Munin (an opensource monitoring tool). This tool automatically triggers alarms when probes detect values outside of their pre-defined range. We monitor access rates, response times, ssh connections, network activity.
+We gather logs information to detect security-related events and logs accessible only to developer who has permission , 
+But for amazon PII we made exception for logs to exclude any PII information from logs
+
 
 **Summarize the steps taken within your organization's incident response plan to handle database hacks, unauthorized access, and data leaks.**
 1. Preparation is we plan needs to detail who is on the incident response team—along with their contact info.
@@ -33,17 +48,23 @@ For instance, salespersons only have access to their own leads/quotes (and thus 
 4. Post-incident activities is security updates have been made, we take some time to debrief from the incident.
 
 
+
 **How do you enforce password management practices throughout the organization as it relates to required length, complexity (upper/lower case, numbers, special character) and expiration period?**
-- We're defined a guidelines for password and developers must establish minimum password requirements for personnel and systems with access to Information. Password requirements must be a minimum of eight (8) characters, contain upper and lower case letters, contain numbers, contain special characters, and rotated at least quarterly. We're using Multi-Factor Authentication.
+- We're defined a guidelines for password and developers must establish minimum password requirements for personnel and systems with access to Information. 
+Password restrictions	
+• A minimum of 12 characters 
+• Requires the following: - Lowercase characters - Uppercase characters - Numbers (0-9) - Symbols
+- and rotated at least quarterly before expired  
+- We're using Multi-Factor Authentication.
 
 **How is Personally Identifiable Information (PII) protected during testing?**
-In during testing, employee only using stub database for test and not using Amazon Information database. And Personally Identifiable Information is encrypted when debug or logs.
+- If it’s necessary for a test participant’s PII to be visible on the screen during a certain task then we enable the Blur Tool to make the screen unreadable during that specific task.
+- Also if data move to test database in test environment then all data for user data PII removed and to mock random data added by database admin before give access to testing user or developer in Test environments and also developer do testing and call to sandbox instead of call production
+
 
 **What measures are taken to prevent exposure of credentials?**
-- Developers must use different passwords for different accounts and systems.
-Developers must use multi-factor authentication (MFA) via Microsoft Authenticator for login to systems.
-Developers must not hardcode sensitive credentials in their code, including encryption keys, secret access keys, or passwords. Sensitive credentials must not be exposed in public code repositories. 
-Developers must maintain separate test and production environments.
+- Passwords are hashed (with salt and IV) before being stored in our database, so If anyone can access it, they couldn't access the original passwords. Additionally, we enforce changing passwords every 6 months, to avoid other password leaks possibilities.
+
 
 **How do you track remediation progress of findings identified from vulnerability scans and penetration tests?**
 - We're testing our applications periodically to assess products’ security is locate any security vulnerabilities that might be hidden in source code, before releasing it.  
