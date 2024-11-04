@@ -846,7 +846,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListTransportationOptions.maxPages.HasValue || totalPages < parameterListTransportationOptions.maxPages.Value))
                 {
-                    parameterListTransportationOptions.PaginationToken = nextToken;
+                    parameterListTransportationOptions.paginationToken = nextToken;
                     var getItemNextPage = await ListTransportationOptionsByNextTokenAsync(inboundPlanId, parameterListTransportationOptions, cancellationToken);
                     list.AddRange(getItemNextPage.TransportationOptions);
                     nextToken = getItemNextPage.Pagination?.NextToken;

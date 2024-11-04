@@ -9,6 +9,10 @@ namespace FikaAmazonAPI.Utils
             //This has to create a new list for each connection, so that rate limits are per seller, not overall.
             return new Dictionary<RateLimitType, RateLimits>()
             {
+              { RateLimitType.AppIntegrationsV20240401_CreateNotification,         new RateLimits(1.0M, 5) },
+              { RateLimitType.AppIntegrationsV20240401_DeleteNotifications,        new RateLimits(1.0M, 5) },
+              { RateLimitType.AppIntegrationsV20240401_RecordActionFeedback,       new RateLimits(1.0M, 5) },
+
               { RateLimitType.Order_GetOrders,                            new RateLimits(0.0167M, 20) },
               { RateLimitType.Order_GetOrder,                             new RateLimits(0.0167M, 20) },
               { RateLimitType.Order_GetOrderBuyerInfo,                    new RateLimits(0.0167M, 20) },
