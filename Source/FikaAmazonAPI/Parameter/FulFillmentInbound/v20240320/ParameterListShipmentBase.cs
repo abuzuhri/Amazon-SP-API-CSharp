@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
+﻿namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
 {
     public class ParameterListShipmentBase : PaginationParameter
     { 
