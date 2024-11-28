@@ -5,8 +5,8 @@ namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
 {
     public class ParameterListPrepDetails : ParameterBased
     {
-        public string marketplaceId { get; set; }
+        public string MarketplaceId { get; set; }
 
-        public ICollection<string> mskus { get; set; }
+        public ICollection<string> Mskus { get; set; }
     }
 }

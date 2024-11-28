@@ -4,6 +4,6 @@
     { 
         public string InboundPlanId { get; set; }
         public string ShipmentId { get; set; }
-        public string paginationToken { get; set; }
+        public string PaginationToken { get; set; }
     }
 }

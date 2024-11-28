@@ -194,7 +194,7 @@ namespace FikaAmazonAPI.Services
         public async Task<LabelDownloadURL> GetLabelsAsync(ParameterGetLabels parameterGetLabels, CancellationToken cancellationToken = default)
         {
             var parameter = parameterGetLabels.getParameters();
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
             var response = await ExecuteRequestAsync<GetLabelsResponse>(RateLimitType.FulFillmentInbound_GetLabels, cancellationToken);
             if (response != null && response.Payload != null)
