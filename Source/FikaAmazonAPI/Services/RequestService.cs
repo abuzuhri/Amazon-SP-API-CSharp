@@ -96,26 +96,27 @@ namespace FikaAmazonAPI.Services
                 AddQueryParameters(queryParameters);
         }
 
-        protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
-        {
-            RefreshToken();
-            if (filter.NextPage != null)
-                CreateRequest(filter.NextPage, method);
-            else
-            {
-                CreateRequest(url, method);
-                AddLimitHeader(filter.Limit);
-            }
+        //protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
+        //{
+        //    RefreshToken();
+        //    if (filter.NextPage != null)
+        //        CreateRequest(filter.NextPage, method);
+        //    else
+        //    {
+        //        CreateRequest(url, method);
+        //        AddLimitHeader(filter.Limit);
+        //    }
 
-            AddAccessToken();
-        }
+        //    AddAccessToken();
+        //}
 
         /// <summary>
         /// Executes the request
         /// </summary>
         /// <typeparam name="T">Type to parse response to</typeparam>
         /// <returns>Returns data of T type</returns>
-        protected async Task<T> ExecuteRequestTry<T>(RateLimitType rateLimitType = RateLimitType.UNSET,
+        protected async Task<T> ExecuteRequestTry<T>(
+            RateLimitType rateLimitType = RateLimitType.UNSET,
             CancellationToken cancellationToken = default) where T : new()
         {
             RestHeader();
@@ -233,8 +234,10 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private async Task SleepForRateLimit(IReadOnlyCollection<RestSharp.Parameter> headers,
-            RateLimitType rateLimitType = RateLimitType.UNSET, CancellationToken cancellationToken = default)
+        private async Task SleepForRateLimit(
+            IReadOnlyCollection<RestSharp.Parameter> headers,
+            RateLimitType rateLimitType = RateLimitType.UNSET,
+            CancellationToken cancellationToken = default)
         {
             try
             {

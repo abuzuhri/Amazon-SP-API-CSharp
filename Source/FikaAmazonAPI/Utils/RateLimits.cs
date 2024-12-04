@@ -41,6 +41,7 @@ namespace FikaAmazonAPI.Utils
                 var LastRequestTime = LastRequest;
                 while (true)
                 {
+                    // to confirm, but looks like we're guessing how long requests will take here?
                     LastRequestTime = LastRequestTime.AddMilliseconds(ratePeriodMs);
                     if (LastRequestTime > DateTime.UtcNow)
                         break;
