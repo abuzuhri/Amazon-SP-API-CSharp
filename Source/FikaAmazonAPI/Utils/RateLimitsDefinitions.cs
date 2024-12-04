@@ -1,10 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Utils
 {
     internal static class RateLimitsDefinitions
     {
-        internal static Dictionary<RateLimitType, RateLimits> RateLimitsTime()
+        private static ConcurrentDictionary<string, ConcurrentDictionary<RateLimitType, RateLimits>> RateLimitsByCredentialKey = new ConcurrentDictionary<string, ConcurrentDictionary<RateLimitType, RateLimits>>();
+
+        /// <summary>
+        /// Returns a concurrent dictionary of rate limit policies by rate limit type based on the credential's client and seller Id
+        /// </summary>
+        /// <param name="credential">The credential to use</param>
+        /// <returns>A concurrent dictionary of rate limit policies by rate limit type</returns>
+        internal static ConcurrentDictionary<RateLimitType, RateLimits> RateLimitsTimeForCredential(AmazonCredential credential)
+        {
+            var credentialKey = $"{credential.ClientId}_{credential.SellerID}";
+
+            if (RateLimitsByCredentialKey.TryGetValue(credentialKey, out var rateLimits)) { return rateLimits; }
+
+            var rateLimitsForSeller = new ConcurrentDictionary<RateLimitType, RateLimits>(RateLimitsTime());
+            RateLimitsByCredentialKey.TryAdd(credentialKey, rateLimitsForSeller);
+            return RateLimitsTimeForCredential(credential);
+        }
+
+        private static Dictionary<RateLimitType, RateLimits> RateLimitsTime()
         {
             //This has to create a new list for each connection, so that rate limits are per seller, not overall.
             return new Dictionary<RateLimitType, RateLimits>()
