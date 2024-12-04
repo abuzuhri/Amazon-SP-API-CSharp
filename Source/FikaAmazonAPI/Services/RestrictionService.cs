@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class RestrictionService : RequestService
     {
-        public RestrictionService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public RestrictionService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

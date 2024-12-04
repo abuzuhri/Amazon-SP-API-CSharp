@@ -16,7 +16,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ReportService : RequestService
     {
-        public ReportService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public ReportService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
         }
         #region GetReport

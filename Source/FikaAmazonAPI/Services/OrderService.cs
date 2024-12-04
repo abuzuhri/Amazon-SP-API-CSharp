@@ -12,7 +12,7 @@ namespace FikaAmazonAPI.Services
 {
     public class OrderService : RequestService
     {
-        public OrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public OrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

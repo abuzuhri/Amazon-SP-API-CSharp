@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
     public class MessagingService : RequestService
     {
 
-        public MessagingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public MessagingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

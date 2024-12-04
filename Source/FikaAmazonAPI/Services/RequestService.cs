@@ -47,9 +47,9 @@ namespace FikaAmazonAPI.Services
         /// </summary>
         /// <param name="amazonCredential">A credential containing the API user's information and cached token values</param>
         /// <param name="rateLimitingHandler">A singleton designed to handle concurrent requests based on the rate limiting policy</param>
-        public RequestService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler)
+        public RequestService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null)
         {
-            RateLimitingHandler = rateLimitingHandler;
+            RateLimitingHandler = rateLimitingHandler ?? new RateLimitingHandler();
 
             AmazonCredential = amazonCredential;
             AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;

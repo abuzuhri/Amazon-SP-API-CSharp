@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class AuthorizationService : RequestService
     {
-        public AuthorizationService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public AuthorizationService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
         }
         public string GetAuthorizationCode(ParameterAuthorizationCode parameterGetOrderMetrics) =>

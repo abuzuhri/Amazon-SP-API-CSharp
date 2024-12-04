@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class VendorDirectFulfillmentOrderService : RequestService
     {
-        public VendorDirectFulfillmentOrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public VendorDirectFulfillmentOrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

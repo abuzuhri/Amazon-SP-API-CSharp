@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
     public class FbaSmallandLightService : RequestService
     {
 
-        public FbaSmallandLightService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public FbaSmallandLightService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

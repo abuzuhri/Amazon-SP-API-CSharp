@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FulFillmentInboundServicev20240320 : RequestService
     {
-        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

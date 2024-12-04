@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class AppIntegrationsServiceV20240401: RequestService
     {
-        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

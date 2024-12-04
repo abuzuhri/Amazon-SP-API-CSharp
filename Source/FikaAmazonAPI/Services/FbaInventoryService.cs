@@ -10,7 +10,7 @@ namespace FikaAmazonAPI.Services
     public class FbaInventoryService : RequestService
     {
 
-        public FbaInventoryService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public FbaInventoryService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

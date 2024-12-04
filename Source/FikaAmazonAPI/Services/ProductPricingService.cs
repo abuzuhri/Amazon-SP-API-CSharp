@@ -14,7 +14,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ProductPricingService : RequestService
     {
-        public ProductPricingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
+        public ProductPricingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
