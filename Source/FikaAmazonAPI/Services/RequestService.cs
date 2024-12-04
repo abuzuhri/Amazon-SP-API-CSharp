@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -40,6 +41,13 @@ namespace FikaAmazonAPI.Services
             {
                 return AmazonCredential.Environment == Environments.Sandbox ? AmazonSandboxUrl : AmazonProductionUrl;
             }
+        }
+
+        private ILogger<RequestService>? _logger = null;
+
+        public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : this(amazonCredential)
+        {
+            _logger = loggerFactory?.CreateLogger<RequestService>() ?? null;
         }
 
         /// <summary>

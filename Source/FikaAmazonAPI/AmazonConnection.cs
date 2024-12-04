@@ -4,11 +4,13 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Globalization;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI
 {
     public class AmazonConnection
     {
+        private readonly ILoggerFactory _loggerFactory;
         private AmazonCredential Credentials { get; set; }
 
         public AppIntegrationsServiceV20240401 AppIntegrationsServiceV20240401 => this._AppIntegrationsServiceV20240401 ?? throw _NoCredentials;
@@ -91,8 +93,9 @@ namespace FikaAmazonAPI
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null)
+        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null, ILoggerFactory? loggerFactory = null)
         {
+            _loggerFactory = loggerFactory;
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
             Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
@@ -129,7 +132,7 @@ namespace FikaAmazonAPI
             this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials);
             this._AplusContent = new AplusContentService(this.Credentials);
             this._Feed = new FeedService(this.Credentials);
-            this._ListingsItem = new ListingsItemService(this.Credentials);
+            this._ListingsItem = new ListingsItemService(this.Credentials, _loggerFactory);
             this._Restrictions = new RestrictionService(this.Credentials);
             this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);
             this._Messaging = new MessagingService(this.Credentials);
