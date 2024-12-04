@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FbaInboundEligibilityService : RequestService
     {
-        public FbaInboundEligibilityService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInboundEligibilityService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

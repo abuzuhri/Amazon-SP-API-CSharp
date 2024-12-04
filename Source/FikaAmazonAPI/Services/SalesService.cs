@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
 using FikaAmazonAPI.Parameter.Sales;
+using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class SalesService : RequestService
     {
-        public SalesService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public SalesService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

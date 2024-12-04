@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FinancialService : RequestService
     {
-        public FinancialService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FinancialService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

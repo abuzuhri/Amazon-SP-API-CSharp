@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class UploadService : RequestService
     {
-        public UploadService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public UploadService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

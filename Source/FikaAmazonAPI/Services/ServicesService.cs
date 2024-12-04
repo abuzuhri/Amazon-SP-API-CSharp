@@ -1,8 +1,10 @@
-﻿namespace FikaAmazonAPI.Services
+﻿using FikaAmazonAPI.Utils;
+
+namespace FikaAmazonAPI.Services
 {
     public class ServicesService : RequestService
     {
-        public ServicesService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ServicesService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

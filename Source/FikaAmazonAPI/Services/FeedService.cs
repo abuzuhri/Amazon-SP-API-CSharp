@@ -19,7 +19,7 @@ namespace FikaAmazonAPI.Services
     public class FeedService : RequestService
     {
 
-        public FeedService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FeedService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

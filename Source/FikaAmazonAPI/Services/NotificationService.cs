@@ -17,7 +17,7 @@ namespace FikaAmazonAPI.Services
 {
     public class NotificationService : RequestService
     {
-        public NotificationService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public NotificationService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
