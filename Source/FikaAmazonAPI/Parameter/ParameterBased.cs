@@ -76,8 +76,8 @@ namespace FikaAmazonAPI.Search
                         output = JsonConvert.SerializeObject(value, settings);
                     }
 
-
-                    var propName = p.Name;
+                    // Convert to cammelCase to avoid issues with properties not being properly mapped
+                    var propName = char.ToLowerInvariant(p.Name[0]) + p.Name.Substring(1);
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }
