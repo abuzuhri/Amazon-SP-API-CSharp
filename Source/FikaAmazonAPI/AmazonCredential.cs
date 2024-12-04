@@ -30,7 +30,7 @@ namespace FikaAmazonAPI
         {
             CacheTokenData = new CacheTokenData();
         }
-        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken, IWebProxy ProxyAddress = null)
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken, IWebProxy proxy)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;
@@ -38,9 +38,14 @@ namespace FikaAmazonAPI
             this.ClientId = ClientId;
             this.ClientSecret = ClientSecret;
             this.RefreshToken = RefreshToken;
-            this.Proxy = ProxyAddress;
+            this.Proxy = proxy;
             CacheTokenData = new CacheTokenData();
         }
+
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId,
+            string ClientSecret, string RefreshToken, string proxyAddress = null)
+            : this(AccessKey, SecretKey, RoleArn, ClientId, ClientSecret, RefreshToken,
+                string.IsNullOrEmpty(proxyAddress) ? null : new WebProxy(proxyAddress)) { }
 
         public TokenResponse GetToken(TokenDataType tokenDataType)
         {

@@ -120,21 +120,38 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ```
 
-### Configuration using a proxy
+### Configuration using a proxy (optional)
 Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
->```csharp
->AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
->{
->     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     MarketPlaceID = "A2VIGQ35RCS4UG",
->     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
->});
->```
->> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
->>
->> ***This is not required and will operate normally without the ProxyAddress being set.***
+```csharp
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     MarketPlaceID = "A2VIGQ35RCS4UG",
+     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
+});
+```
+> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account.
+
+
+Alternatively, you may provide an instance of `IWebProxy` giving you more control over the proxy configuration including the ability to configure credentials:
+```csharp
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     MarketPlaceID = "A2VIGQ35RCS4UG",
+     Proxy = new WebProxy("http(s)://xxx.xxx.xxx.xxx", xxxx)
+                {
+                    Credentials = new NetworkCredential("username", "password")
+                };
+});
+```
+A proxy is not required and things will operate normally without a `ProxyAddress` or `Proxy` being set.
+
+---
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
