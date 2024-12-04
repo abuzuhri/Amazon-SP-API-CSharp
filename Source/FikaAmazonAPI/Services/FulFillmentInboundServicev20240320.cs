@@ -463,7 +463,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                    parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await ListShipmentBoxesByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.AddRange(getItemNextPage.Boxes);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -513,7 +513,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                    parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await ListShipmentContentUpdatePreviewsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.AddRange(getItemNextPage.ContentUpdatePreviews);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -596,7 +596,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                    parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await ListDeliveryWindowOptionsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.AddRange(getItemNextPage.DeliveryWindowOptions);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -646,7 +646,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                    parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await ListShipmentItemsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.AddRange(getItemNextPage.Items);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -700,7 +700,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                    parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await ListShipmentPalletsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.AddRange(getItemNextPage.Pallets);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -751,7 +751,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                parameterListShipmentBase.PaginationToken = nextToken;
+                parameterListShipmentBase.paginationToken = nextToken;
                     var getItemNextPage = await GetSelfShipAppointmentSlotsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.Add(getItemNextPage.SelfShipAppointmentSlotsAvailability);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -846,7 +846,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListTransportationOptions.maxPages.HasValue || totalPages < parameterListTransportationOptions.maxPages.Value))
                 {
-                    parameterListTransportationOptions.PaginationToken = nextToken;
+                    parameterListTransportationOptions.paginationToken = nextToken;
                     var getItemNextPage = await ListTransportationOptionsByNextTokenAsync(inboundPlanId, parameterListTransportationOptions, cancellationToken);
                     list.AddRange(getItemNextPage.TransportationOptions);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -920,6 +920,42 @@ namespace FikaAmazonAPI.Services
         {
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateMarketplaceItemLabels, RestSharp.Method.Post, postJsonObj: createMarketplaceItemLabelsRequest, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<CreateMarketplaceItemLabelsResponse>(RateLimitType.FulFillmentInboundV20240320_CreateMarketplaceItemLabels, cancellationToken);
+        }
+        #endregion
+
+        #region ListPrepDetails
+        public List<MskuPrepDetail> ListPrepDetails(ParameterListPrepDetails parameterListPrep) =>
+            Task.Run(() => ListPrepDetailsAsync(parameterListPrep)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<List<MskuPrepDetail>> ListPrepDetailsAsync(ParameterListPrepDetails parameterListPrepDetails, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(parameterListPrepDetails.marketplaceId))
+            {
+                parameterListPrepDetails.marketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+
+            var parameter = parameterListPrepDetails.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPrepDetails, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<ListPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPrepDetails, cancellationToken);
+
+            return response?.MskuPrepDetails;
+        }
+        #endregion
+
+        #region SetPrepDetails
+        public SetPrepDetailsResponse SetPrepDetails(SetPrepDetailsRequest setPrepDetailsRequest) =>
+            Task.Run(() => SetPrepDetailsAsync(setPrepDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<SetPrepDetailsResponse> SetPrepDetailsAsync(SetPrepDetailsRequest setPrepDetailsRequest, CancellationToken cancellationToken = default)
+        {
+        	if (string.IsNullOrWhiteSpace(setPrepDetailsRequest.MarketplaceId))
+            {
+                setPrepDetailsRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+            
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPrepDetails, RestSharp.Method.Post, postJsonObj: setPrepDetailsRequest, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<SetPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_SetPrepDetails, cancellationToken);
         }
         #endregion
 

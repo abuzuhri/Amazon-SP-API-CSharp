@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,40 +20,40 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// Objects that were included in the update request.
+    /// The response to the &#x60;listPrepDetails&#x60; operation.
     /// </summary>
     [DataContract]
-    public partial class RequestedUpdates :  IEquatable<RequestedUpdates>, IValidatableObject
+    public partial class ListPrepDetailsResponse : IEquatable<ListPrepDetailsResponse>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequestedUpdates" /> class.
+        /// Initializes a new instance of the <see cref="ListPrepDetailsResponse" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public RequestedUpdates() { }
+        public ListPrepDetailsResponse() {
+        }
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequestedUpdates" /> class.
+        /// Initializes a new instance of the <see cref="ListPrepDetailsResponse" /> class.
         /// </summary>
-        /// <param name="boxes">A list of boxes that will be present in the shipment after the update.</param>
-        /// <param name="items">A list of all items that will be present in the shipment after the update.</param>
-        public RequestedUpdates(List<BoxUpdateInput> boxes = default(List<BoxUpdateInput>), List<ItemInput> items = default(List<ItemInput>))
+        /// <param name="mskuPrepDetails">A list of MSKUs and related prep details. (required).</param>
+        public ListPrepDetailsResponse(List<MskuPrepDetail> mskuPrepDetails = default(List<MskuPrepDetail>))
         {
-            this.Boxes = boxes;
-            this.Items = items;
+            // to ensure "mskuPrepDetails" is required (not null)
+            if (mskuPrepDetails == null)
+            {
+                throw new InvalidDataException("mskuPrepDetails is a required property for ListPrepDetailsResponse and cannot be null");
+            }
+            else
+            {
+                this.MskuPrepDetails = mskuPrepDetails;
+            }
         }
 
         /// <summary>
-        /// A list of boxes that will be present in the shipment after the update.
+        /// A list of MSKUs and related prep details.
         /// </summary>
-        /// <value>A list of boxes that will be present in the shipment after the update.</value>
-        [DataMember(Name= "boxes", EmitDefaultValue=false)]
-        public List<BoxUpdateInput> Boxes { get; set; }
-
-        /// <summary>
-        /// A list of all items that will be present in the shipment after the update.
-        /// </summary>
-        /// <value>A list of all items that will be present in the shipment after the update.</value>
-        [DataMember(Name= "items", EmitDefaultValue=false)]
-        public List<ItemInput> Items { get; set; }
+        /// <value>A list of MSKUs and related prep details.</value>
+        [DataMember(Name = "mskuPrepDetails", EmitDefaultValue = false)]
+        public List<MskuPrepDetail> MskuPrepDetails { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,13 +62,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class RequestedUpdates {\n");
-            sb.Append("  Boxes: ").Append(Boxes).Append("\n");
-            sb.Append("  Items: ").Append(Items).Append("\n");
+            sb.Append("class ListPrepDetailsResponse {\n");
+            sb.Append("  MskuPrepDetails: ").Append(MskuPrepDetails).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -84,29 +84,24 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RequestedUpdates);
+            return this.Equals(input as ListPrepDetailsResponse);
         }
 
         /// <summary>
-        /// Returns true if RequestedUpdates instances are equal
+        /// Returns true if ListPrepDetailsResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of RequestedUpdates to be compared</param>
+        /// <param name="input">Instance of ListPrepDetailsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(RequestedUpdates input)
+        public bool Equals(ListPrepDetailsResponse input)
         {
             if (input == null)
                 return false;
 
-            return 
+            return
                 (
-                    this.Boxes == input.Boxes ||
-                    (this.Boxes != null &&
-                    this.Boxes.SequenceEqual(input.Boxes))
-                ) && 
-                (
-                    this.Items == input.Items ||
-                    (this.Items != null &&
-                    this.Items.SequenceEqual(input.Items))
+                    this.MskuPrepDetails == input.MskuPrepDetails ||
+                    this.MskuPrepDetails != null &&
+                    this.MskuPrepDetails.SequenceEqual(input.MskuPrepDetails)
                 );
         }
 
@@ -119,10 +114,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Boxes != null)
-                    hashCode = hashCode * 59 + this.Boxes.GetHashCode();
-                if (this.Items != null)
-                    hashCode = hashCode * 59 + this.Items.GetHashCode();
+                if (this.MskuPrepDetails != null)
+                    hashCode = hashCode * 59 + this.MskuPrepDetails.GetHashCode();
                 return hashCode;
             }
         }
@@ -132,9 +125,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
             yield break;
         }
     }

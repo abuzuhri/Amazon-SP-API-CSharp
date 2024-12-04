@@ -56,6 +56,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         public string FulfillmentChannelCode { get; set; }
 
         /// <summary>
+        /// This property is used like fallback property when property 'FulfillmentChannelCode' is not deserialized by data member name
+        /// </summary>
+        private string apiFulfillmentChannelCode;
+        [DataMember(Name = "fulfillmentChannelCode", EmitDefaultValue = false, IsRequired = false)]
+        private string ApiFullfilmentChannelCode
+        {
+            get => apiFulfillmentChannelCode;
+            set
+            {
+                apiFulfillmentChannelCode = value;
+                if (string.IsNullOrEmpty(FulfillmentChannelCode))
+                    FulfillmentChannelCode = value;
+            }
+        }
+
+        /// <summary>
         /// The quantity of the item you are making available for sale.
         /// </summary>
         /// <value>The quantity of the item you are making available for sale.</value>

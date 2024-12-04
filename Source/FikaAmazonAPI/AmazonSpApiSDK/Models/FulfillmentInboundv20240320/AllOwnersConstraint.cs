@@ -15,21 +15,20 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// The status of a placement option. Can be: OFFERED, ACCEPTED, or EXPIRED.
+    /// A constraint that applies to all owners. If no constraint is specified, defer to any individual owner constraints.
     /// </summary>
-    /// <value>The status of a placement option. Can be: OFFERED, ACCEPTED, or EXPIRED.</value>
+    /// <value>A constraint that applies to all owners. If no constraint is specified, defer to any individual owner constraints.</value>
 
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum PlacementOptionStatus
+
+    public enum AllOwnersConstraint
     {
-        [EnumMember(Value = "OFFERED")]
-        OFFERED = 1,
 
-        [EnumMember(Value = "ACCEPTED")]
-        ACCEPTED = 2,
-
-        [EnumMember(Value = "EXPIRED")]
-        EXPIRED = 3
+        /// <summary>
+        /// Enum MUSTMATCH for value: MUST_MATCH
+        /// </summary>
+        [EnumMember(Value = "MUST_MATCH")]
+        MUSTMATCH = 1
     }
 
 }
