@@ -23,6 +23,7 @@ namespace FikaAmazonAPI.Utils
             this.LastRequestReplenished = DateTime.UtcNow;
             this.RequestsSent = 0;
         }
+
         private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace FikaAmazonAPI.Utils
         /// <param name="rateLimitType">An enum representing the rate limit policy for the resource in use</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        public async Task<RateLimits> WaitForPermittedRequest(RateLimitType rateLimitType, CancellationToken cancellationToken = default, bool debugMode = true)
+        public async Task WaitForPermittedRequest(RateLimitType rateLimitType, CancellationToken cancellationToken = default, bool debugMode = true)
         {
             if (RequestsSent < 0)
             {
@@ -82,8 +83,6 @@ namespace FikaAmazonAPI.Utils
 
             // can't hurt to have this, will probably make the algorithm a little more conservative in practice
             LastRequestReplenished = DateTime.UtcNow;
-
-            return this;
         }
 
         internal void SetRateLimit(decimal rate)
