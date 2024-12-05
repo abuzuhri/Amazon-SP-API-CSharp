@@ -26,57 +26,78 @@ namespace FikaAmazonAPI.Utils
             Action<RestResponse> action = null,
             CancellationToken cancellationToken = default) where TResponse : new()
         {
+            await SleepForRateLimit(credential, rateLimitType, cancellationToken: default);
+
             var response = await restClient.ExecuteAsync<TResponse>(restRequest, cancellationToken);
 
             action?.Invoke(response);
 
-            await SleepForRateLimit(response.Headers, credential, rateLimitType, cancellationToken);
+            await SleepForRateLimit(credential, rateLimitType, cancellationToken: cancellationToken);
 
             return response;
         }
 
         private async Task SleepForRateLimit(
-            IReadOnlyCollection<RestSharp.Parameter> headers,
             AmazonCredential credential,
             RateLimitType rateLimitType = RateLimitType.UNSET,
+            decimal updatedLimitRate = default,
             CancellationToken cancellationToken = default)
         {
-            try
+            if (credential.IsActiveLimitRate)
             {
-                decimal rate = 0;
-                var limitHeader = headers.FirstOrDefault(a => a.Name == RateLimitLimitHeaderName);
-                if (limitHeader != null)
-                {
-                    var RateLimitValue = limitHeader.Value.ToString();
-                    decimal.TryParse(RateLimitValue, NumberStyles.Any, CultureInfo.InvariantCulture, out rate);
-                }
+                var rateLimitPolicies = RateLimitsDefinitions.RateLimitsTimeForCredential(credential);
 
-                if (credential.IsActiveLimitRate)
+                if (rateLimitType == RateLimitType.UNSET
+                    || !rateLimitPolicies.TryGetValue(rateLimitType, out var planTimings))
                 {
-                    if (rateLimitType == RateLimitType.UNSET
-                        || !credential.UsagePlansTimings.TryGetValue(rateLimitType, out var planTimings))
+                    if (updatedLimitRate > 0)
                     {
-                        if (rate > 0)
-                        {
-                            int sleepTime = (int)(1 / rate * 1000);
-                            await Task.Delay(sleepTime, cancellationToken);
-                        }
-                    }
-                    else
-                    {
-                        if (rate > 0)
-                        {
-                            planTimings.SetRateLimit(rate);
-                        }
-
-                        await planTimings.NextRate(rateLimitType);
+                        int sleepTime = (int)(1 / updatedLimitRate * 1000);
+                        await Task.Delay(sleepTime, cancellationToken);
                     }
                 }
+                else
+                {
+                    if (updatedLimitRate > 0)
+                    {
+                        planTimings.SetRateLimit(updatedLimitRate);
+                    }
+
+                    await planTimings.WaitForPermittedRequest(rateLimitType);
+                }
             }
-            catch (Exception e)
+        }
+
+        private void UpdateRateLimitPolicy(AmazonCredential credential, RateLimitType rateLimitType, decimal updatedRateLimit)
+        {
+            if (updatedRateLimit <= 0)
             {
-                // not a big fan of this...
+                return;
             }
+
+            var rateLimitPolicies = RateLimitsDefinitions.RateLimitsTimeForCredential(credential);
+
+            if (rateLimitType == RateLimitType.UNSET
+                || !rateLimitPolicies.TryGetValue(rateLimitType, out var planTimings))
+            {
+                Console.WriteLine($"No rate limit policy found for {rateLimitType} for seller {credential.SellerID}");
+                return;
+            }
+
+            planTimings.SetRateLimit(updatedRateLimit);
+        }
+
+        private decimal GetRateFromHeaders(IEnumerable<RestSharp.Parameter> headers)
+        {
+            decimal rate = 0;
+            var limitHeader = headers.FirstOrDefault(a => a.Name == RateLimitLimitHeaderName);
+            if (limitHeader != null)
+            {
+                var RateLimitValue = limitHeader.Value.ToString();
+                decimal.TryParse(RateLimitValue, NumberStyles.Any, CultureInfo.InvariantCulture, out rate);
+            }
+
+            return rate;
         }
     }
 }
