@@ -36,7 +36,7 @@ namespace FikaAmazonAPI.SampleCode
 
             //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
-            var loggingExamples = new LoggingExamples(config);
+            var loggingExamples = new SerilogLoggingExamples(config);
             await loggingExamples.ConsoleLoggerExample();
 
             Console.ReadLine();

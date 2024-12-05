@@ -170,26 +170,29 @@ namespace FikaAmazonAPI.Services
                     name = parameter.Name,
                     value = parameter.Value,
                     type = parameter.Type.ToString()
-                }),
+                }).ToList(),
                 // ToString() here to have the method as a nice string otherwise it will just show the enum value
                 method = request.Method.ToString(),
                 // This will generate the actual Uri used in the request
                 //uri = request. _restClient.BuildUri(request),
             };
+            
+            //remove the access token from the headers
+            requestToLog.parameters.RemoveAll(p => p.name == "x-amz-access-token");
 
             var responseToLog = new
             {
                 statusCode = response.StatusCode,
                 content = response.Content,
-                headers = response.Headers,
+                headers = response.Headers.Select(h => new
+                {
+                    name = h.Name,
+                    value = h.Value
+                }),
                 // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
                 responseUri = response.ResponseUri,
                 errorMessage = response.ErrorMessage,
             };
-            Debug.WriteLine("\n\n---------------------------------------------------------\n");
-            string msg = string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}", requestToLog, responseToLog);
-
-            Debug.WriteLine(msg);
             //There are PII considerations here
             _logger?.LogInformation("Request completed, \nRequest: {@request} \n\nResponse: {@response}", requestToLog, responseToLog);
         }
