@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Utils;
+using System;
 using System.Globalization;
 
 namespace FikaAmazonAPI
@@ -40,6 +41,7 @@ namespace FikaAmazonAPI
             string marketPlaceId = null,
             string sellerId = null,
             string refCode = null,
+            Action<AmazonCredential> credentialConfiguration = null,
             CultureInfo cultureInfo = null)
         {
             // need to create distinct credential/connection here so that token caching in credential is predicably kept within scope
@@ -48,6 +50,7 @@ namespace FikaAmazonAPI
                 MarketPlaceID = marketPlaceId,
                 SellerID = sellerId,
             };
+            credentialConfiguration?.Invoke(credential);
 
             return new AmazonConnection(credential, _rateLimitingHandler, refCode, cultureInfo);
         }

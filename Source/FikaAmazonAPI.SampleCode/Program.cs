@@ -25,7 +25,12 @@ namespace FikaAmazonAPI.SampleCode
             {
                 var amazonConnection = connectionFactory.RequestScopedConnection(
                     marketPlaceId: config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
-                    sellerId: config.GetSection("FikaAmazonAPI:SellerId").Value);
+                    sellerId: config.GetSection("FikaAmazonAPI:SellerId").Value,
+                    credentialConfiguration: cred => 
+                    { 
+                        cred.IsActiveLimitRate = true;
+                        cred.IsDebugMode = true;
+                    });
 
                 ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
                 reportManagerSample.CallReport();
@@ -34,7 +39,6 @@ namespace FikaAmazonAPI.SampleCode
             await Task.WhenAll(tasks);
 
             Console.ReadLine();
-
         }
     }
 }
