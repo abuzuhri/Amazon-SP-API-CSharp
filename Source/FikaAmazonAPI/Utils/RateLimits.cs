@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Utils
 {
-    internal struct RateLimits
+    internal class RateLimits
     {
         internal decimal Rate { get; private set; }
         internal int Burst { get; }

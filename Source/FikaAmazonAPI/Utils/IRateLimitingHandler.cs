@@ -19,5 +19,7 @@ namespace FikaAmazonAPI.Utils
             RateLimitType rateLimitType = RateLimitType.UNSET,
             Action<RestResponse> responseCallback = null,
             CancellationToken cancellationToken = default) where TResponse : new();
+
+        Task WaitForLimitTypeAsync(AmazonCredential credential, RateLimitType rateLimitType, CancellationToken cancellationToken = default);
     }
 }

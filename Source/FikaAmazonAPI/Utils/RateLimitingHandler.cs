@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,6 +16,7 @@ namespace FikaAmazonAPI.Utils
     internal class RateLimitingHandler : IRateLimitingHandler
     {
         private const string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
+        private const int FallbackDefaultBurstRate = 1;
 
         public async Task<RestResponse<TResponse>> SafelyExecuteRequestAsync<TResponse>(
             IRestClient restClient,
@@ -26,45 +26,35 @@ namespace FikaAmazonAPI.Utils
             Action<RestResponse> action = null,
             CancellationToken cancellationToken = default) where TResponse : new()
         {
-            await SleepForRateLimit(credential, rateLimitType, cancellationToken: default);
+            await WaitForLimitTypeAsync(credential, rateLimitType, cancellationToken: default);
 
             var response = await restClient.ExecuteAsync<TResponse>(restRequest, cancellationToken);
 
             action?.Invoke(response);
 
-            await SleepForRateLimit(credential, rateLimitType, cancellationToken: cancellationToken);
+            if (response != null && TryGetRateFromHeaders(response.Headers, out var headersRate)) 
+            {
+                UpdateRateLimitPolicy(credential, rateLimitType, headersRate);
+            }
 
             return response;
         }
 
-        private async Task SleepForRateLimit(
+        public async Task WaitForLimitTypeAsync(
             AmazonCredential credential,
-            RateLimitType rateLimitType = RateLimitType.UNSET,
-            decimal updatedLimitRate = default,
+            RateLimitType rateLimitType,
             CancellationToken cancellationToken = default)
         {
-            if (credential.IsActiveLimitRate)
+            if (!credential.IsActiveLimitRate)
             {
-                var rateLimitPolicies = RateLimitsDefinitions.RateLimitsTimeForCredential(credential);
+                return;
+            }
 
-                if (rateLimitType == RateLimitType.UNSET
-                    || !rateLimitPolicies.TryGetValue(rateLimitType, out var planTimings))
-                {
-                    if (updatedLimitRate > 0)
-                    {
-                        int sleepTime = (int)(1 / updatedLimitRate * 1000);
-                        await Task.Delay(sleepTime, cancellationToken);
-                    }
-                }
-                else
-                {
-                    if (updatedLimitRate > 0)
-                    {
-                        planTimings.SetRateLimit(updatedLimitRate);
-                    }
+            var policies = RateLimitsDefinitions.RateLimitsTimeForCredential(credential);
 
-                    await planTimings.WaitForPermittedRequest(cancellationToken);
-                }
+            if (policies.TryGetValue(rateLimitType, out var policy))
+            {
+                await policy.WaitForPermittedRequest(cancellationToken, credential.IsDebugMode);
             }
         }
 
@@ -77,27 +67,28 @@ namespace FikaAmazonAPI.Utils
 
             var rateLimitPolicies = RateLimitsDefinitions.RateLimitsTimeForCredential(credential);
 
-            if (rateLimitType == RateLimitType.UNSET
-                || !rateLimitPolicies.TryGetValue(rateLimitType, out var planTimings))
+            if (!rateLimitPolicies.TryGetValue(rateLimitType, out var planTimings))
             {
-                Console.WriteLine($"No rate limit policy found for {rateLimitType} for seller {credential.SellerID}");
+                Console.WriteLine(
+                    $"No rate limit policy found for {rateLimitType} for seller {credential.SellerID}, will create new policy for seller with default burst rate of {FallbackDefaultBurstRate}");
+                rateLimitPolicies.TryAdd(rateLimitType, new RateLimits(Rate: updatedRateLimit, Burst: FallbackDefaultBurstRate, type: rateLimitType));
                 return;
             }
 
             planTimings.SetRateLimit(updatedRateLimit);
         }
 
-        private decimal GetRateFromHeaders(IEnumerable<RestSharp.Parameter> headers)
+        private bool TryGetRateFromHeaders(IEnumerable<RestSharp.Parameter> headers, out decimal rate)
         {
-            decimal rate = 0;
+            rate = 0;
             var limitHeader = headers.FirstOrDefault(a => a.Name == RateLimitLimitHeaderName);
             if (limitHeader != null)
             {
                 var RateLimitValue = limitHeader.Value.ToString();
-                decimal.TryParse(RateLimitValue, NumberStyles.Any, CultureInfo.InvariantCulture, out rate);
+                return decimal.TryParse(RateLimitValue, NumberStyles.Any, CultureInfo.InvariantCulture, out rate);
             }
 
-            return rate;
+            return false;
         }
     }
 }
