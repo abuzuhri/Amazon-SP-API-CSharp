@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.Utils
                         planTimings.SetRateLimit(updatedLimitRate);
                     }
 
-                    await planTimings.WaitForPermittedRequest(rateLimitType);
+                    await planTimings.WaitForPermittedRequest(cancellationToken);
                 }
             }
         }

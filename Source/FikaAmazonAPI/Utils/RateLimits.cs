@@ -37,7 +37,7 @@ namespace FikaAmazonAPI.Utils
         /// <param name="rateLimitType">An enum representing the rate limit policy for the resource in use</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        public async Task WaitForPermittedRequest(RateLimitType rateLimitType, CancellationToken cancellationToken = default, bool debugMode = true)
+        public async Task WaitForPermittedRequest(CancellationToken cancellationToken = default, bool debugMode = true)
         {
             if (RequestsSent < 0)
             {
@@ -50,7 +50,7 @@ namespace FikaAmazonAPI.Utils
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
             if (debugMode)
             {
-                string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
+                string output = $"[RateLimits ,{this.RateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
                 Console.WriteLine(output);
             }
 
