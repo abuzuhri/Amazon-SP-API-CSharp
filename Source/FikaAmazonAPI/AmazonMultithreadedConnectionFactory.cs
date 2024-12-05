@@ -16,12 +16,13 @@ namespace FikaAmazonAPI
         private readonly IRateLimitingHandler _rateLimitingHandler;
 
         public AmazonMultithreadedConnectionFactory(
-            string AccessKey,
-            string SecretKey,
-            string RoleArn,
+            
             string ClientId,
             string ClientSecret,
             string RefreshToken,
+            string AccessKey = null,
+            string SecretKey = null,
+            string RoleArn = null,
             string ProxyAddress = null,
             IRateLimitingHandler rateLimitingHandler = null)
         {
@@ -36,10 +37,19 @@ namespace FikaAmazonAPI
             _rateLimitingHandler = rateLimitingHandler ?? new RateLimitingHandler();
         }
 
-        public AmazonConnection RequestScopedConnection(string refCode = null, CultureInfo cultureInfo = null)
+        public AmazonConnection RequestScopedConnection(
+            string marketPlaceId = null,
+            string sellerId = null,
+            string refCode = null,
+            CultureInfo cultureInfo = null)
         {
             // need to create distinct credential/connection here so that token caching in credential is predicably kept within scope
-            var credential = new AmazonCredential(_accessKey, _secretKey, _roleArn, _clientId, _clientSecret, _refreshToken, _proxyAddress);
+            var credential = new AmazonCredential(_accessKey, _secretKey, _roleArn, _clientId, _clientSecret, _refreshToken, _proxyAddress) 
+            {
+                MarketPlaceID = marketPlaceId,
+                SellerID = sellerId,
+            };
+
             return new AmazonConnection(credential, _rateLimitingHandler, refCode, cultureInfo);
         }
     }

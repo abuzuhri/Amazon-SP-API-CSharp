@@ -13,7 +13,7 @@ namespace FikaAmazonAPI.Utils
     /// <br/><br/>
     /// See <see href="https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits#rate-limiting-algorithm" />
     /// </summary>
-    internal class RateLimitingHandler : IRateLimitingHandler
+    public class RateLimitingHandler : IRateLimitingHandler
     {
         private const string RateLimitLimitHeaderName = "x-amzn-RateLimit-Limit";
         private const int FallbackDefaultBurstRate = 1;
