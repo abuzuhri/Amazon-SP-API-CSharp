@@ -16,7 +16,6 @@ namespace FikaAmazonAPI
         private readonly IRateLimitingHandler _rateLimitingHandler;
 
         public AmazonMultithreadedConnectionFactory(
-            
             string ClientId,
             string ClientSecret,
             string RefreshToken,

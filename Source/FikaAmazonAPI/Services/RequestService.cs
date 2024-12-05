@@ -98,19 +98,19 @@ namespace FikaAmazonAPI.Services
                 AddQueryParameters(queryParameters);
         }
 
-        //protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
-        //{
-        //    RefreshToken();
-        //    if (filter.NextPage != null)
-        //        CreateRequest(filter.NextPage, method);
-        //    else
-        //    {
-        //        CreateRequest(url, method);
-        //        AddLimitHeader(filter.Limit);
-        //    }
+        protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
+        {
+            RefreshToken();
+            if (filter.NextPage != null)
+                CreateRequest(filter.NextPage, method);
+            else
+            {
+                CreateRequest(url, method);
+                AddLimitHeader(filter.Limit);
+            }
 
-        //    AddAccessToken();
-        //}
+            AddAccessToken();
+        }
 
         /// <summary>
         /// Executes the request
