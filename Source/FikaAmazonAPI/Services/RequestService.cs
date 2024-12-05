@@ -47,7 +47,7 @@ namespace FikaAmazonAPI.Services
 
         public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : this(amazonCredential)
         {
-            _logger = loggerFactory?.CreateLogger<RequestService>() ?? null;
+            _logger = loggerFactory?.CreateLogger<RequestService>();
         }
 
         /// <summary>
@@ -162,38 +162,33 @@ namespace FikaAmazonAPI.Services
 
         private void LogRequest(RestRequest request, RestResponse response)
         {
-            if (AmazonCredential.IsDebugMode)
+            var requestToLog = new
             {
-                var requestToLog = new
+                resource = request.Resource,
+                parameters = request.Parameters.Select(parameter => new
                 {
-                    resource = request.Resource,
-                    parameters = request.Parameters.Select(parameter => new
-                    {
-                        name = parameter.Name,
-                        value = parameter.Value,
-                        type = parameter.Type.ToString()
-                    }),
-                    // ToString() here to have the method as a nice string otherwise it will just show the enum value
-                    method = request.Method.ToString(),
-                    // This will generate the actual Uri used in the request
-                    //uri = request. _restClient.BuildUri(request),
-                };
+                    name = parameter.Name,
+                    value = parameter.Value,
+                    type = parameter.Type.ToString()
+                }),
+                // ToString() here to have the method as a nice string otherwise it will just show the enum value
+                method = request.Method.ToString(),
+                // This will generate the actual Uri used in the request
+                //uri = request. _restClient.BuildUri(request),
+            };
 
-                var responseToLog = new
-                {
-                    statusCode = response.StatusCode,
-                    content = response.Content,
-                    headers = response.Headers,
-                    // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
-                    responseUri = response.ResponseUri,
-                    errorMessage = response.ErrorMessage,
-                };
-
-                Debug.WriteLine("\n\n---------------------------------------------------------\n");
-                string msg = string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}", requestToLog, responseToLog);
-
-                Debug.WriteLine(msg);
-            }
+            var responseToLog = new
+            {
+                statusCode = response.StatusCode,
+                content = response.Content,
+                headers = response.Headers,
+                // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
+                responseUri = response.ResponseUri,
+                errorMessage = response.ErrorMessage,
+            };
+            
+            //There are PII considerations here
+            _logger?.LogInformation("Request completed, \nRequest: {request} \n\nResponse: {response}", requestToLog, responseToLog);
         }
 
         private void RestHeader()
@@ -226,9 +221,8 @@ namespace FikaAmazonAPI.Services
                 catch (AmazonQuotaExceededException ex)
                 {
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
-                    {
-                        if (AmazonCredential.IsDebugMode)
-                            Console.WriteLine("Throttle max try count reached");
+                    {                        
+                        _logger?.LogWarning("Throttle max try count reached");
 
                         throw;
                     }
@@ -291,9 +285,8 @@ namespace FikaAmazonAPI.Services
             }
             else
             {
-                if (AmazonCredential.IsDebugMode)
-                    Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" +
-                                      response.Content);
+                
+                _logger?.LogWarning("Amazon Api didn't respond with Okay, see exception for more details: {content}", response.Content);
 
                 var errorResponse = response.Content.ConvertToErrorResponse();
                 if (errorResponse != null)
