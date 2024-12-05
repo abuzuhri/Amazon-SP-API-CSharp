@@ -6,20 +6,23 @@ namespace FikaAmazonAPI.Utils
 {
     internal struct RateLimits
     {
-        internal decimal Rate { get; set; }
-        internal int Burst { get; set; }
-        internal DateTime LastRequestReplenished { get; set; }
-        internal int RequestsSent { get; set; }
+        internal decimal Rate { get; private set; }
+        internal int Burst { get; }
+        internal DateTime LastRequestReplenished { get; private set; }
+        internal int RequestsSent { get; private set; }
+        internal RateLimitType RateLimitType { get; }
 
         /// <summary>
         /// Constructor for rate limits configuration object
         /// </summary>
         /// <param name="Rate">The number of permitted requests which will be added to the "Token bucket" per second</param>
         /// <param name="Burst">The maximum number of requests which can exist in the "Token bucket" at any time</param>
-        internal RateLimits(decimal Rate, int Burst)
+        /// <param name="type">An enum representing the resource for which the rate limit policy is being set</param>
+        internal RateLimits(decimal Rate, int Burst, RateLimitType type)
         {
             this.Rate = Rate;
             this.Burst = Burst;
+            this.RateLimitType = type;
             this.LastRequestReplenished = DateTime.UtcNow;
             this.RequestsSent = 0;
         }
