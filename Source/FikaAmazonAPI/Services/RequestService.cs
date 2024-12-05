@@ -186,9 +186,12 @@ namespace FikaAmazonAPI.Services
                 responseUri = response.ResponseUri,
                 errorMessage = response.ErrorMessage,
             };
-            
+            Debug.WriteLine("\n\n---------------------------------------------------------\n");
+            string msg = string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}", requestToLog, responseToLog);
+
+            Debug.WriteLine(msg);
             //There are PII considerations here
-            _logger?.LogInformation("Request completed, \nRequest: {request} \n\nResponse: {response}", requestToLog, responseToLog);
+            _logger?.LogInformation("Request completed, \nRequest: {@request} \n\nResponse: {@response}", requestToLog, responseToLog);
         }
 
         private void RestHeader()

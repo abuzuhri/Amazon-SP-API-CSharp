@@ -27,8 +27,8 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
-            ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
-            reportManagerSample.CallReport();
+            //ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
+           // reportManagerSample.CallReport();
             //var error = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_STRANDED_INVENTORY_UI_DATA);
             //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_ALL_INVENTORY_DATA);
             //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
@@ -36,7 +36,8 @@ namespace FikaAmazonAPI.SampleCode
 
             //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
-
+            var loggingExamples = new LoggingExamples(config);
+            await loggingExamples.ConsoleLoggerExample();
 
             Console.ReadLine();
 
