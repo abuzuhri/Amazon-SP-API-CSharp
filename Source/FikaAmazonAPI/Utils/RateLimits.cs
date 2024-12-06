@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -49,19 +50,12 @@ namespace FikaAmazonAPI.Utils
             var requestsUsedAtOnset = RequestsUsed;
 
             // when requests used more than zero, replenish according to time elapsed
-            var requestsToReplenish = requestsUsedAtOnset == 0 || ratePeriodMs == 0 ? 0 : (DateTime.UtcNow - LastRequestReplenished).Milliseconds / ratePeriodMs;
-            if (requestsToReplenish > 0)
-            {
-                IncrementAvailableTokens(requestsToReplenish, requestsUsedAtOnset);
-            }
+            IncrementAvailableTokens(debugMode);
 
             var nextRequestsSent = RequestsUsed + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
-            if (debugMode)
-            {
-                string output = $"[RateLimits ,{this.RateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
-                Console.WriteLine(output);
-            }
+
+            WriteDebug($"[RateLimits ,{this.RateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms", debugMode);
 
             var requestIsPermitted = false;
 
@@ -75,13 +69,14 @@ namespace FikaAmazonAPI.Utils
                     var incomingRequestTokenTime = LastRequestReplenished.AddMilliseconds(ratePeriodMs);
                     if (incomingRequestTokenTime > DateTime.UtcNow)
                     {
+                        WriteDebug($"Next token expected at {incomingRequestTokenTime}, waiting", debugMode);
                         await Task.Delay(100);
                         continue;
                     }
                     else
                     {
                         // replenish token
-                        IncrementAvailableTokens(1, currentRequestsUsed);
+                        IncrementAvailableTokens(debugMode);
                     }
 
                     if (RequestsUsed <= 0)
@@ -92,7 +87,7 @@ namespace FikaAmazonAPI.Utils
                 }
 
                 // now remove token from bucket for pending request
-                requestIsPermitted = TryDecrementAvailableTokens();
+                requestIsPermitted = TryDecrementAvailableTokens(debugMode);
             }
         }
 
@@ -102,20 +97,28 @@ namespace FikaAmazonAPI.Utils
         }
 
         // increments available tokens, unless another thread has already incremented them.
-        private void IncrementAvailableTokens(int amountToIncrementBy, int initialAmount)
+        private void IncrementAvailableTokens(bool isDebug)
         {
+            WriteDebug($"Attempting to increment tokens", isDebug);
             lock (_locker)
             {
-                if (RequestsUsed >= initialAmount)
+                var ratePeriodMilliseconds = GetRatePeriodMs();
+                var requestsToReplenish = ratePeriodMilliseconds == 0 ? 0 : (DateTime.UtcNow - LastRequestReplenished).Milliseconds / ratePeriodMilliseconds;
+                WriteDebug($"{requestsToReplenish} tokens to replenish since {LastRequestReplenished}", isDebug);
+                if (requestsToReplenish == 0 || RequestsUsed == 0)
                 {
-                    RequestsUsed = Math.Max(RequestsUsed - amountToIncrementBy, 0);
-                    LastRequestReplenished = DateTime.UtcNow;
+                    return;
                 }
+
+                RequestsUsed = Math.Max(RequestsUsed - requestsToReplenish, 0);
+                LastRequestReplenished = DateTime.UtcNow;
+
+                WriteDebug($"Incremented tokens by {requestsToReplenish}", isDebug);
             }
         }
 
         // will try to decrement available tokens, will fail if another thread has used last of burst quota
-        private bool TryDecrementAvailableTokens()
+        private bool TryDecrementAvailableTokens(bool isDebug)
         {
             var succeeded = false;
 
@@ -123,12 +126,25 @@ namespace FikaAmazonAPI.Utils
             {
                 if (RequestsUsed < Burst)
                 {
+                    WriteDebug($"Token is available for use, requests used = {RequestsUsed}", isDebug);
                     RequestsUsed++;
                     succeeded = true;
-                } 
+                }
+                else
+                {
+                    WriteDebug($"Caller will need to wait for token, {Burst} requests used", isDebug);
+                }
             }
 
             return succeeded;
+        }
+
+        private void WriteDebug(string message, bool isDebug)
+        {
+            if (isDebug)
+            {
+                Console.WriteLine(message);
+            }
         }
     }
 }
