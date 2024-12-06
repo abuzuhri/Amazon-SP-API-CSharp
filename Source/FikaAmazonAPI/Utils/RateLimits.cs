@@ -6,10 +6,11 @@ namespace FikaAmazonAPI.Utils
 {
     internal class RateLimits
     {
+        private object _locker = new object();
         internal decimal Rate { get; private set; }
         internal int Burst { get; }
         internal DateTime LastRequestReplenished { get; private set; }
-        internal int RequestsSent { get; private set; }
+        internal int RequestsUsed { get; private set; }
         internal RateLimitType RateLimitType { get; }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace FikaAmazonAPI.Utils
             this.Burst = Burst;
             this.RateLimitType = type;
             this.LastRequestReplenished = DateTime.UtcNow;
-            this.RequestsSent = 0;
+            this.RequestsUsed = 0;
         }
 
         private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
@@ -39,14 +40,22 @@ namespace FikaAmazonAPI.Utils
         /// <returns></returns>
         public async Task WaitForPermittedRequest(CancellationToken cancellationToken = default, bool debugMode = true)
         {
-            if (RequestsSent < 0)
+            if (RequestsUsed < 0)
             {
-                RequestsSent = 0;
+                RequestsUsed = 0;
             }
 
             int ratePeriodMs = GetRatePeriodMs();
+            var requestsUsedAtOnset = RequestsUsed;
 
-            var nextRequestsSent = RequestsSent + 1;
+            // when requests used more than zero, replenish according to time elapsed
+            var requestsToReplenish = requestsUsedAtOnset == 0 || ratePeriodMs == 0 ? 0 : (DateTime.UtcNow - LastRequestReplenished).Milliseconds / ratePeriodMs;
+            if (requestsToReplenish > 0)
+            {
+                IncrementAvailableTokens(requestsToReplenish, requestsUsedAtOnset);
+            }
+
+            var nextRequestsSent = RequestsUsed + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
             if (debugMode)
             {
@@ -54,43 +63,72 @@ namespace FikaAmazonAPI.Utils
                 Console.WriteLine(output);
             }
 
-            // if bucket is currently empty, enter wait loop for replenishment
-            while (RequestsSent >= Burst)
+            var requestIsPermitted = false;
+
+            while (!requestIsPermitted)
             {
-                // wait until predicted next token available
-                var incomingRequestTokenTime = LastRequestReplenished.AddMilliseconds(ratePeriodMs);
-                if (incomingRequestTokenTime > DateTime.UtcNow)
+                // if bucket is currently empty, enter wait loop for replenishment
+                while (RequestsUsed >= Burst)
                 {
-                    await Task.Delay(100);
-                    continue;
-                }
-                else
-                {
-                    // replenish token
-                    LastRequestReplenished = incomingRequestTokenTime;
-                    RequestsSent -= 1;
+                    var currentRequestsUsed = RequestsUsed;
+                    // wait until predicted next token available
+                    var incomingRequestTokenTime = LastRequestReplenished.AddMilliseconds(ratePeriodMs);
+                    if (incomingRequestTokenTime > DateTime.UtcNow)
+                    {
+                        await Task.Delay(100);
+                        continue;
+                    }
+                    else
+                    {
+                        // replenish token
+                        IncrementAvailableTokens(1, currentRequestsUsed);
+                    }
+
+                    if (RequestsUsed <= 0)
+                    {
+                        RequestsUsed = 0;
+                        break;
+                    }
                 }
 
-                if (RequestsSent <= 0)
-                {
-                    RequestsSent = 0;
-                    break;
-                }
+                // now remove token from bucket for pending request
+                requestIsPermitted = TryDecrementAvailableTokens();
             }
-
-            // now remove token from bucket for pending request
-            if (RequestsSent + 1 <= Burst)
-            {
-                RequestsSent += 1;
-            }
-
-            // can't hurt to have this, will probably make the algorithm a little more conservative in practice
-            LastRequestReplenished = DateTime.UtcNow;
         }
 
         internal void SetRateLimit(decimal rate)
         {
             Rate = rate;
+        }
+
+        // increments available tokens, unless another thread has already incremented them.
+        private void IncrementAvailableTokens(int amountToIncrementBy, int initialAmount)
+        {
+            lock (_locker)
+            {
+                if (RequestsUsed >= initialAmount)
+                {
+                    RequestsUsed = Math.Max(RequestsUsed - amountToIncrementBy, 0);
+                    LastRequestReplenished = DateTime.UtcNow;
+                }
+            }
+        }
+
+        // will try to decrement available tokens, will fail if another thread has used last of burst quota
+        private bool TryDecrementAvailableTokens()
+        {
+            var succeeded = false;
+
+            lock (_locker) 
+            {
+                if (RequestsUsed < Burst)
+                {
+                    RequestsUsed++;
+                    succeeded = true;
+                } 
+            }
+
+            return succeeded;
         }
     }
 }

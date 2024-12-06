@@ -130,6 +130,7 @@ var connectionFactory = new AmazonMultithreadedConnectionFactory(
     ClientId: "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     ClientSecret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     RefreshToken: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    // a singleton that handles rate limiting across multiple threads
     rateLimitingHandler: new RateLimitingHandler());
 
 // Then in each concurrent thread/request scope, a new connection can be created like so
