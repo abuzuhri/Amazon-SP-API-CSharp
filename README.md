@@ -120,6 +120,41 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ```
 
+### Multithreaded connections
+If multithreading, the following should be done to avoid inadvertantly passing incorrect token data between different threads:
+```CSharp
+
+// Note - you may also write and pass your own implementation of the IRateLimitingHandler interface if required
+
+var connectionFactory = new AmazonMultithreadedConnectionFactory(
+    ClientId: "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    ClientSecret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    RefreshToken: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    rateLimitingHandler: new RateLimitingHandler());
+
+// Then in each concurrent thread/request scope, a new connection can be created like so
+var amazonConnection = connectionFactory.RequestScopedConnection(
+    marketPlaceId: "A2VIGQ35RCS4UG",
+    sellerId: "MySellerId",
+    // credentialConfiguration is an optional parameter that allows additional configuration of the AmazonCredential
+    credentialConfiguration: cred => 
+    { 
+        cred.IsActiveLimitRate = true;
+        cred.IsDebugMode = true;
+    });
+
+// or (remember either Marketplace OR Marketplace ID must be provided)
+var amazonConnection = connectionFactory.RequestScopedConnection(
+    sellerId: "MySellerId",
+    credentialConfiguration: cred => 
+    { 
+        cred.IsActiveLimitRate = true;
+        cred.IsDebugMode = true;
+        cred.Marketplace = MarketPlace.UnitedArabEmirates
+    });
+
+```
+
 ### Configuration using a proxy
 Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 >```csharp
