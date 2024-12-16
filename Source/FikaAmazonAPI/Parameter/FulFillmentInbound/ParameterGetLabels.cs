@@ -7,6 +7,8 @@ namespace FikaAmazonAPI.Parameter.FulFillmentInbound
     public class ParameterGetLabels : ParameterBased
     {
         public string MarketplaceId { get; set; }
+
+        [CamelCase]
         public string ShipmentId { get; set; }
         public PageType PageType { get; set; }
         public LabelType LabelType { get; set; }
