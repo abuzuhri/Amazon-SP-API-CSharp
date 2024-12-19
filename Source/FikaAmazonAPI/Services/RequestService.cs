@@ -45,20 +45,16 @@ namespace FikaAmazonAPI.Services
 
         private ILogger<RequestService>? _logger = null;
 
-        public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : this(amazonCredential, rateLimitingHandler)
-        {
-            _logger = loggerFactory?.CreateLogger<RequestService>();
-        }
-
         /// <summary>
         /// Creates request base service
         /// </summary>
         /// <param name="amazonCredential">A credential containing the API user's information and cached token values</param>
         /// <param name="rateLimitingHandler">A singleton designed to handle concurrent requests based on the rate limiting policy</param>
-        public RequestService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null)
+        public RequestService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null)
         {
             RateLimitingHandler = rateLimitingHandler ?? new RateLimitingHandler();
 
+            _logger = loggerFactory?.CreateLogger<RequestService>();
             AmazonCredential = amazonCredential;
             AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;

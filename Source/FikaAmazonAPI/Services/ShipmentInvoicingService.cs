@@ -3,12 +3,13 @@ using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public partial class ShipmentInvoicingService : RequestService
     {
-        public ShipmentInvoicingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public ShipmentInvoicingService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

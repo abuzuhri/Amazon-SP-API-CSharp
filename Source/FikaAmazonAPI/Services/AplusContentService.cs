@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
@@ -6,7 +7,7 @@ namespace FikaAmazonAPI.Services
     public class AplusContentService : RequestService
     {
 
-        public AplusContentService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public AplusContentService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

@@ -12,6 +12,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
@@ -19,7 +20,7 @@ namespace FikaAmazonAPI.Services
     public class FeedService : RequestService
     {
 
-        public FeedService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public FeedService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

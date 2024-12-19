@@ -5,12 +5,13 @@ using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class FulFillmentOutboundService : RequestService
     {
-        public FulFillmentOutboundService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public FulFillmentOutboundService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory,IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }
