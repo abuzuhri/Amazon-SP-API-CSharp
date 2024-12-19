@@ -35,6 +35,7 @@
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.300.106" />
     <PackageReference Include="AWSSDK.SQS" Version="3.7.301.19" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="111.2.0" />

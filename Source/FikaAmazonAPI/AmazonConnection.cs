@@ -4,11 +4,13 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Globalization;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI
 {
     public class AmazonConnection
     {
+        private readonly ILoggerFactory _loggerFactory;
         private AmazonCredential Credentials { get; set; }
 
         private IRateLimitingHandler RateLimitingHandler { get; }
@@ -93,12 +95,9 @@ namespace FikaAmazonAPI
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(
-            AmazonCredential Credentials,
-            IRateLimitingHandler rateLimitingHandler = null,
-            string RefNumber = null,
-            CultureInfo? cultureInfo = null)
+        public AmazonConnection(AmazonCredential Credentials, IRateLimitingHandler rateLimitingHandler = null, string RefNumber = null, CultureInfo? cultureInfo = null, ILoggerFactory? loggerFactory = null)
         {
+            _loggerFactory = loggerFactory;
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
             this.RateLimitingHandler = rateLimitingHandler ?? new RateLimitingHandler();
@@ -119,44 +118,44 @@ namespace FikaAmazonAPI
 
             this.Credentials = Credentials;
 
-            this._Authorization = new AuthorizationService(this.Credentials, this.RateLimitingHandler);
-            this._AppIntegrationsServiceV20240401 = new AppIntegrationsServiceV20240401(this.Credentials, this.RateLimitingHandler);
-            this._Orders = new OrderService(this.Credentials, this.RateLimitingHandler);
-            this._Reports = new ReportService(this.Credentials, this.RateLimitingHandler);
-            this._Solicitations = new SolicitationService(this.Credentials, this.RateLimitingHandler);
-            this._Financials = new FinancialService(this.Credentials, this.RateLimitingHandler);
-            this._CatalogItems = new CatalogItemService(this.Credentials, this.RateLimitingHandler);
-            this._ProductPricing = new ProductPricingService(this.Credentials, this.RateLimitingHandler);
+            this._Authorization = new AuthorizationService(this.Credentials, _loggerFactory);
+            this._AppIntegrationsServiceV20240401 = new AppIntegrationsServiceV20240401(this.Credentials, _loggerFactory);
+            this._Orders = new OrderService(this.Credentials, _loggerFactory);
+            this._Reports = new ReportService(this.Credentials, _loggerFactory);
+            this._Solicitations = new SolicitationService(this.Credentials, _loggerFactory);
+            this._Financials = new FinancialService(this.Credentials, _loggerFactory);
+            this._CatalogItems = new CatalogItemService(this.Credentials, _loggerFactory);
+            this._ProductPricing = new ProductPricingService(this.Credentials, _loggerFactory);
 
-            this._FbaInbound = new FbaInboundService(this.Credentials, this.RateLimitingHandler);
-            this._FbaInventory = new FbaInventoryService(this.Credentials, this.RateLimitingHandler);
-            this._FbaOutbound = new FbaOutboundService(this.Credentials, this.RateLimitingHandler);
-            this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials, this.RateLimitingHandler);
-            this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials, this.RateLimitingHandler);
-            this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials, this.RateLimitingHandler);
-            this._AplusContent = new AplusContentService(this.Credentials, this.RateLimitingHandler);
-            this._Feed = new FeedService(this.Credentials, this.RateLimitingHandler);
-            this._ListingsItem = new ListingsItemService(this.Credentials, this.RateLimitingHandler);
-            this._Restrictions = new RestrictionService(this.Credentials, this.RateLimitingHandler);
-            this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials, this.RateLimitingHandler);
-            this._Messaging = new MessagingService(this.Credentials, this.RateLimitingHandler);
-            this._Notification = new NotificationService(this.Credentials, this.RateLimitingHandler);
-            this._ProductFee = new ProductFeeService(this.Credentials, this.RateLimitingHandler);
-            this._ProductType = new ProductTypeService(this.Credentials, this.RateLimitingHandler);
-            this._Sales = new SalesService(this.Credentials, this.RateLimitingHandler);
-            this._Seller = new SellerService(this.Credentials, this.RateLimitingHandler);
-            this._Services = new ServicesService(this.Credentials, this.RateLimitingHandler);
-            this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials, this.RateLimitingHandler);
-            this._Shipping = new ShippingService(this.Credentials, this.RateLimitingHandler);
-            this._ShippingV2 = new ShippingServiceV2(this.Credentials, this.RateLimitingHandler);
-            this._Upload = new UploadService(this.Credentials, this.RateLimitingHandler);
-            this._Tokens = new TokenService(this.Credentials, this.RateLimitingHandler);
-            this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials, this.RateLimitingHandler);
-            this._FulFillmentInboundv20240320 = new FulFillmentInboundServicev20240320(this.Credentials, this.RateLimitingHandler);
-            this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials, this.RateLimitingHandler);
-            this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials, this.RateLimitingHandler);
-            this._VendorOrders = new VendorOrderService(this.Credentials, this.RateLimitingHandler);
-            this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, this.RateLimitingHandler);
+            this._FbaInbound = new FbaInboundService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FbaInventory = new FbaInventoryService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FbaOutbound = new FbaOutboundService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._AplusContent = new AplusContentService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Feed = new FeedService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._ListingsItem = new ListingsItemService(this.Credentials, _loggerFactory, this.RateLimitingHandler );
+            this._Restrictions = new RestrictionService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Messaging = new MessagingService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Notification = new NotificationService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._ProductFee = new ProductFeeService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._ProductType = new ProductTypeService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Sales = new SalesService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Seller = new SellerService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Services = new ServicesService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Shipping = new ShippingService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._ShippingV2 = new ShippingServiceV2(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Upload = new UploadService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._Tokens = new TokenService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FulFillmentInboundv20240320 = new FulFillmentInboundServicev20240320(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._VendorOrders = new VendorOrderService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
+            this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, _loggerFactory, this.RateLimitingHandler);
 
             AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }

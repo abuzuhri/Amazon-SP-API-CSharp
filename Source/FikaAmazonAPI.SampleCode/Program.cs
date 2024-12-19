@@ -37,8 +37,18 @@ namespace FikaAmazonAPI.SampleCode
             }));
 
             await Task.WhenAll(tasks);
+            
+            //var loggingExamples = new SerilogLoggingExamples(config);
+            //await loggingExamples.ConsoleLoggerExample();
 
             Console.ReadLine();
+
         }
+
+
+
+
+
+
     }
 }

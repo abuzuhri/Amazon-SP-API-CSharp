@@ -8,13 +8,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.v2022_05_01;
 using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
+using Microsoft.Extensions.Logging;
 using Price = FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.Price;
 
 namespace FikaAmazonAPI.Services
 {
     public class ProductPricingService : RequestService
     {
-        public ProductPricingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public ProductPricingService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

@@ -3,12 +3,13 @@ using FikaAmazonAPI.Parameter.FbaInboundEligibility;
 using FikaAmazonAPI.Utils;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class FbaInboundEligibilityService : RequestService
     {
-        public FbaInboundEligibilityService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
+        public FbaInboundEligibilityService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }
