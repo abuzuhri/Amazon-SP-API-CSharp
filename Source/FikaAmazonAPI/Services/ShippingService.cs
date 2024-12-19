@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ShippingService : RequestService
     {
-        public ShippingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShippingService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

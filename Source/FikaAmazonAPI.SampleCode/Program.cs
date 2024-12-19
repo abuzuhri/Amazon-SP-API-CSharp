@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
+using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Configuration;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -12,40 +14,31 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
+            var connectionFactory = new AmazonMultithreadedConnectionFactory(
+               ClientId: config.GetSection("FikaAmazonAPI:ClientId").Value,
+               ClientSecret: config.GetSection("FikaAmazonAPI:ClientSecret").Value,
+               RefreshToken: config.GetSection("FikaAmazonAPI:RefreshToken").Value,
+               rateLimitingHandler: new RateLimitingHandler());
 
-            AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+            var tasks = new[] { 1..10 }.Select(x =>
+            Task.Run(() =>
             {
-                //AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
-                //SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
-                //RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
-                ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
-                ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
-                RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
-                MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
-                SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
-                IsDebugMode = true
-            });
+                var amazonConnection = connectionFactory.RequestScopedConnection(
+                    marketPlaceId: config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
+                    sellerId: config.GetSection("FikaAmazonAPI:SellerId").Value,
+                    credentialConfiguration: cred => 
+                    { 
+                        cred.IsActiveLimitRate = true;
+                        cred.IsDebugMode = true;
+                    });
 
+                ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
+                reportManagerSample.CallReport();
+            }));
 
-            ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
-            reportManagerSample.CallReport();
-            //var error = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_STRANDED_INVENTORY_UI_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_ALL_INVENTORY_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
-            //ReportManager reportManager = new ReportManager(amazonConnection);
-
-            //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
-
-
+            await Task.WhenAll(tasks);
 
             Console.ReadLine();
-
         }
-
-
-
-
-
-
     }
 }

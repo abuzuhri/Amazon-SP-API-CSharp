@@ -52,6 +52,7 @@ namespace FikaAmazonAPI.Utils
         public enum IncludedData
         {
             attributes,
+            classifications,
             dimensions,
             identifiers,
             images,

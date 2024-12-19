@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FulFillmentInboundServicev20240320 : RequestService
     {
-        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
@@ -920,6 +920,42 @@ namespace FikaAmazonAPI.Services
         {
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.CreateMarketplaceItemLabels, RestSharp.Method.Post, postJsonObj: createMarketplaceItemLabelsRequest, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<CreateMarketplaceItemLabelsResponse>(RateLimitType.FulFillmentInboundV20240320_CreateMarketplaceItemLabels, cancellationToken);
+        }
+        #endregion
+
+        #region ListPrepDetails
+        public List<MskuPrepDetail> ListPrepDetails(ParameterListPrepDetails parameterListPrep) =>
+            Task.Run(() => ListPrepDetailsAsync(parameterListPrep)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<List<MskuPrepDetail>> ListPrepDetailsAsync(ParameterListPrepDetails parameterListPrepDetails, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(parameterListPrepDetails.MarketplaceId))
+            {
+                parameterListPrepDetails.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+
+            var parameter = parameterListPrepDetails.getParameters();
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.ListPrepDetails, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<ListPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_ListPrepDetails, cancellationToken);
+
+            return response?.MskuPrepDetails;
+        }
+        #endregion
+
+        #region SetPrepDetails
+        public SetPrepDetailsResponse SetPrepDetails(SetPrepDetailsRequest setPrepDetailsRequest) =>
+            Task.Run(() => SetPrepDetailsAsync(setPrepDetailsRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<SetPrepDetailsResponse> SetPrepDetailsAsync(SetPrepDetailsRequest setPrepDetailsRequest, CancellationToken cancellationToken = default)
+        {
+        	if (string.IsNullOrWhiteSpace(setPrepDetailsRequest.MarketplaceId))
+            {
+                setPrepDetailsRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
+            }
+            
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPrepDetails, RestSharp.Method.Post, postJsonObj: setPrepDetailsRequest, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<SetPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_SetPrepDetails, cancellationToken);
         }
         #endregion
 

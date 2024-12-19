@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ShippingServiceV2 : RequestService
     {
-        public ShippingServiceV2(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShippingServiceV2(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
@@ -42,6 +42,17 @@ namespace FikaAmazonAPI.Services
         {
             await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetRates, RestSharp.Method.Post, postJsonObj: getRatesRequest, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetRatesResponse>(RateLimitType.ShippingV2_GetRates, cancellationToken);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
+        public GetAdditionalInputsResult GetAdditionalInputs(GetAdditionalInputsRequest getRatesRequest) =>
+            Task.Run(() => GetAdditionalInputsAsync(getRatesRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetAdditionalInputsResult> GetAdditionalInputsAsync(GetAdditionalInputsRequest getRatesRequest, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetAdditionalInputs(getRatesRequest.RequestToken, getRatesRequest.RateId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetAdditionalInputsResponse>(RateLimitType.ShippingV2_GetAdditionalInputs, cancellationToken);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

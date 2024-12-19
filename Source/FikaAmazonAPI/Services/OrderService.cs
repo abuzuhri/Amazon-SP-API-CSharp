@@ -6,12 +6,13 @@ using FikaAmazonAPI.Search;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
     public class OrderService : RequestService
     {
-        public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public OrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
@@ -136,11 +137,9 @@ namespace FikaAmazonAPI.Services
 
             return orderList;
         }
-
-       
+        
         public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
         {
-
             var parameterOrderList = new ParameterOrderList
             {
                 MarketplaceIds = searchOrderList.MarketplaceIds,
@@ -151,10 +150,13 @@ namespace FikaAmazonAPI.Services
 
             List<KeyValuePair<string, string>> queryParameters = parameterOrderList.getParameters();
            
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters);
+            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: parameterOrderList);
+            
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
+            
             return response.Payload;
         }
+        
         public OrdersList GetOrdersList(ParameterOrderList searchOrderList) =>
             Task.Run(() => GetOrdersListAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrdersList> GetOrdersListAsync(ParameterOrderList searchOrderList)

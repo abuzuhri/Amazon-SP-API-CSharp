@@ -168,6 +168,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ListTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
             public static string GenerateTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions";
             public static string ConfirmTransportationOptions(string inboundPlanId) => $"{_resourceBaseUrl_V20240320}/inboundPlans/{inboundPlanId}/transportationOptions/confirmation";
+
+            public static string ListPrepDetails => $"{_resourceBaseUrl_V20240320}/items/prepDetails";
+
+            public static string SetPrepDetails => $"{_resourceBaseUrl_V20240320}/items/prepDetails";
+
+
             public static string ListItemComplianceDetails
             {
                 get => $"{_resourceBaseUrl_V20240320}/items/compliance";
@@ -223,6 +229,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipments";
             }
+            public static string GetAdditionalInputs(string requestToken, string rateId) => $"{_resourceBaseUrl}/shipments/additionalInputs/schema?requestToken={requestToken}&rateId={rateId}";            
             public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
             public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
             public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
@@ -663,6 +670,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             private readonly static string _resourceBaseUrl = "/definitions/2020-09-01/productTypes";
             public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/{productType}";
             public static string SearchDefinitionsProductTypes => $"{_resourceBaseUrl}";
+        }
+
+        protected class AppIntegrationsApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "appIntegrations";
+
+            #region V20240401
+            private readonly static string _resourceBaseUrl_V20240401 = "appIntegrations/2024-04-01";
+
+            public static string CreateNotification
+            {
+                get => $"{_resourceBaseUrl_V20240401}/notifications";
+            }
+
+            public static string DeleteNotifications
+            {
+                get => $"{_resourceBaseUrl_V20240401}/notifications/deletion";
+            }
+
+            public static string RecordActionFeedback(string notificationId) => $"{_resourceBaseUrl_V20240401}/notifications/{notificationId}/feedback";
+
+            #endregion
         }
 
     }

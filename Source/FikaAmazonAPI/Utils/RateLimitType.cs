@@ -4,6 +4,10 @@
     {
         UNSET,
 
+        AppIntegrationsV20240401_CreateNotification,
+        AppIntegrationsV20240401_DeleteNotifications,
+        AppIntegrationsV20240401_RecordActionFeedback,
+
         Order_GetOrders,
         Order_GetOrder,
         Order_GetOrderBuyerInfo,
@@ -142,6 +146,8 @@
         FulFillmentInboundV20240320_ListItemComplianceDetails,
         FulFillmentInboundV20240320_UpdateItemComplianceDetails,
         FulFillmentInboundV20240320_CreateMarketplaceItemLabels,
+        FulFillmentInboundV20240320_ListPrepDetails,
+        FulFillmentInboundV20240320_SetPrepDetails,
         FulFillmentInboundV20240320_GetInboundOperationStatus,
 
         FulFillmentOutbound_GetFulfillmentPreview,

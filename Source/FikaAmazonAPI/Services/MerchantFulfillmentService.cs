@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.Services
     public class MerchantFulfillmentService : RequestService
     {
 
-        public MerchantFulfillmentService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public MerchantFulfillmentService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

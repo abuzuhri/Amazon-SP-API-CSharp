@@ -215,6 +215,50 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedId);
         }
 
+        public async Task SubmitJsonFeedPricing(string sku, decimal price)
+        {
+            string jsonString = $@"
+            {{
+              ""header"": {{
+                ""sellerId"": ""{amazonConnection.GetCurrentSellerID}"",
+                ""version"": ""2.0"",
+                ""issueLocale"": ""en_US""
+              }},
+              ""messages"": [
+                {{
+                  ""messageId"": 1,
+                  ""sku"": ""{sku}"",
+                  ""operationType"": ""PATCH"",
+                  ""productType"": ""PRODUCT"",
+                  ""patches"": [
+                    {{
+                      ""op"": ""replace"",
+                      ""path"": ""/attributes/purchasable_offer"",
+                      ""value"": [
+                        {{
+                          ""currency"": ""{amazonConnection.GetCurrentMarketplace.CurrencyCode}"",
+                          ""our_price"": [
+                            {{
+                              ""schedule"": [
+                                {{
+                                  ""value_with_tax"": {price}
+                                }}
+                              ]
+                            }}
+                          ]
+                        }}
+                      ]
+                    }}
+                  ]
+                }}
+              ]
+            }}";
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string>() { amazonConnection.GetCurrentMarketplace.ID }, null, ContentType.JSON);
+
+            await GetJsonFeedDetails(feedID);
+        }
+
 
         public void SubmitFeedSale(double PRICE, string SKU)
         {
@@ -423,6 +467,33 @@ namespace FikaAmazonAPI.SampleCode
                 else Thread.Sleep(10000);
             }
         }
+
+        private async Task GetJsonFeedDetails(string feedID)
+        {
+            string resultFeedDocumentId = string.Empty;
+            string reportResult = string.Empty;
+            while (string.IsNullOrEmpty(resultFeedDocumentId))
+            {
+                Feed feedOutput = amazonConnection.Feed.GetFeed(feedID);
+                if (feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.DONE)
+                {
+                    FeedDocument output = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+                    reportResult = await amazonConnection.Feed.GetJsonFeedDocumentProcessingReportAsync(output);
+                    Console.WriteLine(reportResult);
+                }
+
+                if (!(feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.INPROGRESS ||
+                    feedOutput.ProcessingStatus == Feed.ProcessingStatusEnum.INQUEUE))
+                {
+                    break;
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+        }
+
         private void DisplayProcessingReportMessage(ProcessingReportMessage processingReport)
         {
             Console.WriteLine("MessagesProcessed=" + processingReport.ProcessingSummary.MessagesProcessed);

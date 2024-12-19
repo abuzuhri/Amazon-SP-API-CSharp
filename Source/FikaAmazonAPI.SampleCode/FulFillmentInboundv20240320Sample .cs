@@ -1,4 +1,6 @@
-﻿namespace FikaAmazonAPI.SampleCode
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320;
+
+namespace FikaAmazonAPI.SampleCode
 {
     public class FulFillmentInboundv20240320Sample
     {
@@ -17,7 +19,8 @@
             oCreateInboundShipmentPlanRequest.DestinationMarketplaces = new List<string> {amazonConnection.GetCurrentMarketplace.ID};
 
 
-            oCreateInboundShipmentPlanRequest.SourceAddress = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320.Address();
+
+            oCreateInboundShipmentPlanRequest.SourceAddress = new FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320.AddressInput();
             oCreateInboundShipmentPlanRequest.SourceAddress.AddressLine1 = "Add";
             oCreateInboundShipmentPlanRequest.SourceAddress.AddressLine2 = "ADD2";
             oCreateInboundShipmentPlanRequest.SourceAddress.City = "City";
@@ -33,7 +36,8 @@
             oInboundShipmentPlanRequestItem.Quantity = 1;
             oInboundShipmentPlanRequestItem.LabelOwner = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.LabelOwner.SELLER;
             oInboundShipmentPlanRequestItem.PrepOwner = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.PrepOwner.SELLER;
-          
+            oInboundShipmentPlanRequestItem.Expiration = DateTime.Now.AddDays(110);
+
             var oResult = amazonConnection.FulFillmentInboundv20240320.CreateInboundPlan(oCreateInboundShipmentPlanRequest);
 
         }

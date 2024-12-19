@@ -9,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class VendorTransactionStatusService : RequestService
     {
-        public VendorTransactionStatusService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public VendorTransactionStatusService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

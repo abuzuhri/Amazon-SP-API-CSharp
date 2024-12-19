@@ -120,6 +120,42 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ```
 
+### Multithreaded connections
+If multithreading, the following should be done to avoid inadvertantly passing incorrect token data between different threads:
+```CSharp
+
+// Note - you may also write and pass your own implementation of the IRateLimitingHandler interface if required
+
+var connectionFactory = new AmazonMultithreadedConnectionFactory(
+    ClientId: "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    ClientSecret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    RefreshToken: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    // a singleton that handles rate limiting across multiple threads
+    rateLimitingHandler: new RateLimitingHandler());
+
+// Then in each concurrent thread/request scope, a new connection can be created like so
+var amazonConnection = connectionFactory.RequestScopedConnection(
+    marketPlaceId: "A2VIGQ35RCS4UG",
+    sellerId: "MySellerId",
+    // credentialConfiguration is an optional parameter that allows additional configuration of the AmazonCredential
+    credentialConfiguration: cred => 
+    { 
+        cred.IsActiveLimitRate = true;
+        cred.IsDebugMode = true;
+    });
+
+// or (remember either Marketplace OR Marketplace ID must be provided)
+var amazonConnection = connectionFactory.RequestScopedConnection(
+    sellerId: "MySellerId",
+    credentialConfiguration: cred => 
+    { 
+        cred.IsActiveLimitRate = true;
+        cred.IsDebugMode = true;
+        cred.Marketplace = MarketPlace.UnitedArabEmirates
+    });
+
+```
+
 ### Configuration using a proxy
 Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 >```csharp
@@ -473,6 +509,64 @@ var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(out
 ```
 
 
+#### JSON_LISTINGS_FEED Submit for change price
+```CSharp
+string sellerId = "SellerId";
+string sku = "SKU";
+decimal price = 19.99m;
+
+string jsonString = $@"
+{{
+    ""header"": {{
+    ""sellerId"": ""{sellerId}"",
+    ""version"": ""2.0"",
+    ""issueLocale"": ""en_US""
+    }},
+    ""messages"": [
+    {{
+        ""messageId"": 1,
+        ""sku"": ""{sku}"",
+        ""operationType"": ""PATCH"",
+        ""productType"": ""PRODUCT"",
+        ""patches"": [
+        {{
+            ""op"": ""replace"",
+            ""path"": ""/attributes/purchasable_offer"",
+            ""value"": [
+            {{
+                ""currency"": ""USD"",
+                ""our_price"": [
+                {{
+                    ""schedule"": [
+                    {{
+                        ""value_with_tax"": {price}
+                    }}
+                    ]
+                }}
+                ]
+            }}
+            ]
+        }}
+        ]
+    }}
+    ]
+}}";
+
+string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string>() { MarketPlace.UnitedArabEmirates.ID }, null, ContentType.JSON);
+
+Thread.Sleep(1000*60);
+
+var feedOutput = amazonConnection.Feed.GetFeed(feedID);
+
+var outPut = amazonConnection.Feed.GetFeedDocument(feedOutput.ResultFeedDocumentId);
+
+var reportOutpit = outPut.Url;
+
+var processingReport = await amazonConnection.Feed.GetJsonFeedDocumentProcessingReportAsync(output);
+
+```
+
+
 #### Feed Submit for change Quantity
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
@@ -593,7 +687,7 @@ public void SubmitFeedOrderAdjustment()
 ## Usage Plans and Rate Limits in the Selling Partner API
 
 Please read this doc to get all information about this limitation
-https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-plans-rate-limits/Usage-Plans-and-Rate-Limits.md
+https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits
 
 we calc waiting time by read x-amzn-RateLimit-Limit header 
 
