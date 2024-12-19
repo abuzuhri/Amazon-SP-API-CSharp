@@ -6,12 +6,13 @@ using FikaAmazonAPI.Search;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.Services
 {
     public class OrderService : RequestService
     {
-        public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public OrderService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

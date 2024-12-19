@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class EasyShip20220323Service : RequestService
     {
-        public EasyShip20220323Service(AmazonCredential amazonCredential) : base(amazonCredential)
+        public EasyShip20220323Service(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
