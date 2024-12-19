@@ -3,6 +3,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320;
 
 namespace FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320
 {
+    [CamelCase]
     public class ParameterListInboundPlans : PaginationParameter
     {
         public string PaginationToken { get; set; }

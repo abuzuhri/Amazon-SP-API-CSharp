@@ -1,8 +1,10 @@
-﻿namespace FikaAmazonAPI.Services
+﻿using FikaAmazonAPI.Utils;
+
+namespace FikaAmazonAPI.Services
 {
     public class FbaInboundService : RequestService
     {
-        public FbaInboundService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInboundService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }

@@ -8,13 +8,14 @@ namespace FikaAmazonAPI.Services
 {
     public class UploadService : RequestService
     {
-        public UploadService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public UploadService(AmazonCredential amazonCredential, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, rateLimitingHandler)
         {
 
         }
 
         public UploadDestination CreateUploadDestinationForResource(ParameterCreateUploadDestinationForResource parameterObj) =>
             Task.Run(() => CreateUploadDestinationForResourceAsync(parameterObj)).ConfigureAwait(false).GetAwaiter().GetResult();
+        
         public async Task<UploadDestination> CreateUploadDestinationForResourceAsync(ParameterCreateUploadDestinationForResource parameterObj, CancellationToken cancellationToken = default)
         {
             if (parameterObj.marketplaceIds == null || parameterObj.marketplaceIds.Count == 0)

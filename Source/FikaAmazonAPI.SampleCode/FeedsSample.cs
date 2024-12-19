@@ -215,12 +215,12 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedId);
         }
 
-        public async Task SubmitJsonFeedPricing(string sellerId, string sku, decimal price)
+        public async Task SubmitJsonFeedPricing(string sku, decimal price)
         {
             string jsonString = $@"
             {{
               ""header"": {{
-                ""sellerId"": ""{sellerId}"",
+                ""sellerId"": ""{amazonConnection.GetCurrentSellerID}"",
                 ""version"": ""2.0"",
                 ""issueLocale"": ""en_US""
               }},
@@ -236,7 +236,7 @@ namespace FikaAmazonAPI.SampleCode
                       ""path"": ""/attributes/purchasable_offer"",
                       ""value"": [
                         {{
-                          ""currency"": ""USD"",
+                          ""currency"": ""{amazonConnection.GetCurrentMarketplace.CurrencyCode}"",
                           ""our_price"": [
                             {{
                               ""schedule"": [
@@ -254,7 +254,7 @@ namespace FikaAmazonAPI.SampleCode
               ]
             }}";
 
-            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string>() { MarketPlace.UnitedArabEmirates.ID }, null, ContentType.JSON);
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string>() { amazonConnection.GetCurrentMarketplace.ID }, null, ContentType.JSON);
 
             await GetJsonFeedDetails(feedID);
         }
