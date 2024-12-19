@@ -45,7 +45,7 @@ namespace FikaAmazonAPI.Services
 
         private ILogger<RequestService>? _logger = null;
 
-        public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : this(amazonCredential)
+        public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : this(amazonCredential, rateLimitingHandler)
         {
             _logger = loggerFactory?.CreateLogger<RequestService>();
         }

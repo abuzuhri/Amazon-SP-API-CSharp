@@ -135,7 +135,7 @@ namespace FikaAmazonAPI
             this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials, this.RateLimitingHandler);
             this._AplusContent = new AplusContentService(this.Credentials, this.RateLimitingHandler);
             this._Feed = new FeedService(this.Credentials, this.RateLimitingHandler);
-            this._ListingsItem = new ListingsItemService(this.Credentials, this.RateLimitingHandler, _loggerFactory);
+            this._ListingsItem = new ListingsItemService(this.Credentials, _loggerFactory, this.RateLimitingHandler );
             this._Restrictions = new RestrictionService(this.Credentials, this.RateLimitingHandler);
             this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials, this.RateLimitingHandler);
             this._Messaging = new MessagingService(this.Credentials, this.RateLimitingHandler);
