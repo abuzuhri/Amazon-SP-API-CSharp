@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -17,7 +18,7 @@ namespace FikaAmazonAPI.Services
 {
     public class NotificationService : RequestService
     {
-        public NotificationService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public NotificationService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

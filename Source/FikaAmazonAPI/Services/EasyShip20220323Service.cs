@@ -3,12 +3,13 @@ using FikaAmazonAPI.Parameter.EasyShip;
 using FikaAmazonAPI.Utils;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class EasyShip20220323Service : RequestService
     {
-        public EasyShip20220323Service(AmazonCredential amazonCredential) : base(amazonCredential)
+        public EasyShip20220323Service(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

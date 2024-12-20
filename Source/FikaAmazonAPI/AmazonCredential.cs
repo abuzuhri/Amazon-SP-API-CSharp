@@ -59,11 +59,10 @@ namespace FikaAmazonAPI
         {
             return CacheTokenData.GetAWSAuthenticationTokenData();
         }
+
         public void SetAWSAuthenticationTokenData(AWSAuthenticationTokenData tokenData)
         {
             CacheTokenData.SetAWSAuthenticationTokenData(tokenData);
         }
-        internal Dictionary<RateLimitType, RateLimits> UsagePlansTimings { get; set; } = RateLimitsDefinitions.RateLimitsTime();
-
     }
 }

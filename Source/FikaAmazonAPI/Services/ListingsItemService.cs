@@ -4,12 +4,13 @@ using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class ListingsItemService : RequestService
     {
-        public ListingsItemService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ListingsItemService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null ) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
         }
 

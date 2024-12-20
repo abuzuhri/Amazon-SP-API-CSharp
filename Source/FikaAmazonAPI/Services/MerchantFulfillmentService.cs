@@ -5,13 +5,14 @@ using FikaAmazonAPI.Utils;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class MerchantFulfillmentService : RequestService
     {
 
-        public MerchantFulfillmentService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public MerchantFulfillmentService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

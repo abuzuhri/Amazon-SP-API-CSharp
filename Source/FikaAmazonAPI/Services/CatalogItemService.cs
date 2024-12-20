@@ -8,13 +8,14 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Item = FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.Item;
 
 namespace FikaAmazonAPI.Services
 {
     public class CatalogItemService : RequestService
     {
-        public CatalogItemService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public CatalogItemService(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

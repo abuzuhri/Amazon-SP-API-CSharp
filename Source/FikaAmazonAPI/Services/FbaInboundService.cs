@@ -1,8 +1,11 @@
-﻿namespace FikaAmazonAPI.Services
+﻿using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
+
+namespace FikaAmazonAPI.Services
 {
     public class FbaInboundService : RequestService
     {
-        public FbaInboundService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInboundService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

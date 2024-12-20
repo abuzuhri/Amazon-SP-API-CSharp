@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class AppIntegrationsServiceV20240401: RequestService
     {
-        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential) : base(amazonCredential)
+        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }

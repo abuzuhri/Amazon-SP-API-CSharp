@@ -10,13 +10,14 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
     public class ReportService : RequestService
     {
-        public ReportService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ReportService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
         }
         #region GetReport

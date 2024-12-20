@@ -3,12 +3,13 @@ using FikaAmazonAPI.Parameter.ProductTypes;
 using FikaAmazonAPI.Utils;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class ProductTypeService : RequestService
     {
-        public ProductTypeService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ProductTypeService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
         {
 
         }
