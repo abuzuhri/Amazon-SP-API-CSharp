@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,23 +19,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; private set; }
 
 
-        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, string proxyAddress = null)
+        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, IWebProxy proxy = null)
         {
 
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
             // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
-            if (string.IsNullOrWhiteSpace(proxyAddress))
+            if (proxy == null)
             {
                 RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
             }else
             {
                 var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
                 {
-                    Proxy = new System.Net.WebProxy()
-                    {
-                        Address = new Uri(proxyAddress)
-                    }
+                    Proxy = proxy
                 };
 
                 RestClient = new RestClient(options);
