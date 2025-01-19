@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Runtime;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("Tests")]
 namespace FikaAmazonAPI.Utils
 {
     internal class RateLimits
@@ -47,10 +48,9 @@ namespace FikaAmazonAPI.Utils
             }
 
             int ratePeriodMs = GetRatePeriodMs();
-            var requestsUsedAtOnset = RequestsUsed;
 
             // when requests used more than zero, replenish according to time elapsed
-            IncrementAvailableTokens(debugMode);
+            DecrementRequestsUsed(debugMode);
 
             var nextRequestsSent = RequestsUsed + 1;
             var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
@@ -76,7 +76,7 @@ namespace FikaAmazonAPI.Utils
                     else
                     {
                         // replenish token
-                        IncrementAvailableTokens(debugMode);
+                        DecrementRequestsUsed(debugMode);
                     }
 
                     if (RequestsUsed <= 0)
@@ -87,7 +87,7 @@ namespace FikaAmazonAPI.Utils
                 }
 
                 // now remove token from bucket for pending request
-                requestIsPermitted = TryDecrementAvailableTokens(debugMode);
+                requestIsPermitted = TryIncrementRequestsUsed(debugMode);
             }
         }
 
@@ -97,13 +97,13 @@ namespace FikaAmazonAPI.Utils
         }
 
         // increments available tokens, unless another thread has already incremented them.
-        private void IncrementAvailableTokens(bool isDebug)
+        private void DecrementRequestsUsed(bool isDebug)
         {
             WriteDebug($"Attempting to increment tokens", isDebug);
             lock (_locker)
             {
                 var ratePeriodMilliseconds = GetRatePeriodMs();
-                var requestsToReplenish = ratePeriodMilliseconds == 0 ? 0 : (DateTime.UtcNow - LastRequestReplenished).Milliseconds / ratePeriodMilliseconds;
+                var requestsToReplenish = ratePeriodMilliseconds == 0 ? 0 : (int)((DateTime.UtcNow - LastRequestReplenished).TotalMilliseconds / ratePeriodMilliseconds);
                 WriteDebug($"{requestsToReplenish} tokens to replenish since {LastRequestReplenished}", isDebug);
                 if (requestsToReplenish == 0 || RequestsUsed == 0)
                 {
@@ -118,7 +118,7 @@ namespace FikaAmazonAPI.Utils
         }
 
         // will try to decrement available tokens, will fail if another thread has used last of burst quota
-        private bool TryDecrementAvailableTokens(bool isDebug)
+        private bool TryIncrementRequestsUsed(bool isDebug)
         {
             var succeeded = false;
 

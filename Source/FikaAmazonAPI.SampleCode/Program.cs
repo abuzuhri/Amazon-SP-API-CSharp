@@ -20,7 +20,7 @@ namespace FikaAmazonAPI.SampleCode
                RefreshToken: config.GetSection("FikaAmazonAPI:RefreshToken").Value,
                rateLimitingHandler: new RateLimitingHandler());
 
-            var tasks = new[] { 1..10 }.Select(x =>
+            var tasks = Enumerable.Range(1, 10).Select(x =>
             Task.Run(() =>
             {
                 var amazonConnection = connectionFactory.RequestScopedConnection(

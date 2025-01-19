@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FikaAmazonAPI.SampleCode", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FikaAmazonAPI", "Source\FikaAmazonAPI\FikaAmazonAPI.csproj", "{D6BE954D-174D-4C19-A0B6-46F020878E72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Source\Tests\Tests.csproj", "{4CB44101-8A9E-454A-B272-038C5FAF9F23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{D6BE954D-174D-4C19-A0B6-46F020878E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6BE954D-174D-4C19-A0B6-46F020878E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BE954D-174D-4C19-A0B6-46F020878E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CB44101-8A9E-454A-B272-038C5FAF9F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB44101-8A9E-454A-B272-038C5FAF9F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB44101-8A9E-454A-B272-038C5FAF9F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB44101-8A9E-454A-B272-038C5FAF9F23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FC494085-19C4-4835-B053-F9B74FFB978A} = {3472E85C-6C29-4196-AA16-B95898241C04}
 		{D6BE954D-174D-4C19-A0B6-46F020878E72} = {3472E85C-6C29-4196-AA16-B95898241C04}
+		{4CB44101-8A9E-454A-B272-038C5FAF9F23} = {3472E85C-6C29-4196-AA16-B95898241C04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F072E7DD-BF35-43CC-BF83-E5947CA2D772}
