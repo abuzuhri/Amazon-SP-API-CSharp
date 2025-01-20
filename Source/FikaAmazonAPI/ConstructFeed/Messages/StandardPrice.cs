@@ -5,7 +5,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     public class StandardPrice
     {
         [XmlText]
-        public string Value { get; set; }
+        public decimal Value { get; set; }
         [XmlAttribute]
         public string currency { get; set; }
     }
