@@ -1,6 +1,5 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
-using FikaAmazonAPI.Utils;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -14,32 +13,27 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
-            var connectionFactory = new AmazonMultithreadedConnectionFactory(
-               ClientId: config.GetSection("FikaAmazonAPI:ClientId").Value,
-               ClientSecret: config.GetSection("FikaAmazonAPI:ClientSecret").Value,
-               RefreshToken: config.GetSection("FikaAmazonAPI:RefreshToken").Value,
-               rateLimitingHandler: new RateLimitingHandler());
+            var factory = LoggerFactory.Create(builder => builder.AddConsole());
 
-            var tasks = Enumerable.Range(1, 10).Select(x =>
-            Task.Run(() =>
+            AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
-                var amazonConnection = connectionFactory.RequestScopedConnection(
-                    marketPlaceId: config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
-                    sellerId: config.GetSection("FikaAmazonAPI:SellerId").Value,
-                    credentialConfiguration: cred => 
-                    { 
-                        cred.IsActiveLimitRate = true;
-                        cred.IsDebugMode = true;
-                    });
+                ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
+                ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
+                RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
+                MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
+                SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
+                IsDebugMode = true
+            }, loggerFactory: factory);
 
-                ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
-                reportManagerSample.CallReport();
-            }));
 
-            await Task.WhenAll(tasks);
-            
-            //var loggingExamples = new SerilogLoggingExamples(config);
-            //await loggingExamples.ConsoleLoggerExample();
+            ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
+            reportManagerSample.CallReport();
+            //var error = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_STRANDED_INVENTORY_UI_DATA);
+            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_ALL_INVENTORY_DATA);
+            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
+            //ReportManager reportManager = new ReportManager(amazonConnection);
+
+            //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
             Console.ReadLine();
 
