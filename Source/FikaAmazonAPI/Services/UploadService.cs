@@ -1,22 +1,22 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Upload;
 using FikaAmazonAPI.Parameter.Upload;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class UploadService : RequestService
     {
-        public UploadService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
+        public UploadService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
 
         public UploadDestination CreateUploadDestinationForResource(ParameterCreateUploadDestinationForResource parameterObj) =>
             Task.Run(() => CreateUploadDestinationForResourceAsync(parameterObj)).ConfigureAwait(false).GetAwaiter().GetResult();
-        
+
         public async Task<UploadDestination> CreateUploadDestinationForResourceAsync(ParameterCreateUploadDestinationForResource parameterObj, CancellationToken cancellationToken = default)
         {
             if (parameterObj.marketplaceIds == null || parameterObj.marketplaceIds.Count == 0)

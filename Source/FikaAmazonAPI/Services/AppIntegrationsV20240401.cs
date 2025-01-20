@@ -1,17 +1,14 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.AppIntegrationsV20240401;
 using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using Microsoft.Extensions.Logging;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
-    public class AppIntegrationsServiceV20240401: RequestService
+    public class AppIntegrationsServiceV20240401 : RequestService
     {
-        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential,ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
+        public AppIntegrationsServiceV20240401(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

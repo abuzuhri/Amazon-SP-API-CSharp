@@ -4,13 +4,13 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications;
 using FikaAmazonAPI.NotificationMessages;
 using FikaAmazonAPI.Parameter.Notification;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -18,7 +18,7 @@ namespace FikaAmazonAPI.Services
 {
     public class NotificationService : RequestService
     {
-        public NotificationService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
+        public NotificationService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
