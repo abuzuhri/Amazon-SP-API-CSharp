@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.SampleCode
             }, loggerFactory: factory);
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            // _ = feedsSample.SubmitFeedPRICING_JSONAsync("B087YHP3HQ.151", 131.77M, 67.70M, 131.77M);
+            _ = feedsSample.SubmitFeedPRICING_JSONAsync("B087YHP3HQ.151", 131.77M, 67.70M, 131.77M);
 
 
             Console.ReadLine();
