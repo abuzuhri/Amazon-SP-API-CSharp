@@ -25,15 +25,9 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             }, loggerFactory: factory);
 
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            // _ = feedsSample.SubmitFeedPRICING_JSONAsync("B087YHP3HQ.151", 131.77M, 67.70M, 131.77M);
 
-            ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
-            reportManagerSample.CallReport();
-            //var error = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_STRANDED_INVENTORY_UI_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_ALL_INVENTORY_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
-            //ReportManager reportManager = new ReportManager(amazonConnection);
-
-            //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
             Console.ReadLine();
 
