@@ -4,6 +4,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,13 +17,13 @@ namespace FikaAmazonAPI.Services
 {
     public class ReportService : RequestService
     {
-        public ReportService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ReportService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
         }
         #region GetReport
-        public List<Report> GetReports(ParameterReportList parameterReportList) =>
+        public IList<Report> GetReports(ParameterReportList parameterReportList) =>
             Task.Run(() => GetReportsAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<List<Report>> GetReportsAsync(ParameterReportList parameterReportList, CancellationToken cancellationToken = default)
+        public async Task<IList<Report>> GetReportsAsync(ParameterReportList parameterReportList, CancellationToken cancellationToken = default)
         {
             if (parameterReportList.marketplaceIds == null || parameterReportList.marketplaceIds.Count == 0)
             {
@@ -94,9 +95,15 @@ namespace FikaAmazonAPI.Services
             Task.Run(() => GetReportsByNextTokenAsync(parameterReportList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<GetReportsResponseV00> GetReportsByNextTokenAsync(ParameterReportList parameterReportList, CancellationToken cancellationToken = default)
         {
-            var parameterReportListNew = new ParameterReportList();
-            parameterReportListNew.nextToken = parameterReportList.nextToken;
-            var parameters = parameterReportListNew.getParameters();
+            List<KeyValuePair<string, string>> parameters = null;
+            if (string.IsNullOrEmpty(parameterReportList.nextToken))
+                parameters = parameterReportList.getParameters();
+            else
+            {
+                var parameterReportListNew = new ParameterReportList();
+                parameterReportListNew.nextToken = parameterReportList.nextToken;
+                parameters = parameterReportListNew.getParameters();
+            }
 
             await CreateAuthorizedRequestAsync(ReportApiUrls.GetReports, RestSharp.Method.Get, parameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetReportsResponseV00>(RateLimitType.Report_GetReports, cancellationToken);
@@ -209,8 +216,10 @@ namespace FikaAmazonAPI.Services
 
             string tempFilePath = Path.Combine(Path.GetTempPath() + fileName);
 
-            try {
-                if (isEncryptedFile) {
+            try
+            {
+                if (isEncryptedFile)
+                {
                     //Later will check
                     byte[] rawData = client.DownloadData(reportDocument.Url);
                     byte[] key = Convert.FromBase64String(reportDocument.EncryptionDetails.Key);
@@ -218,29 +227,33 @@ namespace FikaAmazonAPI.Services
                     var reportData = FileTransform.DecryptString(key, iv, rawData);
                     File.WriteAllText(tempFilePath, reportData);
                 }
-                else {
+                else
+                {
                     var stream = await client.OpenReadTaskAsync(new Uri(reportDocument.Url));
-                    using (Stream s = File.Create(tempFilePath)) {
+                    using (Stream s = File.Create(tempFilePath))
+                    {
                         stream?.CopyTo(s);
                     }
                 }
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-				if (isCompressionFile) {
+                if (isCompressionFile)
+                {
                     var compressionFile = tempFilePath;
                     tempFilePath = FileTransform.Decompress(tempFilePath);
                     File.Delete(compressionFile);
                 }
 
-				cancellationToken.ThrowIfCancellationRequested();
+                cancellationToken.ThrowIfCancellationRequested();
 
-				return tempFilePath;
+                return tempFilePath;
             }
-            catch(OperationCanceledException){
-				File.Delete(tempFilePath);
+            catch (OperationCanceledException)
+            {
+                File.Delete(tempFilePath);
                 throw;
-			}
+            }
         }
 
         public async Task SaveStreamToFileAsync(string fileFullPath, Stream stream, CancellationToken cancellationToken = default)
@@ -285,7 +298,7 @@ namespace FikaAmazonAPI.Services
 
             parameters.marketplaceIds = new MarketplaceIds();
 
-            if (marketplaces == null)
+            if (marketplaces == null || !marketplaces.Any())
             {
                 parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
             }
@@ -303,10 +316,16 @@ namespace FikaAmazonAPI.Services
                 parameters.dataEndTime = dataEndTime;
 
             var reportId = await CreateReportAsync(parameters, cancellationToken);
+            return await GetReportFileByReportIdAsync(reportId, isRestrictedReport, millisecondsDelay, cancellationToken);
+
+        }
+
+        public async Task<string> GetReportFileByReportIdAsync(string reportId, bool isRestrictedReport, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
+        {
             var filePath = string.Empty;
             string ReportDocumentId = string.Empty;
 
-            while (string.IsNullOrEmpty(ReportDocumentId))
+            while (string.IsNullOrEmpty(ReportDocumentId) && !cancellationToken.IsCancellationRequested)
             {
                 var reportData = await GetReportAsync(reportId, cancellationToken);
                 if (!string.IsNullOrEmpty(reportData.ReportDocumentId))

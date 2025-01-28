@@ -75,7 +75,7 @@ namespace FikaAmazonAPI.SampleCode
             var labelParams = new ParameterGetLabels()
             {
                 PageType = PageType.PackageLabel_Letter_6,
-                shipmentId = shipmentId,
+                ShipmentId = shipmentId,
                 LabelType = LabelType.SELLER_LABEL,
                 PageSize = boxCount
             };

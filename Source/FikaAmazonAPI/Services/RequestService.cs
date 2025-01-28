@@ -1,10 +1,10 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using FikaAmazonAPI.AmazonSpApiSDK.Runtime;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
@@ -33,6 +33,7 @@ namespace FikaAmazonAPI.Services
         protected string AmazonProductionUrl { get; set; }
         protected string AccessToken { get; set; }
         protected IList<KeyValuePair<string, string>> LastHeaders { get; set; }
+
         protected string ApiBaseUrl
         {
             get
@@ -41,18 +42,20 @@ namespace FikaAmazonAPI.Services
             }
         }
 
+        private ILogger<RequestService>? _logger = null;
+
         /// <summary>
         /// Creates request base service
         /// </summary>
-        /// <param name="awsCredentials">Contains api clients information</param>
-        /// <param name="clientToken">Contains current user's account api keys</param>
-        public RequestService(AmazonCredential amazonCredential)
+        /// <param name="amazonCredential">A credential containing the API user's information and cached token values</param>
+        /// <param name="loggerFactory">A singleton </param>
+        public RequestService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory)
         {
+            _logger = loggerFactory?.CreateLogger<RequestService>();
             AmazonCredential = amazonCredential;
             AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
         }
-
 
         private void CreateRequest(string url, RestSharp.Method method)
         {
@@ -79,7 +82,10 @@ namespace FikaAmazonAPI.Services
             Request = new RestRequest(url, method);
         }
 
-        protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method, List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null, TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null, CancellationToken cancellationToken = default)
+        protected async Task CreateAuthorizedRequestAsync(string url, RestSharp.Method method,
+            List<KeyValuePair<string, string>> queryParameters = null, object postJsonObj = null,
+            TokenDataType tokenDataType = TokenDataType.Normal, object parameter = null,
+            CancellationToken cancellationToken = default)
         {
             var PiiObject = parameter as IParameterBasedPII;
             if (PiiObject != null && PiiObject.IsNeedRestrictedDataToken)
@@ -103,34 +109,39 @@ namespace FikaAmazonAPI.Services
                 CreateRequest(url, method);
                 AddLimitHeader(filter.Limit);
             }
+
             AddAccessToken();
         }
-
 
         /// <summary>
         /// Executes the request
         /// </summary>
         /// <typeparam name="T">Type to parse response to</typeparam>
         /// <returns>Returns data of T type</returns>
-        protected async Task<T> ExecuteRequestTry<T>(RateLimitType rateLimitType = RateLimitType.UNSET, CancellationToken cancellationToken = default) where T : new()
+        protected async Task<T> ExecuteRequestTry<T>(RateLimitType rateLimitType = RateLimitType.UNSET,
+            CancellationToken cancellationToken = default) where T : new()
         {
             RestHeader();
             AddAccessToken();
             AddShippingBusinessId();
 
-            Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
+            //Remove AWS authorization
+            //Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
             var response = await RequestClient.ExecuteAsync<T>(Request, cancellationToken);
             LogRequest(Request, response);
             SaveLastRequestHeader(response.Headers);
             await SleepForRateLimit(response.Headers, rateLimitType, cancellationToken);
             ParseResponse(response);
 
-            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) && response.Data == null)
+            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) &&
+                response.Data == null)
             {
                 response.Data = JsonConvert.DeserializeObject<T>(response.Content);
             }
+
             return response.Data;
         }
+
         private void SaveLastRequestHeader(IReadOnlyCollection<RestSharp.HeaderParameter> parameters)
         {
             LastHeaders = new List<KeyValuePair<string, string>>();
@@ -138,7 +149,8 @@ namespace FikaAmazonAPI.Services
             {
                 if (parameter != null && parameter.Name != null && parameter.Value != null)
                 {
-                    LastHeaders.Add(new KeyValuePair<string, string>(parameter.Name.ToString(), parameter.Value.ToString()));
+                    LastHeaders.Add(new KeyValuePair<string, string>(parameter.Name.ToString(),
+                        parameter.Value.ToString()));
                 }
             }
         }
@@ -155,38 +167,43 @@ namespace FikaAmazonAPI.Services
                         name = parameter.Name,
                         value = parameter.Value,
                         type = parameter.Type.ToString()
-                    }),
+                    }).ToList(),
                     // ToString() here to have the method as a nice string otherwise it will just show the enum value
                     method = request.Method.ToString(),
                     // This will generate the actual Uri used in the request
                     //uri = request. _restClient.BuildUri(request),
                 };
 
+                //remove the access token from the headers
+                requestToLog.parameters.RemoveAll(p => p.name == "x-amz-access-token");
+
                 var responseToLog = new
                 {
                     statusCode = response.StatusCode,
                     content = response.Content,
-                    headers = response.Headers,
+                    headers = response.Headers.Select(h => new
+                    {
+                        name = h.Name,
+                        value = h.Value
+                    }),
                     // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
                     responseUri = response.ResponseUri,
                     errorMessage = response.ErrorMessage,
                 };
-                Console.WriteLine("\n\n");
-                Console.WriteLine(string.Format("Request completed, \nRequest: {0} \n\nResponse: {1}",
-                        JsonConvert.SerializeObject(requestToLog),
-                        JsonConvert.SerializeObject(responseToLog)));
+                //There are PII considerations here
+                _logger?.LogInformation("Request completed, \nRequest: {@request} \n\nResponse: {@response}", requestToLog, responseToLog);
             }
         }
+
         private void RestHeader()
         {
             lock (Request)
             {
-                Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
-                Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
+                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.XAmzDateHeaderName);
+                //Request?.Parameters?.RemoveParameter(AWSSignerHelper.AuthorizationHeaderName);
                 Request?.Parameters?.RemoveParameter(AccessTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(SecurityTokenHeaderName);
                 Request?.Parameters?.RemoveParameter(ShippingBusinessIdHeaderName);
-
             }
         }
 
@@ -195,7 +212,8 @@ namespace FikaAmazonAPI.Services
         //    return this.ExecuteRequestAsync<T>(rateLimitType)).ConfigureAwait(false).GetAwaiter().GetResult();
         //}
 
-        public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET, CancellationToken cancellationToken = default) where T : new()
+        public async Task<T> ExecuteRequestAsync<T>(RateLimitType rateLimitType = RateLimitType.UNSET,
+            CancellationToken cancellationToken = default) where T : new()
         {
             var tryCount = 0;
             while (true)
@@ -209,25 +227,26 @@ namespace FikaAmazonAPI.Services
                     if (tryCount >= AmazonCredential.MaxThrottledRetryCount)
                     {
                         if (AmazonCredential.IsDebugMode)
-                            Console.WriteLine("Throttle max try count reached");
+                            _logger?.LogWarning("Throttle max try count reached");
 
                         throw;
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    AmazonCredential.UsagePlansTimings[rateLimitType].Delay();
+                    await AmazonCredential.UsagePlansTimings[rateLimitType].Delay();
                     tryCount++;
                 }
             }
         }
 
-        private async Task SleepForRateLimit(IReadOnlyCollection<RestSharp.Parameter> headers, RateLimitType rateLimitType = RateLimitType.UNSET, CancellationToken cancellationToken = default)
+        private async Task SleepForRateLimit(IReadOnlyCollection<RestSharp.Parameter> headers,
+                   RateLimitType rateLimitType = RateLimitType.UNSET, CancellationToken cancellationToken = default)
         {
             try
             {
                 decimal rate = 0;
-                var limitHeader = headers.Where(a => a.Name == RateLimitLimitHeaderName).FirstOrDefault();
+                var limitHeader = headers.FirstOrDefault(a => a.Name == RateLimitLimitHeaderName);
                 if (limitHeader != null)
                 {
                     var RateLimitValue = limitHeader.Value.ToString();
@@ -250,19 +269,20 @@ namespace FikaAmazonAPI.Services
                         {
                             AmazonCredential.UsagePlansTimings[rateLimitType].SetRateLimit(rate);
                         }
-                        var time = AmazonCredential.UsagePlansTimings[rateLimitType].NextRate(rateLimitType);
+
+                        await AmazonCredential.UsagePlansTimings[rateLimitType].NextRate(rateLimitType);
                     }
                 }
             }
             catch (Exception e)
             {
-
             }
         }
 
         protected void ParseResponse(RestResponse response)
         {
-            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted ||
+                response.StatusCode == HttpStatusCode.Created || response.StatusCode == HttpStatusCode.NoContent)
                 return;
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -271,7 +291,7 @@ namespace FikaAmazonAPI.Services
             else
             {
                 if (AmazonCredential.IsDebugMode)
-                    Console.WriteLine("Amazon Api didn't respond with Okay, see exception for more details" + response.Content);
+                    _logger?.LogWarning("Amazon Api didn't respond with Okay, see exception for more details: {content}", response.Content);
 
                 var errorResponse = response.Content.ConvertToErrorResponse();
                 if (errorResponse != null)
@@ -285,19 +305,20 @@ namespace FikaAmazonAPI.Services
                         case "InvalidSignature":
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":
-                            throw new AmazonInvalidInputException(error.Message, response);
+                            throw new AmazonInvalidInputException(error.Message, error.Details, response);
                         case "QuotaExceeded":
                             throw new AmazonQuotaExceededException(error.Message, response);
                         case "InternalFailure":
                             throw new AmazonInternalErrorException(error.Message, response);
                     }
-
                 }
             }
 
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
-                throw new AmazonBadRequestException("BadRequest see https://developer-docs.amazon.com/sp-api/changelog/api-request-validation-for-400-errors-with-html-response for advice", response);
+                throw new AmazonBadRequestException(
+                    "BadRequest see https://developer-docs.amazon.com/sp-api/changelog/api-request-validation-for-400-errors-with-html-response for advice",
+                    response);
             }
 
             throw new AmazonException("Amazon Api didn't respond with Okay, see exception for more details", response);
@@ -313,11 +334,13 @@ namespace FikaAmazonAPI.Services
         {
             Request.AddQueryParameter("limit", limit.ToString());
         }
+
         protected void AddJsonBody(object jsonData)
         {
             var json = JsonConvert.SerializeObject(jsonData);
             Request.AddJsonBody(json);
         }
+
         protected void AddAccessToken()
         {
             lock (Request)
@@ -329,17 +352,19 @@ namespace FikaAmazonAPI.Services
         protected void AddShippingBusinessId()
         {
             if (AmazonCredential.ShippingBusiness.HasValue)
-                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName, AmazonCredential.ShippingBusiness.Value.GetEnumMemberValue());
+                Request.AddOrUpdateHeader(ShippingBusinessIdHeaderName,
+                    AmazonCredential.ShippingBusiness.Value.GetEnumMemberValue());
         }
 
-        protected async void RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null)
+        protected async Task RefreshToken(TokenDataType tokenDataType = TokenDataType.Normal,
+            CreateRestrictedDataTokenRequest requestPII = null)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)
             {
                 if (tokenDataType == TokenDataType.PII)
                 {
-                    var pii = CreateRestrictedDataToken(requestPII);
+                    var pii = await CreateRestrictedDataTokenAsync(requestPII);
                     if (pii != null)
                     {
                         token = new TokenResponse()
@@ -365,7 +390,8 @@ namespace FikaAmazonAPI.Services
             AccessToken = token.access_token;
         }
 
-        protected async Task RefreshTokenAsync(TokenDataType tokenDataType = TokenDataType.Normal, CreateRestrictedDataTokenRequest requestPII = null, CancellationToken cancellationToken = default)
+        protected async Task RefreshTokenAsync(TokenDataType tokenDataType = TokenDataType.Normal,
+            CreateRestrictedDataTokenRequest requestPII = null, CancellationToken cancellationToken = default)
         {
             var token = AmazonCredential.GetToken(tokenDataType);
             if (token == null)
@@ -388,7 +414,8 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType, cancellationToken);
+                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType,
+                        cancellationToken);
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);
@@ -397,19 +424,25 @@ namespace FikaAmazonAPI.Services
 
             AccessToken = token.access_token;
         }
+
         public IList<KeyValuePair<string, string>> LastResponseHeader => LastHeaders;
 
-        public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
+        public CreateRestrictedDataTokenResponse CreateRestrictedDataToken(
+            CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest)
         {
-            return Task.Run(() => CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => CreateRestrictedDataTokenAsync(createRestrictedDataTokenRequest))
+                .ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest, CancellationToken cancellationToken = default)
+        public async Task<CreateRestrictedDataTokenResponse> CreateRestrictedDataTokenAsync(
+            CreateRestrictedDataTokenRequest createRestrictedDataTokenRequest,
+            CancellationToken cancellationToken = default)
         {
-            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post, postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(TokenApiUrls.RestrictedDataToken, RestSharp.Method.Post,
+                postJsonObj: createRestrictedDataTokenRequest, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<CreateRestrictedDataTokenResponse>(
+                RateLimitType.Token_CreateRestrictedDataToken, cancellationToken: cancellationToken);
             return response;
         }
     }
-
 }

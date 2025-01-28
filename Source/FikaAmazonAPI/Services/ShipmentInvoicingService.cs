@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public partial class ShipmentInvoicingService : RequestService
     {
-        public ShipmentInvoicingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShipmentInvoicingService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

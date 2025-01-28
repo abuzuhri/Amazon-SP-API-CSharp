@@ -1,7 +1,12 @@
-﻿namespace FikaAmazonAPI.Utils
+﻿using System.Text.Json.Serialization;
+
+namespace FikaAmazonAPI.Utils
 {
     public class Region
     {
+        [JsonConstructorAttribute]
+        public Region() { }
+
         private Region(string regionName, string hostUrl, string sandboxHostUrl)
         {
             RegionName = regionName;

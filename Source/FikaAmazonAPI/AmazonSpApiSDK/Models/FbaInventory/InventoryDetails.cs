@@ -33,7 +33,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
         /// <param name="ReservedQuantity">ReservedQuantity.</param>
         /// <param name="ResearchingQuantity">ResearchingQuantity.</param>
         /// <param name="UnfulfillableQuantity">UnfulfillableQuantity.</param>
-        public InventoryDetails(int? FulfillableQuantity = default(int?), int? InboundWorkingQuantity = default(int?), int? InboundShippedQuantity = default(int?), int? InboundReceivingQuantity = default(int?), ReservedQuantity ReservedQuantity = default(ReservedQuantity), ResearchingQuantity ResearchingQuantity = default(ResearchingQuantity), UnfulfillableQuantity UnfulfillableQuantity = default(UnfulfillableQuantity))
+        /// <param name="FutureSupplyQuantity">FutureSupplyQuantity.</param>
+        public InventoryDetails(int? FulfillableQuantity = default(int?), int? InboundWorkingQuantity = default(int?), int? InboundShippedQuantity = default(int?), int? InboundReceivingQuantity = default(int?), ReservedQuantity ReservedQuantity = default(ReservedQuantity), ResearchingQuantity ResearchingQuantity = default(ResearchingQuantity), UnfulfillableQuantity UnfulfillableQuantity = default(UnfulfillableQuantity), FutureSupplyQuantity FutureSupplyQuantity = default(FutureSupplyQuantity))
         {
             this.FulfillableQuantity = FulfillableQuantity;
             this.InboundWorkingQuantity = InboundWorkingQuantity;
@@ -42,6 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
             this.ReservedQuantity = ReservedQuantity;
             this.ResearchingQuantity = ResearchingQuantity;
             this.UnfulfillableQuantity = UnfulfillableQuantity;
+            this.FutureSupplyQuantity = FutureSupplyQuantity;
         }
 
         /// <summary>
@@ -91,6 +93,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
         public UnfulfillableQuantity UnfulfillableQuantity { get; set; }
 
         /// <summary>
+        /// Gets or Sets FutureSupplyQuantity
+        /// </summary>
+        [DataMember(Name = "futureSupplyQuantity", EmitDefaultValue = false)]
+        public FutureSupplyQuantity FutureSupplyQuantity { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -105,6 +113,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
             sb.Append("  ReservedQuantity: ").Append(ReservedQuantity).Append("\n");
             sb.Append("  ResearchingQuantity: ").Append(ResearchingQuantity).Append("\n");
             sb.Append("  UnfulfillableQuantity: ").Append(UnfulfillableQuantity).Append("\n");
+            sb.Append("  FutureSupplyQuantity: ").Append(FutureSupplyQuantity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -173,6 +182,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
                     this.UnfulfillableQuantity == input.UnfulfillableQuantity ||
                     (this.UnfulfillableQuantity != null &&
                     this.UnfulfillableQuantity.Equals(input.UnfulfillableQuantity))
+                ) &&
+                (
+                    this.FutureSupplyQuantity == input.FutureSupplyQuantity ||
+                    (this.FutureSupplyQuantity != null &&
+                    this.FutureSupplyQuantity.Equals(input.FutureSupplyQuantity))
                 );
         }
 
@@ -199,6 +213,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory
                     hashCode = hashCode * 59 + this.ResearchingQuantity.GetHashCode();
                 if (this.UnfulfillableQuantity != null)
                     hashCode = hashCode * 59 + this.UnfulfillableQuantity.GetHashCode();
+                if (this.FutureSupplyQuantity != null)
+                    hashCode = hashCode * 59 + this.FutureSupplyQuantity.GetHashCode();
                 return hashCode;
             }
         }

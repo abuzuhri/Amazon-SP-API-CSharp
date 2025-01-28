@@ -76,14 +76,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
-        [DataMember(Name = "Quantity", EmitDefaultValue = false)]
+        [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int Quantity { get; set; }
 
         /// <summary>
         /// A fulfillment order item identifier that the seller creates to track items in the fulfillment preview.
         /// </summary>
         /// <value>A fulfillment order item identifier that the seller creates to track items in the fulfillment preview.</value>
-        [DataMember(Name = "SellerFulfillmentOrderItemId", EmitDefaultValue = false)]
+        [DataMember(Name = "sellerFulfillmentOrderItemId", EmitDefaultValue = false)]
         public string SellerFulfillmentOrderItemId { get; set; }
 
         /// <summary>

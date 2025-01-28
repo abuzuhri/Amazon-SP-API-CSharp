@@ -1,6 +1,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
 using FikaAmazonAPI.Parameter.FbaInventory;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace FikaAmazonAPI.Services
     public class FbaInventoryService : RequestService
     {
 
-        public FbaInventoryService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInventoryService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -38,7 +39,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken))
                 {
-					var getInventorySummaries = await GetInventorySummariesByNextTokenAsync(nextToken, parameter, cancellationToken);
+                    var getInventorySummaries = await GetInventorySummariesByNextTokenAsync(nextToken, parameter, cancellationToken);
                     list.Add(getInventorySummaries.Payload.InventorySummaries);
                     nextToken = getInventorySummaries.Pagination?.NextToken;
                 }

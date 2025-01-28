@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes;
 using FikaAmazonAPI.Parameter.ProductTypes;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ProductTypeService : RequestService
     {
-        public ProductTypeService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ProductTypeService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

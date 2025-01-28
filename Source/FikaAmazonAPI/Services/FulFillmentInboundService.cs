@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
 using FikaAmazonAPI.Parameter.FulFillmentInbound;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,7 +11,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FulFillmentInboundService : RequestService
     {
-        public FulFillmentInboundService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FulFillmentInboundService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -194,7 +195,7 @@ namespace FikaAmazonAPI.Services
         public async Task<LabelDownloadURL> GetLabelsAsync(ParameterGetLabels parameterGetLabels, CancellationToken cancellationToken = default)
         {
             var parameter = parameterGetLabels.getParameters();
-            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.shipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.GetLabels(parameterGetLabels.ShipmentId), RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
 
             var response = await ExecuteRequestAsync<GetLabelsResponse>(RateLimitType.FulFillmentInbound_GetLabels, cancellationToken);
             if (response != null && response.Payload != null)

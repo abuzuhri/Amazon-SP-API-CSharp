@@ -7,9 +7,9 @@
     <Product>CSharp Amazon Sp API</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>8.0</LangVersion>
-    <Version>1.7.3</Version>
-    <AssemblyVersion>1.7.3</AssemblyVersion>
-    <FileVersion>1.7.3</FileVersion>
+    <Version>1.8.1</Version>
+    <AssemblyVersion>1.8.1</AssemblyVersion>
+    <FileVersion>1.8.1</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -30,19 +30,16 @@
     <EmbeddedResource Remove="ConstructFeed\xsd\**" />
     <None Remove="ConstructFeed\xsd\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="AmazonSpApiSDK\Runtime\LWAAuthorizationSigner.cs" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.101.23" />
-    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.88" />
+    <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.300.106" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.301.19" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="RestSharp" Version="108.0.3" />
-    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="108.0.3" />
-    <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.4" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="111.2.0" />
+    <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />

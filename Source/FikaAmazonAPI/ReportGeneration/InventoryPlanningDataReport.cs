@@ -32,7 +32,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public string ASIN { get; set; }
         public string ProductName { get; set; }
         public string Condition { get; set; }
-        public int? Avaliable { get; set; }
+        public int? Available { get; set; }
         public int? PendingRemovalQuantity { get; set; }
         public int? InvAge181To330Days { get; set; }
         public int? InvAge331To365Days { get; set; }
@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.ASIN = rowData.GetString("asin");
             row.ProductName = rowData.GetString("product-name");
             row.Condition = rowData.GetString("condition");
-            row.Avaliable= DataConverter.GetInt(rowData.GetString("avaliable"));
+            row.Available = DataConverter.GetInt(rowData.GetString("available"));
             row.PendingRemovalQuantity = DataConverter.GetInt(rowData.GetString("pending-removal-quantity"));
             row.InvAge0To90Days = DataConverter.GetInt(rowData.GetString("inv-age-0-to-90-days"));
             row.InvAge91To180Days = DataConverter.GetInt(rowData.GetString("inv-age-91-to-180-days"));

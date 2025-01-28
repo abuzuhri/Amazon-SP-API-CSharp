@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FinancialService : RequestService
     {
-        public FinancialService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FinancialService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

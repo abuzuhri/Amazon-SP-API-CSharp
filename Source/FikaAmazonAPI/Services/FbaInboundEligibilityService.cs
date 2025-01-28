@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound;
 using FikaAmazonAPI.Parameter.FbaInboundEligibility;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FbaInboundEligibilityService : RequestService
     {
-        public FbaInboundEligibilityService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInboundEligibilityService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

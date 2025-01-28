@@ -1,7 +1,12 @@
-﻿namespace FikaAmazonAPI.Utils
+﻿using System.Text.Json.Serialization;
+
+namespace FikaAmazonAPI.Utils
 {
     public class Country
     {
+        [JsonConstructorAttribute]
+        public Country() { }
+
         public string Code { get; set; }
         public string Name { get; set; }
         public string SellercentralURL { get; set; }
@@ -38,14 +43,13 @@
         public static Country AE { get { return new Country("AE", "United Arab Emirates", "ae", "https://sellercentral.amazon.ae", "https://vendorcentral.amazon.me"); } }
         public static Country IN { get { return new Country("IN", "India", "in", "https://sellercentral.amazon.in", "https://www.vendorcentral.in"); } }
         public static Country SA { get { return new Country("SA", "Saudi Arabia", "sa", "https://sellercentral.amazon.sa", "https://vendorcentral.amazon.me"); } }
-
+        public static Country IE { get { return new Country("IE", "Ireland", "ie", "https://sellercentral.amazon.ie", "https://vendorcentral.amazon.ie"); } }
 
 
         public static Country SG { get { return new Country("SG", "Singapore", "sg", "https://sellercentral.amazon.sg", "https://vendorcentral.amazon.com.sg"); } }
         public static Country AU { get { return new Country("AU", "Australia", "com.au", "https://sellercentral.amazon.com.au", "https://vendorcentral.amazon.com.au"); } }
         public static Country JP { get { return new Country("JP", "Japan", "co.jp", "https://sellercentral.amazon.co.jp", "https://vendorcentral.amazon.co.jp"); } }
 
-
-
+        public static Country ZA { get { return new Country("ZA", "South Africa", "co.za", "https://sellercentral.amazon.co.za", "https://vendorcentral.amazon.co.za"); } }
     }
 }

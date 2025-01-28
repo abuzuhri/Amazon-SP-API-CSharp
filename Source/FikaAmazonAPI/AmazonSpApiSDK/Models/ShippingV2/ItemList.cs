@@ -32,5 +32,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
       return JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 
-}
+  }
 }

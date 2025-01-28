@@ -2,6 +2,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401;
 using FikaAmazonAPI.Parameter.CatalogItems;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +15,19 @@ namespace FikaAmazonAPI.Services
 {
     public class CatalogItemService : RequestService
     {
-        public CatalogItemService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public CatalogItemService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
 
         [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
             Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
         [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204Async instead.", false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
             if (string.IsNullOrEmpty(parameterListCatalogItems.MarketplaceId))
                 parameterListCatalogItems.MarketplaceId = AmazonCredential.MarketPlace.ID;
@@ -53,14 +54,34 @@ namespace FikaAmazonAPI.Services
 
             return list;
         }
+        public String GetCatalogItemJson(string asin) =>
+            Task.Run(() => GetCatalogItemAsyncJson(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public Item GetCatalogItem(string asin) =>
+
+        public async Task<String> GetCatalogItemAsyncJson(string asin)
+        {
+
+            if (string.IsNullOrEmpty(asin))
+                throw new InvalidDataException("asin is a required property and cannot be null");
+
+            var param = new List<KeyValuePair<string, string>>();
+            param.Add(new KeyValuePair<string, string>("MarketplaceId", AmazonCredential.MarketPlace.ID));
+
+            await CreateAuthorizedRequestAsync(CategoryApiUrls.GetCatalogItem(asin), RestSharp.Method.Get, param);
+            var response = await ExecuteRequestAsync<GetCatalogItemResponse>(RateLimitType.CatalogItems_GetCatalogItem);
+
+            if (response != null && response.Payload != null)
+                return response.Payload.ToJson();
+
+            return null;
+        }
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Item GetCatalogItem(string asin) =>
             Task.Run(() => GetCatalogItemAsync(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
-        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", false)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public async Task<Item> GetCatalogItemAsync(string asin)
+        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public async Task<Item> GetCatalogItemAsync(string asin)
         {
 
             if (string.IsNullOrEmpty(asin))
@@ -160,7 +181,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameter.maxPages.HasValue || totalPages < parameter.maxPages.Value))
                 {
-					parameter.pageToken = nextToken;
+                    parameter.pageToken = nextToken;
                     var getItemNextPage = await SearchCatalogItemsByNextToken202204Async(parameter, cancellationToken);
                     list.AddRange(getItemNextPage.Items);
                     nextToken = getItemNextPage.Pagination?.NextToken;

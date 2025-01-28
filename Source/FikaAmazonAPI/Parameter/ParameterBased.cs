@@ -1,11 +1,13 @@
 ﻿using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace FikaAmazonAPI.Search
 {
@@ -20,6 +22,9 @@ namespace FikaAmazonAPI.Search
 
         public virtual List<KeyValuePair<string, string>> getParameters()
         {
+            // Check if the class is marked with the CamelCase attribute
+            var isClassCamelCase = Attribute.IsDefined(this.GetType(), typeof(CamelCaseAttribute));
+
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             if (!string.IsNullOrEmpty(TestCase))
             {
@@ -67,11 +72,17 @@ namespace FikaAmazonAPI.Search
                     }
                     else
                     {
-                        output = JsonConvert.SerializeObject(value);
+                        var settings = new JsonSerializerSettings()
+                        {
+                            Converters = new List<JsonConverter>() { new StringEnumConverter() }
+                        };
+
+                        output = JsonConvert.SerializeObject(value, settings);
                     }
 
-
-                    var propName = p.Name;
+                    // Check if property should be converted to cammel case
+                    var isPropertyCamelCase = isClassCamelCase || Attribute.IsDefined(p, typeof(CamelCaseAttribute));
+                    var propName = isPropertyCamelCase ? char.ToLowerInvariant(p.Name[0]) + p.Name.Substring(1) : p.Name;
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }

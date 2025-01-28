@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders;
 using FikaAmazonAPI.Parameter.VendorDirectFulfillmentOrders;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class VendorDirectFulfillmentOrderService : RequestService
     {
-        public VendorDirectFulfillmentOrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public VendorDirectFulfillmentOrderService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

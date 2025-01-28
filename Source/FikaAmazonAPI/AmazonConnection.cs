@@ -1,14 +1,18 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.Services;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Globalization;
+using System.Threading;
 
 namespace FikaAmazonAPI
 {
     public class AmazonConnection
     {
+        private readonly ILoggerFactory _loggerFactory;
         private AmazonCredential Credentials { get; set; }
-
+        public AppIntegrationsServiceV20240401 AppIntegrationsServiceV20240401 => this._AppIntegrationsServiceV20240401 ?? throw _NoCredentials;
         public OrderService Orders => this._Orders ?? throw _NoCredentials;
         public ReportService Reports => this._Reports ?? throw _NoCredentials;
         public SolicitationService Solicitations => this._Solicitations ?? throw _NoCredentials;
@@ -40,11 +44,14 @@ namespace FikaAmazonAPI
         public UploadService Upload => this._Upload ?? throw _NoCredentials;
         public TokenService Tokens => this._Tokens ?? throw _NoCredentials;
         public FulFillmentInboundService FulFillmentInbound => this._FulFillmentInbound ?? throw _NoCredentials;
+        public FulFillmentInboundServicev20240320 FulFillmentInboundv20240320 => this._FulFillmentInboundv20240320 ?? throw _NoCredentials;
         public FulFillmentOutboundService FulFillmentOutbound => this._FulFillmentOutbound ?? throw _NoCredentials;
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
         public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
 
+        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;
 
+        private AppIntegrationsServiceV20240401 _AppIntegrationsServiceV20240401 { get; set; }
         private OrderService _Orders { get; set; }
         private ReportService _Reports { get; set; }
         private SolicitationService _Solicitations { get; set; }
@@ -74,20 +81,23 @@ namespace FikaAmazonAPI
         private ShippingService _Shipping { get; set; }
         private ShippingServiceV2 _ShippingV2 { get; set; }
         private UploadService _Upload { get; set; }
-
         private TokenService _Tokens { get; set; }
         private FulFillmentInboundService _FulFillmentInbound { get; set; }
+        private FulFillmentInboundServicev20240320 _FulFillmentInboundv20240320 { get; set; }
         private FulFillmentOutboundService _FulFillmentOutbound { get; set; }
         private VendorDirectFulfillmentOrderService _VendorDirectFulfillmentOrders { get; set; }
         private VendorOrderService _VendorOrders { get; set; }
+        private VendorTransactionStatusService _VendorTransactionStatus { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
         public string RefNumber { get; set; }
-        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null)
+        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null, ILoggerFactory? loggerFactory = null)
         {
+            _loggerFactory = loggerFactory;
             this.Authenticate(Credentials);
             this.RefNumber = RefNumber;
+            Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
         }
 
         private void Authenticate(AmazonCredential Credentials)
@@ -104,41 +114,44 @@ namespace FikaAmazonAPI
 
             this.Credentials = Credentials;
 
-            this._Authorization = new AuthorizationService(this.Credentials);
-            this._Orders = new OrderService(this.Credentials);
-            this._Reports = new ReportService(this.Credentials);
-            this._Solicitations = new SolicitationService(this.Credentials);
-            this._Financials = new FinancialService(this.Credentials);
-            this._CatalogItems = new CatalogItemService(this.Credentials);
-            this._ProductPricing = new ProductPricingService(this.Credentials);
+            this._Authorization = new AuthorizationService(this.Credentials, _loggerFactory);
+            this._AppIntegrationsServiceV20240401 = new AppIntegrationsServiceV20240401(this.Credentials, _loggerFactory);
+            this._Orders = new OrderService(this.Credentials, _loggerFactory);
+            this._Reports = new ReportService(this.Credentials, _loggerFactory);
+            this._Solicitations = new SolicitationService(this.Credentials, _loggerFactory);
+            this._Financials = new FinancialService(this.Credentials, _loggerFactory);
+            this._CatalogItems = new CatalogItemService(this.Credentials, _loggerFactory);
+            this._ProductPricing = new ProductPricingService(this.Credentials, _loggerFactory);
 
-            this._FbaInbound = new FbaInboundService(this.Credentials);
-            this._FbaInventory = new FbaInventoryService(this.Credentials);
-            this._FbaOutbound = new FbaOutboundService(this.Credentials);
-            this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials);
-            this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials);
-            this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials);
-            this._AplusContent = new AplusContentService(this.Credentials);
-            this._Feed = new FeedService(this.Credentials);
-            this._ListingsItem = new ListingsItemService(this.Credentials);
-            this._Restrictions = new RestrictionService(this.Credentials);
-            this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);
-            this._Messaging = new MessagingService(this.Credentials);
-            this._Notification = new NotificationService(this.Credentials);
-            this._ProductFee = new ProductFeeService(this.Credentials);
-            this._ProductType = new ProductTypeService(this.Credentials);
-            this._Sales = new SalesService(this.Credentials);
-            this._Seller = new SellerService(this.Credentials);
-            this._Services = new ServicesService(this.Credentials);
-            this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials);
-            this._Shipping = new ShippingService(this.Credentials);
-            this._ShippingV2 = new ShippingServiceV2(this.Credentials);
-            this._Upload = new UploadService(this.Credentials);
-            this._Tokens = new TokenService(this.Credentials);
-            this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials);
-            this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
-            this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
-            this._VendorOrders = new VendorOrderService(this.Credentials);
+            this._FbaInbound = new FbaInboundService(this.Credentials, _loggerFactory);
+            this._FbaInventory = new FbaInventoryService(this.Credentials, _loggerFactory);
+            this._FbaOutbound = new FbaOutboundService(this.Credentials, _loggerFactory);
+            this._FbaSmallandLight = new FbaSmallandLightService(this.Credentials, _loggerFactory);
+            this._FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials, _loggerFactory);
+            this._EasyShip20220323 = new EasyShip20220323Service(this.Credentials, _loggerFactory);
+            this._AplusContent = new AplusContentService(this.Credentials, _loggerFactory);
+            this._Feed = new FeedService(this.Credentials, _loggerFactory);
+            this._ListingsItem = new ListingsItemService(this.Credentials, _loggerFactory);
+            this._Restrictions = new RestrictionService(this.Credentials, _loggerFactory);
+            this._MerchantFulfillment = new MerchantFulfillmentService(this.Credentials, _loggerFactory);
+            this._Messaging = new MessagingService(this.Credentials, _loggerFactory);
+            this._Notification = new NotificationService(this.Credentials, _loggerFactory);
+            this._ProductFee = new ProductFeeService(this.Credentials, _loggerFactory);
+            this._ProductType = new ProductTypeService(this.Credentials, _loggerFactory);
+            this._Sales = new SalesService(this.Credentials, _loggerFactory);
+            this._Seller = new SellerService(this.Credentials, _loggerFactory);
+            this._Services = new ServicesService(this.Credentials, _loggerFactory);
+            this._ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials, _loggerFactory);
+            this._Shipping = new ShippingService(this.Credentials, _loggerFactory);
+            this._ShippingV2 = new ShippingServiceV2(this.Credentials, _loggerFactory);
+            this._Upload = new UploadService(this.Credentials, _loggerFactory);
+            this._Tokens = new TokenService(this.Credentials, _loggerFactory);
+            this._FulFillmentInbound = new FulFillmentInboundService(this.Credentials, _loggerFactory);
+            this._FulFillmentInboundv20240320 = new FulFillmentInboundServicev20240320(this.Credentials, _loggerFactory);
+            this._FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials, _loggerFactory);
+            this._VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials, _loggerFactory);
+            this._VendorOrders = new VendorOrderService(this.Credentials, _loggerFactory);
+            this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, _loggerFactory);
 
             AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }
@@ -146,12 +159,13 @@ namespace FikaAmazonAPI
         {
             if (Credentials == null)
                 throw new AmazonUnauthorizedException($"Error, you cannot make calls to Amazon without credentials!");
-            else if (string.IsNullOrEmpty(Credentials.AccessKey))
-                throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
-            else if (string.IsNullOrEmpty(Credentials.SecretKey))
-                throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
-            else if (string.IsNullOrEmpty(Credentials.RoleArn))
-                throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
+            //Remove AWS authorization
+            //else if (string.IsNullOrEmpty(Credentials.AccessKey))
+            //    throw new AmazonInvalidInputException($"InvalidInput, AccessKey cannot be empty!");
+            //else if (string.IsNullOrEmpty(Credentials.SecretKey))
+            //    throw new AmazonInvalidInputException($"InvalidInput, SecretKey  cannot be empty!");
+            //else if (string.IsNullOrEmpty(Credentials.RoleArn))
+            //    throw new AmazonInvalidInputException($"InvalidInput, RoleArn cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientId))
                 throw new AmazonInvalidInputException($"InvalidInput, ClientId cannot be empty!");
             else if (string.IsNullOrEmpty(Credentials.ClientSecret))

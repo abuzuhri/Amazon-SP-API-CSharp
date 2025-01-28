@@ -16,10 +16,13 @@ namespace FikaAmazonAPI.ReportGeneration
             public const string DATE_AGING_FORMAT = "yyyy-MM-dd";
             public const string DATE_LEDGER_FORMAT = "MM/dd/yyyy";
         }
+
+        public static CultureInfo DataConverterCultureInfo = CultureInfo.CurrentCulture;
+
         public static DateTime? GetDate(string str, string format)
         {
             if (DateTime.TryParseExact(str, format,
-                           System.Globalization.CultureInfo.InvariantCulture,
+                           DataConverterCultureInfo,
                            System.Globalization.DateTimeStyles.None,
                            out DateTime value))
             {
@@ -29,7 +32,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public static decimal? GetDecimal(string str)
         {
-            if (decimal.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal value))
+            if (decimal.TryParse(str?.Replace(",","."), NumberStyles.Any, new CultureInfo("en-US"), out decimal value))
             {
                 return value;
             }
@@ -37,7 +40,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public static int? GetInt(string str)
         {
-            if (int.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
+            if (int.TryParse(str?.Replace(",", "."), NumberStyles.Integer, new CultureInfo("en-US"), out int value))
             {
                 return value;
             }
@@ -45,7 +48,7 @@ namespace FikaAmazonAPI.ReportGeneration
         }
         public static double? GetDouble(string str)
         {
-            if (double.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out double value))
+            if (double.TryParse(str?.Replace(",", "."), NumberStyles.Any, new CultureInfo("en-US"), out double value))
             {
                 return value;
             }

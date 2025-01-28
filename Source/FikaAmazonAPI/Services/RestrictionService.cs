@@ -1,5 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions;
 using FikaAmazonAPI.Parameter.Restrictions;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class RestrictionService : RequestService
     {
-        public RestrictionService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public RestrictionService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
 using FikaAmazonAPI.Parameter.ListingItem;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ListingsItemService : RequestService
     {
-        public ListingsItemService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ListingsItemService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
         }
 

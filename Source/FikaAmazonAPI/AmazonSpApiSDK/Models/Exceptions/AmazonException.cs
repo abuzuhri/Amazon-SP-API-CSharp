@@ -38,11 +38,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
 
     public class AmazonInvalidInputException : AmazonException
     {
-        public AmazonInvalidInputException(string msg, RestResponse response = null) : base(msg, response)
-        {
+        public string Details { get; set; }
 
+        public AmazonInvalidInputException(string msg, string details = null, RestResponse response = null) : base(msg, response)
+        {
+            this.Details = details;
+            //this.Data["Details"] = details;
         }
     }
+
     public class AmazonQuotaExceededException : AmazonException
     {
         public AmazonQuotaExceededException(string msg, RestResponse response = null) : base(msg, response)
@@ -82,7 +86,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions
         {
             ReportContent = reportContent;
         }
-    } 
+    }
 
     public class ExceptionResponse
     {

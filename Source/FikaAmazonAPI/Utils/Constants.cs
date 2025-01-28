@@ -6,7 +6,7 @@ namespace FikaAmazonAPI.Utils
 {
     public class Constants
     {
-        public readonly static string AmazonToeknEndPoint = "https://api.amazon.com/auth/o2/token";
+        public readonly static string AmazonTokenEndPoint = "https://api.amazon.com/auth/o2/token";
         public readonly static string DateISO8601Format = "yyyy-MM-ddTHH:mm:ss.fffZ";
         public readonly static string TestCase200 = "TEST_CASE_200";
         public readonly static string TestCase400 = "TEST_CASE_400";
@@ -52,6 +52,7 @@ namespace FikaAmazonAPI.Utils
         public enum IncludedData
         {
             attributes,
+            classifications,
             dimensions,
             identifiers,
             images,
@@ -737,4 +738,5 @@ namespace FikaAmazonAPI.Utils
         //}
 
     }
+
 }
