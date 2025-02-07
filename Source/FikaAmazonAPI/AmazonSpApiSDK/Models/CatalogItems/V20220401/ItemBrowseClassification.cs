@@ -34,7 +34,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// </summary>
         /// <param name="displayName">Display name for the classification. (required).</param>
         /// <param name="classificationId">Identifier of the classification (browse node identifier). (required).</param>
-        public ItemBrowseClassification(string displayName = default, string classificationId = default, ItemBrowseClassification parent = default)
+        /// <param name="parent">Parent classification (browse node) of the current classification.</param>
+        public ItemBrowseClassification(string displayName = default(string), string classificationId = default(string), ItemBrowseClassification parent = default(ItemBrowseClassification))
         {
             // to ensure "displayName" is required (not null)
             if (displayName == null)
