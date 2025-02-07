@@ -19,7 +19,7 @@ using System.Text;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
 {
     /// <summary>
-    /// Dimensions associated with the item in the Amazon catalog for the indicated Amazon marketplace.
+    /// Classification (browse node) associated with the item in the Amazon catalog for the indicated Amazon marketplace.
     /// </summary>
     [DataContract]
     public partial class ItemBrowseClassificationsByMarketplace : IEquatable<ItemBrowseClassificationsByMarketplace>, IValidatableObject
@@ -33,14 +33,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// Initializes a new instance of the <see cref="ItemBrowseClassificationsByMarketplace" /> class.
         /// </summary>
         /// <param name="marketplaceId">Amazon marketplace identifier. (required).</param>
-        /// <param name="item">Dimensions of an Amazon catalog item..</param>
-        /// <param name="package">Dimensions of an Amazon catalog item in its packaging..</param>
+        /// <param name="classifications">Classification (browse node) Array of an Amazon catalog item.</param>
         public ItemBrowseClassificationsByMarketplace(string marketplaceId = default(string), List<ItemBrowseClassification> classifications = default(List<ItemBrowseClassification>))
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
             {
-                throw new InvalidDataException("marketplaceId is a required property for ItemDimensionsByMarketplace and cannot be null");
+                throw new InvalidDataException("marketplaceId is a required property for ItemBrowseClassificationsByMarketplace and cannot be null");
             }
             else
             {
