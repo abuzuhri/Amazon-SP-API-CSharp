@@ -34,7 +34,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// </summary>
         /// <param name="displayName">Display name for the classification. (required).</param>
         /// <param name="classificationId">Identifier of the classification (browse node identifier). (required).</param>
-        public ItemBrowseClassification(string displayName = default(string), string classificationId = default(string))
+        public ItemBrowseClassification(string displayName = default, string classificationId = default, ItemBrowseClassification parent = default)
         {
             // to ensure "displayName" is required (not null)
             if (displayName == null)
@@ -54,6 +54,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             {
                 this.ClassificationId = classificationId;
             }
+
+            this.Parent = parent;
         }
 
         /// <summary>
@@ -71,6 +73,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         public string ClassificationId { get; set; }
 
         /// <summary>
+        /// Parent classification (browse node) of the current classification.
+        /// </summary>
+        [DataMember(Name = "parent", EmitDefaultValue = false)]
+        public ItemBrowseClassification Parent { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -80,6 +88,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             sb.Append("class ItemBrowseClassification {\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  ClassificationId: ").Append(ClassificationId).Append("\n");
+            sb.Append("  Parent: ").Append(Parent).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,6 +132,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     this.ClassificationId == input.ClassificationId ||
                     (this.ClassificationId != null &&
                     this.ClassificationId.Equals(input.ClassificationId))
+                ) &&
+                (
+                    this.Parent == input.Parent ||
+                    this.Parent != null &&
+                    this.Parent.Equals(input.Parent)
                 );
         }
 
@@ -139,6 +153,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.ClassificationId != null)
                     hashCode = hashCode * 59 + this.ClassificationId.GetHashCode();
+                if (this.Parent != null)
+                    hashCode = hashCode * 59 + this.Parent.GetHashCode();
                 return hashCode;
             }
         }
