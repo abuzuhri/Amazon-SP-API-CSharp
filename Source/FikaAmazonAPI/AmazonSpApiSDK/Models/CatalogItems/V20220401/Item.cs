@@ -42,7 +42,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="salesRanks">salesRanks.</param>
         /// <param name="summaries">summaries.</param>
         /// <param name="vendorDetails">vendorDetails.</param>
-        public Item(string asin = default(string), ItemAttributes attributes = default(ItemAttributes), ItemDimensions dimensions = default(ItemDimensions), ItemIdentifiers identifiers = default(ItemIdentifiers), ItemImages images = default(ItemImages), ItemProductTypes productTypes = default(ItemProductTypes), ItemRelationships relationships = default(ItemRelationships), ItemSalesRanks salesRanks = default(ItemSalesRanks), ItemSummaries summaries = default(ItemSummaries), ItemVendorDetails vendorDetails = default(ItemVendorDetails))
+        public Item(string asin = default(string), List<ItemBrowseClassificationsByMarketplace> classifications = default(List<ItemBrowseClassificationsByMarketplace>), ItemAttributes attributes = default(ItemAttributes), ItemDimensions dimensions = default(ItemDimensions), ItemIdentifiers identifiers = default(ItemIdentifiers), ItemImages images = default(ItemImages), ItemProductTypes productTypes = default(ItemProductTypes), ItemRelationships relationships = default(ItemRelationships), ItemSalesRanks salesRanks = default(ItemSalesRanks), ItemSummaries summaries = default(ItemSummaries), ItemVendorDetails vendorDetails = default(ItemVendorDetails))
         {
             // to ensure "asin" is required (not null)
             if (asin == null)
@@ -54,6 +54,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                 this.Asin = asin;
             }
             this.Attributes = attributes;
+            this.Classifications = classifications;
             this.Dimensions = dimensions;
             this.Identifiers = identifiers;
             this.Images = images;
@@ -75,6 +76,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// </summary>
         [DataMember(Name = "attributes", EmitDefaultValue = false)]
         public ItemAttributes Attributes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Classifications
+        /// </summary>
+        [DataMember(Name = "classifications", EmitDefaultValue = false)]
+        public List<ItemBrowseClassificationsByMarketplace> Classifications { get; set; }
 
         /// <summary>
         /// Gets or Sets Dimensions
@@ -134,6 +141,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             sb.Append("class Item {\n");
             sb.Append("  Asin: ").Append(Asin).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
+            sb.Append("  Classifications: ").Append(Classifications).Append("\n");
             sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("  Identifiers: ").Append(Identifiers).Append("\n");
             sb.Append("  Images: ").Append(Images).Append("\n");
@@ -185,6 +193,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     this.Attributes == input.Attributes ||
                     (this.Attributes != null &&
                     this.Attributes.Equals(input.Attributes))
+                ) &&
+                (
+                    this.Classifications == input.Classifications ||
+                    this.Classifications != null &&
+                    this.Classifications.Equals(input.Classifications)
                 ) &&
                 (
                     this.Dimensions == input.Dimensions ||
@@ -241,6 +254,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     hashCode = hashCode * 59 + this.Asin.GetHashCode();
                 if (this.Attributes != null)
                     hashCode = hashCode * 59 + this.Attributes.GetHashCode();
+                if (this.Classifications != null)
+                    hashCode = hashCode * 59 + this.Classifications.GetHashCode();
                 if (this.Dimensions != null)
                     hashCode = hashCode * 59 + this.Dimensions.GetHashCode();
                 if (this.Identifiers != null)
