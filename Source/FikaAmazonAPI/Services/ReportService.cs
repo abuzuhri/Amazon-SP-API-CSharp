@@ -247,6 +247,8 @@ namespace FikaAmazonAPI.Services
 
                 cancellationToken.ThrowIfCancellationRequested();
 
+                FileTransform.ConvertFileToUtf8(tempFilePath);
+
                 return tempFilePath;
             }
             catch (OperationCanceledException)
