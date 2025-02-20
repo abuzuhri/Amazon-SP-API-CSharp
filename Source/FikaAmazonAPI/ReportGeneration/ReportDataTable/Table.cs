@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 {
@@ -51,7 +52,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         public static Table ConvertFromCSV(string path, char separator = '\t')
         {
-            var lines = File.ReadAllLines(path, Encoding.UTF8);
+            var lines = File.ReadAllLines(path, EncodingHelper.GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
 
             var table = new Table(lines.First().Split(separator));
 

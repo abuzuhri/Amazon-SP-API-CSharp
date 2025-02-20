@@ -56,11 +56,12 @@ namespace FikaAmazonAPI.Utils
             }
         }
 
-        public static void ConvertFileToUtf8(string filePath)
+        public static void SetFileEncoding(string filePath)
         {
             string content = File.ReadAllText(filePath, DetectFileEncoding(filePath));
-            File.WriteAllText(filePath, content, GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
+            File.WriteAllText(filePath, content, EncodingHelper.GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
         }
+
         static Encoding DetectFileEncoding(string filePath)
         {
             using (FileStream fs = File.OpenRead(filePath))
@@ -73,22 +74,5 @@ namespace FikaAmazonAPI.Utils
             }
         }
 
-        static Encoding GetEncodingFromCulture(CultureInfo culture)
-        {
-            string cultureName = culture.Name.ToLower();
-
-            return cultureName switch
-            {
-                "en-us" => Encoding.GetEncoding("Windows-1252"), // Westeuropa (ANSI)
-                "de-de" => Encoding.GetEncoding("Windows-1252"), // Westeuropa (ANSI)
-                "fr-fr" => Encoding.GetEncoding("Windows-1252"), // Westeuropa (ANSI)
-                "ja-jp" => Encoding.GetEncoding("shift_jis"), // Japanisch
-                "zh-cn" => Encoding.GetEncoding("gb2312"), // Vereinfachtes Chinesisch
-                "ru-ru" => Encoding.GetEncoding("Windows-1251"), // Kyrillisch
-                "ko-kr" => Encoding.GetEncoding("ks_c_5601-1987"), // Koreanisch
-                "ar-sa" => Encoding.GetEncoding("Windows-1256"), // Arabisch
-                _ => Encoding.UTF8 // Standard als Fallback
-            };
-        }
     }
 }
