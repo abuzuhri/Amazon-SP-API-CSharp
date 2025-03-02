@@ -107,6 +107,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         [DataMember(Name="ItemLevelSellerInputsList", EmitDefaultValue=false)]
         public AdditionalSellerInputsList ItemLevelSellerInputsList { get; set; }
 
+        [DataMember(Name = "IsHazmat", EmitDefaultValue = false)]
+        public bool? IsHazmat { get; set; }
+        [DataMember(Name = "DangerousGoodsDetails", EmitDefaultValue = false)]
+        public DangerousGoodsDetails DangerousGoodsDetails { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -121,6 +126,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             sb.Append("  ItemDescription: ").Append(ItemDescription).Append("\n");
             sb.Append("  TransparencyCodeList: ").Append(TransparencyCodeList).Append("\n");
             sb.Append("  ItemLevelSellerInputsList: ").Append(ItemLevelSellerInputsList).Append("\n");
+            sb.Append("  IsHazmat: ").Append(IsHazmat).Append("\n");
+            sb.Append("  DangerousGoodsDetails: ").Append(DangerousGoodsDetails).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -184,6 +191,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
                     this.ItemLevelSellerInputsList == input.ItemLevelSellerInputsList ||
                     (this.ItemLevelSellerInputsList != null &&
                     this.ItemLevelSellerInputsList.Equals(input.ItemLevelSellerInputsList))
+                ) &&
+                (
+                    this.IsHazmat == input.IsHazmat ||
+                    (this.IsHazmat != null &&
+                    this.IsHazmat.Equals(input.IsHazmat))
+                ) &&
+                (
+                    this.DangerousGoodsDetails == input.DangerousGoodsDetails ||
+                    (this.DangerousGoodsDetails != null &&
+                    this.DangerousGoodsDetails.Equals(input.IsHazmat))
                 );
         }
 
@@ -208,6 +225,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
                     hashCode = hashCode * 59 + this.TransparencyCodeList.GetHashCode();
                 if (this.ItemLevelSellerInputsList != null)
                     hashCode = hashCode * 59 + this.ItemLevelSellerInputsList.GetHashCode();
+                if (this.IsHazmat != null)
+                    hashCode = hashCode * 59 + this.IsHazmat.GetHashCode();
+                if (this.DangerousGoodsDetails != null)
+                    hashCode = hashCode * 59 + this.DangerousGoodsDetails.GetHashCode();
                 return hashCode;
             }
         }
