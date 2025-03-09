@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Ude;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -58,20 +57,9 @@ namespace FikaAmazonAPI.Utils
 
         public static void SetFileEncoding(string filePath)
         {
-            string content = File.ReadAllText(filePath, DetectFileEncoding(filePath));
+            var detectedEncoding = EncodingDetector.DetectEncoding(filePath);
+            string content = File.ReadAllText(filePath, detectedEncoding);
             File.WriteAllText(filePath, content, EncodingHelper.GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
-        }
-
-        static Encoding DetectFileEncoding(string filePath)
-        {
-            using (FileStream fs = File.OpenRead(filePath))
-            {
-                CharsetDetector detector = new CharsetDetector();
-                detector.Feed(fs);
-                detector.DataEnd();
-
-                return detector.Charset != null ? Encoding.GetEncoding(detector.Charset) : Encoding.UTF8;
-            }
         }
 
     }
