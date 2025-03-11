@@ -619,7 +619,9 @@ namespace FikaAmazonAPI.Utils
             Issues,
             Offers,
             FulfillmentAvailability,
-            Procurement
+            Procurement,
+            Relationships,
+            ProductTypes
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
