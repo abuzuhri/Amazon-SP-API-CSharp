@@ -46,6 +46,7 @@
         ListingsItem_PutListingsItem,
         ListingsItem_DeleteListingsItem,
         ListingsItem_PatchListingsItem,
+        ListingsItem_SearchListingsItems,
 
         Upload_CreateUploadDestinationForResource,
 

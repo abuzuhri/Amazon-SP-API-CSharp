@@ -337,7 +337,8 @@ namespace FikaAmazonAPI.Utils
             JAN,
             MINSAN,
             SKU,
-            UPC
+            UPC,
+            FNSKU
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
