@@ -24,6 +24,44 @@ namespace FikaAmazonAPI.Services
             return await ExecuteRequestAsync<Item>(RateLimitType.ListingsItem_GetListingsItem, cancellationToken);
         }
 
+        public List<Item> SearchListingsItems(ParameterSearchListingsItems parameterSearchListingsItems) =>
+            Task.Run(() => SearchListingsItemsAsync(parameterSearchListingsItems)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<List<Item>> SearchListingsItemsAsync(ParameterSearchListingsItems parameterSearchListingsItems, CancellationToken cancellationToken = default)
+        {
+            var param = parameterSearchListingsItems.getParameters();
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.SearchListingsItems(parameterSearchListingsItems.sellerId), RestSharp.Method.Get, param, cancellationToken: cancellationToken);
+
+            List<Item> list = new List<Item>();
+
+            var response = await ExecuteRequestAsync<ItemSearchResults>(RateLimitType.ListingsItem_SearchListingsItems, cancellationToken);
+            list.AddRange(response.Items);
+
+            var totalPages = 1;
+            if (response.Pagination != null && !string.IsNullOrEmpty(response.Pagination.NextToken))
+            {
+                var nextToken = response.Pagination.NextToken;
+                while (!string.IsNullOrEmpty(nextToken) && (!parameterSearchListingsItems.maxPages.HasValue || totalPages < parameterSearchListingsItems.maxPages.Value))
+                {
+                    parameterSearchListingsItems.pageToken = nextToken;
+                    var getItemNextPage = await SearchListingsItemsByNextTokenAsync(parameterSearchListingsItems, cancellationToken);
+                    list.AddRange(getItemNextPage.Items);
+                    nextToken = getItemNextPage.Pagination?.NextToken;
+                    totalPages++;
+                }
+            }
+
+            return list;
+        }
+
+        private async Task<ItemSearchResults> SearchListingsItemsByNextTokenAsync(ParameterSearchListingsItems parameterSearchListingsItems, CancellationToken cancellationToken = default)
+        {
+            var param = parameterSearchListingsItems.getParameters();
+
+            await CreateAuthorizedRequestAsync(ListingsItemsApiUrls.SearchListingsItems(parameterSearchListingsItems.sellerId), RestSharp.Method.Get, param, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<ItemSearchResults>(RateLimitType.ListingsItem_SearchListingsItems, cancellationToken);
+        }
+
         public ListingsItemSubmissionResponse PutListingsItem(ParameterPutListingItem parameterPutListingItem) =>
             Task.Run(() => PutListingsItemAsync(parameterPutListingItem)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<ListingsItemSubmissionResponse> PutListingsItemAsync(ParameterPutListingItem parameterPutListingItem, CancellationToken cancellationToken = default)

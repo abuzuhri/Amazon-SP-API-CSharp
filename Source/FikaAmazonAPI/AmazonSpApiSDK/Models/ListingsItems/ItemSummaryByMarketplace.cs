@@ -155,12 +155,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// Initializes a new instance of the <see cref="ItemSummaryByMarketplace" /> class.
         /// </summary>
         /// <param name="marketplaceId">A marketplace identifier. Identifies the Amazon marketplace for the listings item. (required).</param>
-        /// <param name="asin">Amazon Standard Identification Number (ASIN) of the listings item. (required).</param>
+        /// <param name="asin">Amazon Standard Identification Number (ASIN) of the listings item.</param>
         /// <param name="productType">The Amazon product type of the listings item. (required).</param>
         /// <param name="conditionType">Identifies the condition of the listings item..</param>
         /// <param name="status">Statuses that apply to the listings item. (required).</param>
         /// <param name="fnSku">Fulfillment network stock keeping unit is an identifier used by Amazon fulfillment centers to identify each unique item..</param>
-        /// <param name="itemName">Name, or title, associated with an Amazon catalog item. (required).</param>
+        /// <param name="itemName">Name, or title, associated with an Amazon catalog item.</param>
         /// <param name="createdDate">Date the listings item was created, in ISO 8601 format. (required).</param>
         /// <param name="lastUpdatedDate">Date the listings item was last updated, in ISO 8601 format. (required).</param>
         /// <param name="mainImage">Main image for the listings item..</param>
@@ -174,15 +174,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             else
             {
                 this.MarketplaceId = marketplaceId;
-            }
-            // to ensure "asin" is required (not null)
-            if (asin == null)
-            {
-                throw new InvalidDataException("asin is a required property for ItemSummaryByMarketplace and cannot be null");
-            }
-            else
-            {
-                this.Asin = asin;
             }
             // to ensure "productType" is required (not null)
             if (productType == null)
@@ -202,15 +193,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             {
                 this.Status = status;
             }
-            // to ensure "itemName" is required (not null)
-            if (itemName == null)
-            {
-                throw new InvalidDataException("itemName is a required property for ItemSummaryByMarketplace and cannot be null");
-            }
-            else
-            {
-                this.ItemName = itemName;
-            }
             // to ensure "createdDate" is required (not null)
             if (createdDate == null)
             {
@@ -229,6 +211,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             {
                 this.LastUpdatedDate = lastUpdatedDate;
             }
+            this.Asin = asin;
+            this.ItemName = itemName;
             this.ConditionType = conditionType;
             this.FnSku = fnSku;
             this.MainImage = mainImage;

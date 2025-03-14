@@ -51,6 +51,7 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.ListingsItem_PutListingsItem,               new RateLimits(5.0M, 10) },
               { RateLimitType.ListingsItem_DeleteListingsItem,            new RateLimits(5.0M, 10) },
               { RateLimitType.ListingsItem_PatchListingsItem,             new RateLimits(5.0M, 10) },
+              { RateLimitType.ListingsItem_SearchListingsItems,           new RateLimits(5.0M, 5) },
 
               { RateLimitType.Upload_CreateUploadDestinationForResource,  new RateLimits(0.1M, 5) },
 

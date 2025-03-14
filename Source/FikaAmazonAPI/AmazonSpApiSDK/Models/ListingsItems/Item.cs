@@ -40,7 +40,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="offers">offers.</param>
         /// <param name="fulfillmentAvailability">Fulfillment availability for the listings item..</param>
         /// <param name="procurement">procurement.</param>
-        public Item(string sku = default(string), ItemSummaries summaries = default(ItemSummaries), ItemAttributes attributes = default(ItemAttributes), ItemIssues issues = default(ItemIssues), ItemOffers offers = default(ItemOffers), List<FulfillmentAvailability> fulfillmentAvailability = default(List<FulfillmentAvailability>), ItemProcurement procurement = default(ItemProcurement))
+        /// <param name="relationships">Relationships for a listing item, by marketplace (for example, variations).</param>
+        /// <param name="productTypes">Product types for a listing item, by marketplace.</param>
+        public Item(string sku = default(string),
+                    ItemSummaries summaries = default(ItemSummaries),
+                    ItemAttributes attributes = default(ItemAttributes),
+                    ItemIssues issues = default(ItemIssues),
+                    ItemOffers offers = default(ItemOffers),
+                    List<FulfillmentAvailability> fulfillmentAvailability = default(List<FulfillmentAvailability>),
+                    List<ItemProcurement> procurement = default(List<ItemProcurement>),
+                    ItemRelationships relationships = default(ItemRelationships),
+                    ItemProductTypes productTypes = default(ItemProductTypes))
         {
             // to ensure "sku" is required (not null)
             if (sku == null)
@@ -57,6 +67,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             this.Offers = offers;
             this.FulfillmentAvailability = fulfillmentAvailability;
             this.Procurement = procurement;
+            this.Relationships = relationships;
+            this.ProductTypes = productTypes;
         }
         
         /// <summary>
@@ -101,7 +113,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// Gets or Sets Procurement
         /// </summary>
         [DataMember(Name="procurement", EmitDefaultValue=false)]
-        public ItemProcurement Procurement { get; set; }
+        public List<ItemProcurement> Procurement { get; set; }
+
+        /// <summary>
+        /// Relationships for a listing item, by marketplace (for example, variations).
+        /// </summary>
+        /// <value>Relationships for a listing item, by marketplace (for example, variations).</value>
+        [DataMember(Name="relationships", EmitDefaultValue = false)]
+        public ItemRelationships Relationships { get; set; }
+
+        /// <summary>
+        /// Product types for a listing item, by marketplace.
+        /// </summary>
+        /// <value>Product types for a listing item, by marketplace.</value>
+        [DataMember(Name="productTypes", EmitDefaultValue = false)]
+        public ItemProductTypes ProductTypes { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -118,6 +144,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             sb.Append("  Offers: ").Append(Offers).Append("\n");
             sb.Append("  FulfillmentAvailability: ").Append(FulfillmentAvailability).Append("\n");
             sb.Append("  Procurement: ").Append(Procurement).Append("\n");
+            sb.Append("  Relationships: ").Append(Relationships).Append("\n");
+            sb.Append("  ProductTypes: ").Append(ProductTypes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -184,8 +212,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                 ) && 
                 (
                     this.Procurement == input.Procurement ||
-                    (this.Procurement != null &&
-                    this.Procurement.Equals(input.Procurement))
+                    this.Procurement != null &&
+                    this.Procurement.SequenceEqual(input.Procurement)
+                ) &&
+                (
+                    this.Relationships == input.Relationships ||
+                    (this.Relationships != null &&
+                    this.Relationships.Equals(input.Relationships))
+                ) &&
+                (
+                    this.ProductTypes == input.ProductTypes ||
+                    (this.ProductTypes != null &&
+                    this.ProductTypes.Equals(input.ProductTypes))
                 );
         }
 
@@ -212,6 +250,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     hashCode = hashCode * 59 + this.FulfillmentAvailability.GetHashCode();
                 if (this.Procurement != null)
                     hashCode = hashCode * 59 + this.Procurement.GetHashCode();
+                if (this.Relationships != null)
+                    hashCode = hashCode * 59 + this.Relationships.GetHashCode();
+                if (this.ProductTypes != null)
+                    hashCode = hashCode * 59 + this.ProductTypes.GetHashCode();
                 return hashCode;
             }
         }
