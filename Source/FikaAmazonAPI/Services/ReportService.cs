@@ -4,20 +4,20 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Parameter.Report;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Services
 {
     public class ReportService : RequestService
     {
-        public ReportService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
+        public ReportService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
         }
         #region GetReport

@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="editableUntil">The timestamp at which this Window can no longer be edited.</param>
         /// <param name="endDate">The end timestamp of the window (required).</param>
         /// <param name="startDate">The start timestamp of the window (required).</param>
-        public SelectedDeliveryWindow(AvailabilityType availabilityType = default(AvailabilityType),
+        public SelectedDeliveryWindow(AvailabilityType? availabilityType = default(AvailabilityType?),
                                       string deliveryWindowOptionId = default(string),
                                       DateTime? editableUntil = default(DateTime?),
                                       DateTime? endDate = default(DateTime?),
@@ -88,7 +88,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// </summary>
         /// <value>Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED</value>
         [DataMember(Name = "availabilityType", EmitDefaultValue = false)]
-        public AvailabilityType AvailabilityType { get; set; }
+        public AvailabilityType? AvailabilityType { get; set; }
 
         /// <summary>
         /// Identifier of a delivery window option. A delivery window option represent one option for when a shipment is expected to be delivered.

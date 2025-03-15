@@ -1,15 +1,15 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
 using FikaAmazonAPI.Parameter.ProductFee;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class ProductFeeService : RequestService
     {
-        public ProductFeeService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory, IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential, loggerFactory, rateLimitingHandler)
+        public ProductFeeService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

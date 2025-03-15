@@ -657,6 +657,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
 
             public static string PatchListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            public static string SearchListingsItems(string seller) => $"{_resourceBaseUrl}/items/{seller}";
         }
 
         protected class ListingsRestrictionsApi

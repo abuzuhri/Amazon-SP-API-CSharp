@@ -155,7 +155,7 @@ namespace FikaAmazonAPI.SampleCode
             GetFeedDetails(feedID);
         }
 
-        public void SubmitFeedPRICING(double PRICE, string SKU)
+        public void SubmitFeedPRICING(decimal PRICE, string SKU)
         {
 
             ConstructFeedService createDocument = new ConstructFeedService(amazonConnection.GetCurrentSellerID, "1.02");
@@ -167,7 +167,7 @@ namespace FikaAmazonAPI.SampleCode
                 StandardPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = (PRICE).ToString("0.00")
+                    Value = decimal.Round(PRICE, 2)
                 }
             });
             createDocument.AddPriceMessage(list);
@@ -177,6 +177,52 @@ namespace FikaAmazonAPI.SampleCode
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PRODUCT_PRICING_DATA);
 
             GetFeedDetails(feedID);
+
+        }
+
+        public async Task SubmitFeedPRICING_JSONAsync(string SKU, decimal PRICE, decimal? minPrice = null, decimal? maxPrice = null)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<PriceMessage>();
+            var msg = new PriceMessage()
+            {
+                SKU = SKU,
+                StandardPrice = new StandardPrice()
+                {
+                    currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
+                    Value = decimal.Round(PRICE, 2)
+                }
+            };
+
+            if (maxPrice != null)
+            {
+                msg.MaximumSellerAllowedPrice = new StandardPrice()
+                {
+                    currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
+                    Value = decimal.Round(maxPrice.Value, 2)
+                };
+            }
+
+            if (minPrice != null)
+            {
+                msg.MinimumSellerAllowedPrice = new StandardPrice()
+                {
+                    currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
+                    Value = decimal.Round(minPrice.Value, 2)
+                };
+            }
+
+
+            list.Add(msg);
+            createDocument.AddPriceMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
+
+
+            await GetJsonFeedDetails(feedID);
 
         }
 
@@ -193,14 +239,14 @@ namespace FikaAmazonAPI.SampleCode
                 StandardPrice = new StandardPrice
                 {
                     currency = currencyCode,
-                    Value = price.ToString("0.00")
+                    Value = decimal.Round(price, 2)
                 },
                 Sale = new Sale
                 {
                     SalePrice = new StandardPrice
                     {
                         currency = currencyCode,
-                        Value = salePrice.ToString("0.00")
+                        Value = decimal.Round(salePrice, 2)
                     },
                     StartDate = startDate.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffK"),
                     EndDate = endDate.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffK")
@@ -260,7 +306,7 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
-        public void SubmitFeedSale(double PRICE, string SKU)
+        public void SubmitFeedSale(decimal PRICE, string SKU)
         {
 
             ConstructFeedService createDocument = new ConstructFeedService("A3J37AJU4O9RHK", "1.02");
@@ -272,7 +318,7 @@ namespace FikaAmazonAPI.SampleCode
                 StandardPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = (PRICE).ToString("0.00")
+                    Value = decimal.Round(PRICE, 2) //(PRICE).ToString("0.00")
                 },
                 Sale = new Sale()
                 {
@@ -281,7 +327,7 @@ namespace FikaAmazonAPI.SampleCode
                     SalePrice = new StandardPrice()
                     {
                         currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                        Value = (PRICE - 10).ToString("0.00")
+                        Value = decimal.Round(PRICE, 2) - 10
                     }
                 }
             });

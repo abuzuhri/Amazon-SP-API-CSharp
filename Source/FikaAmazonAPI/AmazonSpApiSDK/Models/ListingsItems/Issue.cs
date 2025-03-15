@@ -63,7 +63,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// Initializes a new instance of the <see cref="Issue" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Issue() { }
+        public Issue() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Issue" /> class.
         /// </summary>
@@ -71,7 +71,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="message">A message that describes the issue. (required).</param>
         /// <param name="severity">The severity of the issue. (required).</param>
         /// <param name="attributeNames">Names of the attributes associated with the issue, if applicable..</param>
-        public Issue(string code = default(string), string message = default(string), SeverityEnum severity = default(SeverityEnum), List<string> attributeNames = default(List<string>))
+        /// <param name="categories">List of issue categories. (required).</param>
+        /// <param name="enforcements">This field provides information about the enforcement actions taken by Amazon that affect the publishing or status of a listing. It also includes details about any associated exemptions.</param>
+        public Issue(string code = default(string),
+                     string message = default(string),
+                     SeverityEnum severity = default(SeverityEnum),
+                     List<string> attributeNames = default(List<string>),
+                     List<IssueCategory> categories = default(List<IssueCategory>),
+                     IssueEnforcements enforcements = default(IssueEnforcements))
         {
             // to ensure "code" is required (not null)
             if (code == null)
@@ -100,7 +107,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             {
                 this.Severity = severity;
             }
+            // to ensure "categories" is required (not null)
+            if (categories == null)
+            {
+                throw new InvalidDataException("categories is a required property for Issue and cannot be null");
+            }
+            else
+            {
+                this.Categories = categories;
+            }
             this.AttributeNames = attributeNames;
+            this.Enforcements = enforcements;
         }
         
         /// <summary>
@@ -126,6 +143,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         public List<string> AttributeNames { get; set; }
 
         /// <summary>
+        /// List of issue categories.
+        /// </summary>
+        /// <value>List of issue categories.</value>
+        [DataMember(Name="categories", EmitDefaultValue = false)]
+        public List<IssueCategory> Categories { get; set; }
+
+        /// <summary>
+        /// This field provides information about the enforcement actions taken by Amazon that affect the publishing or status of a listing. It also includes details about any associated exemptions.
+        /// </summary>
+        /// <value>This field provides information about the enforcement actions taken by Amazon that affect the publishing or status of a listing. It also includes details about any associated exemptions.</value>
+        [DataMember(Name="enforcements", EmitDefaultValue = false)]
+        public IssueEnforcements Enforcements { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -137,6 +168,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("  Severity: ").Append(Severity).Append("\n");
             sb.Append("  AttributeNames: ").Append(AttributeNames).Append("\n");
+            sb.Append("  Categories: ").Append(Categories).Append("\n");
+            sb.Append("  Enforcements: ").Append(Enforcements).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -190,6 +223,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     this.AttributeNames == input.AttributeNames ||
                     this.AttributeNames != null &&
                     this.AttributeNames.SequenceEqual(input.AttributeNames)
+                ) &&
+                (
+                    this.Categories == input.Categories ||
+                    this.Categories != null &&
+                    this.Categories.SequenceEqual(input.Categories)
+                ) &&
+                (
+                    this.Enforcements == input.Enforcements ||
+                    (this.Enforcements != null &&
+                    this.Enforcements.Equals(input.Enforcements))
                 );
         }
 
@@ -210,6 +253,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     hashCode = hashCode * 59 + this.Severity.GetHashCode();
                 if (this.AttributeNames != null)
                     hashCode = hashCode * 59 + this.AttributeNames.GetHashCode();
+                if (this.Categories != null)
+                    hashCode = hashCode * 59 + this.Categories.GetHashCode();
+                if (this.Enforcements != null)
+                    hashCode = hashCode * 59 + this.Enforcements.GetHashCode();
                 return hashCode;
             }
         }

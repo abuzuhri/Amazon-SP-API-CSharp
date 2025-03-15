@@ -1,16 +1,16 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.Services
 {
     public class FbaSmallandLightService : RequestService
     {
 
-        public FbaSmallandLightService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory,IRateLimitingHandler rateLimitingHandler = null) : base(amazonCredential,loggerFactory, rateLimitingHandler)
+        public FbaSmallandLightService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
