@@ -40,7 +40,14 @@ namespace FikaAmazonAPI.NotificationMessages
 
         [JsonProperty("OrderStatusChangeNotification")]
         public OrderStatusChangeNotification OrderStatusChangeNotification { get; set; }
-        
+
+        [JsonProperty("applicationOAuthClientNewSecret")]
+        public ApplicationOAuthClientNewSecretNotification ApplicationOAuthClientNewSecret { get; set; }
+
+        [JsonProperty("applicationOAuthClientSecretExpiry")]
+        public ApplicationOAuthClientSecretExpiryNotification ApplicationOAuthClientSecretExpiry { get; set; }
+
+
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
