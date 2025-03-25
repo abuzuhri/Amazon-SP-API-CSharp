@@ -532,9 +532,9 @@ namespace FikaAmazonAPI.Utils
             GET_FBA_OVERAGE_FEE_CHARGES_DATA,
             GET_EPR_MONTHLY_REPORTS,
             GET_EPR_QUARTERLY_REPORTS,
-            GET_EPR_ANNUAL_REPORTS
-
-
+            GET_EPR_ANNUAL_REPORTS,
+            GET_BRAND_ANALYTICS_SEARCH_CATALOG_PERFORMANCE_REPORT,
+            GET_BRAND_ANALYTICS_SEARCH_QUERY_PERFORMANCE_REPORT
         }
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ContentType
