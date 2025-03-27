@@ -37,7 +37,9 @@ namespace FikaAmazonAPI.Search
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(IgnoreToAddParameterAttribute))) continue;
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(PathParameterAttribute))) continue;
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(BodyParameterAttribute))) continue;
+
                 var value = p.GetValue(this);
+
                 if (value != null)
                 {
                     var PropertyType = p.PropertyType;
@@ -68,7 +70,6 @@ namespace FikaAmazonAPI.Search
                             output = string.Join(",", result);
                         }
                         else continue;
-
                     }
                     else
                     {
@@ -86,7 +87,6 @@ namespace FikaAmazonAPI.Search
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }
-
             }
 
             return queryParameters;
@@ -97,6 +97,7 @@ namespace FikaAmazonAPI.Search
             Type u = Nullable.GetUnderlyingType(t);
             return (u != null) && u.IsEnum;
         }
+
         private static bool IsEnumerableOfEnum(Type type)
         {
             return GetEnumerableTypes(type).Any(t => t.IsEnum);
@@ -118,6 +119,7 @@ namespace FikaAmazonAPI.Search
 
             return false;
         }
+
         private static IEnumerable<Type> GetEnumerableTypes(Type type)
         {
             if (type.IsInterface)
@@ -137,6 +139,5 @@ namespace FikaAmazonAPI.Search
                 }
             }
         }
-
     }
 }
