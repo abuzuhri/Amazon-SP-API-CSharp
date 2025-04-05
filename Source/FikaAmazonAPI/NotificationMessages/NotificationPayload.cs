@@ -10,10 +10,10 @@ namespace FikaAmazonAPI.NotificationMessages
         /// </summary>
         [JsonProperty("anyOfferChangedNotification")]
         public AnyOfferChangedNotification AnyOfferChangedNotification { get; set; }
-        
+
         [JsonProperty("b2bAnyOfferChangedNotification")]
         public B2BAnyOfferChangedNotification B2BAnyOfferChangedNotification { get; set; }
-        
+
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
@@ -40,7 +40,10 @@ namespace FikaAmazonAPI.NotificationMessages
 
         [JsonProperty("OrderStatusChangeNotification")]
         public OrderStatusChangeNotification OrderStatusChangeNotification { get; set; }
-        
+
+        [JsonProperty("OrderChangeNotification")]
+        public OrderChangeNotification OrderChangeNotification { get; set; }
+
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
