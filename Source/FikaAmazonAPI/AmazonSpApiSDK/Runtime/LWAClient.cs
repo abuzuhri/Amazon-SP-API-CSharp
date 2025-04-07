@@ -66,10 +66,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                     throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
                 }
 
-                TokenResponse tokenService = new TokenResponse();
-
-                var tokenRespoce = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
-                return tokenRespoce;
+                var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
+                return tokenResponse;
             }
             catch (Exception e)
             {
