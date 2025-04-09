@@ -176,7 +176,9 @@ namespace FikaAmazonAPI.Utils
             ORDER_STATUS_CHANGE,
             ORDER_CHANGE,
             PRICING_HEALTH,
-            FBA_INVENTORY_AVAILABILITY_CHANGES
+            FBA_INVENTORY_AVAILABILITY_CHANGES,
+            APPLICATION_OAUTH_CLIENT_SECRET_EXPIRY,
+            APPLICATION_OAUTH_CLIENT_NEW_SECRET
         }
 
         /// <summary>

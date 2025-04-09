@@ -73,10 +73,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
 
         public static bool IsTokenExpired(int? expiresIn, DateTime? dateCreated)
         {
-            if (dateCreated == null)
+            if (!expiresIn.HasValue || !dateCreated.HasValue)
                 return false;
             else
-                return DateTime.UtcNow.Subtract((DateTime)dateCreated).TotalSeconds > (expiresIn - 60); //Add Margent to a void expaired token
+                return DateTime.UtcNow.Subtract(dateCreated.Value.ToUniversalTime()).TotalSeconds > (expiresIn - 60); // Add Margin to avoid expired token
         }
     }
 

@@ -101,7 +101,8 @@ namespace FikaAmazonAPI.Services
 
         protected void CreateAuthorizedPagedRequest(AmazonFilter filter, string url, RestSharp.Method method)
         {
-            RefreshToken();
+            RefreshToken().Wait();
+
             if (filter.NextPage != null)
                 CreateRequest(filter.NextPage, method);
             else
@@ -122,6 +123,7 @@ namespace FikaAmazonAPI.Services
             CancellationToken cancellationToken = default) where T : new()
         {
             RestHeader();
+            await RefreshToken();
             AddAccessToken();
             AddShippingBusinessId();
 
@@ -162,7 +164,7 @@ namespace FikaAmazonAPI.Services
                 var requestToLog = new
                 {
                     resource = request.Resource,
-                    parameters = request.Parameters.Select(parameter => new
+                    parameters = request.Parameters?.Select(parameter => new
                     {
                         name = parameter.Name,
                         value = parameter.Value,
@@ -181,7 +183,7 @@ namespace FikaAmazonAPI.Services
                 {
                     statusCode = response.StatusCode,
                     content = response.Content,
-                    headers = response.Headers.Select(h => new
+                    headers = response.Headers?.Select(h => new
                     {
                         name = h.Name,
                         value = h.Value
