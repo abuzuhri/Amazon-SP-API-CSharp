@@ -43,12 +43,7 @@ jobs:
     - name: Add github package source
       run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json -UserName ${{github.repository_owner}} -Password ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
       
-
-    - name: Push to GitHub Packages
-      run: dotnet nuget push "**/*.nupkg" --skip-duplicate --source https://nuget.pkg.github.com/${{github.repository_owner}}/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
-        
+  
     - name: Get tag
       id: tag
       uses: dawidd6/action-get-tag@v1
