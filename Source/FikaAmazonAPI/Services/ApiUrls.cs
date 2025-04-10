@@ -50,6 +50,35 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
                 get => $"{_resourceBaseUrl}/eligibility/itemPreview";
             }
         }
+
+        protected class ExternalFulfillmentApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/externalFulfillment";
+
+            // Inventory
+            public static string GetInventory(string locationId, string skuId) => $"/{_resourceBaseUrl}/inventory/2021-01-06/locations/{locationId}/skus/{skuId}";
+            public static string UpdateInventory(string locationId, string skuId, int quantity) => $"/{_resourceBaseUrl}/inventory/2021-01-06/locations/{locationId}/skus/{skuId}?quantity={quantity}";
+
+
+            // Order Fulfillment
+            public static string CreatePackages(string shipmentId) => $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shipments/{shipmentId}/packages";
+            public static string ProcessShipment(string shipmentId, string operation) => $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shipments/{shipmentId}?operation={operation}";
+            public static string GenerateInvoice(string shipmentId, string packageId) => $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shipments/{shipmentId}/packages/{packageId}/invoice";
+            public static string RetrieveInvoice(string shipmentId, string packageId) => GenerateInvoice(shipmentId, packageId);
+            public static string GenerateShipLabel(string shipmentId, string packageId, string shippingOptionId, string operation) =>
+                $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shipments/{shipmentId}/packages/{packageId}/shipLabel?shippingOptionId={shippingOptionId}&operation={operation}";
+            public static string RetrieveShipLabel(string shipmentId, string packageId) =>
+                $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shipments/{shipmentId}/packages/{packageId}/shipLabel";
+            public static string RetrieveShippingOptions(string shipmentId, string packageId) =>
+                $"/{_resourceBaseUrl}/externalFulfillment/shipments/2021-01-06/shippingOptions?shipmentId={shipmentId}&packageId={packageId}";
+
+            // Returns
+            public static string ProcessReturnItem(string returnId) => $"/{_resourceBaseUrl}/externalFulfillment/returns/2021-08-19/returns/{returnId}";
+            public static string GetReturn(string returnId) => ProcessReturnItem(returnId);
+            public static string ListReturns() => $"/{_resourceBaseUrl}/externalFulfillment/returns/2021-08-19/returns";
+
+        }
+
         protected class FulFillmentOutboundApiUrls
         {
             private readonly static string _resourceBaseUrl = "/fba/outbound/2020-07-01";
@@ -229,7 +258,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/shipments";
             }
-            public static string GetAdditionalInputs(string requestToken, string rateId) => $"{_resourceBaseUrl}/shipments/additionalInputs/schema?requestToken={requestToken}&rateId={rateId}";            
+            public static string GetAdditionalInputs(string requestToken, string rateId) => $"{_resourceBaseUrl}/shipments/additionalInputs/schema?requestToken={requestToken}&rateId={rateId}";
             public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
             public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
             public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
@@ -459,9 +488,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             }
         }
         protected class VendorTransactionStatusApiUrls
-		{
-			private readonly static string _resourceBaseUrl = "/vendor/transactions/v1";
-			public static string GetTransaction(string transactionId) => $"{_resourceBaseUrl}/transactions/{transactionId}";
+        {
+            private readonly static string _resourceBaseUrl = "/vendor/transactions/v1";
+            public static string GetTransaction(string transactionId) => $"{_resourceBaseUrl}/transactions/{transactionId}";
         }
         protected class UploadApiUrls
         {
