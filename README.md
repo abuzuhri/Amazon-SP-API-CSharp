@@ -138,6 +138,14 @@ Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Sou
 >>
 >> ***This is not required and will operate normally without the ProxyAddress being set.***
 
+
+### Configuration using Docker - Linux
+You need to add windows-1252 encoding
+```csharp
+    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+```
+ 
+
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
 ParameterOrderList serachOrderList = new ParameterOrderList();
