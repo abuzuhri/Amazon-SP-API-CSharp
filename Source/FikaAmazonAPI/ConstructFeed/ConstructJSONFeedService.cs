@@ -54,8 +54,8 @@ namespace FikaAmazonAPI.ConstructFeed
                                 new SchedulePriceData
                                 {
                                     value_with_tax = itm.MinimumSellerAllowedPrice.Value,
-                                    start_at = itm.StandardPrice.start_at,
-                                    end_at = itm.StandardPrice.end_at
+                                    start_at = itm.MinimumSellerAllowedPrice.start_at,
+                                    end_at = itm.MinimumSellerAllowedPrice.end_at
                                 }
                             }
                         }
@@ -73,8 +73,8 @@ namespace FikaAmazonAPI.ConstructFeed
                                 new SchedulePriceData
                                 {
                                     value_with_tax = itm.MaximumSellerAllowedPrice.Value,
-                                    start_at = itm.StandardPrice.start_at,
-                                    end_at = itm.StandardPrice.end_at
+                                    start_at = itm.MaximumSellerAllowedPrice.start_at,
+                                    end_at = itm.MaximumSellerAllowedPrice.end_at
                                 }
                             }
                         }

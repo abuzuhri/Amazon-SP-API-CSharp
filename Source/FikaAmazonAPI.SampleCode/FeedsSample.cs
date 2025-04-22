@@ -200,7 +200,9 @@ namespace FikaAmazonAPI.SampleCode
                 msg.MaximumSellerAllowedPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = decimal.Round(maxPrice.Value, 2)
+                    Value = decimal.Round(maxPrice.Value, 2),
+                    start_at = "2024-01-01",
+                    end_at = "2025-01-01"
                 };
             }
 
@@ -209,7 +211,9 @@ namespace FikaAmazonAPI.SampleCode
                 msg.MinimumSellerAllowedPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = decimal.Round(minPrice.Value, 2)
+                    Value = decimal.Round(minPrice.Value, 2),
+                    start_at = "2024-01-01",
+                    end_at = "2025-01-01"
                 };
             }
 
