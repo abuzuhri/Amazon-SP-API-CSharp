@@ -25,8 +25,13 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             }, loggerFactory: factory);
 
+
+
+            //var list = amazonConnection.Seller.GetMarketplaceParticipations();
+
+
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            _ = feedsSample.SubmitFeedPRICING_JSONAsync("B087YHP3HQ.151", 131.77M, 67.70M, 131.77M);
+            feedsSample.SubmitFeedPRICING_JSONAsync("B09H73T814.259", 112.0M, 53.51M, 112.20M).GetAwaiter().GetResult();
 
 
             Console.ReadLine();

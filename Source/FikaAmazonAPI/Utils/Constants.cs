@@ -176,7 +176,9 @@ namespace FikaAmazonAPI.Utils
             ORDER_STATUS_CHANGE,
             ORDER_CHANGE,
             PRICING_HEALTH,
-            FBA_INVENTORY_AVAILABILITY_CHANGES
+            FBA_INVENTORY_AVAILABILITY_CHANGES,
+            APPLICATION_OAUTH_CLIENT_SECRET_EXPIRY,
+            APPLICATION_OAUTH_CLIENT_NEW_SECRET
         }
 
         /// <summary>
@@ -532,9 +534,9 @@ namespace FikaAmazonAPI.Utils
             GET_FBA_OVERAGE_FEE_CHARGES_DATA,
             GET_EPR_MONTHLY_REPORTS,
             GET_EPR_QUARTERLY_REPORTS,
-            GET_EPR_ANNUAL_REPORTS
-
-
+            GET_EPR_ANNUAL_REPORTS,
+            GET_BRAND_ANALYTICS_SEARCH_CATALOG_PERFORMANCE_REPORT,
+            GET_BRAND_ANALYTICS_SEARCH_QUERY_PERFORMANCE_REPORT
         }
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ContentType

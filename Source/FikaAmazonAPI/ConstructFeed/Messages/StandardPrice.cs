@@ -8,5 +8,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         public decimal Value { get; set; }
         [XmlAttribute]
         public string currency { get; set; }
+        public string start_at { get; set; }
+        public string end_at { get; set; }
     }
 }
