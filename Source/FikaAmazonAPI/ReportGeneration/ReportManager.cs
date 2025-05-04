@@ -401,6 +401,40 @@ namespace FikaAmazonAPI.ReportGeneration
 
         #endregion
 
+        #region VatInvoicing
+
+        public List<VatInvoicingReportRow> GetVATInvoicingData(DateTime fromDate, DateTime toDate,
+           List<MarketPlace> marketplaces = null) =>
+           Task.Run(() => GetVATInvoicingDataAsync(fromDate, toDate, marketplaces)).ConfigureAwait(false)
+               .GetAwaiter().GetResult();
+
+        public async Task<List<VatInvoicingReportRow>> GetVATInvoicingDataAsync(DateTime fromDate, DateTime toDate,
+            List<MarketPlace> marketplaces = null)
+        {
+            List<VatInvoicingReportRow> list = new List<VatInvoicingReportRow>();
+            var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
+            foreach (var range in dateList)
+            {
+                var path = await GetVATInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate,
+                    marketplaces);
+                VatInvoicingReport report = new VatInvoicingReport(path, _amazonConnection.RefNumber);
+                list.AddRange(report.Data);
+            }
+
+            return list;
+        }
+
+        private async Task<string> GetVATInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
+            DateTime toDate, List<MarketPlace> marketplaces = null)
+        {
+            var options = new ReportOptions();
+            options.Add("ReportOption=All", "true");
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+                ReportTypes.GET_FLAT_FILE_VAT_INVOICE_DATA_REPORT, fromDate, toDate, options, false, marketplaces);
+        }
+
+        #endregion
+
         #region Settlement
 
         public List<LedgerDetailReportRow> GetLedgerDetail(int days) =>
