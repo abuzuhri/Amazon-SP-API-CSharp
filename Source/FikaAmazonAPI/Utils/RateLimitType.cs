@@ -35,6 +35,8 @@
         Financial_ListFinancialEventsByOrderId,
         Financial_ListFinancialEvents,
 
+        FinancialV20240619_Transactions,
+
         Feed_GetFeeds,
         Feed_CreateFeed,
         Feed_GetFeed,

@@ -521,7 +521,22 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             {
                 get => $"{_resourceBaseUrl}/financialEvents";
             }
+            public static string Transactions
+            {
+                get => $"{_resourceBaseUrl}/financialEvents";
+            }
+
         }
+        protected class FinanceV20240619ApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/finances/2024-06-19";
+            public static string Transactions
+            {
+                get => $"{_resourceBaseUrl}/transactions";
+            }
+        }
+
+        
 
         protected class AccountApiUrls
         {
