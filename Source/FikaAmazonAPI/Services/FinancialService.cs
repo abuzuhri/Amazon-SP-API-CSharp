@@ -3,6 +3,7 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances.Model;
 using FikaAmazonAPI.Parameter.Finance;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -183,7 +184,8 @@ namespace FikaAmazonAPI.Services
                         ((!parameterListFinancialTransactions.MaxNumberOfPages.HasValue)
                             || (parameterListFinancialTransactions.MaxNumberOfPages.HasValue && parameterListFinancialTransactions.MaxNumberOfPages > countPages)))
             {
-                var data = await GetFinancialTransactions20240619ByNextTokenAsync(nextToken, cancellationToken);
+                parameterListFinancialTransactions.nextToken = nextToken;
+                var data = await GetFinancialTransactions20240619ByNextTokenAsync(parameterListFinancialTransactions, cancellationToken);
                 list.Add(data.Payload.Transactions);
                 nextToken = data.Payload.NextToken;
                 countPages++;
@@ -192,15 +194,14 @@ namespace FikaAmazonAPI.Services
             return list;
         }
 
-        private ListTransactionsResponse GetFinancialTransactions20240619ByNextToken(string nextToken) =>
-            Task.Run(() => GetFinancialTransactions20240619ByNextTokenAsync(nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
+        private ListTransactionsResponse GetFinancialTransactions20240619ByNextToken(ParameterListFinancialTransactions20240619 parameterListFinancialTransactions) =>
+            Task.Run(() => GetFinancialTransactions20240619ByNextTokenAsync(parameterListFinancialTransactions)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        private async Task<ListTransactionsResponse> GetFinancialTransactions20240619ByNextTokenAsync(string nextToken, CancellationToken cancellationToken = default)
+        private async Task<ListTransactionsResponse> GetFinancialTransactions20240619ByNextTokenAsync(ParameterListFinancialTransactions20240619 parameterListFinancialTransactions, CancellationToken cancellationToken = default)
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+            var parameter = parameterListFinancialTransactions.getParameters();
 
-            await CreateAuthorizedRequestAsync(FinanceV20240619ApiUrls.Transactions, RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
+            await CreateAuthorizedRequestAsync(FinanceV20240619ApiUrls.Transactions, RestSharp.Method.Get, parameter, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<ListTransactionsResponse>(RateLimitType.FinancialV20240619_Transactions, cancellationToken);
             return response;
         }
