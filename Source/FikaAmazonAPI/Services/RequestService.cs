@@ -123,7 +123,6 @@ namespace FikaAmazonAPI.Services
             CancellationToken cancellationToken = default) where T : new()
         {
             RestHeader();
-            await RefreshToken();
             AddAccessToken();
             AddShippingBusinessId();
 
