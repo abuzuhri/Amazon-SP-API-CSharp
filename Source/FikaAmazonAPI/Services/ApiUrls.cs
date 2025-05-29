@@ -428,6 +428,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string CancelReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
             public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
         }
+        
+        protected class VendorDirectFulfillmentInventoryApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/directFulfillment/inventory/v1";
+
+            public static string SubmitInventoryUpdate(string warehouseId)
+            {
+                return $"{_resourceBaseUrl}/warehouses/{warehouseId}/items";
+            }
+        }
+        
         protected class VendorDirectFulfillmentOrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/vendor/directFulfillment/orders/v1";
