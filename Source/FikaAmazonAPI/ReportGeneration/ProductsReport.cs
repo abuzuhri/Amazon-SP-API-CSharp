@@ -7,12 +7,12 @@ namespace FikaAmazonAPI.ReportGeneration
     public class ProductsReport
     {
         public List<ProductsRow> Data { get; set; } = new List<ProductsRow>();
-        public ProductsReport(string path, Encoding encoding = default)
+        public ProductsReport(string path)
         {
             if (string.IsNullOrEmpty(path))
                 return;
 
-            var table = Table.ConvertFromCSV(path, encoding: encoding);
+            var table = Table.ConvertFromCSV(path);
 
             List<ProductsRow> values = new List<ProductsRow>();
             foreach (var row in table.Rows)

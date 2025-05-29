@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -31,8 +34,6 @@ namespace FikaAmazonAPI.Utils
 
         }
 
-
-
         public static string Decompress(string fileName)
         {
             FileInfo fileInfo = new FileInfo(fileName);
@@ -54,6 +55,12 @@ namespace FikaAmazonAPI.Utils
             }
         }
 
+        public static void SetFileEncoding(string filePath)
+        {
+            var detectedEncoding = EncodingDetector.DetectEncoding(filePath);
+            string content = File.ReadAllText(filePath, detectedEncoding);
+            File.WriteAllText(filePath, content, EncodingHelper.GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
+        }
 
     }
 }
