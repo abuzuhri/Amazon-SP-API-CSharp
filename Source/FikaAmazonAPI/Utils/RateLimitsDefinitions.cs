@@ -246,6 +246,8 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.VendorOrdersV1_GetPurchaseOrdersStatus,   new RateLimits(10.0M, 10) },
 
               { RateLimitType.VendorTransactionStatus_GetTransaction,     new RateLimits(10.0M, 10) },
+              
+              { RateLimitType.VendorDirectFulfillmentInventory_SubmitInventoryUpdate, new RateLimits(10M, 10) },
             };
 
         }

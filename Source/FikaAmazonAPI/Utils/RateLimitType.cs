@@ -238,6 +238,8 @@
         VendorOrdersV1_GetPurchaseOrdersStatus,
 
 		VendorTransactionStatus_GetTransaction,
+        
+        VendorDirectFulfillmentInventory_SubmitInventoryUpdate,
 
     }
 }
