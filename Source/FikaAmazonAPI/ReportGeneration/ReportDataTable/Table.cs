@@ -1,9 +1,11 @@
-﻿using System;
+﻿using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 {
@@ -48,12 +50,11 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             this.header = header;
         }
 
-        public static Table ConvertFromCSV(string path, char separator = '\t', Encoding encoding = default)
+        public static Table ConvertFromCSV(string path, char separator = '\t')
         {
-            var lines = File.ReadAllLines(path, encoding ?? Encoding.UTF8);
+            var lines = File.ReadAllLines(path, EncodingHelper.GetEncodingFromCulture(Thread.CurrentThread.CurrentCulture));
 
             var table = new Table(lines.First().Split(separator));
-
 
             lines.Skip(1).ToList().ForEach(a => ConvertFromCSVAddRow(table, a, separator));
             return table;
