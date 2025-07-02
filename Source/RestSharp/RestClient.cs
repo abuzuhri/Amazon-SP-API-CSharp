@@ -14,6 +14,7 @@ namespace RestSharp
     {
         public RestClientOptions Options { get; }
         private readonly HttpClient _httpClient;
+        private static readonly HttpMethod PatchMethod = new HttpMethod("PATCH");
 
         public RestClient(RestClientOptions options, Action<RestClient> configureSerialization = null)
         {
@@ -45,7 +46,7 @@ namespace RestSharp
                 Method.Post => HttpMethod.Post,
                 Method.Put => HttpMethod.Put,
                 Method.Delete => HttpMethod.Delete,
-                Method.Patch => HttpMethod.Patch,
+                Method.Patch => PatchMethod,
                 _ => HttpMethod.Get
             };
         }
