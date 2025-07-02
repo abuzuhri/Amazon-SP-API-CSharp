@@ -194,6 +194,16 @@ namespace FikaAmazonAPI.Services
             return await GetFileAsync(reportDocument, cancellationToken);
         }
 
+        public MemoryStream GetReportFileStream(string reportDocumentId, bool isRestrictedReport = false) =>
+            Task.Run(() => GetReportFileStreamAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<MemoryStream> GetReportFileStreamAsync(string reportDocumentId, bool isRestrictedReport = false, CancellationToken cancellationToken = default)
+        {
+            var reportDocument = await GetReportDocumentAsync(reportDocumentId, isRestrictedReport, cancellationToken);
+
+            return await GetStreamAsync(reportDocument, cancellationToken);
+        }
+
         private string GetFile(ReportDocument reportDocument) =>
             Task.Run(() => GetFileAsync(reportDocument)).ConfigureAwait(false).GetAwaiter().GetResult();
         private async Task<string> GetFileAsync(ReportDocument reportDocument, CancellationToken cancellationToken = default)
@@ -254,6 +264,48 @@ namespace FikaAmazonAPI.Services
                 File.Delete(tempFilePath);
                 throw;
             }
+        }
+
+        private async Task<MemoryStream> GetStreamAsync(ReportDocument reportDocument, CancellationToken cancellationToken = default)
+        {
+            bool isCompressionFile = false;
+            bool isEncryptedFile = reportDocument.EncryptionDetails != null;
+
+            if (reportDocument.CompressionAlgorithm is ReportDocument.CompressionAlgorithmEnum.GZIP)
+                isCompressionFile = true;
+
+            var client = new System.Net.WebClient();
+            MemoryStream memoryStream = new MemoryStream();
+
+            if (isEncryptedFile)
+            {
+                byte[] rawData = client.DownloadData(reportDocument.Url);
+                byte[] key = Convert.FromBase64String(reportDocument.EncryptionDetails.Key);
+                byte[] iv = Convert.FromBase64String(reportDocument.EncryptionDetails.InitializationVector);
+                var reportData = FileTransform.DecryptString(key, iv, rawData);
+                var bytes = System.Text.Encoding.UTF8.GetBytes(reportData);
+                await memoryStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
+                memoryStream.Position = 0;
+            }
+            else
+            {
+                var stream = await client.OpenReadTaskAsync(new Uri(reportDocument.Url));
+                await stream.CopyToAsync(memoryStream, cancellationToken);
+                memoryStream.Position = 0;
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (isCompressionFile)
+            {
+                var decompressed = FileTransform.Decompress(memoryStream);
+                memoryStream.Dispose();
+                memoryStream = decompressed;
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return memoryStream;
         }
 
         public async Task SaveStreamToFileAsync(string fileFullPath, Stream stream, CancellationToken cancellationToken = default)
@@ -320,6 +372,43 @@ namespace FikaAmazonAPI.Services
 
         }
 
+        public MemoryStream CreateReportAndDownloadFileStream(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500) =>
+            Task.Run(() => CreateReportAndDownloadFileStreamAsync(reportType, dataStartTime, dataEndTime, reportOptions, isRestrictedReport, marketplaces, millisecondsDelay)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<MemoryStream> CreateReportAndDownloadFileStreamAsync(ReportTypes reportType, DateTime? dataStartTime = null, DateTime? dataEndTime = null, ReportOptions reportOptions = null, bool isRestrictedReport = false, List<MarketPlace> marketplaces = null, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
+        {
+            if (!isRestrictedReport && Enum.TryParse<RestrictedReportTypes>(reportType.ToString(), out _))
+            {
+                isRestrictedReport = true;
+            }
+
+            var parameters = new ParameterCreateReportSpecification();
+            parameters.reportType = reportType;
+
+            parameters.marketplaceIds = new MarketplaceIds();
+
+            if (marketplaces == null || !marketplaces.Any())
+            {
+                parameters.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+            }
+            else
+            {
+                parameters.marketplaceIds.AddRange(marketplaces.Select(x => x.ID).ToList());
+            }
+
+            if (reportOptions != null)
+                parameters.reportOptions = reportOptions;
+
+            if (dataStartTime.HasValue)
+                parameters.dataStartTime = dataStartTime;
+            if (dataEndTime.HasValue)
+                parameters.dataEndTime = dataEndTime;
+
+            var reportId = await CreateReportAsync(parameters, cancellationToken);
+            return await GetReportFileStreamByReportIdAsync(reportId, isRestrictedReport, millisecondsDelay, cancellationToken);
+
+        }
+
         public async Task<string> GetReportFileByReportIdAsync(string reportId, bool isRestrictedReport, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
         {
             var filePath = string.Empty;
@@ -345,6 +434,31 @@ namespace FikaAmazonAPI.Services
                     await Task.Delay(millisecondsDelay, cancellationToken);
             }
             return filePath;
+        }
+
+        public async Task<MemoryStream> GetReportFileStreamByReportIdAsync(string reportId, bool isRestrictedReport, int millisecondsDelay = 500, CancellationToken cancellationToken = default)
+        {
+            MemoryStream result = null;
+            while (result == null && !cancellationToken.IsCancellationRequested)
+            {
+                var reportData = await GetReportAsync(reportId, cancellationToken);
+                if (!string.IsNullOrEmpty(reportData.ReportDocumentId))
+                {
+                    result = await GetReportFileStreamAsync(reportData.ReportDocumentId, isRestrictedReport, cancellationToken);
+                    break;
+                }
+                if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.FATAL)
+                {
+                    throw new Exception("Error with Generate report FATAL");
+                }
+                if (reportData.ProcessingStatus == Report.ProcessingStatusEnum.CANCELLED)
+                {
+                    return null;
+                }
+                else
+                    await Task.Delay(millisecondsDelay, cancellationToken);
+            }
+            return result;
         }
 
 

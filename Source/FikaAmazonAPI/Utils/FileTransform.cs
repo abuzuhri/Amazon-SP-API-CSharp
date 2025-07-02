@@ -54,6 +54,24 @@ namespace FikaAmazonAPI.Utils
             }
         }
 
+        public static MemoryStream Decompress(Stream compressedStream)
+        {
+            if (compressedStream == null)
+                throw new ArgumentNullException(nameof(compressedStream));
+
+            if (compressedStream.CanSeek)
+                compressedStream.Position = 0;
+
+            var outputStream = new MemoryStream();
+            using (var decompressionStream = new GZipStream(compressedStream, CompressionMode.Decompress, leaveOpen: true))
+            {
+                decompressionStream.CopyTo(outputStream);
+            }
+            if (outputStream.CanSeek)
+                outputStream.Position = 0;
+            return outputStream;
+        }
+
 
     }
 }
