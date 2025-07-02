@@ -35,12 +35,16 @@
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.300.106" />
     <PackageReference Include="AWSSDK.SQS" Version="3.7.301.19" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\RestSharp\*.cs" />
   </ItemGroup>
   <ItemGroup>
         <None Include="..\..\Others\icon\icon.jpg">
