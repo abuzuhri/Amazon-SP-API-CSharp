@@ -65,7 +65,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
                 if (!IsSuccessful(response))
                 {
-                    throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
+                    var message = string.IsNullOrEmpty(response.ErrorMessage)
+                        ? "Unsuccessful LWA token exchange"
+                        : $"Unsuccessful LWA token exchange: {response.ErrorMessage}";
+                    throw new IOException(message);
                 }
 
                 var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
