@@ -47,7 +47,8 @@ namespace FikaAmazonAPI.ReportGeneration
                 return new List<T>();
 
             stream.Position = 0;
-            using var reader = new StreamReader(stream, encoding ?? Encoding.UTF8, leaveOpen: true);
+            using var reader = new StreamReader(stream, encoding ?? Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: true);
             var lines = new List<string>();
             while (!reader.EndOfStream)
                 lines.Add(reader.ReadLine());

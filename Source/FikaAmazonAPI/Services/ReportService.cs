@@ -303,7 +303,7 @@ namespace FikaAmazonAPI.Services
                     stream = new GZipStream(stream, CompressionMode.Decompress);
 
                 var memoryStream = new MemoryStream();
-                await stream.CopyToAsync(memoryStream, cancellationToken);
+                await stream.CopyToAsync(memoryStream, 81920, cancellationToken);
                 memoryStream.Position = 0;
 
                 return memoryStream;

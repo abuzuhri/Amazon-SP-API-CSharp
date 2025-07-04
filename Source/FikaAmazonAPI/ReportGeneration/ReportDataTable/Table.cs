@@ -61,7 +61,8 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         public static Table ConvertFromCSV(Stream stream, char separator = '\t', Encoding encoding = default)
         {
-            using var reader = new StreamReader(stream, encoding ?? Encoding.UTF8, leaveOpen: true);
+            using var reader = new StreamReader(stream, encoding ?? Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: true);
             var lines = new List<string>();
             while (!reader.EndOfStream)
                 lines.Add(reader.ReadLine());
