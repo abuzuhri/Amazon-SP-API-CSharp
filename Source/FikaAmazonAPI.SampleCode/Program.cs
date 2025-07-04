@@ -42,12 +42,12 @@ namespace FikaAmazonAPI.SampleCode
             });
 
 
-            var itemsList=amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15KBCBMXC");
+           // var itemsList=amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15KBCBMXC");
 
 
 
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            feedsSample.SubmitFeedPRICING_JSONAsync("B09H73T814.259", 112.0M, 53.51M, 112.20M).GetAwaiter().GetResult();
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedPRICING_JSONAsync("B09H73T814.259", 112.0M, 53.51M, 112.20M).GetAwaiter().GetResult();
 
 
             Console.ReadLine();
