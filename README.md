@@ -764,7 +764,7 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
    new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
     {
      productType = "PRODUCT",
-     requirements = RequirementsEnum.LISTING,
+     requirements = Requirements.LISTING,
      locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
      });
 ```
