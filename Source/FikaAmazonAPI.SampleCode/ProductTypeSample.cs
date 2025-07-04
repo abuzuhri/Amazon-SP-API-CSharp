@@ -1,4 +1,4 @@
-﻿using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
+﻿using FikaAmazonAPI.Parameter.ListingItem;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -27,7 +27,7 @@ namespace FikaAmazonAPI.SampleCode
                 new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
                 {
                     productType = "PRODUCT",
-                    requirements = RequirementsEnum.LISTING,
+                    requirements = Requirements.LISTING,
                     locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
                 });
         }
