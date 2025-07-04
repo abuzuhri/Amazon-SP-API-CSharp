@@ -58,6 +58,21 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             lines.Skip(1).ToList().ForEach(a => ConvertFromCSVAddRow(table, a, separator));
             return table;
         }
+
+        public static Table ConvertFromCSV(Stream stream, char separator = '\t', Encoding encoding = default)
+        {
+            using var reader = new StreamReader(stream, encoding ?? Encoding.UTF8, leaveOpen: true);
+            var lines = new List<string>();
+            while (!reader.EndOfStream)
+                lines.Add(reader.ReadLine());
+
+            if (lines.Count == 0)
+                return null;
+
+            var table = new Table(lines.First().Split(separator));
+            lines.Skip(1).ToList().ForEach(a => ConvertFromCSVAddRow(table, a, separator));
+            return table;
+        }
         private static void ConvertFromCSVAddRow(Table table, string line, char separator)
         {
             table.AddRow(line.Split(separator));
