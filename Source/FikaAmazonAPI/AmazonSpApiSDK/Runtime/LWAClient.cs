@@ -26,8 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
             if (string.IsNullOrWhiteSpace(proxyAddress))
             {
-                RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
-            }else
+                var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+                RestClient = new RestClient(options);
+            }
+            else
             {
                 var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
                 {
@@ -63,7 +65,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
                 if (!IsSuccessful(response))
                 {
-                    throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
+                    var message = string.IsNullOrEmpty(response.ErrorMessage)
+                        ? "Unsuccessful LWA token exchange"
+                        : $"Unsuccessful LWA token exchange: {response.ErrorMessage}";
+                    throw new IOException(message);
                 }
 
                 var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
