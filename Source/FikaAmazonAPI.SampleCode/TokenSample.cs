@@ -55,15 +55,15 @@ namespace FikaAmazonAPI.SampleCode
             };
 
 
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-            serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
-            serachOrderList.RestrictedDataTokenRequest = createRDT;
-            serachOrderList.IsNeedRestrictedDataToken = true;
+            ParameterOrderList searchOrderList = new ParameterOrderList();
+            searchOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+            searchOrderList.OrderStatuses = new List<OrderStatuses>();
+            searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+            searchOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+            searchOrderList.RestrictedDataTokenRequest = createRDT;
+            searchOrderList.IsNeedRestrictedDataToken = true;
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 
         }

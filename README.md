@@ -138,24 +138,24 @@ Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Sou
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
 
 ### Order List with parameter
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+searchOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
