@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace RestSharp
+namespace FikaAmazonAPI.RestSharp
 {
     public class RestClientOptions
     {

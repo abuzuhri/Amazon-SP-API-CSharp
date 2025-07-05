@@ -1,4 +1,4 @@
-namespace RestSharp
+namespace FikaAmazonAPI.RestSharp
 {
     public enum ParameterType
     {

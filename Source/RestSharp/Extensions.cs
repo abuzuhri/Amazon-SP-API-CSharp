@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestSharp
+namespace FikaAmazonAPI.RestSharp
 {
     public static class RestSharpExtensions
     {
@@ -18,6 +18,6 @@ namespace RestSharp.Serializers.NewtonsoftJson
 {
     public static class RestClientExtensions
     {
-        public static RestSharp.RestClient UseNewtonsoftJson(this RestSharp.RestClient client) => client;
+        public static FikaAmazonAPI.RestSharp.RestClient UseNewtonsoftJson(this FikaAmazonAPI.RestSharp.RestClient client) => client;
     }
 }
