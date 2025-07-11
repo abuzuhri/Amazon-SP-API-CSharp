@@ -12,8 +12,6 @@ The purpose of this package is to have an easy way of getting started with the A
 - [AWSSDK.SecurityToken](https://www.nuget.org/packages/AWSSDK.SecurityToken/)
 - [AWSSDK.SQS](https://www.nuget.org/packages/AWSSDK.SQS/)
 - [Microsoft.CSharp](https://www.nuget.org/packages/Microsoft.CSharp/)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
-- [RestSharp](https://www.nuget.org/packages/RestSharp/)
 - [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
 - [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
 
@@ -148,24 +146,24 @@ You need to add windows-1252 encoding
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
 
 ### Order List with parameter
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+searchOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
@@ -774,7 +772,7 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
    new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
     {
      productType = "PRODUCT",
-     requirements = RequirementsEnum.LISTING,
+     requirements = Requirements.LISTING,
      locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
      });
 ```

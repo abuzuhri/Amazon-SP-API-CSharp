@@ -200,7 +200,9 @@ namespace FikaAmazonAPI.SampleCode
                 msg.MaximumSellerAllowedPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = decimal.Round(maxPrice.Value, 2)
+                    Value = decimal.Round(maxPrice.Value, 2),
+                    start_at = "2024-01-01",
+                    end_at = "2025-01-01"
                 };
             }
 
@@ -209,7 +211,9 @@ namespace FikaAmazonAPI.SampleCode
                 msg.MinimumSellerAllowedPrice = new StandardPrice()
                 {
                     currency = amazonConnection.GetCurrentMarketplace.CurrencyCode.ToString(),
-                    Value = decimal.Round(minPrice.Value, 2)
+                    Value = decimal.Round(minPrice.Value, 2),
+                    start_at = "2024-01-01",
+                    end_at = "2025-01-01"
                 };
             }
 
@@ -221,6 +225,29 @@ namespace FikaAmazonAPI.SampleCode
 
             string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
 
+
+            await GetJsonFeedDetails(feedID);
+
+        }
+
+        public async Task SubmitInventoryJSON_Async(string SKU, int quantity, DateTime? restockDate = null)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<InventoryMessage>();
+            var msg = new InventoryMessage()
+            {
+                SKU = SKU,
+                Quantity = quantity,
+                RestockDate = restockDate
+            };
+
+            list.Add(msg);
+            createDocument.AddInventoryMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
 
             await GetJsonFeedDetails(feedID);
 

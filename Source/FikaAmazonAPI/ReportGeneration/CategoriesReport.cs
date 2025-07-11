@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -22,6 +23,24 @@ namespace FikaAmazonAPI.ReportGeneration
                 {
                     Data = (CategoriesData)serializer.Deserialize(reader);
                 }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public CategoriesReport(Stream stream, string refNumber)
+        {
+            if (stream == null || stream.Length == 0)
+                return;
+
+            stream.Position = 0;
+            var serializer = new XmlSerializer(typeof(CategoriesData));
+
+            try
+            {
+                Data = (CategoriesData)serializer.Deserialize(stream);
             }
             catch (System.Exception e)
             {

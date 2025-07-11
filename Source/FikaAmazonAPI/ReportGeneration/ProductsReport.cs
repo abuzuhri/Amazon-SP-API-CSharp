@@ -1,6 +1,7 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -20,6 +21,11 @@ namespace FikaAmazonAPI.ReportGeneration
                 values.Add(ProductsRow.FromRow(row));
             }
             Data = values;
+        }
+
+        public ProductsReport(Stream stream, Encoding encoding = default)
+        {
+            Data = ReportParser.ParseTableRows(stream, ProductsRow.FromRow, encoding: encoding);
         }
 
 

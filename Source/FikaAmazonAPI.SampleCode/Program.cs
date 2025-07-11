@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.SampleCode
@@ -25,8 +27,27 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             }, loggerFactory: factory);
 
-            FeedsSample feedsSample = new FeedsSample(amazonConnection);
-            _ = feedsSample.SubmitFeedPRICING_JSONAsync("B087YHP3HQ.151", 131.77M, 67.70M, 131.77M);
+            var plan = amazonConnection.FulFillmentInboundv20240320.ListInboundPlans(new Parameter.FulFillmentInbound.v20240320.ParameterListInboundPlans
+            {
+                Status = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.InboundPlanStatus.ACTIVE
+            });
+
+
+            //var list = amazonConnection.Seller.GetMarketplaceParticipations();
+
+            var list= amazonConnection.FulFillmentInbound.GetShipments(new Parameter.FulFillmentInbound.ParameterGetShipments()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                ShipmentStatusList = new List<ShipmentStatus> { ShipmentStatus.WORKING, ShipmentStatus.SHIPPED, ShipmentStatus.RECEIVING }
+            });
+
+
+           // var itemsList=amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15KBCBMXC");
+
+
+
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedPRICING_JSONAsync("B09H73T814.259", 112.0M, 53.51M, 112.20M).GetAwaiter().GetResult();
 
 
             Console.ReadLine();

@@ -3,6 +3,7 @@ using FikaAmazonAPI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.Utils.Constants;
@@ -35,15 +36,15 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<FeedbackOrderRow>> GetFeedbackFromDateAsync(DateTime fromDate, DateTime toDate)
         {
-            var path = await GetFeedbackFromDateAsync(_amazonConnection, fromDate, toDate);
-            FeedbackOrderReport report = new FeedbackOrderReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetFeedbackFromDateAsync(_amazonConnection, fromDate, toDate);
+            FeedbackOrderReport report = new FeedbackOrderReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetFeedbackFromDateAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetFeedbackFromDateAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_SELLER_FEEDBACK_DATA,
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes.GET_SELLER_FEEDBACK_DATA,
                 fromDate);
         }
 
@@ -71,15 +72,15 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<IList<ReimbursementsOrderRow>> GetReimbursementsOrderAsync(DateTime fromDate, DateTime toDate)
         {
-            var path = await GetReimbursementsOrderAsync(_amazonConnection, fromDate, toDate);
-            ReimbursementsOrderReport report = new ReimbursementsOrderReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetReimbursementsOrderAsync(_amazonConnection, fromDate, toDate);
+            ReimbursementsOrderReport report = new ReimbursementsOrderReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetReimbursementsOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetReimbursementsOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FBA_REIMBURSEMENTS_DATA, fromDate, toDate);
         }
 
@@ -106,17 +107,17 @@ namespace FikaAmazonAPI.ReportGeneration
         public async Task<List<ReturnFBAOrderRow>> GetReturnFBAOrderAsync(DateTime fromDate, DateTime toDate,
             List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
         {
-            var path = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate, marketplaces,
+            using var stream = await GetReturnFBAOrderAsync(_amazonConnection, fromDate, toDate, marketplaces,
                 cancellationToken);
-            ReturnFBAOrderReport report = new ReturnFBAOrderReport(path, _amazonConnection.RefNumber);
+            ReturnFBAOrderReport report = new ReturnFBAOrderReport(stream, _amazonConnection.RefNumber);
 
             return report.Data;
         }
 
-        private async Task<string> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetReturnFBAOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate, List<MarketPlace> marketplaces = null, CancellationToken cancellationToken = default)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA, fromDate, toDate, marketplaces: marketplaces,
                 cancellationToken: cancellationToken);
         }
@@ -144,19 +145,18 @@ namespace FikaAmazonAPI.ReportGeneration
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_60);
             foreach (var date in dateList)
             {
-                var path = await GetReturnMFNOrderAsync(_amazonConnection, date.StartDate, date.EndDate);
-
-                ReturnFBMOrderReport report = new ReturnFBMOrderReport(path, _amazonConnection.RefNumber);
+                using var stream = await GetReturnMFNOrderAsync(_amazonConnection, date.StartDate, date.EndDate);
+                ReturnFBMOrderReport report = new ReturnFBMOrderReport(stream, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
             return list;
         }
 
-        private async Task<string> GetReturnMFNOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetReturnMFNOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE, fromDate, toDate);
         }
 
@@ -181,20 +181,21 @@ namespace FikaAmazonAPI.ReportGeneration
             if (totalDays > 90)
                 fromDate = DateTime.UtcNow.AddDays(-90);
 
-            var paths = await GetSettlementOrderAsync(_amazonConnection, fromDate, toDate);
-            foreach (var path in paths)
+            var streams = await GetSettlementOrderAsync(_amazonConnection, fromDate, toDate);
+            foreach (var stream in streams)
             {
-                SettlementOrderReport report = new SettlementOrderReport(path, _amazonConnection.RefNumber);
+                using var s = stream;
+                SettlementOrderReport report = new SettlementOrderReport(s, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
             return list;
         }
 
-        private async Task<IList<string>> GetSettlementOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<IList<MemoryStream>> GetSettlementOrderAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.DownloadExistingReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.DownloadExistingReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2, fromDate, toDate);
         }
 
@@ -205,14 +206,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<UnsuppressedInventoryDataRow>> GetUnsuppressedInventoryDataAsync()
         {
-            var path = await GetUnsuppressedInventoryDatayAsync(_amazonConnection);
-            var report = new UnsuppressedInventoryDataReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetUnsuppressedInventoryDatayAsync(_amazonConnection);
+            var report = new UnsuppressedInventoryDataReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetUnsuppressedInventoryDatayAsync(AmazonConnection amazonConnection)
+        private async Task<MemoryStream> GetUnsuppressedInventoryDatayAsync(AmazonConnection amazonConnection)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes
                 .GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
         }
 
@@ -222,14 +223,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<ProductAFNInventoryRow>> GetAFNInventoryQtyAsync()
         {
-            var path = await GetAFNInventoryQtyAsync(_amazonConnection);
-            ProductAFNInventoryReport report = new ProductAFNInventoryReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetAFNInventoryQtyAsync(_amazonConnection);
+            ProductAFNInventoryReport report = new ProductAFNInventoryReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetAFNInventoryQtyAsync(AmazonConnection amazonConnection)
+        private async Task<MemoryStream> GetAFNInventoryQtyAsync(AmazonConnection amazonConnection)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_AFN_INVENTORY_DATA);
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes.GET_AFN_INVENTORY_DATA);
         }
 
         #endregion
@@ -241,14 +242,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<InventoryAgingRow>> GetInventoryAgingAsync()
         {
-            var path = await GetInventoryAgingAsync(_amazonConnection);
-            InventoryAgingReport report = new InventoryAgingReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetInventoryAgingAsync(_amazonConnection);
+            InventoryAgingReport report = new InventoryAgingReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetInventoryAgingAsync(AmazonConnection amazonConnection)
+        private async Task<MemoryStream> GetInventoryAgingAsync(AmazonConnection amazonConnection)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes
                 .GET_FBA_INVENTORY_AGED_DATA);
         }
 
@@ -262,15 +263,15 @@ namespace FikaAmazonAPI.ReportGeneration
         public async Task<List<ProductsRow>> GetProductsAsync(List<MarketPlace> marketplaces = null,
             CancellationToken cancellationToken = default)
         {
-            var path = await GetProductsAsync(_amazonConnection, marketplaces, cancellationToken);
-            ProductsReport report = new ProductsReport(path);
+            using var stream = await GetProductsAsync(_amazonConnection, marketplaces, cancellationToken);
+            ProductsReport report = new ProductsReport(stream);
             return report.Data;
         }
 
-        private Task<string> GetProductsAsync(AmazonConnection amazonConnection, List<MarketPlace> marketplaces = null,
+        private Task<MemoryStream> GetProductsAsync(AmazonConnection amazonConnection, List<MarketPlace> marketplaces = null,
             CancellationToken cancellationToken = default)
         {
-            return amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA,
+            return amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA,
                 marketplaces: marketplaces, cancellationToken: cancellationToken);
         }
 
@@ -285,14 +286,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<CategoriesRow>> GetCategoriesAsync(bool rootNodesOnly = false)
         {
-            var path = await GetCategoriesAsync(_amazonConnection, rootNodesOnly);
-            CategoriesReport report = new CategoriesReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetCategoriesAsync(_amazonConnection, rootNodesOnly);
+            CategoriesReport report = new CategoriesReport(stream, _amazonConnection.RefNumber);
             return report.Data.Node;
         }
 
-        private async Task<string> GetCategoriesAsync(AmazonConnection amazonConnection, bool rootNodesOnly)
+        private async Task<MemoryStream> GetCategoriesAsync(AmazonConnection amazonConnection, bool rootNodesOnly)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA,
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes.GET_XML_BROWSE_TREE_DATA,
                 reportOptions: new ReportOptions
                 {
                     { "RootNodesOnly", rootNodesOnly.ToString() }
@@ -319,18 +320,18 @@ namespace FikaAmazonAPI.ReportGeneration
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
             foreach (var range in dateList)
             {
-                var path = await GetOrdersByLastUpdateAsync(_amazonConnection, range.StartDate, range.EndDate);
-                OrdersReport report = new OrdersReport(path, _amazonConnection.RefNumber);
+                using var stream = await GetOrdersByLastUpdateAsync(_amazonConnection, range.StartDate, range.EndDate);
+                OrdersReport report = new OrdersReport(stream, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
             return list;
         }
 
-        private async Task<string> GetOrdersByLastUpdateAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetOrdersByLastUpdateAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL, fromDate, toDate);
         }
 
@@ -353,18 +354,18 @@ namespace FikaAmazonAPI.ReportGeneration
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
             foreach (var range in dateList)
             {
-                var path = await GetOrdersByOrderDateAsync(_amazonConnection, range.StartDate, range.EndDate);
-                OrdersReport report = new OrdersReport(path, _amazonConnection.RefNumber);
+                using var stream = await GetOrdersByOrderDateAsync(_amazonConnection, range.StartDate, range.EndDate);
+                OrdersReport report = new OrdersReport(stream, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
             return list;
         }
 
-        private async Task<string> GetOrdersByOrderDateAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetOrdersByOrderDateAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_GENERAL, fromDate, toDate);
         }
 
@@ -380,21 +381,21 @@ namespace FikaAmazonAPI.ReportGeneration
             var dateList = ReportDateRange.GetDateRange(fromDate, toDate, DAY_30);
             foreach (var range in dateList)
             {
-                var path = await GetOrderInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate,
+                using var stream = await GetOrderInvoicingDataAsync(_amazonConnection, range.StartDate, range.EndDate,
                     marketplaces);
-                OrderInvoicingReport report = new OrderInvoicingReport(path, _amazonConnection.RefNumber);
+                OrderInvoicingReport report = new OrderInvoicingReport(stream, _amazonConnection.RefNumber);
                 list.AddRange(report.Data);
             }
 
             return list;
         }
 
-        private async Task<string> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetOrderInvoicingDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate, List<MarketPlace> marketplaces = null)
         {
             var options = new AmazonSpApiSDK.Models.Reports.ReportOptions();
             options.Add("ShowSalesChannel", "true");
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FLAT_FILE_ORDER_REPORT_DATA_INVOICING, fromDate, toDate, options, false, marketplaces);
         }
 
@@ -453,17 +454,17 @@ namespace FikaAmazonAPI.ReportGeneration
             if (totalDays > 90)
                 fromDate = DateTime.UtcNow.AddDays(-90);
 
-            var path = await GetLedgerDetailAsync(_amazonConnection, fromDate, toDate);
-            LedgerDetailReport report = new LedgerDetailReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetLedgerDetailAsync(_amazonConnection, fromDate, toDate);
+            LedgerDetailReport report = new LedgerDetailReport(stream, _amazonConnection.RefNumber);
             list.AddRange(report.Data);
 
             return list;
         }
 
-        private async Task<string> GetLedgerDetailAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetLedgerDetailAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_LEDGER_DETAIL_VIEW_DATA, fromDate, toDate);
         }
 
@@ -476,14 +477,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public async Task<List<InventoryPlanningDataRow>> GetInventoryPlanningDataAsync()
         {
-            var path = await GetInventoryPlanningDataAsync(_amazonConnection);
-            InventoryPlanningDataReport report = new InventoryPlanningDataReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetInventoryPlanningDataAsync(_amazonConnection);
+            InventoryPlanningDataReport report = new InventoryPlanningDataReport(stream, _amazonConnection.RefNumber);
             return report.Data;
         }
 
-        private async Task<string> GetInventoryPlanningDataAsync(AmazonConnection amazonConnection)
+        private async Task<MemoryStream> GetInventoryPlanningDataAsync(AmazonConnection amazonConnection)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(ReportTypes
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(ReportTypes
                 .GET_FBA_INVENTORY_PLANNING_DATA);
         }
 
@@ -498,17 +499,17 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             List<FbaEstimateFeeReportRow> list = new List<FbaEstimateFeeReportRow>();
 
-            var path = await GetFbaEstimateFeeDataAsync(_amazonConnection, fromDate, toDate);
-            FbaEstimateFeeReport report = new FbaEstimateFeeReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetFbaEstimateFeeDataAsync(_amazonConnection, fromDate, toDate);
+            FbaEstimateFeeReport report = new FbaEstimateFeeReport(stream, _amazonConnection.RefNumber);
             list.AddRange(report.Data);
 
             return list;
         }
 
-        private async Task<string> GetFbaEstimateFeeDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetFbaEstimateFeeDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
-            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+            return await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                 ReportTypes.GET_FBA_ESTIMATED_FBA_FEES_TXT_DATA, fromDate, toDate);
         }
 
@@ -525,18 +526,18 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             List<ReferralFeeReportRow> list = new List<ReferralFeeReportRow>();
 
-            var path = await GetReferralFeeReportDataAsync(_amazonConnection, fromDate, toDate);
-            ReferralFeeReport report = new ReferralFeeReport(path, _amazonConnection.RefNumber);
+            using var stream = await GetReferralFeeReportDataAsync(_amazonConnection, fromDate, toDate);
+            ReferralFeeReport report = new ReferralFeeReport(stream, _amazonConnection.RefNumber);
             list.AddRange(report.Data);
 
             return list;
         }
 
-        private async Task<string> GetReferralFeeReportDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
+        private async Task<MemoryStream> GetReferralFeeReportDataAsync(AmazonConnection amazonConnection, DateTime fromDate,
             DateTime toDate)
         {
             var reportPath =
-                await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+                await amazonConnection.Reports.CreateReportAndDownloadFileStreamAsync(
                     ReportTypes.GET_REFERRAL_FEE_PREVIEW_REPORT, fromDate, toDate);
             if (reportPath == null)
             {
@@ -549,7 +550,7 @@ namespace FikaAmazonAPI.ReportGeneration
                 if (getOldReports != null && getOldReports.Count > 0)
                 {
                     var reportId = getOldReports.FirstOrDefault().ReportId;
-                    return await amazonConnection.Reports.GetReportFileByReportIdAsync(reportId, false);
+                    return await amazonConnection.Reports.GetReportFileStreamByReportIdAsync(reportId, false);
                 }
             }
 

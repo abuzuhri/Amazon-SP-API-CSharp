@@ -1,5 +1,7 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -20,6 +22,11 @@ namespace FikaAmazonAPI.ReportGeneration
                 values.Add(UnsuppressedInventoryDataRow.FromRow(row, refNumber));
             }
             Data = values;
+        }
+
+        public UnsuppressedInventoryDataReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseTableRows(stream, UnsuppressedInventoryDataRow.FromRow, refNumber);
         }
     }
 

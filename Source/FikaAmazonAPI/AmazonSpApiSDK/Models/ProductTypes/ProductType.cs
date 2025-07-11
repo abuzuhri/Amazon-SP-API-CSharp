@@ -21,6 +21,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         public string Name { get; set; }
 
         /// <summary>
+        /// The display name of the Amazon product type.
+        /// </summary>
+        /// <value>The display name of the Amazon product type.</value>
+        [DataMember(Name = "displayName", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "displayName")]
+        public string DisplayName { get; set; }
+
+        /// <summary>
         /// The Amazon marketplace identifiers for which the product type definition is available.
         /// </summary>
         /// <value>The Amazon marketplace identifiers for which the product type definition is available.</value>
