@@ -1,6 +1,6 @@
 using System;
 using System.Net.Http;
-using RestSharp;
+using FikaAmazonAPI.RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime

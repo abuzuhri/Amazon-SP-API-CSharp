@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestSharp
+namespace FikaAmazonAPI.RestSharp
 {
     public class RestRequest
     {
