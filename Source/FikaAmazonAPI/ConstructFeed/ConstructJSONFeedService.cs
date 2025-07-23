@@ -137,7 +137,37 @@ namespace FikaAmazonAPI.ConstructFeed
                         {
                             op = "replace",
                             path = "/attributes/fulfillment_availability",
-                            value =new List<PatcheValueData>{ patcheValueData }
+                            value = new List<PatcheValueData>{ patcheValueData }
+                        }
+                    }
+                };
+
+                jsonMessagesData.messages.Add(msg);
+            }
+        }
+
+        public void AddMerchantShippingGroupMessage(IList<MerchantShippingGroupMessage> messages)
+        {
+            int index = jsonMessagesData.messages.Count;
+            foreach (var itm in messages)
+            {
+                var msg = new MessagesData()
+                {
+                    messageId = ++index,
+                    sku = itm.SKU,
+                    operationType = "PATCH",
+                    productType = "PRODUCT",
+                    patches = new List<PatcheData>{
+                        new PatcheData()
+                        {
+                            op = "replace",
+                            path = "/attributes/merchant_shipping_group",
+                            value = new List<PatcheValueData>{
+                                new PatcheValueData()
+                                {
+                                    value = itm.MerchantShippingGroupId
+                                }
+                            }
                         }
                     }
                 };
