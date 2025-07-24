@@ -230,7 +230,7 @@ namespace FikaAmazonAPI.SampleCode
 
         }
 
-        public async Task SubmitInventoryJSON_Async(string SKU, int quantity, DateTime? restockDate = null)
+        public async Task SubmitInventoryJSON_Async(string SKU, int quantity, int? leadTimeToShip = null, DateTime? restockDate = null)
         {
             ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
 
@@ -239,6 +239,7 @@ namespace FikaAmazonAPI.SampleCode
             {
                 SKU = SKU,
                 Quantity = quantity,
+                FulfillmentLatency = leadTimeToShip.HasValue ? leadTimeToShip.Value.ToString() : null,
                 RestockDate = restockDate
             };
 

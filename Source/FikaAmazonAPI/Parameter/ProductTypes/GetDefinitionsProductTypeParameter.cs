@@ -12,6 +12,7 @@ namespace FikaAmazonAPI.Parameter.ProductTypes
         public string sellerId { get; set; }
         public ICollection<string> marketplaceIds { get; set; } = new List<string>();
         public string productTypeVersion { get; set; }
+        public string version { get; set; }
         public Requirements? requirements { get; set; }
         public RequirementsEnforcedEnum? requirementsEnforced { get; set; }
         public LocaleEnum? locale { get; set; }

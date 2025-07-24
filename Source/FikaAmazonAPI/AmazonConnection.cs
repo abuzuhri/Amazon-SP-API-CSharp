@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
 using System.Threading;
+using System.Net.Http;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI
 {
@@ -49,7 +51,9 @@ namespace FikaAmazonAPI
         public VendorDirectFulfillmentOrderService VendorDirectFulfillmentOrders => this._VendorDirectFulfillmentOrders ?? throw _NoCredentials;
         public VendorOrderService VendorOrders => this._VendorOrders ?? throw _NoCredentials;
         public VendorDirectFulfillmentInventoryService VendorDirectFulfillmentInventory => this._VendorDirectFulfillmentInventory ?? throw _NoCredentials;
-        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;
+        public VendorTransactionStatusService VendorTransactionStatus => this._VendorTransactionStatus ?? throw _NoCredentials;        
+        public MerchantShippingTemplateService MerchantShippingTemplate => this._MerchantShippingTemplate ?? throw _NoCredentials;
+
 
         private AppIntegrationsServiceV20240401 _AppIntegrationsServiceV20240401 { get; set; }
         private OrderService _Orders { get; set; }
@@ -89,6 +93,7 @@ namespace FikaAmazonAPI
         private VendorOrderService _VendorOrders { get; set; }
         private VendorTransactionStatusService _VendorTransactionStatus { get; set; }
         private VendorDirectFulfillmentInventoryService _VendorDirectFulfillmentInventory { get; set; }
+        private MerchantShippingTemplateService _MerchantShippingTemplate { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
@@ -154,6 +159,7 @@ namespace FikaAmazonAPI
             this._VendorOrders = new VendorOrderService(this.Credentials, _loggerFactory);
             this._VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, _loggerFactory);
             this._VendorDirectFulfillmentInventory = new VendorDirectFulfillmentInventoryService(this.Credentials, _loggerFactory);
+            this._MerchantShippingTemplate = new MerchantShippingTemplateService(this.Credentials, _loggerFactory);
 
             AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }
