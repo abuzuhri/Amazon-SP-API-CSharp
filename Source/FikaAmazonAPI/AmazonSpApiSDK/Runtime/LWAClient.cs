@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
@@ -67,7 +68,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                 if (!IsSuccessful(response))
                 {
                     var message = string.IsNullOrEmpty(response.ErrorMessage)
-                        ? "Unsuccessful LWA token exchange"
+                        ? $"Unsuccessful LWA token exchange: {response.Content}"
                         : $"Unsuccessful LWA token exchange: {response.ErrorMessage}";
                     throw new IOException(message);
                 }
@@ -77,7 +78,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             }
             catch (Exception e)
             {
-                throw new SystemException("Error getting LWA Access Token", e);
+                //Debug.WriteLine(e.Message + Environment.NewLine + e.InnerException?.Message);
+                throw new SystemException("Error getting LWA Access Token!", e);
             }
         }
 
