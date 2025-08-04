@@ -30,8 +30,8 @@ namespace FikaAmazonAPI.Services
 
 
         public ProductTypeDefinition GetDefinitionsProductType(GetDefinitionsProductTypeParameter parameter) =>
-            Task.Run(() => SearchDefinitionsProductTypesAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<ProductTypeDefinition> SearchDefinitionsProductTypesAsync(GetDefinitionsProductTypeParameter parameter, CancellationToken cancellationToken = default)
+            Task.Run(() => GetDefinitionsProductTypeAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<ProductTypeDefinition> GetDefinitionsProductTypeAsync(GetDefinitionsProductTypeParameter parameter, CancellationToken cancellationToken = default)
         {
             if (parameter.marketplaceIds == null || parameter.marketplaceIds.Count == 0)
                 parameter.marketplaceIds.Add(AmazonCredential.MarketPlace.ID);

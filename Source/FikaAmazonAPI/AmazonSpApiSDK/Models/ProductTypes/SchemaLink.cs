@@ -1,3 +1,4 @@
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Solicitations;
 using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
@@ -18,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         /// <value>Link to retrieve the schema.</value>
         [DataMember(Name = "link", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "link")]
-        public Object Link { get; set; }
+        public SchemaLinkObject Link { get; set; }
 
         /// <summary>
         /// Checksum hash of the schema (Base64 MD5). Can be used to verify schema contents, identify changes between schema versions, and for caching.
@@ -51,6 +52,48 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
+    }
 
+    [DataContract]
+    public class SchemaLinkObject
+    {
+        /// <summary>
+        /// A URI for this object.
+        /// </summary>
+        /// <value>A URI for this object.</value>
+        [DataMember(Name = "resource", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "resource")]
+        public string ResourceUrl { get; set; }
+
+        /// <summary>
+        /// The HTTP Verb Method to use when calling the resource url.
+        /// </summary>
+        /// <value>The HTTP Verb Method to use when calling the resource url.</value>
+        [DataMember(Name = "verb", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "verb")]
+        public string Verb { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("class " + nameof(SchemaLinkObject) + " {\n");
+            sb.Append("  ResourceUrl: ").Append(ResourceUrl).Append("\n");
+            sb.Append("  Verb: ").Append(Verb).Append("\n");
+            sb.Append("}\n");
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
+        /// <returns>JSON string presentation of the object</returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 }
