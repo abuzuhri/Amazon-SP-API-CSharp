@@ -64,7 +64,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="offerType">Type of offer for the listings item. (required).</param>
         /// <param name="price">Purchase price of the listings item (required).</param>
         /// <param name="points">points.</param>
-        public ItemOfferByMarketplace(string marketplaceId = default(string), OfferTypeEnum offerType = default(OfferTypeEnum), Money price = default(Money), Points points = default(Points))
+        public ItemOfferByMarketplace(string marketplaceId = default(string), OfferTypeEnum offerType = default(OfferTypeEnum), Money price = default(Money), Points points = default(Points), Audience audience = default(Audience))
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
@@ -94,6 +94,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                 this.Price = price;
             }
             this.Points = points;
+            this.Audience = audience;
         }
         
         /// <summary>
@@ -118,6 +119,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         public Points Points { get; set; }
 
         /// <summary>
+        /// Buyer segment or program this offer is applicable to.
+        /// </summary>
+        [DataMember(Name = "audience", EmitDefaultValue = false)]
+        public Audience Audience { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -129,6 +136,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             sb.Append("  OfferType: ").Append(OfferType).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Points: ").Append(Points).Append("\n");
+            sb.Append("  Audience: ").Append(Audience).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -182,6 +190,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     this.Points == input.Points ||
                     (this.Points != null &&
                     this.Points.Equals(input.Points))
+                ) &&
+                (
+                    this.Audience == input.Audience ||
+                    (this.Audience != null &&
+                    this.Audience.Equals(input.Audience))
                 );
         }
 
@@ -202,6 +215,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     hashCode = hashCode * 59 + this.Price.GetHashCode();
                 if (this.Points != null)
                     hashCode = hashCode * 59 + this.Points.GetHashCode();
+                if (this.Audience != null)
+                    hashCode = hashCode * 59 + this.Audience.GetHashCode();
                 return hashCode;
             }
         }
