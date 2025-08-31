@@ -1,8 +1,11 @@
 ﻿using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.Parameter.ListingItem
 {
@@ -39,14 +42,25 @@ namespace FikaAmazonAPI.Parameter.ListingItem
             return true;
         }
 
+        [PathParameter]
         public string sellerId { get; set; }
 
+        [PathParameter]
         public string sku { get; set; }
 
         public ICollection<string> marketplaceIds { get; set; }
 
+
+        /// <summary>
+        /// Values: issues, identifiers
+        /// </summary>
+        public ICollection<Constants.IncludedData> includedData { get; set; }
+
+        public OperationMode? mode { get; set; }
+
         public string issueLocale { get; set; }
 
+        [BodyParameter]
         public ListingsItemPatchRequest listingsItemPatchRequest { get; set; }
 
     }
@@ -70,6 +84,14 @@ namespace FikaAmazonAPI.Parameter.ListingItem
     {
         add,
         replace,
-        delete
+        delete,
+        merge
+    }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum OperationMode
+    {
+        [EnumMember(Value = "VALIDATION_PREVIEW")]
+        VALIDATION_PREVIEW = 1,
     }
 }

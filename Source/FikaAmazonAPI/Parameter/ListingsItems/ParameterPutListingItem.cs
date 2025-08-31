@@ -50,6 +50,13 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 
         public ICollection<string> marketplaceIds { get; set; }
 
+        /// <summary>
+        /// Values: issues, identifiers
+        /// </summary>
+        public ICollection<Constants.IncludedData> includedData { get; set; }
+
+        public OperationMode? mode { get; set; }
+
         public string issueLocale { get; set; }
 
         [BodyParameter]
