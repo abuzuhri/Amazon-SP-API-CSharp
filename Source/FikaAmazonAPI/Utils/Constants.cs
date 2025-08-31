@@ -60,7 +60,8 @@ namespace FikaAmazonAPI.Utils
             relationships,
             salesRanks,
             summaries,
-            vendorDetails
+            vendorDetails,
+            issues
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -178,7 +179,8 @@ namespace FikaAmazonAPI.Utils
             PRICING_HEALTH,
             FBA_INVENTORY_AVAILABILITY_CHANGES,
             APPLICATION_OAUTH_CLIENT_SECRET_EXPIRY,
-            APPLICATION_OAUTH_CLIENT_NEW_SECRET
+            APPLICATION_OAUTH_CLIENT_NEW_SECRET,
+            TRANSACTION_UPDATE
         }
 
         /// <summary>

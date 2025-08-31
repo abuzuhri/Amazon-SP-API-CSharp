@@ -530,7 +530,104 @@ var processingReport = await amazonConnection.Feed.GetJsonFeedDocumentProcessing
 
 ```
 
+#### Website authorization workflow.
+```CSharp
+    [HttpGet("AuthorizeAmazon")]
+    public async Task<IActionResult> AuthorizeAmazon()
+    {
+        // Step 2-5 of the website authorization workflow.
 
+        // Step 2-3: Amazon calls our log-in URI with amazon_callback_uri.
+        var amazonCallbackUri = Request.Query["amazon_callback_uri"].ToString();
+        if (!string.IsNullOrEmpty(amazonCallbackUri))
+        {
+            var amazonState = Request.Query["amazon_state"].ToString();
+            var version = configuration["FikaAmazonAPI:AuthorizeVersion"];
+            var redirectUri = configuration["FikaAmazonAPI:AmazonCallbackUri"];
+
+            var generatedState = Guid.NewGuid().ToString("N");
+            Response.Cookies.Append("amazon_oauth_state", generatedState, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
+            });
+
+            var query = new Dictionary<string, string?>
+            {
+                ["redirect_uri"] = redirectUri,
+                ["amazon_state"] = amazonState,
+                ["state"] = generatedState
+            };
+
+            if (!string.IsNullOrEmpty(version))
+            {
+                query["version"] = version;
+            }
+
+            Response.Headers["Referrer-Policy"] = "no-referrer";
+            var redirectUrl = QueryHelpers.AddQueryString(amazonCallbackUri, query!);
+            return Redirect(redirectUrl);
+        }
+
+        // Step 4-5: Amazon redirects back to our redirect_uri with authorization code.
+        var state = Request.Query["state"].ToString();
+        var sellingPartnerId = Request.Query["selling_partner_id"].ToString();
+        var mwsAuthToken = Request.Query["mws_auth_token"].ToString();
+        var code = Request.Query["spapi_oauth_code"].ToString();
+
+        var storedState = Request.Cookies["amazon_oauth_state"];
+        if (string.IsNullOrEmpty(state) || storedState != state)
+        {
+            return BadRequest("Invalid state");
+        }
+
+        Response.Cookies.Delete("amazon_oauth_state");
+
+        if (string.IsNullOrEmpty(code))
+        {
+            return BadRequest("Missing spapi_oauth_code");
+        }
+
+        var clientId = configuration["FikaAmazonAPI:ClientId"];
+        var clientSecret = configuration["FikaAmazonAPI:ClientSecret"];
+        var callbackUri = configuration["FikaAmazonAPI:AmazonCallbackUri"];
+
+        using var httpClient = new HttpClient();
+        var form = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["grant_type"] = "authorization_code",
+            ["code"] = code,
+            ["client_id"] = clientId ?? string.Empty,
+            ["client_secret"] = clientSecret ?? string.Empty,
+            ["redirect_uri"] = callbackUri ?? string.Empty
+        });
+
+        using var response = await httpClient.PostAsync("https://api.amazon.com/auth/o2/token", form);
+        var responseBody = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            return BadRequest(responseBody);
+        }
+
+        using var document = JsonDocument.Parse(responseBody);
+        var refreshToken = document.RootElement.GetProperty("refresh_token").GetString();
+        var accessToken = document.RootElement.GetProperty("access_token").GetString();
+
+        return Json(new
+        {
+            state,
+            selling_partner_id = sellingPartnerId,
+            mws_auth_token = mwsAuthToken,
+            refresh_token = refreshToken,
+            access_token = accessToken
+        });
+    }
+
+```
+
+ 
 #### Feed Submit for change Quantity
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
