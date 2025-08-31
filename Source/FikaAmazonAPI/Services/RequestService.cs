@@ -302,7 +302,7 @@ namespace FikaAmazonAPI.Services
                     switch (error.Code)
                     {
                         case "Unauthorized":
-                            throw new AmazonUnauthorizedException(error.Message, response);
+                            throw new AmazonUnauthorizedException($"{error.Message} {error.Details}", response);
                         case "InvalidSignature":
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":

@@ -27,6 +27,9 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             }, loggerFactory: factory);
 
+
+            var aa=amazonConnection.Seller.GetMarketplaceParticipations();
+
             var plan = amazonConnection.FulFillmentInboundv20240320.ListInboundPlans(new Parameter.FulFillmentInbound.v20240320.ParameterListInboundPlans
             {
                 Status = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.InboundPlanStatus.ACTIVE
