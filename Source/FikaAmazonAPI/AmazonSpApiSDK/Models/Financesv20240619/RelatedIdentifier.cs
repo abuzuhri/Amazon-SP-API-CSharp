@@ -91,6 +91,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances.Model
             /// </summary>
             [EnumMember(Value = "FINANCIAL_EVENT_GROUP_ID")]
             FINANCIALEVENTGROUPID = 10
+
+            /// <summary>
+            /// Enum SETTLEMENTID for value: SETTLEMENT_ID
+            /// </summary>
+            [EnumMember(Value = "SETTLEMENT_ID")]
+            SETTLEMENTID = 11
         }
 
         /// <summary>
