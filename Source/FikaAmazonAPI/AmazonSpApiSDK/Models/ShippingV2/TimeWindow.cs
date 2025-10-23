@@ -16,16 +16,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2 {
     /// The start time of the time window.
     /// </summary>
     /// <value>The start time of the time window.</value>
-    [DataMember(Name="startTime", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "startTime")]
+    [DataMember(Name="start", EmitDefaultValue=false)]
+    [JsonProperty(PropertyName = "start")]
     public DateTime? StartTime { get; set; }
 
     /// <summary>
     /// The end time of the time window.
     /// </summary>
     /// <value>The end time of the time window.</value>
-    [DataMember(Name="endTime", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "endTime")]
+    [DataMember(Name="end", EmitDefaultValue=false)]
+    [JsonProperty(PropertyName = "end")]
     public DateTime? EndTime { get; set; }
 
 
