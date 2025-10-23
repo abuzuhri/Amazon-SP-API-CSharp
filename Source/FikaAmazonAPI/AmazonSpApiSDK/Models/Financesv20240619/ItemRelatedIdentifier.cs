@@ -60,7 +60,17 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances.Model
             /// Enum INVOICEID for value: INVOICE_ID
             /// </summary>
             [EnumMember(Value = "INVOICE_ID")]
-            INVOICEID = 5
+            INVOICEID = 5,
+            /// <summary>
+            /// Enum DEAL_ID for value: DEAL_ID
+            /// </summary>
+            [EnumMember(Value = "DEAL_ID")]
+            DEALID = 6,
+            /// <summary>
+            /// Enum SETTLEMENT_ID for value: SETTLEMENT_ID
+            /// </summary>
+            [EnumMember(Value = "SETTLEMENT_ID")]
+            SETTLEMENTID = 7
         }
 
         /// <summary>
