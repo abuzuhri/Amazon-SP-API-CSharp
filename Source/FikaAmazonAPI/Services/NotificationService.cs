@@ -137,7 +137,7 @@ namespace FikaAmazonAPI.Services
                     {
                         var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest, cancellationToken);
                         var Messages = result.Messages;
-                        if (Messages.Count > 0)
+                        if (Messages != null && Messages.Count > 0)
                         {
                             foreach (var msg in Messages)
                             {
