@@ -60,14 +60,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound
         /// Three-digit currency code in ISO 4217 format.
         /// </summary>
         /// <value>Three-digit currency code in ISO 4217 format.</value>
-        [DataMember(Name = "CurrencyCode", EmitDefaultValue = false)]
+        [DataMember(Name = "currencyCode", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "currencyCode")] 
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// The currency amount.
         /// </summary>
         /// <value>The currency amount.</value>
-        [DataMember(Name = "Value", EmitDefaultValue = false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
+        [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
