@@ -136,7 +136,7 @@ namespace FikaAmazonAPI.Services
                     try
                     {
                         var result = await amazonSQSClient.ReceiveMessageAsync(receiveMessageRequest, cancellationToken);
-                        var Messages = result.Messages;
+                        var Messages = result.Messages ?? new List<Message>();
                         if (Messages.Count > 0)
                         {
                             foreach (var msg in Messages)
@@ -144,10 +144,10 @@ namespace FikaAmazonAPI.Services
                                 ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, isDeleteNotificationAfterRead, cancellationToken).ConfigureAwait(false);
 
                             }
-
-                            if (Messages.Count < 10)
-                                Thread.Sleep(1000 * 5);
                         }
+
+                        if (Messages.Count < 10)
+                            Thread.Sleep(1000 * 5);
                     }
                     catch (Exception ex)
                     {
