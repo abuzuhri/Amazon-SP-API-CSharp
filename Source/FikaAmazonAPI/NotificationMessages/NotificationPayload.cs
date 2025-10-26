@@ -50,9 +50,6 @@ namespace FikaAmazonAPI.NotificationMessages
         [JsonProperty("applicationOAuthClientSecretExpiry")]
         public ApplicationOAuthClientSecretExpiryNotification ApplicationOAuthClientSecretExpiry { get; set; }
 
-        [JsonProperty("FulfillmentInventoryByMarketplace")]
-        public FulfillmentInventorybyMarketplaceNotification FulfillmentInventoryByMarketplace { get; set; }
-
         /// <summary>
         /// An explanation about the purpose of this instance.
         /// </summary>
