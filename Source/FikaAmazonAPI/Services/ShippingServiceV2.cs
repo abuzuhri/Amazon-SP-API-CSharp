@@ -68,5 +68,16 @@ namespace FikaAmazonAPI.Services
                 return response.Payload;
             return null;
         }
+
+        public GetShipmentDocumentsResult GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) =>
+             Task.Run(() => GetShipmentDocumentsAsync(shipmentId, packageClientReferenceId, format)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetShipmentDocumentsResult> GetShipmentDocumentsAsync(string shipmentId, string packageClientReferenceId, string format, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetShipmentDocuments(shipmentId, packageClientReferenceId, format), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetShipmentDocumentsResponse>(RateLimitType.ShippingV2_GetShipmentDocument, cancellationToken);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
     }
 }
