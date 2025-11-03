@@ -18,9 +18,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
     /// <summary>
     /// Gets or Sets EventCode
     /// </summary>
-    [DataMember(Name = "eventCode", EmitDefaultValue = true)]
-    [JsonProperty(PropertyName = "eventCode", NullValueHandling = NullValueHandling.Include)]
-    public EventCode EventCode { get; set; }
+    [DataMember(Name = "eventCode", EmitDefaultValue = false)]
+    [JsonProperty(PropertyName = "eventCode")]
+    public EventCode? EventCode { get; set; }
 
     /// <summary>
     /// Gets or Sets Location
