@@ -28,6 +28,10 @@ namespace FikaAmazonAPI.SampleCode
             }, loggerFactory: factory);
 
 
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            await feedsSample.SubmitFeedDELETE_JSONAsync("B07HMBFZCZ .2");
+
+
             var aa=amazonConnection.Seller.GetMarketplaceParticipations();
 
             var plan = amazonConnection.FulFillmentInboundv20240320.ListInboundPlans(new Parameter.FulFillmentInbound.v20240320.ParameterListInboundPlans
