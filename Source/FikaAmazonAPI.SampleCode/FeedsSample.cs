@@ -229,6 +229,28 @@ namespace FikaAmazonAPI.SampleCode
             await GetJsonFeedDetails(feedID);
 
         }
+        public async Task SubmitFeedDELETE_JSONAsync(string SKU)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<ProductMessage>();
+            var msg = new ProductMessage()
+            {
+                SKU = SKU
+            };
+
+
+            list.Add(msg);
+            createDocument.AddDeleteMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
+
+
+            await GetJsonFeedDetails(feedID);
+
+        }
 
         public async Task SubmitInventoryJSON_Async(string SKU, int quantity, int? leadTimeToShip = null, DateTime? restockDate = null)
         {
