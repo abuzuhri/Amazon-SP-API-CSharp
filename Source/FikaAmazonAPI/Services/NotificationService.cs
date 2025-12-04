@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -117,7 +118,15 @@ namespace FikaAmazonAPI.Services
         public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true) =>
             Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver, isDeleteNotificationAfterRead)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false) =>
+            Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver, isDeleteNotificationAfterRead)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        {
+            return StartReceivingNotificationMessagesAsync(param, new MessageReceiverAdapter(messageReceiver), isDeleteNotificationAfterRead, cancellationToken);
+        }
+
+        public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false, CancellationToken cancellationToken = default)
         {
             var awsAccessKeyId = param.awsAccessKeyId;
             var awsSecretAccessKey = param.awsSecretAccessKey;
@@ -157,22 +166,23 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiver messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        private async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiverWithResult messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
         {
+            var deleteMessage = isDeleteNotificationAfterRead;
             try
             {
                 var data = DeserializeNotification(msg);
 
-                messageReceiver.NewMessageRevicedTriger(data);
+                deleteMessage = messageReceiver.NewMessageRevicedTriger(data) || isDeleteNotificationAfterRead;
 
-                if (isDeleteNotificationAfterRead)
+                if (deleteMessage)
                     await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
             catch (Exception ex)
             {
                 messageReceiver.ErrorCatch(ex);
 
-                if (isDeleteNotificationAfterRead)
+                if (deleteMessage)
                     await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
         }
@@ -194,5 +204,25 @@ namespace FikaAmazonAPI.Services
             return notification;
         }
 
+        private class MessageReceiverAdapter : IMessageReceiverWithResult
+        {
+            private readonly IMessageReceiver _receiver;
+
+            public MessageReceiverAdapter(IMessageReceiver receiver)
+            {
+                _receiver = receiver;
+            }
+
+            public void ErrorCatch(Exception ex)
+            {
+                _receiver.ErrorCatch(ex);
+            }
+
+            public bool NewMessageRevicedTriger(NotificationMessageResponce message)
+            {
+                _receiver.NewMessageRevicedTriger(message);
+                return false;
+            }
+        }
     }
 }
