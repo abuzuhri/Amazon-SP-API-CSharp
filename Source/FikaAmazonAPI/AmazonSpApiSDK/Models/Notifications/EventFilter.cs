@@ -15,7 +15,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Gets or Sets MarketplaceIds
         /// </summary>
         [DataMember(Name = "marketplaceIds", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "marketplaceIds")]
+        [JsonProperty(PropertyName = "marketplaceIds", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> MarketplaceIds { get; set; }
 
         /// <summary>
@@ -23,14 +23,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// </summary>
         /// <value>An eventFilterType value that is supported by the specific notificationType. This is used by the subscription service to determine the type of event filter. Refer to the section of the [Notifications Use Case Guide](doc:notifications-api-v1-use-case-guide) that describes the specific notificationType to determine if an eventFilterType is supported.</value>
         [DataMember(Name = "eventFilterType", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "eventFilterType")]
+        [JsonProperty(PropertyName = "eventFilterType", NullValueHandling = NullValueHandling.Ignore)]
         public string EventFilterType { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderChangeTypes
         /// </summary>
         [DataMember(Name = "orderChangeTypes", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "orderChangeTypes")]
+        [JsonProperty(PropertyName = "orderChangeTypes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> OrderChangeTypes { get; set; }
 
 

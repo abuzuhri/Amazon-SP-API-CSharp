@@ -101,6 +101,22 @@ namespace FikaAmazonAPI.ConstructFeed
             }
         }
 
+        public void AddDeleteMessage(IList<ProductMessage> messages)
+        {
+            int index = jsonMessagesData.messages.Count;
+            foreach (var itm in messages)
+            {
+                var msg = new MessagesData()
+                {
+                    messageId = ++index,
+                    sku = itm.SKU,
+                    operationType = "DELETE"
+                };
+
+                jsonMessagesData.messages.Add(msg);
+            }
+        }
+
         public void AddInventoryMessage(IList<InventoryMessage> messages)
         {
             int index = jsonMessagesData.messages.Count;
