@@ -25,23 +25,6 @@ namespace FikaAmazonAPI.Utils
 
         [JsonConstructorAttribute]
         public MarketPlace() { }
-        static MarketPlace()
-        {
-            _allMarketplaces = new List<MarketPlace>
-            {
-                // NorthAmerica
-                US, Canada, Mexico, Brazil,
-                // Europe
-                Spain, UnitedKingdom, France, Belgium,
-                Netherlands, Germany, Italy, Sweden,
-                Egypt, Poland, Turkey, UnitedArabEmirates,
-                India, SaudiArabia, SouthAfrica, Ireland,
-                // FarEast
-                Singapore, Australia, Japan
-            };
-        }
-
-        private static readonly List<MarketPlace> _allMarketplaces;
 
         public static MarketPlace GetMarketPlaceByID(string id)
         {
@@ -88,5 +71,20 @@ namespace FikaAmazonAPI.Utils
         public static readonly MarketPlace Singapore = new MarketPlace("A19VAU5U5O7RUS", Region.FarEast, Country.SG, BaseCurrencyCode.SGD);
         public static readonly MarketPlace Australia = new MarketPlace("A39IBJ37TRP1C6", Region.FarEast, Country.AU, BaseCurrencyCode.AUD);
         public static readonly MarketPlace Japan = new MarketPlace("A1VC38T7YXB528", Region.FarEast, Country.JP, BaseCurrencyCode.JPY);
+
+
+        private static readonly IReadOnlyList<MarketPlace> _allMarketplaces = new[]
+       {
+            // NorthAmerica
+            US, Canada, Mexico, Brazil,
+            // Europe
+            Spain, UnitedKingdom, France, Belgium,
+            Netherlands, Germany, Italy, Sweden,
+            Egypt, Poland, Turkey, UnitedArabEmirates,
+            India, SaudiArabia, SouthAfrica, Ireland,
+            // FarEast
+            Singapore, Australia, Japan
+        };
+
     }
 }
