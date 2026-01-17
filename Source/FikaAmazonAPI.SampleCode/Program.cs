@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.SampleCode
                 MarketPlaceID = config.GetSection("FikaAmazonAPI:MarketPlaceID").Value,
                 SellerID = config.GetSection("FikaAmazonAPI:SellerId").Value,
                 IsDebugMode = true
-            }, loggerFactory: factory);
+            });
 
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
