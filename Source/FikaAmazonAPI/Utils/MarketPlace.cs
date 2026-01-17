@@ -28,11 +28,11 @@ namespace FikaAmazonAPI.Utils
 
         public static MarketPlace GetMarketPlaceByID(string id)
         {
-            var marketpalce = _allMarketplaces.FirstOrDefault(a => a.ID == id);
-            if (marketpalce == null)
+            var marketplace = _allMarketplaces.FirstOrDefault(a => a.ID == id);
+            if (marketplace == null)
                 throw new AmazonInvalidInputException($"InvalidInput, MarketPlace or MarketPlaceID cannot be null for both!");
 
-            return marketpalce;
+            return marketplace;
         }
 
         public static MarketPlace GetMarketplaceByCountryCode(string countryCode)
