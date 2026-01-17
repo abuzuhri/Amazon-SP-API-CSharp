@@ -25,23 +25,18 @@ namespace FikaAmazonAPI.Utils
 
         [JsonConstructorAttribute]
         public MarketPlace() { }
-        static MarketPlace()
+        private static readonly IReadOnlyList<MarketPlace> _allMarketplaces = new[]
         {
-            _allMarketplaces = new List<MarketPlace>
-            {
-                // NorthAmerica
-                US, Canada, Mexico, Brazil,
-                // Europe
-                Spain, UnitedKingdom, France, Belgium,
-                Netherlands, Germany, Italy, Sweden,
-                Egypt, Poland, Turkey, UnitedArabEmirates,
-                India, SaudiArabia, SouthAfrica, Ireland,
-                // FarEast
-                Singapore, Australia, Japan
-            };
-        }
-
-        private static readonly List<MarketPlace> _allMarketplaces;
+            // NorthAmerica
+            US, Canada, Mexico, Brazil,
+            // Europe
+            Spain, UnitedKingdom, France, Belgium,
+            Netherlands, Germany, Italy, Sweden,
+            Egypt, Poland, Turkey, UnitedArabEmirates,
+            India, SaudiArabia, SouthAfrica, Ireland,
+            // FarEast
+            Singapore, Australia, Japan
+        };
 
         public static MarketPlace GetMarketPlaceByID(string id)
         {
