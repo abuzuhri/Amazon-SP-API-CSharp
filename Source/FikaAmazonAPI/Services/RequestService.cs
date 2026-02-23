@@ -128,8 +128,9 @@ namespace FikaAmazonAPI.Services
 
             //Remove AWS authorization
             //Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
-            var response = await RequestClient.ExecuteAsync<T>(Request, cancellationToken);
-            LogRequest(Request, response);
+            var currentRequest = Request;
+            var response = await RequestClient.ExecuteAsync<T>(currentRequest, cancellationToken);
+            LogRequest(currentRequest, response);
             SaveLastRequestHeader(response.Headers);
             await SleepForRateLimit(response.Headers, rateLimitType, cancellationToken);
             ParseResponse(response);
