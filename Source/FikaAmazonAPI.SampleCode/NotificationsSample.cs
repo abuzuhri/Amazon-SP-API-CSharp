@@ -199,7 +199,7 @@ namespace FikaAmazonAPI.SampleCode
             {
                 try
                 {
-                    await amazonConnection.Notification.StartReceivingNotificationMessagesAsync(
+                    await FikaAmazonAPI.Services.NotificationService.StartReceivingNotificationMessagesAsync(
                         param, messageReceiver, cancellationToken: cancellationToken);
                 }
                 catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)

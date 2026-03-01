@@ -115,18 +115,18 @@ namespace FikaAmazonAPI.Services
             return true;
         }
 
-        public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true) =>
+        public static void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true) =>
             Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver, isDeleteNotificationAfterRead)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false) =>
+        public static void StartReceivingNotificationMessages(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false) =>
             Task.Run(() => StartReceivingNotificationMessagesAsync(param, messageReceiver, isDeleteNotificationAfterRead)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        public static Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiver messageReceiver, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
         {
             return StartReceivingNotificationMessagesAsync(param, new MessageReceiverAdapter(messageReceiver), isDeleteNotificationAfterRead, cancellationToken);
         }
 
-        public async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false, CancellationToken cancellationToken = default)
+        public static async Task StartReceivingNotificationMessagesAsync(ParameterMessageReceiver param, IMessageReceiverWithResult messageReceiver, bool isDeleteNotificationAfterRead = false, CancellationToken cancellationToken = default)
         {
             var awsAccessKeyId = param.awsAccessKeyId;
             var awsSecretAccessKey = param.awsSecretAccessKey;
@@ -165,7 +165,7 @@ namespace FikaAmazonAPI.Services
             }
         }
 
-        private async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiverWithResult messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
+        private static async Task ProcessAnyOfferChangedMessage(Message msg, IMessageReceiverWithResult messageReceiver, AmazonSQSClient amazonSQSClient, string SQS_URL, bool isDeleteNotificationAfterRead = true, CancellationToken cancellationToken = default)
         {
             var deleteMessage = isDeleteNotificationAfterRead;
             try
@@ -185,12 +185,12 @@ namespace FikaAmazonAPI.Services
                     await DeleteMessageFromQueueAsync(amazonSQSClient, SQS_URL, msg.ReceiptHandle, cancellationToken);
             }
         }
-        private async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle, CancellationToken cancellationToken = default)
+        private static async Task DeleteMessageFromQueueAsync(AmazonSQSClient sqsClient, string QueueUrl, string ReceiptHandle, CancellationToken cancellationToken = default)
         {
             var deleteMessageRequest = new DeleteMessageRequest() { QueueUrl = QueueUrl, ReceiptHandle = ReceiptHandle };
             _ = await sqsClient.DeleteMessageAsync(deleteMessageRequest, cancellationToken);
         }
-        private NotificationMessageResponce DeserializeNotification(Message message)
+        private static NotificationMessageResponce DeserializeNotification(Message message)
         {
 
             NotificationMessageResponce notification;

@@ -434,7 +434,8 @@ while (!cts.Token.IsCancellationRequested)
 {
     try
     {
-        await amazonConnection.Notification.StartReceivingNotificationMessagesAsync(
+        // Static method — no instance needed
+        await NotificationService.StartReceivingNotificationMessagesAsync(
             param, messageReceiver, cancellationToken: cts.Token);
     }
     catch (OperationCanceledException) when (cts.Token.IsCancellationRequested)
@@ -478,6 +479,45 @@ public class CustomMessageReceiver : IMessageReceiver
         //Your Code here
     }
 }
+
+```
+
+### Notifications — End-to-End SQS Setup
+Complete workflow following the [Amazon SQS notification setup guide](https://developer-docs.amazon.com/sp-api/docs/set-up-notifications-with-amazon-sqs). Before running this code, grant SP-API permission to write to your SQS queue in the AWS Console.
+```CSharp
+
+// Step 3: Create a destination (grantless operation — no seller authorization needed)
+var destination = amazonConnection.Notification.CreateDestination(
+    new Notifications.CreateDestinationRequest()
+    {
+        Name = "CompanyName_SQS",
+        ResourceSpecification = new Notifications.DestinationResourceSpecification
+        {
+            Sqs = new Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+        }
+    });
+
+// Step 4: Create a subscription using the destinationId from Step 3
+// processingDirective is optional — only supported for ANY_OFFER_CHANGED and ORDER_CHANGE
+var subscription = amazonConnection.Notification.CreateSubscription(
+    new ParameterCreateSubscription()
+    {
+        destinationId = destination.DestinationId,
+        notificationType = NotificationType.ANY_OFFER_CHANGED,
+        payloadVersion = "1.0",
+        processingDirective = new Notifications.ProcessingDirective
+        {
+            EventFilter = new Notifications.EventFilter
+            {
+                EventFilterType = "ANY_OFFER_CHANGED",
+                MarketplaceIds = new List<string> { "ATVPDKIKX0DER" },
+                AggregationSettings = new Notifications.AggregationSettings
+                {
+                    AggregationTimePeriod = Notifications.AggregationTimePeriod.FiveMinutes
+                }
+            }
+        }
+    });
 
 ```
 
