@@ -73,6 +73,104 @@ namespace FikaAmazonAPI.SampleCode
                 });
         }
 
+        /// <summary>
+        /// End-to-end SQS notification setup following the documented workflow:
+        /// https://developer-docs.amazon.com/sp-api/docs/set-up-notifications-with-amazon-sqs
+        ///
+        /// Step 1: Grant SP-API permission to write to your SQS queue (done in AWS Console).
+        /// Step 2: (Optional) Grant SP-API access to your SSE key via AWS KMS.
+        /// Step 3: Create a destination using your SQS ARN.
+        /// Step 4: Create a subscription for the desired notification type.
+        /// </summary>
+        public void SetUpSqsNotifications()
+        {
+            // Step 3: Create a destination (grantless operation — no seller authorization needed)
+            var destination = amazonConnection.Notification.CreateDestination(
+                new AmazonSpApiSDK.Models.Notifications.CreateDestinationRequest()
+                {
+                    Name = "CompanyName_SQS",
+                    ResourceSpecification = new AmazonSpApiSDK.Models.Notifications.DestinationResourceSpecification
+                    {
+                        Sqs = new AmazonSpApiSDK.Models.Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+                    }
+                });
+
+            if (destination == null)
+            {
+                Console.WriteLine("Failed to create destination.");
+                return;
+            }
+
+            Console.WriteLine($"Destination created: {destination.DestinationId}");
+
+            // Step 4: Create a subscription using the destinationId from Step 3.
+            //
+            // processingDirective is optional and only supported for two notification types:
+            //
+            // (A) ANY_OFFER_CHANGED — supports:
+            //     - MarketplaceIds: limit notifications to specific marketplaces
+            //       (useful when you sell in many marketplaces but only track pricing in a few)
+            //     - AggregationTimePeriod: FiveMinutes or TenMinutes
+            //       (useful for high-volume catalogs to reduce notification flood)
+            //
+            // (B) ORDER_CHANGE — supports:
+            //     - OrderChangeTypes: "BuyerRequestedChange", "OrderStatusChange"
+            //       (useful when you only need cancellation requests, not every status update)
+            //     - AggregationTimePeriod: FiveMinutes or TenMinutes
+            //     - NOTE: MarketplaceIds is NOT supported for ORDER_CHANGE
+            //
+            // Using processingDirective with any other notification type returns HTTP 400.
+
+            // Example A: ANY_OFFER_CHANGED with marketplace filter + aggregation
+            var subscription = amazonConnection.Notification.CreateSubscription(
+                new ParameterCreateSubscription()
+                {
+                    destinationId = destination.DestinationId,
+                    notificationType = NotificationType.ANY_OFFER_CHANGED,
+                    payloadVersion = "1.0",
+                    processingDirective = new AmazonSpApiSDK.Models.Notifications.ProcessingDirective
+                    {
+                        EventFilter = new AmazonSpApiSDK.Models.Notifications.EventFilter
+                        {
+                            EventFilterType = "ANY_OFFER_CHANGED",
+                            MarketplaceIds = new List<string> { "ATVPDKIKX0DER" },
+                            AggregationSettings = new AmazonSpApiSDK.Models.Notifications.AggregationSettings
+                            {
+                                AggregationTimePeriod = AmazonSpApiSDK.Models.Notifications.AggregationTimePeriod.FiveMinutes
+                            }
+                        }
+                    }
+                });
+
+            if (subscription == null)
+            {
+                Console.WriteLine("Failed to create subscription.");
+                return;
+            }
+
+            Console.WriteLine($"Subscription created: {subscription.SubscriptionId}");
+
+            // Example B: ORDER_CHANGE filtered to buyer cancellation requests only
+            var orderChangeSub = amazonConnection.Notification.CreateSubscription(
+                new ParameterCreateSubscription()
+                {
+                    destinationId = destination.DestinationId,
+                    notificationType = NotificationType.ORDER_CHANGE,
+                    payloadVersion = "1.0",
+                    processingDirective = new AmazonSpApiSDK.Models.Notifications.ProcessingDirective
+                    {
+                        EventFilter = new AmazonSpApiSDK.Models.Notifications.EventFilter
+                        {
+                            EventFilterType = "ORDER_CHANGE",
+                            OrderChangeTypes = new List<string> { "BuyerRequestedChange" }
+                        }
+                    }
+                });
+
+            if (orderChangeSub != null)
+                Console.WriteLine($"ORDER_CHANGE subscription created: {orderChangeSub.SubscriptionId}");
+        }
+
 
         public async Task StartReceivingNotificationMessagesAsync(CancellationToken cancellationToken)
         {
