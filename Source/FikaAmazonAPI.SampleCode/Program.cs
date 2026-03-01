@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.ReportGeneration;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,9 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             });
 
+            ReportManager reportManager = new ReportManager(amazonConnection);
+
+            var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 
             FeedsSample feedsSample = new FeedsSample(amazonConnection);
             await feedsSample.SubmitFeedDELETE_JSONAsync("B07HMBFZCZ .2");

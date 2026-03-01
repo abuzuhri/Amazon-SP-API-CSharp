@@ -150,13 +150,12 @@ namespace FikaAmazonAPI.Services
                         {
                             foreach (var msg in Messages)
                             {
-                                ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, isDeleteNotificationAfterRead, cancellationToken).ConfigureAwait(false);
-
+                                await ProcessAnyOfferChangedMessage(msg, messageReceiver, amazonSQSClient, SQS_URL, isDeleteNotificationAfterRead, cancellationToken).ConfigureAwait(false);
                             }
                         }
 
                         if (Messages.Count < 10)
-                            Thread.Sleep(1000 * 5);
+                            await Task.Delay(1000 * 5, cancellationToken).ConfigureAwait(false);
                     }
                     catch (Exception ex)
                     {
