@@ -20,6 +20,10 @@
         Order_UpdateOrderItemsApprovals,
         Order_ShipmentConfirmation,
 
+        /*Order V2026-01-01*/
+        Order20260101_GetOrder,
+        Order20260101_SearchOrders,
+
         Report_GetReports,
         Report_GetReport,
         Report_CreateReport,

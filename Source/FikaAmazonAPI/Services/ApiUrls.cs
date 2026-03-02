@@ -645,6 +645,37 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string ConfirmShipment(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
         }
 
+
+        /// <summary>
+        /// API URL definitions for the Orders API v2026-01-01.
+        /// Base URL: /orders/2026-01-01
+        /// 
+        /// Replaces OrdersApiUrls (v0) with only two endpoints:
+        /// - searchOrders (replaces getOrders)
+        /// - getOrder (replaces getOrder + getOrderBuyerInfo + getOrderAddress + getOrderItems + getOrderItemsBuyerInfo)
+        /// 
+        /// Based on the API definition as of end of February 2026:
+        /// https://github.com/amzn/selling-partner-api-models/blob/main/models/orders-api-model/orders_2026-01-01.json
+        /// </summary>
+        public class OrdersApiUrls20260101
+        {
+            private static readonly string _resourceBaseUrl = "/orders/2026-01-01";
+
+            /// <summary>
+            /// GET /orders/2026-01-01/orders
+            /// searchOrders - replaces getOrders from v0.
+            /// </summary>
+            public static string SearchOrders => $"{_resourceBaseUrl}/orders";
+
+            /// <summary>
+            /// GET /orders/2026-01-01/orders/{orderId}
+            /// getOrder - replaces getOrder, getOrderBuyerInfo, getOrderAddress, 
+            /// getOrderItems, getOrderItemsBuyerInfo from v0.
+            /// Use includedData parameter to control response data.
+            /// </summary>
+            public static string GetOrder(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}";
+        }
+
         protected class CategoryApiUrls
         {
             private readonly static string _resourceBaseUrl = "/catalog/v0";
