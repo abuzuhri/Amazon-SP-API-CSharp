@@ -25,6 +25,10 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Order_UpdateOrderItemsApprovals,            new RateLimits(5M, 15) },
               { RateLimitType.Order_ShipmentConfirmation,                 new RateLimits(2M, 10) },
 
+              /*Order V2026-01-01*/
+              { RateLimitType.Order20260101_GetOrder,                     new RateLimits(0.0056M, 20) },
+              { RateLimitType.Order20260101_SearchOrders,                 new RateLimits(0.5M, 30) },
+
               { RateLimitType.Report_GetReports,                          new RateLimits(0.0222M, 10) },
               { RateLimitType.Report_GetReport,                           new RateLimits(2.0M, 15) },
               { RateLimitType.Report_CreateReport,                        new RateLimits(0.0167M, 15) },

@@ -21,11 +21,13 @@ namespace FikaAmazonAPI.SampleCode
         }
 
 
+        [Obsolete("PII is not a thing anymore (OrderAPIv2026-01-01) -> Just Use Normal GetOrder")]
         public void OrderPII()
         {
+            throw new NotImplementedException("PII is not a thing anymore (OrderAPIv2026-01-01) -> Just Use Normal GetOrder");
             var restrictedResource = new RestrictedResource();
             restrictedResource.method = Method.GET.ToString();
-            restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("404-7777403-8594716");
+            //restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("404-7777403-8594716");
             //restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
 
 
@@ -38,14 +40,16 @@ namespace FikaAmazonAPI.SampleCode
             parameterBasedPII.IsNeedRestrictedDataToken = true;
             parameterBasedPII.RestrictedDataTokenRequest = createRDT;
 
-           var order= amazonConnection.Orders.GetOrderItems("404-7777403-8594716", parameterBasedPII);
+           //var order= amazonConnection.Orders.GetOrderItems("404-7777403-8594716", parameterBasedPII);
         }
 
+        [Obsolete("PII is not a thing anymore (OrderAPIv2026-01-01) -> Just Use Normal GetOrder")]
         public void OrdersPII()
         {
+            throw new NotImplementedException("PII is not a thing anymore (OrderAPIv2026-01-01) -> Just Use Normal GetOrder");
             var restrictedResource = new RestrictedResource();
             restrictedResource.method = Method.GET.ToString();
-            restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("404-7777403-8594716");
+            //restrictedResource.path = ApiUrls.OrdersApiUrls.OrderItems("404-7777403-8594716");
             //restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
 
 
@@ -63,7 +67,7 @@ namespace FikaAmazonAPI.SampleCode
             searchOrderList.RestrictedDataTokenRequest = createRDT;
             searchOrderList.IsNeedRestrictedDataToken = true;
 
-            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
+            //var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 
         }

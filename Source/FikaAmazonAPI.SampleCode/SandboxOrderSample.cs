@@ -17,13 +17,15 @@ namespace FikaAmazonAPI.SampleCode
 
         public void GetOrderTestCase200()
         {
-            var orders = amazonConnection.Orders.GetOrders
+            /* 
+             var orders = amazonConnection.Orders.GetOrder
             (
-                 new FikaAmazonAPI.Parameter.Order.ParameterOrderList
+                 new FikaAmazonAPI.Parameter.Order.ParameterGetOrder
                  {
                      TestCase = Constants.TestCase200
                  }
             );
+            */
         }
     }
 }

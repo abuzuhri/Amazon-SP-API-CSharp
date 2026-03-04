@@ -27,6 +27,7 @@ Install-Package CSharpAmazonSpAPI
 ### Tasks
 #### Seller
 
+- [x] [OrdersV2026-01-01](https://developer-docs.amazon.com/sp-api/reference/orders-v2026-01-01)
 - [x] [OrdersV0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference)
 - [x] [Reports](https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-reference)
 - [x] [FinancesV0](https://developer-docs.amazon.com/sp-api/docs/finances-api-reference)
@@ -141,86 +142,67 @@ Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Sou
 ### Order List
 For more order samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/OrdersSample.cs).
 ```CSharp
-ParameterOrderList searchOrderList = new ParameterOrderList();
-searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-searchOrderList.OrderStatuses = new List<OrderStatuses>();
-searchOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-var orders = amazonConnection.Orders.GetOrders(searchOrderList);
-
+    ParameterSearchOrders searchOrderList = new ParameterSearchOrders{
+        CreatedAfter = DateTime.UtcNow.AddMinutes(-600000),
+        MaxNumberOfPages = 1
+    };
+    var orders = amazonConnection.Orders.SearchOrders(searchOrderList);
 ```
 
 
 ### Order List with parameter
 ```CSharp
-ParameterOrderList searchOrderList = new ParameterOrderList();
-searchOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-searchOrderList.OrderStatuses = new List<OrderStatuses>();
-searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-searchOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
-var orders = amazonConnection.Orders.GetOrders(searchOrderList);
-
-```
-
-
-### Order List with parameter including PII data Simple
-```CSharp
-var parameterOrderList = new ParameterOrderList
+ParameterSearchOrders searchOrderList = new ParameterSearchOrders{
+        CreatedAfter = DateTime.UtcNow.AddHours(-24),
+        MaxNumberOfPages = 1,
+        FulfillmentStatuses = new List<FulfillmentStatus20260101>
         {
-            CreatedAfter = DateTime.UtcNow.AddHours(-24),
-            OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
-            MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
-            IsNeedRestrictedDataToken = true
-        };
-
-var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
-
-```
-
-### Order List with parameter including PII data — Advanced (if you want to get specific data elements only)
-```CSharp
-var parameterOrderList = new ParameterOrderList
+            FulfillmentStatus20260101.UNSHIPPED
+        }
+        MarketplaceIds = new List<string>
         {
-            CreatedAfter = DateTime.UtcNow.AddHours(-24),
-            OrderStatuses = new List<OrderStatuses> { OrderStatuses.Unshipped },
-            MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
-            IsNeedRestrictedDataToken = true,
-            RestrictedDataTokenRequest = new CreateRestrictedDataTokenRequest
-            {
-                restrictedResources = new List<RestrictedResource>
-                {
-                    new RestrictedResource
-                    {
-                        method = Method.GET.ToString(),
-                        path = ApiUrls.OrdersApiUrls.Orders,
-                        dataElements = new List<string> { "buyerInfo", "shippingAddress" }
-                    }
-                }
-            }
-        };
-
-var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
+            MarketPlace.Germany.ID,
+            MarketPlace.Australia.ID,
+            MarketPlace.France.ID
+        }
+    };
+var orders = amazonConnection.Orders.SearchOrders(searchOrderList);
 
 ```
 
-### Order List data from Sandbox
+#### ParameterSearchOrders (v2026-01-01) Class
+
 ```CSharp
-AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
-{
-     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-     Environment=Environments.Sandbox
-});
+ParameterSearchOrders searchOrderList = new ParameterSearchOrders{
+    public ICollection<string> MarketplaceIds { get; set; }
+    public DateTime? LastUpdatedAfter { get; set; }
+    public DateTime? LastUpdatedBefore { get; set; }
+    public DateTime? CreatedAfter { get; set; }
+    public DateTime? CreatedBefore { get; set; }
+    public int? MaxResultsPerPage { get; set; } = 100;
+    public string PaginationToken { get; set; }
+    public ICollection<FulfillmentStatus20260101> FulfillmentStatuses { get; set; }
+    public ICollection<FulfilledBy20260101> FulfilledBy { get; set; }
+    public ICollection<string> AmazonOrderIds { get; set; }
+    public ICollection<IncludedData20260101> IncludedData { get; set; }
 
-var orders = amazonConnection.Orders.GetOrders
-(
-     new FikaAmazonAPI.Parameter.Order.ParameterOrderList
-     {
-         TestCase = Constants.TestCase200
-     }
-);
+    // ClientSide
+    public int? MaxNumberOfPages { get; set; }
+};
 ```
+
+
+#### ParameterGetOrder20260101 Class
+
+```CSharp
+ParameterGetOrder20260101 GetOrderParam = new ParameterGetOrder20260101{
+    public string OrderId { get; set; }
+    public ICollection<IncludedData20260101> IncludedData { get; set; }
+};
+```
+
+
 
 ### Report List
 For more report samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).

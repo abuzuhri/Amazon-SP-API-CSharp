@@ -628,15 +628,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         public class OrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/orders/v0";
-            public static string Orders
-            {
-                get => $"{_resourceBaseUrl}/orders";
-            }
-            public static string Order(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}";
-            public static string OrderItems(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems";
-            public static string OrderBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/buyerInfo";
-            public static string OrderItemsBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems/buyerInfo";
-            public static string OrderShipmentInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/address";
+            private static readonly string _resourceBaseUrl20260101 = "/orders/2026-01-01";
+
+            /*v2026-01-01*/
+            public static string SearchOrders => $"{_resourceBaseUrl20260101}/orders";
+            public static string GetOrder(string orderId) => $"{_resourceBaseUrl20260101}/orders/{orderId}";
+
+            /*v0*/
             public static string UpdateShipmentStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipment";
             public static string GetOrderRegulatedInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
             public static string UpdateVerificationStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";

@@ -96,6 +96,7 @@ namespace FikaAmazonAPI.Services
             if (postJsonObj != null)
                 AddJsonBody(postJsonObj);
             if (queryParameters != null)
+                
                 AddQueryParameters(queryParameters);
         }
 
@@ -133,6 +134,7 @@ namespace FikaAmazonAPI.Services
             LogRequest(currentRequest, response);
             SaveLastRequestHeader(response.Headers);
             await SleepForRateLimit(response.Headers, rateLimitType, cancellationToken);
+
             ParseResponse(response);
 
             if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content) &&
