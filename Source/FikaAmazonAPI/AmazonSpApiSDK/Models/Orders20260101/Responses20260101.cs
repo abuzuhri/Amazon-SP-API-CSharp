@@ -18,6 +18,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders20260101
 
         [JsonProperty("paginationToken")]
         public string PaginationToken { get; set; }
+
+        [JsonProperty("lastUpdatedBefore")]
+        public string LastUpdatedBefore { get; set; }
     }
 
     /// <summary>

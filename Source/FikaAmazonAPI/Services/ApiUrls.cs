@@ -628,52 +628,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         public class OrdersApiUrls
         {
             private readonly static string _resourceBaseUrl = "/orders/v0";
-            public static string Orders
-            {
-                get => $"{_resourceBaseUrl}/orders";
-            }
-            public static string Order(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}";
-            public static string OrderItems(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems";
-            public static string OrderBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/buyerInfo";
-            public static string OrderItemsBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems/buyerInfo";
-            public static string OrderShipmentInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/address";
+            private static readonly string _resourceBaseUrl20260101 = "/orders/2026-01-01";
+
+            /*v2026-01-01*/
+            public static string SearchOrders => $"{_resourceBaseUrl20260101}/orders";
+            public static string GetOrder(string orderId) => $"{_resourceBaseUrl20260101}/orders/{orderId}";
+
+            /*v0*/
             public static string UpdateShipmentStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipment";
             public static string GetOrderRegulatedInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
             public static string UpdateVerificationStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
             public static string GetOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
             public static string UpdateOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
             public static string ConfirmShipment(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
-        }
-
-
-        /// <summary>
-        /// API URL definitions for the Orders API v2026-01-01.
-        /// Base URL: /orders/2026-01-01
-        /// 
-        /// Replaces OrdersApiUrls (v0) with only two endpoints:
-        /// - searchOrders (replaces getOrders)
-        /// - getOrder (replaces getOrder + getOrderBuyerInfo + getOrderAddress + getOrderItems + getOrderItemsBuyerInfo)
-        /// 
-        /// Based on the API definition as of end of February 2026:
-        /// https://github.com/amzn/selling-partner-api-models/blob/main/models/orders-api-model/orders_2026-01-01.json
-        /// </summary>
-        public class OrdersApiUrls20260101
-        {
-            private static readonly string _resourceBaseUrl = "/orders/2026-01-01";
-
-            /// <summary>
-            /// GET /orders/2026-01-01/orders
-            /// searchOrders - replaces getOrders from v0.
-            /// </summary>
-            public static string SearchOrders => $"{_resourceBaseUrl}/orders";
-
-            /// <summary>
-            /// GET /orders/2026-01-01/orders/{orderId}
-            /// getOrder - replaces getOrder, getOrderBuyerInfo, getOrderAddress, 
-            /// getOrderItems, getOrderItemsBuyerInfo from v0.
-            /// Use includedData parameter to control response data.
-            /// </summary>
-            public static string GetOrder(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}";
         }
 
         protected class CategoryApiUrls

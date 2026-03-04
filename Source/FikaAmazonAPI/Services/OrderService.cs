@@ -1,15 +1,46 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders20260101;
 using FikaAmazonAPI.Parameter.Order;
-using FikaAmazonAPI.Search;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FikaAmazonAPI.Services
 {
+    /// <summary>
+    /// Order service for the Orders API v2026-01-01.
+    /// 
+    /// Migration summary
+    /// -------------------------------------------------------------------------
+    ///  v0 Operation              | v2026-01-01 Operation
+    /// -------------------------------------------------------------------------
+    ///  GetOrders                ->  SearchOrders
+    ///  GetOrder                ->  GetOrder (with includedData)
+    ///  GetOrderItems          ->  GetOrder (items always included)
+    ///  GetOrderBuyerInfo        ->  GetOrder +includedData=BUYER
+    ///  GetOrderAddress         ->  GetOrder + includedData= RECIPIENT
+    ///  GetOrderItemsBuyerInfo ->  GetOrder + includedData= BUYER
+    /// -------------------------------------------------------------------------
+    /// 
+    /// 
+    /// Main-Changes:
+    /// - No Restricted Data Tokens (RDT) required for PII access.
+    /// - Use includedData parameter for flexible data retrieval.
+    /// - FulfillmentChannels MFN/AFN replaced with MERCHANT/AMAZON.
+    /// - OrderStatuses replaced with FulfillmentStatuses (upper snake case) (I personaly knows it as SCREAMING_SNAKE_CASE).
+    /// - New features: Package tracking, programs array, structured proceeds.
+    /// 
+    /// Infos from:
+    /// https://developer-docs.amazon.com/sp-api/docs/orders-api-migration-guide
+    /// https://developer-docs.amazon.com/sp-api/reference/searchorders
+    /// https://developer-docs.amazon.com/sp-api/reference/getorder-3
+    /// + Some inspiration from the code of the Python Respository:
+    /// https://github.com/saleweaver/python-amazon-sp-api/tree/master
+    /// </summary>
     public class OrderService : RequestService
     {
         public OrderService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
@@ -17,263 +48,206 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        #region GetOrders
+        /* v2026-01-01 API */
 
-        public OrderList GetOrders(ParameterOrderList searchOrderList) =>
-            Task.Run(() => GetOrdersAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderList> GetOrdersAsync(ParameterOrderList searchOrderList, CancellationToken cancellationToken = default)
+        #region SearchOrders
+
+        /// <summary>
+        /// Synchronous wrapper for SearchOrdersAsync.
+        /// Replaces GetOrders from v0.
+        /// </summary>
+        public IList<Order20260101> SearchOrders(ParameterSearchOrders parameter) =>
+            Task.Run(() => SearchOrdersAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Returns orders that are created or updated during the specified time period.
+        /// Automatically handles pagination (respects MaxNumberOfPages if set).
+        /// 
+        /// Replaces GetOrdersAsync from v0.
+        /// Also replaces the need for separate GetOrderBuyerInfo/GetOrderAddress calls
+        /// when includedData contains BUYER/RECIPIENT.
+        /// </summary>
+        public async Task<IList<Order20260101>> SearchOrdersAsync(ParameterSearchOrders parameter, CancellationToken cancellationToken = default)
         {
+            var allOrders = new List<Order20260101>();
 
-            var orderList = new OrderList();
-
-            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
+            if (parameter.MarketplaceIds == null || parameter.MarketplaceIds.Count == 0)
             {
-                searchOrderList.MarketplaceIds = new List<string>();
-                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
+                parameter.MarketplaceIds = new List<string> { AmazonCredential.MarketPlace.ID };
             }
 
-            if (searchOrderList.IsNeedRestrictedDataToken && searchOrderList.RestrictedDataTokenRequest == null)
+            var queryParameters = parameter.getParameters();
+
+            await CreateAuthorizedRequestAsync(
+                OrdersApiUrls.SearchOrders,
+                RestSharp.Method.Get,
+                queryParameters,
+                cancellationToken: cancellationToken);
+
+
+            var response = await ExecuteRequestAsync<SearchOrdersResponse>(Utils.RateLimitType.Order20260101_SearchOrders, cancellationToken);
+
+            if (response?.Orders != null)
             {
-                var restrictedResource = new RestrictedResource();
-                restrictedResource.method = Method.GET.ToString();
-                restrictedResource.path = OrdersApiUrls.Orders;
-                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
+                allOrders.AddRange(response.Orders);
+            }
 
+            var paginationToken = response?.PaginationToken;
+            int pageCount = 1;
 
-                var createRDT = new CreateRestrictedDataTokenRequest()
+            if (parameter.MaxNumberOfPages.HasValue && parameter.MaxNumberOfPages.Value == 1)
+            {
+                // Caller only wants one page; return results as-is
+                return allOrders;
+            }
+
+            while (!string.IsNullOrEmpty(paginationToken))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var nextPageResponse = await SearchOrdersByPaginationTokenAsync(paginationToken, parameter, cancellationToken);
+
+                if (nextPageResponse?.Orders != null)
                 {
-                    restrictedResources = new List<RestrictedResource> { restrictedResource }
-                };
-                searchOrderList.RestrictedDataTokenRequest = createRDT;
-            }
+                    allOrders.AddRange(nextPageResponse.Orders);
+                }
 
-            var queryParameters = searchOrderList.getParameters();
+                paginationToken = nextPageResponse?.PaginationToken;
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders, cancellationToken);
-            var nextToken = response.Payload.NextToken;
-            orderList = response.Payload.Orders;
-            if (!string.IsNullOrWhiteSpace(response.Payload.LastUpdatedBefore))
-                orderList.LastUpdatedBefore = DateTime.Parse(response.Payload.LastUpdatedBefore);
-
-            int PageCount = 1;
-            if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
-            {
-                orderList.NextToken = nextToken;
-            }
-            else
-            {
-                while (!string.IsNullOrEmpty(nextToken))
+                if (parameter.MaxNumberOfPages.HasValue)
                 {
-                    var orderPayload = await GetGetOrdersByNextTokenAsync(nextToken, searchOrderList, cancellationToken);
-                    orderList.AddRange(orderPayload.Orders);
-                    nextToken = orderPayload.NextToken;
-
-                    if (searchOrderList.MaxNumberOfPages.HasValue)
-                    {
-                        PageCount++;
-                        if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
-                            break;
-                    }
+                    pageCount++;
+                    if (pageCount >= parameter.MaxNumberOfPages.Value)
+                        break;
                 }
             }
 
-            return orderList;
+            return allOrders;
         }
 
-        public OrdersList GetGetOrdersByNextToken(string nextToken, ParameterOrderList searchOrderList) =>
-            Task.Run(() => GetGetOrdersByNextTokenAsync(nextToken, searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList, CancellationToken cancellationToken = default)
-        {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
-            queryParameters.Add(new KeyValuePair<string, string>("MarketplaceIds", string.Join(",", searchOrderList.MarketplaceIds)));
+        /// <summary>
+        /// Synchronous wrapper for SearchOrdersPageAsync.
+        /// Returns a single page of results (no auto-pagination).
+        /// </summary>
+        public SearchOrdersResponse SearchOrdersPage(ParameterSearchOrders parameter) =>
+            Task.Run(() => SearchOrdersPageAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders, cancellationToken);
-            return response.Payload;
+        /// <summary>
+        /// Returns a single page of searchOrders results without automatic pagination.
+        /// Replaces GetOrdersListAsync from v0.
+        /// </summary>
+        public async Task<SearchOrdersResponse> SearchOrdersPageAsync(ParameterSearchOrders parameter, CancellationToken cancellationToken = default)
+        {
+            if (parameter.MarketplaceIds == null || parameter.MarketplaceIds.Count == 0)
+            {
+                parameter.MarketplaceIds = new List<string> { AmazonCredential.MarketPlace.ID };
+            }
+
+            var queryParameters = parameter.getParameters();
+
+            await CreateAuthorizedRequestAsync(
+                OrdersApiUrls.SearchOrders,
+                RestSharp.Method.Get,
+                queryParameters,
+                cancellationToken: cancellationToken);
+
+            return await ExecuteRequestAsync<SearchOrdersResponse>(Utils.RateLimitType.Order20260101_SearchOrders, cancellationToken);
         }
 
-        #endregion
-        #region GetOrders
-
-
-        public async Task<OrderList> GetOrdersAsync(ParameterOrderList searchOrderList)
+        /// <summary>
+        /// Fetches the next page of results using a pagination token.
+        /// Note: Pagination tokens expire after 24 hours in v2026-01-01.
+        /// </summary>
+        private async Task<SearchOrdersResponse> SearchOrdersByPaginationTokenAsync(string paginationToken, ParameterSearchOrders originalParameter, CancellationToken cancellationToken = default)
         {
-            var orderList = new OrderList();
-
-            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
+            var queryParameters = new List<KeyValuePair<string, string>>
             {
-                searchOrderList.MarketplaceIds = new List<string>();
-                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
-            }
-            var queryParameters = searchOrderList.getParameters();
-
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
-            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
-            var nextToken = response.Payload.NextToken;
-            orderList = response.Payload.Orders;
-            int PageCount = 1;
-            if (searchOrderList.MaxNumberOfPages.HasValue && searchOrderList.MaxNumberOfPages.Value == 1)
-            {
-                orderList.NextToken = nextToken;
-            }
-            else
-            {
-                while (!string.IsNullOrEmpty(nextToken))
-                {
-                    var orderPayload = GetGetOrdersByNextToken(nextToken, searchOrderList);
-                    orderList.AddRange(orderPayload.Orders);
-                    nextToken = orderPayload.NextToken;
-
-                    if (searchOrderList.MaxNumberOfPages.HasValue)
-                    {
-                        PageCount++;
-                        if (PageCount >= searchOrderList.MaxNumberOfPages.Value)
-                            break;
-                    }
-                }
-            }
-
-            return orderList;
-        }
-
-        public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
-        {
-            var parameterOrderList = new ParameterOrderList
-            {
-                MarketplaceIds = searchOrderList.MarketplaceIds,
-                NextToken = nextToken,
-                IsNeedRestrictedDataToken = searchOrderList.IsNeedRestrictedDataToken,
-                RestrictedDataTokenRequest = searchOrderList.RestrictedDataTokenRequest
+                new KeyValuePair<string, string>("paginationToken", paginationToken),
+                new KeyValuePair<string, string>("marketplaceIds", string.Join(",", originalParameter.MarketplaceIds))
             };
 
-            List<KeyValuePair<string, string>> queryParameters = parameterOrderList.getParameters();
+            await CreateAuthorizedRequestAsync(
+                OrdersApiUrls.SearchOrders,
+                RestSharp.Method.Get,
+                queryParameters,
+                cancellationToken: cancellationToken);
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: parameterOrderList);
-
-            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
-
-            return response.Payload;
-        }
-
-        public OrdersList GetOrdersList(ParameterOrderList searchOrderList) =>
-            Task.Run(() => GetOrdersListAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrdersList> GetOrdersListAsync(ParameterOrderList searchOrderList)
-        {
-            if (searchOrderList.MarketplaceIds == null || searchOrderList.MarketplaceIds.Count == 0)
-            {
-                searchOrderList.MarketplaceIds = new List<string>();
-                searchOrderList.MarketplaceIds.Add(AmazonCredential.MarketPlace.ID);
-            }
-            var queryParameters = searchOrderList.getParameters();
-
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: searchOrderList);
-            var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
-            return response.Payload;
+            return await ExecuteRequestAsync<SearchOrdersResponse>(Utils.RateLimitType.Order20260101_SearchOrders, cancellationToken);
         }
 
         #endregion
-        public Order GetOrder(ParameterGetOrder parameter) =>
+
+        #region GetOrder
+
+        /// <summary>
+        /// Synchronous wrapper for GetOrderAsync.
+        /// </summary>
+        public Order20260101 GetOrder(ParameterGetOrder20260101 parameter) =>
             Task.Run(() => GetOrderAsync(parameter)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<Order> GetOrderAsync(ParameterGetOrder parameter, CancellationToken cancellationToken = default)
+
+        /// <summary>
+        /// Returns detailed order information for the specified order ID.
+        /// 
+        /// Replaces the following v0 operations (consolidated into one call):
+        /// - GetOrder
+        /// - GetOrderItems (items are always included)
+        /// - GetOrderBuyerInfo (use includedData=BUYER)
+        /// - GetOrderAddress (use includedData=RECIPIENT)
+        /// - GetOrderItemsBuyerInfo (use includedData=BUYER)
+        /// 
+        /// No RDT required for PII access. Use appropriate application roles instead.
+        /// </summary>
+        public async Task<Order20260101> GetOrderAsync(ParameterGetOrder20260101 parameter, CancellationToken cancellationToken = default)
         {
-            if (parameter.IsNeedRestrictedDataToken && parameter.RestrictedDataTokenRequest == null)
+            var queryParameters = parameter.getParameters();
+
+            await CreateAuthorizedRequestAsync(
+                OrdersApiUrls.GetOrder(parameter.OrderId),
+                RestSharp.Method.Get,
+                queryParameters,
+                cancellationToken: cancellationToken);
+
+            var response = await ExecuteRequestAsync<GetOrderResponse20260101>(Utils.RateLimitType.Order20260101_GetOrder, cancellationToken);
+
+            return response?.Order;
+        }
+
+        /// <summary>
+        /// Synchronous wrapper for GetOrderFullAsync.
+        /// </summary>
+        public Order20260101 GetOrderFull(string orderId) =>
+            Task.Run(() => GetOrderFullAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Convenience method: GetOrder with all available data included.
+        /// Equivalent to calling getOrder with includedData=BUYER,RECIPIENT,FULFILLMENT,PROCEEDS,EXPENSE,PROMOTION,CANCELLATION,PACKAGES
+        /// </summary>
+        public async Task<Order20260101> GetOrderFullAsync(string orderId, CancellationToken cancellationToken = default)
+        {
+            var parameter = new ParameterGetOrder20260101
             {
-                var restrictedResource = new RestrictedResource();
-                restrictedResource.method = Method.GET.ToString();
-                restrictedResource.path = OrdersApiUrls.Order(parameter.OrderId);
-                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
-
-
-                var createRDT = new CreateRestrictedDataTokenRequest()
+                OrderId = orderId,
+                IncludedData = new List<AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101>
                 {
-                    restrictedResources = new List<RestrictedResource> { restrictedResource }
-                };
-                parameter.RestrictedDataTokenRequest = createRDT;
-            }
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.BUYER,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.RECIPIENT,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.FULFILLMENT,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.PROCEEDS,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.EXPENSE,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.PROMOTION,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.CANCELLATION,
+                    AmazonSpApiSDK.Models.Orders20260101.IncludedData20260101.PACKAGES
+                }
+            };
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.Order(parameter.OrderId), RestSharp.Method.Get, parameter: parameter, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderResponse>(Utils.RateLimitType.Order_GetOrder, cancellationToken);
-            if (response != null && response.Payload != null)
-                return response.Payload;
-            else return null;
-        }
-        public OrderItemList GetOrderItems(string orderId, IParameterBasedPII parameterBasedPII = null) =>
-            Task.Run(() => GetOrderItemsAsync(orderId, parameterBasedPII)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderItemList> GetOrderItemsAsync(string orderId, IParameterBasedPII ParameterBasedPII = null, CancellationToken cancellationToken = default)
-        {
-            var orderItemList = new OrderItemList();
-
-            if (ParameterBasedPII != null && ParameterBasedPII.IsNeedRestrictedDataToken && ParameterBasedPII.RestrictedDataTokenRequest == null)
-            {
-                var restrictedResource = new RestrictedResource();
-                restrictedResource.method = Method.GET.ToString();
-                restrictedResource.path = OrdersApiUrls.OrderItems(orderId);
-                restrictedResource.dataElements = new List<string> { "buyerInfo", "shippingAddress" };
-
-                var createRDT = new CreateRestrictedDataTokenRequest()
-                {
-                    restrictedResources = new List<RestrictedResource> { restrictedResource }
-                };
-                ParameterBasedPII.RestrictedDataTokenRequest = createRDT;
-            }
-
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.Get, parameter: ParameterBasedPII, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems, cancellationToken);
-            var nextToken = response.Payload.NextToken;
-            orderItemList.AddRange(response.Payload.OrderItems);
-            while (!string.IsNullOrEmpty(nextToken))
-            {
-                var orderItemPayload = await GetOrderItemsNextTokenAsync(orderId, nextToken, cancellationToken);
-                orderItemList.AddRange(orderItemPayload.OrderItems);
-                nextToken = orderItemPayload.NextToken;
-
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-            return orderItemList;
+            return await GetOrderAsync(parameter, cancellationToken);
         }
 
-        public OrderItemsList GetOrderItemsNextToken(string orderId, string nextToken) =>
-            Task.Run(() => GetOrderItemsNextTokenAsync(orderId, nextToken)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderItemsList> GetOrderItemsNextTokenAsync(string orderId, string nextToken, CancellationToken cancellationToken = default)
-        {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
-            queryParameters.Add(new KeyValuePair<string, string>("NextToken", nextToken));
+        #endregion
 
+        /* v0 API*/
 
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItems(orderId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderItemsResponse>(Utils.RateLimitType.Order_GetOrderItems, cancellationToken);
-            return response.Payload;
-        }
-
-        public OrderBuyerInfo GetOrderBuyerInfo(string orderId, List<KeyValuePair<string, string>> queryParameters = null) =>
-            Task.Run(() => GetOrderBuyerInfoAsync(orderId, queryParameters)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderBuyerInfo> GetOrderBuyerInfoAsync(string orderId, List<KeyValuePair<string, string>> queryParameters = null, CancellationToken cancellationToken = default)
-        {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderBuyerInfo(orderId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderBuyerInfo, cancellationToken);
-            return response.Payload;
-        }
-
-        public OrderItemsBuyerInfoList GetOrderItemsBuyerInfo(string orderId) =>
-            Task.Run(() => GetOrderItemsBuyerInfoAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderItemsBuyerInfoList> GetOrderItemsBuyerInfoAsync(string orderId, CancellationToken cancellationToken = default)
-        {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderItemsBuyerInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderItemsBuyerInfoResponse>(Utils.RateLimitType.Order_GetOrderItemsBuyerInfo, cancellationToken);
-            return response.Payload;
-        }
-
-        public OrderAddress GetOrderAddress(string orderId) =>
-            Task.Run(() => GetOrderAddressAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<OrderAddress> GetOrderAddressAsync(string orderId, CancellationToken cancellationToken = default)
-        {
-            await CreateAuthorizedRequestAsync(OrdersApiUrls.OrderShipmentInfo(orderId), RestSharp.Method.Get, cancellationToken: cancellationToken);
-            var response = await ExecuteRequestAsync<GetOrderAddressResponse>(Utils.RateLimitType.Order_GetOrderAddress, cancellationToken);
-            return response.Payload;
-        }
-
+        #region UpdateShipmentStatus
         public bool UpdateShipmentStatus(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest) =>
             Task.Run(() => UpdateShipmentStatusAsync(orderId, updateShipmentStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> UpdateShipmentStatusAsync(string orderId, UpdateShipmentStatusRequest updateShipmentStatusRequest, CancellationToken cancellationToken = default)
@@ -283,8 +257,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
             return true;
         }
+        #endregion
 
-
+        #region GetOrderRegulatedInfo
         public OrderRegulatedInfo GetOrderRegulatedInfo(string orderId) =>
             Task.Run(() => GetOrderRegulatedInfoAsync(orderId)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderRegulatedInfo> GetOrderRegulatedInfoAsync(string orderId, CancellationToken cancellationToken = default)
@@ -293,7 +268,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrderRegulatedInfoResponse>(Utils.RateLimitType.Order_GetOrderRegulatedInfo, cancellationToken);
             return response.Payload;
         }
+        #endregion
 
+        #region UpdateVerificationStatus
         public bool UpdateVerificationStatus(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest) =>
             Task.Run(() => UpdateVerificationStatusAsync(orderId, updateVerificationStatusRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> UpdateVerificationStatusAsync(string orderId, UpdateVerificationStatusRequest updateVerificationStatusRequest, CancellationToken cancellationToken = default)
@@ -303,8 +280,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
             return true;
         }
+        #endregion
 
-
+        #region GetOrderItemsApprovals
         public OrderApprovalsResponse GetOrderItemsApprovals(ParameterGetOrderItemsApprovals parameterGetOrderItemsApprovals) =>
             Task.Run(() => GetOrderItemsApprovalsAsync(parameterGetOrderItemsApprovals)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrderApprovalsResponse> GetOrderItemsApprovalsAsync(ParameterGetOrderItemsApprovals parameterGetOrderItemsApprovals, CancellationToken cancellationToken = default)
@@ -315,8 +293,9 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<GetOrderApprovalsResponse>(Utils.RateLimitType.Order_GetOrderRegulatedInfo, cancellationToken);
             return response.Payload;
         }
+        #endregion
 
-
+        #region ConfirmShipment
         public bool ConfirmShipment(string orderId, ConfirmShipmentRequest confirmShipmentRequest) =>
             Task.Run(() => ConfirmShipmentAsync(orderId, confirmShipmentRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<bool> ConfirmShipmentAsync(string orderId, ConfirmShipmentRequest confirmShipmentRequest, CancellationToken cancellationToken = default)
@@ -326,5 +305,6 @@ namespace FikaAmazonAPI.Services
             var response = await ExecuteRequestAsync<NoContentResult>(Utils.RateLimitType.Order_UpdateShipmentStatus, cancellationToken);
             return true;
         }
+        #endregion
     }
 }

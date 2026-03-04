@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Parameter.Order
 {
+    [Obsolete("This class is deprecated. Please use ParameterSearchOrders instead.")]
     public class ParameterOrderList : ParameterBased, IParameterBasedPII
     {
         public ParameterOrderList()
