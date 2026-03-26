@@ -1,0 +1,61 @@
+name: Upstream Sync
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: read
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+          source-url: https://nuget.pkg.github.com/flipacross/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure upstream remote
+        run: |
+          git remote remove upstream 2>/dev/null || true
+          git remote add upstream https://github.com/abuzuhri/Amazon-SP-API-CSharp.git
+          git fetch upstream
+
+      - name: Merge upstream into sync branch
+        run: |
+          BRANCH_NAME="sync/upstream-$(date +%Y-%m-%d)"
+          git checkout -B "$BRANCH_NAME"
+          git merge upstream/main --no-edit
+          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
+
+      - name: Build merged branch
+        run: dotnet build ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj --configuration Release
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync upstream Amazon-SP-API-CSharp"
+          branch: ${{ env.BRANCH_NAME }}
+          base: main
+          title: "chore: sync upstream Amazon-SP-API-CSharp"
+          body: |
+            ## Summary
+            - merge latest changes from `abuzuhri/Amazon-SP-API-CSharp`
+            - preserve FlipAcross fork customizations
+            - validate merged branch with a Release build
+
+            ## Test plan
+            - [x] `dotnet build ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj --configuration Release`

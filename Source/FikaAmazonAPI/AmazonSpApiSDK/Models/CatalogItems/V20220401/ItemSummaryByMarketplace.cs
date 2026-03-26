@@ -87,11 +87,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="style">Name of the style associated with an Amazon catalog item.</param>
         /// <param name="websiteDisplayGroup">Name of the website display group associated with an Amazon catalog item.</param>
         /// <param name="contributors">Names of the contributors associated with an Amazon catalog item.</param>
+        /// <param name="adultProduct">Adult product flag associated with an Amazon catalog item.</param>
         public ItemSummaryByMarketplace(string marketplaceId = default, string brand = default, ItemBrowseClassification browseClassification = default,
             string color = default, ItemClassificationEnum? itemClassification = default, string itemName = default, string manufacturer = default,
             string modelNumber = default, int? packageQuantity = default, string partNumber = default, DateTime? releaseDate = default,
             string size = default, string style = default, string websiteDisplayGroup = default, string websiteDisplayGroupName = default,
-            ItemContributors contributors = default)
+            ItemContributors contributors = default, bool adultProduct = default)
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
@@ -116,6 +117,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             this.Style = style;
             this.WebsiteDisplayGroup = websiteDisplayGroup;
             this.WebsiteDisplayGroupName = websiteDisplayGroupName;
+            this.AdultProduct = adultProduct;
             this.Contributors = contributors; 
         }
 
@@ -154,6 +156,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <value>Name, or title, associated with an Amazon catalog item.</value>
         [DataMember(Name = "itemName", EmitDefaultValue = false)]
         public string ItemName { get; set; }
+
+        /// <summary>
+        /// Adult product flag associated with an Amazon catalog item.
+        /// </summary>
+        /// <value>Adult product flag associated with an Amazon catalog item.</value>
+        [DataMember(Name = "adultProduct", EmitDefaultValue = false)]
+        public bool AdultProduct { get; set; }
 
         /// <summary>
         /// Name of the manufacturer associated with an Amazon catalog item.
@@ -239,6 +248,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             sb.Append("  Color: ").Append(Color).Append("\n");
             sb.Append("  ItemClassification: ").Append(ItemClassification).Append("\n");
             sb.Append("  ItemName: ").Append(ItemName).Append("\n");
+            sb.Append("  AdultProduct: ").Append(AdultProduct).Append("\n");
             sb.Append("  Manufacturer: ").Append(Manufacturer).Append("\n");
             sb.Append("  ModelNumber: ").Append(ModelNumber).Append("\n");
             sb.Append("  PackageQuantity: ").Append(PackageQuantity).Append("\n");
@@ -312,6 +322,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     this.ItemName.Equals(input.ItemName))
                 ) &&
                 (
+                    this.AdultProduct == input.AdultProduct
+                ) &&
+                (
                     this.Manufacturer == input.Manufacturer ||
                     (this.Manufacturer != null &&
                     this.Manufacturer.Equals(input.Manufacturer))
@@ -374,6 +387,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     hashCode = hashCode * 59 + this.ItemClassification.GetHashCode();
                 if (this.ItemName != null)
                     hashCode = hashCode * 59 + this.ItemName.GetHashCode();
+                hashCode = hashCode * 59 + this.AdultProduct.GetHashCode();
                 if (this.Manufacturer != null)
                     hashCode = hashCode * 59 + this.Manufacturer.GetHashCode();
                 if (this.ModelNumber != null)

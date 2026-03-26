@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Feeds;
 using FikaAmazonAPI.ConstructFeed;
 using FikaAmazonAPI.ConstructFeed.Messages;
@@ -273,6 +273,12 @@ namespace FikaAmazonAPI.Services
 
         private async Task<string> PostFileDataAsync(string destinationUrl, string contentOrFilePath, ContentType contentType = ContentType.XML, ContentFormate contentFormate = ContentFormate.AutoDetect, CancellationToken cancellationToken = default)
         {
+            if (contentFormate == ContentFormate.File ||
+                (contentFormate == ContentFormate.AutoDetect && IsPathRooted(contentOrFilePath)))
+            {
+                PathValidator.EnsureSafePath(contentOrFilePath, nameof(contentOrFilePath));
+            }
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
 
             byte[] bytes = null;
@@ -321,7 +327,7 @@ namespace FikaAmazonAPI.Services
             return null;
         }
 
-        private bool IsPathRooted(string content)
+        private static bool IsPathRooted(string content)
         {
             if (string.IsNullOrEmpty(content))
                 return false;
@@ -329,7 +335,7 @@ namespace FikaAmazonAPI.Services
             if (content.Length > 255 || content.Contains("\n"))
                 return false;
 
-            return true;
+            return Path.IsPathRooted(content);
         }
 
     }

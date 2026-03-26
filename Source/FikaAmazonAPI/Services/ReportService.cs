@@ -1,4 +1,4 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter;
@@ -317,6 +317,8 @@ namespace FikaAmazonAPI.Services
         public async Task SaveStreamToFileAsync(string fileFullPath, Stream stream, CancellationToken cancellationToken = default)
         {
             if (stream.Length == 0) return;
+
+            PathValidator.EnsureSafePath(fileFullPath, nameof(fileFullPath));
 
             // Create a FileStream object to write a stream to a file
             using (FileStream fileStream = System.IO.File.Create(fileFullPath, (int)stream.Length))

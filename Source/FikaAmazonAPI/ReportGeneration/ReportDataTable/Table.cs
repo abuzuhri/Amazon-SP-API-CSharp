@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 {
@@ -50,6 +51,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         public static Table ConvertFromCSV(string path, char separator = '\t', Encoding encoding = default)
         {
+            PathValidator.EnsureSafePath(path, nameof(path));
             var lines = File.ReadAllLines(path, encoding ?? Encoding.UTF8);
 
             var table = new Table(lines.First().Split(separator));

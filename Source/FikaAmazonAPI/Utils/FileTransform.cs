@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
@@ -35,12 +35,14 @@ namespace FikaAmazonAPI.Utils
 
         public static string Decompress(string fileName)
         {
+            PathValidator.EnsureSafePath(fileName, nameof(fileName));
             FileInfo fileInfo = new FileInfo(fileName);
 
             using (FileStream originalFileStream = fileInfo.OpenRead())
             {
                 string currentFileName = fileInfo.FullName;
                 string newFileName = currentFileName.Remove(currentFileName.Length - fileInfo.Extension.Length);
+                PathValidator.EnsureSafePath(newFileName, nameof(newFileName));
 
                 using (FileStream decompressedFileStream = File.Create(newFileName))
                 {

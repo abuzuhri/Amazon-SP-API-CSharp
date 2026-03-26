@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
@@ -10,8 +10,7 @@ namespace FikaAmazonAPI.Utils
     {
         public static string GetMD5HashFromFile(string filepath)
         {
-            if (filepath == null)
-                throw new ArgumentNullException("filepath");
+            PathValidator.EnsureSafePath(filepath, nameof(filepath));
             if (File.Exists(filepath) == false)
                 throw new InvalidOperationException("file '" + filepath + "' doesn't exist");
 

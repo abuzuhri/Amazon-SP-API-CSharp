@@ -1,5 +1,4 @@
-name: Release
-
+name: Publish Package
 
 on:
   push:
@@ -8,20 +7,27 @@ on:
     - 'v*.*.*-rc*'
     - '[0-9]+.[0-9]+.[0-9]+'
     - '[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
-    
-    
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v4
 
     - name: Install .NET
-      uses: actions/setup-dotnet@v1.9.0
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 10.0.x
+        source-url: https://nuget.pkg.github.com/flipacross/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Restore dependencies
       run: dotnet restore
@@ -30,32 +36,18 @@ jobs:
       id: build-project
       run: dotnet build ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj --configuration Release --no-restore
     
-    
     - name: Pack
-      id: pack-prohject
+      id: pack-project
       run: |
-        dotnet pack ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj  --configuration Release
+        dotnet pack ./Source/FikaAmazonAPI/FikaAmazonAPI.csproj --configuration Release --no-build --output ./artifacts
 
-    - name: PushNuget
-      run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
+    - name: Push package to GitHub Packages
+      run: dotnet nuget push "./artifacts/*.nupkg" --source "https://nuget.pkg.github.com/flipacross/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
   
-    - name: Get tag
-      id: tag
-      uses: dawidd6/action-get-tag@v1
-
-
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
       env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_AMAZON_SP_API }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          tag_name: ${{steps.tag.outputs.tag}}
-          release_name: Release ${{steps.tag.outputs.tag}}
-          body: TODO
-          draft: false
-          prerelease: false
-          
-        
-        
-            
+          files: ./artifacts/*.nupkg
