@@ -27,8 +27,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="pointsMonetaryValue">An amount of money, including units in the form of currency.</param>
         public PointsGranted(int? pointsNumber, Money pointsMonetaryValue)
         {
-            PointsNumber = pointsNumber;
-            PointsMonetaryValue = pointsMonetaryValue;
+            this.PointsNumber = pointsNumber;
+            this.PointsMonetaryValue = pointsMonetaryValue;
         }
 
         /// <summary>

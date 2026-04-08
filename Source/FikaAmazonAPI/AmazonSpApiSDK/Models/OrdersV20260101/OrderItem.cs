@@ -46,36 +46,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                          Cancellation cancellation,
                          OrderItemFulfillment fulfillment)
         {
-            // to ensure "orderItemId" is required (not null)
-            if (orderItemId == null)
-            {
-                throw new InvalidDataException("orderItemId is a required property for OrderItem and cannot be null");
-            }
-            else
-            {
-                this.OrderItemId = orderItemId;
-            }
-
-            // to ensure "quantityOrdered" is required (not null)
-            if (quantityOrdered == null)
-            {
-                throw new InvalidDataException("quantityOrdered is a required property for OrderItem and cannot be null");
-            }
-            else
-            {
-                this.QuantityOrdered = quantityOrdered;
-            }
-
-            // to ensure "product" is required (not null)
-            if (product == null)
-            {
-                throw new InvalidDataException("product is a required property for OrderItem and cannot be null");
-            }
-            else
-            {
-                this.Product = product;
-            }
-
+            this.OrderItemId = orderItemId;
+            this.QuantityOrdered = quantityOrdered;
+            this.Product = product;
             this.Measurement = measurement;
             this.Programs = programs;
             this.Proceeds = proceeds;

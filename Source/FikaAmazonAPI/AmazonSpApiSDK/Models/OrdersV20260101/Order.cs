@@ -51,56 +51,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                      List<OrderItem> orderItems,
                      List<Package> packages)
         {
-            // to ensure "orderId" is required (not null)
-            if (orderId == null)
-            {
-                throw new InvalidDataException("orderId is a required property for Order and cannot be null");
-            }
-            else
-            {
-                this.OrderId = orderId;
-            }
 
-            // to ensure "createdTime" is required (not null)
-            if (createdTime == null)
-            {
-                throw new InvalidDataException("createdTime is a required property for Order and cannot be null");
-            }
-            else
-            {
-                this.CreatedTime = createdTime;
-            }
-
-            // to ensure "lastUpdatedTime" is required (not null)
-            if (lastUpdatedTime == null)
-            {
-                throw new InvalidDataException("lastUpdatedTime is a required property for Order and cannot be null");
-            }
-            else
-            {
-                this.LastUpdatedTime = lastUpdatedTime;
-            }
-
-            // to ensure "salesChannel" is required (not null)
-            if (salesChannel == null)
-            {
-                throw new InvalidDataException("salesChannel is a required property for Order and cannot be null");
-            }
-            else
-            {
-                this.SalesChannel = salesChannel;
-            }
-
-            // to ensure "orderItems" is required (not null)
-            if (orderItems == null)
-            {
-                throw new InvalidDataException("orderItems is a required property for Order and cannot be null");
-            }
-            else
-            {
-                this.OrderItems = orderItems;
-            }
-
+            this.OrderId = orderId;
+            this.CreatedTime = createdTime;
+            this.LastUpdatedTime = lastUpdatedTime;
+            this.SalesChannel = salesChannel;
+            this.OrderItems = orderItems;
             this.OrderAliases = orderAliases;
             this.Programs = programs;
             this.AssociatedOrders = associatedOrders;

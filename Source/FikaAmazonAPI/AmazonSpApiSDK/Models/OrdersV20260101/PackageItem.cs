@@ -34,26 +34,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                            int quantity,
                            List<string> transparencyCodes)
         {
-            // to ensure "orderItemId" is required (not null)
-            if (orderItemId == null)
-            {
-                throw new InvalidDataException("orderItemId is a required property for PackageItem and cannot be null");
-            }
-            else
-            {
-                this.OrderItemId = orderItemId;
-            }
-
-            // to ensure "quantity" is required (not null)
-            if (quantity == null)
-            {
-                throw new InvalidDataException("quantity is a required property for PackageItem and cannot be null");
-            }
-            else
-            {
-                this.Quantity = quantity;
-            }
-
+            this.OrderItemId = orderItemId;
+            this.Quantity = quantity;
             this.TransparencyCodes = transparencyCodes;
         }
 

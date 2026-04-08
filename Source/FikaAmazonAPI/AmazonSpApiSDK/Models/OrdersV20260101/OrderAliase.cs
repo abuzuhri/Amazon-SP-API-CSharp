@@ -26,16 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="aliasType">The kind of alternative identifier this represents. (required)</param>
         public OrderAliase(string aliasId, AliasTypeEnum aliasType)
         {
-            // to ensure "aliasId" is required (not null)
-            if (aliasId == null)
-            {
-                throw new InvalidDataException("aliasId is a required property for OrderAliase and cannot be null");
-            }
-            else
-            {
-                this.AliasId = aliasId;
-            }
-
+            this.AliasId = aliasId;
             this.AliasType = aliasType;
         }
 

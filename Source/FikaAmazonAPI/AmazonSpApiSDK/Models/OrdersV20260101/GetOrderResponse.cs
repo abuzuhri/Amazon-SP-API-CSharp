@@ -25,15 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="order">Comprehensive information about a customer order. (required)</param>
         public GetOrderResponse(Order order)
         {
-            // to ensure "order" is required (not null)
-            if (order == null)
-            {
-                throw new ArgumentNullException("order is a required property for GetOrderResponse and cannot be null");
-            }
-            else 
-            {
-                this.Order = order;
-            }
+            this.Order = order;
         }
 
         /// <summary>

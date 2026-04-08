@@ -44,16 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                          Address shipFromAddress,
                          List<PackageItem> packageItems)
         {
-            // to ensure "packageReferenceId" is required (not null)
-            if (packageReferenceId == null)
-            {
-                throw new InvalidDataException("packageReferenceId is a required property for Package and cannot be null");
-            }
-            else
-            {
-                this.PackageReferenceId = packageReferenceId;
-            }
-
+            this.PackageReferenceId = packageReferenceId;
             this.CreatedTime = createdTime;
             this.PackageStatus = packageStatus;
             this.Carrier = carrier;

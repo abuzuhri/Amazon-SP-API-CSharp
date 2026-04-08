@@ -29,16 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                             string marketplaceId,
                             string marketplaceName)
         {
-            // to ensure "channelName" is required (not null)
-            if (channelName == null)
-            {
-                throw new InvalidDataException("channelName is a required property for SalesChannel and cannot be null");
-            }
-            else
-            {
-                this.ChannelName = channelName;
-            }
-
+            this.ChannelName = channelName;
             this.MarketplaceId = marketplaceId;
             this.MarketplaceName = marketplaceName;
         }

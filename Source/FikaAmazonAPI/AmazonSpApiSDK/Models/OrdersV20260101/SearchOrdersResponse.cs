@@ -31,16 +31,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
                                     DateTime? lastUpdatedBefore,
                                     DateTime? createdBefore)
         {
-            // to ensure "orders" is required (not null)
-            if (orders == null)
-            {
-                throw new ArgumentNullException("orders is a required property for SearchOrdersResponse and cannot be null");
-            }
-            else 
-            {
-                this.Orders = orders;
-            }
-
+            this.Orders = orders;
             this.Pagination = pagination;
             this.LastUpdatedBefore = lastUpdatedBefore;
             this.CreatedBefore = createdBefore;

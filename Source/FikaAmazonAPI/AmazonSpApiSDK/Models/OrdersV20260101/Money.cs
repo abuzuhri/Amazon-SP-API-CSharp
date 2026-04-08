@@ -22,16 +22,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         public Money(decimal amount, string currencyCode)
         {
             this.Amount = amount;
-
-            //ensure "currencyCode" is required (not null)
-            if (currencyCode == null)
-            {
-                throw new ArgumentNullException("currencyCode is a required property for Money and cannot be null");
-            }
-            else
-            {
-                this.CurrencyCode = currencyCode;
-            }
+            this.CurrencyCode = currencyCode;
         }
 
         /// <summary>
