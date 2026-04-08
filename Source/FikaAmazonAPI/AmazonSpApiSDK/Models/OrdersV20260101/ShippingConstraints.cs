@@ -30,11 +30,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="signatureConfirmation">Classification of the enforcement level required for shipping and delivery constraints.</param>
         /// <param name="recipientIdentityVerification">Classification of the enforcement level required for shipping and delivery constraints.</param>
         /// <param name="recipientAgeVerification">Classification of the enforcement level required for shipping and delivery constraints.</param>
-        public ShippingConstraints(EnforcementLevelEnum? palletDelivery = default,
-                                   EnforcementLevelEnum? cashOnDelivery = default,
-                                   EnforcementLevelEnum? signatureConfirmation = default,
-                                   EnforcementLevelEnum? recipientIdentityVerification = default,
-                                   EnforcementLevelEnum? recipientAgeVerification = default)
+        public ShippingConstraints(EnforcementLevelEnum? palletDelivery,
+                                   EnforcementLevelEnum? cashOnDelivery,
+                                   EnforcementLevelEnum? signatureConfirmation,
+                                   EnforcementLevelEnum? recipientIdentityVerification,
+                                   EnforcementLevelEnum? recipientAgeVerification)
         {
             this.PalletDelivery = palletDelivery;
             this.CashOnDelivery = cashOnDelivery;
@@ -107,11 +107,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as ShippingConstraints);
+            return this.Equals(obj as ShippingConstraints);
         }
 
         /// <summary>

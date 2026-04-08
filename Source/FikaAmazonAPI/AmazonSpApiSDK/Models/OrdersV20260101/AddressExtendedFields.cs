@@ -25,10 +25,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="streetNumber">The house, building, or property number associated with the location's street address.</param>
         /// <param name="complement">The floor number / unit number.</param>
         /// <param name="neighborhood">The neighborhood. This value is only used in some countries (such as Brazil).</param>
-        public AddressExtendedFields(string streetName = default,
-                                     string streetNumber = default,
-                                     string complement = default,
-                                     string neighborhood = default)
+        public AddressExtendedFields(string streetName,
+                                     string streetNumber,
+                                     string complement,
+                                     string neighborhood)
         {
             this.StreetName = streetName;
             this.StreetNumber = streetNumber;
@@ -92,11 +92,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as AddressExtendedFields);
+            return this.Equals(obj as AddressExtendedFields);
         }
 
         /// <summary>

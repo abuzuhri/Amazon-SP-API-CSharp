@@ -30,9 +30,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="orderItemId">Unique identifier of the order item included in this package. (required)</param>
         /// <param name="quantity">Number of units of this item included in the package shipment. (required)</param>
         /// <param name="transparencyCodes">The transparency codes associated with this item for product authentication.</param>
-        public PackageItem(string orderItemId = default,
-                           int quantity = default,
-                           List<string> transparencyCodes = default)
+        public PackageItem(string orderItemId,
+                           int quantity,
+                           List<string> transparencyCodes)
         {
             // to ensure "orderItemId" is required (not null)
             if (orderItemId == null)
@@ -105,11 +105,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as PackageItem);
+            return this.Equals(obj as PackageItem);
         }
 
         /// <summary>

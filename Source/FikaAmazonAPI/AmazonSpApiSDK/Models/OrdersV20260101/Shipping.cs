@@ -29,9 +29,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="shippingConstraints">Special shipping requirements and restrictions that must be observed when shipping an order item.</param>
         /// <param name="internationalShipping">Additional requirements needed for cross-border shipping of an order item.</param>
 
-        public Shipping(DeliveryWindow scheduledDeliveryWindow = default,
-                        ShippingConstraints shippingConstraints = default,
-                        InternationalShipping internationalShipping = default)
+        public Shipping(DeliveryWindow scheduledDeliveryWindow,
+                        ShippingConstraints shippingConstraints,
+                        InternationalShipping internationalShipping)
         {
             this.ScheduledDeliveryWindow = scheduledDeliveryWindow;
             this.ShippingConstraints = shippingConstraints;
@@ -87,11 +87,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Shipping);
+            return this.Equals(obj as Shipping);
         }
 
         /// <summary>

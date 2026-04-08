@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Picking" /> class.
         /// </summary>
         /// <param name="substitutionPreference">Substitution preference for an order item when it becomes unavailable during fulfillment.</param>
-        public Picking(SubstitutionPreference substitutionPreference = default)
+        public Picking(SubstitutionPreference substitutionPreference)
         {
             this.SubstitutionPreference = substitutionPreference;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Picking);
+            return this.Equals(obj as Picking);
         }
 
         /// <summary>

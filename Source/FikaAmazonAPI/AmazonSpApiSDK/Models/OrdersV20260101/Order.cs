@@ -19,7 +19,6 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Initializes a new instance of the <see cref="Order" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
         public Order() { }
 
         /// <summary>
@@ -38,19 +37,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="fulfillment">Information about how the order is being processed, packed, and shipped to the customer.</param>
         /// <param name="orderItems">The list of all order items included in this order. (required)</param>
         /// <param name="packages">Shipping packages created for this order, including tracking information. Note: Only available for merchant-fulfilled (FBM) orders.</param>
-        public Order(string orderId = default,
-                     List<OrderAliase> orderAliases = default,
-                     DateTime createdTime = default,
-                     DateTime lastUpdatedTime = default,
-                     List<ProgramEnum> programs = default,
-                     List<AssociatedOrder> associatedOrders = default,
-                     SalesChannel salesChannel = default,
-                     Buyer buyer = default,
-                     Recipient recipient = default,
-                     OrderProceeds proceeds = default,
-                     OrderFulfillment fulfillment = default,
-                     List<OrderItem> orderItems = default,
-                     List<Package> packages = default)
+        public Order(string orderId,
+                     List<OrderAliase> orderAliases,
+                     DateTime createdTime,
+                     DateTime lastUpdatedTime,
+                     List<ProgramEnum> programs,
+                     List<AssociatedOrder> associatedOrders,
+                     SalesChannel salesChannel,
+                     Buyer buyer,
+                     Recipient recipient,
+                     OrderProceeds proceeds,
+                     OrderFulfillment fulfillment,
+                     List<OrderItem> orderItems,
+                     List<Package> packages)
         {
             // to ensure "orderId" is required (not null)
             if (orderId == null)
@@ -241,11 +240,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return Equals(input as Order);
+            return Equals(obj as Order);
         }
 
         /// <summary>

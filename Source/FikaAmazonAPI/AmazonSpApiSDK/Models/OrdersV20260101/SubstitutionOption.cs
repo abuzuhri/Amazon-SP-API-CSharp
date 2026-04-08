@@ -17,31 +17,29 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Initializes a new instance of the <see cref="SubstitutionOption" /> class.
         /// </summary>
+        public SubstitutionOption()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubstitutionOption" /> class.
+        /// </summary>
         /// <param name="asin">Amazon Standard Identification Number of the substitute product.</param>
         /// <param name="quantityOrdered">Number of units of the substitute item to be selected if substitution occurs.</param>
         /// <param name="sellerSku">The item's seller stock keeping unit (SKU).</param>
         /// <param name="title">Product name or title of the substitute item as displayed to customers.</param>
         /// <param name="measurement">Specifies the unit of measure and quantity for items that are sold by weight, volume, length, or other measurements rather than simple count.</param>
-        public SubstitutionOption(string asin = default,
-                                  int? quantityOrdered = default,
-                                  string sellerSku = default,
-                                  string title = default,
-                                  Measurement measurement = default)
+        public SubstitutionOption(string asin,
+                                  int? quantityOrdered,
+                                  string sellerSku,
+                                  string title,
+                                  Measurement measurement)
         {
             this.Asin = asin;
             this.QuantityOrdered = quantityOrdered;
             this.SellerSku = sellerSku;
             this.Title = title;
             this.Measurement = measurement;
-        }
-
-        public SubstitutionOption()
-        {
-            this.Asin = default;
-            this.QuantityOrdered = default;
-            this.SellerSku = default;
-            this.Title = default;
-            this.Measurement = default;
         }
 
         /// <summary>
@@ -108,11 +106,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as SubstitutionOption);
+            return this.Equals(obj as SubstitutionOption);
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="requester">Entity that initiated the cancellation request for this item.</param>
         /// <param name="cancelReason">Explanation provided for why the cancellation was requested.</param>
-        public CancellationRequest(CancellationRequesterEnum? requester = default, string cancelReason = default)
+        public CancellationRequest(CancellationRequesterEnum? requester, string cancelReason)
         {
             this.Requester = requester;
             this.CancelReason = cancelReason;
@@ -72,11 +72,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as CancellationRequest);
+            return this.Equals(obj as CancellationRequest);
         }
 
         /// <summary>

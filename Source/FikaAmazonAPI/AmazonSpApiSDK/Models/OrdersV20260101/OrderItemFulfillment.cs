@@ -29,11 +29,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="packing">Information related to the packaging process for an order item.</param>
         /// <param name="shipping">Information related to the shipping and delivery process for an order item.</param>
 
-        public OrderItemFulfillment(int? quantityFulfilled = default,
-                                    int? quantityUnfulfilled = default,
-                                    Picking picking = default,
-                                    Packing packing = default,
-                                    Shipping shipping = default)
+        public OrderItemFulfillment(int? quantityFulfilled,
+                                    int? quantityUnfulfilled,
+                                    Picking picking,
+                                    Packing packing,
+                                    Shipping shipping)
         {
             this.QuantityFulfilled = quantityFulfilled;
             this.QuantityUnfulfilled = quantityUnfulfilled;
@@ -107,11 +107,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderItemFulfillment);
+            return this.Equals(obj as OrderItemFulfillment);
         }
 
         /// <summary>

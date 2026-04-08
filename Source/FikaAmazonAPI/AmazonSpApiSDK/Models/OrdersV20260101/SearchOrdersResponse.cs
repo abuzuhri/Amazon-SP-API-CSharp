@@ -26,10 +26,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="pagination">Contains tokens to fetch from a certain page.</param>
         /// <param name="lastUpdatedBefore">Only orders updated before the specified time are returned. The date must be in ISO 8601 format.</param>
         /// <param name="createdBefore">Only orders placed before the specified time are returned. The date must be in ISO 8601 format.</param>
-        public SearchOrdersResponse(List<Order> orders = default,
-                                    Pagination pagination = default,
-                                    DateTime? lastUpdatedBefore = default,
-                                    DateTime? createdBefore = default)
+        public SearchOrdersResponse(List<Order> orders,
+                                    Pagination pagination,
+                                    DateTime? lastUpdatedBefore,
+                                    DateTime? createdBefore)
         {
             // to ensure "orders" is required (not null)
             if (orders == null)
@@ -99,11 +99,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return Equals(input as SearchOrdersResponse);
+            return Equals(obj as SearchOrdersResponse);
         }
 
         /// <summary>

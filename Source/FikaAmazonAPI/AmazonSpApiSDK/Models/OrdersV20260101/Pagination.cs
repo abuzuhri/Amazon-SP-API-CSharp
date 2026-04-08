@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Pagination" /> class.
         /// </summary>
         /// <param name="nextToken">A token that can be used to fetch the next page of results.</param>
-        public Pagination(string nextToken = default)
+        public Pagination(string nextToken)
         {
             NextToken = nextToken;
         }
@@ -63,11 +63,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return Equals(input as Pagination);
+            return Equals(obj as Pagination);
         }
 
         /// <summary>

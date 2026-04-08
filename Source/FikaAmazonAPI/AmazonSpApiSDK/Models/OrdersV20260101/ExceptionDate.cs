@@ -27,9 +27,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="exceptionDate">Specific calendar date when normal operating hours do not apply. In ISO 8601 format at day granularity.</param>
         /// <param name="exceptionDateType">Operational status of the business on the specified exception date.</param>
         /// <param name="timeWindows">Alternative operating hours that apply specifically to this exception date.</param>
-        public DeliveryExceptionDate(DateTime? exceptionDate = default,
-                                     ExceptionDateTypeEnum? exceptionDateType = default,
-                                     List<TimeWindow> timeWindows = default)
+        public DeliveryExceptionDate(DateTime? exceptionDate,
+                                     ExceptionDateTypeEnum? exceptionDateType,
+                                     List<TimeWindow> timeWindows)
         {
             this.ExceptionDate = exceptionDate;
             this.ExceptionDateType = exceptionDateType;
@@ -84,11 +84,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as DeliveryExceptionDate);
+            return this.Equals(obj as DeliveryExceptionDate);
         }
 
         /// <summary>

@@ -36,22 +36,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="phone">The contact phone number for delivery coordination and customer communication.</param>
         /// <param name="extendedFields">Additional address components that provide more detailed location information, helping with precise delivery routing.</param>
         /// <param name="addressType">The type of location.</param>
-        public Address(string name = default,
-                       string companyName = default,
-                       string addressLine1 = default,
-                       string addressLine2 = default,
-                       string addressLine3 = default,
-                       string city = default,
-                       string districtOrCounty = default,
-                       string stateOrRegion = default,
-                       string municipality = default,
-                       string postalCode = default,
-                       string countryCode = default,
-                       string phone = default,
-                       AddressExtendedFields extendedFields = default,
-                       AddressTypeEnum? addressType = default)
+        public Address(string name,
+                       string companyName,
+                       string addressLine1,
+                       string addressLine2,
+                       string addressLine3,
+                       string city,
+                       string districtOrCounty,
+                       string stateOrRegion,
+                       string municipality,
+                       string postalCode,
+                       string countryCode,
+                       string phone,
+                       AddressExtendedFields extendedFields,
+                       AddressTypeEnum? addressType)
         {
-
             this.Name = name;
             this.CompanyName = companyName;
             this.AddressLine1 = addressLine1;
@@ -205,11 +204,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Address);
+            return this.Equals(obj as Address);
         }
 
         /// <summary>

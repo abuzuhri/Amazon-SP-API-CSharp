@@ -25,8 +25,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="hour">The hour when the business opens or closes, in 24-hour format (0-23).</param>
         /// <param name="minute">The minute when the business opens or closes.</param>
-        public Time(int? hour = default,
-                    int? minute = default)
+        public Time(int? hour,
+                    int? minute)
         {
             this.Hour = hour;
             this.Minute = minute;
@@ -72,11 +72,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Time);
+            return this.Equals(obj as Time);
         }
 
         /// <summary>

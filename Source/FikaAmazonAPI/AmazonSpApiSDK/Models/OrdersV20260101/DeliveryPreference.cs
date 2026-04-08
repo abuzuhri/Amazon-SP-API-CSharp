@@ -28,10 +28,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="addressInstruction">Building instructions, nearby landmark, or navigation instructions.</param>
         /// <param name="deliveryTime">Customer-specified time preferences for when deliveries should be attempted at the destination address.</param>
         /// <param name="deliveryCapabilities">A list of miscellaneous delivery capabilities associated with the shipping address.</param>
-        public DeliveryPreference(string dropOffLocation = default,
-                                  string addressInstruction = default,
-                                  DeliveryTime deliveryTime = default,
-                                  List<object> deliveryCapabilities = default)
+        public DeliveryPreference(string dropOffLocation,
+                                  string addressInstruction,
+                                  DeliveryTime deliveryTime,
+                                  List<object> deliveryCapabilities)
         {
             this.DropOffLocation = dropOffLocation;
             this.AddressInstruction = addressInstruction;
@@ -95,11 +95,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as DeliveryPreference);
+            return this.Equals(obj as DeliveryPreference);
         }
 
         /// <summary>

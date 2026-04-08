@@ -25,8 +25,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="startTime">The time when the business opens.</param>
         /// <param name="endTime">The time when the business closes.</param>
-        public TimeWindow(Time startTime = default,
-                          Time endTime = default)
+        public TimeWindow(Time startTime,
+                          Time endTime)
         {
             this.StartTime = startTime;
             this.EndTime = endTime;
@@ -73,11 +73,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as TimeWindow);
+            return this.Equals(obj as TimeWindow);
         }
 
         /// <summary>

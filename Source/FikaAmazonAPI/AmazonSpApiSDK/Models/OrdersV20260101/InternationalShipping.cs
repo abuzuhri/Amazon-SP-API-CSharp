@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="InternationalShipping" /> class.
         /// </summary>
         /// <param name="iossNumber">Import One-Stop Shop registration number required for EU VAT compliance when shipping from outside the European Union. Sellers shipping to the EU from outside the EU must provide this IOSS number to their carrier when Amazon has collected the VAT on the sale.</param>
-        public InternationalShipping(string iossNumber = default)
+        public InternationalShipping(string iossNumber)
         {
             this.IossNumber = iossNumber;
         }
@@ -61,11 +61,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as InternationalShipping);
+            return this.Equals(obj as InternationalShipping);
         }
 
         /// <summary>

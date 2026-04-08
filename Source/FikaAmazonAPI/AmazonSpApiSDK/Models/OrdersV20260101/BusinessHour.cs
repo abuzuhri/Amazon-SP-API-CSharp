@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="dayOfWeek">Specific day of the week for which operating hours are being defined.</param>
         /// <param name="timeWindows">Collection of time windows during which the location is available for deliveries on the specified day.</param>
-        public BusinessHour(DayOfWeekEnum? dayOfWeek = default,
-                            List<TimeWindow> timeWindows = default)
+        public BusinessHour(DayOfWeekEnum? dayOfWeek,
+                            List<TimeWindow> timeWindows)
         {
             this.DayOfWeek = dayOfWeek;
             this.TimeWindows = timeWindows;
@@ -73,11 +73,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as BusinessHour);
+            return this.Equals(obj as BusinessHour);
         }
 
         /// <summary>

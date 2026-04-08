@@ -26,9 +26,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="conditionType">The primary condition category that broadly describes the item's state.</param>
         /// <param name="conditionSubtype">A more specific condition classification that provides additional detail about the item's quality within the main condition type.</param>
         /// <param name="conditionNote">Additional details provided by the seller to describe the specific condition of this particular item.</param>
-        public Condition(ConditionTypeEnum? conditionType = default,
-                         ConditionSubtypeEnum? conditionSubtype = default,
-                         string conditionNote = default)
+        public Condition(ConditionTypeEnum? conditionType,
+                         ConditionSubtypeEnum? conditionSubtype,
+                         string conditionNote)
         {
             this.ConditionType = conditionType;
             this.ConditionSubtype = conditionSubtype;
@@ -83,11 +83,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Condition);
+            return this.Equals(obj as Condition);
         }
 
         /// <summary>

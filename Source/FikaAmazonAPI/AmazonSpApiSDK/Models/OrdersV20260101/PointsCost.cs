@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="pointsGranted">Information about Amazon Points awarded with an item purchase.</param>
 
-        public PointsCost(PointsGranted pointsGranted = default)
+        public PointsCost(PointsGranted pointsGranted)
         {
             this.PointsGranted = pointsGranted;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as PointsCost);
+            return this.Equals(obj as PointsCost);
         }
 
         /// <summary>

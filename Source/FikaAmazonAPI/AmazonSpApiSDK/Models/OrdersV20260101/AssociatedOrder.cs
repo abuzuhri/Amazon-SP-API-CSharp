@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="orderId">The unique identifier of the related order that is associated with the current order.</param>
         /// <param name="associationType">The relationship between the current order and the associated order.</param>
-        public AssociatedOrder(string orderId = default, OrderAssociationTypeEnum? associationType = default)
+        public AssociatedOrder(string orderId, OrderAssociationTypeEnum? associationType)
         {
             this.OrderId = orderId;
             this.AssociationType = associationType;
@@ -71,11 +71,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as AssociatedOrder);
+            return this.Equals(obj as AssociatedOrder);
         }
 
         /// <summary>

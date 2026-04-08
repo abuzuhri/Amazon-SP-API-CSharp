@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Cancellation" /> class.
         /// </summary>
         /// <param name="cancellationRequest">Detailed information about a cancellation request submitted for a specific order item.</param>
-        public Cancellation(CancellationRequest cancellationRequest = default)
+        public Cancellation(CancellationRequest cancellationRequest)
         {
             this.CancellationRequest = cancellationRequest;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Cancellation);
+            return this.Equals(obj as Cancellation);
         }
 
         /// <summary>

@@ -24,26 +24,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="unit">The specific unit of measurement used to quantify this item. (required)</param>
         /// <param name="value">The numerical quantity or amount being measured in the specified unit. (required)</param>
-        public Measurement(UnitEnum unit = default, decimal value = default)
+        public Measurement(UnitEnum unit, decimal value)
         {
-            // to ensure "unit" is required (not null)
-            if (unit == null)
-            {
-                throw new InvalidDataException("unit is a required property for Measurement and cannot be null");
-            }
-            else
-            {
-                this.Unit = unit;
-            }
-            // to ensure "value" is required (not null)
-            if (value == null)
-            {
-                throw new InvalidDataException("value is a required property for Measurement and cannot be null");
-            }
-            else
-            {
-                this.Value = value;
-            }
+            this.Unit = unit;
+            this.Value = value;
         }
 
         /// <summary>
@@ -86,11 +70,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Measurement);
+            return this.Equals(obj as Measurement);
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="businessHours">Business hours when the business is open for deliveries.</param>
         /// <param name="exceptionDates">Specific dates within the next 30 days when normal business hours do not apply.</param>
-        public DeliveryTime(List<BusinessHour> businessHours = default,
-                            List<DeliveryExceptionDate> exceptionDates = default)
+        public DeliveryTime(List<BusinessHour> businessHours,
+                            List<DeliveryExceptionDate> exceptionDates)
         {
             this.BusinessHours = businessHours;
             this.ExceptionDates = exceptionDates;
@@ -74,11 +74,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as DeliveryTime);
+            return this.Equals(obj as DeliveryTime);
         }
 
         /// <summary>

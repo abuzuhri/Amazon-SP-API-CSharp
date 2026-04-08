@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Packing" /> class.
         /// </summary>
         /// <param name="giftOption">Gift wrapping and personalization options selected by the customer for an order item.</param>
-        public Packing(GiftOption giftOption = default)
+        public Packing(GiftOption giftOption)
         {
             this.GiftOption = giftOption;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Packing);
+            return this.Equals(obj as Packing);
         }
 
         /// <summary>

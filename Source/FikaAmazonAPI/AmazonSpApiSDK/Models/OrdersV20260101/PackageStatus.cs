@@ -27,8 +27,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="status">Primary status classification of the package in the shipping workflow. (required)</param>
         /// <param name="detailedStatus">Granular status information providing specific details about the package's current location and handling stage.</param>
 
-        public PackageStatus(PackageStatusEnum status = default,
-                             PackageDetailedStatusEnum? detailedStatus = default)
+        public PackageStatus(PackageStatusEnum status,
+                             PackageDetailedStatusEnum? detailedStatus)
         {
             this.Status = status;
             this.DetailedStatus = detailedStatus;
@@ -75,11 +75,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as PackageStatus);
+            return this.Equals(obj as PackageStatus);
         }
 
         /// <summary>

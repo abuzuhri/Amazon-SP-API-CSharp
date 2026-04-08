@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="proceedsTotal">An amount of money, including units in the form of currency.</param>
         /// <param name="breakdowns">The breakdown of proceeds.</param>
-        public OrderItemProceeds(Money proceedsTotal = default, List<OrderItemProceedsBreakdown> breakdowns = default)
+        public OrderItemProceeds(Money proceedsTotal, List<OrderItemProceedsBreakdown> breakdowns)
         {
             this.ProceedsTotal = proceedsTotal;
             this.Breakdowns = breakdowns;
@@ -72,11 +72,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderItemProceeds);
+            return this.Equals(obj as OrderItemProceeds);
         }
 
         /// <summary>

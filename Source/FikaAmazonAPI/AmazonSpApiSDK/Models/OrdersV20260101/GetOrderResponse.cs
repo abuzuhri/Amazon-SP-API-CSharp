@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="GetOrderResponse" /> class.
         /// </summary>
         /// <param name="order">Comprehensive information about a customer order. (required)</param>
-        public GetOrderResponse(Order order = default)
+        public GetOrderResponse(Order order)
         {
             // to ensure "order" is required (not null)
             if (order == null)
@@ -68,11 +68,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return Equals(input as GetOrderResponse);
+            return Equals(obj as GetOrderResponse);
         }
 
         /// <summary>

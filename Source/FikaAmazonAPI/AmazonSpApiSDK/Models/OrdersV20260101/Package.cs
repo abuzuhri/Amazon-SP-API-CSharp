@@ -34,15 +34,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="shipFromAddress">The physical address of the merchant.</param>
         /// <param name="packageItems">A list of all order items included in this specific package.</param>
 
-        public Package(string packageReferenceId = default,
-                         DateTime? createdTime = default,
-                         PackageStatus packageStatus = default,
-                         string carrier = default,
-                         DateTime? shipTime = default,
-                         string shippingService = default,
-                         string trackingNumber = default,
-                         Address shipFromAddress = default,
-                         List<PackageItem> packageItems = default)
+        public Package(string packageReferenceId,
+                         DateTime? createdTime,
+                         PackageStatus packageStatus,
+                         string carrier,
+                         DateTime? shipTime,
+                         string shippingService,
+                         string trackingNumber,
+                         Address shipFromAddress,
+                         List<PackageItem> packageItems)
         {
             // to ensure "packageReferenceId" is required (not null)
             if (packageReferenceId == null)
@@ -161,11 +161,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Package);
+            return this.Equals(obj as Package);
         }
 
         /// <summary>

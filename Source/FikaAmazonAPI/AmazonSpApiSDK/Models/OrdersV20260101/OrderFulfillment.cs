@@ -29,11 +29,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="shipByWindow">A time period with start and end boundaries.</param>
         /// <param name="deliverByWindow">A time period with start and end boundaries.</param>
 
-        public OrderFulfillment(FulfillmentStatusEnum fulfillmentStatus = default,
-                                FulfilledByEnum? fulfilledBy = default,
-                                FulfillmentServiceLevelEnum? fulfillmentServiceLevel = default,
-                                DeliveryWindow shipByWindow = default,
-                                DeliveryWindow deliverByWindow = default)
+        public OrderFulfillment(FulfillmentStatusEnum fulfillmentStatus,
+                                FulfilledByEnum? fulfilledBy,
+                                FulfillmentServiceLevelEnum? fulfillmentServiceLevel,
+                                DeliveryWindow shipByWindow,
+                                DeliveryWindow deliverByWindow)
         {
             this.FulfillmentStatus = fulfillmentStatus;
             this.FulfilledBy = fulfilledBy;
@@ -107,11 +107,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderFulfillment);
+            return this.Equals(obj as OrderFulfillment);
         }
 
         /// <summary>

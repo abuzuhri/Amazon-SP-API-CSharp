@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Expense" /> class.
         /// </summary>
         /// <param name="pointsCost">Information about Amazon Points granted with the purchase of an item, including both quantity and monetary equivalent value.</param>
-        public Expense(PointsCost pointsCost = default)
+        public Expense(PointsCost pointsCost)
         {
             this.PointsCost = pointsCost;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Expense);
+            return this.Equals(obj as Expense);
         }
 
         /// <summary>

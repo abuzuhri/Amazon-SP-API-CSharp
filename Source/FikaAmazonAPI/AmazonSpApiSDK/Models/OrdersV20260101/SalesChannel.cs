@@ -25,9 +25,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="channelName">The name of the sales platform or channel where the customer placed this order. (required)</param>
         /// <param name="marketplaceId">The unique identifier for the specific marketplace within the sales channel where this order was placed.</param>
         /// <param name="marketplaceName">The human-readable name of the marketplace where this order was placed.</param>
-        public SalesChannel(ChannelTypeEnum channelName = default,
-                            string marketplaceId = default,
-                            string marketplaceName = default)
+        public SalesChannel(ChannelTypeEnum channelName,
+                            string marketplaceId,
+                            string marketplaceName)
         {
             // to ensure "channelName" is required (not null)
             if (channelName == null)
@@ -92,11 +92,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as SalesChannel);
+            return this.Equals(obj as SalesChannel);
         }
 
         /// <summary>

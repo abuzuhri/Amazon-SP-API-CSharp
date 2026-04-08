@@ -35,16 +35,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="promotion">Details about any discounts, coupons, or promotional offers applied to this item.</param>
         /// <param name="cancellation">The cancellation information of the order item.</param>
         /// <param name="fulfillment">Information about how the order item should be processed, packed, and shipped to the customer.</param>
-        public OrderItem(string orderItemId = default,
-                         int quantityOrdered = default,
-                         Measurement measurement = default,
-                         List<OrderItemProgramEnum> programs = default,
-                         Product product = default,
-                         OrderItemProceeds proceeds = default,
-                         Expense expense = default,
-                         Promotion promotion = default,
-                         Cancellation cancellation = default,
-                         OrderItemFulfillment fulfillment = default)
+        public OrderItem(string orderItemId,
+                         int quantityOrdered,
+                         Measurement measurement,
+                         List<OrderItemProgramEnum> programs,
+                         Product product,
+                         OrderItemProceeds proceeds,
+                         Expense expense,
+                         Promotion promotion,
+                         Cancellation cancellation,
+                         OrderItemFulfillment fulfillment)
         {
             // to ensure "orderItemId" is required (not null)
             if (orderItemId == null)
@@ -190,11 +190,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderItem);
+            return this.Equals(obj as OrderItem);
         }
 
         /// <summary>

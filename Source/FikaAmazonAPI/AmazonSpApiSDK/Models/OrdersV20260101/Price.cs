@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="unitPrice">An amount of money, including units in the form of currency.</param>
         /// <param name="priceDesignation">Indicates that the selling price is a special price that is only available for Amazon Business orders. For more information about the Amazon Business Seller Program, refer to the Amazon Business website.</param>
-        public Price(Money unitPrice = default, PriceDesignationEnum? priceDesignation = default)
+        public Price(Money unitPrice, PriceDesignationEnum? priceDesignation)
         {
             this.UnitPrice = unitPrice;
             this.PriceDesignation = priceDesignation;
@@ -71,11 +71,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Price);
+            return this.Equals(obj as Price);
         }
 
         /// <summary>

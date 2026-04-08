@@ -26,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="giftMessage">Personal message from the buyer to be included with the gift-wrapped item.</param>
         /// <param name="giftWrapLevel">Type or quality level of gift wrapping service selected by the customer.</param>
-        public GiftOption(string giftMessage = default, string giftWrapLevel = default)
+        public GiftOption(string giftMessage, string giftWrapLevel)
         {
             this.GiftMessage = giftMessage;
             this.GiftWrapLevel = giftWrapLevel;
@@ -72,11 +72,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as GiftOption);
+            return this.Equals(obj as GiftOption);
         }
 
         /// <summary>

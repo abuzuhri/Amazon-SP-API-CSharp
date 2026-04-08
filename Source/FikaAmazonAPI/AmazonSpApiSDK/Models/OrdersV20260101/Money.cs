@@ -19,17 +19,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="amount">A decimal number with no loss of precision. Follows RFC 7159 for number representation. (required)</param>
         /// <param name="currencyCode">The three-letter currency code that identifies the currency type, following ISO 4217 international standards. (required)</param>
 
-        public Money(decimal amount = default, string currencyCode = default)
+        public Money(decimal amount, string currencyCode)
         {
-            //ensure "amount" is required (not null)
-            if (amount == null)
-            {
-                throw new ArgumentNullException("amount is a required property for Money and cannot be null");
-            }
-            else
-            {
-                this.Amount = amount;
-            }
+            this.Amount = amount;
 
             //ensure "currencyCode" is required (not null)
             if (currencyCode == null)
@@ -82,11 +74,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Money);
+            return this.Equals(obj as Money);
         }
 
         /// <summary>

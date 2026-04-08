@@ -25,10 +25,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="buyerEmail">The anonymized email address of the buyer. Note: Only available for merchant-fulfilled (FBM) orders.</param>
         /// <param name="buyerCompanyName">The name of the company or organization for a business order.</param>
         /// <param name="buyerPurchaseOrderNumber">The purchase order (PO) number entered by the buyer at checkout. Only returned for orders where the buyer entered a PO number at checkout.</param>
-        public Buyer(string buyerName = default,
-                     string buyerEmail = default,
-                     string buyerCompanyName = default,
-                     string buyerPurchaseOrderNumber = default)
+        public Buyer(string buyerName,
+                     string buyerEmail,
+                     string buyerCompanyName,
+                     string buyerPurchaseOrderNumber)
         {
             this.BuyerName = buyerName;
             this.BuyerEmail = buyerEmail;
@@ -92,11 +92,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Buyer);
+            return this.Equals(obj as Buyer);
         }
 
         /// <summary>

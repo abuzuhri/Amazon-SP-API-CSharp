@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="deliveryAddress">The physical address of the customer.</param>
         /// <param name="deliveryPreference">Contains all delivery instructions that the customer provides for the shipping address.</param>
-        public Recipient(Address deliveryAddress = default, DeliveryPreference deliveryPreference = default)
+        public Recipient(Address deliveryAddress, DeliveryPreference deliveryPreference)
         {
             this.DeliveryAddress = deliveryAddress;
             this.DeliveryPreference = deliveryPreference;
@@ -69,11 +69,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Recipient);
+            return this.Equals(obj as Recipient);
         }
 
         /// <summary>

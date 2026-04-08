@@ -29,13 +29,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="price">Pricing information for the order item.</param>
         /// <param name="serialNumbers">Unique serial numbers for products that require individual tracking, typically provided for FBA orders.</param>
         /// <param name="customization">Information about any personalization, customization, or special modifications applied to this order item.</param>
-        public Product(string asin = default,
-                       string title = default,
-                       string sellerSku = default,
-                       Condition condition = default,
-                       Price price = default,
-                       List<string> serialNumbers = default,
-                       OrderItemCustomization customization = default)
+        public Product(string asin,
+                       string title,
+                       string sellerSku,
+                       Condition condition,
+                       Price price,
+                       List<string> serialNumbers,
+                       OrderItemCustomization customization)
         {
             this.Asin = asin;
             this.Title = title;
@@ -127,11 +127,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Product);
+            return this.Equals(obj as Product);
         }
 
         /// <summary>

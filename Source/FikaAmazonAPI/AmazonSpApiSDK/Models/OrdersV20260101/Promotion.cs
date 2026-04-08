@@ -25,7 +25,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="Promotion" /> class.
         /// </summary>
         /// <param name="breakdowns">A list of promotions applied to the order item.</param>
-        public Promotion(List<PromotionBreakdown> breakdowns = default)
+        public Promotion(List<PromotionBreakdown> breakdowns)
         {
             this.Breakdowns = breakdowns;
         }
@@ -62,11 +62,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as Promotion);
+            return this.Equals(obj as Promotion);
         }
 
         /// <summary>

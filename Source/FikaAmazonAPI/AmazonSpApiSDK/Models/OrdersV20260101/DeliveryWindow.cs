@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="earliestDateTime">The beginning of the time period, in ISO 8601 format.</param>
         /// <param name="latestDateTime">The end of the time period, in ISO 8601 format.</param>
-        public DeliveryWindow(DateTime? earliestDateTime = default,
-                              DateTime? latestDateTime = default)
+        public DeliveryWindow(DateTime? earliestDateTime,
+                              DateTime? latestDateTime)
         {
             this.EarliestDateTime = earliestDateTime;
             this.LatestDateTime = latestDateTime;
@@ -74,11 +74,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as DeliveryWindow);
+            return this.Equals(obj as DeliveryWindow);
         }
 
         /// <summary>

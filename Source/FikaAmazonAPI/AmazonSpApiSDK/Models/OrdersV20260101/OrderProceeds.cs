@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// Initializes a new instance of the <see cref="OrderProceeds" /> class.
         /// </summary>
         /// <param name="grandTotal">An amount of money, including units in the form of currency.</param>
-        public OrderProceeds(Money grandTotal = default)
+        public OrderProceeds(Money grandTotal)
         {
             this.GrandTotal = grandTotal;
         }
@@ -61,11 +61,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderProceeds);
+            return this.Equals(obj as OrderProceeds);
         }
 
         /// <summary>

@@ -26,9 +26,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <param name="type">Category classification of the proceeds breakdown.</param>
         /// <param name="subtotal">An amount of money, including units in the form of currency.</param>
         /// <param name="detailedBreakdowns">Further granular breakdown of the subtotal.</param>
-        public OrderItemProceedsBreakdown(ProceedsBreakdownTypeEnum? type = default,
-                                          Money subtotal = default,
-                                          List<OrderItemProceedsDetailedBreakdown> detailedBreakdowns = default)
+        public OrderItemProceedsBreakdown(ProceedsBreakdownTypeEnum? type,
+                                          Money subtotal,
+                                          List<OrderItemProceedsDetailedBreakdown> detailedBreakdowns)
         {
             this.Type = type;
             this.Subtotal = subtotal;
@@ -83,11 +83,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderItemProceedsBreakdown);
+            return this.Equals(obj as OrderItemProceedsBreakdown);
         }
 
         /// <summary>

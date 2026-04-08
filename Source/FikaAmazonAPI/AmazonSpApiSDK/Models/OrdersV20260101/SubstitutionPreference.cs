@@ -26,8 +26,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="substitutionType">Source and nature of the substitution preferences for this item. (required)</param>
         /// <param name="substitutionOptions">List of alternative products that can be substituted for the original item if it becomes unavailable.</param>
-        public SubstitutionPreference(SubstitutionTypeEnum substitutionType = default,
-                                      List<SubstitutionOption> substitutionOptions = default)
+        public SubstitutionPreference(SubstitutionTypeEnum substitutionType,
+                                      List<SubstitutionOption> substitutionOptions)
         {
             this.SubstitutionType = substitutionType;
             this.SubstitutionOptions = substitutionOptions;
@@ -73,11 +73,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as SubstitutionPreference);
+            return this.Equals(obj as SubstitutionPreference);
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// </summary>
         /// <param name="aliasId">The alternative identifier value that can be used to reference this order. (required)</param>
         /// <param name="aliasType">The kind of alternative identifier this represents. (required)</param>
-        public OrderAliase(string aliasId = default, AliasTypeEnum aliasType = default)
+        public OrderAliase(string aliasId, AliasTypeEnum aliasType)
         {
             // to ensure "aliasId" is required (not null)
             if (aliasId == null)
@@ -35,15 +35,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
             {
                 this.AliasId = aliasId;
             }
-            // to ensure "aliasType" is required (not null)
-            if (aliasType == null)
-            {
-                throw new InvalidDataException("aliasType is a required property for OrderAliase and cannot be null");
-            }
-            else
-            {
-                this.AliasType = aliasType;
-            }
+
+            this.AliasType = aliasType;
         }
 
         /// <summary>
@@ -86,11 +79,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.OrdersV20260101
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
-        /// <param name="input">Object to be compared</param>
+        /// <param name="obj">Object to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(object input)
+        public override bool Equals(object obj)
         {
-            return this.Equals(input as OrderAliase);
+            return this.Equals(obj as OrderAliase);
         }
 
         /// <summary>
