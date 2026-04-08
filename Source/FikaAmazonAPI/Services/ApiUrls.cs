@@ -643,6 +643,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
             public static string UpdateOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
             public static string ConfirmShipment(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
+
+            #region V20260101
+            private readonly static string _resourceBaseUrl_V20260101 = "/orders/2026-01-01";
+            public static string SearchOrdersV20260101
+            {
+                get => $"{_resourceBaseUrl_V20260101}/orders";
+            }
+            public static string GetOrderV20260101(string orderId) => $"{_resourceBaseUrl_V20260101}/orders/{orderId}";
+            #endregion
         }
 
         protected class CategoryApiUrls
