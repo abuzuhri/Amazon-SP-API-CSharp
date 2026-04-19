@@ -18,5 +18,14 @@ namespace FikaAmazonAPI.Parameter.Notification
             this.WaitTimeSeconds = WaitTimeSeconds;
         }
 
+        public ParameterMessageReceiver(string awsAccessKeyId, string awsSecretAccessKey, string SQS_URL, string regionSystemName, int? WaitTimeSeconds = null)
+        {
+            this.awsAccessKeyId = awsAccessKeyId;
+            this.awsSecretAccessKey = awsSecretAccessKey;
+            this.SQS_URL = SQS_URL;
+            this.RegionEndpoint = RegionEndpoint.GetBySystemName(regionSystemName);
+            this.WaitTimeSeconds = WaitTimeSeconds;
+        }
+
     }
 }

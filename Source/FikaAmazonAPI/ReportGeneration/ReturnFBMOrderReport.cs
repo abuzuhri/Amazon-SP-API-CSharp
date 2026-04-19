@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -17,6 +18,11 @@ namespace FikaAmazonAPI.ReportGeneration
                                            .Select(v => ReturnFBMOrderRow.FromCsv(v, refNumber))
                                            .ToList();
             Data = values;
+        }
+
+        public ReturnFBMOrderReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseCsvLines(stream, ReturnFBMOrderRow.FromCsv, refNumber);
         }
 
 

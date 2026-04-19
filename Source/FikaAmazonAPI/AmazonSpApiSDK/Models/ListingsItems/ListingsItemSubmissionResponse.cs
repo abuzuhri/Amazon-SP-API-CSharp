@@ -44,7 +44,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             /// Enum INVALID for value: INVALID
             /// </summary>
             [EnumMember(Value = "INVALID")]
-            INVALID = 2
+            INVALID = 2,
+
+            /// <summary>
+            /// Enum VALID for value: VALID
+            /// </summary>
+            [EnumMember(Value = "VALID")]
+            VALID = 3,
         }
 
         /// <summary>
@@ -65,7 +71,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         /// <param name="status">The status of the listings item submission. (required).</param>
         /// <param name="submissionId">The unique identifier of the listings item submission. (required).</param>
         /// <param name="issues">Listings item issues related to the listings item submission..</param>
-        public ListingsItemSubmissionResponse(string sku = default(string), StatusEnum status = default(StatusEnum), string submissionId = default(string), List<Issue> issues = default(List<Issue>))
+        public ListingsItemSubmissionResponse(string sku = default(string), StatusEnum status = default(StatusEnum), string submissionId = default(string), List<Issue> issues = default(List<Issue>), List<AsinIdentifier> identifiers = default(List<AsinIdentifier>))
         {
             // to ensure "sku" is required (not null)
             if (sku == null)
@@ -95,6 +101,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                 this.SubmissionId = submissionId;
             }
             this.Issues = issues;
+            this.Identifiers = identifiers;
         }
         
         /// <summary>
@@ -120,6 +127,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
         public List<Issue> Issues { get; set; }
 
         /// <summary>
+        /// Identity attributes associated with the item in the Amazon catalog, such as the ASIN.
+        /// </summary>
+        /// <value>Identity attributes associated with the item in the Amazon catalog, such as the ASIN.</value>
+        [DataMember(Name = "identifiers", EmitDefaultValue = false)]
+        public List<AsinIdentifier> Identifiers { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -131,6 +145,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  SubmissionId: ").Append(SubmissionId).Append("\n");
             sb.Append("  Issues: ").Append(Issues).Append("\n");
+            sb.Append("  Identifiers: ").Append(Identifiers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -184,6 +199,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     this.Issues == input.Issues ||
                     this.Issues != null &&
                     this.Issues.SequenceEqual(input.Issues)
+                ) &&
+                (
+                    this.Identifiers == input.Identifiers ||
+                    this.Identifiers != null &&
+                    this.Identifiers.SequenceEqual(input.Identifiers)
                 );
         }
 
@@ -204,6 +224,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems
                     hashCode = hashCode * 59 + this.SubmissionId.GetHashCode();
                 if (this.Issues != null)
                     hashCode = hashCode * 59 + this.Issues.GetHashCode();
+                if (this.Identifiers != null)
+                    hashCode = hashCode * 59 + this.Identifiers.GetHashCode();
                 return hashCode;
             }
         }

@@ -1,6 +1,8 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -20,6 +22,11 @@ namespace FikaAmazonAPI.ReportGeneration
                 values.Add(InventoryAgingRow.FromRow(row, refNumber));
             }
             Data = values;
+        }
+
+        public InventoryAgingReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseTableRows(stream, InventoryAgingRow.FromRow, refNumber);
         }
     }
     public class InventoryAgingRow

@@ -15,9 +15,9 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is not yet 'VALIDATED', please verify the number and update if necessary. Can be: VALIDATED, NOT_VALIDATED.
+    /// Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is not yet 'VALIDATED', please verify the number and update if necessary. Can be: VALIDATED, NOT_VALIDATED, NOT_SUPPORTED.
     /// </summary>
-    /// <value>Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is not yet 'VALIDATED', please verify the number and update if necessary. Can be: VALIDATED, NOT_VALIDATED.
+    /// <value>Whether or not Amazon has validated the tracking number. If more than 24 hours have passed and the status is not yet 'VALIDATED', please verify the number and update if necessary. Can be: VALIDATED, NOT_VALIDATED, NOT_SUPPORTED.
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum TrackingNumberValidationStatus
@@ -27,6 +27,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 
         [EnumMember(Value = "NOT_VALIDATED")]
         NOT_VALIDATED = 2,
+
+        [EnumMember(Value = "NOT_SUPPORTED")]
+        NOT_SUPPORTED = 3
     }
 
 }

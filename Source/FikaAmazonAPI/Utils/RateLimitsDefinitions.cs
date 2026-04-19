@@ -40,6 +40,8 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Financial_ListFinancialEventsByOrderId,     new RateLimits(0.5M, 30) },
               { RateLimitType.Financial_ListFinancialEvents,              new RateLimits(0.5M, 30) },
 
+              { RateLimitType.FinancialV20240619_Transactions,            new RateLimits(0.5M, 10) },
+
               { RateLimitType.Feed_GetFeeds,                              new RateLimits(0.0222M, 10) },
               { RateLimitType.Feed_CreateFeed,                            new RateLimits(0.0083M, 15) },
               { RateLimitType.Feed_GetFeed,                               new RateLimits(2.0M, 15) },
@@ -51,6 +53,7 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.ListingsItem_PutListingsItem,               new RateLimits(5.0M, 10) },
               { RateLimitType.ListingsItem_DeleteListingsItem,            new RateLimits(5.0M, 10) },
               { RateLimitType.ListingsItem_PatchListingsItem,             new RateLimits(5.0M, 10) },
+              { RateLimitType.ListingsItem_SearchListingsItems,           new RateLimits(5.0M, 5) },
 
               { RateLimitType.Upload_CreateUploadDestinationForResource,  new RateLimits(0.1M, 5) },
 
@@ -245,7 +248,10 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.VendorOrdersV1_GetPurchaseOrdersStatus,   new RateLimits(10.0M, 10) },
 
               { RateLimitType.VendorTransactionStatus_GetTransaction,     new RateLimits(10.0M, 10) },
+              
+              { RateLimitType.VendorDirectFulfillmentInventory_SubmitInventoryUpdate, new RateLimits(10M, 10) },
             };
+
         }
     }
 }

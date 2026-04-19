@@ -7,7 +7,8 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
     public class ParameterGetItemOffers : ParameterBased
     {
         public string MarketplaceId { get; set; }
-        
+
+        [PathParameter]
         [JsonIgnore]
         public string Asin { get; set; }
         

@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320;
 using FikaAmazonAPI.Parameter.FulFillmentInbound.v20240320;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FikaAmazonAPI.Services
 {
     public class FulFillmentInboundServicev20240320 : RequestService
     {
-        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FulFillmentInboundServicev20240320(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -751,7 +752,7 @@ namespace FikaAmazonAPI.Services
                 var nextToken = response.Pagination.NextToken;
                 while (!string.IsNullOrEmpty(nextToken) && (!parameterListShipmentBase.maxPages.HasValue || totalPages < parameterListShipmentBase.maxPages.Value))
                 {
-                parameterListShipmentBase.PaginationToken = nextToken;
+                    parameterListShipmentBase.PaginationToken = nextToken;
                     var getItemNextPage = await GetSelfShipAppointmentSlotsByNextTokenAsync(parameterListShipmentBase, cancellationToken);
                     list.Add(getItemNextPage.SelfShipAppointmentSlotsAvailability);
                     nextToken = getItemNextPage.Pagination?.NextToken;
@@ -949,11 +950,11 @@ namespace FikaAmazonAPI.Services
 
         public async Task<SetPrepDetailsResponse> SetPrepDetailsAsync(SetPrepDetailsRequest setPrepDetailsRequest, CancellationToken cancellationToken = default)
         {
-        	if (string.IsNullOrWhiteSpace(setPrepDetailsRequest.MarketplaceId))
+            if (string.IsNullOrWhiteSpace(setPrepDetailsRequest.MarketplaceId))
             {
                 setPrepDetailsRequest.MarketplaceId = AmazonCredential.MarketPlace.ID;
             }
-            
+
             await CreateAuthorizedRequestAsync(FulFillmentInboundApiUrls.SetPrepDetails, RestSharp.Method.Post, postJsonObj: setPrepDetailsRequest, cancellationToken: cancellationToken);
             return await ExecuteRequestAsync<SetPrepDetailsResponse>(RateLimitType.FulFillmentInboundV20240320_SetPrepDetails, cancellationToken);
         }
@@ -969,6 +970,6 @@ namespace FikaAmazonAPI.Services
             return await ExecuteRequestAsync<InboundOperationStatus>(RateLimitType.FulFillmentInboundV20240320_GetInboundOperationStatus, cancellationToken);
         }
         #endregion
-        }
     }
+}
 

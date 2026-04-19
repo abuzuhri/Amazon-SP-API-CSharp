@@ -1,20 +1,21 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.v2022_05_01;
 using FikaAmazonAPI.Parameter.ProductPricing;
+using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.v2022_05_01;
-using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
 using Price = FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.Price;
 
 namespace FikaAmazonAPI.Services
 {
     public class ProductPricingService : RequestService
     {
-        public ProductPricingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ProductPricingService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -145,7 +146,7 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
         public GetFeaturedOfferExpectedPriceBatchResponse GetFeaturedOfferExpectedPriceBatch(
             GetFeaturedOfferExpectedPriceBatchRequest getFeaturedOfferExpectedPriceBatchRequest)
         {
-           return Task.Run(() => GetFeaturedOfferExpectedPriceBatchAsync(getFeaturedOfferExpectedPriceBatchRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
+            return Task.Run(() => GetFeaturedOfferExpectedPriceBatchAsync(getFeaturedOfferExpectedPriceBatchRequest)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -173,6 +174,6 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
         }
 
         #endregion
-        
+
     }
 }

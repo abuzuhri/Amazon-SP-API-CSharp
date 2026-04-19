@@ -34,7 +34,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
         /// </summary>
         /// <param name="Marketplace">Marketplace (required).</param>
         /// <param name="Participation">Participation (required).</param>
-        public MarketplaceParticipation(Marketplace Marketplace = default(Marketplace), Participation Participation = default(Participation))
+        /// <param name="StoreName">StoreName (required).</param>
+        public MarketplaceParticipation(Marketplace Marketplace = default(Marketplace), Participation Participation = default(Participation), string StoreName = default(string))
         {
             // to ensure "Marketplace" is required (not null)
             if (Marketplace == null)
@@ -54,6 +55,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
             {
                 this.Participation = Participation;
             }
+            // to ensure "StoreName" is required (not null)
+            if (StoreName == null)
+            {
+                throw new InvalidDataException("StoreName is a required property for MarketplaceParticipation and cannot be null");
+            }
+            else
+            {
+                this.StoreName = StoreName;
+            }
         }
 
         /// <summary>
@@ -69,6 +79,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
         public Participation Participation { get; set; }
 
         /// <summary>
+        /// Gets or Sets StoreName
+        /// </summary>
+        [DataMember(Name = "storeName", EmitDefaultValue = false)]
+        public string StoreName { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -78,6 +94,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
             sb.Append("class MarketplaceParticipation {\n");
             sb.Append("  Marketplace: ").Append(Marketplace).Append("\n");
             sb.Append("  Participation: ").Append(Participation).Append("\n");
+            sb.Append("  StoreName: ").Append(StoreName).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -121,6 +138,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Sellers
                     this.Participation == input.Participation ||
                     (this.Participation != null &&
                     this.Participation.Equals(input.Participation))
+                ) &&
+                (
+                    this.StoreName == input.StoreName ||
+                    (this.StoreName != null &&
+                    this.StoreName.Equals(input.StoreName))
                 );
         }
 

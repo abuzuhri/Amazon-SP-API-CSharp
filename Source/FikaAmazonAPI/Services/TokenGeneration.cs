@@ -35,6 +35,43 @@ namespace FikaAmazonAPI.Services
             return accessToken;
         }
 
+        // Get access token for a different type of scope (e.g. client_credential:rotation)
+        public static async Task<TokenResponse> GetAccessTokenFromScopeAsync(AmazonCredential credentials, string grant_type = "client_credentials", string scope = ScopeConstants.ScopeMigrationAPI, CancellationToken cancellationToken = default)
+        {
+            TokenResponse tokenResponse = null;
+                        
+            using (HttpClient client = new HttpClient())
+            {
+                var endpoint = new Uri(Constants.AmazonTokenEndPoint);
+                client.BaseAddress = new Uri(endpoint.GetLeftPart(UriPartial.Authority));
+
+                var formUrlEncodedContent = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "grant_type", grant_type },
+                    { "scope", scope },
+                    { "client_id", credentials.ClientId },
+                    { "client_secret", credentials.ClientSecret },
+                });
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = endpoint,
+                    Headers = { { "accept", "application/json" } },
+                    Content = formUrlEncodedContent,
+                };
+
+                using var response = await client.SendAsync(request, cancellationToken);
+                response.EnsureSuccessStatusCode();
+
+                string jsonBody = await response.Content.ReadAsStringAsync();
+
+                tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(jsonBody);
+            }
+
+            return tokenResponse;
+        }
+
         public static async Task<TokenResponse> GetAccessTokenFromCodeAsync(string ClientId, string ClientSecret, string code, string appRedirectUri, string grant_type = "client_credentials", CancellationToken cancellationToken = default)
         {
             string data = string.Empty;

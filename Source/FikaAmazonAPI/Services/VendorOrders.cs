@@ -2,6 +2,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorTransactions;
 using FikaAmazonAPI.Parameter.VendorOrders;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace FikaAmazonAPI.Services
 {
     public class VendorOrderService : RequestService
     {
-        public VendorOrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public VendorOrderService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }

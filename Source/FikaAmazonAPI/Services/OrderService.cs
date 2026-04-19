@@ -1,8 +1,9 @@
-﻿using System;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Parameter.Order;
 using FikaAmazonAPI.Search;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace FikaAmazonAPI.Services
 {
     public class OrderService : RequestService
     {
-        public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public OrderService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -96,7 +97,7 @@ namespace FikaAmazonAPI.Services
         #endregion
         #region GetOrders
 
-        
+
         public async Task<OrderList> GetOrdersAsync(ParameterOrderList searchOrderList)
         {
             var orderList = new OrderList();
@@ -136,7 +137,7 @@ namespace FikaAmazonAPI.Services
 
             return orderList;
         }
-        
+
         public async Task<OrdersList> GetGetOrdersByNextTokenAsync(string nextToken, ParameterOrderList searchOrderList)
         {
             var parameterOrderList = new ParameterOrderList
@@ -144,18 +145,18 @@ namespace FikaAmazonAPI.Services
                 MarketplaceIds = searchOrderList.MarketplaceIds,
                 NextToken = nextToken,
                 IsNeedRestrictedDataToken = searchOrderList.IsNeedRestrictedDataToken,
-                RestrictedDataTokenRequest = searchOrderList.RestrictedDataTokenRequest 
+                RestrictedDataTokenRequest = searchOrderList.RestrictedDataTokenRequest
             };
 
             List<KeyValuePair<string, string>> queryParameters = parameterOrderList.getParameters();
-           
+
             await CreateAuthorizedRequestAsync(OrdersApiUrls.Orders, RestSharp.Method.Get, queryParameters, parameter: parameterOrderList);
-            
+
             var response = await ExecuteRequestAsync<GetOrdersResponse>(Utils.RateLimitType.Order_GetOrders);
-            
+
             return response.Payload;
         }
-        
+
         public OrdersList GetOrdersList(ParameterOrderList searchOrderList) =>
             Task.Run(() => GetOrdersListAsync(searchOrderList)).ConfigureAwait(false).GetAwaiter().GetResult();
         public async Task<OrdersList> GetOrdersListAsync(ParameterOrderList searchOrderList)

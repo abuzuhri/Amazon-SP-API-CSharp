@@ -1,6 +1,6 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2;
-using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ShippingServiceV2 : RequestService
     {
-        public ShippingServiceV2(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShippingServiceV2(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
@@ -64,6 +64,17 @@ namespace FikaAmazonAPI.Services
         {
             await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetTracking(carrierId, trackingId), RestSharp.Method.Get, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<GetTrackingResponse>(RateLimitType.ShippingV2_GetTracking, cancellationToken);
+            if (response != null && response.Payload != null)
+                return response.Payload;
+            return null;
+        }
+
+        public GetShipmentDocumentsResult GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) =>
+             Task.Run(() => GetShipmentDocumentsAsync(shipmentId, packageClientReferenceId, format)).ConfigureAwait(false).GetAwaiter().GetResult();
+        public async Task<GetShipmentDocumentsResult> GetShipmentDocumentsAsync(string shipmentId, string packageClientReferenceId, string format, CancellationToken cancellationToken = default)
+        {
+            await CreateAuthorizedRequestAsync(ShippingApiV2Urls.GetShipmentDocuments(shipmentId, packageClientReferenceId, format), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            var response = await ExecuteRequestAsync<GetShipmentDocumentsResponse>(RateLimitType.ShippingV2_GetShipmentDocument, cancellationToken);
             if (response != null && response.Payload != null)
                 return response.Payload;
             return null;

@@ -79,17 +79,19 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         /// <param name="itemClassification">Classification type associated with the Amazon catalog item..</param>
         /// <param name="itemName">Name, or title, associated with an Amazon catalog item..</param>
         /// <param name="manufacturer">Name of the manufacturer associated with an Amazon catalog item..</param>
-        /// <param name="modelNumber">Model number associated with an Amazon catalog item..</param>
-        /// <param name="packageQuantity">Quantity of an Amazon catalog item in one package..</param>
-        /// <param name="partNumber">Part number associated with an Amazon catalog item..</param>
-        /// <param name="releaseDate">First date on which an Amazon catalog item is shippable to customers..</param>
-        /// <param name="size">Name of the size associated with an Amazon catalog item..</param>
-        /// <param name="style">Name of the style associated with an Amazon catalog item..</param>
-        /// <param name="websiteDisplayGroup">Name of the website display group associated with an Amazon catalog item..</param>
+        /// <param name="modelNumber">Model number associated with an Amazon catalog item.</param>
+        /// <param name="packageQuantity">Quantity of an Amazon catalog item in one package.</param>
+        /// <param name="partNumber">Part number associated with an Amazon catalog item.</param>
+        /// <param name="releaseDate">First date on which an Amazon catalog item is shippable to customers.</param>
+        /// <param name="size">Name of the size associated with an Amazon catalog item.</param>
+        /// <param name="style">Name of the style associated with an Amazon catalog item.</param>
+        /// <param name="websiteDisplayGroup">Name of the website display group associated with an Amazon catalog item.</param>
+        /// <param name="contributors">Names of the contributors associated with an Amazon catalog item.</param>
         public ItemSummaryByMarketplace(string marketplaceId = default, string brand = default, ItemBrowseClassification browseClassification = default,
             string color = default, ItemClassificationEnum? itemClassification = default, string itemName = default, string manufacturer = default,
             string modelNumber = default, int? packageQuantity = default, string partNumber = default, DateTime? releaseDate = default,
-            string size = default, string style = default, string websiteDisplayGroup = default, string websiteDisplayGroupName = default)
+            string size = default, string style = default, string websiteDisplayGroup = default, string websiteDisplayGroupName = default,
+            ItemContributors contributors = default)
         {
             // to ensure "marketplaceId" is required (not null)
             if (marketplaceId == null)
@@ -114,6 +116,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             this.Style = style;
             this.WebsiteDisplayGroup = websiteDisplayGroup;
             this.WebsiteDisplayGroupName = websiteDisplayGroupName;
+            this.Contributors = contributors; 
         }
 
         /// <summary>
@@ -216,6 +219,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
         public string WebsiteDisplayGroupName { get; set; }
 
         /// <summary>
+        /// Names of the contributors associated with an Amazon catalog item.
+        /// </summary>
+        /// <value>Names of the contributors associated with the Amazon catalog item.</value>
+        [DataMember(Name = "contributors", EmitDefaultValue = false)]
+        public ItemContributors Contributors { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -236,6 +246,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
             sb.Append("  Size: ").Append(Size).Append("\n");
             sb.Append("  Style: ").Append(Style).Append("\n");
             sb.Append("  WebsiteDisplayGroup: ").Append(WebsiteDisplayGroup).Append("\n");
+            sb.Append("  Contributors:").Append(Contributors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -334,6 +345,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     this.WebsiteDisplayGroup == input.WebsiteDisplayGroup ||
                     (this.WebsiteDisplayGroup != null &&
                     this.WebsiteDisplayGroup.Equals(input.WebsiteDisplayGroup))
+                ) &&
+                (
+                    this.Contributors == input.Contributors ||
+                    (this.Contributors != null &&
+                     this.Contributors.Equals(input.Contributors))
                 );
         }
 
@@ -372,6 +388,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems.V20220401
                     hashCode = hashCode * 59 + this.Style.GetHashCode();
                 if (this.WebsiteDisplayGroup != null)
                     hashCode = hashCode * 59 + this.WebsiteDisplayGroup.GetHashCode();
+                if (this.Contributors != null)
+                    hashCode = hashCode * 59 + this.Contributors.GetHashCode();
                 return hashCode;
             }
         }

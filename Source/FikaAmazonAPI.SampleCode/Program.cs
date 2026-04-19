@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.ReportGeneration;
+using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FikaAmazonAPI.SampleCode
 {
@@ -12,12 +16,10 @@ namespace FikaAmazonAPI.SampleCode
             .AddUserSecrets<Program>()
             .Build();
 
+            var factory = LoggerFactory.Create(builder => builder.AddConsole());
 
             AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
             {
-                //AccessKey = config.GetSection("FikaAmazonAPI:AccessKey").Value,
-                //SecretKey = config.GetSection("FikaAmazonAPI:SecretKey").Value,
-                //RoleArn = config.GetSection("FikaAmazonAPI:RoleArn").Value,
                 ClientId = config.GetSection("FikaAmazonAPI:ClientId").Value,
                 ClientSecret = config.GetSection("FikaAmazonAPI:ClientSecret").Value,
                 RefreshToken = config.GetSection("FikaAmazonAPI:RefreshToken").Value,
@@ -26,16 +28,37 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true
             });
 
+            ReportManager reportManager = new ReportManager(amazonConnection);
 
-            ReportManagerSample reportManagerSample = new ReportManagerSample(amazonConnection);
-            reportManagerSample.CallReport();
-            //var error = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_STRANDED_INVENTORY_UI_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_ALL_INVENTORY_DATA);
-            //var dddd = amazonConnection.Reports.CreateReportAndDownloadFile(Utils.Constants.ReportTypes.GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA);
-            //ReportManager reportManager = new ReportManager(amazonConnection);
+            var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 
-            //var dddddd = reportManager.GetAFNInventoryQtyAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            await feedsSample.SubmitFeedDELETE_JSONAsync("B07HMBFZCZ .2");
 
+
+            var aa=amazonConnection.Seller.GetMarketplaceParticipations();
+
+            var plan = amazonConnection.FulFillmentInboundv20240320.ListInboundPlans(new Parameter.FulFillmentInbound.v20240320.ParameterListInboundPlans
+            {
+                Status = AmazonSpApiSDK.Models.FulfillmentInboundv20240320.InboundPlanStatus.ACTIVE
+            });
+
+
+            //var list = amazonConnection.Seller.GetMarketplaceParticipations();
+
+            var list= amazonConnection.FulFillmentInbound.GetShipments(new Parameter.FulFillmentInbound.ParameterGetShipments()
+            {
+                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+                ShipmentStatusList = new List<ShipmentStatus> { ShipmentStatus.WORKING, ShipmentStatus.SHIPPED, ShipmentStatus.RECEIVING }
+            });
+
+
+           // var itemsList=amazonConnection.FulFillmentInbound.GetShipmentItemsByShipmentId("FBA15KBCBMXC");
+
+
+
+            //FeedsSample feedsSample = new FeedsSample(amazonConnection);
+            //feedsSample.SubmitFeedPRICING_JSONAsync("B09H73T814.259", 112.0M, 53.51M, 112.20M).GetAwaiter().GetResult();
 
 
             Console.ReadLine();

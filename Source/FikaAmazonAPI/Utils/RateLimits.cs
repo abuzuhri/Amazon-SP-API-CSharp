@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("Tests")]
 namespace FikaAmazonAPI.Utils
 {
     internal class RateLimits
@@ -10,6 +12,11 @@ namespace FikaAmazonAPI.Utils
         internal DateTime LastRequest { get; set; }
         internal int RequestsSent { get; set; }
 
+        /// <summary>
+        /// Constructor for rate limits configuration object
+        /// </summary>
+        /// <param name="Rate">The number of permitted requests which will be added to the "Token bucket" per second</param>
+        /// <param name="Burst">The maximum number of requests which can exist in the "Token bucket" at any time</param>
         internal RateLimits(decimal Rate, int Burst)
         {
             this.Rate = Rate;
@@ -17,12 +24,21 @@ namespace FikaAmazonAPI.Utils
             this.LastRequest = DateTime.UtcNow;
             this.RequestsSent = 0;
         }
+
         private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
+
+        /// <summary>
+        /// Performs a wait based on the Token Bucket rate limiting algorithm described in documentation.
+        /// <br/><br/>
+        /// See also <see href="https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits#rate-limiting-algorithm"/>
+        /// </summary>
+        /// <param name="rateLimitType">An enum representing the rate limit policy for the resource in use</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
         public async Task<RateLimits> NextRate(RateLimitType rateLimitType)
         {
             if (RequestsSent < 0)
                 RequestsSent = 0;
-
 
             int ratePeriodMs = GetRatePeriodMs();
 
@@ -34,8 +50,6 @@ namespace FikaAmazonAPI.Utils
                 Console.WriteLine(output);
             }
 
-
-
             if (RequestsSent >= Burst)
             {
                 var LastRequestTime = LastRequest;
@@ -46,7 +60,6 @@ namespace FikaAmazonAPI.Utils
                         break;
                     else
                         RequestsSent -= 1;
-
                     if (RequestsSent <= 0)
                     {
                         RequestsSent = 0;
@@ -54,7 +67,6 @@ namespace FikaAmazonAPI.Utils
                     }
                 }
             }
-
 
             if (RequestsSent >= Burst)
             {
@@ -64,8 +76,6 @@ namespace FikaAmazonAPI.Utils
                     await Task.Delay(100);
 
             }
-
-
 
             if (RequestsSent + 1 <= Burst)
                 RequestsSent += 1;
@@ -77,6 +87,7 @@ namespace FikaAmazonAPI.Utils
         internal void SetRateLimit(decimal rate)
         {
             Rate = rate;
+
         }
 
         internal Task Delay()

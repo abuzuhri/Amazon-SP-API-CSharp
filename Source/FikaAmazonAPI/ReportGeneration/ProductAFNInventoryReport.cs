@@ -19,6 +19,11 @@ namespace FikaAmazonAPI.ReportGeneration
                                            .ToList();
             Data = values;
         }
+
+        public ProductAFNInventoryReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseCsvLines(stream, ProductAFNInventoryRow.FromCsv, refNumber);
+        }
     }
 
     public class ProductAFNInventoryRow

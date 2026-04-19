@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace FikaAmazonAPI.Search
 {
@@ -21,6 +22,9 @@ namespace FikaAmazonAPI.Search
 
         public virtual List<KeyValuePair<string, string>> getParameters()
         {
+            // Check if the class is marked with the CamelCase attribute
+            var isClassCamelCase = Attribute.IsDefined(this.GetType(), typeof(CamelCaseAttribute));
+
             List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
             if (!string.IsNullOrEmpty(TestCase))
             {
@@ -76,8 +80,9 @@ namespace FikaAmazonAPI.Search
                         output = JsonConvert.SerializeObject(value, settings);
                     }
 
-                    // Convert to cammelCase to avoid issues with properties not being properly mapped
-                    var propName = char.ToLowerInvariant(p.Name[0]) + p.Name.Substring(1);
+                    // Check if property should be converted to cammel case
+                    var isPropertyCamelCase = isClassCamelCase || Attribute.IsDefined(p, typeof(CamelCaseAttribute));
+                    var propName = isPropertyCamelCase ? char.ToLowerInvariant(p.Name[0]) + p.Name.Substring(1) : p.Name;
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }

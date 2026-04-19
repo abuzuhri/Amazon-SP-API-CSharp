@@ -1,6 +1,7 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Shipping;
 using FikaAmazonAPI.Parameter;
 using FikaAmazonAPI.Utils;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace FikaAmazonAPI.Services
 {
     public class ShippingService : RequestService
     {
-        public ShippingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShippingService(AmazonCredential amazonCredential, ILoggerFactory? loggerFactory) : base(amazonCredential, loggerFactory)
         {
 
         }
