@@ -29,7 +29,8 @@ namespace FikaAmazonAPI.Services
             if (tokenDataType == TokenDataType.Grantless)
                 lwaCredentials.Scopes = new List<string>() { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
-            var Client = new LWAClient(lwaCredentials, credentials.ProxyAddress);
+            var proxyAddress = (credentials.Proxy as System.Net.WebProxy)?.Address?.ToString();
+            var Client = new LWAClient(lwaCredentials, proxyAddress);
             var accessToken = await Client.GetAccessTokenAsync(cancellationToken);
 
             return accessToken;
