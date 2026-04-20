@@ -275,6 +275,7 @@ var reimbursementsOrder = reportManager.GetReimbursementsOrder(180); //GET_FBA_R
 var feedbacks = reportManager.GetFeedbackFromDays(180); //GET_SELLER_FEEDBACK_DATA
 var LedgerDetails = reportManager.GetLedgerDetailAsync(10); //GET_LEDGER_DETAIL_VIEW_DATA
 var UnsuppressedInventory = reportManager.GetUnsuppressedInventoryDataAsync().ConfigureAwait(false).GetAwaiter().GetResult(); //GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA
+var sellerPerformance = reportManager.GetSellerPerformance(); //GET_V2_SELLER_PERFORMANCE_REPORT
 ```
 
 

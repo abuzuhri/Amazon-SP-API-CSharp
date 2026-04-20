@@ -558,5 +558,36 @@ namespace FikaAmazonAPI.ReportGeneration
         }
 
         #endregion
+        
+        #region Performance
+
+        /// <summary>
+        /// Gets the seller performance report for the current marketplace, containing account health status
+        /// and performance metrics such as order defect rate, late shipment rate, and policy violations.
+        /// </summary>
+        /// <returns>A <see cref="SellerPerformanceReport"/> containing account status and performance metrics.</returns>
+        public SellerPerformanceReport GetSellerPerformance() =>
+            Task.Run(() => GetSellerPerformanceAsync()).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Gets the seller performance report asynchronously for the current marketplace, containing account health status
+        /// and performance metrics such as order defect rate, late shipment rate, and policy violations.
+        /// </summary>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the request.</param>
+        /// <returns>A task that resolves to a <see cref="SellerPerformanceReport"/> containing account status and performance metrics.</returns>
+        public async Task<SellerPerformanceReport> GetSellerPerformanceAsync(CancellationToken cancellationToken = default)
+        {
+            var path = await GetSellerPerformanceAsync(_amazonConnection, cancellationToken);
+            return new SellerPerformanceReport(path, _amazonConnection.RefNumber);
+        }
+
+        private async Task<string> GetSellerPerformanceAsync(AmazonConnection amazonConnection, CancellationToken cancellationToken = default)
+        {
+            return await amazonConnection.Reports.CreateReportAndDownloadFileAsync(
+                ReportTypes.GET_V2_SELLER_PERFORMANCE_REPORT,
+                cancellationToken: cancellationToken);
+        }
+
+        #endregion
     }
 }
