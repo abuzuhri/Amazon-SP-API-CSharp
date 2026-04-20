@@ -14,7 +14,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         /// Gets or Sets AggregationSettings
         /// </summary>
         [DataMember(Name = "aggregationSettings", EmitDefaultValue = false)]
-        [JsonProperty(PropertyName = "aggregationSettings")]
+        [JsonProperty(PropertyName = "aggregationSettings", NullValueHandling = NullValueHandling.Ignore)]
         public AggregationSettings AggregationSettings { get; set; }
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FikaAmazonAPI.ReportGeneration.ReportDataTable;
+using System.IO;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -21,6 +22,11 @@ namespace FikaAmazonAPI.ReportGeneration
                 values.Add(InventoryPlanningDataRow.FromRow(row, refNumber));
             }
             Data = values;
+        }
+
+        public InventoryPlanningDataReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseTableRows(stream, InventoryPlanningDataRow.FromRow, refNumber);
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using RestSharp;
+﻿using FikaAmazonAPI.RestSharp;
 using System;
 using System.Net;
 

@@ -89,7 +89,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound
         /// Enum READY_TO_SHIP for value: READY_TO_SHIP
         /// </summary>
         [EnumMember(Value = "READY_TO_SHIP")]
-        READY_TO_SHIP = 11
+        READY_TO_SHIP = 11,
+        [EnumMember(Value = "ABANDONED")]
+        ABANDONED = 12,
+        [EnumMember(Value = "MIXED")]
+        MIXED = 13,
+        [EnumMember(Value = "UNCONFIRMED")]
+        UNCONFIRMED = 14
     }
 
 }

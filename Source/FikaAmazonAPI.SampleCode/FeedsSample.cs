@@ -229,6 +229,72 @@ namespace FikaAmazonAPI.SampleCode
             await GetJsonFeedDetails(feedID);
 
         }
+        public async Task SubmitFeedDELETE_JSONAsync(string SKU)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<ProductMessage>();
+            var msg = new ProductMessage()
+            {
+                SKU = SKU
+            };
+
+
+            list.Add(msg);
+            createDocument.AddDeleteMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
+
+
+            await GetJsonFeedDetails(feedID);
+
+        }
+
+        public async Task SubmitInventoryJSON_Async(string SKU, int quantity, int? leadTimeToShip = null, DateTime? restockDate = null)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<InventoryMessage>();
+            var msg = new InventoryMessage()
+            {
+                SKU = SKU,
+                Quantity = quantity,
+                FulfillmentLatency = leadTimeToShip.HasValue ? leadTimeToShip.Value.ToString() : null,
+                RestockDate = restockDate
+            };
+
+            list.Add(msg);
+            createDocument.AddInventoryMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
+
+            await GetJsonFeedDetails(feedID);
+        }
+
+        public async Task SubmitMerchantShippingGroupJSON_Async(string sku, string merchant_shipping_group_id)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var list = new List<MerchantShippingGroupMessage>();
+            var msg = new MerchantShippingGroupMessage()
+            {
+                SKU = sku, 
+                MerchantShippingGroupId = merchant_shipping_group_id
+            };
+
+            list.Add(msg);
+            createDocument.AddMerchantShippingGroupMessage(list);
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, null, null, ContentType.JSON);
+
+            await GetJsonFeedDetails(feedID);
+        }
 
         public async Task SubmitFeedPricingWithSalePrice(string sku, decimal price, decimal salePrice, DateTime startDate, DateTime endDate)
         {

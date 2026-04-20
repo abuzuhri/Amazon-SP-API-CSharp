@@ -1,11 +1,13 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using FikaAmazonAPI.RestSharp;
 using Newtonsoft.Json;
-using RestSharp;
+using FikaAmazonAPI.RestSharp;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
@@ -24,19 +26,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
-            // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
-            if (proxy == null)
+            var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
             {
-                RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
-            }else
-            {
-                var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
-                {
-                    Proxy = proxy
-                };
-
-                RestClient = new RestClient(options);
-            }
+                Proxy = proxy
+            };
+            RestClient = new RestClient(options);
         }
 
 
@@ -61,7 +55,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
                 if (!IsSuccessful(response))
                 {
-                    throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
+                    var message = string.IsNullOrEmpty(response.ErrorMessage)
+                        ? $"Unsuccessful LWA token exchange: {response.Content}"
+                        : $"Unsuccessful LWA token exchange: {response.ErrorMessage}";
+                    throw new IOException(message);
                 }
 
                 var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
@@ -69,7 +66,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             }
             catch (Exception e)
             {
-                throw new SystemException("Error getting LWA Access Token", e);
+                //Debug.WriteLine(e.Message + Environment.NewLine + e.InnerException?.Message);
+                throw new SystemException("Error getting LWA Access Token!", e);
             }
         }
 

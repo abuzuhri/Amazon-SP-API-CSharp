@@ -15,7 +15,7 @@ using System.Runtime.Serialization;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
 {
     /// <summary>
-    /// Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED
+    /// Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED, BLOCKED, DISCOUNTED
     /// </summary>
     /// <value>Identifies type of Delivery Window Availability. Values: AVAILABLE, CONGESTED
 
@@ -26,7 +26,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         AVAILABLE = 1,
 
         [EnumMember(Value = "CONGESTED")]
-        CONGESTED = 2
+        CONGESTED = 2,
+        [EnumMember(Value = "BLOCKED")]
+        BLOCKED = 3,
+        [EnumMember(Value = "DISCOUNTED")]
+        DISCOUNTED = 4
     }
 
 }

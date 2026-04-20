@@ -101,6 +101,97 @@ namespace FikaAmazonAPI.ConstructFeed
             }
         }
 
+        public void AddDeleteMessage(IList<ProductMessage> messages)
+        {
+            int index = jsonMessagesData.messages.Count;
+            foreach (var itm in messages)
+            {
+                var msg = new MessagesData()
+                {
+                    messageId = ++index,
+                    sku = itm.SKU,
+                    operationType = "DELETE"
+                };
+
+                jsonMessagesData.messages.Add(msg);
+            }
+        }
+
+        public void AddInventoryMessage(IList<InventoryMessage> messages)
+        {
+            int index = jsonMessagesData.messages.Count;
+            foreach (var itm in messages)
+            {
+                var patcheValueData = new PatcheValueData()
+                {
+                    fulfillment_channel_code = "DEFAULT"
+                };
+
+                if (itm.QuantitySpecified)
+                {
+                    patcheValueData.quantity = itm.Quantity;
+                }
+
+                if (itm.FulfillmentLatencySpecified)
+                {
+                    patcheValueData.lead_time_to_ship_max_days = System.Convert.ToInt32(itm.FulfillmentLatency);
+                }
+
+                if (itm.RestockDateSpecified)
+                {
+                    patcheValueData.restock_date = itm.RestockDate;
+                }
+
+                var msg = new MessagesData()
+                {
+                    messageId = ++index,
+                    sku = itm.SKU,
+                    operationType = "PATCH",
+                    productType = "PRODUCT",
+                    patches = new List<PatcheData>{
+                        new PatcheData()
+                        {
+                            op = "replace",
+                            path = "/attributes/fulfillment_availability",
+                            value = new List<PatcheValueData>{ patcheValueData }
+                        }
+                    }
+                };
+
+                jsonMessagesData.messages.Add(msg);
+            }
+        }
+
+        public void AddMerchantShippingGroupMessage(IList<MerchantShippingGroupMessage> messages)
+        {
+            int index = jsonMessagesData.messages.Count;
+            foreach (var itm in messages)
+            {
+                var msg = new MessagesData()
+                {
+                    messageId = ++index,
+                    sku = itm.SKU,
+                    operationType = "PATCH",
+                    productType = "PRODUCT",
+                    patches = new List<PatcheData>{
+                        new PatcheData()
+                        {
+                            op = "replace",
+                            path = "/attributes/merchant_shipping_group",
+                            value = new List<PatcheValueData>{
+                                new PatcheValueData()
+                                {
+                                    value = itm.MerchantShippingGroupId
+                                }
+                            }
+                        }
+                    }
+                };
+
+                jsonMessagesData.messages.Add(msg);
+            }
+        }
+
         public string GetJSON()
         {
             string jsonString = JsonConvert.SerializeObject(jsonMessagesData, Formatting.Indented, new JsonSerializerSettings

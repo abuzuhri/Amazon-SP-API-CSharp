@@ -2,11 +2,11 @@ using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Filters;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.AmazonSpApiSDK.Services;
+using FikaAmazonAPI.RestSharp;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using System;
 using System.Collections.Generic;
@@ -59,22 +59,12 @@ namespace FikaAmazonAPI.Services
 
         private void CreateRequest(string url, RestSharp.Method method)
         {
-            if (AmazonCredential.Proxy == null)
+            var options = new RestClientOptions(ApiBaseUrl)
             {
-                var options = new RestClientOptions(ApiBaseUrl);
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
-            }
-            else
-            {
-                var options = new RestClientOptions(ApiBaseUrl)
-                {
-                    Proxy = AmazonCredential.Proxy
-                };
-
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
-            }
+                Proxy = AmazonCredential.Proxy
+            };
+            RequestClient = new RestClient(options,
+                configureSerialization: s => s.UseNewtonsoftJson());
 
             Request = new RestRequest(url, method);
         }
@@ -120,14 +110,14 @@ namespace FikaAmazonAPI.Services
             CancellationToken cancellationToken = default) where T : new()
         {
             RestHeader();
-            await RefreshToken();
             AddAccessToken();
             AddShippingBusinessId();
 
             //Remove AWS authorization
             //Request = await TokenGeneration.SignWithSTSKeysAndSecurityTokenAsync(Request, RequestClient.Options.BaseUrl.Host, AmazonCredential, cancellationToken);
-            var response = await RequestClient.ExecuteAsync<T>(Request, cancellationToken);
-            LogRequest(Request, response);
+            var currentRequest = Request;
+            var response = await RequestClient.ExecuteAsync<T>(currentRequest, cancellationToken);
+            LogRequest(currentRequest, response);
             SaveLastRequestHeader(response.Headers);
             await SleepForRateLimit(response.Headers, rateLimitType, cancellationToken);
             ParseResponse(response);
@@ -300,7 +290,7 @@ namespace FikaAmazonAPI.Services
                     switch (error.Code)
                     {
                         case "Unauthorized":
-                            throw new AmazonUnauthorizedException(error.Message, response);
+                            throw new AmazonUnauthorizedException($"{error.Message} {error.Details}", response);
                         case "InvalidSignature":
                             throw new AmazonInvalidSignatureException(error.Message, response);
                         case "InvalidInput":

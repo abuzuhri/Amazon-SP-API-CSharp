@@ -5,15 +5,13 @@ This is an API Binding in .Net C# for the new Amazon Selling Partner API.
 
 This library is based on the output of [swagger-codegen](https://app.swaggerhub.com/home) with the [OpenAPI files provided by Amazon (Models)](https://github.com/amzn/selling-partner-api-models/tree/main/models) and has been modified by the contributors.
 
-The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using C#, you can watch this 📷 [Youtube](https://www.youtube.com/watch?v=1gZJBCoMr70) 📣 video for easy start your project
+The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using C#. You can watch this 📷 [YouTube](https://www.youtube.com/watch?v=1gZJBCoMr70) 📣 video to get started quickly.
 
 ---
 ### Requirements
 - [AWSSDK.SecurityToken](https://www.nuget.org/packages/AWSSDK.SecurityToken/)
 - [AWSSDK.SQS](https://www.nuget.org/packages/AWSSDK.SQS/)
 - [Microsoft.CSharp](https://www.nuget.org/packages/Microsoft.CSharp/)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
-- [RestSharp](https://www.nuget.org/packages/RestSharp/)
 - [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
 - [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
 
@@ -78,8 +76,10 @@ Install-Package CSharpAmazonSpAPI
 
 ---
 ## Keys
-To get all keys needed you need to follow this step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) and then you need to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application) then [Authorizing Selling Partner API applications
-](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
+To get all the keys you need, follow these steps:
+1. [Create and configure IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
+2. [Register your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application)
+3. [Authorize Selling Partner API applications](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
 
 
 | Name | Description |
@@ -90,7 +90,7 @@ To get all keys needed you need to follow this step [Creating and configuring IA
 | RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
 
 
-For more information about keys please check [New Amazon doc for create keys Developer ](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
+For more information about keys, check the [Amazon developer documentation](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities). If you are not registered as a developer, please [Register](https://developer.amazonservices.com/) to be able to create an application.
 
 ---
 ## Usage
@@ -98,7 +98,7 @@ For more information about keys please check [New Amazon doc for create keys Dev
 > ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
 
 ### Configuration
-You can configure a connection like so please see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
+You can configure a connection as shown below. See [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -124,6 +124,8 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ### Configuration using a proxy
 Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
+
+The `Proxy` property accepts any `IWebProxy` implementation:
 ```csharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -131,13 +133,11 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      MarketPlaceID = "A2VIGQ35RCS4UG",
-     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
+     Proxy = new System.Net.WebProxy("http://xxx.xxx.xxx.xxx:xxxx"),
 });
 ```
-> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account.
 
-
-Alternatively, you may provide an instance of `IWebProxy` giving you more control over the proxy configuration including the ability to configure credentials:
+For an authenticated proxy, assign any `IWebProxy` implementation -- for example, a `WebProxy` with credentials:
 ```csharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -145,36 +145,37 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
      ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
      MarketPlaceID = "A2VIGQ35RCS4UG",
-     Proxy = new WebProxy("http(s)://xxx.xxx.xxx.xxx", xxxx)
-                {
-                    Credentials = new NetworkCredential("username", "password")
-                };
+     Proxy = new System.Net.WebProxy("http://xxx.xxx.xxx.xxx:xxxx")
+     {
+         Credentials = new System.Net.NetworkCredential("username", "password")
+     },
 });
 ```
-A proxy is not required and things will operate normally without a `ProxyAddress` or `Proxy` being set.
+> ***Proxy is not required and will operate normally without it being set.***
 
 ---
 
-### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
+### Order List
+For more order samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/OrdersSample.cs).
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Canceled);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
 
 ### Order List with parameter
 ```CSharp
-ParameterOrderList serachOrderList = new ParameterOrderList();
-serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
-serachOrderList.OrderStatuses = new List<OrderStatuses>();
-serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
-serachOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
+ParameterOrderList searchOrderList = new ParameterOrderList();
+searchOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
+searchOrderList.OrderStatuses = new List<OrderStatuses>();
+searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+searchOrderList.MarketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID };
 
-var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+var orders = amazonConnection.Orders.GetOrders(searchOrderList);
 
 ```
 
@@ -193,7 +194,7 @@ var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
 
 ```
 
-### Order List with parameter including PII data Advance (if you want to get specific data Elements object only)
+### Order List with parameter including PII data — Advanced (if you want to get specific data elements only)
 ```CSharp
 var parameterOrderList = new ParameterOrderList
         {
@@ -238,7 +239,8 @@ var orders = amazonConnection.Orders.GetOrders
 );
 ```
 
-### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/OrdersSample.cs).
+### Report List
+For more report samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
 ```CSharp
 var parameters = new ParameterReportList();
 parameters.pageSize = 100;
@@ -276,7 +278,7 @@ var data = amazonConnection.Reports.GetReportDocument("50039018869997",true);
 
 
 ### Report Manager 🚀🧑‍🚀✨
-Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
+An easy way to get the report you need and convert the file returned from Amazon to a class or list. This feature is only available for some reports, as it takes significant effort to cover all [report types](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md).
 ```CSharp
 ReportManager reportManager = new ReportManager(amazonConnection);
 var products = reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
@@ -388,7 +390,8 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
 ```
 
 
-### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
+### Notifications — Create Destination
+For more notification samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
 ```CSharp
 
 //EventBridge
@@ -414,7 +417,8 @@ var dataSqs = amazonConnection.Notification.CreateDestination(
     });
 ```
 
-### Notifications Create Subscription, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
+### Notifications — Create Subscription
+For more notification samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
 ```CSharp
 
 //SQS
@@ -427,39 +431,120 @@ var result = amazonConnection.Notification.CreateSubscription(
     });
 ```
 
-### Notifications read messages
+### Notifications — Read Messages
 ```CSharp
 
-var SQS_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
-ParameterMessageReceiver param = new ParameterMessageReceiver(
-                    Environment.GetEnvironmentVariable("AccessKey"), 
-                    Environment.GetEnvironmentVariable("SecretKey"), 
-                    SQS_URL, Amazon.RegionEndpoint.USEast2);
+var SQS_URL = Environment.GetEnvironmentVariable("SQS_URL");
+var param = new ParameterMessageReceiver(
+    Environment.GetEnvironmentVariable("AccessKey"),
+    Environment.GetEnvironmentVariable("SecretKey"),
+    SQS_URL,
+    Amazon.RegionEndpoint.USEast2,
+    WaitTimeSeconds: 20); // Enable SQS long polling to reduce empty receives and cost
 
-CustomMessageReceiver messageReceiver = new CustomMessageReceiver();
+var messageReceiver = new CustomMessageReceiver();
 
+// Use CancellationToken for graceful shutdown and wrap in a restart loop
+// so the listener recovers from transient errors automatically.
+var cts = new CancellationTokenSource();
+while (!cts.Token.IsCancellationRequested)
+{
+    try
+    {
+        // Static method — no instance needed
+        await NotificationService.StartReceivingNotificationMessagesAsync(
+            param, messageReceiver, cancellationToken: cts.Token);
+    }
+    catch (OperationCanceledException) when (cts.Token.IsCancellationRequested)
+    {
+        break; // Graceful shutdown
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Notification listener crashed, restarting in 10s: {ex.Message}");
+        await Task.Delay(TimeSpan.FromSeconds(10), cts.Token);
+    }
+}
 
-amazonConnection.Notification.StartReceivingNotificationMessages(param, messageReceiver);
 public class CustomMessageReceiver : IMessageReceiver
 {
-     public void ErrorCatch(Exception ex)
-     {
-         //Your code here
-     }
+    // Track processed notification IDs to handle SQS duplicate delivery
+    private readonly ConcurrentDictionary<string, byte> _processedNotificationIds = new();
+    private readonly ConcurrentQueue<string> _idQueue = new();
+    private const int MaxTrackedIds = 10_000;
 
-     public void NewMessageRevicedTriger(NotificationMessageResponce message)
-     {
-         //Your Code here
-     }
+    public void ErrorCatch(Exception ex)
+    {
+        Console.WriteLine($"Notification error: {ex.Message}");
+    }
+
+    public void NewMessageRevicedTriger(NotificationMessageResponce message)
+    {
+        // Deduplicate: SQS standard queues may deliver the same message more than once
+        var notificationId = message?.NotificationMetadata?.NotificationId;
+        if (notificationId != null && !_processedNotificationIds.TryAdd(notificationId, 0))
+            return;
+
+        // Cap the dedup cache so it doesn't grow forever
+        if (notificationId != null)
+        {
+            _idQueue.Enqueue(notificationId);
+            while (_idQueue.Count > MaxTrackedIds && _idQueue.TryDequeue(out var oldId))
+                _processedNotificationIds.TryRemove(oldId, out _);
+        }
+
+        //Your Code here
+    }
 }
 
 ```
 
-### Feed Submit
-Here full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
-Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and use our library to get data, now we support only submit existing product, change quantity and change price , I list most of XSD here Source\FikaAmazonAPI\ConstructFeed\xsd its will help you easy generate class and add it in your app to generate final feed xml.
+### Notifications — End-to-End SQS Setup
+Complete workflow following the [Amazon SQS notification setup guide](https://developer-docs.amazon.com/sp-api/docs/set-up-notifications-with-amazon-sqs). Before running this code, grant SP-API permission to write to your SQS queue in the AWS Console.
+```CSharp
 
-#### Feed Submit for change price , For more Feed sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/FeedsSample.cs).
+// Step 3: Create a destination (grantless operation — no seller authorization needed)
+var destination = amazonConnection.Notification.CreateDestination(
+    new Notifications.CreateDestinationRequest()
+    {
+        Name = "CompanyName_SQS",
+        ResourceSpecification = new Notifications.DestinationResourceSpecification
+        {
+            Sqs = new Notifications.SqsResource("arn:aws:sqs:us-east-2:9999999999999:NAME")
+        }
+    });
+
+// Step 4: Create a subscription using the destinationId from Step 3
+// processingDirective is optional — only supported for ANY_OFFER_CHANGED and ORDER_CHANGE
+var subscription = amazonConnection.Notification.CreateSubscription(
+    new ParameterCreateSubscription()
+    {
+        destinationId = destination.DestinationId,
+        notificationType = NotificationType.ANY_OFFER_CHANGED,
+        payloadVersion = "1.0",
+        processingDirective = new Notifications.ProcessingDirective
+        {
+            EventFilter = new Notifications.EventFilter
+            {
+                EventFilterType = "ANY_OFFER_CHANGED",
+                MarketplaceIds = new List<string> { "ATVPDKIKX0DER" },
+                AggregationSettings = new Notifications.AggregationSettings
+                {
+                    AggregationTimePeriod = Notifications.AggregationTimePeriod.FiveMinutes
+                }
+            }
+        }
+    });
+
+```
+
+### Feed Submit
+Here is a full sample for submitting a feed to change price, generate XML, and get the final processing report, same as in the [documentation](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
+
+> **Note:** Not all [feed types](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) are implemented yet. All classes are `partial` for easy extension — you can generate XML outside the library and use it to submit data. Currently supported: submit existing product, change quantity, and change price. Most XSD files are listed in `Source\FikaAmazonAPI\ConstructFeed\xsd` to help you generate classes for your app.
+
+#### Feed Submit — Change Price
+For more feed samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/FeedsSample.cs).
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
 
@@ -549,8 +634,105 @@ var processingReport = await amazonConnection.Feed.GetJsonFeedDocumentProcessing
 
 ```
 
+#### Website authorization workflow.
+```CSharp
+    [HttpGet("AuthorizeAmazon")]
+    public async Task<IActionResult> AuthorizeAmazon()
+    {
+        // Step 2-5 of the website authorization workflow.
 
-#### Feed Submit for change Quantity
+        // Step 2-3: Amazon calls our log-in URI with amazon_callback_uri.
+        var amazonCallbackUri = Request.Query["amazon_callback_uri"].ToString();
+        if (!string.IsNullOrEmpty(amazonCallbackUri))
+        {
+            var amazonState = Request.Query["amazon_state"].ToString();
+            var version = configuration["FikaAmazonAPI:AuthorizeVersion"];
+            var redirectUri = configuration["FikaAmazonAPI:AmazonCallbackUri"];
+
+            var generatedState = Guid.NewGuid().ToString("N");
+            Response.Cookies.Append("amazon_oauth_state", generatedState, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
+            });
+
+            var query = new Dictionary<string, string?>
+            {
+                ["redirect_uri"] = redirectUri,
+                ["amazon_state"] = amazonState,
+                ["state"] = generatedState
+            };
+
+            if (!string.IsNullOrEmpty(version))
+            {
+                query["version"] = version;
+            }
+
+            Response.Headers["Referrer-Policy"] = "no-referrer";
+            var redirectUrl = QueryHelpers.AddQueryString(amazonCallbackUri, query!);
+            return Redirect(redirectUrl);
+        }
+
+        // Step 4-5: Amazon redirects back to our redirect_uri with authorization code.
+        var state = Request.Query["state"].ToString();
+        var sellingPartnerId = Request.Query["selling_partner_id"].ToString();
+        var mwsAuthToken = Request.Query["mws_auth_token"].ToString();
+        var code = Request.Query["spapi_oauth_code"].ToString();
+
+        var storedState = Request.Cookies["amazon_oauth_state"];
+        if (string.IsNullOrEmpty(state) || storedState != state)
+        {
+            return BadRequest("Invalid state");
+        }
+
+        Response.Cookies.Delete("amazon_oauth_state");
+
+        if (string.IsNullOrEmpty(code))
+        {
+            return BadRequest("Missing spapi_oauth_code");
+        }
+
+        var clientId = configuration["FikaAmazonAPI:ClientId"];
+        var clientSecret = configuration["FikaAmazonAPI:ClientSecret"];
+        var callbackUri = configuration["FikaAmazonAPI:AmazonCallbackUri"];
+
+        using var httpClient = new HttpClient();
+        var form = new FormUrlEncodedContent(new Dictionary<string, string>
+        {
+            ["grant_type"] = "authorization_code",
+            ["code"] = code,
+            ["client_id"] = clientId ?? string.Empty,
+            ["client_secret"] = clientSecret ?? string.Empty,
+            ["redirect_uri"] = callbackUri ?? string.Empty
+        });
+
+        using var response = await httpClient.PostAsync("https://api.amazon.com/auth/o2/token", form);
+        var responseBody = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            return BadRequest(responseBody);
+        }
+
+        using var document = JsonDocument.Parse(responseBody);
+        var refreshToken = document.RootElement.GetProperty("refresh_token").GetString();
+        var accessToken = document.RootElement.GetProperty("access_token").GetString();
+
+        return Json(new
+        {
+            state,
+            selling_partner_id = sellingPartnerId,
+            mws_auth_token = mwsAuthToken,
+            refresh_token = refreshToken,
+            access_token = accessToken
+        });
+    }
+
+```
+
+ 
+#### Feed Submit — Change Quantity
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
 
@@ -580,7 +762,7 @@ var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(out
 
 ```
 
-#### Feed Submit for change ProdcutImage
+#### Feed Submit — Change Product Image
 ```CSharp
 public void SubmitFeedProductImage()
 {
@@ -600,7 +782,7 @@ public void SubmitFeedProductImage()
 }
 ```
 
-#### Feed Submit for change FULFILLMENT DATA (add tracking number for shipment)
+#### Feed Submit — Fulfillment Data (add tracking number for shipment)
 ```CSharp
 
 ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
@@ -626,7 +808,7 @@ list.Add(new OrderFulfillmentMessage()
 ```
 
 
-#### Feed Submit for change Order Adjustments
+#### Feed Submit — Order Adjustments
 ```CSharp
 public void SubmitFeedOrderAdjustment()
 {
@@ -672,11 +854,11 @@ public void SubmitFeedOrderAdjustment()
 Please read this doc to get all information about this limitation
 https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits
 
-we calc waiting time by read x-amzn-RateLimit-Limit header 
+We calculate the waiting time by reading the `x-amzn-RateLimit-Limit` header:
 
 `int sleepTime = (int)((1 / header["x-amzn-RateLimit-Limit"] ) * 1000);`
 
-You can also disable libary from handelling limitaion by set IsActiveLimitRate=false in AmazonCredential
+You can also disable the library's rate limit handling by setting `IsActiveLimitRate = false` in `AmazonCredential`:
 ```CSharp
 var amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -688,8 +870,8 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ---
 
-## Enable debug mode
-You can also enable log for all http request and response you can set IsDebugMode=true in AmazonCredential
+## Enable Debug Mode
+You can enable logging for all HTTP requests and responses by setting `IsDebugMode = true` in `AmazonCredential`:
 ```CSharp
 var amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -701,7 +883,7 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ---
 
-## Get restrictions before try to add new lists
+## Get Restrictions Before Adding New Listings
 
 ```CSharp
 var result = amazonConnection.Restrictions.GetListingsRestrictions(
@@ -783,7 +965,7 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
    new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
     {
      productType = "PRODUCT",
-     requirements = RequirementsEnum.LISTING,
+     requirements = Requirements.LISTING,
      locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
      });
 ```

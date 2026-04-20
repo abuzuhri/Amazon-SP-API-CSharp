@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
@@ -22,6 +23,11 @@ namespace FikaAmazonAPI.ReportGeneration
                 values.Add(OrderInvoicingReportRow.FromRow(row, refNumber));
             }
             Data = values;
+        }
+
+        public OrderInvoicingReport(Stream stream, string refNumber)
+        {
+            Data = ReportParser.ParseTableRows(stream, OrderInvoicingReportRow.FromRow, refNumber);
         }
     }
 

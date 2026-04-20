@@ -19,38 +19,38 @@ namespace FikaAmazonAPI.SampleCode
         public void GetOrdersOnePageWithNextPageToken()
         {
             // ONLY USE THIS SAMPLE IF YOU NEED TO GET ONE PAGE EACH TIME other wise remove parameter 'MaxNumberOfPages' and libaray will fetch all orders to you
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
-            serachOrderList.MaxNumberOfPages = 1;
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+            ParameterOrderList searchOrderList = new ParameterOrderList();
+            searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            searchOrderList.MaxNumberOfPages = 1;
+            searchOrderList.OrderStatuses = new List<OrderStatuses>();
+            searchOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
 
-            serachOrderList.AmazonOrderIds = new List<string>();
+            searchOrderList.AmazonOrderIds = new List<string>();
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
             var nextPageToken = orders.NextToken;
             while (!string.IsNullOrEmpty(nextPageToken))
             {
-                var moreOrders = amazonConnection.Orders.GetGetOrdersByNextToken(nextPageToken, serachOrderList);
+                var moreOrders = amazonConnection.Orders.GetGetOrdersByNextToken(nextPageToken, searchOrderList);
                 nextPageToken = moreOrders.NextToken;
             }
 
         }
         public void GetOrders()
         {
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            ParameterOrderList searchOrderList = new ParameterOrderList();
+            searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
+            searchOrderList.OrderStatuses = new List<OrderStatuses>();
+            searchOrderList.OrderStatuses.Add(OrderStatuses.Shipped);
 
-            serachOrderList.AmazonOrderIds = new List<string>();
-            serachOrderList.AmazonOrderIds.Add("403-1710607-6240347");
-            serachOrderList.AmazonOrderIds.Add("403-5583945-7236361");
-            serachOrderList.AmazonOrderIds.Add("403-3320829-4528316");
-            serachOrderList.AmazonOrderIds.Add("406-2574982-2047546");
+            searchOrderList.AmazonOrderIds = new List<string>();
+            searchOrderList.AmazonOrderIds.Add("403-1710607-6240347");
+            searchOrderList.AmazonOrderIds.Add("403-5583945-7236361");
+            searchOrderList.AmazonOrderIds.Add("403-3320829-4528316");
+            searchOrderList.AmazonOrderIds.Add("406-2574982-2047546");
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
         }
 
         /// <summary>
@@ -58,24 +58,24 @@ namespace FikaAmazonAPI.SampleCode
         /// </summary>
         public void GetOrdersPIISimple()
         {
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            ParameterOrderList searchOrderList = new ParameterOrderList();
+            searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+            searchOrderList.OrderStatuses = new List<OrderStatuses>();
+            searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
-            //You must have valid PII developer to be able to call this 
-            serachOrderList.IsNeedRestrictedDataToken = true;
+            //You must have valid PII developer to be able to call this
+            searchOrderList.IsNeedRestrictedDataToken = true;
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
         }
         public void GetOrdersPIIAdvance()
         {
-            ParameterOrderList serachOrderList = new ParameterOrderList();
-            serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
+            ParameterOrderList searchOrderList = new ParameterOrderList();
+            searchOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
 
-            serachOrderList.OrderStatuses = new List<OrderStatuses>();
-            serachOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
+            searchOrderList.OrderStatuses = new List<OrderStatuses>();
+            searchOrderList.OrderStatuses.Add(OrderStatuses.Unshipped);
 
             //You must have valid PII developer to be able to call this 
             var restrictedResource = new RestrictedResource();
@@ -88,10 +88,10 @@ namespace FikaAmazonAPI.SampleCode
             {
                 restrictedResources = new List<RestrictedResource> { restrictedResource }
             };
-            serachOrderList.RestrictedDataTokenRequest = createRDT;
-            serachOrderList.IsNeedRestrictedDataToken = true;
+            searchOrderList.RestrictedDataTokenRequest = createRDT;
+            searchOrderList.IsNeedRestrictedDataToken = true;
 
-            var orders = amazonConnection.Orders.GetOrders(serachOrderList);
+            var orders = amazonConnection.Orders.GetOrders(searchOrderList);
         }
 
         public void GetOrderBuyerInfo()

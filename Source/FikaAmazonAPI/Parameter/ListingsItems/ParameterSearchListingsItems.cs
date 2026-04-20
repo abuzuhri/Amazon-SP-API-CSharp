@@ -7,6 +7,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
 {
     public class ParameterSearchListingsItems : PaginationParameter
     {
+        [PathParameter]
         public string sellerId { get; set; }
         public ICollection<string> marketplaceIds { get; set; } = new List<string>();
         public string issueLocale { get; set; } = "en_US";

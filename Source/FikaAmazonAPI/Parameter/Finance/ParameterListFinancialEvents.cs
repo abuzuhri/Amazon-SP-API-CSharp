@@ -11,4 +11,5 @@ namespace FikaAmazonAPI.Parameter.Finance
         public string NextToken { get; set; }
         public int? MaxNumberOfPages { get; set; }
     }
+
 }

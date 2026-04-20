@@ -35,6 +35,8 @@
         Financial_ListFinancialEventsByOrderId,
         Financial_ListFinancialEvents,
 
+        FinancialV20240619_Transactions,
+
         Feed_GetFeeds,
         Feed_CreateFeed,
         Feed_GetFeed,
@@ -238,6 +240,8 @@
         VendorOrdersV1_GetPurchaseOrdersStatus,
 
 		VendorTransactionStatus_GetTransaction,
+        
+        VendorDirectFulfillmentInventory_SubmitInventoryUpdate,
 
     }
 }
