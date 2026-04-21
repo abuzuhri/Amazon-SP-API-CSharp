@@ -46,12 +46,14 @@ namespace FikaAmazonAPI.ReportGeneration
         public int? ReconciledQuantity { get; set; }
         public int? UnreconciledQuantity { get; set; }
         public string refNumber { get; set; }
+        public DateTime? DateAndTime { get; set; }
 
 
         public static LedgerDetailReportRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new LedgerDetailReportRow();
             row.Date = DataConverter.GetDate(rowData.GetString("Date"), DataConverter.DateTimeFormat.DATE_LEDGER_FORMAT);
+            row.DateAndTime = DataConverter.GetDate(rowData.GetString("Date and Time"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.FNSKU = rowData.GetString("FNSKU");
             row.ASIN = rowData.GetString("ASIN");
             row.MSKU = rowData.GetString("MSKU");
