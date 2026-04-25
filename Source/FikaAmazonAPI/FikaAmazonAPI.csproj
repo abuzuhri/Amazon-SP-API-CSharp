@@ -32,12 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SecurityToken" Version="4.0.5.7" />
-    <PackageReference Include="AWSSDK.SQS" Version="4.0.2.12" />
+    <PackageReference Include="AWSSDK.SecurityToken" Version="4.0.6.2" />
+    <PackageReference Include="AWSSDK.SQS" Version="4.0.2.27" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Text.Json" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
