@@ -43,6 +43,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         /// <param name="phoneNumber">The phone number.</param>
         /// <param name="postalCode">The postal code. (required).</param>
         /// <param name="stateOrProvinceCode">The state or province code..</param>
+        /// <param name="districtOrCounty">The district or county.</param>
         public Address(string addressLine1 = default(string),
                        string addressLine2 = default(string),
                        string city = default(string),
@@ -52,7 +53,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                        string name = default(string),
                        string phoneNumber = default(string),
                        string postalCode = default(string),
-                       string stateOrProvinceCode = default(string))
+                       string stateOrProvinceCode = default(string),
+                       string districtOrCounty = default(string))
         {
             // to ensure "addressLine1" is required (not null)
             if (addressLine1 == null)
@@ -104,6 +106,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             this.Email = email;
             this.PhoneNumber = phoneNumber;
             this.StateOrProvinceCode = stateOrProvinceCode;
+            this.DistrictOrCounty = districtOrCounty;
         }
         
         /// <summary>
@@ -177,6 +180,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
         public string StateOrProvinceCode { get; set; }
 
         /// <summary>
+        /// The district or county.
+        /// </summary>
+        /// <value>The district or county.</value>
+        [DataMember(Name="districtOrCounty", EmitDefaultValue=false)]
+        public string DistrictOrCounty { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -194,6 +204,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
             sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
             sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
             sb.Append("  StateOrProvinceCode: ").Append(StateOrProvinceCode).Append("\n");
+            sb.Append("  DistrictOrCounty: ").Append(DistrictOrCounty).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -277,6 +288,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     this.StateOrProvinceCode == input.StateOrProvinceCode ||
                     (this.StateOrProvinceCode != null &&
                     this.StateOrProvinceCode.Equals(input.StateOrProvinceCode))
+                ) &&
+                (
+                    this.DistrictOrCounty == input.DistrictOrCounty ||
+                    (this.DistrictOrCounty != null &&
+                    this.DistrictOrCounty.Equals(input.DistrictOrCounty))
                 );
         }
 
@@ -309,6 +325,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInboundv20240320
                     hashCode = hashCode * 59 + this.PostalCode.GetHashCode();
                 if (this.StateOrProvinceCode != null)
                     hashCode = hashCode * 59 + this.StateOrProvinceCode.GetHashCode();
+                if (this.DistrictOrCounty != null)
+                    hashCode = hashCode * 59 + this.DistrictOrCounty.GetHashCode();
                 return hashCode;
             }
         }
