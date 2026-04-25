@@ -95,7 +95,12 @@ For more information about keys, check the [Amazon developer documentation](http
 ---
 ## Usage
 
-> ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
+> ### Heads-up: Amazon-side changes affecting this library
+>
+> - **Catalog Items API v0 was removed by Amazon on 2025-03-31.** `CatalogItem.ListCatalogItems`, `CatalogItem.ListCatalogCategories`, and `CatalogItem.GetCatalogItemJson` are now marked obsolete because the underlying endpoints no longer exist. Use the 2022-04-01 methods (`SearchCatalogItems202204`, `GetCatalogItem202204`) instead.
+> - **XML feed types (e.g. the legacy inventory feed) were turned off on 2025-07-31.** If you previously submitted inventory updates with `_POST_INVENTORY_AVAILABILITY_DATA_` or similar XML feed types, migrate to `FeedType.JSON_LISTINGS_FEED` with a JSON-Patch payload (see `FeedsSample.cs`).
+> - **Orders API v0 will be removed on 2027-03-27.** All six v0 operations (`getOrders`, `getOrder`, `getOrderBuyerInfo`, `getOrderAddress`, `getOrderItems`, `getOrderItemsBuyerInfo`) will start failing on that date. For new code, prefer `amazonConnection.OrdersV20260101` (Orders API v2026-01-01), which collapses those six operations into `getOrder` and `searchOrders`.
+> - **`Address.Name` (Orders v0) is now optional** as of Amazon's 2025-10 release. The constructor in `AmazonSpApiSDK.Models.Orders.Address` no longer throws when `name` is null — handle null `Name` defensively in your code.
 
 ### Configuration
 You can configure a connection as shown below. See [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.

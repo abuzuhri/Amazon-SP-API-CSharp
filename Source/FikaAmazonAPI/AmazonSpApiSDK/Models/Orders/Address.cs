@@ -13,7 +13,6 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -60,7 +59,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
-        /// <param name="name">The name. (required).</param>
+        /// <param name="name">The name..</param>
         /// <param name="companyName">The name of the business or organization at this address..</param>
         /// <param name="addressLine1">The street address..</param>
         /// <param name="addressLine2">Additional street address information, if required..</param>
@@ -76,15 +75,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="addressType">The address type of the shipping address..</param>
         public Address(string name = default(string), string companyName = default(string), string addressLine1 = default(string), string addressLine2 = default(string), string addressLine3 = default(string), string city = default(string), string county = default(string), string district = default(string), string stateOrRegion = default(string), string municipality = default(string), string postalCode = default(string), string countryCode = default(string), string phone = default(string), AddressTypeEnum? addressType = default(AddressTypeEnum?))
         {
-            // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for Address and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             this.CompanyName = companyName;
             this.AddressLine1 = addressLine1;
             this.AddressLine2 = addressLine2;

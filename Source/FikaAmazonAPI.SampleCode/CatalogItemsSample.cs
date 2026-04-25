@@ -19,13 +19,14 @@ namespace FikaAmazonAPI.SampleCode
 
         }
 
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. The 2022-04-01 version of the API does not expose a categories endpoint.", true)]
         public void ListCatalogCategories()
         {
             var item = amazonConnection.CatalogItem.ListCatalogCategories("B00CZC5F0G");
 
         }
 
-        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", true)]
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. Use SearchCatalogItems202204 instead.", true)]
         public void ListCatalogItems()
         {
             var items = amazonConnection.CatalogItem.ListCatalogItems(new Parameter.CatalogItems.ParameterListCatalogItems()

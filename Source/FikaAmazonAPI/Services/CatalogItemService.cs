@@ -20,12 +20,12 @@ namespace FikaAmazonAPI.Services
 
         }
 
-        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", false)]
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. Use SearchCatalogItems202204 instead.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<Item> ListCatalogItems(ParameterListCatalogItems parameterListCatalogItems) =>
             Task.Run(() => ListCatalogItemsAsync(parameterListCatalogItems)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204Async instead.", false)]
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. Use SearchCatalogItems202204Async instead.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public async Task<IList<Item>> ListCatalogItemsAsync(ParameterListCatalogItems parameterListCatalogItems)
         {
@@ -54,9 +54,13 @@ namespace FikaAmazonAPI.Services
 
             return list;
         }
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. Use GetCatalogItem202204 instead.", false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public String GetCatalogItemJson(string asin) =>
             Task.Run(() => GetCatalogItemAsyncJson(asin)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. Use GetCatalogItem202204Async instead.", false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public async Task<String> GetCatalogItemAsyncJson(string asin)
         {
 
@@ -99,9 +103,13 @@ namespace FikaAmazonAPI.Services
         }
 
 
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. The 2022-04-01 version of the API does not expose a categories endpoint.", false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<Categories> ListCatalogCategories(string ASIN, string SellerSKU = null, string MarketPlaceID = null) =>
                     Task.Run(() => ListCatalogCategoriesAsync(ASIN, SellerSKU, MarketPlaceID)).ConfigureAwait(false).GetAwaiter().GetResult();
 
+        [Obsolete("Catalog Items API v0 was removed by Amazon on 2025-03-31; this call will fail at runtime. The 2022-04-01 version of the API does not expose a categories endpoint.", false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public async Task<IList<Categories>> ListCatalogCategoriesAsync(string ASIN, string SellerSKU = null, string MarketPlaceID = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(ASIN))
