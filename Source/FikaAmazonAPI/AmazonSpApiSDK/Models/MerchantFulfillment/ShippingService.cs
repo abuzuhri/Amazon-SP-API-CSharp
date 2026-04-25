@@ -51,7 +51,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         /// <param name="availableLabelFormats">availableLabelFormats.</param>
         /// <param name="availableFormatOptionsForLabel">availableFormatOptionsForLabel.</param>
         /// <param name="requiresAdditionalSellerInputs">When true, additional seller inputs are required. (required).</param>
-        public ShippingService(string shippingServiceName = default(string), string carrierName = default(string), string shippingServiceId = default(string), string shippingServiceOfferId = default(string), DateTime? shipDate = default(DateTime?), DateTime? earliestEstimatedDeliveryDate = default(DateTime?), DateTime? latestEstimatedDeliveryDate = default(DateTime?), CurrencyAmount rate = default(CurrencyAmount), ShippingServiceOptions shippingServiceOptions = default(ShippingServiceOptions), AvailableShippingServiceOptions availableShippingServiceOptions = default(AvailableShippingServiceOptions), LabelFormatList availableLabelFormats = default(LabelFormatList), AvailableFormatOptionsForLabelList availableFormatOptionsForLabel = default(AvailableFormatOptionsForLabelList), bool? requiresAdditionalSellerInputs = default(bool?))
+        public ShippingService(string shippingServiceName = default(string), string carrierName = default(string), string shippingServiceId = default(string), string shippingServiceOfferId = default(string), DateTime? shipDate = default(DateTime?), DateTime? earliestEstimatedDeliveryDate = default(DateTime?), DateTime? latestEstimatedDeliveryDate = default(DateTime?), CurrencyAmount rate = default(CurrencyAmount), ShippingServiceOptions shippingServiceOptions = default(ShippingServiceOptions), AvailableShippingServiceOptions availableShippingServiceOptions = default(AvailableShippingServiceOptions), LabelFormatList availableLabelFormats = default(LabelFormatList), AvailableFormatOptionsForLabelList availableFormatOptionsForLabel = default(AvailableFormatOptionsForLabelList), bool? requiresAdditionalSellerInputs = default(bool?), CurrencyAmount rateWithAdjustments = default(CurrencyAmount), AdjustmentItemList adjustmentItemList = default(AdjustmentItemList))
         {
             // to ensure "shippingServiceName" is required (not null)
             if (shippingServiceName == null)
@@ -130,6 +130,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             this.AvailableShippingServiceOptions = availableShippingServiceOptions;
             this.AvailableLabelFormats = availableLabelFormats;
             this.AvailableFormatOptionsForLabel = availableFormatOptionsForLabel;
+            this.RateWithAdjustments = rateWithAdjustments;
+            this.AdjustmentItemList = adjustmentItemList;
         }
         
         /// <summary>
@@ -220,6 +222,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
         public bool? RequiresAdditionalSellerInputs { get; set; }
 
         /// <summary>
+        /// The amount that the carrier will charge for the shipment with adjustments.
+        /// </summary>
+        /// <value>The amount that the carrier will charge for the shipment with adjustments.</value>
+        [DataMember(Name="RateWithAdjustments", EmitDefaultValue=false)]
+        public CurrencyAmount RateWithAdjustments { get; set; }
+
+        /// <summary>
+        /// A list of adjustments applied to a shipping service.
+        /// </summary>
+        /// <value>A list of adjustments applied to a shipping service.</value>
+        [DataMember(Name="AdjustmentItemList", EmitDefaultValue=false)]
+        public AdjustmentItemList AdjustmentItemList { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -240,6 +256,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
             sb.Append("  AvailableLabelFormats: ").Append(AvailableLabelFormats).Append("\n");
             sb.Append("  AvailableFormatOptionsForLabel: ").Append(AvailableFormatOptionsForLabel).Append("\n");
             sb.Append("  RequiresAdditionalSellerInputs: ").Append(RequiresAdditionalSellerInputs).Append("\n");
+            sb.Append("  RateWithAdjustments: ").Append(RateWithAdjustments).Append("\n");
+            sb.Append("  AdjustmentItemList: ").Append(AdjustmentItemList).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -338,6 +356,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
                     this.RequiresAdditionalSellerInputs == input.RequiresAdditionalSellerInputs ||
                     (this.RequiresAdditionalSellerInputs != null &&
                     this.RequiresAdditionalSellerInputs.Equals(input.RequiresAdditionalSellerInputs))
+                ) &&
+                (
+                    this.RateWithAdjustments == input.RateWithAdjustments ||
+                    (this.RateWithAdjustments != null &&
+                    this.RateWithAdjustments.Equals(input.RateWithAdjustments))
+                ) &&
+                (
+                    this.AdjustmentItemList == input.AdjustmentItemList ||
+                    (this.AdjustmentItemList != null &&
+                    this.AdjustmentItemList.Equals(input.AdjustmentItemList))
                 );
         }
 
@@ -376,6 +404,10 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment
                     hashCode = hashCode * 59 + this.AvailableFormatOptionsForLabel.GetHashCode();
                 if (this.RequiresAdditionalSellerInputs != null)
                     hashCode = hashCode * 59 + this.RequiresAdditionalSellerInputs.GetHashCode();
+                if (this.RateWithAdjustments != null)
+                    hashCode = hashCode * 59 + this.RateWithAdjustments.GetHashCode();
+                if (this.AdjustmentItemList != null)
+                    hashCode = hashCode * 59 + this.AdjustmentItemList.GetHashCode();
                 return hashCode;
             }
         }
