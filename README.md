@@ -395,6 +395,33 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
  await priceDemo.GetFeaturedOfferExpectedPriceBatch();
 ```
 
+### GetCompetitiveSummary (v2022-05-01)
+The 2022-05-01 batch operation returns featured buying options, reference prices, lowest priced offers, and **similar items** (the `similarItems` array Amazon added in April 2026) for up to 20 ASIN/marketplace pairs per call. Rate limit is strict — 0.033 req/s, burst 1.
+
+```CSharp
+var response = await amazonConnection.ProductPricing.GetCompetitiveSummaryAsync(new CompetitiveSummaryBatchRequest
+{
+    Requests = new List<CompetitiveSummaryRequest>
+    {
+        new CompetitiveSummaryRequest
+        {
+            Asin          = "B00CZC5F0G",
+            MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+            IncludedData  = new List<CompetitiveSummaryIncludedData>
+            {
+                CompetitiveSummaryIncludedData.similarItems
+            },
+        }
+    }
+});
+
+// Read the new similarItems array.
+foreach (var r in response.Responses)
+    foreach (var group in r.Body?.SimilarItems ?? new List<SimilarItems>())
+        foreach (var item in group.Items)
+            Console.WriteLine($"Similar ASIN: {item.Asin}");
+```
+
 
 ### Notifications — Create Destination
 For more notification samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).

@@ -1,6 +1,8 @@
-﻿using FikaAmazonAPI.Parameter.ProductPricing;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductPricing.v2022_05_01;
+using FikaAmazonAPI.Parameter.ProductPricing;
 using FikaAmazonAPI.Parameter.ProductPricing.v2022_05_01;
 using FikaAmazonAPI.Utils;
+using System.Linq;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.SampleCode
@@ -133,6 +135,72 @@ namespace FikaAmazonAPI.SampleCode
                     new FeaturedOfferExpectedPriceRequest{
                         SellerSku  = "SellerSKU_02",
                         MarketplaceId = MarketPlace.Germany.ID,
+                    }
+                }
+            });
+        }
+
+        /// <summary>
+        /// Pulls similar-item ASINs (and other competitive data) for a list of ASINs.
+        /// Up to 20 ASIN/marketplace combinations per batch. Rate limit is strict (0.033 req/s).
+        /// </summary>
+        public async Task<List<string>> GetSimilarAsinsAsync(IList<string> asins, string marketplaceId)
+        {
+            var batch = new CompetitiveSummaryBatchRequest
+            {
+                Requests = asins.Select(asin => new CompetitiveSummaryRequest
+                {
+                    Asin          = asin,
+                    MarketplaceId = marketplaceId,
+                    IncludedData  = new List<CompetitiveSummaryIncludedData>
+                    {
+                        CompetitiveSummaryIncludedData.similarItems
+                    },
+                }).ToList()
+            };
+
+            var response = await amazonConnection.ProductPricing.GetCompetitiveSummaryAsync(batch);
+
+            var similar = new List<string>();
+            foreach (var r in response?.Responses ?? new List<CompetitiveSummaryResponse>())
+            {
+                if (r.Body?.SimilarItems == null) continue;
+                foreach (var group in r.Body.SimilarItems)
+                    foreach (var item in group.Items ?? new List<Item>())
+                        similar.Add(item.Asin);
+            }
+            return similar;
+        }
+
+        /// <summary>
+        /// Full competitive summary call asking for everything: featured buying options,
+        /// reference prices, lowest priced offers, and similar items.
+        /// </summary>
+        public async Task<CompetitiveSummaryBatchResponse> GetCompetitiveSummaryFullAsync(string asin)
+        {
+            return await amazonConnection.ProductPricing.GetCompetitiveSummaryAsync(new CompetitiveSummaryBatchRequest
+            {
+                Requests = new List<CompetitiveSummaryRequest>
+                {
+                    new CompetitiveSummaryRequest
+                    {
+                        Asin          = asin,
+                        MarketplaceId = amazonConnection.GetCurrentMarketplace.ID,
+                        IncludedData = new List<CompetitiveSummaryIncludedData>
+                        {
+                            CompetitiveSummaryIncludedData.featuredBuyingOptions,
+                            CompetitiveSummaryIncludedData.referencePrices,
+                            CompetitiveSummaryIncludedData.lowestPricedOffers,
+                            CompetitiveSummaryIncludedData.similarItems,
+                        },
+                        LowestPricedOffersInputs = new List<LowestPricedOffersInput>
+                        {
+                            new LowestPricedOffersInput
+                            {
+                                ItemCondition = Condition.New,
+                                OfferType     = LowestPricedOffersOfferType.Consumer,
+                            }
+                        }
                     }
                 }
             });

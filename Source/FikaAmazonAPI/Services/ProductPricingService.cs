@@ -173,6 +173,27 @@ Task.Run(() => GetListingOffersBatchAsync(parameterGetItemOffersBatchRequest)).C
             return await ExecuteRequestAsync<GetFeaturedOfferExpectedPriceBatchResponse>(RateLimitType.ProductPricing_GetListingOffersBatch, cancellationToken);
         }
 
+        /// <summary>
+        /// Returns competitive summary information (featured buying options, lowest priced offers,
+        /// reference prices, similar items) for up to 20 ASIN/marketplaceId combinations per call.
+        /// Rate limit: 0.033 req/s, burst 1.
+        /// </summary>
+        public CompetitiveSummaryBatchResponse GetCompetitiveSummary(CompetitiveSummaryBatchRequest request) =>
+            Task.Run(() => GetCompetitiveSummaryAsync(request)).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<CompetitiveSummaryBatchResponse> GetCompetitiveSummaryAsync(CompetitiveSummaryBatchRequest request, CancellationToken cancellationToken = default)
+        {
+            if (request == null)
+                throw new System.IO.InvalidDataException("request is required and cannot be null");
+            if (request.Requests == null || request.Requests.Count == 0)
+                throw new System.IO.InvalidDataException("request.Requests must contain at least one CompetitiveSummaryRequest");
+            if (request.Requests.Count > 20)
+                throw new System.IO.InvalidDataException("request.Requests cannot contain more than 20 items per spec");
+
+            await CreateAuthorizedRequestAsync(ProductPricingApiUrls.GetCompetitiveSummary, RestSharp.Method.Post, postJsonObj: request, cancellationToken: cancellationToken);
+            return await ExecuteRequestAsync<CompetitiveSummaryBatchResponse>(RateLimitType.ProductPricing_GetCompetitiveSummary, cancellationToken);
+        }
+
         #endregion
 
     }

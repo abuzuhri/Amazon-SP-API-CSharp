@@ -209,6 +209,7 @@
         ProductPricing_GetItemOffers,
         ProductPricing_GetItemOffersBatch,
         ProductPricing_GetListingOffersBatch,
+        ProductPricing_GetCompetitiveSummary,
 
         Sales_GetOrderMetrics,
 

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
@@ -144,44 +145,103 @@ namespace FikaAmazonAPI.Services
             }
         }
 
+        private static readonly HashSet<string> _sensitiveHeaderNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            AccessTokenHeaderName, SecurityTokenHeaderName, "Authorization"
+        };
+
+        private static string MaskSensitive(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= 8
+                ? "***"
+                : value.Substring(0, 4) + "***" + value.Substring(value.Length - 4);
+        }
+
+        private static string PrettyJsonOrRaw(string raw)
+        {
+            if (string.IsNullOrWhiteSpace(raw)) return "(empty)";
+            try
+            {
+                var obj = JsonConvert.DeserializeObject(raw);
+                return JsonConvert.SerializeObject(obj, Formatting.Indented);
+            }
+            catch
+            {
+                return raw;
+            }
+        }
+
         private void LogRequest(RestRequest request, RestResponse response)
         {
-            if (AmazonCredential.IsDebugMode)
+            // PII considerations: this dumps the full request body and response payload, which may
+            // contain buyer info / addresses / tokens. Only enabled when the caller opts in via
+            // AmazonCredential.IsDebugMode. Sensitive headers are masked.
+            if (!AmazonCredential.IsDebugMode) return;
+
+            var paramsList = request.Parameters?.ToList() ?? new List<FikaAmazonAPI.RestSharp.Parameter>();
+
+            string baseUrl = RequestClient?.Options?.BaseUrl?.ToString() ?? string.Empty;
+            string fullUrl = baseUrl.TrimEnd('/') + "/" + (request.Resource ?? string.Empty).TrimStart('/');
+
+            var sb = new StringBuilder();
+            sb.AppendLine();
+            sb.AppendLine("---- [SP-API DEBUG] Request ----");
+            sb.AppendLine($"  {request.Method} {fullUrl}");
+
+            var queryParams = paramsList.Where(p => p.Type == ParameterType.QueryString).ToList();
+            if (queryParams.Count > 0)
             {
-                var requestToLog = new
-                {
-                    resource = request.Resource,
-                    parameters = request.Parameters?.Select(parameter => new
-                    {
-                        name = parameter.Name,
-                        value = parameter.Value,
-                        type = parameter.Type.ToString()
-                    }).ToList(),
-                    // ToString() here to have the method as a nice string otherwise it will just show the enum value
-                    method = request.Method.ToString(),
-                    // This will generate the actual Uri used in the request
-                    //uri = request. _restClient.BuildUri(request),
-                };
-
-                //remove the access token from the headers
-                requestToLog.parameters.RemoveAll(p => p.name == "x-amz-access-token");
-
-                var responseToLog = new
-                {
-                    statusCode = response.StatusCode,
-                    content = response.Content,
-                    headers = response.Headers?.Select(h => new
-                    {
-                        name = h.Name,
-                        value = h.Value
-                    }),
-                    // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
-                    responseUri = response.ResponseUri,
-                    errorMessage = response.ErrorMessage,
-                };
-                //There are PII considerations here
-                _logger?.LogInformation("Request completed, \nRequest: {@request} \n\nResponse: {@response}", requestToLog, responseToLog);
+                sb.AppendLine("  Query:");
+                foreach (var q in queryParams)
+                    sb.AppendLine($"    {q.Name} = {q.Value}");
             }
+
+            var headerParams = paramsList.Where(p => p.Type == ParameterType.HttpHeader).ToList();
+            if (headerParams.Count > 0)
+            {
+                sb.AppendLine("  Headers:");
+                foreach (var h in headerParams)
+                {
+                    var name = h.Name?.ToString() ?? string.Empty;
+                    var rawValue = h.Value?.ToString() ?? string.Empty;
+                    var displayValue = _sensitiveHeaderNames.Contains(name) ? MaskSensitive(rawValue) : rawValue;
+                    sb.AppendLine($"    {name}: {displayValue}");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(request.JsonBody))
+            {
+                sb.AppendLine("  Body:");
+                sb.AppendLine(PrettyJsonOrRaw(request.JsonBody));
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("---- [SP-API DEBUG] Response ----");
+            sb.AppendLine($"  Status: {(int)response.StatusCode} {response.StatusCode}");
+            if (response.ResponseUri != null)
+                sb.AppendLine($"  ResponseUri: {response.ResponseUri}");
+
+            if (response.Headers != null && response.Headers.Count > 0)
+            {
+                sb.AppendLine("  Headers:");
+                foreach (var h in response.Headers)
+                    sb.AppendLine($"    {h.Name}: {h.Value}");
+            }
+
+            sb.AppendLine("  Body:");
+            sb.AppendLine(PrettyJsonOrRaw(response.Content));
+
+            if (!string.IsNullOrEmpty(response.ErrorMessage))
+                sb.AppendLine($"  ErrorMessage: {response.ErrorMessage}");
+
+            sb.AppendLine("---- [SP-API DEBUG] End ----");
+
+            // Always echo to Console — matches the RateLimits debug-mode convention so users
+            // see output without needing to wire up an ILoggerFactory.
+            Console.WriteLine(sb.ToString());
+            // Also forward to the structured logger when one is configured.
+            _logger?.LogInformation(sb.ToString());
         }
 
         private void RestHeader()

@@ -389,6 +389,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             private static readonly string _resourceBaseUrl_v20220501 = "/products/pricing/2022-05-01";
             public static string FeaturedOfferExpectedPriceUri => $"{_resourceBaseUrl_v20220501}/offer/featuredOfferExpectedPrice";
             public static string GetFeaturedOfferExpectedPriceBatch => $"/batches{FeaturedOfferExpectedPriceUri}";
+            public static string CompetitiveSummaryUri => $"{_resourceBaseUrl_v20220501}/items/competitiveSummary";
+            public static string GetCompetitiveSummary => $"/batches{CompetitiveSummaryUri}";
             #endregion
         }
         protected class ProductTypeApiUrls
