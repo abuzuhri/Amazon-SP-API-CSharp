@@ -51,7 +51,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [ProductPricingV0](https://developer-docs.amazon.com/sp-api/docs/product-pricing-api-v0-reference)
 - [x] [Sales](https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference)
 - [x] [Sellers](https://developer-docs.amazon.com/sp-api/docs/sellers-api-v1-reference)
-- [ ] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference)
+- [x] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference) — `getServiceJobByServiceJobId`
 - [x] [Solicitations](https://developer-docs.amazon.com/sp-api/docs/solicitations-api-v1-reference)
 - [x] [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide)
 - [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
@@ -990,6 +990,17 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
      parameters.firstDayOfWeek = Constants.FirstDayOfWeek.monday;
 
      var sales = amazonConnection.Sales.GetOrderMetrics(parameters);
+```
+
+### Services — Get a service job by ID
+For more samples, see [`ServicesSample.cs`](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ServicesSample.cs).
+```CSharp
+var serviceJob = amazonConnection.Services.GetServiceJobByServiceJobId("SJ-1234567890");
+
+// As of Amazon's April 2026 release, the response contains a payments[] array.
+var totalPaid = serviceJob.Payments?
+    .Where(p => p.Amount?.Value != null)
+    .Sum(p => p.Amount.Value);
 ```
 ---
 ## Q & A

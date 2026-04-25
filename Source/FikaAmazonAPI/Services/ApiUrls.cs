@@ -730,6 +730,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             #endregion
         }
 
+        protected class ServiceApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/service/v1";
+            public static string GetServiceJobByServiceJobId(string serviceJobId) => $"{_resourceBaseUrl}/serviceJobs/{serviceJobId}";
+        }
+
     }
 
 

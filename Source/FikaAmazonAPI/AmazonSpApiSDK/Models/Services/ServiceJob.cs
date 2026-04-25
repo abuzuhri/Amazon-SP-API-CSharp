@@ -99,7 +99,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// <param name="Buyer">Information about the buyer..</param>
         /// <param name="AssociatedItems">A list of items associated with the service job..</param>
         /// <param name="ServiceLocation">Information about the location of the service job..</param>
-        public ServiceJob(DateTime? CreateTime = default(DateTime?), ServiceJobId ServiceJobId = default(ServiceJobId), ServiceJobStatusEnum? ServiceJobStatus = default(ServiceJobStatusEnum?), ScopeOfWork ScopeOfWork = default(ScopeOfWork), Seller Seller = default(Seller), ServiceJobProvider ServiceJobProvider = default(ServiceJobProvider), List<AppointmentTime> PreferredAppointmentTimes = default(List<AppointmentTime>), List<Appointment> Appointments = default(List<Appointment>), OrderId ServiceOrderId = default(OrderId), string MarketplaceId = default(string), Buyer Buyer = default(Buyer), List<AssociatedItem> AssociatedItems = default(List<AssociatedItem>), ServiceLocation ServiceLocation = default(ServiceLocation))
+        public ServiceJob(DateTime? CreateTime = default(DateTime?), ServiceJobId ServiceJobId = default(ServiceJobId), ServiceJobStatusEnum? ServiceJobStatus = default(ServiceJobStatusEnum?), ScopeOfWork ScopeOfWork = default(ScopeOfWork), Seller Seller = default(Seller), ServiceJobProvider ServiceJobProvider = default(ServiceJobProvider), List<AppointmentTime> PreferredAppointmentTimes = default(List<AppointmentTime>), List<Appointment> Appointments = default(List<Appointment>), OrderId ServiceOrderId = default(OrderId), string MarketplaceId = default(string), Buyer Buyer = default(Buyer), List<AssociatedItem> AssociatedItems = default(List<AssociatedItem>), ServiceLocation ServiceLocation = default(ServiceLocation), List<Payment> Payments = default(List<Payment>))
         {
             this.CreateTime = CreateTime;
             this.ServiceJobId = ServiceJobId;
@@ -114,6 +114,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
             this.Buyer = Buyer;
             this.AssociatedItems = AssociatedItems;
             this.ServiceLocation = ServiceLocation;
+            this.Payments = Payments;
         }
 
         /// <summary>
@@ -202,6 +203,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         public ServiceLocation ServiceLocation { get; set; }
 
         /// <summary>
+        /// A list that contains payment information for the service job.
+        /// </summary>
+        /// <value>A list that contains payment information for the service job.</value>
+        [DataMember(Name = "payments", EmitDefaultValue = false)]
+        public List<Payment> Payments { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -222,6 +230,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
             sb.Append("  Buyer: ").Append(Buyer).Append("\n");
             sb.Append("  AssociatedItems: ").Append(AssociatedItems).Append("\n");
             sb.Append("  ServiceLocation: ").Append(ServiceLocation).Append("\n");
+            sb.Append("  Payments: ").Append(Payments).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -320,6 +329,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
                     this.ServiceLocation == input.ServiceLocation ||
                     (this.ServiceLocation != null &&
                     this.ServiceLocation.Equals(input.ServiceLocation))
+                ) &&
+                (
+                    this.Payments == input.Payments ||
+                    this.Payments != null &&
+                    this.Payments.SequenceEqual(input.Payments)
                 );
         }
 
@@ -358,6 +372,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
                     hashCode = hashCode * 59 + this.AssociatedItems.GetHashCode();
                 if (this.ServiceLocation != null)
                     hashCode = hashCode * 59 + this.ServiceLocation.GetHashCode();
+                if (this.Payments != null)
+                    hashCode = hashCode * 59 + this.Payments.GetHashCode();
                 return hashCode;
             }
         }

@@ -245,5 +245,7 @@
         
         VendorDirectFulfillmentInventory_SubmitInventoryUpdate,
 
+        Service_GetServiceJobByServiceJobId,
+
     }
 }
