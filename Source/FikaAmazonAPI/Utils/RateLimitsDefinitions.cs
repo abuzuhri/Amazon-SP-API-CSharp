@@ -262,6 +262,10 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Replenishment_ListOffers,                  new RateLimits(1.0M, 1) },
               { RateLimitType.Replenishment_ListOfferMetrics,            new RateLimits(1.0M, 1) },
               { RateLimitType.Replenishment_GetSellingPartnerMetrics,    new RateLimits(1.0M, 1) },
+
+              // Rotation is bounded by the underlying secret cycle, not a per-second budget;
+              // defend with ~1 call/min so callers can't accidentally hammer it.
+              { RateLimitType.ApplicationManagement_RotateApplicationClientSecret, new RateLimits(0.0167M, 1) },
             };
 
         }

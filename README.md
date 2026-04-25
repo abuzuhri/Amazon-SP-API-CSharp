@@ -464,7 +464,32 @@ var result = amazonConnection.Notification.CreateSubscription(
     });
 ```
 
+> **One subscription per `NotificationType`.** Amazon doesn't let a single subscription cover multiple notification types — call `CreateSubscription` once per type. You **can** reuse the same `destinationId` (the same SQS queue) across all of them. To handle LWA secret rotation, add two extra calls pointing at the same destination:
+>
+> ```CSharp
+> // Receive the new secret on rotation.
+> amazonConnection.Notification.CreateSubscription(new ParameterCreateSubscription
+> {
+>     notificationType = NotificationType.APPLICATION_OAUTH_CLIENT_NEW_SECRET,
+>     destinationId    = "xxxxxxxxxxxxxxx",   // same destination as your other subscriptions
+>     payloadVersion   = "1.0",
+> });
+>
+> // Get advance warning before the current secret expires.
+> amazonConnection.Notification.CreateSubscription(new ParameterCreateSubscription
+> {
+>     notificationType = NotificationType.APPLICATION_OAUTH_CLIENT_SECRET_EXPIRY,
+>     destinationId    = "xxxxxxxxxxxxxxx",
+>     payloadVersion   = "1.0",
+> });
+> ```
+>
+> See [Application Management — rotate the LWA client secret](#application-management-v2023-11-30--rotate-the-lwa-client-secret) for the full rotation flow.
+
 ### Notifications — Read Messages
+
+> **Tip:** if your subscriptions include `APPLICATION_OAUTH_CLIENT_NEW_SECRET`, wrap your `IMessageReceiver` with [`RotationApplyingMessageReceiver`](#application-management-v2023-11-30--rotate-the-lwa-client-secret) so a rotated client secret is applied to `amazonConnection.Credentials.ClientSecret` automatically before your receiver sees the message.
+
 ```CSharp
 
 var SQS_URL = Environment.GetEnvironmentVariable("SQS_URL");
@@ -534,6 +559,9 @@ public class CustomMessageReceiver : IMessageReceiver
 
 ### Notifications — End-to-End SQS Setup
 Complete workflow following the [Amazon SQS notification setup guide](https://developer-docs.amazon.com/sp-api/docs/set-up-notifications-with-amazon-sqs). Before running this code, grant SP-API permission to write to your SQS queue in the AWS Console.
+
+> If you also subscribe to `APPLICATION_OAUTH_CLIENT_NEW_SECRET` here, see [Notifications — Read Messages](#notifications--read-messages) for the `RotationApplyingMessageReceiver` wrapper that auto-applies rotated secrets.
+
 ```CSharp
 
 // Step 3: Create a destination (grantless operation — no seller authorization needed)
@@ -1029,6 +1057,65 @@ var totalPaid = serviceJob.Payments?
     .Where(p => p.Amount?.Value != null)
     .Sum(p => p.Amount.Value);
 ```
+
+### Application Management (v2023-11-30) — rotate the LWA client secret
+[`ApplicationManagementSample.cs`](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ApplicationManagementSample.cs) shows the full flow.
+
+The HTTP response carries no useful body — the rotated secret is delivered **asynchronously to a developer-registered SQS queue** subscribed to the `APPLICATION_OAUTH_CLIENT_NEW_SECRET` notification. The pattern is:
+
+```CSharp
+// 1. One-time setup: subscribe to the rotation notifications.
+amazonConnection.Notification.CreateSubscription(new ParameterCreateSubscription
+{
+    notificationType = NotificationType.APPLICATION_OAUTH_CLIENT_NEW_SECRET,
+    destinationId    = yourSqsDestinationId,   // pre-existing destination on an SQS queue
+    payloadVersion   = "1.0",
+});
+
+// 2. Trigger rotation. Uses LWA grant_type=client_credentials with the rotation scope —
+//    the SDK handles that special auth path internally.
+amazonConnection.ApplicationManagement.RotateApplicationClientSecret();
+
+// 3. Poll your SQS queue. The SDK already deserializes the payload into
+//    NotificationMessageResponce.Payload.ApplicationOAuthClientNewSecret
+//    (an ApplicationOAuthClientNewSecretNotification with NewClientSecret +
+//    NewClientSecretExpiryTime + OldClientSecretExpiryTime).
+```
+
+#### Auto-applying the rotated secret
+If you already use `NotificationService.StartReceivingNotificationMessages*` for SQS, wrap your existing receiver in `RotationApplyingMessageReceiver` to apply rotated secrets automatically — your code keeps doing what it did before, the credential bag updates transparently, and your `onRotated` callback persists the rotated values to your database so the next process start picks them up.
+
+Persist **all four** fields:
+
+| Field | What to do with it |
+|---|---|
+| `payload.ClientId` | Row key. |
+| `payload.NewClientSecret` | Store **encrypted** (Key Vault / KMS / encrypted column). |
+| `payload.NewClientSecretExpiryTime` | When this new secret itself expires — schedule the next rotation before this. |
+| `payload.OldClientSecretExpiryTime` | Deadline to finish the cutover. Until this passes, both secrets work; after, only the new one does. |
+
+```CSharp
+var wrapped = new RotationApplyingMessageReceiver(
+    inner: myReceiver,
+    credentials: amazonConnection.Credentials,
+    onRotated: payload =>
+    {
+        // TODO: save these four values to your database, with NewClientSecret encrypted at rest.
+        // The SDK has already applied payload.NewClientSecret to amazonConnection.Credentials,
+        // so a transient DB error here doesn't break the running process — log and continue.
+        myDb.SaveRotatedSecret(
+            clientId:                 payload.ClientId,
+            newClientSecret:          payload.NewClientSecret,
+            newClientSecretExpiresAt: payload.NewClientSecretExpiryTime,
+            oldClientSecretExpiresAt: payload.OldClientSecretExpiryTime);
+    });
+
+NotificationService.StartReceivingNotificationMessages(param, wrapped);
+```
+
+A reference `IClientSecretStore` interface is in [`ApplicationManagementSample.cs`](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ApplicationManagementSample.cs).
+
+To get advance warning before a secret expires, also subscribe to `NotificationType.APPLICATION_OAUTH_CLIENT_SECRET_EXPIRY` — its payload is `ApplicationOAuthClientSecretExpiryNotification` with a `ClientSecretExpiryTime`.
 
 ### Replenishment (v2022-11-07) — Subscribe & Save
 For more samples, see [`ReplenishmentSample.cs`](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReplenishmentSample.cs). All three operations are rate-limited to 1 req/s, burst 1.

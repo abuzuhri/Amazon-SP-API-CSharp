@@ -255,5 +255,7 @@
         Replenishment_ListOfferMetrics,
         Replenishment_GetSellingPartnerMetrics,
 
+        ApplicationManagement_RotateApplicationClientSecret,
+
     }
 }

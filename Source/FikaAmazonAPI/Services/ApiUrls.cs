@@ -749,6 +749,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetSellingPartnerMetrics => $"{_resourceBaseUrl}/sellingPartners/metrics/search";
         }
 
+        protected class ApplicationManagementApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/applications/2023-11-30";
+            public static string RotateApplicationClientSecret => $"{_resourceBaseUrl}/clientSecret";
+        }
+
     }
 
 
