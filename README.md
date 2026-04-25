@@ -56,7 +56,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide)
 - [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
 - [x] [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference)
-- [ ] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
+- [x] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
 - [x] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference) — `listOffers`, `listOfferMetrics`, `getSellingPartnerMetrics`
 
 
@@ -1056,6 +1056,54 @@ var serviceJob = amazonConnection.Services.GetServiceJobByServiceJobId("SJ-12345
 var totalPaid = serviceJob.Payments?
     .Where(p => p.Amount?.Value != null)
     .Sum(p => p.Amount.Value);
+```
+
+### A+ Content (v2020-11-01)
+For more samples, see [`AplusContentSample.cs`](https://github.com/abuzuhri/coderzanjeer/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/AplusContentSample.cs). All ten operations share a 10 req/s, burst 10 rate limit; list/search ops auto-page internally.
+
+```CSharp
+// 1. List all A+ docs on the account.
+var docs = await amazonConnection.AplusContent.SearchContentDocumentsAsync();
+
+// 2. Fetch one with full content + metadata.
+var doc = await amazonConnection.AplusContent.GetContentDocumentAsync(
+    contentReferenceKey: docs.First().ContentReferenceKey,
+    includedDataSet:     new List<AplusIncludedDataType> { AplusIncludedDataType.CONTENTS, AplusIncludedDataType.METADATA });
+
+// 3. Create a minimal doc with one STANDARD_TEXT module.
+var created = await amazonConnection.AplusContent.CreateContentDocumentAsync(new PostContentDocumentRequest
+{
+    ContentDocument = new ContentDocument
+    {
+        Name        = "My new A+ doc",
+        ContentType = ContentType.EBC,
+        Locale      = "en-US",
+        ContentModuleList = new List<ContentModule>
+        {
+            new ContentModule
+            {
+                ContentModuleType = ContentModuleType.STANDARD_TEXT,
+                StandardText = new StandardTextModule
+                {
+                    Headline = new TextComponent { Value = "About this product" },
+                    Body     = new ParagraphComponent
+                    {
+                        TextList = new List<TextComponent>
+                        {
+                            new TextComponent { Value = "Replace with your product story." }
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+// 4. Link ASINs and submit for approval.
+await amazonConnection.AplusContent.PostContentDocumentAsinRelationsAsync(
+    created.ContentReferenceKey,
+    new PostContentDocumentAsinRelationsRequest { AsinSet = new List<string> { "B00CZC5F0G" } });
+await amazonConnection.AplusContent.PostContentDocumentApprovalSubmissionAsync(created.ContentReferenceKey);
 ```
 
 ### Application Management (v2023-11-30) — rotate the LWA client secret

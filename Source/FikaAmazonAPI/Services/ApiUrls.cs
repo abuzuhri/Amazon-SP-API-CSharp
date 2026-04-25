@@ -749,6 +749,21 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string GetSellingPartnerMetrics => $"{_resourceBaseUrl}/sellingPartners/metrics/search";
         }
 
+        protected class AplusContentApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/aplus/2020-11-01";
+            public static string SearchContentDocuments => $"{_resourceBaseUrl}/contentDocuments";
+            public static string CreateContentDocument => $"{_resourceBaseUrl}/contentDocuments";
+            public static string GetContentDocument(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}";
+            public static string UpdateContentDocument(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}";
+            public static string ListContentDocumentAsinRelations(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}/asins";
+            public static string PostContentDocumentAsinRelations(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}/asins";
+            public static string ValidateContentDocumentAsinRelations => $"{_resourceBaseUrl}/contentAsinValidations";
+            public static string SearchContentPublishRecords => $"{_resourceBaseUrl}/contentPublishRecords";
+            public static string PostContentDocumentApprovalSubmission(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}/approvalSubmissions";
+            public static string PostContentDocumentSuspendSubmission(string contentReferenceKey) => $"{_resourceBaseUrl}/contentDocuments/{contentReferenceKey}/suspendSubmissions";
+        }
+
         protected class ApplicationManagementApiUrls
         {
             private readonly static string _resourceBaseUrl = "/applications/2023-11-30";

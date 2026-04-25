@@ -266,6 +266,18 @@ namespace FikaAmazonAPI.Utils
               // Rotation is bounded by the underlying secret cycle, not a per-second budget;
               // defend with ~1 call/min so callers can't accidentally hammer it.
               { RateLimitType.ApplicationManagement_RotateApplicationClientSecret, new RateLimits(0.0167M, 1) },
+
+              // All A+ Content operations share 10 req/s, burst 10 per spec.
+              { RateLimitType.AplusContent_SearchContentDocuments,                  new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_CreateContentDocument,                   new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_GetContentDocument,                      new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_UpdateContentDocument,                   new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_ListContentDocumentAsinRelations,        new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_PostContentDocumentAsinRelations,        new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_ValidateContentDocumentAsinRelations,    new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_SearchContentPublishRecords,             new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_PostContentDocumentApprovalSubmission,   new RateLimits(10.0M, 10) },
+              { RateLimitType.AplusContent_PostContentDocumentSuspendSubmission,    new RateLimits(10.0M, 10) },
             };
 
         }

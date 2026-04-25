@@ -257,5 +257,16 @@
 
         ApplicationManagement_RotateApplicationClientSecret,
 
+        AplusContent_SearchContentDocuments,
+        AplusContent_CreateContentDocument,
+        AplusContent_GetContentDocument,
+        AplusContent_UpdateContentDocument,
+        AplusContent_ListContentDocumentAsinRelations,
+        AplusContent_PostContentDocumentAsinRelations,
+        AplusContent_ValidateContentDocumentAsinRelations,
+        AplusContent_SearchContentPublishRecords,
+        AplusContent_PostContentDocumentApprovalSubmission,
+        AplusContent_PostContentDocumentSuspendSubmission,
+
     }
 }
