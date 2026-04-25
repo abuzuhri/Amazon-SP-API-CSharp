@@ -15,6 +15,7 @@ namespace FikaAmazonAPI.Parameter.Sales
         public string asin { get; set; }
         public string sku { get; set; }
         public FirstDayOfWeek firstDayOfWeek { get; set; }
+        public string amazonProgram { get; set; }
 
     }
 }

@@ -100,9 +100,17 @@ namespace FikaAmazonAPI.Services
         public FeedDocument GetFeedDocument(string feedDocumentId) =>
             Task.Run(() => GetFeedDocumentAsync(feedDocumentId)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId, CancellationToken cancellationToken = default)
+        public async Task<FeedDocument> GetFeedDocumentAsync(string feedDocumentId, CancellationToken cancellationToken = default, bool enableContentEncodingUrlHeader = false)
         {
-            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.Get, cancellationToken: cancellationToken);
+            List<KeyValuePair<string, string>> queryParameters = null;
+            if (enableContentEncodingUrlHeader)
+            {
+                queryParameters = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("enableContentEncodingUrlHeader", "true")
+                };
+            }
+            await CreateAuthorizedRequestAsync(FeedsApiUrls.GetFeedDocument(feedDocumentId), RestSharp.Method.Get, queryParameters, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<FeedDocument>(RateLimitType.Feed_GetFeedDocument, cancellationToken);
             if (response != null)
                 return response;
