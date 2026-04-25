@@ -734,6 +734,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
         {
             private readonly static string _resourceBaseUrl = "/service/v1";
             public static string GetServiceJobByServiceJobId(string serviceJobId) => $"{_resourceBaseUrl}/serviceJobs/{serviceJobId}";
+            public static string GetServiceJobs => $"{_resourceBaseUrl}/serviceJobs";
+            public static string CancelServiceJobByServiceJobId(string serviceJobId) => $"{_resourceBaseUrl}/serviceJobs/{serviceJobId}/cancellations";
+            public static string CompleteServiceJobByServiceJobId(string serviceJobId) => $"{_resourceBaseUrl}/serviceJobs/{serviceJobId}/completions";
         }
 
     }

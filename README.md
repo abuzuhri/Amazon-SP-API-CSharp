@@ -51,7 +51,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [ProductPricingV0](https://developer-docs.amazon.com/sp-api/docs/product-pricing-api-v0-reference)
 - [x] [Sales](https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference)
 - [x] [Sellers](https://developer-docs.amazon.com/sp-api/docs/sellers-api-v1-reference)
-- [x] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference) — `getServiceJobByServiceJobId`
+- [x] [Services](https://developer-docs.amazon.com/sp-api/docs/services-api-v1-reference) — `getServiceJobByServiceJobId`, `getServiceJobs`, `cancelServiceJobByServiceJobId`, `completeServiceJobByServiceJobId`
 - [x] [Solicitations](https://developer-docs.amazon.com/sp-api/docs/solicitations-api-v1-reference)
 - [x] [Token](https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference)  [Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/tokens-api-use-case-guide)
 - [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
@@ -1001,6 +1001,24 @@ var serviceJob = amazonConnection.Services.GetServiceJobByServiceJobId("SJ-12345
 var totalPaid = serviceJob.Payments?
     .Where(p => p.Amount?.Value != null)
     .Sum(p => p.Amount.Value);
+```
+
+### Services — List, cancel, and complete service jobs
+```CSharp
+// Auto-pages through every result page and returns a flat list.
+var upcoming = amazonConnection.Services.GetServiceJobs(new ParameterGetServiceJobs
+{
+    scheduleStartDate = DateTime.UtcNow,
+    scheduleEndDate   = DateTime.UtcNow.AddDays(14),
+    serviceJobStatus  = new List<string> { "SCHEDULED", "PENDING_SCHEDULE" },
+    pageSize          = 50,
+    sortField         = "JOB_DATE",
+    sortOrder         = "ASC",
+});
+
+// Returns true when the request succeeds with no errors in the response body.
+amazonConnection.Services.CancelServiceJobByServiceJobId("SJ-1234567890", "BUYER_REQUESTED_CANCELLATION");
+amazonConnection.Services.CompleteServiceJobByServiceJobId("SJ-1234567890");
 ```
 ---
 ## Q & A

@@ -26,6 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="CompleteServiceJobByServiceJobIdResponse" /> class.
         /// </summary>
+        [JsonConstructorAttribute]
+        public CompleteServiceJobByServiceJobIdResponse() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompleteServiceJobByServiceJobIdResponse" /> class.
+        /// </summary>
         /// <param name="Errors">Encountered errors for the CompleteServiceJobByServiceJobId operation..</param>
         public CompleteServiceJobByServiceJobIdResponse(ErrorList Errors = default(ErrorList))
         {

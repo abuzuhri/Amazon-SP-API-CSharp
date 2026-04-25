@@ -26,6 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="CancelServiceJobByServiceJobIdResponse" /> class.
         /// </summary>
+        [JsonConstructorAttribute]
+        public CancelServiceJobByServiceJobIdResponse() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CancelServiceJobByServiceJobIdResponse" /> class.
+        /// </summary>
         /// <param name="Errors">Encountered errors for the CancelServiceJobByServiceJobId operation..</param>
         public CancelServiceJobByServiceJobIdResponse(ErrorList Errors = default(ErrorList))
         {

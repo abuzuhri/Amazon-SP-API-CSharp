@@ -1,4 +1,7 @@
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Services;
+using FikaAmazonAPI.Parameter.Service;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +38,34 @@ namespace FikaAmazonAPI.SampleCode
             return job.Payments
                 .Where(p => p.Amount?.Value != null)
                 .Sum(p => p.Amount.Value);
+        }
+
+        /// <summary>
+        /// List service jobs scheduled in the next 14 days. The SDK pages the call internally
+        /// and returns a flat <see cref="IList{ServiceJob}"/>.
+        /// </summary>
+        public IList<ServiceJob> GetUpcomingServiceJobs()
+        {
+            var parameter = new ParameterGetServiceJobs
+            {
+                scheduleStartDate = DateTime.UtcNow,
+                scheduleEndDate = DateTime.UtcNow.AddDays(14),
+                serviceJobStatus = new List<string> { "SCHEDULED", "PENDING_SCHEDULE" },
+                pageSize = 50,
+                sortField = "JOB_DATE",
+                sortOrder = "ASC",
+            };
+            return amazonConnection.Services.GetServiceJobs(parameter);
+        }
+
+        public bool CancelServiceJob(string serviceJobId, string cancellationReasonCode)
+        {
+            return amazonConnection.Services.CancelServiceJobByServiceJobId(serviceJobId, cancellationReasonCode);
+        }
+
+        public bool CompleteServiceJob(string serviceJobId)
+        {
+            return amazonConnection.Services.CompleteServiceJobByServiceJobId(serviceJobId);
         }
     }
 }

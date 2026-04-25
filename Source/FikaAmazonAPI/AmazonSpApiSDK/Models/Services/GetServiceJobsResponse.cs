@@ -26,6 +26,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="GetServiceJobsResponse" /> class.
         /// </summary>
+        [JsonConstructorAttribute]
+        public GetServiceJobsResponse() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetServiceJobsResponse" /> class.
+        /// </summary>
         /// <param name="Payload">The payload for the GetJobs operation..</param>
         /// <param name="Errors">An unexpected condition occurred during the GetServiceJobs operation..</param>
         public GetServiceJobsResponse(JobListing Payload = default(JobListing), ErrorList Errors = default(ErrorList))

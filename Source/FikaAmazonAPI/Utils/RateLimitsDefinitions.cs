@@ -254,6 +254,9 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.VendorDirectFulfillmentInventory_SubmitInventoryUpdate, new RateLimits(10M, 10) },
 
               { RateLimitType.Service_GetServiceJobByServiceJobId,       new RateLimits(20.0M, 40) },
+              { RateLimitType.Service_GetServiceJobs,                    new RateLimits(10.0M, 40) },
+              { RateLimitType.Service_CancelServiceJobByServiceJobId,    new RateLimits(5.0M, 20) },
+              { RateLimitType.Service_CompleteServiceJobByServiceJobId,  new RateLimits(5.0M, 20) },
             };
 
         }
