@@ -258,6 +258,10 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.Service_GetServiceJobs,                    new RateLimits(10.0M, 40) },
               { RateLimitType.Service_CancelServiceJobByServiceJobId,    new RateLimits(5.0M, 20) },
               { RateLimitType.Service_CompleteServiceJobByServiceJobId,  new RateLimits(5.0M, 20) },
+
+              { RateLimitType.Replenishment_ListOffers,                  new RateLimits(1.0M, 1) },
+              { RateLimitType.Replenishment_ListOfferMetrics,            new RateLimits(1.0M, 1) },
+              { RateLimitType.Replenishment_GetSellingPartnerMetrics,    new RateLimits(1.0M, 1) },
             };
 
         }

@@ -28,6 +28,12 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true,
             });
 
+
+
+            ReplenishmentSample replenishmentSample = new ReplenishmentSample(amazonConnection);
+            var listAtRiskOffers = await replenishmentSample.ListAtRiskOffersAsync();
+
+
             ProductPricingSample productPricingSample = new ProductPricingSample(amazonConnection);
             var ASINs = await productPricingSample.GetCompetitiveSummaryFullAsync("B001F0R64M");
 

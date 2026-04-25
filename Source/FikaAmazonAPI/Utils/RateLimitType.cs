@@ -251,5 +251,9 @@
         Service_CancelServiceJobByServiceJobId,
         Service_CompleteServiceJobByServiceJobId,
 
+        Replenishment_ListOffers,
+        Replenishment_ListOfferMetrics,
+        Replenishment_GetSellingPartnerMetrics,
+
     }
 }

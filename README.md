@@ -57,7 +57,7 @@ Install-Package CSharpAmazonSpAPI
 - [x] [Authorization](https://developer-docs.amazon.com/sp-api/docs/authorization-api-v1-reference)
 - [x] [Easy Ship](https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference)
 - [ ] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
-- [ ] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference)
+- [x] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference) — `listOffers`, `listOfferMetrics`, `getSellingPartnerMetrics`
 
 
 #### Vendor 
@@ -1028,6 +1028,42 @@ var serviceJob = amazonConnection.Services.GetServiceJobByServiceJobId("SJ-12345
 var totalPaid = serviceJob.Payments?
     .Where(p => p.Amount?.Value != null)
     .Sum(p => p.Amount.Value);
+```
+
+### Replenishment (v2022-11-07) — Subscribe & Save
+For more samples, see [`ReplenishmentSample.cs`](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReplenishmentSample.cs). All three operations are rate-limited to 1 req/s, burst 1.
+
+```CSharp
+// 1. Find offers with paused or at-risk deliveries, sorted by inventory ascending.
+var atRisk = await amazonConnection.Replenishment.ListOffersAsync(new ListOffersRequest
+{
+    Pagination = new ListOffersRequestPagination { Limit = 100 },
+    Filters = new ListOffersRequestFilters
+    {
+        MarketplaceId = MarketPlace.US.ID,
+        ProgramTypes  = new List<ProgramType> { ProgramType.SUBSCRIBE_AND_SAVE },
+        DeliveriesConditions = new List<DeliveryConditionType>
+        {
+            DeliveryConditionType.NEXT_30_DAYS_DELIVERIES_PAUSED_PRICING,
+            DeliveryConditionType.NEXT_30_DAYS_DELIVERIES_AT_LOW_INVENTORY_RISK,
+        },
+    },
+    Sort = new ListOffersRequestSort { Order = SortOrder.ASC, Key = ListOffersSortKey.INVENTORY },
+});
+
+// 2. Per-offer metrics — now offer-level (SKU + FulfillmentChannelType) per April 2026 release.
+var perOffer = await amazonConnection.Replenishment.ListOfferMetricsAsync(new ListOfferMetricsRequest { /*...*/ });
+
+// 3. Seller-level metrics including the new REVENUE_PENETRATION metric.
+var spMetrics = await amazonConnection.Replenishment.GetSellingPartnerMetricsAsync(new GetSellingPartnerMetricsRequest
+{
+    AggregationFrequency = AggregationFrequency.MONTH,
+    TimeInterval = new TimeInterval { StartDate = monthStart, EndDate = monthEnd },
+    TimePeriodType = TimePeriodType.PERFORMANCE,
+    MarketplaceId = MarketPlace.US.ID,
+    ProgramTypes  = new List<ProgramType> { ProgramType.SUBSCRIBE_AND_SAVE },
+    Metrics = new List<Metric> { Metric.REVENUE_PENETRATION, Metric.TOTAL_SUBSCRIPTIONS_REVENUE },
+});
 ```
 
 ### Services — List, cancel, and complete service jobs

@@ -741,6 +741,14 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string CompleteServiceJobByServiceJobId(string serviceJobId) => $"{_resourceBaseUrl}/serviceJobs/{serviceJobId}/completions";
         }
 
+        protected class ReplenishmentApiUrls
+        {
+            private readonly static string _resourceBaseUrl = "/replenishment/2022-11-07";
+            public static string ListOffers => $"{_resourceBaseUrl}/offers/search";
+            public static string ListOfferMetrics => $"{_resourceBaseUrl}/offers/metrics/search";
+            public static string GetSellingPartnerMetrics => $"{_resourceBaseUrl}/sellingPartners/metrics/search";
+        }
+
     }
 
 
