@@ -1,6 +1,8 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
 using FikaAmazonAPI.Utils;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.Token.CacheTokenData;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -23,13 +25,23 @@ namespace FikaAmazonAPI
         public bool IsDebugMode { get; set; }
         public string MarketPlaceID { get; set; }
         public string SellerID { get; set; }
-        public string ProxyAddress { get; set; }
+        public IWebProxy Proxy { get; set; }
+
+        [Obsolete("Use the Proxy property instead.")]
+        public string ProxyAddress
+        {
+            get => (Proxy as WebProxy)?.Address?.ToString();
+            set => Proxy = string.IsNullOrWhiteSpace(value) ? null : new WebProxy(value);
+        }
+
         public static bool DebugMode { get; set; }
         public AmazonCredential()
         {
             CacheTokenData = new CacheTokenData();
         }
-        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId, string ClientSecret, string RefreshToken, string ProxyAddress = null)
+
+        public AmazonCredential(string AccessKey, string SecretKey, string RoleArn, string ClientId,
+            string ClientSecret, string RefreshToken, string ProxyAddress = null)
         {
             this.AccessKey = AccessKey;
             this.SecretKey = SecretKey;
@@ -37,7 +49,7 @@ namespace FikaAmazonAPI
             this.ClientId = ClientId;
             this.ClientSecret = ClientSecret;
             this.RefreshToken = RefreshToken;
-            this.ProxyAddress = ProxyAddress;
+            this.Proxy = string.IsNullOrWhiteSpace(ProxyAddress) ? null : new WebProxy(ProxyAddress);
             CacheTokenData = new CacheTokenData();
         }
 

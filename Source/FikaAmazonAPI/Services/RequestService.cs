@@ -59,25 +59,12 @@ namespace FikaAmazonAPI.Services
 
         private void CreateRequest(string url, RestSharp.Method method)
         {
-            if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
+            var options = new RestClientOptions(ApiBaseUrl)
             {
-                var options = new RestClientOptions(ApiBaseUrl);
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
-            }
-            else
-            {
-                var options = new RestClientOptions(ApiBaseUrl)
-                {
-                    Proxy = new System.Net.WebProxy()
-                    {
-                        Address = new Uri(AmazonCredential.ProxyAddress)
-                    }
-                };
-
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
-            }
+                Proxy = AmazonCredential.Proxy
+            };
+            RequestClient = new RestClient(options,
+                configureSerialization: s => s.UseNewtonsoftJson());
 
             Request = new RestRequest(url, method);
         }

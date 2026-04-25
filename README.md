@@ -124,19 +124,36 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 
 ### Configuration using a proxy
 Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
->```csharp
->AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
->{
->     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
->     MarketPlaceID = "A2VIGQ35RCS4UG",
->     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
->});
->```
->> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
->>
->> ***This is not required and will operate normally without the ProxyAddress being set.***
+
+The `Proxy` property accepts any `IWebProxy` implementation:
+```csharp
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     MarketPlaceID = "A2VIGQ35RCS4UG",
+     Proxy = new System.Net.WebProxy("http://xxx.xxx.xxx.xxx:xxxx"),
+});
+```
+
+For an authenticated proxy, assign any `IWebProxy` implementation -- for example, a `WebProxy` with credentials:
+```csharp
+AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
+{
+     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     ClientSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     RefreshToken= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+     MarketPlaceID = "A2VIGQ35RCS4UG",
+     Proxy = new System.Net.WebProxy("http://xxx.xxx.xxx.xxx:xxxx")
+     {
+         Credentials = new System.Net.NetworkCredential("username", "password")
+     },
+});
+```
+> ***Proxy is not required and will operate normally without it being set.***
+
+---
 
 ### Order List
 For more order samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/OrdersSample.cs).
