@@ -275,6 +275,30 @@ namespace FikaAmazonAPI.SampleCode
             await GetJsonFeedDetails(feedID);
         }
 
+        /// <summary>
+        /// Inventory update scoped to a specific marketplace. Recommended when a seller operates
+        /// in multiple marketplaces — without MarketplaceID the patch may apply ambiguously.
+        /// </summary>
+        public async Task SubmitInventoryJSON_PerMarketplace_Async(string SKU, int quantity, string marketplaceId)
+        {
+            ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);
+
+            var msg = new InventoryMessage()
+            {
+                SKU = SKU,
+                Quantity = quantity,
+                MarketplaceID = marketplaceId,
+            };
+
+            createDocument.AddInventoryMessage(new List<InventoryMessage> { msg });
+
+            var jsonString = createDocument.GetJSON();
+
+            string feedID = await amazonConnection.Feed.SubmitFeedAsync(jsonString, FeedType.JSON_LISTINGS_FEED, new List<string> { marketplaceId }, null, ContentType.JSON);
+
+            await GetJsonFeedDetails(feedID);
+        }
+
         public async Task SubmitMerchantShippingGroupJSON_Async(string sku, string merchant_shipping_group_id)
         {
             ConstructJSONFeedService createDocument = new ConstructJSONFeedService(amazonConnection.GetCurrentSellerID);

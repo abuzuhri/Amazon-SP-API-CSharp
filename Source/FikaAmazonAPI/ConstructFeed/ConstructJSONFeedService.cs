@@ -124,8 +124,13 @@ namespace FikaAmazonAPI.ConstructFeed
             {
                 var patcheValueData = new PatcheValueData()
                 {
-                    fulfillment_channel_code = "DEFAULT"
+                    fulfillment_channel_code = string.IsNullOrEmpty(itm.FulfillmentChannelCode) ? "DEFAULT" : itm.FulfillmentChannelCode
                 };
+
+                if (!string.IsNullOrEmpty(itm.MarketplaceID))
+                {
+                    patcheValueData.marketplace_id = itm.MarketplaceID;
+                }
 
                 if (itm.QuantitySpecified)
                 {
@@ -147,7 +152,7 @@ namespace FikaAmazonAPI.ConstructFeed
                     messageId = ++index,
                     sku = itm.SKU,
                     operationType = "PATCH",
-                    productType = "PRODUCT",
+                    productType = string.IsNullOrEmpty(itm.ProductType) ? "PRODUCT" : itm.ProductType,
                     patches = new List<PatcheData>{
                         new PatcheData()
                         {
