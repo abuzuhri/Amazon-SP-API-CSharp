@@ -12,7 +12,6 @@
     <FileVersion>1.9.27</FileVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/abuzuhri/Amazon-SP-API-CSharp</RepositoryUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageTags>Amazon SP-API MWS Amazon-SP-API Amazon Selling</PackageTags>
@@ -23,6 +22,7 @@
 	<PackageIcon>icon.jpg</PackageIcon>
 	<TargetFramework>netstandard2.0</TargetFramework>
 	<UserSecretsId>2ff602c6-a213-4df0-88f2-cf1a1df95fbc</UserSecretsId>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
     
   </PropertyGroup>
   <ItemGroup>
@@ -47,6 +47,10 @@
     <Compile Include="..\RestSharp\*.cs" />
   </ItemGroup>
   <ItemGroup>
+        <None Include="..\..\LICENSE">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
         <None Include="..\..\Others\icon\icon.jpg">
           <Pack>True</Pack>
           <PackagePath>\</PackagePath>
