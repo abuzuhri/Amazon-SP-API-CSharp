@@ -61,6 +61,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// Initializes a new instance of the <see cref="Address" /> class.
         /// </summary>
         /// <param name="name">The name. (required).</param>
+        /// <param name="companyName">The name of the business or organization at this address..</param>
         /// <param name="addressLine1">The street address..</param>
         /// <param name="addressLine2">Additional street address information, if required..</param>
         /// <param name="addressLine3">Additional street address information, if required..</param>
@@ -73,7 +74,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="countryCode">The country code. A two-character country code, in ISO 3166-1 alpha-2 format..</param>
         /// <param name="phone">The phone number. Not returned for Fulfillment by Amazon (FBA) orders..</param>
         /// <param name="addressType">The address type of the shipping address..</param>
-        public Address(string name = default(string), string addressLine1 = default(string), string addressLine2 = default(string), string addressLine3 = default(string), string city = default(string), string county = default(string), string district = default(string), string stateOrRegion = default(string), string municipality = default(string), string postalCode = default(string), string countryCode = default(string), string phone = default(string), AddressTypeEnum? addressType = default(AddressTypeEnum?))
+        public Address(string name = default(string), string companyName = default(string), string addressLine1 = default(string), string addressLine2 = default(string), string addressLine3 = default(string), string city = default(string), string county = default(string), string district = default(string), string stateOrRegion = default(string), string municipality = default(string), string postalCode = default(string), string countryCode = default(string), string phone = default(string), AddressTypeEnum? addressType = default(AddressTypeEnum?))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -84,6 +85,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             {
                 this.Name = name;
             }
+            this.CompanyName = companyName;
             this.AddressLine1 = addressLine1;
             this.AddressLine2 = addressLine2;
             this.AddressLine3 = addressLine3;
@@ -104,6 +106,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <value>The name.</value>
         [DataMember(Name = "Name", EmitDefaultValue = false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The name of the business or organization at this address.
+        /// </summary>
+        /// <value>The name of the business or organization at this address.</value>
+        [DataMember(Name = "CompanyName", EmitDefaultValue = false)]
+        public string CompanyName { get; set; }
 
         /// <summary>
         /// The street address.
@@ -192,6 +201,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             var sb = new StringBuilder();
             sb.Append("class Address {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  CompanyName: ").Append(CompanyName).Append("\n");
             sb.Append("  AddressLine1: ").Append(AddressLine1).Append("\n");
             sb.Append("  AddressLine2: ").Append(AddressLine2).Append("\n");
             sb.Append("  AddressLine3: ").Append(AddressLine3).Append("\n");
@@ -242,6 +252,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
+                ) &&
+                (
+                    this.CompanyName == input.CompanyName ||
+                    (this.CompanyName != null &&
+                    this.CompanyName.Equals(input.CompanyName))
                 ) &&
                 (
                     this.AddressLine1 == input.AddressLine1 ||
@@ -316,6 +331,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                 int hashCode = 41;
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.CompanyName != null)
+                    hashCode = hashCode * 59 + this.CompanyName.GetHashCode();
                 if (this.AddressLine1 != null)
                     hashCode = hashCode * 59 + this.AddressLine1.GetHashCode();
                 if (this.AddressLine2 != null)
