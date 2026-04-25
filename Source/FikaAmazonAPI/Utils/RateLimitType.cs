@@ -19,6 +19,8 @@
         Order_UpdateVerificationStatus,
         Order_UpdateOrderItemsApprovals,
         Order_ShipmentConfirmation,
+        OrderV20260101_SearchOrders,
+        OrderV20260101_GetOrder,
 
         Report_GetReports,
         Report_GetReport,
