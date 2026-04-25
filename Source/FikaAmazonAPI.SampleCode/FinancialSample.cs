@@ -1,4 +1,5 @@
 ﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,37 @@ namespace FikaAmazonAPI.SampleCode
                     MaxResultsPerPage = 55
                 });
             return financialEventsWithParams;
+        }
+
+        public IList<Transaction> ListFinancialTransactions20240619()
+        {
+            return amazonConnection.Financial.ListFinancialTransactions20240619(
+                new Parameter.Finance.ParameterListFinancialTransactions20240619()
+                {
+                    postedAfter = DateTime.UtcNow.AddDays(-30),
+                    postedBefore = DateTime.UtcNow.AddMinutes(-60),
+                });
+        }
+
+        public IList<Transaction> ListFinancialTransactions20240619_DeferredReleased()
+        {
+            return amazonConnection.Financial.ListFinancialTransactions20240619(
+                new Parameter.Finance.ParameterListFinancialTransactions20240619()
+                {
+                    postedAfter = DateTime.UtcNow.AddDays(-30),
+                    transactionStatus = "DEFERRED_RELEASED",
+                });
+        }
+
+        public IList<Transaction> ListFinancialTransactions20240619_ByEventGroup(string financialEventGroupId)
+        {
+            return amazonConnection.Financial.ListFinancialTransactions20240619(
+                new Parameter.Finance.ParameterListFinancialTransactions20240619()
+                {
+                    postedAfter = DateTime.UtcNow.AddDays(-30),
+                    relatedIdentifierName = "FINANCIAL_EVENT_GROUP_ID",
+                    relatedIdentifierValue = financialEventGroupId,
+                });
         }
     }
 }
