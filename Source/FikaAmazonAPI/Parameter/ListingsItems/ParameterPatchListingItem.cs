@@ -80,6 +80,7 @@ namespace FikaAmazonAPI.Parameter.ListingItem
         public ICollection<object> value { get; set; }
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Op
     {
         add,
