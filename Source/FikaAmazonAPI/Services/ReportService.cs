@@ -157,7 +157,7 @@ namespace FikaAmazonAPI.Services
 
         public ReportDocument GetReportDocument(string reportDocumentId, bool isRestrictedReport = false) =>
             Task.Run(() => GetReportDocumentAsync(reportDocumentId, isRestrictedReport)).ConfigureAwait(false).GetAwaiter().GetResult();
-        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, bool isRestrictedReport = false, CancellationToken cancellationToken = default)
+        public async Task<ReportDocument> GetReportDocumentAsync(string reportDocumentId, bool isRestrictedReport = false, CancellationToken cancellationToken = default, bool enableContentEncodingUrlHeader = false)
         {
             ParameterBasedPII parameterBasedPII = null;
 
@@ -180,7 +180,16 @@ namespace FikaAmazonAPI.Services
                 };
             }
 
-            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.Get, parameter: parameterBasedPII, cancellationToken: cancellationToken);
+            List<KeyValuePair<string, string>> queryParameters = null;
+            if (enableContentEncodingUrlHeader)
+            {
+                queryParameters = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("enableContentEncodingUrlHeader", "true")
+                };
+            }
+
+            await CreateAuthorizedRequestAsync(ReportApiUrls.GetReportDocument(reportDocumentId), RestSharp.Method.Get, queryParameters, parameter: parameterBasedPII, cancellationToken: cancellationToken);
             var response = await ExecuteRequestAsync<ReportDocument>(RateLimitType.Report_GetReportDocument, cancellationToken);
             if (response != null)
                 return response;
