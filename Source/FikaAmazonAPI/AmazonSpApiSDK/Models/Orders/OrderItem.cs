@@ -121,7 +121,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderItem" /> class.
         /// </summary>
-        /// <param name="aSIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
+        /// <param name="ASIN">The Amazon Standard Identification Number (ASIN) of the item. (required).</param>
         /// <param name="sellerSKU">The seller stock keeping unit (SKU) of the item..</param>
         /// <param name="orderItemId">An Amazon-defined order item identifier. (required).</param>
         /// <param name="title">The name of the item..</param>
@@ -157,16 +157,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         /// <param name="buyerRequestedCancel">Information about whether or not a buyer requested cancellation..</param>
         /// <param name="itemApprovalContext">Item approval context containing the information regarding the status and progress of the item approval..</param>
         /// <param name="serialNumbers">A list of serial numbers for electronic products that are shipped to customers. Returned for FBA orders only..</param>
-        public OrderItem(string aSIN = default(string), string sellerSKU = default(string), string orderItemId = default(string), string title = default(string), int? quantityOrdered = default(int?), int? quantityShipped = default(int?), ProductInfoDetail productInfo = default(ProductInfoDetail), PointsGrantedDetail pointsGranted = default(PointsGrantedDetail), Money itemPrice = default(Money), Money shippingPrice = default(Money), Money itemTax = default(Money), Money shippingTax = default(Money), Money shippingDiscount = default(Money), Money shippingDiscountTax = default(Money), Money promotionDiscount = default(Money), Money promotionDiscountTax = default(Money), PromotionIdList promotionIds = default(PromotionIdList), Money cODFee = default(Money), Money cODFeeDiscount = default(Money), bool? isGift = default(bool?), string conditionNote = default(string), string conditionId = default(string), string conditionSubtypeId = default(string), string scheduledDeliveryStartDate = default(string), string scheduledDeliveryEndDate = default(string), string priceDesignation = default(string), TaxCollection taxCollection = default(TaxCollection), bool? serialNumberRequired = default(bool?), bool? isTransparency = default(bool?), string iossNumber = default(string), string storeChainStoreId = default(string), DeemedResellerCategoryEnum? deemedResellerCategory = default(DeemedResellerCategoryEnum?), ItemBuyerInfo buyerInfo = default(ItemBuyerInfo), BuyerRequestedCancel buyerRequestedCancel = default(BuyerRequestedCancel), ItemApprovalContext itemApprovalContext = default(ItemApprovalContext), List<string> serialNumbers = default(List<string>))
+        public OrderItem(string ASIN = default(string), string sellerSKU = default(string), string orderItemId = default(string), string title = default(string), int? quantityOrdered = default(int?), int? quantityShipped = default(int?), ProductInfoDetail productInfo = default(ProductInfoDetail), PointsGrantedDetail pointsGranted = default(PointsGrantedDetail), Money itemPrice = default(Money), Money shippingPrice = default(Money), Money itemTax = default(Money), Money shippingTax = default(Money), Money shippingDiscount = default(Money), Money shippingDiscountTax = default(Money), Money promotionDiscount = default(Money), Money promotionDiscountTax = default(Money), PromotionIdList promotionIds = default(PromotionIdList), Money cODFee = default(Money), Money cODFeeDiscount = default(Money), bool? isGift = default(bool?), string conditionNote = default(string), string conditionId = default(string), string conditionSubtypeId = default(string), string scheduledDeliveryStartDate = default(string), string scheduledDeliveryEndDate = default(string), string priceDesignation = default(string), TaxCollection taxCollection = default(TaxCollection), bool? serialNumberRequired = default(bool?), bool? isTransparency = default(bool?), string iossNumber = default(string), string storeChainStoreId = default(string), DeemedResellerCategoryEnum? deemedResellerCategory = default(DeemedResellerCategoryEnum?), ItemBuyerInfo buyerInfo = default(ItemBuyerInfo), BuyerRequestedCancel buyerRequestedCancel = default(BuyerRequestedCancel), ItemApprovalContext itemApprovalContext = default(ItemApprovalContext), List<string> serialNumbers = default(List<string>), AmazonPrograms amazonPrograms = default(AmazonPrograms))
         {
             // to ensure "aSIN" is required (not null)
-            if (aSIN == null)
+            if (ASIN == null)
             {
                 throw new InvalidDataException("aSIN is a required property for OrderItem and cannot be null");
             }
             else
             {
-                this.ASIN = aSIN;
+                this.ASIN = ASIN;
             }
             // to ensure "orderItemId" is required (not null)
             if (orderItemId == null)
@@ -219,6 +219,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             this.BuyerRequestedCancel = buyerRequestedCancel;
             this.ItemApprovalContext = itemApprovalContext;
             this.SerialNumbers = serialNumbers;
+            this.AmazonPrograms = amazonPrograms;
         }
 
         /// <summary>
@@ -466,6 +467,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         public List<string> SerialNumbers { get; set; }
 
         /// <summary>
+        /// Contains the list of programs that Amazon associates with this item. Possible Programs values: SUBSCRIBE_AND_SAVE, FBM_SHIP_PLUS.
+        /// </summary>
+        /// <value>Contains the list of programs that Amazon associates with this item.</value>
+        [DataMember(Name = "AmazonPrograms", EmitDefaultValue = false)]
+        public AmazonPrograms AmazonPrograms { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -509,6 +517,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
             sb.Append("  BuyerRequestedCancel: ").Append(BuyerRequestedCancel).Append("\n");
             sb.Append("  ItemApprovalContext: ").Append(ItemApprovalContext).Append("\n");
             sb.Append("  SerialNumbers: ").Append(SerialNumbers).Append("\n");
+            sb.Append("  AmazonPrograms: ").Append(AmazonPrograms).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -721,6 +730,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
                 (
                     this.SerialNumbers == input.SerialNumbers ||
                     this.SerialNumbers != null
+                ) &&
+                (
+                    this.AmazonPrograms == input.AmazonPrograms ||
+                    (this.AmazonPrograms != null &&
+                    this.AmazonPrograms.Equals(input.AmazonPrograms))
                 );
         }
 
