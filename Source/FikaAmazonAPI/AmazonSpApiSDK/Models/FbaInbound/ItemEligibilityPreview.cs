@@ -284,10 +284,16 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound
             FBAINB0104 = 37,
 
             /// <summary>
+            /// Enum FBAINB0465 for value: FBA_INB_0465
+            /// </summary>
+            [EnumMember(Value = "FBA_INB_0465")]
+            FBAINB0465 = 38,
+
+            /// <summary>
             /// Enum UNKNOWNINBERRORCODE for value: UNKNOWN_INB_ERROR_CODE
             /// </summary>
             [EnumMember(Value = "UNKNOWN_INB_ERROR_CODE")]
-            UNKNOWNINBERRORCODE = 38
+            UNKNOWNINBERRORCODE = 39
         }
 
 
