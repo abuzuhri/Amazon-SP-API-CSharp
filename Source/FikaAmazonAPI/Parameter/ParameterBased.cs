@@ -57,11 +57,22 @@ namespace FikaAmazonAPI.Search
                     }
                     else if (p.PropertyType.IsEnum || IsNullableEnum(p.PropertyType))
                     {
-                        output = value.ToString();
+                        var enumSettings = new JsonSerializerSettings
+                        {
+                            Converters = new List<JsonConverter> { new StringEnumConverter() }
+                        };
+                        output = JsonConvert.SerializeObject(value, enumSettings).Trim('"');
                     }
                     else if (IsEnumerableOfEnum(p.PropertyType) || IsEnumerable(p.PropertyType))
                     {
-                        var data = ((ICollection)value).Cast<object>().Select(a => a.ToString());
+                        var enumSettings = new JsonSerializerSettings
+                        {
+                            Converters = new List<JsonConverter> { new StringEnumConverter() }
+                        };
+                        var data = ((ICollection)value).Cast<object>()
+                            .Select(a => a.GetType().IsEnum
+                                ? JsonConvert.SerializeObject(a, enumSettings).Trim('"')
+                                : a.ToString());
                         if (data.Count() > 0)
                         {
                             var result = data.ToArray();

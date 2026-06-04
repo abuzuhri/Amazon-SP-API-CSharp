@@ -19,10 +19,10 @@ namespace FikaAmazonAPI.Parameter.Finance
         /// </summary>
         public string? transactionStatus { get; set; }
         /// <summary>
-        /// Possible values:`FINANCIAL_EVENT_GROUP_ID`: the financial event group ID associated with the transaction.
-        ///*Note: FINANCIAL_EVENT_GROUP_ID is the only `relatedIdentifier` with filtering capabilities at the moment. While other `relatedIdentifier` values will be included in the response when available, they cannot be used for filtering purposes.
+        /// The identifier name to filter by. Only FINANCIAL_EVENT_GROUP_ID has filtering capability at the moment;
+        /// other values appear in response payloads but cannot be used as query filters.
         /// </summary>
-        public string? relatedIdentifierName { get; set; }
+        public RelatedIdentifierNameEnum? relatedIdentifierName { get; set; }
         public string? relatedIdentifierValue { get; set; }
         public string nextToken { get; set; }
         public int? MaxNumberOfPages { get; set; }
