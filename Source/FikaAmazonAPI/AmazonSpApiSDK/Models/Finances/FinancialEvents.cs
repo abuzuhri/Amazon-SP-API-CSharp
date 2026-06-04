@@ -83,6 +83,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
         public ShipmentEventList ShipmentEventList { get; set; }
 
         /// <summary>
+        /// A list of shipment settle events for orders subject to the Delivery Date Policy (DD+7).
+        /// </summary>
+        [DataMember(Name = "ShipmentSettleEventList", EmitDefaultValue = false)]
+        public ShipmentEventList ShipmentSettleEventList { get; set; }
+
+        /// <summary>
         /// A list of refund events.
         /// </summary>
         /// <value>A list of refund events.</value>
