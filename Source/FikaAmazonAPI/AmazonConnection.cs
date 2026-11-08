@@ -69,6 +69,7 @@ namespace FikaAmazonAPI
         public MerchantShippingTemplateService MerchantShippingTemplate => this._MerchantShippingTemplate ?? throw _NoCredentials;
         public ReplenishmentService Replenishment => this._Replenishment ?? throw _NoCredentials;
         public ApplicationManagementService ApplicationManagement => this._ApplicationManagement ?? throw _NoCredentials;
+        public SupportService Support => this._Support ?? throw _NoCredentials;
 
 
         private AppIntegrationsServiceV20240401 _AppIntegrationsServiceV20240401 { get; set; }
@@ -120,6 +121,7 @@ namespace FikaAmazonAPI
         private MerchantShippingTemplateService _MerchantShippingTemplate { get; set; }
         private ReplenishmentService _Replenishment { get; set; }
         private ApplicationManagementService _ApplicationManagement { get; set; }
+        private SupportService _Support { get; set; }
 
         private UnauthorizedAccessException _NoCredentials = new UnauthorizedAccessException($"Error, you cannot make calls to Amazon without credentials!");
 
@@ -196,6 +198,7 @@ namespace FikaAmazonAPI
             this._MerchantShippingTemplate = new MerchantShippingTemplateService(this.Credentials, _loggerFactory);
             this._Replenishment = new ReplenishmentService(this.Credentials, _loggerFactory);
             this._ApplicationManagement = new ApplicationManagementService(this.Credentials, _loggerFactory);
+            this._Support = new SupportService(this.Credentials, _loggerFactory);
 
             AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }

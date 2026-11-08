@@ -316,6 +316,12 @@ namespace FikaAmazonAPI.Utils
               { RateLimitType.AplusContent_SearchContentPublishRecords,             new RateLimits(10.0M, 10) },
               { RateLimitType.AplusContent_PostContentDocumentApprovalSubmission,   new RateLimits(10.0M, 10) },
               { RateLimitType.AplusContent_PostContentDocumentSuspendSubmission,    new RateLimits(10.0M, 10) },
+
+              // Amazon has not published usage plans for the Support API. These are conservative
+              // defaults; the limiter adopts the x-amzn-RateLimit-Limit header once a response arrives.
+              { RateLimitType.Support_ListCases,       new RateLimits(1.0M, 1) },
+              { RateLimitType.Support_GetCase,         new RateLimits(1.0M, 1) },
+              { RateLimitType.Support_ListContacts,    new RateLimits(1.0M, 1) },
             };
 
         }

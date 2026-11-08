@@ -63,6 +63,7 @@ Install-Package CSharpAmazonSpAPI
 | [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference) | ✅ | `listOffers`, `listOfferMetrics`, `getSellingPartnerMetrics` |
 | [External Fulfillment Shipments](https://developer-docs.amazon.com/sp-api/reference/externalfulfillmentshipments-api-v2024-09-11) | ✅ | `getShipments`, `getShipment`, `processShipment`, `createPackages`, `updatePackage`, `retrieveShippingOptions`, `generateShipLabels`, `generateInvoice`, `retrieveInvoice`, `updatePackageStatus` |
 | [Data Kiosk (v2023-11-15)](https://developer-docs.amazon.com/sp-api/reference/datakiosk-api-v2023-11-15-reference) | ✅ | `getQueries`, `createQuery`, `getQuery`, `cancelQuery`, `getDocument` |
+| [Support (v2025-02-01)](https://developer-docs.amazon/sp-api/reference/support-v2025-02-01) | ✅ | `listCases`, `getCase`, `listContacts` |
 
 #### Vendor
 
@@ -1415,6 +1416,24 @@ if (query.ProcessingStatus == Query.ProcessingStatusEnum.DONE && !string.IsNullO
 // List / cancel
 var list = amazonConnection.DataKiosk.GetQueries(new ParameterGetQueries { PageSize = 10 });
 amazonConnection.DataKiosk.CancelQuery(created.QueryId);
+```
+### Support (v2025-02-01): Seller support cases and contact history
+For more samples, please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/SupportSample.cs). Requires the Selling Partner Support (Restricted) role.
+```CSharp
+// 1. List cases: auto-pages through every result page and returns a flat list.
+var cases = amazonConnection.Support.ListCases(new ParameterListCases
+{
+    CaseFilters = new CaseFilters(
+        caseStatuses: new List<CaseFilters.CaseStatusesEnum> { CaseFilters.CaseStatusesEnum.PENDINGMERCHANTACTION },
+        createdDate: new DateFilter(after: DateTime.UtcNow.AddDays(-30))),
+    MaxResults = 50
+});
+
+// 2. Get a single case.
+var supportCase = amazonConnection.Support.GetCase("CASE_ID");
+
+// 3. List the case's email, chat and phone contacts (attachment download URLs expire after 15 minutes).
+var contacts = amazonConnection.Support.ListContacts("CASE_ID", new ParameterListContacts { SortOrder = SupportSortOrder.ASC });
 ```
 ---
 ## Q & A
