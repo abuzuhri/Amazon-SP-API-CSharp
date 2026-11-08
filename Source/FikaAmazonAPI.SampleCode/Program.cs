@@ -28,6 +28,18 @@ namespace FikaAmazonAPI.SampleCode
                 IsDebugMode = true,
             });
 
+            // dotnet run -- pricecycle [asin] [high] [step] [floor]   (see PriceCycleTest)
+            if (args.Length > 0 && args[0].Equals("pricecycle", StringComparison.OrdinalIgnoreCase))
+            {
+                string Arg(int i, string def) => args.Length > i ? args[i] : def;
+                decimal Num(int i, decimal def) => args.Length > i ? decimal.Parse(args[i], System.Globalization.CultureInfo.InvariantCulture) : def;
+                using var cts = new CancellationTokenSource();
+                Console.CancelKeyPress += (_, e) => { e.Cancel = true; cts.Cancel(); };
+                await new PriceCycleTest(amazonConnection, config.Required("FikaAmazonAPI:SellerId"),
+                    asin: Arg(1, "B0098TN3NA"), high: Num(2, 315.00m), step: Num(3, 0.25m), floor: Num(4, 300.00m)).RunAsync(cts.Token);
+                return;
+            }
+
 
 
             ReplenishmentSample replenishmentSample = new ReplenishmentSample(amazonConnection);
