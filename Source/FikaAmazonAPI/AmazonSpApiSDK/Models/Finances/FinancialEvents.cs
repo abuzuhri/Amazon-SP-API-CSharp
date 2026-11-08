@@ -218,6 +218,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
         public AffordabilityExpenseEventList AffordabilityExpenseReversalEventList { get; set; }
 
         /// <summary>
+        /// A list of removal shipment event information.
+        /// </summary>
+        [DataMember(Name = "RemovalShipmentEventList", EmitDefaultValue = false)]
+        public RemovalShipmentEventList RemovalShipmentEventList { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -247,6 +253,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
             sb.Append("  NetworkComminglingTransactionEventList: ").Append(NetworkComminglingTransactionEventList).Append("\n");
             sb.Append("  AffordabilityExpenseEventList: ").Append(AffordabilityExpenseEventList).Append("\n");
             sb.Append("  AffordabilityExpenseReversalEventList: ").Append(AffordabilityExpenseReversalEventList).Append("\n");
+            sb.Append("  RemovalShipmentEventList: ").Append(RemovalShipmentEventList).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -390,6 +397,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
                     this.AffordabilityExpenseReversalEventList == input.AffordabilityExpenseReversalEventList ||
                     (this.AffordabilityExpenseReversalEventList != null &&
                     this.AffordabilityExpenseReversalEventList.Equals(input.AffordabilityExpenseReversalEventList))
+                ) &&
+                (
+                    this.RemovalShipmentEventList == input.RemovalShipmentEventList ||
+                    (this.RemovalShipmentEventList != null &&
+                    this.RemovalShipmentEventList.Equals(input.RemovalShipmentEventList))
                 );
         }
 
@@ -446,6 +458,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Finances
                     hashCode = hashCode * 59 + this.AffordabilityExpenseEventList.GetHashCode();
                 if (this.AffordabilityExpenseReversalEventList != null)
                     hashCode = hashCode * 59 + this.AffordabilityExpenseReversalEventList.GetHashCode();
+                if (this.RemovalShipmentEventList != null)
+                    hashCode = hashCode * 59 + this.RemovalShipmentEventList.GetHashCode();
                 return hashCode;
             }
         }
