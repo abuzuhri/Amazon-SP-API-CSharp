@@ -834,6 +834,15 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Services
             public static string RotateApplicationClientSecret => $"{_resourceBaseUrl}/clientSecret";
         }
 
+        protected class SupportApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/support/2025-02-01";
+
+            public static string Cases => $"{_resourceBaseUrl}/cases";
+            public static string Case(string caseId) => $"{_resourceBaseUrl}/cases/{caseId}";
+            public static string Contacts(string caseId) => $"{Case(caseId)}/contacts";
+        }
+
     }
 
 
