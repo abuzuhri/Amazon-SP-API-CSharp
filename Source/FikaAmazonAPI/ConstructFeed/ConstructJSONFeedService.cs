@@ -167,7 +167,7 @@ namespace FikaAmazonAPI.ConstructFeed
             }
         }
 
-        public void AddMerchantShippingGroupMessage(IList<MerchantShippingGroupMessage> messages)
+        public void AddMerchantShippingGroupMessage(IList<MerchantShippingGroupMessage> messages, string marketplaceId)
         {
             int index = jsonMessagesData.messages.Count;
             foreach (var itm in messages)
@@ -186,7 +186,8 @@ namespace FikaAmazonAPI.ConstructFeed
                             value = new List<PatcheValueData>{
                                 new PatcheValueData()
                                 {
-                                    value = itm.MerchantShippingGroupId
+                                    value = itm.MerchantShippingGroupId,
+                                    marketplace_id = marketplaceId
                                 }
                             }
                         }
