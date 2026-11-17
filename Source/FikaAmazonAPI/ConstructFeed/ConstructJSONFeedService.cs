@@ -198,6 +198,47 @@ namespace FikaAmazonAPI.ConstructFeed
             }
         }
 
+        /// <summary>
+        /// Combines all PATCH messages with the same SKU and product type into a single message
+        /// containing all their patches (e.g. fulfillment_availability + merchant_shipping_group),
+        /// so each SKU appears only once in the feed. Message IDs are renumbered afterwards.
+        /// </summary>
+        public void CombinePatchMessagesBySku()
+        {
+            var combined = new List<MessagesData>();
+            var patchMessageByKey = new Dictionary<string, MessagesData>();
+
+            foreach (var msg in jsonMessagesData.messages)
+            {
+                if (msg.operationType != "PATCH" || msg.sku == null)
+                {
+                    combined.Add(msg);
+                    continue;
+                }
+
+                var key = msg.sku + "|" + msg.productType;
+                MessagesData existing;
+                if (patchMessageByKey.TryGetValue(key, out existing))
+                {
+                    var patches = new List<PatcheData>(existing.patches ?? new List<PatcheData>());
+                    if (msg.patches != null)
+                        patches.AddRange(msg.patches);
+                    existing.patches = patches;
+                }
+                else
+                {
+                    patchMessageByKey[key] = msg;
+                    combined.Add(msg);
+                }
+            }
+
+            int index = 0;
+            foreach (var msg in combined)
+                msg.messageId = ++index;
+
+            jsonMessagesData.messages = combined;
+        }
+
         public string GetJSON()
         {
             string jsonString = JsonConvert.SerializeObject(jsonMessagesData, Formatting.Indented, new JsonSerializerSettings
